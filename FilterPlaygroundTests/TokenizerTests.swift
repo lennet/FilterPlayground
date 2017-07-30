@@ -67,5 +67,11 @@ class TokenizerTests: XCTestCase {
         XCTAssertEqual(Token.tab, tokenizer.nextToken()!)
     }
     
+    func testTokenizeDateString() {
+        let string = "30.07.17"
+        let tokenizer = Tokenizer(string: string)
+        XCTAssertEqual(Token.identifier(.other("30")), tokenizer.nextToken()!)
+    }
+    
     
 }

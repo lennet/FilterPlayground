@@ -41,7 +41,7 @@ extension Token: Equatable {
 }
 
 extension Token {
-
+    
     var stringRepresentation: String {
         switch self {
         case .op(let a):
@@ -86,7 +86,7 @@ enum Identifier {
         }
         
     }
-
+    
 }
 
 extension Identifier: Equatable {
@@ -121,7 +121,7 @@ extension Identifier: Equatable {
     
 }
 
-enum Operator:String {
+enum Operator: String {
     case add = "+"
     case minus = "-"
     case substract = "/"
@@ -153,6 +153,7 @@ class Tokenizer {
     
     func nextToken() -> Token? {
         guard let char = getNextCharacter() else { return nil }
+        let oldIndex = index
         switch char {
         case "\n":
             index = string.index(after: index)
@@ -168,27 +169,42 @@ class Tokenizer {
             return Token.op(Operator(rawValue:a)!)
         case let a where Float(a)?.isNormal ?? false :
             var floatString = a
+            var alreadyFoundDot = false
             index = string.index(after: index)
             while let nextChar = getNextCharacter(),
-                (Float(nextChar)?.isNaN ?? true) == false  || nextChar == "." {
-                floatString.append(nextChar)
-                index = string.index(after: index)
-            }
-    
-            return Token.float(Float(floatString)!)
-        case let a:
-            var identifier = a
-            
-            index = string.index(after: index)
-            while let nextChar = getNextCharacter(),
-                CharacterSet.alphanumerics.contains(nextChar.unicodeScalars.first!) {
-                    identifier.append(nextChar)
+                (Float(nextChar)?.isNaN ?? true) == false  || (nextChar == "." && !alreadyFoundDot){
+                    if (nextChar == ".") {
+                        alreadyFoundDot =  true
+                    }
+                    floatString.append(nextChar)
                     index = string.index(after: index)
             }
-            
-            return Token.identifier(Identifier(identifier))
+            // todo refactor 
+            if (getNextCharacter() ?? " ") == " " {
+                return Token.float(Float(floatString)!)
+            } else {
+                index = oldIndex
+                return tokenizeIdentifer()
+            }
+        default:
+            return tokenizeIdentifer()
         }
         
+    }
+    
+    func tokenizeIdentifer() -> Token? {
+        guard let nextChar = getNextCharacter() else { return nil }
+        var identifier = nextChar
+        
+        index = string.index(after: index)
+        while let nextChar = getNextCharacter(),
+            CharacterSet.alphanumerics.contains(nextChar.unicodeScalars.first!) {
+                identifier.append(nextChar)
+                index = string.index(after: index)
+        }
+        
+        return Token.identifier(Identifier(identifier))
+
     }
     
 }

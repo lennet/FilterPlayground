@@ -1,4 +1,3 @@
-//
 //  Parser.swift
 //  FilterPlayground
 //
@@ -11,10 +10,11 @@ import UIKit
 
 enum Token {
     case op(Operator)
-    case float(value: Float)
+    case float(Float)
     case whiteSpace
     case newLine
-    case identifier(value: String)
+    case tab
+    case identifier(Identifier)
 }
 
 extension Token: Equatable {
@@ -28,6 +28,8 @@ extension Token: Equatable {
         case (.whiteSpace, .whiteSpace):
             return true
         case (.newLine, .newLine):
+            return true
+        case(.tab, .tab):
             return true
         case (.identifier(let a), .identifier(let b)):
             return a == b
@@ -48,21 +50,73 @@ extension Token {
             return " "
         case .newLine:
             return "\n"
-        case .identifier(value: let a):
-            return a
-        case .float(value: let a):
+        case .tab:
+            return "\t"
+        case .identifier(let a):
+            return a.stringRepresentation
+        case .float(let a):
             return a.debugDescription
         }
     }
     
     var attributes: [NSAttributedStringKey: Any] {
         switch self {
-        case .float(value: _):
+        case .float(_):
             return [NSAttributedStringKey.foregroundColor: UIColor.blue]
+        case .identifier(let a):
+            return a.attributes
+        default:
+            return [:]
+        }
+    }
+    
+}
+
+enum Identifier {
+    case type(KernelAttributeType)
+    case other(String)
+    // todo keywords
+    
+    var attributes: [NSAttributedStringKey: Any] {
+        switch self {
+        case .type(_):
+            return [NSAttributedStringKey.foregroundColor: UIColor.red]
         default:
             return [:]
         }
         
+    }
+
+}
+
+extension Identifier: Equatable {
+    
+    static func ==(lhs: Identifier, rhs: Identifier) -> Bool {
+        switch (lhs, rhs) {
+        case (.other(let a), .other(let b)):
+            return a == b
+        case (.type(let a), .type(let b)):
+            return a == b
+        default:
+            return false
+        }
+    }
+    
+    var stringRepresentation: String {
+        switch self {
+        case .other(let a):
+            return a
+        case .type(let a):
+            return a.rawValue
+        }
+    }
+    
+    init(_ string: String) {
+        if let type = KernelAttributeType(rawValue: string) {
+            self = .type(type)
+        } else {
+            self = .other(string)
+        }
     }
     
 }
@@ -106,6 +160,9 @@ class Tokenizer {
         case " ":
             index = string.index(after: index)
             return Token.whiteSpace
+        case "\t":
+            index = string.index(after: index)
+            return Token.tab
         case let a where Operator(rawValue:a) != nil:
             index = string.index(after: index)
             return Token.op(Operator(rawValue:a)!)
@@ -118,7 +175,7 @@ class Tokenizer {
                 index = string.index(after: index)
             }
     
-            return Token.float(value: Float(floatString)!)
+            return Token.float(Float(floatString)!)
         case let a:
             var identifier = a
             
@@ -129,7 +186,7 @@ class Tokenizer {
                     index = string.index(after: index)
             }
             
-            return Token.identifier(value: identifier)
+            return Token.identifier(Identifier(identifier))
         }
         
     }

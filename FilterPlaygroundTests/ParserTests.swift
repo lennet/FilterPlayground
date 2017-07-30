@@ -26,13 +26,13 @@ class ParserTests: XCTestCase {
         let parser = Parser(string: string)
         let tokens = parser.getTokens()
         
-        XCTAssertEqual(tokens, [Token.identifier(value: "this"),
+        XCTAssertEqual(tokens, [Token.identifier(.other("this")),
                                 Token.whiteSpace,
-                                Token.identifier(value: "is"),
+                                Token.identifier(.other("is")),
                                 Token.whiteSpace,
-                                Token.identifier(value: "a"),
+                                Token.identifier(.other("a")),
                                 Token.whiteSpace,
-                                Token.identifier(value: "test")])
+                                Token.identifier(.other("test"))])
     }
     
     func testPerformanceExample() {

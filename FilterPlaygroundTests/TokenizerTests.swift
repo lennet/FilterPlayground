@@ -33,7 +33,7 @@ class TokenizerTests: XCTestCase {
         let string = "50.0"
         
         let tokenizer = Tokenizer(string: string )
-        XCTAssertEqual(Token.float(value: 50.0), tokenizer.nextToken()!)
+        XCTAssertEqual(Token.float(50.0), tokenizer.nextToken()!)
     }
     
     func testTokenizeWhiteSpace() {
@@ -52,7 +52,19 @@ class TokenizerTests: XCTestCase {
     func testTokenizeIdentifier() {
         let string = "test"
         let tokenizer = Tokenizer(string: string)
-        XCTAssertEqual(Token.identifier(value: string), tokenizer.nextToken()!)
+        XCTAssertEqual(Token.identifier(.other(string)), tokenizer.nextToken()!)
+    }
+    
+    func testTokenizeType() {
+        let string = "vec2"
+        let tokenizer = Tokenizer(string: string)
+        XCTAssertEqual(Token.identifier(.type(.vec2)), tokenizer.nextToken()!)
+    }
+    
+    func testTokenizeTab() {
+        let string = "\t"
+        let tokenizer = Tokenizer(string: string)
+        XCTAssertEqual(Token.tab, tokenizer.nextToken()!)
     }
     
     

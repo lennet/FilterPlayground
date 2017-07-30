@@ -10,7 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    weak var attributesViewController: AttributesViewController?
+    weak var attributesViewController: AttributesViewController? {
+        didSet {
+            attributesViewController?.didUpdateDescriptor = didUpdate
+        }
+    }
     weak var imagesViewController: ImageViewController?
     weak var sourceEditorViewController: SourceEditorViewController?
     
@@ -33,6 +37,14 @@ class ViewController: UIViewController {
         let runKeyCommand = UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(run), discoverabilityTitle: "Run")
         
         return[ runKeyCommand ]
+    }
+    
+    func didUpdate(descriptor: KernelDescriptor, shouldRun: Bool) {
+        sourceEditorViewController?.prefix = descriptor.prefix
+        
+        if shouldRun {
+            run()
+        }
     }
     
     @objc func run() {

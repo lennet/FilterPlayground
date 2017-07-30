@@ -57,6 +57,7 @@ class AttributesViewController: UIViewController, UITableViewDataSource, UITable
             kernelDescriptor.attributes.append(attribute)
             tableView.insertRows(at: [IndexPath(row: indexPath.row+1, section: 0)], with: .automatic)
         }
+        didUpdateDescriptor?(kernelDescriptor, true)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

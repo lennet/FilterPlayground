@@ -17,9 +17,9 @@ extension KernelType {
     var returnType: String {
         switch self {
         case .warp:
-            return "vec 2"
+            return "vec2"
         case .color:
-            return "vec 4"
+            return "vec4"
         }
     }
 }

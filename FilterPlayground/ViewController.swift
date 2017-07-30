@@ -53,13 +53,18 @@ class ViewController: UIViewController {
         isRunning = true
         guard let source = sourceEditorViewController?.source,
             let image = imagesViewController?.inputImage,
+            let descriptor = attributesViewController?.kernelDescriptor,
             let input = CIImage(image: image) else {
-            return
+                isRunning = false
+                return
         }
+        
+        
         let kernel = CIWarpKernel(source: source)
         guard let filtred = kernel?.apply(extent: input.extent, roiCallback: { (index, rect) -> CGRect in
             return rect
-        }, image: input, arguments: []) else {
+        }, image: input, arguments: descriptor.attributes.flatMap{ $0.value }) else {
+            isRunning = false
             return
         }
         

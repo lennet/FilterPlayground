@@ -27,13 +27,20 @@ class KernelAttributeTableViewCell: UITableViewCell {
 
     var updateCallBack: ((UITableViewCell, KernelAttribute) -> ())?
     var peromSegueCallBack: ((String, Any?) -> ())?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
 
     @IBAction func nameTextFieldChanged(_ sender: Any) {
+        guard let name = nameTextField.text else {
+            return
+        }
+        attribute?.name = name
+        update()
+    }
+    
+    @IBAction func valueTextFieldChanged(_ sender: Any) {
+        guard let value = valueTextField.text else { return
+            
+        }
+        attribute?.value = Float(value)
         update()
     }
     
@@ -53,12 +60,6 @@ class KernelAttributeTableViewCell: UITableViewCell {
     
     @IBAction func selectType(_ sender: Any) {
         peromSegueCallBack?("SelectType", self)
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

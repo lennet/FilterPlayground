@@ -50,7 +50,10 @@ struct KernelDescriptor {
 extension KernelDescriptor {
     
     var prefix: String {
-        let parameter = ""
+        let parameter = attributes
+            .filter{ $0.type != nil }
+            .map{ "\($0.type!) \($0.name)" }
+            .joined(separator: ", ")
         return "kernel \(type.returnType) \(name)(\(parameter)) {\n"
     }
     

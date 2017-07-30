@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     }
     weak var imagesViewController: ImageViewController?
     weak var sourceEditorViewController: SourceEditorViewController?
+    var isRunning = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,8 @@ class ViewController: UIViewController {
     }
     
     @objc func run() {
+        guard !isRunning else { return }
+        isRunning = true
         guard let source = sourceEditorViewController?.source,
             let image = imagesViewController?.inputImage,
             let input = CIImage(image: image) else {
@@ -63,6 +66,7 @@ class ViewController: UIViewController {
         
         let result = UIImage(ciImage: filtred)
         imagesViewController?.outputImage = result
+        isRunning = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

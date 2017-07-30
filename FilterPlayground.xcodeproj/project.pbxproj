@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		985668411F2E60EB00297A4E /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985668401F2E60EB00297A4E /* Parser.swift */; };
+		985668431F2E6ABE00297A4E /* TokenizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985668421F2E6ABE00297A4E /* TokenizerTests.swift */; };
 		985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42051F2CF8F200636E72 /* AppDelegate.swift */; };
 		985A42081F2CF8F200636E72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42071F2CF8F200636E72 /* ViewController.swift */; };
 		985A420B1F2CF8F200636E72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 985A42091F2CF8F200636E72 /* Main.storyboard */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		985668401F2E60EB00297A4E /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		985668421F2E6ABE00297A4E /* TokenizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizerTests.swift; sourceTree = "<group>"; };
 		985A42021F2CF8F200636E72 /* FilterPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		985A42051F2CF8F200636E72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		985A42071F2CF8F200636E72 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 			children = (
 				985A421A1F2CF8F300636E72 /* FilterPlaygroundTests.swift */,
 				985A421C1F2CF8F300636E72 /* Info.plist */,
+				985668421F2E6ABE00297A4E /* TokenizerTests.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -160,6 +165,7 @@
 			children = (
 				98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */,
 				98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */,
+				985668401F2E60EB00297A4E /* Parser.swift */,
 			);
 			path = "Sourceeditor View";
 			sourceTree = "<group>";
@@ -305,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
+				985668411F2E60EB00297A4E /* Parser.swift in Sources */,
 				98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */,
 				98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */,
 				985A42081F2CF8F200636E72 /* ViewController.swift in Sources */,
@@ -322,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				985A421B1F2CF8F300636E72 /* FilterPlaygroundTests.swift in Sources */,
+				985668431F2E6ABE00297A4E /* TokenizerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,23 +14,28 @@ enum KernelType {
 }
 
 extension KernelType {
-    var returnType: String {
+    
+    var returnType: KernelAttributeType {
         switch self {
         case .warp:
-            return "vec2"
+            return .vec2
         case .color:
-            return "vec4"
+            return .vec4
         }
     }
+    
 }
 
-enum KernelAttributeType {
+enum KernelAttributeType: String {
     
     case float
-    case image
+    case vec2
+    case vec3
+    case vec4
+    case sampler
     
     static var all: [KernelAttributeType] {
-        return [.float, .image]
+        return [.float, .vec2, .vec3, .vec4, .sampler]
     }
     
 }

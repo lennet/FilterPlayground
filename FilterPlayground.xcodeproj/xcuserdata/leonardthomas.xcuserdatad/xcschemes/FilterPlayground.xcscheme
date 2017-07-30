@@ -30,6 +30,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "985A42151F2CF8F300636E72"
+               BuildableName = "FilterPlaygroundTests.xctest"
+               BlueprintName = "FilterPlaygroundTests"
+               ReferencedContainer = "container:FilterPlayground.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

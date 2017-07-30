@@ -51,10 +51,17 @@ class NumberedTextView: UIView, UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         setNeedsDisplay()
+        
+        let selectedRange = textView.selectedRange
+        let parser = Parser(string: textView.text)
+        let oldFont = font
+        textView.attributedText = Renderer.rederAsAttributedString(tokens: parser.getTokens())
+        textView.selectedRange = selectedRange
+        textView.font = oldFont
     }
     
     override func draw(_ rect: CGRect) {
-        super.draw(rect)
+        super.draw(rect) 
         
         var lineRange = NSMakeRange(0, 1)
         var index = 0

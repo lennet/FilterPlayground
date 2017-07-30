@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum Token {
     case op(Operator)
@@ -14,15 +15,12 @@ enum Token {
     case whiteSpace
     case newLine
     case identifier(value: String)
-    case none
 }
 
 extension Token: Equatable {
     
     static func ==(lhs: Token, rhs: Token) -> Bool {
         switch (lhs, rhs) {
-        case (.none, .none):
-            return true
         case (.op(let a), .op(let b)):
             return a == b
         case (.float(let a), .float(let b)):
@@ -40,17 +38,41 @@ extension Token: Equatable {
     
 }
 
-enum Operator:String, RawRepresentable {
+extension Token {
+
+    var stringRepresentation: String {
+        switch self {
+        case .op(let a):
+            return a.rawValue
+        case .whiteSpace:
+            return " "
+        case .newLine:
+            return "\n"
+        case .identifier(value: let a):
+            return a
+        case .float(value: let a):
+            return a.debugDescription
+        }
+    }
     
+    var attributes: [NSAttributedStringKey: Any] {
+        switch self {
+        case .float(value: _):
+            return [NSAttributedStringKey.foregroundColor: UIColor.blue]
+        default:
+            return [:]
+        }
+        
+    }
+    
+}
+
+enum Operator:String {
     case add = "+"
     case minus = "-"
     case substract = "/"
     case multiply = "*"
     case assignment = "="
-    
-    var description: String {
-        return rawValue
-    }
 }
 
 class Tokenizer {
@@ -74,12 +96,6 @@ class Tokenizer {
         let nextIndex = string.index(after: index)
         return String(string[index..<nextIndex])
     }
-    
-//    func getChracter(with distance: Int) -> String? {
-//        let start = string.index(index, offsetBy: distance-1)
-//        let end = string.index(index, offsetBy: distance)
-//        return String(string[start..<end])
-//    }
     
     func nextToken() -> Token? {
         guard let char = getNextCharacter() else { return nil }
@@ -111,16 +127,11 @@ class Tokenizer {
                 CharacterSet.alphanumerics.contains(nextChar.unicodeScalars.first!) {
                     identifier.append(nextChar)
                     index = string.index(after: index)
-
             }
             
             return Token.identifier(value: identifier)
-        default:
-            // TODO
-            break
         }
         
-        return nil
     }
     
 }
@@ -133,12 +144,31 @@ class Parser {
     }
     
     func getTokens() -> [Token] {
-                return []
+        var tokens: [Token] = []
+        while let token = tokenizer.nextToken() {
+            tokens.append(token)
+        }
+        return tokens
     }
     
 }
 
+func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString
+{
+    let result = NSMutableAttributedString()
+    result.append(lhs)
+    result.append(rhs)
+    return result
+}
+
 class Renderer {
     
+    class func renderAsPlainText(tokens: [Token]) -> String {
+        return tokens.map{ $0.stringRepresentation }.joined()
+    }
+    
+    class func rederAsAttributedString(tokens: [Token]) -> NSAttributedString {
+        return tokens.map{ NSAttributedString(string: $0.stringRepresentation, attributes: $0.attributes) }.reduce(NSAttributedString(), +)
+    }
     
 }

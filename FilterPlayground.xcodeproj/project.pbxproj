@@ -20,6 +20,7 @@
 		98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */; };
 		98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */; };
 		98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */; };
+		98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorViewController.swift; sourceTree = "<group>"; };
 		98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelDescriptor.swift; sourceTree = "<group>"; };
 		98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeTableViewCell.swift; sourceTree = "<group>"; };
+		98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */,
 				98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */,
 				98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */,
+				98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */,
 			);
 			path = FilterPlayground;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				98A0CC611F2D043100FFC0A1 /* ImageViewController.swift in Sources */,
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
+				98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

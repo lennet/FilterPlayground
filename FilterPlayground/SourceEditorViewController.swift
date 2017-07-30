@@ -10,11 +10,12 @@ import UIKit
 
 class SourceEditorViewController: UIViewController, UITextViewDelegate {
 
-    @IBOutlet private weak var textView: UITextView!
+    @IBOutlet weak var textView: NumberedTextView!
     
     var source: String {
-        return textView.text
+        return textView.text ?? ""
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,9 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return false
+    }
 
     /*
     // MARK: - Navigation

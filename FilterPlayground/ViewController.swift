@@ -48,6 +48,7 @@ class ViewController: UIViewController {
             return
         }
         
+        
         let result = UIImage(ciImage: filtred)
         imagesViewController?.outputImage = result
     }

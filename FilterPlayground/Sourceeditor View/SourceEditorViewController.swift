@@ -18,6 +18,14 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    var fontSize: Float = 22 {
+        didSet {
+            textView.font = UIFont.systemFont(ofSize: CGFloat(fontSize))
+            textView.setNeedsDisplay()
+        }
+    }
+
+    
     let postfix: String = "\n}"
     
     var source: String {

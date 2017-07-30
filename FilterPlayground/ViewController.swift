@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     weak var imagesViewController: ImageViewController?
     weak var sourceEditorViewController: SourceEditorViewController?
     var isRunning = false
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -37,7 +37,20 @@ class ViewController: UIViewController {
 
         let runKeyCommand = UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(run), discoverabilityTitle: "Run")
         
-        return[ runKeyCommand ]
+        let increaseFontKeyCommand = UIKeyCommand(input: "+", modifierFlags: .command, action: #selector(increaseFontSize), discoverabilityTitle: "increase font size")
+        
+        let decreaseFontKeyCommand = UIKeyCommand(input: "-", modifierFlags: .command, action: #selector(decreaseFontSize), discoverabilityTitle: "decrease font size")
+
+        
+        return[ runKeyCommand, increaseFontKeyCommand, decreaseFontKeyCommand ]
+    }
+    
+    @objc func increaseFontSize() {
+        sourceEditorViewController?.fontSize += 3
+    }
+    
+    @objc func decreaseFontSize() {
+        sourceEditorViewController?.fontSize -= 3
     }
     
     func didUpdate(descriptor: KernelDescriptor, shouldRun: Bool) {

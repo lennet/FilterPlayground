@@ -26,6 +26,15 @@ class NumberedTextView: UIView, UITextViewDelegate {
         }
     }
     
+    var font: UIFont? {
+        get {
+            return textView.font
+        }
+        set {
+            textView.font = newValue
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         textView.frame = CGRect(origin: CGPoint(x:20, y:0), size: CGSize(width: frame.width - 20, height: frame.height))

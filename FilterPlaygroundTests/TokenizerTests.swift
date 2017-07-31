@@ -33,7 +33,21 @@ class TokenizerTests: XCTestCase {
         let string = "50.0"
         
         let tokenizer = Tokenizer(string: string )
-        XCTAssertEqual(Token.float(50.0), tokenizer.nextToken()!)
+        XCTAssertEqual(Token.float(string), tokenizer.nextToken()!)
+    }
+    
+    func testTokenizeFloat2() {
+        let string = "50"
+        
+        let tokenizer = Tokenizer(string: string )
+        XCTAssertEqual(Token.float(string), tokenizer.nextToken()!)
+    }
+    
+    func testTokenizeFloatStartingWithZero() {
+        let string = "050"
+        
+        let tokenizer = Tokenizer(string: string )
+        XCTAssertEqual(Token.float(string), tokenizer.nextToken()!)
     }
     
     func testTokenizeWhiteSpace() {

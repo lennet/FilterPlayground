@@ -10,7 +10,7 @@ import UIKit
 
 enum Token {
     case op(Operator)
-    case float(Float)
+    case float(String)
     case whiteSpace
     case newLine
     case tab
@@ -55,7 +55,7 @@ extension Token {
         case .identifier(let a):
             return a.stringRepresentation
         case .float(let a):
-            return a.debugDescription
+            return a
         }
     }
     
@@ -156,6 +156,7 @@ class Tokenizer {
         let oldIndex = index
         switch char {
         case "\n":
+            
             index = string.index(after: index)
             return Token.newLine
         case " ":
@@ -167,7 +168,7 @@ class Tokenizer {
         case let a where Operator(rawValue:a) != nil:
             index = string.index(after: index)
             return Token.op(Operator(rawValue:a)!)
-        case let a where Float(a)?.isNormal ?? false :
+        case let a where !(Float(a)?.isNaN ?? true):
             var floatString = a
             var alreadyFoundDot = false
             index = string.index(after: index)
@@ -181,7 +182,7 @@ class Tokenizer {
             }
             // todo refactor 
             if (getNextCharacter() ?? " ") == " " {
-                return Token.float(Float(floatString)!)
+                return Token.float(floatString)
             } else {
                 index = oldIndex
                 return tokenizeIdentifer()
@@ -226,7 +227,7 @@ class Parser {
     
 }
 
-func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString
+func +(lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString
 {
     let result = NSMutableAttributedString()
     result.append(lhs)

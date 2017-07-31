@@ -21,8 +21,8 @@ class RendererTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        let string = "this is a test 50.0"
+    func testRenderAsPlainText() {
+        let string = "this is a test 50.0 and 50"
         let parser = Parser(string: string)
         let tokens = parser.getTokens()
         XCTAssertEqual(Renderer.renderAsPlainText(tokens: tokens), string)

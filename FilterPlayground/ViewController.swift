@@ -85,13 +85,12 @@ class ViewController: UIViewController {
         }
         let errorHelper = ErrorHelper()
         guard let kernel = CIWarpKernel(source: source) else {
-            let alert = UIAlertController(title: "Error", message: errorHelper.parseError(), preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "ok", style: .default, handler: { (action) in
-                alert.dismiss(animated: true, completion: nil)
-            }))
-            present(alert, animated: true, completion: nil)
+            if let errorString = errorHelper.errorString() {
+                sourceEditorViewController?.errors = ErrorParser.getErrors(for: errorString)
+            }
             return
         }
+        sourceEditorViewController?.errors = []
         
         guard let filtred = kernel.apply(extent: input.extent, roiCallback: { (index, rect) -> CGRect in
             return rect

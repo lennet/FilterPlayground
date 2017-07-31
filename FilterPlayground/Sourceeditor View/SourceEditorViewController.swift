@@ -8,9 +8,29 @@
 
 import UIKit
 
-class SourceEditorViewController: UIViewController, UITextViewDelegate {
+class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var errorTableView: UITableView!
     @IBOutlet weak var textView: NumberedTextView!
+    @IBOutlet weak var errorViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    var errors: [CompilerError] = [] {
+        didSet {
+            guard errors != oldValue else { return }
+            if errors.isEmpty {
+                errorViewHeightConstraint.constant = 0
+                bottomConstraint.constant = 0
+            } else {
+                // todo check for keyboardsize
+                bottomConstraint.constant = 100
+                errorViewHeightConstraint.constant = 100
+            }
+            view.layoutIfNeeded()
+            textView.hightLightErrorLineNumber = nil
+            errorTableView.reloadData()
+        }
+    }
     
     var prefix: String = "vec 2 testFunc() {\n" {
         didSet {
@@ -53,7 +73,13 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(SourceEditorViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SourceEditorViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+        super.viewWillDisappear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,8 +87,33 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return false
+    @objc func keyboardWillShow(notification: Notification) {
+        guard let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        // todo animate
+        bottomConstraint.constant = keyboardSize.height
+        view.layoutIfNeeded()
     }
-
+        
+    @objc func keyboardWillHide(notification: Notification) {
+        bottomConstraint.constant = 0
+        view.layoutIfNeeded()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return errors.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "errorCellIdentifier") as! ErrorTableViewCell
+        let error = errors[indexPath.row]
+        cell.label.text = "\(error.type): \(error.message)"
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let error = errors[indexPath.row]
+        textView.hightLightErrorLineNumber = error.lineNumber
+    }
 }

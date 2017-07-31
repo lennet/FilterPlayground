@@ -35,7 +35,7 @@ class ErrorHelper {
         print(filePath)
     }
     
-    func parseError() -> String? {
+    func errorString() -> String? {
         let url = URL(fileURLWithPath: filePath)
         return try? String(contentsOf: url)
     }

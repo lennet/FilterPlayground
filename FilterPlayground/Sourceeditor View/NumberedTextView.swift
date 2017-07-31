@@ -30,6 +30,12 @@ class NumberedTextView: UIView, UITextViewDelegate {
         }
     }
     
+    var hightLightErrorLineNumber: Int? {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
     var font: UIFont? {
         get {
             return textView.font
@@ -77,8 +83,15 @@ class NumberedTextView: UIView, UITextViewDelegate {
         while index < textView.layoutManager.numberOfGlyphs {
             var lineRect = textView.layoutManager.lineFragmentUsedRect(forGlyphAt: index, effectiveRange: &lineRange)
             lineRect.origin.y = lineRect.origin.y - textView.contentOffset.y + textView.textContainerInset.top
-            index = NSMaxRange(lineRange)
-            lineNumber += 1
+            
+            if (hightLightErrorLineNumber ?? -1) == lineNumber {
+                UIColor.red.withAlphaComponent(0.1).setFill()
+                var fillRect = lineRect
+                fillRect.size.width = rect.width
+                UIGraphicsGetCurrentContext()?.fill(fillRect)
+                UIColor.black.setFill()
+
+            }
             
             if lineRange.contains(textView.selectedRange.location) && textView.selectedRange.length == 0 {
                 UIColor.blue.withAlphaComponent(0.1).setFill()
@@ -95,6 +108,9 @@ class NumberedTextView: UIView, UITextViewDelegate {
             if lineRect.origin.y > frame.size.height {
                 break
             }
+            
+            index = NSMaxRange(lineRange)
+            lineNumber += 1
         }
     }
     

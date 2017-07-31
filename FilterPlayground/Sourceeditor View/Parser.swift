@@ -72,15 +72,23 @@ extension Token {
     
 }
 
+enum Keyword: String {
+    case kernel
+    case kernelReturn = "return"
+}
+
 enum Identifier {
     case type(KernelAttributeType)
     case other(String)
+    case keyword(Keyword)
     // todo keywords
     
     var attributes: [NSAttributedStringKey: Any] {
         switch self {
         case .type(_):
             return [NSAttributedStringKey.foregroundColor: UIColor.red]
+        case .keyword(_):
+            return [NSAttributedStringKey.foregroundColor: UIColor.purple]
         default:
             return [:]
         }
@@ -108,11 +116,15 @@ extension Identifier: Equatable {
             return a
         case .type(let a):
             return a.rawValue
+        case .keyword(let a):
+            return a.rawValue
         }
     }
     
     init(_ string: String) {
-        if let type = KernelAttributeType(rawValue: string) {
+        if let keyword = Keyword(rawValue: string) {
+            self = .keyword(keyword)
+        } else if let type = KernelAttributeType(rawValue: string) {
             self = .type(type)
         } else {
             self = .other(string)

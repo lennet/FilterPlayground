@@ -15,18 +15,33 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     @IBOutlet weak var errorViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    var keyboardHeight: CGFloat = 0.0
+    
+    var isShowingErrors: Bool {
+        return !errors.isEmpty
+    }
+    
+    var bottomSpacing: CGFloat {
+        
+        if isShowingErrors {
+            return keyboardHeight + 8.0
+        } else {
+            return 0
+        }
+        
+    }
+    
     var errors: [CompilerError] = [] {
         didSet {
             guard errors != oldValue else { return }
             if errors.isEmpty {
                 errorViewHeightConstraint.constant = 0
-                bottomConstraint.constant = 0
             } else {
                 // todo check for keyboardsize
-                bottomConstraint.constant = 100
+                
                 errorViewHeightConstraint.constant = 100
             }
-            view.layoutIfNeeded()
+            updateBottomSpacing(animated: true)
             textView.hightLightErrorLineNumber = nil
             errorTableView.reloadData()
         }
@@ -82,23 +97,30 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         super.viewWillDisappear(animated)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    func updateBottomSpacing(animated: Bool) {
+        bottomConstraint.constant = bottomSpacing
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+        
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            self.textView.setNeedsDisplay()
+        }
+     }
     
     @objc func keyboardWillShow(notification: Notification) {
         guard let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
-        // todo animate
-        bottomConstraint.constant = keyboardSize.height
-        view.layoutIfNeeded()
+        keyboardHeight = keyboardSize.height
+        updateBottomSpacing(animated: true)
     }
         
     @objc func keyboardWillHide(notification: Notification) {
-        bottomConstraint.constant = 0
-        view.layoutIfNeeded()
+        keyboardHeight = 0
+        updateBottomSpacing(animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

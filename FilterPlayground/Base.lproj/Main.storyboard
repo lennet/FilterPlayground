@@ -14,6 +14,44 @@
     </dependencies>
     <scenes>
         <!--View Controller-->
+        <scene sceneID="AKO-gh-YNY">
+            <objects>
+                <viewController id="04X-wZ-hWf" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WEg-i2-9WZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pLt-mU-mcX">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KoN-vk-Pgd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="File" id="8OG-LJ-dLI">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="K8X-6b-KOD"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZVg-v0-vSA" firstAttribute="trailing" secondItem="pLt-mU-mcX" secondAttribute="trailing" id="4kh-Ua-mNB"/>
+                            <constraint firstItem="KoN-vk-Pgd" firstAttribute="top" secondItem="ZVg-v0-vSA" secondAttribute="top" id="5SP-hg-MnO"/>
+                            <constraint firstItem="KoN-vk-Pgd" firstAttribute="leading" secondItem="ZVg-v0-vSA" secondAttribute="leading" id="7Iw-sD-lLe"/>
+                            <constraint firstItem="KoN-vk-Pgd" firstAttribute="trailing" secondItem="ZVg-v0-vSA" secondAttribute="trailing" id="BL7-Qb-WJk"/>
+                            <constraint firstItem="pLt-mU-mcX" firstAttribute="top" secondItem="KoN-vk-Pgd" secondAttribute="bottom" id="QEC-Yt-REL"/>
+                            <constraint firstItem="pLt-mU-mcX" firstAttribute="leading" secondItem="ZVg-v0-vSA" secondAttribute="leading" id="Rig-ze-saf"/>
+                            <constraint firstItem="ZVg-v0-vSA" firstAttribute="bottom" secondItem="pLt-mU-mcX" secondAttribute="bottom" id="q1l-hu-N6u"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ZVg-v0-vSA"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aiq-FF-Dt9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-750.21961932650072" y="-96.09375"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
@@ -25,14 +63,27 @@
                                 <rect key="frame" x="0.0" y="20" width="1366" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="XRg-Nm-2fI">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="fET-oE-8Ka">
+                                            <connections>
+                                                <segue destination="04X-wZ-hWf" kind="popoverPresentation" popoverAnchorBarButtonItem="fET-oE-8Ka" id="Zbf-JI-q01">
+                                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                </segue>
+                                            </connections>
+                                        </barButtonItem>
                                         <rightBarButtonItems>
-                                            <barButtonItem title="Run" id="6Sj-FV-7a1">
+                                            <barButtonItem systemItem="play" id="6Sj-FV-7a1">
                                                 <connections>
                                                     <action selector="run" destination="BYZ-38-t0r" id="NnW-Wn-NtQ"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem title="Export" id="IBv-aa-U1L"/>
-                                            <barButtonItem title="Documentation" id="AP8-1U-dgp">
+                                            <barButtonItem systemItem="action" id="IBv-aa-U1L">
+                                                <connections>
+                                                    <segue destination="7Pl-x7-6sH" kind="popoverPresentation" popoverAnchorBarButtonItem="IBv-aa-U1L" id="glL-Df-6kZ">
+                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                    </segue>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem systemItem="bookmarks" id="AP8-1U-dgp">
                                                 <connections>
                                                     <action selector="documentation:" destination="BYZ-38-t0r" id="DxU-mZ-0vO"/>
                                                 </connections>
@@ -89,6 +140,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-98.828696925329425" y="123.63281249999999"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Eug-m6-zq9">
+            <objects>
+                <viewController id="7Pl-x7-6sH" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Xi-B6-dKe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAv-9C-QPt">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Export" id="iYC-fd-ppw">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Tx2-dU-JHI"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PfX-pg-ktA">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="PfX-pg-ktA" firstAttribute="top" secondItem="gAv-9C-QPt" secondAttribute="bottom" id="1E0-lc-j2p"/>
+                            <constraint firstItem="gAv-9C-QPt" firstAttribute="leading" secondItem="u0A-7B-KLG" secondAttribute="leading" id="50T-Fv-JwN"/>
+                            <constraint firstItem="PfX-pg-ktA" firstAttribute="leading" secondItem="u0A-7B-KLG" secondAttribute="leading" id="Ggj-6d-91v"/>
+                            <constraint firstItem="u0A-7B-KLG" firstAttribute="bottom" secondItem="PfX-pg-ktA" secondAttribute="bottom" id="HYr-cN-hdP"/>
+                            <constraint firstItem="u0A-7B-KLG" firstAttribute="trailing" secondItem="PfX-pg-ktA" secondAttribute="trailing" id="nQ5-s2-ZId"/>
+                            <constraint firstItem="gAv-9C-QPt" firstAttribute="top" secondItem="u0A-7B-KLG" secondAttribute="top" id="uGU-g2-wJj"/>
+                            <constraint firstItem="gAv-9C-QPt" firstAttribute="trailing" secondItem="u0A-7B-KLG" secondAttribute="trailing" id="xdz-cP-coz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="u0A-7B-KLG"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E8I-ea-yZ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="543" y="-224"/>
         </scene>
         <!--Attributes View Controller-->
         <scene sceneID="WY2-JR-hmI">
@@ -292,7 +381,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="100" height="44"/>
                                 <items>
                                     <navigationItem title="Select type" id="yQu-s3-fwC">
-                                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="U4r-uw-4VE">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="U4r-uw-4VE">
                                             <connections>
                                                 <action selector="cancel:" destination="1dF-MB-AMV" id="u8q-26-BtQ"/>
                                             </connections>
@@ -374,18 +463,18 @@
                                                 <rect key="frame" x="0.0" y="28" width="750" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KAf-ZC-l95" id="OiD-gc-sFo">
-                                                    <rect key="frame" x="0.0" y="0.0" width="750" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="750" height="44.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E82-qh-gb9">
-                                                            <rect key="frame" x="5" y="5" width="33.5" height="33.5"/>
+                                                            <rect key="frame" x="5" y="5" width="34.5" height="34.5"/>
                                                             <color key="backgroundColor" red="1" green="0.13210731552523058" blue="0.099258996422646573" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="E82-qh-gb9" secondAttribute="height" multiplier="1:1" id="fXK-Jc-vmp"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yP9-Lo-ci8">
-                                                            <rect key="frame" x="46.5" y="16" width="687.5" height="19.5"/>
+                                                            <rect key="frame" x="47.5" y="16" width="686.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>

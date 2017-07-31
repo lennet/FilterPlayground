@@ -12,6 +12,9 @@ class NumberedTextView: UIView, UITextViewDelegate {
 
     let textView: UITextView = {
         let textView = UITextView()
+        textView.backgroundColor = .clear
+        textView.autocorrectionType = .no
+        textView.autocapitalizationType = .none
         textView.autoresizingMask = UIViewAutoresizing.flexibleHeight.union(.flexibleWidth)
         return textView
     }()
@@ -32,6 +35,9 @@ class NumberedTextView: UIView, UITextViewDelegate {
         }
         set {
             textView.font = newValue
+            // todo calculate max contentInset
+            guard let newValue = newValue else { return }
+            textView.contentInset.left = newValue.pointSize
         }
     }
     
@@ -67,18 +73,34 @@ class NumberedTextView: UIView, UITextViewDelegate {
         var index = 0
         var lineNumber = 0
         
-        // todo check for cursor position
+        
         
         while index < textView.layoutManager.numberOfGlyphs {
-            let lineRect = textView.layoutManager.lineFragmentUsedRect(forGlyphAt: index, effectiveRange: &lineRange)
+            var lineRect = textView.layoutManager.lineFragmentUsedRect(forGlyphAt: index, effectiveRange: &lineRange)
+            lineRect.origin.y = lineRect.origin.y - textView.contentOffset.y + textView.textContainerInset.top
             index = NSMaxRange(lineRange)
             lineNumber += 1
             
-            let y = lineRect.origin.y - textView.contentOffset.y + textView.textContainerInset.top
-            if y > -(textView.font?.lineHeight ?? 10) {
-                ("\(lineNumber) :" as NSString).draw(at: CGPoint(x: 0, y: y), withAttributes: [NSAttributedStringKey.font:textView.font!])
+            if lineRange.contains(textView.selectedRange.location) {
+                UIColor.blue.withAlphaComponent(0.1).setFill()
+                var fillRect = lineRect
+                fillRect.size.width = rect.width
+                UIGraphicsGetCurrentContext()?.fill(fillRect)
+                UIColor.black.setFill()
+            }
+            
+            if lineRect.origin.y > -(textView.font?.lineHeight ?? 10) {
+                ("\(lineNumber) :" as NSString).draw(at: CGPoint(x: 0, y: lineRect.origin.y), withAttributes: [NSAttributedStringKey.font:textView.font!])
+            }
+    
+            if lineRect.origin.y > frame.size.height {
+                break
             }
         }
+    }
+    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        setNeedsDisplay()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -82,7 +82,6 @@ class ViewController: UIViewController {
                 return
         }
         
-        
         let kernel = CIWarpKernel(source: source)
         guard let filtred = kernel?.apply(extent: input.extent, roiCallback: { (index, rect) -> CGRect in
             return rect

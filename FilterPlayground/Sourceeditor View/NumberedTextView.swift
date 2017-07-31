@@ -26,6 +26,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
         }
         set {
             textView.text = newValue
+            textViewDidChange(textView)
         }
     }
     
@@ -73,15 +74,13 @@ class NumberedTextView: UIView, UITextViewDelegate {
         var index = 0
         var lineNumber = 0
         
-        
-        
         while index < textView.layoutManager.numberOfGlyphs {
             var lineRect = textView.layoutManager.lineFragmentUsedRect(forGlyphAt: index, effectiveRange: &lineRange)
             lineRect.origin.y = lineRect.origin.y - textView.contentOffset.y + textView.textContainerInset.top
             index = NSMaxRange(lineRange)
             lineNumber += 1
             
-            if lineRange.contains(textView.selectedRange.location) {
+            if lineRange.contains(textView.selectedRange.location) && textView.selectedRange.length == 0 {
                 UIColor.blue.withAlphaComponent(0.1).setFill()
                 var fillRect = lineRect
                 fillRect.size.width = rect.width

@@ -73,20 +73,29 @@ class ViewController: UIViewController {
     
     @IBAction func run() {
         guard !isRunning else { return }
-        isRunning = true
+        defer {
+            isRunning = false
+        }
+        
         guard let source = sourceEditorViewController?.source,
             let image = imagesViewController?.inputImage,
             let descriptor = attributesViewController?.kernelDescriptor,
             let input = CIImage(image: image) else {
-                isRunning = false
                 return
         }
+        let errorHelper = ErrorHelper()
+        guard let kernel = CIWarpKernel(source: source) else {
+            let alert = UIAlertController(title: "Error", message: errorHelper.parseError(), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ok", style: .default, handler: { (action) in
+                alert.dismiss(animated: true, completion: nil)
+            }))
+            present(alert, animated: true, completion: nil)
+            return
+        }
         
-        let kernel = CIWarpKernel(source: source)
-        guard let filtred = kernel?.apply(extent: input.extent, roiCallback: { (index, rect) -> CGRect in
+        guard let filtred = kernel.apply(extent: input.extent, roiCallback: { (index, rect) -> CGRect in
             return rect
         }, image: input, arguments: descriptor.attributes.flatMap{ $0.value }) else {
-            isRunning = false
             return
         }
         

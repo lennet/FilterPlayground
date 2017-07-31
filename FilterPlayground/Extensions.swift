@@ -29,3 +29,11 @@ extension UIFont {
     }
     
 }
+
+extension String {
+    
+    var firstLine: String? {
+        return self.components(separatedBy: "\n").first
+    }
+        
+}

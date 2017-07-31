@@ -6,7 +6,7 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class ErrorHelper {
 

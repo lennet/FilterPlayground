@@ -18,6 +18,7 @@
 		985A421B1F2CF8F300636E72 /* FilterPlaygroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A421A1F2CF8F300636E72 /* FilterPlaygroundTests.swift */; };
 		985A42261F2CF8F300636E72 /* FilterPlaygroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42251F2CF8F300636E72 /* FilterPlaygroundUITests.swift */; };
 		985A42361F2CFEE800636E72 /* SelectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42351F2CFEE800636E72 /* SelectImageView.swift */; };
+		987672451F2F5355002F9AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
 		98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */; };
 		98A0CC611F2D043100FFC0A1 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC601F2D043100FFC0A1 /* ImageViewController.swift */; };
 		98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */; };
@@ -63,6 +64,7 @@
 		985A42251F2CF8F300636E72 /* FilterPlaygroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPlaygroundUITests.swift; sourceTree = "<group>"; };
 		985A42271F2CF8F300636E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		985A42351F2CFEE800636E72 /* SelectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageView.swift; sourceTree = "<group>"; };
+		987672441F2F5355002F9AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesViewController.swift; sourceTree = "<group>"; };
 		98A0CC601F2D043100FFC0A1 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				98D919A01F2E05AB007D5234 /* Images View */,
 				98D9199E1F2E0585007D5234 /* Sourceeditor View */,
 				98D9199D1F2E0578007D5234 /* Attributes View */,
+				987672441F2F5355002F9AAF /* Extensions.swift */,
 			);
 			path = FilterPlayground;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				985A42081F2CF8F200636E72 /* ViewController.swift in Sources */,
 				985A42361F2CFEE800636E72 /* SelectImageView.swift in Sources */,
 				98A0CC611F2D043100FFC0A1 /* ImageViewController.swift in Sources */,
+				987672451F2F5355002F9AAF /* Extensions.swift in Sources */,
 				98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */,
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
@@ -524,6 +528,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 23Q9KTEYUV;
 				INFOPLIST_FILE = FilterPlaygroundTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lt.FilterPlaygroundTests;
@@ -539,6 +544,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 23Q9KTEYUV;
 				INFOPLIST_FILE = FilterPlaygroundTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lt.FilterPlaygroundTests;

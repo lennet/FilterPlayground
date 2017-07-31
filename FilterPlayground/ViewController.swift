@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import SafariServices
 
 class ViewController: UIViewController {
-
+    
     weak var attributesViewController: AttributesViewController? {
         didSet {
             attributesViewController?.didUpdateDescriptor = didUpdate
@@ -18,12 +19,12 @@ class ViewController: UIViewController {
     weak var imagesViewController: ImageViewController?
     weak var sourceEditorViewController: SourceEditorViewController?
     var isRunning = false
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -32,15 +33,15 @@ class ViewController: UIViewController {
     override var canBecomeFirstResponder: Bool {
         return true
     }
-
+    
     override var keyCommands: [UIKeyCommand]? {
-
+        
         let runKeyCommand = UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(run), discoverabilityTitle: "Run")
         
         let increaseFontKeyCommand = UIKeyCommand(input: "+", modifierFlags: .command, action: #selector(increaseFontSize), discoverabilityTitle: "increase font size")
         
         let decreaseFontKeyCommand = UIKeyCommand(input: "-", modifierFlags: .command, action: #selector(decreaseFontSize), discoverabilityTitle: "decrease font size")
-
+        
         
         return[ runKeyCommand, increaseFontKeyCommand, decreaseFontKeyCommand ]
     }
@@ -60,8 +61,17 @@ class ViewController: UIViewController {
             run()
         }
     }
+    @IBAction func documentation(_ sender: UIBarButtonItem) {
+        let url = URL(string: "https://developer.apple.com/library/content/documentation/GraphicsImaging/Reference/CIKernelLangRef/ci_gslang_ext.html")!
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.modalPresentationStyle = .popover
+        safariVC.popoverPresentationController?.barButtonItem = sender
+        
+        present(safariVC, animated: true, completion: nil)
+        
+    }
     
-    @objc func run() {
+    @IBAction func run() {
         guard !isRunning else { return }
         isRunning = true
         guard let source = sourceEditorViewController?.source,

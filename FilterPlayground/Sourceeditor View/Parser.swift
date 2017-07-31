@@ -227,14 +227,6 @@ class Parser {
     
 }
 
-func +(lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString
-{
-    let result = NSMutableAttributedString()
-    result.append(lhs)
-    result.append(rhs)
-    return result
-}
-
 class Renderer {
     
     class func renderAsPlainText(tokens: [Token]) -> String {

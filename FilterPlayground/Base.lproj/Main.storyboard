@@ -7,6 +7,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +23,22 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6b-qX-1nY">
                                 <rect key="frame" x="0.0" y="20" width="1366" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="XRg-Nm-2fI"/>
+                                    <navigationItem title="Title" id="XRg-Nm-2fI">
+                                        <rightBarButtonItems>
+                                            <barButtonItem title="Run" id="6Sj-FV-7a1">
+                                                <connections>
+                                                    <action selector="run" destination="BYZ-38-t0r" id="NnW-Wn-NtQ"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Export" id="IBv-aa-U1L"/>
+                                            <barButtonItem title="Documentation" id="AP8-1U-dgp">
+                                                <connections>
+                                                    <action selector="documentation:" destination="BYZ-38-t0r" id="DxU-mZ-0vO"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Fullscreen" id="OS8-oq-PhH"/>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OIh-xL-mtz">

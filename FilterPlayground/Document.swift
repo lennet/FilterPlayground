@@ -11,8 +11,10 @@ import UIKit
 class Document: UIDocument {
 
     override func contents(forType typeName: String) throws -> Any {
-        // Encode your document with an instance of NSData or NSFileWrapper
-        return Data()
+        let content = FileWrapper(regularFileWithContents: Data())
+        let metadata = FileWrapper(regularFileWithContents: Data())
+        return FileWrapper(directoryWithFileWrappers: ["content": content,
+                                                                  "metadata": metadata])
     }
     
     override func load(fromContents contents: Any, ofType typeName: String?) throws {

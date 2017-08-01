@@ -27,10 +27,15 @@ class DcoumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     // MARK: UIDocumentBrowserViewControllerDelegate
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
-        if let newDocumentURL = Bundle.main.url(forResource: "BlankFile", withExtension: "CIKernel") {
-            importHandler(newDocumentURL, .move)
-        } else {
-            importHandler(nil, .none)
+        let newDocumentURL = FileManager.urlInDocumentsDirectory(for: "\(Date()).CIKernel")
+        
+        let document = Document(fileURL: newDocumentURL)
+        document.save(to: newDocumentURL, for: .forCreating) { (success) in
+            if success {
+                importHandler(newDocumentURL, .move)
+            } else {
+                importHandler(nil, .none)
+            }
         }
     }
     

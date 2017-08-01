@@ -31,6 +31,9 @@
 		98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */; };
 		98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */; };
 		98E5AD0E1F2E87280047AC2E /* RendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E5AD0D1F2E87280047AC2E /* RendererTests.swift */; };
+		98E692E71F30C5EA000C8B41 /* DcoumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692E61F30C5EA000C8B41 /* DcoumentBrowserViewController.swift */; };
+		98E692E91F30C832000C8B41 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692E81F30C832000C8B41 /* Document.swift */; };
+		98E692EB1F30D33E000C8B41 /* BlankFile.CIKernel in Resources */ = {isa = PBXBuildFile; fileRef = 98E692EA1F30D33E000C8B41 /* BlankFile.CIKernel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +84,9 @@
 		98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedTextView.swift; sourceTree = "<group>"; };
 		98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeViewController.swift; sourceTree = "<group>"; };
 		98E5AD0D1F2E87280047AC2E /* RendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererTests.swift; sourceTree = "<group>"; };
+		98E692E61F30C5EA000C8B41 /* DcoumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DcoumentBrowserViewController.swift; sourceTree = "<group>"; };
+		98E692E81F30C832000C8B41 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		98E692EA1F30D33E000C8B41 /* BlankFile.CIKernel */ = {isa = PBXFileReference; lastKnownFileType = text; path = BlankFile.CIKernel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +149,9 @@
 				987672441F2F5355002F9AAF /* Extensions.swift */,
 				980229AB1F2F94F9000FFCA2 /* ErrorHelper.swift */,
 				980229AD1F2FB88F000FFCA2 /* ErrorParser.swift */,
+				98E692E61F30C5EA000C8B41 /* DcoumentBrowserViewController.swift */,
+				98E692E81F30C832000C8B41 /* Document.swift */,
+				98E692EA1F30D33E000C8B41 /* BlankFile.CIKernel */,
 			);
 			path = FilterPlayground;
 			sourceTree = "<group>";
@@ -305,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				985A42101F2CF8F200636E72 /* LaunchScreen.storyboard in Resources */,
+				98E692EB1F30D33E000C8B41 /* BlankFile.CIKernel in Resources */,
 				985A420D1F2CF8F200636E72 /* Assets.xcassets in Resources */,
 				985A420B1F2CF8F200636E72 /* Main.storyboard in Resources */,
 			);
@@ -331,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98E692E71F30C5EA000C8B41 /* DcoumentBrowserViewController.swift in Sources */,
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,
 				980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */,
@@ -343,6 +354,7 @@
 				98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */,
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
+				98E692E91F30C832000C8B41 /* Document.swift in Sources */,
 				980229AE1F2FB88F000FFCA2 /* ErrorParser.swift in Sources */,
 				98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */,
 				980229AC1F2F94F9000FFCA2 /* ErrorHelper.swift in Sources */,

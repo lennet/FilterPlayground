@@ -13,37 +13,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Dcoument Browser View Controller-->
         <scene sceneID="AKO-gh-YNY">
             <objects>
-                <viewController id="04X-wZ-hWf" sceneMemberID="viewController">
+                <viewController id="04X-wZ-hWf" customClass="DcoumentBrowserViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WEg-i2-9WZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pLt-mU-mcX">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KoN-vk-Pgd">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="File" id="8OG-LJ-dLI">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="K8X-6b-KOD"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="ZVg-v0-vSA" firstAttribute="trailing" secondItem="pLt-mU-mcX" secondAttribute="trailing" id="4kh-Ua-mNB"/>
-                            <constraint firstItem="KoN-vk-Pgd" firstAttribute="top" secondItem="ZVg-v0-vSA" secondAttribute="top" id="5SP-hg-MnO"/>
-                            <constraint firstItem="KoN-vk-Pgd" firstAttribute="leading" secondItem="ZVg-v0-vSA" secondAttribute="leading" id="7Iw-sD-lLe"/>
-                            <constraint firstItem="KoN-vk-Pgd" firstAttribute="trailing" secondItem="ZVg-v0-vSA" secondAttribute="trailing" id="BL7-Qb-WJk"/>
-                            <constraint firstItem="pLt-mU-mcX" firstAttribute="top" secondItem="KoN-vk-Pgd" secondAttribute="bottom" id="QEC-Yt-REL"/>
-                            <constraint firstItem="pLt-mU-mcX" firstAttribute="leading" secondItem="ZVg-v0-vSA" secondAttribute="leading" id="Rig-ze-saf"/>
-                            <constraint firstItem="ZVg-v0-vSA" firstAttribute="bottom" secondItem="pLt-mU-mcX" secondAttribute="bottom" id="q1l-hu-N6u"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ZVg-v0-vSA"/>
                     </view>
                 </viewController>
@@ -54,7 +31,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

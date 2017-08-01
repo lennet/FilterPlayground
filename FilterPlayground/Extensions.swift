@@ -37,3 +37,15 @@ extension String {
     }
         
 }
+
+extension FileManager {
+    
+    static func urlInDocumentsDirectory(for name: String) -> URL {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(
+            .documentDirectory,
+            .userDomainMask,
+            true)[0]
+        return URL(fileURLWithPath: "\(documentsPath)/\(name)")
+    }
+    
+}

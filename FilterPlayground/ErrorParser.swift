@@ -28,6 +28,8 @@ extension CompilerError: Equatable {
 
 class ErrorParser {
     
+    private init() {}
+    
     class func getErrors(for errorString: String) -> [CompilerError] {
         let components = errorString.components(separatedBy: "[CIKernelPool]").flatMap{ $0.firstLine }
         let errors = components.flatMap(getError)

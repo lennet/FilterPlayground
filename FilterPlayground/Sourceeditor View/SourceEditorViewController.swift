@@ -64,7 +64,12 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     let postfix: String = "\n}"
     
     var source: String {
-        return textView.text ?? ""
+        get {
+            return textView.text ?? ""
+        }
+        set {
+            textView.text = newValue
+        }
     }
     
     func editableSource(with prefix: String) -> String {

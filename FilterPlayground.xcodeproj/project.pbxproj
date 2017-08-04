@@ -29,11 +29,13 @@
 		98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */; };
 		98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */; };
 		98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */; };
+		98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */; };
 		98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */; };
 		98E5AD0E1F2E87280047AC2E /* RendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E5AD0D1F2E87280047AC2E /* RendererTests.swift */; };
-		98E692E71F30C5EA000C8B41 /* DcoumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692E61F30C5EA000C8B41 /* DcoumentBrowserViewController.swift */; };
+		98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */; };
 		98E692E91F30C832000C8B41 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692E81F30C832000C8B41 /* Document.swift */; };
 		98E692EB1F30D33E000C8B41 /* BlankFile.CIKernel in Resources */ = {isa = PBXBuildFile; fileRef = 98E692EA1F30D33E000C8B41 /* BlankFile.CIKernel */; };
+		98E692EE1F30DF8D000C8B41 /* ProjectMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692ED1F30DF8D000C8B41 /* ProjectMetaData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,11 +84,13 @@
 		98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelDescriptor.swift; sourceTree = "<group>"; };
 		98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeTableViewCell.swift; sourceTree = "<group>"; };
 		98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedTextView.swift; sourceTree = "<group>"; };
+		98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingDocumentTests.swift; sourceTree = "<group>"; };
 		98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeViewController.swift; sourceTree = "<group>"; };
 		98E5AD0D1F2E87280047AC2E /* RendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererTests.swift; sourceTree = "<group>"; };
-		98E692E61F30C5EA000C8B41 /* DcoumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DcoumentBrowserViewController.swift; sourceTree = "<group>"; };
+		98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		98E692E81F30C832000C8B41 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		98E692EA1F30D33E000C8B41 /* BlankFile.CIKernel */ = {isa = PBXFileReference; lastKnownFileType = text; path = BlankFile.CIKernel; sourceTree = "<group>"; };
+		98E692ED1F30DF8D000C8B41 /* ProjectMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectMetaData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 		985A42041F2CF8F200636E72 /* FilterPlayground */ = {
 			isa = PBXGroup;
 			children = (
+				98E692EC1F30DF75000C8B41 /* Model */,
 				985A42051F2CF8F200636E72 /* AppDelegate.swift */,
 				985A42071F2CF8F200636E72 /* ViewController.swift */,
 				985A42091F2CF8F200636E72 /* Main.storyboard */,
@@ -149,8 +154,7 @@
 				987672441F2F5355002F9AAF /* Extensions.swift */,
 				980229AB1F2F94F9000FFCA2 /* ErrorHelper.swift */,
 				980229AD1F2FB88F000FFCA2 /* ErrorParser.swift */,
-				98E692E61F30C5EA000C8B41 /* DcoumentBrowserViewController.swift */,
-				98E692E81F30C832000C8B41 /* Document.swift */,
+				98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */,
 				98E692EA1F30D33E000C8B41 /* BlankFile.CIKernel */,
 			);
 			path = FilterPlayground;
@@ -165,6 +169,7 @@
 				984D9FA31F2E824B004AFD74 /* ParserTests.swift */,
 				98E5AD0D1F2E87280047AC2E /* RendererTests.swift */,
 				980229AF1F2FBF18000FFCA2 /* ErrorParserTests.swift */,
+				98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -207,6 +212,15 @@
 				98A0CC601F2D043100FFC0A1 /* ImageViewController.swift */,
 			);
 			path = "Images View";
+			sourceTree = "<group>";
+		};
+		98E692EC1F30DF75000C8B41 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				98E692E81F30C832000C8B41 /* Document.swift */,
+				98E692ED1F30DF8D000C8B41 /* ProjectMetaData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,7 +355,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98E692E71F30C5EA000C8B41 /* DcoumentBrowserViewController.swift in Sources */,
+				98E692EE1F30DF8D000C8B41 /* ProjectMetaData.swift in Sources */,
+				98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */,
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,
 				980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */,
@@ -365,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */,
 				98E5AD0E1F2E87280047AC2E /* RendererTests.swift in Sources */,
 				985A421B1F2CF8F300636E72 /* FilterPlaygroundTests.swift in Sources */,
 				985668431F2E6ABE00297A4E /* TokenizerTests.swift in Sources */,

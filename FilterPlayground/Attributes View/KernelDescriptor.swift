@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum KernelType {
+enum KernelType: String, Codable {
     case warp
     case color
 }
@@ -26,7 +26,7 @@ extension KernelType {
     
 }
 
-enum KernelAttributeType: String {
+enum KernelAttributeType: String, Codable {
     
     case float
     case vec2
@@ -44,6 +44,30 @@ struct KernelAttribute {
     var name: String
     var type: KernelAttributeType?
     var value: Any?
+}
+
+extension KernelAttribute: Codable {
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case type
+        case value
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        name = try values.decode(String.self, forKey: .name)
+        type = try values.decode(KernelAttributeType.self, forKey: .type)
+        // todo
+        value = nil
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(type, forKey: .type)
+    }
+    
 }
 
 struct KernelDescriptor {

@@ -20,6 +20,14 @@
 				<string>com.leonardtthomas.kernelProject</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeIconFiles</key>
+			<array/>
+			<key>CFBundleTypeName</key>
+			<string>test</string>
+			<key>LSItemContentTypes</key>
+			<array/>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
@@ -82,7 +90,12 @@
 	</array>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
-		<dict/>
+		<dict>
+			<key>UTTypeDescription</key>
+			<string>Kernel Project</string>
+			<key>UTTypeIdentifier</key>
+			<string></string>
+		</dict>
 	</array>
 </dict>
 </plist>

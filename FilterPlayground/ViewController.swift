@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     weak var sourceEditorViewController: SourceEditorViewController?
     var isRunning = false
     
+    var document: Document?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -72,6 +74,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func run() {
+        
+        document?.source = sourceEditorViewController?.source ?? ""
+        
         guard !isRunning else { return }
         defer {
             isRunning = false
@@ -104,6 +109,18 @@ class ViewController: UIViewController {
         isRunning = false
     }
     
+    func didOpenedDocument(document: Document) {
+        defer {
+            self.presentedViewController?.dismiss(animated: true, completion: nil)
+            self.document = document
+            sourceEditorViewController?.source = document.source
+        }
+        
+        self.document?.close(completionHandler: { (status) in
+            return
+        })
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {
         case let vc as AttributesViewController:
@@ -112,6 +129,8 @@ class ViewController: UIViewController {
             self.imagesViewController = vc
         case let vc as SourceEditorViewController:
             self.sourceEditorViewController = vc
+        case let vc as DocumentBrowserViewController:
+            vc.didOpenedDocument = didOpenedDocument
         default:
             print("Unkown ViewController Segue: \(segue.destination)")
         }

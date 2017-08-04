@@ -9,8 +9,10 @@
 import UIKit
 import MobileCoreServices
 
-class DcoumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
+class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
 
+    var didOpenedDocument: ((Document) -> ())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,12 +62,12 @@ class DcoumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     // MARK: Document Presentation
     
     func presentDocument(at documentURL: URL) {
-        
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let documentViewController = storyBoard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-//        documentViewController.document = Document(fileURL: documentURL)
-        
-        present(documentViewController, animated: true, completion: nil)
+    
+        let document = Document(fileURL: documentURL)
+        document.open { (_) in
+            self.didOpenedDocument?(document)
+        }
+    
     }
 
 }

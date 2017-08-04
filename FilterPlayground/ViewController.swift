@@ -88,15 +88,21 @@ class ViewController: UIViewController {
             let input = CIImage(image: image) else {
                 return
         }
-        let errorHelper = ErrorHelper()
-        guard let kernel = CIWarpKernel(source: source) else {
-            if let errorString = errorHelper.errorString() {
-                sourceEditorViewController?.errors = ErrorParser.getErrors(for: errorString)
-            }
-            return
-        }
-        sourceEditorViewController?.errors = []
         
+        switch KernelCompiler.compile(source: source) {
+        case .success(kernel: let kernel):
+            apply(kernel: kernel, input: input, descriptor: descriptor)
+            break
+        case .failed(errors: let errors):
+            display(errors: errors)
+            break
+            
+        }
+    }
+    
+    func apply(kernel: CIWarpKernel, input: CIImage, descriptor: KernelDescriptor) {
+        clearErrors()
+
         guard let filtred = kernel.apply(extent: input.extent, roiCallback: { (index, rect) -> CGRect in
             return rect
         }, image: input, arguments: descriptor.attributes.flatMap{ $0.value }) else {
@@ -107,6 +113,14 @@ class ViewController: UIViewController {
         let result = UIImage(ciImage: filtred)
         imagesViewController?.outputImage = result
         isRunning = false
+    }
+    
+    func clearErrors(){
+        sourceEditorViewController?.errors = []
+    }
+    
+    func display(errors: [CompilerError]) {
+        sourceEditorViewController?.errors = errors
     }
     
     func didOpenedDocument(document: Document) {

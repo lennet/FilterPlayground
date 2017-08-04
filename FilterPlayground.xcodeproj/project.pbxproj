@@ -32,6 +32,9 @@
 		98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */; };
 		98C5E2391F34B45E006E7658 /* KernelDescriptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2381F34B45E006E7658 /* KernelDescriptorTests.swift */; };
 		98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */; };
+		98C5E23D1F34B85C006E7658 /* KernelCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23C1F34B85C006E7658 /* KernelCompiler.swift */; };
+		98C5E23F1F34B8DD006E7658 /* CompilerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23E1F34B8DD006E7658 /* CompilerError.swift */; };
+		98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */; };
 		98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */; };
 		98E5AD0E1F2E87280047AC2E /* RendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E5AD0D1F2E87280047AC2E /* RendererTests.swift */; };
 		98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */; };
@@ -89,6 +92,9 @@
 		98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingDocumentTests.swift; sourceTree = "<group>"; };
 		98C5E2381F34B45E006E7658 /* KernelDescriptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelDescriptorTests.swift; sourceTree = "<group>"; };
 		98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelperTests.swift; sourceTree = "<group>"; };
+		98C5E23C1F34B85C006E7658 /* KernelCompiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelCompiler.swift; sourceTree = "<group>"; };
+		98C5E23E1F34B8DD006E7658 /* CompilerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerError.swift; sourceTree = "<group>"; };
+		98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelCompilerTests.swift; sourceTree = "<group>"; };
 		98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeViewController.swift; sourceTree = "<group>"; };
 		98E5AD0D1F2E87280047AC2E /* RendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererTests.swift; sourceTree = "<group>"; };
 		98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +166,8 @@
 				980229AD1F2FB88F000FFCA2 /* ErrorParser.swift */,
 				98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */,
 				98E692EA1F30D33E000C8B41 /* BlankFile.CIKernel */,
+				98C5E23C1F34B85C006E7658 /* KernelCompiler.swift */,
+				98C5E23E1F34B8DD006E7658 /* CompilerError.swift */,
 			);
 			path = FilterPlayground;
 			sourceTree = "<group>";
@@ -176,6 +184,7 @@
 				98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */,
 				98C5E2381F34B45E006E7658 /* KernelDescriptorTests.swift */,
 				98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */,
+				98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -376,9 +385,11 @@
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
 				98E692E91F30C832000C8B41 /* Document.swift in Sources */,
+				98C5E23D1F34B85C006E7658 /* KernelCompiler.swift in Sources */,
 				980229AE1F2FB88F000FFCA2 /* ErrorParser.swift in Sources */,
 				98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */,
 				980229AC1F2F94F9000FFCA2 /* ErrorHelper.swift in Sources */,
+				98C5E23F1F34B8DD006E7658 /* CompilerError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +401,7 @@
 				98E5AD0E1F2E87280047AC2E /* RendererTests.swift in Sources */,
 				985A421B1F2CF8F300636E72 /* FilterPlaygroundTests.swift in Sources */,
 				985668431F2E6ABE00297A4E /* TokenizerTests.swift in Sources */,
+				98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */,
 				980229B01F2FBF18000FFCA2 /* ErrorParserTests.swift in Sources */,
 				98C5E2391F34B45E006E7658 /* KernelDescriptorTests.swift in Sources */,
 				98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */,

@@ -23,7 +23,7 @@ class KernelCompilerTests: XCTestCase {
     
     func testValidKernel() {
         let source = "kernel vec2 foo() { return destCoord(); }"
-        let result = KernelCompiler.compile(source: source)
+        let result = KernelCompiler<CIWarpKernel>.compile(source: source)
         
         if case .failed(let errors) = result {
             XCTFail("\(errors.count) unexpected errors")
@@ -33,7 +33,7 @@ class KernelCompilerTests: XCTestCase {
     
     func testInvalidKernel() {
         let source = "kernel vec2 foo() { return destCoord() }"
-        let result = KernelCompiler.compile(source: source)
+        let result = KernelCompiler<CIWarpKernel>.compile(source: source)
         
         switch result {
         case .failed(let errors):

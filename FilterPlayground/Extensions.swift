@@ -49,3 +49,26 @@ extension FileManager {
     }
     
 }
+
+extension CIWarpKernel: Kernel {
+    
+    static func compile(source: String) -> Kernel? {
+        return CIWarpKernel(source: source)
+    }
+    
+    func apply(to image: UIImage, attributes: [KernelAttribute]) -> UIImage? {
+        
+        guard let input = CIImage(image: image) else {
+            return nil
+            
+        }
+        
+        guard let result = self.apply(extent: input.extent, roiCallback: { (index, rect) -> CGRect in
+            return rect
+        }, image: input, arguments: attributes.flatMap{ $0.value }) else {
+            return nil
+        }
+        return UIImage(ciImage: result)
+    }
+
+}

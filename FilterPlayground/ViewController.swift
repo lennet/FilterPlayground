@@ -84,14 +84,13 @@ class ViewController: UIViewController {
         
         guard let source = sourceEditorViewController?.source,
             let image = imagesViewController?.inputImage,
-            let descriptor = attributesViewController?.kernelDescriptor,
-            let input = CIImage(image: image) else {
+            let descriptor = attributesViewController?.kernelDescriptor else {
                 return
         }
         
-        switch KernelCompiler.compile(source: source) {
+        switch KernelCompiler<CIWarpKernel>.compile(source: source) {
         case .success(kernel: let kernel):
-            apply(kernel: kernel, input: input, descriptor: descriptor)
+            apply(kernel: kernel, input: image, attributes: descriptor.attributes)
             break
         case .failed(errors: let errors):
             display(errors: errors)
@@ -100,18 +99,9 @@ class ViewController: UIViewController {
         }
     }
     
-    func apply(kernel: CIWarpKernel, input: CIImage, descriptor: KernelDescriptor) {
+    func apply(kernel: Kernel, input: UIImage, attributes: [KernelAttribute]) {
         clearErrors()
-
-        guard let filtred = kernel.apply(extent: input.extent, roiCallback: { (index, rect) -> CGRect in
-            return rect
-        }, image: input, arguments: descriptor.attributes.flatMap{ $0.value }) else {
-            return
-        }
-        
-        
-        let result = UIImage(ciImage: filtred)
-        imagesViewController?.outputImage = result
+        imagesViewController?.outputImage = kernel.apply(to: input, attributes: attributes)
         isRunning = false
     }
     

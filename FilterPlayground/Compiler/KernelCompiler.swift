@@ -6,21 +6,21 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-enum KernelCompilerResult {
-    case success(kernel: CIWarpKernel)
+enum KernelCompilerResult<T: Kernel> {
+    case success(kernel: T)
     case failed(errors: [CompilerError])
 }
 
-class KernelCompiler {
+class KernelCompiler<T: Kernel> {
 
     private init() {}
     
-    class func compile(source: String) -> KernelCompilerResult {
+    class func compile(source: String) -> KernelCompilerResult<T> {
         let errorHelper = ErrorHelper()
-        if let kernel = CIWarpKernel(source: source) {
-            return .success(kernel: kernel)
+        if let kernel = T.compile(source: source) {
+            return KernelCompilerResult<T>.success(kernel: kernel as! T)
         } else if let errorString = errorHelper.errorString() {
             return .failed(errors: ErrorParser.getErrors(for: errorString))
         }

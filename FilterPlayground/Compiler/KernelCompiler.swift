@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum KernelCompilerResult<T: Kernel> {
-    case success(kernel: T)
+enum KernelCompilerResult {
+    case success(kernel: Kernel)
     case failed(errors: [CompilerError])
 }
 
@@ -17,10 +17,10 @@ class KernelCompiler<T: Kernel> {
 
     private init() {}
     
-    class func compile(source: String) -> KernelCompilerResult<T> {
+    class func compile(source: String) -> KernelCompilerResult {
         let errorHelper = ErrorHelper()
         if let kernel = T.compile(source: source) {
-            return KernelCompilerResult<T>.success(kernel: kernel as! T)
+            return KernelCompilerResult.success(kernel: kernel)
         } else if let errorString = errorHelper.errorString() {
             return .failed(errors: ErrorParser.getErrors(for: errorString))
         }

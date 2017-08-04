@@ -133,6 +133,7 @@
 		981267D21F34BEDB00101027 /* Compiler */ = {
 			isa = PBXGroup;
 			children = (
+				981267D31F34BEFC00101027 /* Kernel.swift */,
 				98C5E23C1F34B85C006E7658 /* KernelCompiler.swift */,
 				980229AB1F2F94F9000FFCA2 /* ErrorHelper.swift */,
 				980229AD1F2FB88F000FFCA2 /* ErrorParser.swift */,
@@ -178,7 +179,6 @@
 				981267D21F34BEDB00101027 /* Compiler */,
 				98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */,
 				98E692EA1F30D33E000C8B41 /* BlankFile.CIKernel */,
-				981267D31F34BEFC00101027 /* Kernel.swift */,
 			);
 			path = FilterPlayground;
 			sourceTree = "<group>";

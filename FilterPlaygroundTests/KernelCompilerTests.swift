@@ -21,7 +21,7 @@ class KernelCompilerTests: XCTestCase {
         super.tearDown()
     }
     
-    func testValidKernel() {
+    func testValidWarpKernel() {
         let source = "kernel vec2 foo() { return destCoord(); }"
         let result = KernelCompiler<CIWarpKernel>.compile(source: source)
         
@@ -31,7 +31,7 @@ class KernelCompilerTests: XCTestCase {
         
     }
     
-    func testInvalidKernel() {
+    func testInvalidWarpKernel() {
         let source = "kernel vec2 foo() { return destCoord() }"
         let result = KernelCompiler<CIWarpKernel>.compile(source: source)
         
@@ -43,5 +43,29 @@ class KernelCompilerTests: XCTestCase {
             XCTFail()
         }
     }
+    
+    func testValidColorKernel() {
+        let source = "kernel vec4 foo() { return vec4(1.0,1.0,1.0,1.0); }"
+        let result = KernelCompiler<CIColorKernel>.compile(source: source)
+        
+        if case .failed(let errors) = result {
+            XCTFail("\(errors.count) unexpected errors")
+        }
+        
+    }
+    
+    func testInvalidColorKernel() {
+        let source = "kernel vec2 foo() { return destCoord() }"
+        let result = KernelCompiler<CIColorKernel>.compile(source: source)
+        
+        switch result {
+        case .failed(let errors):
+            XCTAssertGreaterThan(errors.count, 0)
+            break
+        default:
+            XCTFail()
+        }
+    }
+
     
 }

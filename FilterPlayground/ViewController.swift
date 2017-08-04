@@ -88,7 +88,7 @@ class ViewController: UIViewController {
                 return
         }
         
-        switch KernelCompiler<CIWarpKernel>.compile(source: source) {
+        switch descriptor.compile(source) {
         case .success(kernel: let kernel):
             apply(kernel: kernel, input: image, attributes: descriptor.attributes)
             break

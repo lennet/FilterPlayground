@@ -72,3 +72,24 @@ extension CIWarpKernel: Kernel {
     }
 
 }
+
+extension CIColorKernel: Kernel {
+    
+    static func compile(source: String) -> Kernel? {
+        return CIColorKernel(source: source)
+    }
+    
+    func apply(to image: UIImage, attributes: [KernelAttribute]) -> UIImage? {
+        
+        guard let input = CIImage(image: image) else {
+            return nil
+            
+        }
+        
+        guard let result = self.apply(extent: input.extent, arguments: [input] + attributes.flatMap{ $0.value }) else {
+            return nil
+        }
+        return UIImage(ciImage: result)
+    }
+    
+}

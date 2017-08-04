@@ -74,6 +74,16 @@ struct KernelDescriptor {
     var name: String
     var type: KernelType
     var attributes: [KernelAttribute]
+    
+    var compile: (String) -> KernelCompilerResult {
+        switch type {
+        case .color:
+            // TODO
+            return KernelCompiler<CIWarpKernel>.compile
+        case .warp:
+            return KernelCompiler<CIWarpKernel>.compile
+        }
+    }
 }
 
 extension KernelDescriptor {

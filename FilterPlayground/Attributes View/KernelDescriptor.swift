@@ -32,10 +32,11 @@ enum KernelAttributeType: String, Codable {
     case vec2
     case vec3
     case vec4
-    case sampler
+    case sample = "__sample"
+    case color = "__color"
     
     static var all: [KernelAttributeType] {
-        return [.float, .vec2, .vec3, .vec4, .sampler]
+        return [.float, .vec2, .vec3, .vec4, .sample, .color]
     }
     
 }
@@ -78,8 +79,7 @@ struct KernelDescriptor {
     var compile: (String) -> KernelCompilerResult {
         switch type {
         case .color:
-            // TODO
-            return KernelCompiler<CIWarpKernel>.compile
+            return KernelCompiler<CIColorKernel>.compile
         case .warp:
             return KernelCompiler<CIWarpKernel>.compile
         }

@@ -111,6 +111,7 @@ class ViewController: UIViewController {
     
     func display(errors: [CompilerError]) {
         sourceEditorViewController?.errors = errors
+        isRunning = false
     }
     
     func didOpenedDocument(document: Document) {

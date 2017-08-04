@@ -60,7 +60,6 @@ extension CIWarpKernel: Kernel {
         
         guard let input = CIImage(image: image) else {
             return nil
-            
         }
         
         guard let result = self.apply(extent: input.extent, roiCallback: { (index, rect) -> CGRect in
@@ -83,10 +82,12 @@ extension CIColorKernel: Kernel {
         
         guard let input = CIImage(image: image) else {
             return nil
-            
         }
         
-        guard let result = self.apply(extent: input.extent, arguments: [input] + attributes.flatMap{ $0.value }) else {
+        let arguments =  [input as Any]
+        guard let result = self.apply(extent: input.extent, roiCallback: { (index, rect) -> CGRect in
+            return rect
+        }, arguments: arguments) else {
             return nil
         }
         return UIImage(ciImage: result)

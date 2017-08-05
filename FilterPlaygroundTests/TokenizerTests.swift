@@ -87,5 +87,12 @@ class TokenizerTests: XCTestCase {
         XCTAssertEqual(Token.identifier(.other("30")), tokenizer.nextToken()!)
     }
     
+    func testTokenizeSampleAttribute() {
+        let string = "__sample"
+        let tokenizer = Tokenizer(string: string)
+        XCTAssertEqual(Token.identifier(.type(.sample)), tokenizer.nextToken()!)
+
+    }
+    
     
 }

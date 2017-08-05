@@ -208,10 +208,10 @@ class Tokenizer {
     func tokenizeIdentifer() -> Token? {
         guard let nextChar = getNextCharacter() else { return nil }
         var identifier = nextChar
-        
         index = string.index(after: index)
         while let nextChar = getNextCharacter(),
-            CharacterSet.alphanumerics.contains(nextChar.unicodeScalars.first!) {
+            // todo create own charactersets for identifier
+            CharacterSet.alphanumerics.contains(nextChar.unicodeScalars.first!) || nextChar == "_" {
                 identifier.append(nextChar)
                 index = string.index(after: index)
         }

@@ -85,24 +85,13 @@ class NumberedTextView: UIView, UITextViewDelegate {
             lineRect.origin.y = lineRect.origin.y - textView.contentOffset.y + textView.textContainerInset.top
             
             if (hightLightErrorLineNumber ?? -1) == lineNumber {
-                UIColor.red.withAlphaComponent(0.1).setFill()
-                var fillRect = lineRect
-                fillRect.size.width = rect.width
-                UIGraphicsGetCurrentContext()?.fill(fillRect)
-                UIColor.black.setFill()
-
-            }
-            
-            if lineRange.contains(textView.selectedRange.location) && textView.selectedRange.length == 0 {
-                UIColor.blue.withAlphaComponent(0.1).setFill()
-                var fillRect = lineRect
-                fillRect.size.width = rect.width
-                UIGraphicsGetCurrentContext()?.fill(fillRect)
-                UIColor.black.setFill()
+                fillLine(rect: CGRect(origin:lineRect.origin, size: CGSize(width: rect.width, height: lineRect.height)), color: UIColor.red.withAlphaComponent(0.1))
+            } else if lineRange.contains(textView.selectedRange.location) && textView.selectedRange.length == 0 {
+                fillLine(rect: CGRect(origin:lineRect.origin, size: CGSize(width: rect.width, height: lineRect.height)), color: UIColor.blue.withAlphaComponent(0.1))
             }
             
             if lineRect.origin.y > -(textView.font?.lineHeight ?? 10) {
-                ("\(lineNumber) :" as NSString).draw(at: CGPoint(x: 0, y: lineRect.origin.y), withAttributes: [NSAttributedStringKey.font:textView.font!])
+                draw(text: "\(lineNumber) :", at: lineRect.origin)
             }
     
             if lineRect.origin.y > frame.size.height {
@@ -112,6 +101,15 @@ class NumberedTextView: UIView, UITextViewDelegate {
             index = NSMaxRange(lineRange)
             lineNumber += 1
         }
+    }
+    
+    func fillLine(rect: CGRect, color: UIColor) {
+        color.setFill()
+        UIGraphicsGetCurrentContext()?.fill(rect)
+    }
+    
+    func draw(text: String, at point: CGPoint) {
+        (text as NSString).draw(at: CGPoint(x: 0, y: point.y), withAttributes: [NSAttributedStringKey.font:textView.font!])
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {

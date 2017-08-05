@@ -9,6 +9,10 @@
 import UIKit
 
 class NumberedTextView: UIView, UITextViewDelegate {
+    
+    var theme: Theme.Type {
+        return ThemeManager.shared.currentTheme
+    }
 
     let textView: UITextView = {
         let textView = UITextView()
@@ -48,18 +52,12 @@ class NumberedTextView: UIView, UITextViewDelegate {
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         textView.frame = CGRect(origin: CGPoint(x:20, y:0), size: CGSize(width: frame.width - 20, height: frame.height))
         textView.delegate = self
         addSubview(textView)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        textView.frame = CGRect(origin: CGPoint(x:20, y:0), size: CGSize(width: frame.width - 20, height: frame.height))
-        textView.delegate = self
-        addSubview(textView)
+        backgroundColor = .clear
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -85,13 +83,13 @@ class NumberedTextView: UIView, UITextViewDelegate {
             lineRect.origin.y = lineRect.origin.y - textView.contentOffset.y + textView.textContainerInset.top
             
             if (hightLightErrorLineNumber ?? -1) == lineNumber {
-                fillLine(rect: CGRect(origin:lineRect.origin, size: CGSize(width: rect.width, height: lineRect.height)), color: UIColor.red.withAlphaComponent(0.1))
+                fillLine(rect: CGRect(origin:lineRect.origin, size: CGSize(width: rect.width, height: lineRect.height)), color: theme.sourceEditorLineBackgroundError)
             } else if lineRange.contains(textView.selectedRange.location) && textView.selectedRange.length == 0 {
-                fillLine(rect: CGRect(origin:lineRect.origin, size: CGSize(width: rect.width, height: lineRect.height)), color: UIColor.blue.withAlphaComponent(0.1))
+                fillLine(rect: CGRect(origin:lineRect.origin, size: CGSize(width: rect.width, height: lineRect.height)), color: theme.sourceEditorLineBackgroundHighlighted)
             }
             
             if lineRect.origin.y > -(textView.font?.lineHeight ?? 10) {
-                draw(text: "\(lineNumber) :", at: lineRect.origin)
+                draw(text: "\(lineNumber) :", at: lineRect.origin, color: theme.sourceEditorLineNumber)
             }
     
             if lineRect.origin.y > frame.size.height {
@@ -108,8 +106,10 @@ class NumberedTextView: UIView, UITextViewDelegate {
         UIGraphicsGetCurrentContext()?.fill(rect)
     }
     
-    func draw(text: String, at point: CGPoint) {
-        (text as NSString).draw(at: CGPoint(x: 0, y: point.y), withAttributes: [NSAttributedStringKey.font:textView.font!])
+    func draw(text: String, at point: CGPoint, color: UIColor) {
+        let attributes = [NSAttributedStringKey.font:textView.font!,
+                          NSAttributedStringKey.foregroundColor: color] as [NSAttributedStringKey : Any]
+        (text as NSString).draw(at: CGPoint(x: 0, y: point.y), withAttributes: attributes)
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {

@@ -62,11 +62,11 @@ extension Token {
     var attributes: [NSAttributedStringKey: Any] {
         switch self {
         case .float(_):
-            return [NSAttributedStringKey.foregroundColor: UIColor.blue]
+            return [NSAttributedStringKey.foregroundColor: ThemeManager.shared.currentTheme.sourceEditorTextFloat]
         case .identifier(let a):
             return a.attributes
         default:
-            return [:]
+            return [NSAttributedStringKey.foregroundColor: ThemeManager.shared.currentTheme.sourceEditorText]
         }
     }
     
@@ -81,18 +81,18 @@ enum Identifier {
     case type(KernelAttributeType)
     case other(String)
     case keyword(Keyword)
-    // todo keywords
     
     var attributes: [NSAttributedStringKey: Any] {
+        let color: UIColor
         switch self {
         case .type(_):
-            return [NSAttributedStringKey.foregroundColor: UIColor.red]
+            color = ThemeManager.shared.currentTheme.sourceEditorTextType
         case .keyword(_):
-            return [NSAttributedStringKey.foregroundColor: UIColor.purple]
+            color = ThemeManager.shared.currentTheme.sourceEditorTextKeyword
         default:
-            return [:]
+            color = ThemeManager.shared.currentTheme.sourceEditorText
         }
-        
+        return [NSAttributedStringKey.foregroundColor: color]
     }
     
 }

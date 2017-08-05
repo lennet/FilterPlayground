@@ -59,7 +59,6 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
             textView.setNeedsDisplay()
         }
     }
-
     
     let postfix: String = "\n}"
     
@@ -90,16 +89,27 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         textView.text = fullSource
         textView.setNeedsDisplay()
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(SourceEditorViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SourceEditorViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerNotifications()
+        setColors(with: ThemeManager.shared.currentTheme)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(self)
         super.viewWillDisappear(animated)
+    }
+    
+    func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(SourceEditorViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SourceEditorViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(forName: ThemeManager.themeChangedNotificationName, object: nil, queue: OperationQueue.main) { [weak self] (notification)  in
+            guard let theme = notification.object.self as? Theme.Type else {
+                return
+            }
+            self?.setColors(with: theme)
+        }
     }
 
     func updateBottomSpacing(animated: Bool) {
@@ -143,4 +153,9 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         let error = errors[indexPath.row]
         textView.hightLightErrorLineNumber = error.lineNumber
     }
+    
+    func setColors(with theme: Theme.Type) {
+        view.backgroundColor = theme.sourceEditorBackground
+    }
+
 }

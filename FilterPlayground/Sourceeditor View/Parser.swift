@@ -168,7 +168,6 @@ class Tokenizer {
         let oldIndex = index
         switch char {
         case "\n":
-            
             index = string.index(after: index)
             return Token.newLine
         case " ":
@@ -185,20 +184,19 @@ class Tokenizer {
             var alreadyFoundDot = false
             index = string.index(after: index)
             while let nextChar = getNextCharacter(),
-                (Float(nextChar)?.isNaN ?? true) == false  || (nextChar == "." && !alreadyFoundDot){
+                (Float(nextChar)?.isNaN ?? true) == false  || (nextChar == "."){
                     if (nextChar == ".") {
-                        alreadyFoundDot =  true
+                        if (alreadyFoundDot) {
+                            index = oldIndex
+                            return tokenizeIdentifer()
+                        } else {
+                            alreadyFoundDot =  true
+                        }
                     }
                     floatString.append(nextChar)
                     index = string.index(after: index)
             }
-            // todo refactor 
-            if (getNextCharacter() ?? " ") == " " {
-                return Token.float(floatString)
-            } else {
-                index = oldIndex
-                return tokenizeIdentifer()
-            }
+            return Token.float(floatString)
         default:
             return tokenizeIdentifer()
         }

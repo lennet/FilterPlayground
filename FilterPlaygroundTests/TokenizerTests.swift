@@ -25,28 +25,35 @@ class TokenizerTests: XCTestCase {
     func testTokenizeOperator() {
         let string = "+"
         
-        let tokenizer = Tokenizer(string: string )
+        let tokenizer = Tokenizer(string: string)
         XCTAssertEqual(Token.op(.add), tokenizer.nextToken()!)
     }
     
     func testTokenizeFloat() {
         let string = "50.0"
         
-        let tokenizer = Tokenizer(string: string )
+        let tokenizer = Tokenizer(string: string)
         XCTAssertEqual(Token.float(string), tokenizer.nextToken()!)
+    }
+    
+    func testFloatBeforeLinebreak() {
+        let string = "50.0\n"
+        
+        let tokenizer = Tokenizer(string: string)
+        XCTAssertEqual(Token.float("50.0"), tokenizer.nextToken()!)
     }
     
     func testTokenizeFloat2() {
         let string = "50"
         
-        let tokenizer = Tokenizer(string: string )
+        let tokenizer = Tokenizer(string: string)
         XCTAssertEqual(Token.float(string), tokenizer.nextToken()!)
     }
     
     func testTokenizeFloatStartingWithZero() {
         let string = "050"
         
-        let tokenizer = Tokenizer(string: string )
+        let tokenizer = Tokenizer(string: string)
         XCTAssertEqual(Token.float(string), tokenizer.nextToken()!)
     }
     
@@ -91,7 +98,7 @@ class TokenizerTests: XCTestCase {
         let string = "__sample"
         let tokenizer = Tokenizer(string: string)
         XCTAssertEqual(Token.identifier(.type(.sample)), tokenizer.nextToken()!)
-
+        
     }
     
     

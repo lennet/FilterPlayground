@@ -188,4 +188,14 @@ a{b{{
         XCTAssertEqual(root.intendationLevel(at: f), 0)
     }
     
+    func testBrokenASTWithKernel() {
+        let text = "kernel{\n\t"
+        let tokens = Parser(string: text).getTokens()
+        let result = ASTBuilder.getAST(for: tokens)
+    
+        let expectedResult: [ASTNode] = [ ASTNode.bracetStatement(prefix: [.identifier(.keyword(.kernel)), .openingBracket], body: [.unkown([.newLine, .tab])], postfix: []) ]
+
+        XCTAssertEqual(result, expectedResult)
+    }
+    
 }

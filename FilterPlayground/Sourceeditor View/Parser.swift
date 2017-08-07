@@ -115,6 +115,9 @@ extension Identifier: Equatable {
             return a == b
         case (.type(let a), .type(let b)):
             return a == b
+        case (.keyword(let a), .keyword(let b)):
+            return a == b
+
         default:
             return false
         }

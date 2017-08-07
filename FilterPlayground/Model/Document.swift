@@ -22,6 +22,16 @@ class Document: UIDocument {
         }
     }
     
+    convenience init(fileURL url: URL, type: KernelType) {
+        self.init(fileURL: url)
+        metaData.type = type
+        source = metaData.initialSource()
+    }
+    
+    override init(fileURL url: URL) {
+        super.init(fileURL: url)
+    }
+    
     override func contents(forType typeName: String) throws -> Any {
         let meta = try JSONEncoder().encode(metaData)
         

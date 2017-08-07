@@ -14,6 +14,7 @@
 		981267D41F34BEFC00101027 /* Kernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981267D31F34BEFC00101027 /* Kernel.swift */; };
 		9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC741F3663AE00A8E3CA /* Theme.swift */; };
 		9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC761F36675000A8E3CA /* ThemingTests.swift */; };
+		9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845C6101F38F44100F38283 /* NewProjectViewController.swift */; };
 		984D9FA41F2E824B004AFD74 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D9FA31F2E824B004AFD74 /* ParserTests.swift */; };
 		985668411F2E60EB00297A4E /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985668401F2E60EB00297A4E /* Parser.swift */; };
 		985668431F2E6ABE00297A4E /* TokenizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985668421F2E6ABE00297A4E /* TokenizerTests.swift */; };
@@ -72,6 +73,7 @@
 		981267D31F34BEFC00101027 /* Kernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kernel.swift; sourceTree = "<group>"; };
 		9841EC741F3663AE00A8E3CA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		9841EC761F36675000A8E3CA /* ThemingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingTests.swift; sourceTree = "<group>"; };
+		9845C6101F38F44100F38283 /* NewProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectViewController.swift; sourceTree = "<group>"; };
 		984D9FA31F2E824B004AFD74 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
 		985668401F2E60EB00297A4E /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		985668421F2E6ABE00297A4E /* TokenizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizerTests.swift; sourceTree = "<group>"; };
@@ -156,6 +158,15 @@
 			path = Theming;
 			sourceTree = "<group>";
 		};
+		9845C60F1F38F42500F38283 /* Create Project */ = {
+			isa = PBXGroup;
+			children = (
+				98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */,
+				9845C6101F38F44100F38283 /* NewProjectViewController.swift */,
+			);
+			path = "Create Project";
+			sourceTree = "<group>";
+		};
 		985A41F91F2CF8F200636E72 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +190,7 @@
 		985A42041F2CF8F200636E72 /* FilterPlayground */ = {
 			isa = PBXGroup;
 			children = (
+				9845C60F1F38F42500F38283 /* Create Project */,
 				9841EC731F36639B00A8E3CA /* Theming */,
 				98E692EC1F30DF75000C8B41 /* Model */,
 				985A42051F2CF8F200636E72 /* AppDelegate.swift */,
@@ -192,7 +204,6 @@
 				98D9199D1F2E0578007D5234 /* Attributes View */,
 				987672441F2F5355002F9AAF /* Extensions.swift */,
 				981267D21F34BEDB00101027 /* Compiler */,
-				98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */,
 				98E692EA1F30D33E000C8B41 /* BlankFile.CIKernel */,
 			);
 			path = FilterPlayground;
@@ -399,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98E692EE1F30DF8D000C8B41 /* ProjectMetaData.swift in Sources */,
+				9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */,
 				98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */,
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,

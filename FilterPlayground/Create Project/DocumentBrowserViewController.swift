@@ -10,7 +10,7 @@ import UIKit
 import MobileCoreServices
 
 class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
-
+    
     var didOpenedDocument: ((Document) -> ())?
     
     override func viewDidLoad() {
@@ -23,16 +23,27 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     // MARK: UIDocumentBrowserViewControllerDelegate
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
-        let newDocumentURL = FileManager.urlInDocumentsDirectory(for: "\(Date()).CIKernel")
+        let newDocumentURL = FileManager.urlInDocumentsDirectory(for: "\(Date()).kernelProj")
         
-        let document = Document(fileURL: newDocumentURL)
-        document.save(to: newDocumentURL, for: .forCreating) { (success) in
-            if success {
-                importHandler(newDocumentURL, .move)
-            } else {
-                importHandler(nil, .none)
+        let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewProjectNavigationController") as! UINavigationController
+        let viewController = navigationController.viewControllers.first as! NewProjectViewController
+        viewController.modalPresentationStyle = .formSheet
+        present(viewController, animated: true) {
+            
+            viewController.didSelectType = { type in
+                viewController.dismiss(animated: true, completion: nil)
+                let document = Document(fileURL: newDocumentURL, type: type)
+                document.save(to: newDocumentURL, for: .forCreating) { (success) in
+                    if success {
+                        importHandler(newDocumentURL, .move)
+                    } else {
+                        importHandler(nil, .none)
+                    }
+                }
+                
             }
         }
+        
     }
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentURLs documentURLs: [URL]) {
@@ -52,16 +63,16 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
     }
     
-
+    
     // MARK: Document Presentation
     
     func presentDocument(at documentURL: URL) {
-    
+        
         let document = Document(fileURL: documentURL)
         document.open { (_) in
             self.didOpenedDocument?(document)
         }
-    
+        
     }
-
+    
 }

@@ -9,17 +9,21 @@
 import UIKit
 
 enum KernelType: String, Codable {
+    case normal
     case warp
     case color
+    case blend
 }
 
 extension KernelType {
     
     var returnType: KernelAttributeType {
         switch self {
-        case .warp:
+        case .normal,
+             .warp:
             return .vec2
-        case .color:
+        case .color,
+             .blend:
             return .vec4
         }
     }
@@ -81,6 +85,9 @@ struct KernelDescriptor {
         case .color:
             return KernelCompiler<CIColorKernel>.compile
         case .warp:
+            return KernelCompiler<CIWarpKernel>.compile
+        default:
+            // todo!
             return KernelCompiler<CIWarpKernel>.compile
         }
     }

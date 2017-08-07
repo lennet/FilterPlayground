@@ -94,3 +94,16 @@ extension CIColorKernel: Kernel {
     }
     
 }
+
+extension Array where Element: Equatable {
+    
+    func index(of element: Element, after index: Int) -> Int? {
+        for i in index..<self.count {
+            if self[i] == element {
+                return i
+            }
+        }
+        return nil
+    }
+    
+}

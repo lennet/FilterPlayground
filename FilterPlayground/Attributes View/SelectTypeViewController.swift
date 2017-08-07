@@ -12,21 +12,8 @@ class SelectTypeViewController: UIViewController, UITableViewDataSource, UITable
     
     var didSelectType: ((KernelAttributeType) -> ())?
     
-    fileprivate var attributes: [KernelAttributeType] {
-        return KernelAttributeType.all
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    fileprivate let attributes: [KernelAttributeType] = KernelAttributeType.all
+        
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

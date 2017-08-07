@@ -13,6 +13,9 @@ enum Token {
     case float(String)
     case whiteSpace
     case newLine
+    case semicolon
+    case openingBracket
+    case closingBracket
     case tab
     case identifier(Identifier)
 }
@@ -25,11 +28,12 @@ extension Token: Equatable {
             return a == b
         case (.float(let a), .float(let b)):
             return a == b
-        case (.whiteSpace, .whiteSpace):
-            return true
-        case (.newLine, .newLine):
-            return true
-        case(.tab, .tab):
+        case (.whiteSpace, .whiteSpace),
+             (.newLine, .newLine),
+             (.tab, .tab),
+             (.semicolon, .semicolon),
+             (.openingBracket, .openingBracket),
+             (.closingBracket, .closingBracket):
             return true
         case (.identifier(let a), .identifier(let b)):
             return a == b
@@ -46,6 +50,8 @@ extension Token {
         switch self {
         case .op(let a):
             return a.rawValue
+        case .semicolon:
+            return ";"
         case .whiteSpace:
             return " "
         case .newLine:
@@ -56,6 +62,10 @@ extension Token {
             return a.stringRepresentation
         case .float(let a):
             return a
+        case .openingBracket:
+            return "{"
+        case .closingBracket:
+            return "}"
         }
     }
     
@@ -167,13 +177,22 @@ class Tokenizer {
         guard let char = getNextCharacter() else { return nil }
         let oldIndex = index
         switch char {
-        case "\n":
+        case Token.openingBracket.stringRepresentation:
+            index = string.index(after: index)
+            return Token.openingBracket
+        case Token.closingBracket.stringRepresentation:
+            index = string.index(after: index)
+            return Token.closingBracket
+        case Token.semicolon.stringRepresentation:
+            index = string.index(after: index)
+            return Token.semicolon
+        case Token.newLine.stringRepresentation:
             index = string.index(after: index)
             return Token.newLine
         case " ":
             index = string.index(after: index)
             return Token.whiteSpace
-        case "\t":
+        case Token.tab.stringRepresentation:
             index = string.index(after: index)
             return Token.tab
         case let a where Operator(rawValue:a) != nil:

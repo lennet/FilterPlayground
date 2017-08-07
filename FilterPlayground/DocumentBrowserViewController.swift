@@ -18,12 +18,6 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         
         self.delegate = self
         allowsDocumentCreation = true
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: UIDocumentBrowserViewControllerDelegate

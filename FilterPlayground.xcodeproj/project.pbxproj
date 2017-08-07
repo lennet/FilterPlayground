@@ -28,11 +28,11 @@
 		9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868A8C01F3712EB00D0BC79 /* AST.swift */; };
 		987672451F2F5355002F9AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
 		98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */; };
-		98A0CC611F2D043100FFC0A1 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC601F2D043100FFC0A1 /* ImageViewController.swift */; };
 		98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */; };
 		98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */; };
 		98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */; };
 		98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */; };
+		98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE92A81F3900290044E33F /* LiveViewController.swift */; };
 		98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */; };
 		98C5E2391F34B45E006E7658 /* KernelDescriptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2381F34B45E006E7658 /* KernelDescriptorTests.swift */; };
 		98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */; };
@@ -93,11 +93,11 @@
 		9868A8C01F3712EB00D0BC79 /* AST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
 		987672441F2F5355002F9AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesViewController.swift; sourceTree = "<group>"; };
-		98A0CC601F2D043100FFC0A1 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorViewController.swift; sourceTree = "<group>"; };
 		98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelDescriptor.swift; sourceTree = "<group>"; };
 		98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeTableViewCell.swift; sourceTree = "<group>"; };
 		98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedTextView.swift; sourceTree = "<group>"; };
+		98AE92A81F3900290044E33F /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingDocumentTests.swift; sourceTree = "<group>"; };
 		98C5E2381F34B45E006E7658 /* KernelDescriptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelDescriptorTests.swift; sourceTree = "<group>"; };
 		98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelperTests.swift; sourceTree = "<group>"; };
@@ -263,7 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				985A42351F2CFEE800636E72 /* SelectImageView.swift */,
-				98A0CC601F2D043100FFC0A1 /* ImageViewController.swift */,
+				98AE92A81F3900290044E33F /* LiveViewController.swift */,
 			);
 			path = "Images View";
 			sourceTree = "<group>";
@@ -418,10 +418,10 @@
 				98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */,
 				981267D41F34BEFC00101027 /* Kernel.swift in Sources */,
 				98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */,
+				98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */,
 				985A42081F2CF8F200636E72 /* ViewController.swift in Sources */,
 				9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */,
 				985A42361F2CFEE800636E72 /* SelectImageView.swift in Sources */,
-				98A0CC611F2D043100FFC0A1 /* ImageViewController.swift in Sources */,
 				987672451F2F5355002F9AAF /* Extensions.swift in Sources */,
 				98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */,
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,

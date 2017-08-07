@@ -12,7 +12,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var typeButton: UIButton!
-    @IBOutlet weak var valueTextField: UITextField!
+
     
     var attribute: KernelAttribute? {
         didSet {
@@ -36,13 +36,6 @@ class KernelAttributeTableViewCell: UITableViewCell {
         update()
     }
     
-    @IBAction func valueTextFieldChanged(_ sender: Any) {
-        guard let value = valueTextField.text else { return
-            
-        }
-        attribute?.value = Float(value)
-        update()
-    }
     
     func update() {
         guard let attribute = attribute else {

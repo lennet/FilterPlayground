@@ -18,6 +18,7 @@ protocol Theme {
     static var sourceEditorTextKeyword: UIColor { get }
     static var sourceEditorTextFloat: UIColor { get }
     static var sourceEditorText: UIColor { get }
+    static var liveViewBackground: UIColor { get }
 }
 
 struct NightTheme: Theme {
@@ -38,6 +39,8 @@ struct NightTheme: Theme {
     static var sourceEditorBackground: UIColor = .black
     
     static var sourceEditorLineNumber: UIColor = .black
+    
+    static var liveViewBackground: UIColor = #colorLiteral(red: 0.8000000119, green: 0.8000000119, blue: 0.8000000119, alpha: 1)
 }
 
 struct Default: Theme {
@@ -58,6 +61,8 @@ struct Default: Theme {
     static var sourceEditorBackground: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     
     static var sourceEditorLineNumber: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    
+    static var liveViewBackground: UIColor = #colorLiteral(red: 0.9404068964, green: 0.9404068964, blue: 0.9404068964, alpha: 1)
 }
 
 class ThemeManager {

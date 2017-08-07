@@ -11,26 +11,16 @@ import SafariServices
 
 class ViewController: UIViewController {
     
-    weak var attributesViewController: AttributesViewController? {
-        didSet {
-            attributesViewController?.didUpdateDescriptor = didUpdate
-        }
-    }
-    weak var imagesViewController: ImageViewController?
+    @IBOutlet weak var liveViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sourceEditorWidthConstraint: NSLayoutConstraint!
+    weak var attributesViewController: AttributesViewController?
+    weak var liveViewController: LiveViewController?
     weak var sourceEditorViewController: SourceEditorViewController?
     var isRunning = false
     
     var document: Document?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    var showLiveView = true
+    var showAttributes = true
     
     override var canBecomeFirstResponder: Bool {
         return true
@@ -56,13 +46,6 @@ class ViewController: UIViewController {
         sourceEditorViewController?.fontSize -= 3
     }
     
-    func didUpdate(descriptor: KernelDescriptor, shouldRun: Bool) {
-        sourceEditorViewController?.prefix = descriptor.prefix
-        
-        if shouldRun {
-            run()
-        }
-    }
     @IBAction func documentation(_ sender: UIBarButtonItem) {
         let url = URL(string: "https://developer.apple.com/library/content/documentation/GraphicsImaging/Reference/CIKernelLangRef/ci_gslang_ext.html")!
         let safariVC = SFSafariViewController(url: url)
@@ -74,39 +57,60 @@ class ViewController: UIViewController {
     }
     
     @IBAction func run() {
-        
-        document?.source = sourceEditorViewController?.source ?? ""
-        
-        guard !isRunning else { return }
-        defer {
-            isRunning = false
-        }
-        
-        guard let source = sourceEditorViewController?.source,
-            let image = imagesViewController?.inputImage,
-            let descriptor = attributesViewController?.kernelDescriptor else {
-                return
-        }
-        
-        switch descriptor.compile(source) {
-        case .success(kernel: let kernel):
-            apply(kernel: kernel, input: image, attributes: descriptor.attributes)
-            break
-        case .failed(errors: let errors):
-            display(errors: errors)
-            break
-            
-        }
+//
+//        document?.source = sourceEditorViewController?.source ?? ""
+//
+//        guard !isRunning else { return }
+//        defer {
+//            isRunning = false
+//        }
+//
+//        guard let source = sourceEditorViewController?.source,
+//            let image = imagesViewController?.inputImage else {
+//                return
+//        }
+//        // todo
+//        let descriptor = KernelDescriptor(name: "", type: .warp, attributes: [])
+//
+//        switch descriptor.compile(source) {
+//        case .success(kernel: let kernel):
+//            apply(kernel: kernel, input: image, attributes: descriptor.attributes)
+//            break
+//        case .failed(errors: let errors):
+//            display(errors: errors)
+//            break
+//
+//        }
     }
     
     func apply(kernel: Kernel, input: UIImage, attributes: [KernelAttribute]) {
         clearErrors()
-        imagesViewController?.outputImage = kernel.apply(to: input, attributes: attributes)
-        isRunning = false
+        liveViewController?.imageView.image = kernel.apply(to: input, attributes: attributes)
+         isRunning = false
     }
     
     func clearErrors(){
         sourceEditorViewController?.errors = []
+    }
+    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        
+        let attributesWidth: CGFloat = 200
+        if showLiveView && showAttributes {
+            let width = (view.frame.width - attributesWidth) / 2
+            liveViewWidthConstraint.constant = width
+            sourceEditorWidthConstraint.constant = width
+        } else if showLiveView {
+            sourceEditorWidthConstraint.constant = view.frame.width/2
+            liveViewWidthConstraint.constant = view.frame.width/2
+        } else if showAttributes {
+            sourceEditorWidthConstraint.constant = view.frame.width-attributesWidth
+            liveViewWidthConstraint.constant = 0
+        } else {
+            sourceEditorWidthConstraint.constant = view.frame.width
+            liveViewWidthConstraint.constant = 0
+        }
     }
     
     func display(errors: [CompilerError]) {
@@ -131,12 +135,31 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func didTapLiveViewButton(_ sender: Any) {
+        showLiveView = !showLiveView
+        updateViewConstraints()
+        
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @IBAction func didTapAttribtutesButton(_ sender: Any) {
+        showAttributes = !showAttributes
+        updateViewConstraints()
+        
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {
         case let vc as AttributesViewController:
             self.attributesViewController = vc
-        case let vc as ImageViewController:
-            self.imagesViewController = vc
+        case let vc as LiveViewController:
+            self.liveViewController = vc
         case let vc as SourceEditorViewController:
             self.sourceEditorViewController = vc
             vc.didUpdateText = { [weak self] text in

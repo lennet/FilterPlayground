@@ -128,6 +128,11 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         }
      }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        textView.setNeedsDisplay()
+    }
+    
     @objc func keyboardWillShow(notification: Notification) {
         guard let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return

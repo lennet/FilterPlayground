@@ -115,15 +115,20 @@ class ViewController: UIViewController {
     }
     
     func didOpenedDocument(document: Document) {
-        defer {
+        let completion = {
             self.presentedViewController?.dismiss(animated: true, completion: nil)
             self.document = document
-            sourceEditorViewController?.source = document.source
+            self.sourceEditorViewController?.source = document.source
         }
-        
-        self.document?.close(completionHandler: { (status) in
-            return
-        })
+        if let document = self.document {
+            document.save(to: document.fileURL, for: .forOverwriting, completionHandler: { (_) in
+                document.close(completionHandler: { (_) in
+                    completion()
+                })
+            })
+        } else {
+            completion()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -134,6 +139,9 @@ class ViewController: UIViewController {
             self.imagesViewController = vc
         case let vc as SourceEditorViewController:
             self.sourceEditorViewController = vc
+            vc.didUpdateText = { [weak self] text in
+                self?.document?.source = text
+            }
         case let vc as DocumentBrowserViewController:
             vc.didOpenedDocument = didOpenedDocument
         default:

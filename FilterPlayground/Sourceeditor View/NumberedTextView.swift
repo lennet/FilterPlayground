@@ -34,6 +34,8 @@ class NumberedTextView: UIView, UITextViewDelegate {
         }
     }
     
+    var currentAST: ASTNode?
+    
     var hightLightErrorLineNumber: Int? {
         didSet {
             setNeedsDisplay()
@@ -66,11 +68,15 @@ class NumberedTextView: UIView, UITextViewDelegate {
         let selectedRange = textView.selectedRange
         let parser = Parser(string: textView.text)
         let oldFont = font
-        textView.attributedText = parser.getAST().asAttributedText
+        currentAST = parser.getAST()
+        textView.attributedText = currentAST?.asAttributedText
 //        textView.attributedText = Renderer.rederAsAttributedString(tokens: parser.getTokens())
         textView.selectedRange = selectedRange
         textView.font = oldFont
+        delegate?.textViewDidChange?(textView)
     }
+    
+    
     
     override func draw(_ rect: CGRect) {
         super.draw(rect) 
@@ -111,6 +117,17 @@ class NumberedTextView: UIView, UITextViewDelegate {
         let attributes = [NSAttributedStringKey.font:textView.font!,
                           NSAttributedStringKey.foregroundColor: color] as [NSAttributedStringKey : Any]
         (text as NSString).draw(at: CGPoint(x: 0, y: point.y), withAttributes: attributes)
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        if text == "\n" && range.length == 0 {
+//            var newText = text
+//            newText += Array(repeating: "\t", count: currentAST?.intendationLevel(at: range.location, with: 1) ?? 0).joined()
+//            textView.text = textView.text.replacingCharacters(in: Range(range, in: textView.text)!, with: newText)
+//            return false
+//        }
+//        
+        return true
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {

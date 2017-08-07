@@ -41,7 +41,7 @@ class Document: UIDocument {
             throw DocumentError.unknownFileFormat
         }
         
-        guard let metaFilewrapper = filewrapper.fileWrappers?["metadata"] else {
+        guard let metaFilewrapper = filewrapper.fileWrappers?["metadata.json"] else {
             throw DocumentError.unknownFileFormat
         }
         
@@ -66,5 +66,8 @@ class Document: UIDocument {
         self.source = sourceString
     }
 
+    override func save(to url: URL, for saveOperation: UIDocumentSaveOperation, completionHandler: ((Bool) -> Void)? = nil) {
+        super.save(to: url, for: saveOperation, completionHandler: completionHandler)
+    }
     
 }

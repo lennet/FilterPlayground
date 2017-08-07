@@ -25,22 +25,22 @@ class SavingDocumentTests: XCTestCase {
     }
     
     func testSaveText() {
-//        let text = "Hello World"
-//        let expectation = XCTestExpectation(description: "Waiting for file creation")
-//        
-//        let document = Document(fileURL: url)
-//        document.save(to: url, for: .forCreating) { (_) in
-//            document.source = text
-//            document.close(completionHandler: { (_) in
-//                let document2 = Document(fileURL: self.url)
-//                document2.open(completionHandler: { (_) in
-//                    XCTAssertEqual(document2.source, text)
-//                    expectation.fulfill()
-//                })
-//            })
-//        }
-//        
-//        wait(for: [expectation], timeout: 5)
+        let text = "Hello World"
+        let expectation = XCTestExpectation(description: "Waiting for file creation")
+        
+        let document = Document(fileURL: url)
+        document.save(to: url, for: .forCreating) { (_) in
+            document.source = text
+            document.close(completionHandler: { (_) in
+                let document2 = Document(fileURL: self.url)
+                document2.open(completionHandler: { (_) in
+                    XCTAssertEqual(document2.source, text)
+                    expectation.fulfill()
+                })
+            })
+        }
+        
+        wait(for: [expectation], timeout: 5)
     }
     
 

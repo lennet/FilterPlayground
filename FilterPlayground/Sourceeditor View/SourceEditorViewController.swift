@@ -28,8 +28,9 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         } else {
             return 0
         }
-        
     }
+    
+    var didUpdateText: ((String)->())?
     
     var errors: [CompilerError] = [] {
         didSet {
@@ -55,8 +56,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     
     var fontSize: Float = 22 {
         didSet {
-            textView.font = UIFont.systemFont(ofSize: CGFloat(fontSize)).monospacedDigitFont
-            textView.setNeedsDisplay()
+            updateFont()
         }
     }
     
@@ -94,6 +94,9 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         super.viewWillAppear(animated)
         registerNotifications()
         setColors(with: ThemeManager.shared.currentTheme)
+        
+        textView.delegate = self
+        updateFont()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -154,8 +157,17 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         textView.hightLightErrorLineNumber = error.lineNumber
     }
     
+    func updateFont() {
+        textView.font = UIFont.systemFont(ofSize: CGFloat(fontSize)).monospacedDigitFont
+        textView.setNeedsDisplay()
+    }
+    
     func setColors(with theme: Theme.Type) {
         view.backgroundColor = theme.sourceEditorBackground
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        didUpdateText?(textView.text)
     }
 
 }

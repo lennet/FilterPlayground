@@ -186,7 +186,6 @@ a{b{{
         XCTAssertEqual(root.intendationLevel(at: d), 3)
         XCTAssertEqual(root.intendationLevel(at: e), 2)
         XCTAssertEqual(root.intendationLevel(at: f), 0)
-
     }
     
 }

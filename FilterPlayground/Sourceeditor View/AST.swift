@@ -63,7 +63,32 @@ extension ASTNode: Equatable {
              .unkown(let tokens),
              .comment(let tokens):
             return tokens.count
-            
+        }
+    }
+    
+    func intendationLevel(at index: Int, with depth: Int = 0) -> Int {
+        switch self {
+        case .bracetStatement(prefix: let prefix, body: let body, postfix:_):
+            let bodyStartIndex = index - prefix.count
+            let bodyRoot = ASTNode.root(body)
+            if bodyStartIndex >= 0 && bodyStartIndex < bodyRoot.numberOfTokens {
+                return bodyRoot.intendationLevel(at: bodyStartIndex, with: depth+1)
+            }
+            return depth 
+        case .root(let nodes):
+            var maxValue = depth
+            var currentIndex = index
+            nodes.forEach({ (node) in
+                if currentIndex >= 0 && currentIndex < node.numberOfTokens {
+                    maxValue = max(node.intendationLevel(at: currentIndex, with: depth), maxValue)
+                }
+                currentIndex -= node.numberOfTokens 
+            })
+            return maxValue
+        case .statement(_),
+        .unkown(_),
+        .comment(_):
+            return depth
         }
     }
     
@@ -96,12 +121,18 @@ class ASTBuilder {
                 lastNode = i + 1
                 break
             case .openingBracket:
-                let bodyResult = getAST(for: Array(tokens[(i+1)...]))
+                let bodyTokens: [Token]
+                if let lastIndex = Array(tokens.reversed()).index(of: .closingBracket) {
+                    bodyTokens = Array(tokens[(i+1)..<(tokens.count-lastIndex)])
+                } else {
+                    bodyTokens = Array(tokens[(i+1)...])
+                }
+                let bodyResult = getAST(for: bodyTokens)
                 let oldI = i
                 
                 i += bodyResult.map{ $0.numberOfTokens }.reduce(0, +)
                 var postFix: [Token] = []
-                if let closingBracketIndex = tokens.index(of: .closingBracket, after: i) {
+                if let closingBracketIndex = tokens.index(of: .closingBracket, after: i+1) {
                     postFix = [tokens[closingBracketIndex]]
                     i = closingBracketIndex + 1
                 } else {

@@ -149,4 +149,44 @@ class ASTTests: XCTestCase {
 
     }
     
+    func testNestedEmptyBracketStatements() {
+        let text = "{{}"
+        
+        let tokens = Parser(string: text).getTokens()
+        let result = ASTBuilder.getAST(for: tokens)
+        let expectation: [ASTNode] = [.bracetStatement(prefix: [.openingBracket], body: [
+            .bracetStatement(prefix: [.openingBracket], body:
+                [], postfix: [.closingBracket])
+            ], postfix: [])]
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func testIntendationLevel() {
+        let text = """
+a{b{{
+            c
+            d
+    }e}}f
+"""
+    
+        let tokens = Parser(string: text).getTokens()
+        let root = ASTNode.root(ASTBuilder.getAST(for: tokens))
+        
+        let a = text.range(of: "a")!.lowerBound.encodedOffset
+        let b = text.range(of: "b")!.lowerBound.encodedOffset
+        let c = text.range(of: "c")!.lowerBound.encodedOffset
+        let d = text.range(of: "d")!.lowerBound.encodedOffset
+        let e = text.range(of: "e")!.lowerBound.encodedOffset
+        let f = text.range(of: "f")!.lowerBound.encodedOffset
+
+        XCTAssertEqual(root.intendationLevel(at: a), 0)
+        XCTAssertEqual(root.intendationLevel(at: b), 1)
+        XCTAssertEqual(root.intendationLevel(at: c), 3)
+        XCTAssertEqual(root.intendationLevel(at: d), 3)
+        XCTAssertEqual(root.intendationLevel(at: e), 2)
+        XCTAssertEqual(root.intendationLevel(at: f), 0)
+
+    }
+    
 }

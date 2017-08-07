@@ -38,7 +38,7 @@ class ASTTests: XCTestCase {
         let tokens = Parser(string: text).getTokens()
         let result = ASTBuilder.getAST(for: tokens)
         
-        let expectedResult = ASTNode.comment("//hello world")
+        let expectedResult = ASTNode.comment(Parser(string:text).getTokens())
         XCTAssertEqual(result, [expectedResult])
     }
     
@@ -47,7 +47,7 @@ class ASTTests: XCTestCase {
         let tokens = Parser(string: text).getTokens()
         let result = ASTBuilder.getAST(for: tokens)
         
-        let expectedResult = [ASTNode.comment("//hello world"),
+        let expectedResult = [ASTNode.comment(Parser(string:"//hello world").getTokens()),
                               ASTNode.bracetStatement(prefix: [.newLine, .identifier(.other("foo")), .openingBracket],
                                                      body: [.statement([.whiteSpace, .identifier(.other("bar")), .identifier(.other("(")), .identifier(.other(")")), .semicolon]),
                                                             .unkown([.whiteSpace])],
@@ -62,7 +62,7 @@ class ASTTests: XCTestCase {
         
         let expectedResult = ASTNode.bracetStatement(prefix: [.identifier(.other("foo")), .openingBracket],
                                                      body: [.unkown([.whiteSpace]),
-                                                            .comment("//hello world"),
+                                                            .comment(Parser(string:"//hello world").getTokens()),
                                                             .statement([.newLine, .whiteSpace, .identifier(.other("bar")), .identifier(.other("(")), .identifier(.other(")")), .semicolon]),
                                                             .unkown([.whiteSpace])],
                                                      postfix: [.closingBracket])
@@ -98,7 +98,7 @@ class ASTTests: XCTestCase {
         
         let expectedResult = [ASTNode.unkown([
                                               .whiteSpace]),
-                                              .comment("//Hello World"),
+                                              .comment(Parser(string:"//Hello World").getTokens()),
                                               .unkown([.newLine, .newLine])]
         
         XCTAssertEqual(result, expectedResult)    }
@@ -121,7 +121,7 @@ class ASTTests: XCTestCase {
         let tokens = Parser(string: text).getTokens()
         let result = ASTBuilder.getAST(for: tokens)
         
-        XCTAssertEqual(result, [ASTNode.comment(text)])
+        XCTAssertEqual(result, [ASTNode.comment(Parser(string:text).getTokens())])
     }
     
     func testInlineComment() {
@@ -129,7 +129,24 @@ class ASTTests: XCTestCase {
         let tokens = Parser(string: text).getTokens()
         let result = ASTBuilder.getAST(for: tokens)
         
-        XCTAssertEqual(result, [ASTNode.unkown([.identifier(.other("foo"))]), ASTNode.comment("/*comment*/"), ASTNode.unkown([.identifier(.other("bar"))])])
+        XCTAssertEqual(result, [ASTNode.unkown([.identifier(.other("foo"))]), ASTNode.comment(Parser(string:"/*comment*/").getTokens()), ASTNode.unkown([.identifier(.other("bar"))])])
+    }
+    
+    func testOpeningBracket() {
+        let text = "{"
+        let tokens = Parser(string: text).getTokens()
+        let result = ASTBuilder.getAST(for: tokens)
+        
+        XCTAssertEqual(result, [ASTNode.bracetStatement(prefix: [.openingBracket], body: [], postfix: [])])
+    }
+    
+    func testTwoOpeningBrackets() {
+        let text = "{{"
+        let tokens = Parser(string: text).getTokens()
+        let result = ASTBuilder.getAST(for: tokens)
+        
+        XCTAssertEqual(result, [ASTNode.bracetStatement(prefix: [.openingBracket], body: [ASTNode.bracetStatement(prefix: [.openingBracket], body: [], postfix: [])], postfix: [])])
+
     }
     
 }

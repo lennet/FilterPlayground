@@ -10,7 +10,7 @@ import Foundation
 
 enum ASTNode {
     case unkown([Token])
-    case comment(String)
+    case comment([Token])
     case statement([Token])
     case bracetStatement(prefix:[Token], body: [ASTNode], postfix: [Token])
     case root([ASTNode])
@@ -44,11 +44,26 @@ extension ASTNode: Equatable {
             return prefixValue + bodyValue + postFixValue
         case .root(let nodes):
             return nodes.map{$0.asAttributedText}.reduce(NSAttributedString(), +)
-        case .comment(let string):
-            return NSAttributedString(string: string, attributes: [NSAttributedStringKey.foregroundColor: ThemeManager.shared.currentTheme.sourceEditTextComment])
+        case .comment(let tokens):
+            let attributes =  [NSAttributedStringKey.foregroundColor: ThemeManager.shared.currentTheme.sourceEditTextComment]
+            return tokens.map{ NSAttributedString(string: $0.stringRepresentation, attributes: attributes) }.reduce(NSAttributedString(), +)
         case .statement(let tokens),
              .unkown(let tokens):
             return tokens.map{ NSAttributedString(string: $0.stringRepresentation, attributes: $0.attributes) }.reduce(NSAttributedString(), +)
+        }
+    }
+    
+    var numberOfTokens: Int {
+        switch self {
+        case .bracetStatement(prefix: let prefix, body: let body, postfix: let postfix):
+            return prefix.count + body.map{ $0.numberOfTokens }.reduce(0, +) + postfix.count
+        case .root(let nodes):
+            return nodes.map{$0.numberOfTokens}.reduce(0, +)
+        case .statement(let tokens),
+             .unkown(let tokens),
+             .comment(let tokens):
+            return tokens.count
+            
         }
     }
     
@@ -70,8 +85,8 @@ class ASTBuilder {
                         nodes.append(.unkown(Array(tokens[lastNode..<i])))
                     }
                     let commentResult = buildComment(tokens: Array(tokens[i...]), multiLine: tokens [i+1] == .op(.multiply))
-                    nodes.append(commentResult.0)
-                    i = tokens.count - commentResult.1.count
+                    nodes.append(commentResult)
+                    i += commentResult.numberOfTokens
                     lastNode = i
                 }
                 break
@@ -84,15 +99,13 @@ class ASTBuilder {
                 let bodyResult = getAST(for: Array(tokens[(i+1)...]))
                 let oldI = i
                 
-                if case let .unkown(content) = bodyResult.last ?? .unkown([]) {
-                    i = tokens.count - content.count - 1
-                } else {
-                    i = tokens.count - 0 - 1
-                }
+                i += bodyResult.map{ $0.numberOfTokens }.reduce(0, +)
                 var postFix: [Token] = []
                 if let closingBracketIndex = tokens.index(of: .closingBracket, after: i) {
                     postFix = [tokens[closingBracketIndex]]
                     i = closingBracketIndex + 1
+                } else {
+                    i += 1
                 }
                 
                 let node = ASTNode.bracetStatement(prefix: Array(tokens[lastNode...oldI]), body: bodyResult, postfix: postFix)
@@ -116,24 +129,19 @@ class ASTBuilder {
         return nodes
     }
     
-    class func buildComment(tokens: [Token], multiLine: Bool) -> (ASTNode, [Token]) {
-        var comment: String = ""
-        var tokenCount = 0
-
+    class func buildComment(tokens: [Token], multiLine: Bool) -> (ASTNode) {
+        var resultIndex = 0
         for (index, token) in tokens.enumerated() {
             if !multiLine && token == Token.newLine {
                 break
             }
-
-            comment += token.stringRepresentation
-            tokenCount += 1
-
+            resultIndex = index
             if multiLine, index > 0 && token == .op(.substract) &&
                 tokens[index-1] == .op(.multiply) {
                 break
             }
         }
-        return (ASTNode.comment(comment), Array(tokens[tokenCount...]))
+        return ASTNode.comment(Array(tokens[...resultIndex]))
     }
     
 }

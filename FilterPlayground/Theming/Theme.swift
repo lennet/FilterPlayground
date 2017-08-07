@@ -41,23 +41,23 @@ struct NightTheme: Theme {
 }
 
 struct Default: Theme {
-    static var sourceEditTextComment: UIColor = .green
+    static var sourceEditTextComment: UIColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
     
-    static var sourceEditorTextFloat: UIColor = .blue
+    static var sourceEditorTextFloat: UIColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
     
-    static var sourceEditorText: UIColor = .black
+    static var sourceEditorText: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
-    static var sourceEditorTextType: UIColor = .purple
+    static var sourceEditorTextType: UIColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
     
-    static var sourceEditorTextKeyword: UIColor = .red
+    static var sourceEditorTextKeyword: UIColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
 
-    static var sourceEditorLineBackgroundError: UIColor = UIColor.red.withAlphaComponent(0.1)
+    static var sourceEditorLineBackgroundError: UIColor = #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 0.2044360017)
     
-    static var sourceEditorLineBackgroundHighlighted: UIColor = UIColor.blue.withAlphaComponent(0.1)
+    static var sourceEditorLineBackgroundHighlighted: UIColor = #colorLiteral(red: 0.1058823529, green: 0.6784313725, blue: 0.9725490196, alpha: 0.1972923801)
 
-    static var sourceEditorBackground: UIColor = .white
+    static var sourceEditorBackground: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     
-    static var sourceEditorLineNumber: UIColor = .black
+    static var sourceEditorLineNumber: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
 }
 
 class ThemeManager {

@@ -54,47 +54,6 @@ extension ASTNode: Equatable {
     
 }
 
-struct AST {
-    
-    var root: ASTNode?
-    
-    init(with tokens: [Token]) {
-        
-        var unprocessedTokens: [Token] = []
-        var currentBraceStatementPrefix: [Token] = []
-        var unprocessedStatements: [ASTNode] = []
-        
-        for token in tokens {
-            
-            switch token {
-            case .op(.substract):
-                break
-            case .semicolon:
-                let node = ASTNode.statement(unprocessedTokens + [token])
-                unprocessedStatements.append(node)
-                break
-            case .openingBracket:
-                currentBraceStatementPrefix = unprocessedTokens + [token]
-                unprocessedTokens = []
-                break
-            case .closingBracket:
-                if currentBraceStatementPrefix.count > 0 {
-                    let node = ASTNode.bracetStatement(prefix: currentBraceStatementPrefix, body: unprocessedStatements, postfix: [token])
-                    unprocessedTokens = []
-                    unprocessedStatements = [node]
-                }
-                break
-            default:
-                unprocessedTokens.append(token)
-                break
-            }
-            
-        }
-        
-    }
-    
-}
-
 class ASTBuilder {
     
     private init() {}
@@ -106,11 +65,11 @@ class ASTBuilder {
         while i < tokens.count {
             switch tokens[i] {
             case .op(.substract):
-                if tokens.count > 1 && (tokens [1] == .op(.substract) || tokens [1] == .op(.multiply)) {
+                if tokens.count > i && (tokens [i+1] == .op(.substract) || tokens [i+1] == .op(.multiply)) {
                     if lastNode != i {
                         nodes.append(.unkown(Array(tokens[lastNode..<i])))
                     }
-                    let commentResult = buildComment(tokens: Array(tokens[i...]), multiLine: tokens [1] == .op(.multiply))
+                    let commentResult = buildComment(tokens: Array(tokens[i...]), multiLine: tokens [i+1] == .op(.multiply))
                     nodes.append(commentResult.0)
                     i = tokens.count - commentResult.1.count
                     lastNode = i

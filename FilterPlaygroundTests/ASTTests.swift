@@ -91,4 +91,24 @@ class ASTTests: XCTestCase {
         XCTAssertEqual(result, [expectedResult])
     }
     
+    func testCommentAfterSpace() {
+        let text = " //Hello World\n\n}"
+        let tokens = Parser(string: text).getTokens()
+        let result = ASTBuilder.getAST(for: tokens)
+        
+        let expectedResult = [ASTNode.unkown([
+                                              .whiteSpace]),
+                                              .comment("//Hello World"),
+                                              .unkown([.newLine, .newLine])]
+        
+        XCTAssertEqual(result, expectedResult)    }
+    
+    func testBrokenCommentWithNewLine() {
+        let text = "/\n/hello world"
+        let tokens = Parser(string: text).getTokens()
+        let result = ASTBuilder.getAST(for: tokens)
+        
+        XCTAssertEqual(result, [ASTNode.unkown([.op(.substract), .newLine, .op(.substract), .identifier(.other("hello")), .whiteSpace, .identifier(.other("world"))])])
+    }
+    
 }

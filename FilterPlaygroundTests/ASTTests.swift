@@ -111,4 +111,25 @@ class ASTTests: XCTestCase {
         XCTAssertEqual(result, [ASTNode.unkown([.op(.substract), .newLine, .op(.substract), .identifier(.other("hello")), .whiteSpace, .identifier(.other("world"))])])
     }
     
+    func testMultiLineComment() {
+        let text = """
+/*
+                This is a
+                multi line comment
+            */
+"""
+        let tokens = Parser(string: text).getTokens()
+        let result = ASTBuilder.getAST(for: tokens)
+        
+        XCTAssertEqual(result, [ASTNode.comment(text)])
+    }
+    
+    func testInlineComment() {
+        let text = "foo/*comment*/bar"
+        let tokens = Parser(string: text).getTokens()
+        let result = ASTBuilder.getAST(for: tokens)
+        
+        XCTAssertEqual(result, [ASTNode.unkown([.identifier(.other("foo"))]), ASTNode.comment("/*comment*/"), ASTNode.unkown([.identifier(.other("bar"))])])
+    }
+    
 }

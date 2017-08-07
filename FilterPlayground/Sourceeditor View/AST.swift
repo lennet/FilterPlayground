@@ -65,7 +65,7 @@ class ASTBuilder {
         while i < tokens.count {
             switch tokens[i] {
             case .op(.substract):
-                if tokens.count > i && (tokens [i+1] == .op(.substract) || tokens [i+1] == .op(.multiply)) {
+                if i < tokens.count-1 && (tokens [i+1] == .op(.substract) || tokens [i+1] == .op(.multiply)) {
                     if lastNode != i {
                         nodes.append(.unkown(Array(tokens[lastNode..<i])))
                     }
@@ -119,14 +119,19 @@ class ASTBuilder {
     class func buildComment(tokens: [Token], multiLine: Bool) -> (ASTNode, [Token]) {
         var comment: String = ""
         var tokenCount = 0
-        for token in tokens {
-            if token == Token.op(.multiply) && multiLine {
-                
-            } else if !multiLine && token == Token.newLine {
+
+        for (index, token) in tokens.enumerated() {
+            if !multiLine && token == Token.newLine {
                 break
             }
+
             comment += token.stringRepresentation
             tokenCount += 1
+
+            if multiLine, index > 0 && token == .op(.substract) &&
+                tokens[index-1] == .op(.multiply) {
+                break
+            }
         }
         return (ASTNode.comment(comment), Array(tokens[tokenCount...]))
     }

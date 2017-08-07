@@ -66,7 +66,8 @@ class NumberedTextView: UIView, UITextViewDelegate {
         let selectedRange = textView.selectedRange
         let parser = Parser(string: textView.text)
         let oldFont = font
-        textView.attributedText = Renderer.rederAsAttributedString(tokens: parser.getTokens())
+        textView.attributedText = parser.getAST().asAttributedText
+//        textView.attributedText = Renderer.rederAsAttributedString(tokens: parser.getTokens())
         textView.selectedRange = selectedRange
         textView.font = oldFont
     }

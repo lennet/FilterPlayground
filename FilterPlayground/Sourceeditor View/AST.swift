@@ -9,6 +9,7 @@
 import Foundation
 
 enum ASTNode {
+    case unkown([Token])
     case comment(String)
     case statement([Token])
     case bracetStatement(prefix:[Token], body: [ASTNode], postfix: [Token])
@@ -27,11 +28,29 @@ extension ASTNode: Equatable {
             return leftPrefix == rightPrefix && leftBody == rightBody && leftPostFix == rightPostfix
         case (.root(let left), .root(let right)):
             return left == right
+        case (.unkown(let left), .unkown(let right)):
+            return left == right
         default:
             return false
         }
     }
     
+    var asAttributedText: NSAttributedString {
+        switch self {
+        case .bracetStatement(prefix: let prefix, body: let body, postfix: let postfix):
+            let prefixValue = prefix.map{ NSAttributedString(string: $0.stringRepresentation, attributes: $0.attributes) }.reduce(NSAttributedString(), +)
+            let bodyValue = body.map{$0.asAttributedText}.reduce(NSAttributedString(), +)
+            let postFixValue = postfix.map{ NSAttributedString(string: $0.stringRepresentation, attributes: $0.attributes) }.reduce(NSAttributedString(), +)
+            return prefixValue + bodyValue + postFixValue
+        case .root(let nodes):
+            return nodes.map{$0.asAttributedText}.reduce(NSAttributedString(), +)
+        case .comment(let string):
+            return NSAttributedString(string: string, attributes: [NSAttributedStringKey.foregroundColor: ThemeManager.shared.currentTheme.sourceEditTextComment])
+        case .statement(let tokens),
+             .unkown(let tokens):
+            return tokens.map{ NSAttributedString(string: $0.stringRepresentation, attributes: $0.attributes) }.reduce(NSAttributedString(), +)
+        }
+    }
     
 }
 
@@ -80,7 +99,7 @@ class ASTBuilder {
     
     private init() {}
     
-    class func getAST(for tokens: [Token]) -> ([ASTNode], [Token]) {
+    class func getAST(for tokens: [Token]) -> ([ASTNode]) {
         var nodes: [ASTNode] = []
         var lastNode = 0
         var i = 0
@@ -89,9 +108,7 @@ class ASTBuilder {
             case .op(.substract):
                 if tokens.count > 1 && (tokens [1] == .op(.substract) || tokens [1] == .op(.multiply)) {
                     if lastNode != i {
-                        // todo remove workaround for inline comments
-                        let node = ASTNode.statement(Array(tokens[lastNode..<i]))
-                        nodes.append(node)
+                        nodes.append(.unkown(Array(tokens[lastNode..<i])))
                     }
                     let commentResult = buildComment(tokens: Array(tokens[i...]), multiLine: tokens [1] == .op(.multiply))
                     nodes.append(commentResult.0)
@@ -102,32 +119,42 @@ class ASTBuilder {
             case .semicolon:
                 let node = ASTNode.statement(Array(tokens[lastNode...i]))
                 nodes.append(node)
-                lastNode = i
+                lastNode = i + 1
                 break
             case .openingBracket:
                 let bodyResult = getAST(for: Array(tokens[(i+1)...]))
                 let oldI = i
-//                i = tokens.count - bodyResult.1.count + lastNode - i
-                i = tokens.count - bodyResult.1.count - 1
+                
+                if case let .unkown(content) = bodyResult.last ?? .unkown([]) {
+                    i = tokens.count - content.count - 1
+                } else {
+                    i = tokens.count - 0 - 1
+                }
                 var postFix: [Token] = []
                 if let closingBracketIndex = tokens.index(of: .closingBracket, after: i) {
-                    postFix = Array(tokens[i...closingBracketIndex])
+                    postFix = [tokens[closingBracketIndex]]
                     i = closingBracketIndex + 1
                 }
-                let node = ASTNode.bracetStatement(prefix: Array(tokens[lastNode...oldI]), body: bodyResult.0, postfix: postFix)
+                
+                let node = ASTNode.bracetStatement(prefix: Array(tokens[lastNode...oldI]), body: bodyResult, postfix: postFix)
                 nodes.append(node)
                 
                 lastNode = i
                 break
             case .closingBracket:
-                return (nodes, Array(tokens[i...]))
+                if lastNode < i {
+                    nodes.append(.unkown(Array(tokens[lastNode..<i])))
+                }
+                return (nodes)
             default:
                 break
             }
             i += 1 
         }
-        
-        return(nodes, Array(tokens[lastNode...]))
+        if lastNode < tokens.count {
+            nodes.append(.unkown(Array(tokens[lastNode...])))
+        }
+        return nodes
     }
     
     class func buildComment(tokens: [Token], multiLine: Bool) -> (ASTNode, [Token]) {

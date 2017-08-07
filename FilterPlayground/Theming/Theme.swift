@@ -13,6 +13,7 @@ protocol Theme {
     static var sourceEditorLineNumber: UIColor { get }
     static var sourceEditorLineBackgroundError: UIColor { get }
     static var sourceEditorLineBackgroundHighlighted: UIColor { get }
+    static var sourceEditTextComment: UIColor { get }
     static var sourceEditorTextType: UIColor { get }
     static var sourceEditorTextKeyword: UIColor { get }
     static var sourceEditorTextFloat: UIColor { get }
@@ -20,6 +21,8 @@ protocol Theme {
 }
 
 struct NightTheme: Theme {
+    static var sourceEditTextComment: UIColor = .green
+    
     static var sourceEditorTextFloat: UIColor = .blue
     
     static var sourceEditorText: UIColor = .black
@@ -38,6 +41,8 @@ struct NightTheme: Theme {
 }
 
 struct Default: Theme {
+    static var sourceEditTextComment: UIColor = .green
+    
     static var sourceEditorTextFloat: UIColor = .blue
     
     static var sourceEditorText: UIColor = .black

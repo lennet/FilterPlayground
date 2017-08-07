@@ -25,49 +25,70 @@ class ASTTests: XCTestCase {
         let text = "foo{ bar(); }"
         let tokens = Parser(string: text).getTokens()
         let result = ASTBuilder.getAST(for: tokens)
-        XCTAssertEqual(result.1.count, 0)
         
         let expectedResult = ASTNode.bracetStatement(prefix: [.identifier(.other("foo")), .openingBracket],
-                                body: [.statement([.whiteSpace, .identifier(.other("bar")), .identifier(.other("(")), .identifier(.other(")")), .semicolon])],
-                                                  postfix: [.whiteSpace, .closingBracket])
-        XCTAssertEqual(result.0, [expectedResult])
+                                body: [.statement([.whiteSpace, .identifier(.other("bar")), .identifier(.other("(")), .identifier(.other(")")), .semicolon]),
+                                    .unkown([.whiteSpace])],
+                                                  postfix: [.closingBracket])
+        XCTAssertEqual(result, [expectedResult])
     }
     
     func testComment() {
         let text = "//hello world"
         let tokens = Parser(string: text).getTokens()
         let result = ASTBuilder.getAST(for: tokens)
-        XCTAssertEqual(result.1.count, 0)
         
         let expectedResult = ASTNode.comment("//hello world")
-        XCTAssertEqual(result.0, [expectedResult])
+        XCTAssertEqual(result, [expectedResult])
     }
     
     func testCommentAndMethod() {
         let text = "//hello world\nfoo{ bar(); }"
         let tokens = Parser(string: text).getTokens()
         let result = ASTBuilder.getAST(for: tokens)
-        XCTAssertEqual(result.1.count, 0)
         
         let expectedResult = [ASTNode.comment("//hello world"),
                               ASTNode.bracetStatement(prefix: [.newLine, .identifier(.other("foo")), .openingBracket],
-                                                     body: [.statement([.whiteSpace, .identifier(.other("bar")), .identifier(.other("(")), .identifier(.other(")")), .semicolon])],
-                                                     postfix: [.whiteSpace, .closingBracket])]
-        XCTAssertEqual(result.0, expectedResult)
+                                                     body: [.statement([.whiteSpace, .identifier(.other("bar")), .identifier(.other("(")), .identifier(.other(")")), .semicolon]),
+                                                            .unkown([.whiteSpace])],
+                                                     postfix: [.closingBracket])]
+        XCTAssertEqual(result, expectedResult)
     }
     
     func testCommentInMethod() {
         let text = "foo{ //hello world\n bar(); }"
         let tokens = Parser(string: text).getTokens()
         let result = ASTBuilder.getAST(for: tokens)
-        XCTAssertEqual(result.1.count, 0)
         
         let expectedResult = ASTNode.bracetStatement(prefix: [.identifier(.other("foo")), .openingBracket],
-                                                     body: [.statement([.whiteSpace]),
+                                                     body: [.unkown([.whiteSpace]),
                                                             .comment("//hello world"),
-                                                            .statement([.newLine, .whiteSpace, .identifier(.other("bar")), .identifier(.other("(")), .identifier(.other(")")), .semicolon])],
-                                                     postfix: [.whiteSpace, .closingBracket])
-        XCTAssertEqual(result.0, [expectedResult])
+                                                            .statement([.newLine, .whiteSpace, .identifier(.other("bar")), .identifier(.other("(")), .identifier(.other(")")), .semicolon]),
+                                                            .unkown([.whiteSpace])],
+                                                     postfix: [.closingBracket])
+        XCTAssertEqual(result, [expectedResult])
+    }
+    
+    func testMethodWithNewLine() {
+        let text = "foo{\n}"
+        let tokens = Parser(string: text).getTokens()
+        let result = ASTBuilder.getAST(for: tokens)
+        
+        let expectedResult = ASTNode.bracetStatement(prefix: [.identifier(.other("foo")), .openingBracket],
+                                                     body: [.unkown([.newLine])],
+                                                     postfix: [.closingBracket])
+        XCTAssertEqual(result, [expectedResult])
+    }
+    
+    func testEmptyMethod() {
+        let text = "foo{}"
+        let tokens = Parser(string: text).getTokens()
+        let result = ASTBuilder.getAST(for: tokens)
+        
+        let expectedResult = ASTNode.bracetStatement(prefix: [.identifier(.other("foo")), .openingBracket],
+                                                     body: [],
+                                                     postfix: [.closingBracket])
+        XCTAssertEqual(result, [expectedResult])
     }
     
 }

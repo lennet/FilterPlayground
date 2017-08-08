@@ -135,6 +135,8 @@ class ViewController: UIViewController {
             self.presentedViewController?.dismiss(animated: true, completion: nil)
             self.document = document
             self.sourceEditorViewController?.source = document.source
+            self.attributesViewController?.attributes = document.metaData.attributes
+            self.attributesViewController?.tableView.reloadData()
         }
         if let document = self.document {
             document.save(to: document.fileURL, for: .forOverwriting, completionHandler: { (_) in
@@ -171,10 +173,11 @@ class ViewController: UIViewController {
         case let vc as AttributesViewController:
             self.attributesViewController = vc
             self.attributesViewController?.didUpdateAttributes = { shouldRun in
+                self.document?.metaData.attributes = self.attributesViewController?.attributes ?? []
+                self.document?.updateChangeCount(.done)
                 if shouldRun {
                     self.run()
                 }
-    
             }
         case let vc as LiveViewController:
             self.liveViewController = vc

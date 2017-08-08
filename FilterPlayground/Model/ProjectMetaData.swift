@@ -10,11 +10,11 @@ import Foundation
 
 struct ProjectMetaData: Codable {
     
-    var attributes: [String: KernelAttribute]
+    var attributes: [KernelAttribute]
     var type: KernelType
     var name: String
     
-    init(attributes: [String: KernelAttribute], type: KernelType) {
+    init(attributes: [KernelAttribute], type: KernelType) {
         self.attributes = attributes
         self.type = type
         self.name = "untitled"

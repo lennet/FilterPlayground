@@ -15,7 +15,7 @@ enum DocumentError: Error {
 
 class Document: UIDocument {
 
-    var metaData: ProjectMetaData = ProjectMetaData(attributes: [:], type: .warp)
+    var metaData: ProjectMetaData = ProjectMetaData(attributes: [], type: .warp)
     var source: String = "" {
         didSet {
             self.updateChangeCount(.done)

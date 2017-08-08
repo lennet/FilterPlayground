@@ -63,14 +63,29 @@ extension KernelAttribute: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
         type = try values.decode(KernelAttributeType.self, forKey: .type)
+        switch type {
+        case .float?:
+            value = try values.decode(Float.self, forKey: .value)
+            break
+        default:
+            value = nil
+            break
+        }
         // todo
-        value = nil
+        
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(type, forKey: .type)
+        switch type {
+        case .float?:
+            try container.encode((value as? Float) ?? 0, forKey: .value)
+            break
+        default:
+            break
+        }
     }
     
 }

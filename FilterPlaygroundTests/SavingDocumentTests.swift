@@ -26,15 +26,18 @@ class SavingDocumentTests: XCTestCase {
     
     func testSaveText() {
         let text = "Hello World"
+        let attribute = KernelAttribute(name: "test", type: .float , value: 50)
         let expectation = XCTestExpectation(description: "Waiting for file creation")
         
         let document = Document(fileURL: url)
         document.save(to: url, for: .forCreating) { (_) in
             document.source = text
+            document.metaData.attributes = [attribute]
             document.close(completionHandler: { (_) in
                 let document2 = Document(fileURL: self.url)
                 document2.open(completionHandler: { (_) in
                     XCTAssertEqual(document2.source, text)
+                    XCTAssertNotNil(document2.metaData.attributes.first)
                     expectation.fulfill()
                 })
             })

@@ -57,36 +57,42 @@ class ViewController: UIViewController {
     }
     
     @IBAction func run() {
-//
-//        document?.source = sourceEditorViewController?.source ?? ""
-//
-//        guard !isRunning else { return }
-//        defer {
-//            isRunning = false
-//        }
-//
-//        guard let source = sourceEditorViewController?.source,
-//            let image = imagesViewController?.inputImage else {
-//                return
-//        }
-//        // todo
-//        let descriptor = KernelDescriptor(name: "", type: .warp, attributes: [])
-//
-//        switch descriptor.compile(source) {
-//        case .success(kernel: let kernel):
-//            apply(kernel: kernel, input: image, attributes: descriptor.attributes)
-//            break
-//        case .failed(errors: let errors):
-//            display(errors: errors)
-//            break
-//
-//        }
+
+        guard !isRunning else { return }
+        defer {
+            isRunning = false
+        }
+
+        guard let source = sourceEditorViewController?.source,
+            let image = liveViewController?.inputImageView.image else {
+                return
+        }
+        // todo
+        let descriptor = KernelDescriptor(name: "", type: .warp, attributes: attributesViewController?.attributes ?? [])
+
+        switch descriptor.compile(source) {
+        case .success(kernel: let kernel):
+            apply(kernel: kernel, input: image, attributes: descriptor.attributes)
+            break
+        case .failed(errors: let errors):
+            display(errors: errors)
+            break
+
+        }
     }
     
     func apply(kernel: Kernel, input: UIImage, attributes: [KernelAttribute]) {
         clearErrors()
-        liveViewController?.imageView.image = kernel.apply(to: input, attributes: attributes)
-         isRunning = false
+        
+        DispatchQueue.global(qos: .background).async {
+            let image = kernel.apply(to: input, attributes: attributes)
+            
+            DispatchQueue.main.async {
+                self.liveViewController?.imageView.image = image
+                self.isRunning = false                
+            }
+
+        }
     }
     
     func clearErrors(){
@@ -164,6 +170,12 @@ class ViewController: UIViewController {
         switch segue.destination {
         case let vc as AttributesViewController:
             self.attributesViewController = vc
+            self.attributesViewController?.didUpdateAttributes = { shouldRun in
+                if shouldRun {
+                    self.run()
+                }
+    
+            }
         case let vc as LiveViewController:
             self.liveViewController = vc
         case let vc as SourceEditorViewController:

@@ -11,6 +11,7 @@ import UIKit
 class LiveViewController: UIViewController {
 
     @IBOutlet weak var imageView: SelectImageView!
+    @IBOutlet weak var inputImageView: SelectImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

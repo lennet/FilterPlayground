@@ -14,13 +14,14 @@ class KernelAttributeTableViewCell: UITableViewCell {
     @IBOutlet weak var typeButton: UIButton!
     @IBOutlet weak var valueSelectionView: UIView!
     
+    var valueButton: UIButton!
+    
     var attribute: KernelAttribute? {
         didSet {
             if let type = attribute?.type {
                 typeButton.setTitle("\(type)", for: .normal)
-                setupValueView(for: type)
             } else {
-                typeButton.setTitle("select type", for: .normal)
+                typeButton.setTitle("type", for: .normal)
             }
             update()
         }
@@ -41,11 +42,11 @@ class KernelAttributeTableViewCell: UITableViewCell {
         guard let attribute = attribute else {
             return
         }
-        guard attribute.type != nil,
-            !attribute.name.isEmpty,
-            attribute.value != nil else {
-            return
-        }
+//        guard attribute.type != nil,
+//            !attribute.name.isEmpty,
+//            attribute.value != nil else {
+//            return
+//        }
   
         updateCallBack?(self, attribute)
        
@@ -60,22 +61,26 @@ class KernelAttributeTableViewCell: UITableViewCell {
         viewController.popoverPresentationController?.sourceRect = sender.bounds
         viewController.didSelectType = { type in
             self.attribute = KernelAttribute(name: self.attribute?.name ?? "", type: type, value: nil)
+            self.setupValueView(for: type)
         }
         UIApplication.shared.keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
     }
     
     @objc func valueButtonTapped(sender: UIButton) {
         let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! SelectFloatViewController
-        
+        self.valueButton = sender
         viewController.valueChanged = { value in
             
             let title = "\(value.description)"
-            sender.setTitle(title, for: .normal)
+            self.valueButton.setTitle(title, for: .normal)
+            self.attribute?.value = value
+            self.updateCallBack?(self, self.attribute!)
+            
         }
         
         viewController.modalPresentationStyle = .popover
-        viewController.popoverPresentationController?.sourceView = sender
-        viewController.popoverPresentationController?.sourceRect = sender.bounds
+        viewController.popoverPresentationController?.sourceView = valueButton
+        viewController.popoverPresentationController?.sourceRect = valueButton.bounds
         
         UIApplication.shared.keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
     }

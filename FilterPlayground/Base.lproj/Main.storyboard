@@ -799,25 +799,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gaw-QV-wG7" customClass="SelectImageView" customModule="FilterPlayground" customModuleProvider="target">
-                                <rect key="frame" x="8" y="8" width="184" height="900"/>
+                                <rect key="frame" x="8" y="8" width="184" height="454"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s9I-fw-uLe" customClass="SelectImageView" customModule="FilterPlayground" customModuleProvider="target">
+                                <rect key="frame" x="8" y="470" width="184" height="438"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="gaw-QV-wG7" secondAttribute="bottom" constant="8" id="Sri-oA-h4A"/>
+                            <constraint firstAttribute="trailing" secondItem="s9I-fw-uLe" secondAttribute="trailing" constant="8" id="CfB-sT-L2e"/>
+                            <constraint firstItem="s9I-fw-uLe" firstAttribute="top" secondItem="gaw-QV-wG7" secondAttribute="bottom" constant="8" id="EVu-Ni-EIQ"/>
                             <constraint firstAttribute="trailing" secondItem="gaw-QV-wG7" secondAttribute="trailing" constant="8" id="Xhw-X4-UTe"/>
                             <constraint firstItem="gaw-QV-wG7" firstAttribute="top" secondItem="8Yp-iT-9hZ" secondAttribute="top" constant="8" id="XxA-2J-E9h"/>
+                            <constraint firstItem="TCx-nS-dLE" firstAttribute="bottom" secondItem="s9I-fw-uLe" secondAttribute="bottom" constant="8" id="YCh-np-dm0"/>
+                            <constraint firstItem="gaw-QV-wG7" firstAttribute="height" secondItem="8Yp-iT-9hZ" secondAttribute="height" multiplier="0.5" constant="-4" id="YEq-vW-cMq"/>
+                            <constraint firstItem="s9I-fw-uLe" firstAttribute="leading" secondItem="8Yp-iT-9hZ" secondAttribute="leading" constant="8" id="alP-ON-oWS"/>
                             <constraint firstItem="gaw-QV-wG7" firstAttribute="leading" secondItem="8Yp-iT-9hZ" secondAttribute="leading" constant="8" id="cvm-SF-cu3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TCx-nS-dLE"/>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="gaw-QV-wG7" id="iDM-bF-s85"/>
+                        <outlet property="imageView" destination="s9I-fw-uLe" id="GYP-fN-RKA"/>
+                        <outlet property="inputImageView" destination="gaw-QV-wG7" id="7D5-m6-Fpv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xkA-3E-GHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-253" y="1753"/>
+            <point key="canvasLocation" x="-253.00146412884331" y="1752.5390625"/>
         </scene>
     </scenes>
     <resources>

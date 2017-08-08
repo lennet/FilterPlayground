@@ -101,5 +101,11 @@ class TokenizerTests: XCTestCase {
         
     }
     
+    func testFloatAfterBracket() {
+        let string = "(float"
+        let tokenizer = Tokenizer(string: string)
+        XCTAssertEqual(Token.identifier(.other("(")), tokenizer.nextToken()!)
+        XCTAssertEqual(Token.identifier(.type(.float)), tokenizer.nextToken()!)
+    }
     
 }

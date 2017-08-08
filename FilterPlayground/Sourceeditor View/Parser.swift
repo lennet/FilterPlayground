@@ -201,6 +201,9 @@ class Tokenizer {
         case let a where Operator(rawValue:a) != nil:
             index = string.index(after: index)
             return Token.op(Operator(rawValue:a)!)
+        case let a where !(CharacterSet.alphanumerics.contains(a.unicodeScalars.first!) || a == "_"):
+            index = string.index(after: index)
+            return Token.identifier(.other(a))
         case let a where !(Float(a)?.isNaN ?? true):
             var floatString = a
             var alreadyFoundDot = false

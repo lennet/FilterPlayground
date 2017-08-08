@@ -59,6 +59,8 @@ class CircularSlider: UIControl {
         let prog = progress(for: a)
         if previousProgress - prog > 0.9 {
             previousProgress = 0
+        } else if prog - previousProgress > 0.9 {
+            previousProgress = 1
         }
         
         if roundedSteps {

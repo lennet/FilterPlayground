@@ -7,6 +7,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -269,6 +270,232 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYs-z0-CKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="809" y="942"/>
+        </scene>
+        <!--Select Float View Controller-->
+        <scene sceneID="sp8-AN-UJL">
+            <objects>
+                <viewController storyboardIdentifier="SelectFloatViewControllerIdentifier" id="TNL-dx-1Vd" customClass="SelectFloatViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vKu-ZY-mYt">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2N-Lt-AJg" customClass="CircularSlider" customModule="FilterPlayground" customModuleProvider="target">
+                                <rect key="frame" x="32" y="52" width="336" height="336"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="a2N-Lt-AJg" secondAttribute="height" multiplier="1:1" id="dSK-lM-7qd"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="TNL-dx-1Vd" eventType="valueChanged" id="BD0-dN-zMC"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0NQ-aM-KYa">
+                                <rect key="frame" x="0.0" y="100" width="400" height="924"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Igt-kZ-2Hg" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="20" width="133.5" height="133.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Igt-kZ-2Hg" secondAttribute="height" multiplier="1:1" id="CKC-53-ecv"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="7"/>
+                                        <connections>
+                                            <action selector="sevenButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="SCY-v5-fse"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CYH-Q8-Cam" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="133.5" y="20" width="133.5" height="133.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="8"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="needsLeftBorder" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="needsRightBorder" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="eightButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="7d0-yf-fG0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qk-7J-lR0" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="267" y="20" width="133" height="133.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="9"/>
+                                        <connections>
+                                            <action selector="nineButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="cCo-xP-Eqp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnq-4O-2n7" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="153.5" width="133.5" height="133.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="jnq-4O-2n7" secondAttribute="height" multiplier="1:1" id="Oq7-ok-bn6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="4"/>
+                                        <connections>
+                                            <action selector="fourButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="sce-Yi-i90"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RwV-gI-rsy" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="133" y="153.5" width="133.5" height="133.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="5"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="needsLeftBorder" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="needsRightBorder" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="fiveButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="wdn-Ba-ceE"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZO-8K-Gme" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="267" y="153.5" width="133" height="133.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="6"/>
+                                        <connections>
+                                            <action selector="sixButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="63z-oT-foq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWW-M4-Hxg" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="287" width="133.5" height="133.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="hWW-M4-Hxg" secondAttribute="height" multiplier="1:1" id="xa1-6x-Ovg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="1"/>
+                                        <connections>
+                                            <action selector="oneButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="cjC-Ac-uw3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UAI-KV-PGy" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="133.5" y="287" width="133.5" height="133.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="2"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="needsLeftBorder" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="needsRightBorder" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="twoButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="gsc-WC-QEr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJ7-Ea-smw" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="267.5" y="287" width="132.5" height="133.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="3"/>
+                                        <connections>
+                                            <action selector="threeButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="KXX-sX-dKr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1bd-7z-eFF" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="420" width="133.5" height="133.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="1bd-7z-eFF" secondAttribute="height" multiplier="1:1" id="R9e-qP-RQ9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="0"/>
+                                        <connections>
+                                            <action selector="zeroButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="fYN-zN-rlr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TdD-Eu-khJ" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="133.5" y="420" width="133.5" height="133.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="•"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="needsLeftBorder" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="needsRightBorder" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="dotButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="Se9-zO-Xu7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K0m-Cb-EFz" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="267.5" y="420" width="132.5" height="133.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="delete"/>
+                                        <connections>
+                                            <action selector="deleteButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="gDh-BX-Zqj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="RwV-gI-rsy" firstAttribute="width" secondItem="jnq-4O-2n7" secondAttribute="width" id="0mu-IX-1Re"/>
+                                    <constraint firstItem="Igt-kZ-2Hg" firstAttribute="top" secondItem="0NQ-aM-KYa" secondAttribute="top" constant="20" id="1TA-86-MFv"/>
+                                    <constraint firstItem="K0m-Cb-EFz" firstAttribute="height" secondItem="TdD-Eu-khJ" secondAttribute="height" id="3Ma-VP-7pa"/>
+                                    <constraint firstItem="TdD-Eu-khJ" firstAttribute="top" secondItem="hWW-M4-Hxg" secondAttribute="bottom" id="4wa-pA-haT"/>
+                                    <constraint firstItem="1bd-7z-eFF" firstAttribute="width" secondItem="hWW-M4-Hxg" secondAttribute="width" id="57L-kY-RPo"/>
+                                    <constraint firstItem="CYH-Q8-Cam" firstAttribute="height" secondItem="Igt-kZ-2Hg" secondAttribute="height" id="7FK-Xa-ob7"/>
+                                    <constraint firstItem="UAI-KV-PGy" firstAttribute="leading" secondItem="hWW-M4-Hxg" secondAttribute="trailing" id="ARI-Fn-6dm"/>
+                                    <constraint firstAttribute="trailing" secondItem="K0m-Cb-EFz" secondAttribute="trailing" id="B4u-VJ-KB7"/>
+                                    <constraint firstItem="CYH-Q8-Cam" firstAttribute="width" secondItem="Igt-kZ-2Hg" secondAttribute="width" id="BgF-ev-yhB"/>
+                                    <constraint firstAttribute="trailing" secondItem="EZO-8K-Gme" secondAttribute="trailing" id="Cuk-90-4w3"/>
+                                    <constraint firstItem="K0m-Cb-EFz" firstAttribute="top" secondItem="hWW-M4-Hxg" secondAttribute="bottom" id="FSW-9j-G4Z"/>
+                                    <constraint firstItem="jnq-4O-2n7" firstAttribute="leading" secondItem="0NQ-aM-KYa" secondAttribute="leading" id="Gc5-ye-FNZ"/>
+                                    <constraint firstItem="CYH-Q8-Cam" firstAttribute="top" secondItem="0NQ-aM-KYa" secondAttribute="top" constant="20" id="GzC-lB-8ai"/>
+                                    <constraint firstItem="hWW-M4-Hxg" firstAttribute="top" secondItem="jnq-4O-2n7" secondAttribute="bottom" id="Ivz-j6-M6K"/>
+                                    <constraint firstItem="wJ7-Ea-smw" firstAttribute="height" secondItem="UAI-KV-PGy" secondAttribute="height" id="KJb-6c-S2B"/>
+                                    <constraint firstItem="6Qk-7J-lR0" firstAttribute="height" secondItem="CYH-Q8-Cam" secondAttribute="height" id="KNc-iv-wEK"/>
+                                    <constraint firstItem="UAI-KV-PGy" firstAttribute="top" secondItem="jnq-4O-2n7" secondAttribute="bottom" id="O60-S1-bTK"/>
+                                    <constraint firstItem="UAI-KV-PGy" firstAttribute="height" secondItem="hWW-M4-Hxg" secondAttribute="height" id="OM5-CY-aVd"/>
+                                    <constraint firstItem="RwV-gI-rsy" firstAttribute="height" secondItem="jnq-4O-2n7" secondAttribute="height" id="Qz2-SK-Qtt"/>
+                                    <constraint firstItem="Igt-kZ-2Hg" firstAttribute="width" secondItem="0NQ-aM-KYa" secondAttribute="width" multiplier="0.33333" id="RPq-G0-UVq"/>
+                                    <constraint firstItem="1bd-7z-eFF" firstAttribute="width" secondItem="1bd-7z-eFF" secondAttribute="height" multiplier="1:1" id="Unf-yU-63R"/>
+                                    <constraint firstItem="wJ7-Ea-smw" firstAttribute="leading" secondItem="UAI-KV-PGy" secondAttribute="trailing" id="VHb-t0-01I"/>
+                                    <constraint firstItem="hWW-M4-Hxg" firstAttribute="height" secondItem="Igt-kZ-2Hg" secondAttribute="height" id="XSn-ZJ-og9"/>
+                                    <constraint firstItem="1bd-7z-eFF" firstAttribute="leading" secondItem="0NQ-aM-KYa" secondAttribute="leading" id="Zt6-Ee-lPV"/>
+                                    <constraint firstItem="EZO-8K-Gme" firstAttribute="top" secondItem="Igt-kZ-2Hg" secondAttribute="bottom" id="ZxX-ow-buO"/>
+                                    <constraint firstItem="hWW-M4-Hxg" firstAttribute="width" secondItem="Igt-kZ-2Hg" secondAttribute="width" id="ap4-0V-x5z"/>
+                                    <constraint firstItem="RwV-gI-rsy" firstAttribute="top" secondItem="Igt-kZ-2Hg" secondAttribute="bottom" id="awD-A3-2a9"/>
+                                    <constraint firstItem="jnq-4O-2n7" firstAttribute="top" secondItem="Igt-kZ-2Hg" secondAttribute="bottom" id="bRe-cj-vdN"/>
+                                    <constraint firstItem="jnq-4O-2n7" firstAttribute="width" secondItem="jnq-4O-2n7" secondAttribute="height" multiplier="1:1" id="cH1-UW-p8D"/>
+                                    <constraint firstItem="EZO-8K-Gme" firstAttribute="height" secondItem="RwV-gI-rsy" secondAttribute="height" id="cOo-ax-Uvt"/>
+                                    <constraint firstItem="CYH-Q8-Cam" firstAttribute="leading" secondItem="Igt-kZ-2Hg" secondAttribute="trailing" id="d14-Nn-exn"/>
+                                    <constraint firstItem="TdD-Eu-khJ" firstAttribute="leading" secondItem="1bd-7z-eFF" secondAttribute="trailing" id="e2H-xX-35a"/>
+                                    <constraint firstItem="1bd-7z-eFF" firstAttribute="height" secondItem="hWW-M4-Hxg" secondAttribute="height" id="e6h-AR-nvy"/>
+                                    <constraint firstItem="K0m-Cb-EFz" firstAttribute="leading" secondItem="TdD-Eu-khJ" secondAttribute="trailing" id="eoL-U1-c8x"/>
+                                    <constraint firstItem="RwV-gI-rsy" firstAttribute="leading" secondItem="jnq-4O-2n7" secondAttribute="trailing" id="gGs-b2-Lb4"/>
+                                    <constraint firstItem="Igt-kZ-2Hg" firstAttribute="leading" secondItem="0NQ-aM-KYa" secondAttribute="leading" id="hfL-M9-YlB"/>
+                                    <constraint firstItem="TdD-Eu-khJ" firstAttribute="height" secondItem="1bd-7z-eFF" secondAttribute="height" id="iJb-Kj-ADi"/>
+                                    <constraint firstItem="jnq-4O-2n7" firstAttribute="height" secondItem="Igt-kZ-2Hg" secondAttribute="height" id="iSq-ka-eYq"/>
+                                    <constraint firstItem="wJ7-Ea-smw" firstAttribute="top" secondItem="jnq-4O-2n7" secondAttribute="bottom" id="ieG-x5-XMU"/>
+                                    <constraint firstAttribute="trailing" secondItem="wJ7-Ea-smw" secondAttribute="trailing" id="jen-Qo-yeA"/>
+                                    <constraint firstItem="6Qk-7J-lR0" firstAttribute="leading" secondItem="CYH-Q8-Cam" secondAttribute="trailing" id="kfi-IV-s47"/>
+                                    <constraint firstItem="hWW-M4-Hxg" firstAttribute="width" secondItem="hWW-M4-Hxg" secondAttribute="height" multiplier="1:1" id="pcY-Sx-qur"/>
+                                    <constraint firstItem="1bd-7z-eFF" firstAttribute="top" secondItem="hWW-M4-Hxg" secondAttribute="bottom" id="vGb-Uq-FXv"/>
+                                    <constraint firstItem="hWW-M4-Hxg" firstAttribute="leading" secondItem="0NQ-aM-KYa" secondAttribute="leading" id="vgX-um-7xi"/>
+                                    <constraint firstAttribute="trailing" secondItem="6Qk-7J-lR0" secondAttribute="trailing" id="xJt-eM-FfW"/>
+                                    <constraint firstItem="6Qk-7J-lR0" firstAttribute="top" secondItem="0NQ-aM-KYa" secondAttribute="top" constant="20" id="xKB-1E-rJ4"/>
+                                    <constraint firstItem="UAI-KV-PGy" firstAttribute="width" secondItem="hWW-M4-Hxg" secondAttribute="width" id="xdY-G5-vJe"/>
+                                    <constraint firstItem="jnq-4O-2n7" firstAttribute="width" secondItem="Igt-kZ-2Hg" secondAttribute="width" id="yMU-x9-RU5"/>
+                                    <constraint firstItem="1bd-7z-eFF" firstAttribute="width" secondItem="1bd-7z-eFF" secondAttribute="height" multiplier="1:1" id="yc2-1U-ZxR"/>
+                                    <constraint firstItem="EZO-8K-Gme" firstAttribute="leading" secondItem="RwV-gI-rsy" secondAttribute="trailing" id="zOu-W0-2ZY"/>
+                                    <constraint firstItem="TdD-Eu-khJ" firstAttribute="width" secondItem="1bd-7z-eFF" secondAttribute="width" id="zgy-yY-3NR"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="m97-Yq-hw7" firstAttribute="bottom" secondItem="0NQ-aM-KYa" secondAttribute="bottom" id="81R-0d-ciG"/>
+                            <constraint firstItem="0NQ-aM-KYa" firstAttribute="leading" secondItem="m97-Yq-hw7" secondAttribute="leading" id="B6N-a4-yeZ"/>
+                            <constraint firstItem="m97-Yq-hw7" firstAttribute="trailing" secondItem="a2N-Lt-AJg" secondAttribute="trailing" constant="32" id="Vsn-gr-z83"/>
+                            <constraint firstItem="m97-Yq-hw7" firstAttribute="trailing" secondItem="0NQ-aM-KYa" secondAttribute="trailing" id="mpv-g5-rsN"/>
+                            <constraint firstItem="a2N-Lt-AJg" firstAttribute="top" secondItem="m97-Yq-hw7" secondAttribute="top" constant="32" id="rHn-f6-UzB"/>
+                            <constraint firstItem="a2N-Lt-AJg" firstAttribute="leading" secondItem="m97-Yq-hw7" secondAttribute="leading" constant="32" id="rLv-0A-HOf"/>
+                            <constraint firstItem="0NQ-aM-KYa" firstAttribute="top" secondItem="m97-Yq-hw7" secondAttribute="top" constant="80" id="vKO-60-ChH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="m97-Yq-hw7"/>
+                    </view>
+                    <size key="freeformSize" width="400" height="1024"/>
+                    <connections>
+                        <outlet property="buttonsView" destination="0NQ-aM-KYa" id="EjA-ey-TM3"/>
+                        <outlet property="buttonsViewTopConstraint" destination="vKO-60-ChH" id="eZk-Lg-kU6"/>
+                        <outlet property="pointsButton" destination="TdD-Eu-khJ" id="SFf-w5-shG"/>
+                        <outlet property="slider" destination="a2N-Lt-AJg" id="zbY-e4-Zl0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C1W-mL-79d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1438.9458272327963" y="1147.8515625"/>
         </scene>
         <!--New Project-->
         <scene sceneID="pgF-Sh-xtC">

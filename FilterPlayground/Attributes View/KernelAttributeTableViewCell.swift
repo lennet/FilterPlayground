@@ -65,7 +65,19 @@ class KernelAttributeTableViewCell: UITableViewCell {
     }
     
     @objc func valueButtonTapped(sender: UIButton) {
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! SelectFloatViewController
         
+        viewController.valueChanged = { value in
+            
+            let title = "\(value.description)"
+            sender.setTitle(title, for: .normal)
+        }
+        
+        viewController.modalPresentationStyle = .popover
+        viewController.popoverPresentationController?.sourceView = sender
+        viewController.popoverPresentationController?.sourceRect = sender.bounds
+        
+        UIApplication.shared.keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
     }
     
     func setupValueView(for type: KernelAttributeType) {

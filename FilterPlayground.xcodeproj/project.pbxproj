@@ -32,6 +32,9 @@
 		98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */; };
 		98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */; };
 		98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */; };
+		98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */; };
+		98A67FB21F3A17820043AA9D /* SelectFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB11F3A17820043AA9D /* SelectFloatViewController.swift */; };
+		98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */; };
 		98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE92A81F3900290044E33F /* LiveViewController.swift */; };
 		98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */; };
 		98C5E2391F34B45E006E7658 /* KernelDescriptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2381F34B45E006E7658 /* KernelDescriptorTests.swift */; };
@@ -97,6 +100,9 @@
 		98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelDescriptor.swift; sourceTree = "<group>"; };
 		98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeTableViewCell.swift; sourceTree = "<group>"; };
 		98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedTextView.swift; sourceTree = "<group>"; };
+		98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSlider.swift; sourceTree = "<group>"; };
+		98A67FB11F3A17820043AA9D /* SelectFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFloatViewController.swift; sourceTree = "<group>"; };
+		98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatSelectionButton.swift; sourceTree = "<group>"; };
 		98AE92A81F3900290044E33F /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingDocumentTests.swift; sourceTree = "<group>"; };
 		98C5E2381F34B45E006E7658 /* KernelDescriptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelDescriptorTests.swift; sourceTree = "<group>"; };
@@ -243,6 +249,9 @@
 				98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */,
 				98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */,
 				98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */,
+				98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */,
+				98A67FB11F3A17820043AA9D /* SelectFloatViewController.swift */,
+				98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */,
 			);
 			path = "Attributes View";
 			sourceTree = "<group>";
@@ -415,8 +424,10 @@
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,
 				980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */,
+				98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */,
 				98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */,
 				981267D41F34BEFC00101027 /* Kernel.swift in Sources */,
+				98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */,
 				98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */,
 				98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */,
 				985A42081F2CF8F200636E72 /* ViewController.swift in Sources */,
@@ -425,6 +436,7 @@
 				987672451F2F5355002F9AAF /* Extensions.swift in Sources */,
 				98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */,
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,
+				98A67FB21F3A17820043AA9D /* SelectFloatViewController.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
 				9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */,
 				98E692E91F30C832000C8B41 /* Document.swift in Sources */,

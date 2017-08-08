@@ -107,3 +107,11 @@ extension Array where Element: Equatable {
     }
     
 }
+
+extension CGFloat {
+    
+    var asRadian: CGFloat {
+        return self * CGFloat.pi / 180
+    }
+    
+}

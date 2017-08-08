@@ -13,8 +13,8 @@ class SelectImageView: UIImageView, UIImagePickerControllerDelegate, UINavigatio
     
     var didSelectImage: ((SelectImageView)->())?
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         addGestureRecognizer(tapGestureRecognizer)
@@ -27,9 +27,7 @@ class SelectImageView: UIImageView, UIImagePickerControllerDelegate, UINavigatio
         imagePicker.delegate = self
         imagePicker.modalPresentationStyle = .popover
         imagePicker.popoverPresentationController?.sourceView = self
-        var sourceRect = frame
-        sourceRect.origin.y -= 30
-        imagePicker.popoverPresentationController?.sourceRect = sourceRect
+        imagePicker.popoverPresentationController?.sourceRect = frame
         
         self.window?.rootViewController?.present(imagePicker, animated: true, completion: nil)
     }

@@ -93,10 +93,16 @@ class ViewController: UIViewController {
         sourceEditorViewController?.errors = []
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        updateViewConstraints()
+    }
+    
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
-        let attributesWidth: CGFloat = 200
+        let attributesWidth: CGFloat = 220
         if showLiveView && showAttributes {
             let width = (view.frame.width - attributesWidth) / 2
             liveViewWidthConstraint.constant = width

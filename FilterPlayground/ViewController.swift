@@ -64,20 +64,18 @@ class ViewController: UIViewController {
         }
 
         guard let source = sourceEditorViewController?.source,
-            let image = liveViewController?.inputImageView.image else {
+            let image = liveViewController?.inputImageView.image,
+            let document = document else {
                 return
         }
-        // todo
-        let descriptor = KernelDescriptor(name: "", type: .warp, attributes: attributesViewController?.attributes ?? [])
-
-        switch descriptor.compile(source) {
+        let attributes = attributesViewController?.attributes ?? []
+        switch document.metaData.type.compile(source) {
         case .success(kernel: let kernel):
-            apply(kernel: kernel, input: image, attributes: descriptor.attributes)
+            apply(kernel: kernel, input: image, attributes: attributes)
             break
         case .failed(errors: let errors):
             display(errors: errors)
             break
-
         }
     }
     

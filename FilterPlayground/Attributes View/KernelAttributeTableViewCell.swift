@@ -60,7 +60,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
         viewController.popoverPresentationController?.sourceView = sender
         viewController.popoverPresentationController?.sourceRect = sender.bounds
         viewController.didSelectType = { type in
-            self.attribute = KernelAttribute(name: self.attribute?.name ?? "", type: type, value: nil)
+            self.attribute = KernelAttribute(name: self.attribute?.name ?? "", type: type, value: type.defaultValue)
             self.setupValueView(for: type)
         }
         UIApplication.shared.keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)

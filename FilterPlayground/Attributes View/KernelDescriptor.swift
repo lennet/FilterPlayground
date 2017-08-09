@@ -28,6 +28,18 @@ extension KernelType {
         }
     }
     
+    var compile: (String) -> KernelCompilerResult {
+        switch self {
+        case .color:
+            return KernelCompiler<CIColorKernel>.compile
+        case .warp:
+            return KernelCompiler<CIWarpKernel>.compile
+        default:
+            // todo!
+            return KernelCompiler<CIWarpKernel>.compile
+        }
+    }
+    
 }
 
 enum KernelAttributeType: String, Codable {
@@ -47,8 +59,8 @@ enum KernelAttributeType: String, Codable {
 
 struct KernelAttribute {
     var name: String
-    var type: KernelAttributeType?
-    var value: Any?
+    var type: KernelAttributeType
+    var value: Any
 }
 
 extension KernelAttribute: Codable {
@@ -64,11 +76,11 @@ extension KernelAttribute: Codable {
         name = try values.decode(String.self, forKey: .name)
         type = try values.decode(KernelAttributeType.self, forKey: .type)
         switch type {
-        case .float?:
+        case .float:
             value = try values.decode(Float.self, forKey: .value)
             break
         default:
-            value = nil
+            value = type.defaultValue
             break
         }
         // todo
@@ -80,7 +92,7 @@ extension KernelAttribute: Codable {
         try container.encode(name, forKey: .name)
         try container.encode(type, forKey: .type)
         switch type {
-        case .float?:
+        case .float:
             try container.encode((value as? Float) ?? 0, forKey: .value)
             break
         default:
@@ -90,32 +102,17 @@ extension KernelAttribute: Codable {
     
 }
 
-struct KernelDescriptor {
-    var name: String
-    var type: KernelType
-    var attributes: [KernelAttribute]
+extension KernelAttributeType {
     
-    var compile: (String) -> KernelCompilerResult {
-        switch type {
-        case .color:
-            return KernelCompiler<CIColorKernel>.compile
-        case .warp:
-            return KernelCompiler<CIWarpKernel>.compile
+    var defaultValue: Any {
+        switch self {
+        case .float:
+            return 0
         default:
-            // todo!
-            return KernelCompiler<CIWarpKernel>.compile
+            // TODO
+            return 0
         }
     }
-}
-
-extension KernelDescriptor {
     
-    var prefix: String {
-        let parameter = attributes
-            .filter{ $0.type != nil }
-            .map{ "\($0.type!) \($0.name)" }
-            .joined(separator: ", ")
-        return "kernel \(type.returnType) \(name)(\(parameter)) {\n"
-    }
     
 }

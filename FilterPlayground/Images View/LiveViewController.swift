@@ -25,6 +25,11 @@ class LiveViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    func reset() {
+        imageView.image = nil
+        inputImageView.image = nil
+    }
+    
     @objc func themeChanged(notification: Notification?) {
         self.view.backgroundColor = ThemeManager.shared.currentTheme.liveViewBackground
     }

@@ -97,6 +97,15 @@ class ViewController: UIViewController {
         sourceEditorViewController?.errors = []
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        updateViewConstraints(newWidth: size.width)
+        coordinator.animate(alongsideTransition: { (context) in
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
@@ -105,20 +114,25 @@ class ViewController: UIViewController {
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
+        updateViewConstraints(newWidth: view.frame.width)
+    }
+    
+    
+    func updateViewConstraints(newWidth: CGFloat) {
         
         let attributesWidth: CGFloat = 220
         if showLiveView && showAttributes {
-            let width = (view.frame.width - attributesWidth) / 2
+            let width = (newWidth - attributesWidth) / 2
             liveViewWidthConstraint.constant = width
             sourceEditorWidthConstraint.constant = width
         } else if showLiveView {
-            sourceEditorWidthConstraint.constant = view.frame.width/2
-            liveViewWidthConstraint.constant = view.frame.width/2
+            sourceEditorWidthConstraint.constant = newWidth/2
+            liveViewWidthConstraint.constant = newWidth/2
         } else if showAttributes {
-            sourceEditorWidthConstraint.constant = view.frame.width-attributesWidth
+            sourceEditorWidthConstraint.constant = newWidth-attributesWidth
             liveViewWidthConstraint.constant = 0
         } else {
-            sourceEditorWidthConstraint.constant = view.frame.width
+            sourceEditorWidthConstraint.constant = newWidth
             liveViewWidthConstraint.constant = 0
         }
     }
@@ -128,13 +142,15 @@ class ViewController: UIViewController {
         isRunning = false
     }
     
-    func didOpenedDocument(document: Document) {
+    func didOpened(document: Document) {
         let completion = {
             self.presentedViewController?.dismiss(animated: true, completion: nil)
             self.document = document
             self.sourceEditorViewController?.source = document.source
             self.attributesViewController?.attributes = document.metaData.attributes
             self.attributesViewController?.tableView.reloadData()
+            self.title = document.title
+            self.liveViewController?.reset()
         }
         if let document = self.document {
             document.save(to: document.fileURL, for: .forOverwriting, completionHandler: { (_) in
@@ -185,7 +201,7 @@ class ViewController: UIViewController {
                 self?.document?.source = text
             }
         case let vc as DocumentBrowserViewController:
-            vc.didOpenedDocument = didOpenedDocument
+            vc.didOpenedDocument = didOpened
         default:
             print("Unkown ViewController Segue: \(segue.destination)")
         }

@@ -22,6 +22,10 @@ class Document: UIDocument {
         }
     }
     
+    var title: String {
+        return fileURL.lastPathComponent
+    }
+    
     convenience init(fileURL url: URL, type: KernelType) {
         self.init(fileURL: url)
         metaData.type = type

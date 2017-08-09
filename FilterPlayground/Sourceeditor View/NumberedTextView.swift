@@ -30,7 +30,8 @@ class NumberedTextView: UIView, UITextViewDelegate {
         }
         set {
             textView.text = newValue
-            textViewDidChange(textView)
+            renderText()
+            setNeedsDisplay()
         }
     }
     

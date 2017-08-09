@@ -94,7 +94,6 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         super.viewWillAppear(animated)
         registerNotifications()
         textView.delegate = self
-        updateFont()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="04X-wZ-hWf">
     <device id="ipad12_9" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -62,6 +62,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="TCt-Bf-kNy" firstAttribute="centerY" secondItem="tBS-9t-vuw" secondAttribute="centerY" id="B0s-5o-WM6"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TCt-Bf-kNy" secondAttribute="trailingMargin" id="Etw-J8-VDh"/>
                                                 <constraint firstAttribute="trailing" secondItem="qNO-gb-toC" secondAttribute="trailing" constant="16" id="Fam-RG-MAA"/>
                                                 <constraint firstItem="TCt-Bf-kNy" firstAttribute="leading" secondItem="tBS-9t-vuw" secondAttribute="leadingMargin" constant="16" id="fDA-fB-ihQ"/>
                                                 <constraint firstItem="qNO-gb-toC" firstAttribute="centerY" secondItem="tBS-9t-vuw" secondAttribute="centerY" id="pUe-kc-GM5"/>
@@ -84,64 +85,14 @@
             </objects>
             <point key="canvasLocation" x="-1266" y="691"/>
         </scene>
-        <!--View Controller-->
+        <!--Title-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewControllerIdentifier" id="BYZ-38-t0r" customClass="ViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6b-qX-1nY">
-                                <rect key="frame" x="0.0" y="20" width="1366" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="XRg-Nm-2fI">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="fET-oE-8Ka">
-                                            <connections>
-                                                <segue destination="04X-wZ-hWf" kind="popoverPresentation" popoverAnchorBarButtonItem="fET-oE-8Ka" id="Zbf-JI-q01">
-                                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                </segue>
-                                            </connections>
-                                        </barButtonItem>
-                                        <rightBarButtonItems>
-                                            <barButtonItem systemItem="play" id="6Sj-FV-7a1">
-                                                <connections>
-                                                    <action selector="run" destination="BYZ-38-t0r" id="NnW-Wn-NtQ"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem systemItem="action" id="IBv-aa-U1L">
-                                                <connections>
-                                                    <segue destination="7Pl-x7-6sH" kind="popoverPresentation" popoverAnchorBarButtonItem="IBv-aa-U1L" id="glL-Df-6kZ">
-                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                    </segue>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem systemItem="bookmarks" id="AP8-1U-dgp">
-                                                <connections>
-                                                    <action selector="documentation:" destination="BYZ-38-t0r" id="DxU-mZ-0vO"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem title="Attributes" style="plain" id="PCG-9f-F1l">
-                                                <connections>
-                                                    <action selector="didTapAttribtutesButton:" destination="BYZ-38-t0r" id="zhJ-Cx-O3q"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem title="LiveView" style="plain" id="ixj-CU-ojp">
-                                                <connections>
-                                                    <action selector="didTapLiveViewButton:" destination="BYZ-38-t0r" id="kxN-q7-FRP"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem title="Settings" id="W6L-IY-U0w">
-                                                <connections>
-                                                    <segue destination="d8L-vD-k8G" kind="popoverPresentation" popoverAnchorBarButtonItem="W6L-IY-U0w" id="JGY-1m-aqb">
-                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                    </segue>
-                                                </connections>
-                                            </barButtonItem>
-                                        </rightBarButtonItems>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j2b-N6-rPD">
                                 <rect key="frame" x="0.0" y="64" width="200" height="916"/>
                                 <constraints>
@@ -169,23 +120,67 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="j2b-N6-rPD" firstAttribute="top" secondItem="n6b-qX-1nY" secondAttribute="bottom" id="2TS-sk-NI1"/>
+                            <constraint firstItem="j2b-N6-rPD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9Lk-9e-GAA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="x9Q-Am-enn" secondAttribute="bottom" id="C7x-Fe-HGn"/>
+                            <constraint firstItem="ekL-A8-cbw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HWZ-0h-mS4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="x9Q-Am-enn" secondAttribute="trailing" id="L29-l2-evK"/>
                             <constraint firstItem="j2b-N6-rPD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Piq-rJ-oe0"/>
-                            <constraint firstItem="n6b-qX-1nY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Y2H-nB-U25"/>
-                            <constraint firstItem="ekL-A8-cbw" firstAttribute="top" secondItem="n6b-qX-1nY" secondAttribute="bottom" id="a6z-VB-bg5"/>
                             <constraint firstItem="x9Q-Am-enn" firstAttribute="leading" secondItem="ekL-A8-cbw" secondAttribute="trailing" id="aNE-c1-I9s"/>
-                            <constraint firstItem="x9Q-Am-enn" firstAttribute="top" secondItem="n6b-qX-1nY" secondAttribute="bottom" id="ahO-6X-WG0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="j2b-N6-rPD" secondAttribute="bottom" id="ajt-99-yZX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ekL-A8-cbw" secondAttribute="bottom" id="d87-QO-rdx"/>
-                            <constraint firstItem="n6b-qX-1nY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="goR-5V-hGm"/>
-                            <constraint firstAttribute="trailing" secondItem="n6b-qX-1nY" secondAttribute="trailing" id="gsH-qc-Bc6"/>
                             <constraint firstItem="ekL-A8-cbw" firstAttribute="leading" secondItem="j2b-N6-rPD" secondAttribute="trailing" id="miL-Xe-Poh"/>
+                            <constraint firstItem="x9Q-Am-enn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ph9-ka-1cD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="XRg-Nm-2fI">
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="organize" id="fET-oE-8Ka">
+                                <connections>
+                                    <segue destination="04X-wZ-hWf" kind="popoverPresentation" popoverAnchorBarButtonItem="fET-oE-8Ka" id="Zbf-JI-q01">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Settings" id="W6L-IY-U0w">
+                                <connections>
+                                    <segue destination="d8L-vD-k8G" kind="popoverPresentation" popoverAnchorBarButtonItem="W6L-IY-U0w" id="JGY-1m-aqb">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="action" id="IBv-aa-U1L">
+                                <connections>
+                                    <segue destination="7Pl-x7-6sH" kind="popoverPresentation" popoverAnchorBarButtonItem="IBv-aa-U1L" id="glL-Df-6kZ">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="play" id="6Sj-FV-7a1">
+                                <connections>
+                                    <action selector="run" destination="BYZ-38-t0r" id="NnW-Wn-NtQ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Attributes" style="plain" id="PCG-9f-F1l">
+                                <connections>
+                                    <action selector="didTapAttribtutesButton:" destination="BYZ-38-t0r" id="zhJ-Cx-O3q"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="LiveView" style="plain" id="ixj-CU-ojp">
+                                <connections>
+                                    <action selector="didTapLiveViewButton:" destination="BYZ-38-t0r" id="kxN-q7-FRP"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="bookmarks" id="AP8-1U-dgp">
+                                <connections>
+                                    <action selector="documentation:" destination="BYZ-38-t0r" id="DxU-mZ-0vO"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="liveViewWidthConstraint" destination="7pj-Pg-4Ff" id="H2f-Pe-5gU"/>
@@ -194,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-536" y="848"/>
+            <point key="canvasLocation" x="-443.1918008784773" y="847.8515625"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Eug-m6-zq9">
@@ -331,7 +326,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYs-z0-CKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="809" y="942"/>
+            <point key="canvasLocation" x="901.75695461200576" y="941.60156249999989"/>
         </scene>
         <!--Select Float View Controller-->
         <scene sceneID="sp8-AN-UJL">
@@ -557,7 +552,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C1W-mL-79d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1438.9458272327963" y="1147.8515625"/>
+            <point key="canvasLocation" x="1532.0644216691069" y="1147.8515625"/>
         </scene>
         <!--New Project-->
         <scene sceneID="pgF-Sh-xtC">
@@ -671,7 +666,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="itg-mA-yig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3127.1999999999998" y="942.27886056971522"/>
+            <point key="canvasLocation" x="3220.0585651537331" y="942.18749999999989"/>
         </scene>
         <!--Select Type View Controller-->
         <scene sceneID="OGM-s8-jx5">
@@ -738,7 +733,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e3S-Yx-F0w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="505" y="1060"/>
+            <point key="canvasLocation" x="597.80380673499269" y="1059.9609375"/>
         </scene>
         <!--Source Editor View Controller-->
         <scene sceneID="jwi-XS-pAf">
@@ -850,7 +845,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sxS-6g-jkS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2335" y="942"/>
+            <point key="canvasLocation" x="2428.1112737920935" y="941.60156249999989"/>
         </scene>
         <!--Live View Controller-->
         <scene sceneID="Tse-Ci-XcA">
@@ -888,6 +883,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xkA-3E-GHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-253.00146412884331" y="1752.5390625"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vjS-RX-a2o">
+            <objects>
+                <navigationController storyboardIdentifier="NavigationControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="AKF-dN-QLZ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2S3-UD-ZfH">
+                        <rect key="frame" x="0.0" y="20" width="1366" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="wo5-Qm-kZc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qv3-qs-8wA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2180" y="1252"/>
         </scene>
     </scenes>
     <resources>

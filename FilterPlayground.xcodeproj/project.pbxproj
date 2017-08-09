@@ -111,6 +111,8 @@
 		98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelCompilerTests.swift; sourceTree = "<group>"; };
 		98C6FE851F3832AE00D0E840 /* ASTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTTests.swift; sourceTree = "<group>"; };
 		98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeViewController.swift; sourceTree = "<group>"; };
+		98D475AC1F3BB88C0080D794 /* iconlarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconlarge.png; sourceTree = "<group>"; };
+		98D475AD1F3BB88D0080D794 /* Iconsmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Iconsmall.png; sourceTree = "<group>"; };
 		98E5AD0D1F2E87280047AC2E /* RendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererTests.swift; sourceTree = "<group>"; };
 		98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		98E692E81F30C832000C8B41 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		985A42041F2CF8F200636E72 /* FilterPlayground */ = {
 			isa = PBXGroup;
 			children = (
+				98D475AE1F3BB8920080D794 /* Resources */,
 				9845C60F1F38F42500F38283 /* Create Project */,
 				9841EC731F36639B00A8E3CA /* Theming */,
 				98E692EC1F30DF75000C8B41 /* Model */,
@@ -237,6 +240,15 @@
 				985A42271F2CF8F300636E72 /* Info.plist */,
 			);
 			path = FilterPlaygroundUITests;
+			sourceTree = "<group>";
+		};
+		98D475AE1F3BB8920080D794 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				98D475AC1F3BB88C0080D794 /* iconlarge.png */,
+				98D475AD1F3BB88D0080D794 /* Iconsmall.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		98D9199D1F2E0578007D5234 /* Attributes View */ = {

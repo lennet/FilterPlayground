@@ -79,6 +79,10 @@
 			<string>Kernel Project</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.leonardtthomas.kernelProject</string>
+			<key>UTTypeSize320IconFile</key>
+			<string>iconlarge.png</string>
+			<key>UTTypeSize64IconFile</key>
+			<string>iconsmall.png</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

@@ -49,14 +49,14 @@ class NumberedTextView: UIView, UITextViewDelegate {
         set {
             textView.font = newValue
             // todo calculate max contentInset
-            guard let newValue = newValue else { return }
-            textView.contentInset.left = newValue.pointSize
+//            guard let newValue = newValue else { return }
+//            textView.contentInset.left = newValue.pointSize
         }
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
-        textView.frame = CGRect(origin: CGPoint(x:20, y:0), size: CGSize(width: frame.width - 20, height: frame.height))
+        textView.frame = CGRect(origin: CGPoint(x:30, y:0), size: CGSize(width: frame.width - 20, height: frame.height))
         textView.delegate = self
         addSubview(textView)
         backgroundColor = .clear
@@ -64,19 +64,19 @@ class NumberedTextView: UIView, UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         setNeedsDisplay()
-        
+        renderText()
+    }
+    
+    func renderText() {
         let selectedRange = textView.selectedRange
         let parser = Parser(string: textView.text)
         let oldFont = font
         currentAST = parser.getAST()
         textView.attributedText = currentAST?.asAttributedText
-//        textView.attributedText = Renderer.rederAsAttributedString(tokens: parser.getTokens())
         textView.selectedRange = selectedRange
         textView.font = oldFont
         delegate?.textViewDidChange?(textView)
     }
-    
-    
     
     override func draw(_ rect: CGRect) {
         super.draw(rect) 

@@ -20,16 +20,6 @@ extension NSAttributedString {
 
 }
 
-extension UIFont {
-    
-    var monospacedDigitFont: UIFont {
-        let fontDescriptorFeatureSetting = [UIFontDescriptor.FeatureKey.featureIdentifier: kNumberSpacingType, UIFontDescriptor.FeatureKey.typeIdentifier: kMonospacedNumbersSelector]
-        let monospacedFontDescriptor = fontDescriptor.addingAttributes([UIFontDescriptor.AttributeName.featureSettings: [fontDescriptorFeatureSetting]])
-        return UIFont(descriptor: monospacedFontDescriptor, size: pointSize)
-    }
-    
-}
-
 extension String {
     
     var firstLine: String? {

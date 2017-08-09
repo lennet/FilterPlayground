@@ -29,6 +29,61 @@
             </objects>
             <point key="canvasLocation" x="-750.21961932650072" y="-96.09375"/>
         </scene>
+        <!--Settings Table View Controller-->
+        <scene sceneID="tRQ-GT-tr6">
+            <objects>
+                <tableViewController id="d8L-vD-k8G" customClass="SettingsTableViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xuq-aG-Uhv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <sections>
+                            <tableViewSection headerTitle="Theme" id="56j-go-3Wp">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oYv-bI-9l2">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oYv-bI-9l2" id="tBS-9t-vuw">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Night mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCt-Bf-kNy">
+                                                    <rect key="frame" x="24" y="11" width="89.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qNO-gb-toC">
+                                                    <rect key="frame" x="310" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="nightModeSwitchValueChanged:" destination="d8L-vD-k8G" eventType="valueChanged" id="dnx-7J-SEQ"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="TCt-Bf-kNy" firstAttribute="centerY" secondItem="tBS-9t-vuw" secondAttribute="centerY" id="B0s-5o-WM6"/>
+                                                <constraint firstAttribute="trailing" secondItem="qNO-gb-toC" secondAttribute="trailing" constant="16" id="Fam-RG-MAA"/>
+                                                <constraint firstItem="TCt-Bf-kNy" firstAttribute="leading" secondItem="tBS-9t-vuw" secondAttribute="leadingMargin" constant="16" id="fDA-fB-ihQ"/>
+                                                <constraint firstItem="qNO-gb-toC" firstAttribute="centerY" secondItem="tBS-9t-vuw" secondAttribute="centerY" id="pUe-kc-GM5"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="d8L-vD-k8G" id="Cd4-mr-S1m"/>
+                            <outlet property="delegate" destination="d8L-vD-k8G" id="urw-t2-WrO"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="nightModeSwitch" destination="qNO-gb-toC" id="nI3-xN-rl7"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6mT-a1-awb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1266" y="691"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -74,6 +129,13 @@
                                             <barButtonItem title="LiveView" style="plain" id="ixj-CU-ojp">
                                                 <connections>
                                                     <action selector="didTapLiveViewButton:" destination="BYZ-38-t0r" id="kxN-q7-FRP"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Settings" id="W6L-IY-U0w">
+                                                <connections>
+                                                    <segue destination="d8L-vD-k8G" kind="popoverPresentation" popoverAnchorBarButtonItem="W6L-IY-U0w" id="JGY-1m-aqb">
+                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                    </segue>
                                                 </connections>
                                             </barButtonItem>
                                         </rightBarButtonItems>

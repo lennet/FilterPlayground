@@ -93,8 +93,6 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         registerNotifications()
-        setColors(with: ThemeManager.shared.currentTheme)
-        
         textView.delegate = self
         updateFont()
     }
@@ -107,12 +105,8 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     func registerNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(SourceEditorViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(SourceEditorViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(forName: ThemeManager.themeChangedNotificationName, object: nil, queue: OperationQueue.main) { [weak self] (notification)  in
-            guard let theme = notification.object.self as? Theme.Type else {
-                return
-            }
-            self?.setColors(with: theme)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(notification:)), name: ThemeManager.themeChangedNotificationName, object: nil)
+        themeChanged(notification: nil)
     }
 
     func updateBottomSpacing(animated: Bool) {
@@ -163,12 +157,14 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     }
     
     func updateFont() {
-        textView.font = UIFont.systemFont(ofSize: CGFloat(fontSize)).monospacedDigitFont
+        textView.font = UIFont.monospacedDigitSystemFont(ofSize: CGFloat(fontSize), weight: .regular)
         textView.setNeedsDisplay()
     }
     
-    func setColors(with theme: Theme.Type) {
-        view.backgroundColor = theme.sourceEditorBackground
+    @objc func themeChanged(notification: Notification?) {
+        view.backgroundColor = ThemeManager.shared.currentTheme.sourceEditorBackground
+        textView.renderText()
+        textView.setNeedsDisplay()
     }
     
     func textViewDidChange(_ textView: UITextView) {

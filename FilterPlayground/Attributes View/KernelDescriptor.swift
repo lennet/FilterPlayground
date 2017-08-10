@@ -64,6 +64,24 @@ enum KernelAttributeValue {
     case vec4(Float, Float, Float, Float)
     case sample(UIImage)
     case color(Float, Float, Float, Float)
+    
+    
+    var asKernelValue: Any {
+        switch self {
+        case .float(let value):
+            return value
+        case .vec2(let a, let b):
+            return CIVector(x: CGFloat(a), y: CGFloat(b))
+        case .vec3(let a, let b, let c):
+            return CIVector(x: CGFloat(a), y: CGFloat(b), z: CGFloat(c))
+        case .vec4(let a, let b, let c, let d):
+            return CIVector(x: CGFloat(a), y: CGFloat(b), z: CGFloat(c), w: CGFloat(d))
+        case .color(let a, let b, let c, let d):
+            return CIColor(red: CGFloat(a), green: CGFloat(b), blue: CGFloat(c), alpha: CGFloat(d))
+        case .sample(let image):
+            return CISampler(image: image.ciImage!)
+        }
+    }
 }
 
 extension KernelAttributeValue: Codable {

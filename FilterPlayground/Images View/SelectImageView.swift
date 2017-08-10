@@ -29,7 +29,7 @@ class SelectImageView: UIImageView, UIImagePickerControllerDelegate, UINavigatio
         imagePicker.popoverPresentationController?.sourceView = self
         imagePicker.popoverPresentationController?.sourceRect = frame
         
-        self.window?.rootViewController?.present(imagePicker, animated: true, completion: nil)
+        self.window?.rootViewController?.presentedViewController?.present(imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

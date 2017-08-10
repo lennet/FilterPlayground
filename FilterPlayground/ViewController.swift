@@ -82,8 +82,10 @@ class ViewController: UIViewController {
     func apply(kernel: Kernel, input: UIImage, attributes: [KernelAttribute]) {
         clearErrors()
         
+        
+        
         DispatchQueue.global(qos: .background).async {
-            let image = kernel.apply(to: input, attributes: attributes)
+            let image = kernel.apply(to: input, attributes: attributes.map{ $0.value.asKernelValue })
             
             DispatchQueue.main.async {
                 self.liveViewController?.imageView.image = image

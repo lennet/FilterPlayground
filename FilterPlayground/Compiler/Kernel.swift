@@ -12,5 +12,5 @@ protocol Kernel: class {
 
     static func compile(source: String) -> Kernel?
     
-    func apply(to image: UIImage, attributes: [KernelAttribute]) -> UIImage?
+    func apply(to image: UIImage, attributes: [Any]) -> UIImage?
 }

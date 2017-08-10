@@ -20,6 +20,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
         didSet {
             if let type = attribute?.type {
                 setupValueView(for: type, value: attribute?.value)
+                typeButton.setTitle(type.rawValue, for: .normal)
             } else {
                 typeButton.setTitle("type", for: .normal)
                 valueSelectionView.subviews.forEach{ $0.removeFromSuperview() }
@@ -55,7 +56,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
     
     @IBAction func selectType(_ sender: UIButton) {
 
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "selectTypeViewControllerIdentifier") as! SelectTypeViewController
+        let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "selectTypeViewControllerIdentifier") as! SelectTypeViewController
         
         viewController.modalPresentationStyle = .popover
         viewController.popoverPresentationController?.sourceView = sender
@@ -68,15 +69,25 @@ class KernelAttributeTableViewCell: UITableViewCell {
     }
     
     @objc func valueButtonTapped(sender: UIButton) {
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! SelectFloatViewController
+        let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! SelectFloatViewController
         self.valueButton = sender
         viewController.valueChanged = { value in
-            
-            let title = "\(value.description)"
-            self.valueButton.setTitle(title, for: .normal)
             self.attribute?.value = .float(Float(value))
             self.updateCallBack?(self, self.attribute!)
-            
+        }
+        
+        viewController.modalPresentationStyle = .popover
+        viewController.popoverPresentationController?.sourceView = valueSelectionView
+        viewController.popoverPresentationController?.sourceRect = valueSelectionView.bounds
+        
+        UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(viewController, animated: true, completion: nil)
+    }
+    
+    @objc func colorButtonTapped(sender: UIButton) {
+        let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "ColorPickerViewControllerIdentifier") as! ColorPickerViewController
+        viewController.colorChanged = { r, g ,b , a in
+            self.attribute?.value = .color(r,g,b,a)
+            self.updateCallBack?(self, self.attribute!)
         }
         
         viewController.modalPresentationStyle = .popover
@@ -93,6 +104,15 @@ class KernelAttributeTableViewCell: UITableViewCell {
             let imageView = SelectImageView(frame: valueSelectionView.bounds)
             imageView.backgroundColor = .gray
             valueSelectionView.addSubview(imageView)
+            break
+        case .color:
+            let button = UIButton(frame: valueSelectionView.bounds)
+            valueSelectionView.addSubview(button)
+            if case .color(let r, let g , let b , let a)? = value {
+                button.backgroundColor = UIColor(displayP3Red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(a))
+            }
+            button.addTarget(self, action: #selector(colorButtonTapped(sender:)), for: .touchUpInside)
+            valueButton = button
             break
         default:
             let button = UIButton(frame: valueSelectionView.bounds)

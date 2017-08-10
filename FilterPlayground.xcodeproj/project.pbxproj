@@ -26,6 +26,7 @@
 		985A42101F2CF8F200636E72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 985A420E1F2CF8F200636E72 /* LaunchScreen.storyboard */; };
 		985A42261F2CF8F300636E72 /* FilterPlaygroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42251F2CF8F300636E72 /* FilterPlaygroundUITests.swift */; };
 		985A42361F2CFEE800636E72 /* SelectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42351F2CFEE800636E72 /* SelectImageView.swift */; };
+		986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */; };
 		9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868A8C01F3712EB00D0BC79 /* AST.swift */; };
 		987672451F2F5355002F9AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
 		98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */; };
@@ -44,6 +45,7 @@
 		98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */; };
 		98C6FE861F3832AE00D0E840 /* ASTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C6FE851F3832AE00D0E840 /* ASTTests.swift */; };
 		98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */; };
+		98DC562C1F3CEF1C0024F522 /* ValuePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98DC562A1F3CEF1C0024F522 /* ValuePicker.storyboard */; };
 		98E5AD0E1F2E87280047AC2E /* RendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E5AD0D1F2E87280047AC2E /* RendererTests.swift */; };
 		98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */; };
 		98E692E91F30C832000C8B41 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692E81F30C832000C8B41 /* Document.swift */; };
@@ -93,6 +95,7 @@
 		985A42251F2CF8F300636E72 /* FilterPlaygroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPlaygroundUITests.swift; sourceTree = "<group>"; };
 		985A42271F2CF8F300636E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		985A42351F2CFEE800636E72 /* SelectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageView.swift; sourceTree = "<group>"; };
+		986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		9868A8C01F3712EB00D0BC79 /* AST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
 		987672441F2F5355002F9AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +116,7 @@
 		98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeViewController.swift; sourceTree = "<group>"; };
 		98D475AC1F3BB88C0080D794 /* iconlarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconlarge.png; sourceTree = "<group>"; };
 		98D475AD1F3BB88D0080D794 /* Iconsmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Iconsmall.png; sourceTree = "<group>"; };
+		98DC562B1F3CEF1C0024F522 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = FilterPlayground/Base.lproj/ValuePicker.storyboard; sourceTree = "<group>"; };
 		98E5AD0D1F2E87280047AC2E /* RendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererTests.swift; sourceTree = "<group>"; };
 		98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		98E692E81F30C832000C8B41 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -254,6 +258,7 @@
 		98D9199D1F2E0578007D5234 /* Attributes View */ = {
 			isa = PBXGroup;
 			children = (
+				98DC562A1F3CEF1C0024F522 /* ValuePicker.storyboard */,
 				98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */,
 				98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */,
 				98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */,
@@ -261,6 +266,7 @@
 				98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */,
 				98A67FB11F3A17820043AA9D /* SelectFloatViewController.swift */,
 				98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */,
+				986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */,
 			);
 			path = "Attributes View";
 			sourceTree = "<group>";
@@ -399,6 +405,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98DC562C1F3CEF1C0024F522 /* ValuePicker.storyboard in Resources */,
 				985A42101F2CF8F200636E72 /* LaunchScreen.storyboard in Resources */,
 				985A420D1F2CF8F200636E72 /* Assets.xcassets in Resources */,
 				985A420B1F2CF8F200636E72 /* Main.storyboard in Resources */,
@@ -429,6 +436,7 @@
 				98E692EE1F30DF8D000C8B41 /* ProjectMetaData.swift in Sources */,
 				9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */,
 				98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */,
+				986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */,
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,
 				980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */,
@@ -511,6 +519,14 @@
 				985A420F1F2CF8F200636E72 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		98DC562A1F3CEF1C0024F522 /* ValuePicker.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				98DC562B1F3CEF1C0024F522 /* Base */,
+			);
+			name = ValuePicker.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

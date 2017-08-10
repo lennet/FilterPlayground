@@ -63,7 +63,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
             self.attribute = KernelAttribute(name: self.attribute?.name ?? "", type: type, value: type.defaultValue)
             self.setupValueView(for: type)
         }
-        UIApplication.shared.keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(viewController, animated: true, completion: nil)
     }
     
     @objc func valueButtonTapped(sender: UIButton) {
@@ -73,7 +73,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
             
             let title = "\(value.description)"
             self.valueButton.setTitle(title, for: .normal)
-            self.attribute?.value = value
+            self.attribute?.value = .float(Float(value))
             self.updateCallBack?(self, self.attribute!)
             
         }
@@ -82,7 +82,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
         viewController.popoverPresentationController?.sourceView = valueButton
         viewController.popoverPresentationController?.sourceRect = valueButton.bounds
         
-        UIApplication.shared.keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(viewController, animated: true, completion: nil)
     }
     
     func setupValueView(for type: KernelAttributeType) {

@@ -19,9 +19,10 @@ class KernelAttributeTableViewCell: UITableViewCell {
     var attribute: KernelAttribute? {
         didSet {
             if let type = attribute?.type {
-                typeButton.setTitle("\(type)", for: .normal)
+                setupValueView(for: type, value: attribute?.value)
             } else {
                 typeButton.setTitle("type", for: .normal)
+                valueSelectionView.subviews.forEach{ $0.removeFromSuperview() }
             }
             update()
         }
@@ -61,7 +62,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
         viewController.popoverPresentationController?.sourceRect = sender.bounds
         viewController.didSelectType = { type in
             self.attribute = KernelAttribute(name: self.attribute?.name ?? "", type: type, value: type.defaultValue)
-            self.setupValueView(for: type)
+            self.setupValueView(for: type, value: self.attribute!.value)
         }
         UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(viewController, animated: true, completion: nil)
     }
@@ -79,13 +80,13 @@ class KernelAttributeTableViewCell: UITableViewCell {
         }
         
         viewController.modalPresentationStyle = .popover
-        viewController.popoverPresentationController?.sourceView = valueButton
-        viewController.popoverPresentationController?.sourceRect = valueButton.bounds
+        viewController.popoverPresentationController?.sourceView = valueSelectionView
+        viewController.popoverPresentationController?.sourceRect = valueSelectionView.bounds
         
         UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(viewController, animated: true, completion: nil)
     }
     
-    func setupValueView(for type: KernelAttributeType) {
+    func setupValueView(for type: KernelAttributeType, value: KernelAttributeValue?) {
         valueSelectionView.subviews.forEach{ $0.removeFromSuperview() }
         switch type {
         case .sample :
@@ -99,8 +100,14 @@ class KernelAttributeTableViewCell: UITableViewCell {
             button.addTarget(self, action: #selector(valueButtonTapped(sender:)), for: .touchUpInside)
             button.setTitle("0.0", for: .normal)
             button.setTitleColor(.blue, for: .normal)
+            if case .float(let floatValue)? = value {
+                button.setTitle("\(floatValue)", for: .normal)
+            } else {
+                button.setTitle("0.0", for: .normal)
+            }
+            valueButton = button
             break
         }
     }
-
+    
 }

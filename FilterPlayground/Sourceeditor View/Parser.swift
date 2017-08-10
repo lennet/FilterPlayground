@@ -84,7 +84,11 @@ extension Token {
 
 enum Keyword: String {
     case kernel
-    case kernelReturn = "return"
+    case _if = "if"
+    case _for = "for"
+    case _do = "do"
+    case _while = "while"
+    case _return = "return"
 }
 
 enum Identifier {

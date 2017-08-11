@@ -102,6 +102,14 @@ class KernelAttributeTableViewCell: UITableViewCell {
         switch type {
         case .sample :
             let imageView = SelectImageView(frame: valueSelectionView.bounds)
+            imageView.didSelectImage = { image in
+                self.attribute?.value = .sample(image.image!)
+                self.updateCallBack?(self, self.attribute!)
+            }
+            if case .sample(let image)? = value {
+                imageView.image = image
+            }
+            
             imageView.backgroundColor = .gray
             valueSelectionView.addSubview(imageView)
             break

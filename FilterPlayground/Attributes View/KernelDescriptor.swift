@@ -90,6 +90,7 @@ enum KernelAttributeValue {
         case .color(let a, let b, let c, let d):
             return CIColor(red: CGFloat(a), green: CGFloat(b), blue: CGFloat(c), alpha: CGFloat(d))
         case .sample(let image):
+            // todo save images to file and store path inside json
             return CISampler(image: image.ciImage!)
         }
     }

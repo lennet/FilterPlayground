@@ -74,10 +74,9 @@ extension CIColorKernel: Kernel {
             return nil
         }
         
-        let arguments =  [input as Any]
-        guard let result = self.apply(extent: input.extent, roiCallback: { (index, rect) -> CGRect in
-            return rect
-        }, arguments: arguments) else {
+        let arguments =  [input] + attributes
+        
+        guard let result = self.apply(extent: input.extent, arguments: arguments) else {
             return nil
         }
         return UIImage(ciImage: result)

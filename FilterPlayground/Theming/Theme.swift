@@ -56,7 +56,7 @@ struct Default: Theme {
 
     static var sourceEditorLineBackgroundError: UIColor = #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 0.2044360017)
     
-    static var sourceEditorLineBackgroundHighlighted: UIColor = #colorLiteral(red: 0.1058823529, green: 0.6784313725, blue: 0.9725490196, alpha: 0.1972923801)
+    static var sourceEditorLineBackgroundHighlighted: UIColor = #colorLiteral(red: 0.1058823529, green: 0.6784313725, blue: 0.9725490196, alpha: 0.1)
 
     static var sourceEditorBackground: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     

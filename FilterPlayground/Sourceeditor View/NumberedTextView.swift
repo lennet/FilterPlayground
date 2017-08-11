@@ -85,7 +85,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
         
         var lineRange = NSMakeRange(0, 1)
         var index = 0
-        var lineNumber = 0
+        var lineNumber = 1
         
         while index < textView.layoutManager.numberOfGlyphs {
             var lineRect = textView.layoutManager.lineFragmentUsedRect(forGlyphAt: index, effectiveRange: &lineRange)

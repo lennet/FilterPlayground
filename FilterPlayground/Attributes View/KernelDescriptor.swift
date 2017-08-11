@@ -105,16 +105,21 @@ extension KernelAttributeValue: Codable {
         switch self {
         case .float(let value):
             try container.encode(value, forKey: .float)
+            break
         case .vec2(let a, let b):
             try container.encode([a, b], forKey: .vec2)
+            break
         case .vec3(let a, let b, let c):
             try container.encode([a, b, c], forKey: .vec3)
+            break
         case .vec4(let a, let b, let c, let d):
             try container.encode([a, b, c, d], forKey: .vec4)
+            break
         case .color(let a, let b, let c, let d):
             try container.encode([a, b, c, d], forKey: .vec4)
+            break
         case .sample(let image):
-            // TODO
+            try container.encode(NSKeyedArchiver.archivedData(withRootObject: image), forKey: .sample)
             break
         }
     }
@@ -158,6 +163,13 @@ extension KernelAttributeValue: Codable {
                 throw CodableErrors.unkownValue
             }
             self = .vec4(value[0], value[1], value[2], value[3])
+            return
+        }
+        if let value = try? values.decode(Data.self, forKey: .sample) {
+            guard let image = NSKeyedUnarchiver.unarchiveObject(with: value) as? UIImage else {
+                throw CodableErrors.unkownValue
+            }
+            self = .sample(image)
             return
         }
         throw CodableErrors.unkownValue

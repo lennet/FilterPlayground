@@ -128,7 +128,7 @@ extension KernelAttributeValue: Codable {
             try container.encode([a, b, c, d], forKey: .vec4)
             break
         case .color(let a, let b, let c, let d):
-            try container.encode([a, b, c, d], forKey: .vec4)
+            try container.encode([a, b, c, d], forKey: .color)
             break
         case .sample(let image):
             try container.encode(NSKeyedArchiver.archivedData(withRootObject: image), forKey: .sample)
@@ -174,7 +174,7 @@ extension KernelAttributeValue: Codable {
             guard value.count == 4 else {
                 throw CodableErrors.unkownValue
             }
-            self = .vec4(value[0], value[1], value[2], value[3])
+            self = .color(value[0], value[1], value[2], value[3])
             return
         }
         if let value = try? values.decode(Data.self, forKey: .sample) {

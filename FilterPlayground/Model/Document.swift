@@ -30,6 +30,7 @@ class Document: UIDocument {
         self.init(fileURL: url)
         metaData.type = type
         source = metaData.initialSource()
+        metaData.attributes = metaData.initalArguments()
     }
     
     override init(fileURL url: URL) {

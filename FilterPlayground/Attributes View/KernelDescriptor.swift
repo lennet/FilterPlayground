@@ -20,11 +20,20 @@ extension KernelType {
     var returnType: KernelAttributeType {
         switch self {
         case .normal,
-             .warp:
-            return .vec2
-        case .color,
-             .blend:
+         .color,
+         .blend:
             return .vec4
+        case .warp:
+            return .vec2
+        }
+    }
+    
+    var requiredArguments: [KernelAttributeType] {
+        switch self {
+        case .color:
+            return [.sample]
+        default:
+            return []
         }
     }
     
@@ -34,6 +43,8 @@ extension KernelType {
             return KernelCompiler<CIColorKernel>.compile
         case .warp:
             return KernelCompiler<CIWarpKernel>.compile
+        case .normal:
+            return KernelCompiler<GeneralKernel>.compile
         default:
             // todo!
             return KernelCompiler<CIWarpKernel>.compile
@@ -202,13 +213,7 @@ extension KernelAttribute: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(type, forKey: .type)
-        switch type {
-        case .float:
-            try container.encode(value, forKey: .value)
-            break
-        default:
-            break
-        }
+        try container.encode(value, forKey: .value)
     }
     
 }

@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     var document: Document?
     var showLiveView = true
     var showAttributes = true
-    
+        
     override var canBecomeFirstResponder: Bool {
         return true
     }
@@ -53,7 +53,6 @@ class ViewController: UIViewController {
         safariVC.popoverPresentationController?.barButtonItem = sender
         
         present(safariVC, animated: true, completion: nil)
-        
     }
     
     @IBAction func run() {
@@ -64,14 +63,14 @@ class ViewController: UIViewController {
         }
 
         guard let source = sourceEditorViewController?.source,
-            let image = liveViewController?.inputImageView.image,
+            let input = liveViewController?.inputImages,
             let document = document else {
                 return
         }
         let attributes = attributesViewController?.attributes ?? []
         switch document.metaData.type.compile(source) {
         case .success(kernel: let kernel):
-            apply(kernel: kernel, input: image, attributes: attributes)
+            apply(kernel: kernel, input: input, attributes: attributes)
             break
         case .failed(errors: let errors):
             display(errors: errors)
@@ -79,11 +78,11 @@ class ViewController: UIViewController {
         }
     }
     
-    func apply(kernel: Kernel, input: UIImage, attributes: [KernelAttribute]) {
+    func apply(kernel: Kernel, input: [UIImage], attributes: [KernelAttribute]) {
         clearErrors()
         
         DispatchQueue.global(qos: .background).async {
-            let image = kernel.apply(to: input, attributes: attributes.map{ $0.value.asKernelValue })
+            let image = kernel.apply(with: input, attributes: attributes.map{ $0.value.asKernelValue })
             
             DispatchQueue.main.async {
                 self.liveViewController?.imageView.image = image

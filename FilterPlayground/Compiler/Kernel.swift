@@ -12,7 +12,7 @@ protocol Kernel: class {
 
     static func compile(source: String) -> Kernel?
     
-    func apply(to image: UIImage, attributes: [Any]) -> UIImage?
+    func apply(with inputImages: [UIImage], attributes: [Any]) -> UIImage?
 }
 
 class GeneralKernel: Kernel {
@@ -24,7 +24,7 @@ class GeneralKernel: Kernel {
         return result
     }
     
-    func apply(to image: UIImage, attributes: [Any]) -> UIImage? {
+    func apply(with inputImages: [UIImage], attributes: [Any]) -> UIImage? {
         let arguments: [Any] = attributes
         // todo
 //        if let input = CIImage(image: image)  {

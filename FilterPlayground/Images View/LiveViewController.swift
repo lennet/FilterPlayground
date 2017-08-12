@@ -12,7 +12,10 @@ class LiveViewController: UIViewController {
 
     @IBOutlet weak var imageView: SelectImageView!
     @IBOutlet weak var inputImageView: SelectImageView!
-    
+    var inputImages: [UIImage] {
+        return inputImageView.image != nil ? [inputImageView.image!] : []
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

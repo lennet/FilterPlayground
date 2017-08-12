@@ -46,9 +46,9 @@ extension CIWarpKernel: Kernel {
         return CIWarpKernel(source: source)
     }
     
-    func apply(to image: UIImage, attributes: [Any]) -> UIImage? {
+    func apply(with inputImages: [UIImage], attributes: [Any]) -> UIImage? {
         
-        guard let input = CIImage(image: image) else {
+        guard let input = (inputImages.flatMap{ $0.asCIImage }).first else {
             return nil
         }
         
@@ -68,15 +68,12 @@ extension CIColorKernel: Kernel {
         return CIColorKernel(source: source)
     }
     
-    func apply(to image: UIImage, attributes: [Any]) -> UIImage? {
-        
-        guard let input = CIImage(image: image) else {
+    func apply(with inputImages: [UIImage], attributes: [Any]) -> UIImage? {
+        guard let image = attributes.first as? CISampler else {
             return nil
         }
         
-        let arguments =  [input] + attributes
-        
-        guard let result = self.apply(extent: input.extent, arguments: arguments) else {
+        guard let result = self.apply(extent: image.extent, arguments: attributes) else {
             return nil
         }
         return UIImage(ciImage: result)
@@ -101,6 +98,14 @@ extension CGFloat {
     
     var asRadian: CGFloat {
         return self * CGFloat.pi / 180
+    }
+    
+}
+
+extension UIImage {
+    
+    var asCIImage: CIImage? {
+        return ciImage ?? CIImage(cgImage: cgImage!)
     }
     
 }

@@ -57,7 +57,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
     
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
-        textView.frame = CGRect(origin: CGPoint(x:30, y:0), size: CGSize(width: frame.width - 20, height: frame.height))
+        textView.frame = CGRect(origin: CGPoint(x:30, y:0), size: CGSize(width: frame.width - 30, height: frame.height))
         textView.delegate = self
         contentMode = .topLeft
         addSubview(textView)

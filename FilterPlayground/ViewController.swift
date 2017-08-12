@@ -159,6 +159,8 @@ class ViewController: UIViewController {
         let translation = sender.translation(in: sender.view!)
         sender.setTranslation(.zero, in: sender.view!)
         sourceEditorWidthConstraint.constant += translation.x
+        sourceEditorWidthConstraint.constant = max(sourceEditorWidthConstraint.constant, 0)
+        sourceEditorWidthConstraint.constant = min(view.frame.width-attributesContainerWidthConstraint.constant, sourceEditorWidthConstraint.constant)
         view.layoutIfNeeded()
     }
     

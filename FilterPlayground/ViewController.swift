@@ -11,7 +11,7 @@ import SafariServices
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var liveViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var attributesContainerWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var sourceEditorWidthConstraint: NSLayoutConstraint!
     weak var attributesViewController: AttributesViewController?
     weak var liveViewController: LiveViewController?
@@ -119,20 +119,13 @@ class ViewController: UIViewController {
     
     func updateViewConstraints(newWidth: CGFloat) {
         
-        let attributesWidth: CGFloat = 220
-        if showLiveView && showAttributes {
-            let width = (newWidth - attributesWidth) / 2
-            liveViewWidthConstraint.constant = width
-            sourceEditorWidthConstraint.constant = width
-        } else if showLiveView {
-            sourceEditorWidthConstraint.constant = newWidth/2
-            liveViewWidthConstraint.constant = newWidth/2
-        } else if showAttributes {
-            sourceEditorWidthConstraint.constant = newWidth-attributesWidth
-            liveViewWidthConstraint.constant = 0
+        
+        attributesContainerWidthConstraint.constant = showAttributes ? 220 : 0
+
+        if showLiveView {
+            sourceEditorWidthConstraint.constant = (newWidth - attributesContainerWidthConstraint.constant) / 2
         } else {
-            sourceEditorWidthConstraint.constant = newWidth
-            liveViewWidthConstraint.constant = 0
+            sourceEditorWidthConstraint.constant = newWidth - attributesContainerWidthConstraint.constant
         }
     }
     
@@ -160,6 +153,13 @@ class ViewController: UIViewController {
         } else {
             completion()
         }
+    }
+    
+    @IBAction func handleDividerPan(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: sender.view!)
+        sender.setTranslation(.zero, in: sender.view!)
+        sourceEditorWidthConstraint.constant += translation.x
+        view.layoutIfNeeded()
     }
     
     @IBAction func didTapLiveViewButton(_ sender: Any) {

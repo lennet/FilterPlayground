@@ -12,6 +12,7 @@
 		980229B01F2FBF18000FFCA2 /* ErrorParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229AF1F2FBF18000FFCA2 /* ErrorParserTests.swift */; };
 		980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229B11F2FCF41000FFCA2 /* ErrorTableViewCell.swift */; };
 		981267D41F34BEFC00101027 /* Kernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981267D31F34BEFC00101027 /* Kernel.swift */; };
+		982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */; };
 		9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC741F3663AE00A8E3CA /* Theme.swift */; };
 		9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC761F36675000A8E3CA /* ThemingTests.swift */; };
 		9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845C6101F38F44100F38283 /* NewProjectViewController.swift */; };
@@ -75,6 +76,7 @@
 		980229AF1F2FBF18000FFCA2 /* ErrorParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorParserTests.swift; sourceTree = "<group>"; };
 		980229B11F2FCF41000FFCA2 /* ErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTableViewCell.swift; sourceTree = "<group>"; };
 		981267D31F34BEFC00101027 /* Kernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kernel.swift; sourceTree = "<group>"; };
+		982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDraggingIndicator.swift; sourceTree = "<group>"; };
 		9841EC741F3663AE00A8E3CA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		9841EC761F36675000A8E3CA /* ThemingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingTests.swift; sourceTree = "<group>"; };
 		9845C6101F38F44100F38283 /* NewProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				987672441F2F5355002F9AAF /* Extensions.swift */,
 				981267D21F34BEDB00101027 /* Compiler */,
 				9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */,
+				982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */,
 			);
 			path = FilterPlayground;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */,
 				985A42361F2CFEE800636E72 /* SelectImageView.swift in Sources */,
 				987672451F2F5355002F9AAF /* Extensions.swift in Sources */,
+				982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */,
 				98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */,
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,
 				98A67FB21F3A17820043AA9D /* SelectFloatViewController.swift in Sources */,

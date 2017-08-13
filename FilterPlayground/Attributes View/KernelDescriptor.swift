@@ -37,6 +37,17 @@ extension KernelType {
         }
     }
     
+    var requiredInputImages: Int {
+        switch self {
+        case .blend:
+            return 2
+        case .warp:
+            return 1
+        default:
+            return 0
+        }
+    }
+    
     var compile: (String) -> KernelCompilerResult {
         switch self {
         case .color:

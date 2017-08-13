@@ -141,6 +141,7 @@ class ViewController: UIViewController {
             self.sourceEditorViewController?.source = document.source
             self.attributesViewController?.attributes = document.metaData.attributes
             self.attributesViewController?.tableView.reloadData()
+            self.liveViewController?.numberOfInputs = document.metaData.type.requiredInputImages
             self.title = document.title
             self.liveViewController?.reset()
         }
@@ -200,7 +201,6 @@ class ViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {

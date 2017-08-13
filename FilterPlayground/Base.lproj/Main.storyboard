@@ -8,7 +8,6 @@
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -596,29 +595,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="946" height="916"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gaw-QV-wG7" customClass="SelectImageView" customModule="FilterPlayground" customModuleProvider="target">
-                                <rect key="frame" x="8" y="8" width="930" height="454"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s9I-fw-uLe" customClass="SelectImageView" customModule="FilterPlayground" customModuleProvider="target">
-                                <rect key="frame" x="8" y="470" width="930" height="438"/>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sQJ-6r-2tx">
+                                <rect key="frame" x="8" y="8" width="930" height="900"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aY7-EU-4tc">
+                                        <rect key="frame" x="0.0" y="0.0" width="930" height="446"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gaw-QV-wG7" customClass="SelectImageView" customModule="FilterPlayground" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="461" height="446"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VAu-42-Aum" customClass="SelectImageView" customModule="FilterPlayground" customModuleProvider="target">
+                                                <rect key="frame" x="469" y="0.0" width="461" height="446"/>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s9I-fw-uLe" customClass="SelectImageView" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="454" width="930" height="446"/>
+                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="s9I-fw-uLe" secondAttribute="trailing" priority="999" constant="8" id="CfB-sT-L2e"/>
-                            <constraint firstItem="s9I-fw-uLe" firstAttribute="top" secondItem="gaw-QV-wG7" secondAttribute="bottom" constant="8" id="EVu-Ni-EIQ"/>
-                            <constraint firstAttribute="trailing" secondItem="gaw-QV-wG7" secondAttribute="trailing" priority="999" constant="8" id="Xhw-X4-UTe"/>
-                            <constraint firstItem="gaw-QV-wG7" firstAttribute="top" secondItem="8Yp-iT-9hZ" secondAttribute="top" constant="8" id="XxA-2J-E9h"/>
-                            <constraint firstItem="TCx-nS-dLE" firstAttribute="bottom" secondItem="s9I-fw-uLe" secondAttribute="bottom" constant="8" id="YCh-np-dm0"/>
-                            <constraint firstItem="gaw-QV-wG7" firstAttribute="height" secondItem="8Yp-iT-9hZ" secondAttribute="height" multiplier="0.5" constant="-4" id="YEq-vW-cMq"/>
-                            <constraint firstItem="s9I-fw-uLe" firstAttribute="leading" secondItem="8Yp-iT-9hZ" secondAttribute="leading" constant="8" id="alP-ON-oWS"/>
-                            <constraint firstItem="gaw-QV-wG7" firstAttribute="leading" secondItem="8Yp-iT-9hZ" secondAttribute="leading" constant="8" id="cvm-SF-cu3"/>
+                            <constraint firstAttribute="bottom" secondItem="sQJ-6r-2tx" secondAttribute="bottom" constant="8" id="2BF-Cv-Mvi"/>
+                            <constraint firstItem="sQJ-6r-2tx" firstAttribute="leading" secondItem="TCx-nS-dLE" secondAttribute="leading" constant="8" id="9Mx-rv-uWJ"/>
+                            <constraint firstItem="TCx-nS-dLE" firstAttribute="trailing" secondItem="sQJ-6r-2tx" secondAttribute="trailing" constant="8" id="jLK-00-gRf"/>
+                            <constraint firstItem="sQJ-6r-2tx" firstAttribute="top" secondItem="8Yp-iT-9hZ" secondAttribute="top" constant="8" id="rz4-Oc-5BQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TCx-nS-dLE"/>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="s9I-fw-uLe" id="GYP-fN-RKA"/>
-                        <outlet property="inputImageView" destination="gaw-QV-wG7" id="7D5-m6-Fpv"/>
+                        <outletCollection property="inputImageViews" destination="VAu-42-Aum" collectionClass="NSMutableArray" id="ZvM-Br-Sqp"/>
+                        <outletCollection property="inputImageViews" destination="gaw-QV-wG7" collectionClass="NSMutableArray" id="8u0-ZV-VUm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xkA-3E-GHI" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -156,7 +156,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     }
     
     func updateFont() {
-        textView.font = UIFont.monospacedDigitSystemFont(ofSize: CGFloat(fontSize), weight: .regular)
+        textView.font = UIFont(name: "Menlo", size: CGFloat(fontSize))
         textView.setNeedsDisplay()
     }
     

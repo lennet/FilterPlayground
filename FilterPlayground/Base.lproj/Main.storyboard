@@ -40,7 +40,7 @@
                         <sections>
                             <tableViewSection headerTitle="Theme" id="56j-go-3Wp">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oYv-bI-9l2">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="oYv-bI-9l2">
                                         <rect key="frame" x="0.0" y="28" width="200" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oYv-bI-9l2" id="tBS-9t-vuw">
@@ -69,6 +69,30 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="DSd-D7-Kvj">
+                                        <rect key="frame" x="0.0" y="72" width="200" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DSd-D7-Kvj" id="bUr-48-Dzp">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="RIp-DC-uTf">
+                                                    <rect key="frame" x="43" y="8" width="115" height="29"/>
+                                                    <segments>
+                                                        <segment title="tabs"/>
+                                                        <segment title="spaces"/>
+                                                    </segments>
+                                                    <connections>
+                                                        <action selector="tabsVsSpacesValueChanged:" destination="d8L-vD-k8G" eventType="valueChanged" id="CjH-IF-iha"/>
+                                                    </connections>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RIp-DC-uTf" firstAttribute="centerY" secondItem="bUr-48-Dzp" secondAttribute="centerY" id="oiZ-ZA-FBk"/>
+                                                <constraint firstItem="RIp-DC-uTf" firstAttribute="centerX" secondItem="bUr-48-Dzp" secondAttribute="centerX" id="zT9-27-qSl"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -80,6 +104,7 @@
                     <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
                     <connections>
                         <outlet property="nightModeSwitch" destination="qNO-gb-toC" id="nI3-xN-rl7"/>
+                        <outlet property="tabsVsSpacesSegmentedControl" destination="RIp-DC-uTf" id="ews-jt-Xtz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6mT-a1-awb" userLabel="First Responder" sceneMemberID="firstResponder"/>

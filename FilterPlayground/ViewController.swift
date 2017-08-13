@@ -125,16 +125,12 @@ class ViewController: UIViewController {
         updateViewConstraints(newWidth: view.frame.width)
     }
     
-    
     func updateViewConstraints(newWidth: CGFloat) {
-        
-        
         attributesContainerWidthConstraint.constant = showAttributes ? 220 : 0
-
+        let maxWidth = newWidth - attributesContainerWidthConstraint.constant
+        sourceEditorWidthConstraint.constant = maxWidth
         if showLiveView {
-            sourceEditorWidthConstraint.constant = (newWidth - attributesContainerWidthConstraint.constant) / 2
-        } else {
-            sourceEditorWidthConstraint.constant = newWidth - attributesContainerWidthConstraint.constant
+            sourceEditorWidthConstraint.constant /= 2
         }
     }
     

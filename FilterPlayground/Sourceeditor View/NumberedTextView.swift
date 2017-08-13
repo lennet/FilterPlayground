@@ -13,6 +13,10 @@ class NumberedTextView: UIView, UITextViewDelegate {
     var theme: Theme.Type {
         return ThemeManager.shared.currentTheme
     }
+    
+    var spacingValue: String {
+        return Settings.tabsEnabled ? "\t" : "    "
+    }
 
     let textView: UITextView = {
         let textView = UITextView()
@@ -116,19 +120,30 @@ class NumberedTextView: UIView, UITextViewDelegate {
     }
     
     func draw(text: String, at point: CGPoint, color: UIColor) {
-        let attributes = [NSAttributedStringKey.font:textView.font!,
-                          NSAttributedStringKey.foregroundColor: color] as [NSAttributedStringKey : Any]
+        let attributes = [.font : textView.font!,
+                          .foregroundColor: color] as [NSAttributedStringKey : Any]
         (text as NSString).draw(at: CGPoint(x: 0, y: point.y), withAttributes: attributes)
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//        if text == "\n" && range.length == 0 {
-//            var newText = text
-//            newText += Array(repeating: "\t", count: currentAST?.intendationLevel(at: range.location, with: 1) ?? 0).joined()
-//            textView.text = textView.text.replacingCharacters(in: Range(range, in: textView.text)!, with: newText)
-//            return false
-//        }
-//        
+        if text == "\n" && range.length == 0 {
+            let intendationLevel = currentAST?.intendationLevel(at: range.location, with: 0) ?? 0
+            let tabs = Array(repeating: spacingValue, count: intendationLevel).joined()
+            var newText = text + tabs
+            
+            let newSelectedRange: NSRange
+            if (textView.text as NSString).substring(with: NSMakeRange(range.location, 1)) == "}" && (textView.text as NSString).substring(with: NSMakeRange(range.location-1, 1)) == "{" {
+                newSelectedRange = NSMakeRange(range.location+newText.count+1, 0)
+                newText += "\(spacingValue)\n" + tabs
+            } else {
+                newSelectedRange = NSMakeRange(range.location+newText.count, 0)
+            }
+            
+            textView.text = textView.text.replacingCharacters(in: Range(range, in: textView.text)!, with: newText)
+            textView.selectedRange = newSelectedRange
+            renderText()
+            return false
+        }
         return true
     }
     

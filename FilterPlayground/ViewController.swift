@@ -158,10 +158,29 @@ class ViewController: UIViewController {
     @IBAction func handleDividerPan(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: sender.view!)
         sender.setTranslation(.zero, in: sender.view!)
+        
+        let maxWidth = view.frame.width-attributesContainerWidthConstraint.constant
+        
         sourceEditorWidthConstraint.constant += translation.x
         sourceEditorWidthConstraint.constant = max(sourceEditorWidthConstraint.constant, 0)
-        sourceEditorWidthConstraint.constant = min(view.frame.width-attributesContainerWidthConstraint.constant, sourceEditorWidthConstraint.constant)
-        view.layoutIfNeeded()
+        sourceEditorWidthConstraint.constant = min(maxWidth, sourceEditorWidthConstraint.constant)
+        
+        switch sender.state {
+        case .cancelled, .ended:
+            let threshold: CGFloat = 100
+            if (sourceEditorWidthConstraint.constant < threshold) {
+                sourceEditorWidthConstraint.constant = 0
+            } else if sourceEditorWidthConstraint.constant > (maxWidth - threshold) {
+                sourceEditorWidthConstraint.constant = maxWidth
+            } else {
+                fallthrough
+            }
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        default:
+           view.layoutIfNeeded()
+        }
     }
     
     @IBAction func didTapLiveViewButton(_ sender: Any) {

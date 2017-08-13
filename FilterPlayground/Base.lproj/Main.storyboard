@@ -211,6 +211,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="attributesBarButtonItem" destination="PCG-9f-F1l" id="u9T-p5-dfP"/>
                         <outlet property="attributesContainerWidthConstraint" destination="Eee-sr-ho5" id="2qd-JR-sRN"/>
                         <outlet property="sourceEditorWidthConstraint" destination="udQ-FA-yvS" id="84x-sp-Urz"/>
                     </connections>

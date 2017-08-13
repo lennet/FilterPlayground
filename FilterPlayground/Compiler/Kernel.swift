@@ -26,16 +26,33 @@ class GeneralKernel: Kernel {
     
     func apply(with inputImages: [UIImage], attributes: [Any]) -> UIImage? {
         let arguments: [Any] = attributes
-        // todo
-//        if let input = CIImage(image: image)  {
-//            arguments =  [input] + attributes
-//        } else {
-//            arguments =
-//        }
-        
-        guard let result = kernel?.apply(extent: CGRect(origin: .zero, size: CGSize(width: 900, height: 200) ), roiCallback: { (index, rect) -> CGRect in
+            guard let result = kernel?.apply(extent: CGRect(origin: .zero, size: CGSize(width: 900, height: 200) ), roiCallback: { (index, rect) -> CGRect in
             return rect
         }, arguments: arguments) else {
+            return nil
+        }
+        return UIImage(ciImage: result)
+    }
+    
+}
+
+class BlendKernel: Kernel {
+    var kernel: CIBlendKernel?
+    
+    static func compile(source: String) -> Kernel? {
+        let result = BlendKernel()
+        result.kernel = CIBlendKernel(source: source)
+        return result
+    }
+    
+    func apply(with inputImages: [UIImage], attributes: [Any]) -> UIImage? {
+            guard let first = inputImages.first?.asCIImage,
+            let second = inputImages.last?.asCIImage,
+            inputImages.count == 2 else {
+                return nil
+        }
+        
+        guard let result = kernel?.apply(foreground: first, background: second) else {
             return nil
         }
         return UIImage(ciImage: result)

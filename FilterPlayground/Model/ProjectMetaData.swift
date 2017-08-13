@@ -21,7 +21,7 @@ struct ProjectMetaData: Codable {
     }
     
     func initialSource() -> String {
-        let parameter = initalArguments().map{ "\($0.type.rawValue) \($0.name)" }.joined(separator: ",")
+        let parameter = type.initialArguments
         return "kernel \(type.returnType) \(name)(\(parameter)) {\n\n}"
     }
     

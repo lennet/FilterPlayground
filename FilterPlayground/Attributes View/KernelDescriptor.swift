@@ -37,6 +37,17 @@ extension KernelType {
         }
     }
     
+    var initialArguments: String {
+        switch self {
+        case .color:
+            return "\(KernelAttributeType.sample.rawValue) img"
+        case .blend:
+            return "\(KernelAttributeType.sample.rawValue) fore, \(KernelAttributeType.sample.rawValue) back"
+        default:
+            return ""
+        }
+    }
+    
     var requiredInputImages: Int {
         switch self {
         case .blend:
@@ -48,6 +59,15 @@ extension KernelType {
         }
     }
     
+    var supportsAttributes: Bool {
+        switch self {
+        case .blend:
+            return false
+        default:
+            return true
+        }
+    }
+    
     var compile: (String) -> KernelCompilerResult {
         switch self {
         case .color:
@@ -56,9 +76,8 @@ extension KernelType {
             return KernelCompiler<CIWarpKernel>.compile
         case .normal:
             return KernelCompiler<GeneralKernel>.compile
-        default:
-            // todo!
-            return KernelCompiler<CIWarpKernel>.compile
+        case .blend:
+            return KernelCompiler<BlendKernel>.compile
         }
     }
     
@@ -120,7 +139,6 @@ extension KernelAttributeValue: Codable {
     private enum CodableErrors: Error {
         case unkownValue
     }
-    
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)

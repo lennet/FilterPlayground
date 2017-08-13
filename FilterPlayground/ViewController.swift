@@ -11,6 +11,7 @@ import SafariServices
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var attributesBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var attributesContainerWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var sourceEditorWidthConstraint: NSLayoutConstraint!
     weak var attributesViewController: AttributesViewController?
@@ -19,8 +20,16 @@ class ViewController: UIViewController {
     var isRunning = false
     
     var document: Document?
-    var showLiveView = true
-    var showAttributes = true
+    var showLiveView = true {
+        didSet {
+            updateViewConstraints()
+        }
+    }
+    var showAttributes = true {
+        didSet {
+            updateViewConstraints()
+        }
+    }
         
     override var canBecomeFirstResponder: Bool {
         return true
@@ -142,6 +151,8 @@ class ViewController: UIViewController {
             self.attributesViewController?.attributes = document.metaData.attributes
             self.attributesViewController?.tableView.reloadData()
             self.liveViewController?.numberOfInputs = document.metaData.type.requiredInputImages
+            self.attributesBarButtonItem.isEnabled = document.metaData.type.supportsAttributes
+            self.showAttributes = document.metaData.type.supportsAttributes
             self.title = document.title
             self.liveViewController?.reset()
         }

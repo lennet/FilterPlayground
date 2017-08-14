@@ -92,6 +92,32 @@ extension ASTNode: Equatable {
         }
     }
     
+    func needsClosingBracket(at index: Int, openedBrackets: Int = 0) -> Bool {
+        switch self {
+        case .bracetStatement(prefix: let prefix, body: let body, postfix:let postFix):
+            let bodyStartIndex = index - prefix.count
+            let bodyRoot = ASTNode.root(body)
+            let hasClosingBracket = postFix.contains(.closingBracket)
+            if bodyStartIndex >= 0 && bodyStartIndex < bodyRoot.numberOfTokens {
+                return bodyRoot.needsClosingBracket(at: bodyStartIndex, openedBrackets: openedBrackets + (hasClosingBracket ? 0: 1))
+            }
+            return !hasClosingBracket
+        case .root(let nodes):
+            var currentIndex = index
+            for node in nodes {
+                if currentIndex >= 0 && currentIndex < node.numberOfTokens {
+                    return node.needsClosingBracket(at: currentIndex, openedBrackets: openedBrackets)
+                }
+                currentIndex -= node.numberOfTokens
+            }
+            return false
+        case .statement(_),
+             .unkown(_),
+             .comment(_):
+            return openedBrackets > 0
+        }
+    }
+    
 }
 
 class ASTBuilder {

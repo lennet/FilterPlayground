@@ -188,6 +188,54 @@ a{b{{
         XCTAssertEqual(root.intendationLevel(at: f), 0)
     }
     
+    func testNeedsClosingBracket() {
+        let text = "{ "
+        
+        let tokens = Parser(string: text).getTokens()
+        let root = ASTNode.root(ASTBuilder.getAST(for: tokens))
+    
+        XCTAssertTrue(root.needsClosingBracket(at: 1))
+    }
+    
+    func testNeedsClosingBracketFalse() {
+        let text = "{ }"
+        
+        let tokens = Parser(string: text).getTokens()
+        let root = ASTNode.root(ASTBuilder.getAST(for: tokens))
+        
+        XCTAssertFalse(root.needsClosingBracket(at: 1))
+    }
+    
+    func testNeedsClosingBracketForInnerBody() {
+        let text = "{{ }"
+        
+        let tokens = Parser(string: text).getTokens()
+        let root = ASTNode.root(ASTBuilder.getAST(for: tokens))
+        
+        XCTAssertTrue(root.needsClosingBracket(at: 2))
+    }
+    
+    func testNeedsClosingBracketForInnerBodyFalse() {
+        let text = "{{ }}"
+        
+        let tokens = Parser(string: text).getTokens()
+        let root = ASTNode.root(ASTBuilder.getAST(for: tokens))
+        
+        XCTAssertFalse(root.needsClosingBracket(at: 2))
+    }
+    
+    func testAstInnerBracetStatementBug() {
+        let text = "{{ }}"
+        
+        let tokens = Parser(string: text).getTokens()
+        let result = ASTBuilder.getAST(for: tokens)
+        let expectedResult = [ASTNode.bracetStatement(prefix: [.openingBracket], body:
+            [ASTNode.bracetStatement(prefix: [.openingBracket], body: [.unkown([.whiteSpace])], postfix: [.closingBracket])]
+            , postfix: [.closingBracket])]
+        
+        XCTAssertEqual(expectedResult, result)
+    }
+    
     func testBrokenASTWithKernel() {
         let text = "kernel{\n\t"
         let tokens = Parser(string: text).getTokens()

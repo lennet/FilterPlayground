@@ -42,6 +42,13 @@ class LiveViewController: UIViewController {
         themeChanged(notification: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        inputImageViews.forEach{ $0.accessibilityIgnoresInvertColors = true }
+        imageView.accessibilityIgnoresInvertColors = true
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)

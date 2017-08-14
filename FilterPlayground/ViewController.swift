@@ -11,6 +11,7 @@ import SafariServices
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var contentViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var attributesBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var attributesContainerWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var sourceEditorWidthConstraint: NSLayoutConstraint!
@@ -33,6 +34,40 @@ class ViewController: UIViewController {
         
     override var canBecomeFirstResponder: Bool {
         return true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        registerNotifications()
+    }
+    
+    func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        guard let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        updateBottomSpacing(animated: true, keyboardHeight: keyboardSize.height)
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        updateBottomSpacing(animated: true, keyboardHeight: 0)
+    }
+    
+    func updateBottomSpacing(animated: Bool, keyboardHeight: CGFloat) {
+        contentViewBottomConstraint.constant = keyboardHeight
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+        
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
+            self.view.layoutIfNeeded()
+        }) { (_) in
+            
+        }
     }
     
     override var keyCommands: [UIKeyCommand]? {

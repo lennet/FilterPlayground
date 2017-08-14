@@ -71,14 +71,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         textView.delegate = self
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self)
-        super.viewWillDisappear(animated)
-    }
-    
     func registerNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(SourceEditorViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(SourceEditorViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(notification:)), name: ThemeManager.themeChangedNotificationName, object: nil)
         themeChanged(notification: nil)
     }
@@ -99,19 +92,6 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         textView.setNeedsDisplay()
-    }
-    
-    @objc func keyboardWillShow(notification: Notification) {
-        guard let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            return
-        }
-        keyboardHeight = keyboardSize.height
-        updateBottomSpacing(animated: true)
-    }
-        
-    @objc func keyboardWillHide(notification: Notification) {
-        keyboardHeight = 0
-        updateBottomSpacing(animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -119,70 +119,82 @@
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j2b-N6-rPD">
-                                <rect key="frame" x="0.0" y="64" width="200" height="916"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" priority="999" constant="200" id="udQ-FA-yvS"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="hbu-YJ-oVo" kind="embed" id="KoO-5O-izF"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekL-A8-cbw">
-                                <rect key="frame" x="200" y="64" width="946" height="916"/>
-                                <connections>
-                                    <segue destination="Kda-zV-ES4" kind="embed" id="Aq2-Fd-zVJ"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-Am-enn">
-                                <rect key="frame" x="1146" y="64" width="220" height="916"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="220" id="Eee-sr-ho5"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="lBD-SZ-RD5" kind="embed" id="7OY-Ia-AT0"/>
-                                </connections>
-                            </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0LG-qD-OhP" customClass="ViewDraggingIndicator" customModule="FilterPlayground" customModuleProvider="target">
-                                <rect key="frame" x="160" y="64" width="80" height="916"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g4Z-Px-HDe">
+                                <rect key="frame" x="0.0" y="64" width="1366" height="960"/>
                                 <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s7q-FV-ZGY">
-                                        <rect key="frame" x="35" y="418" width="10" height="80"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j2b-N6-rPD">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="960"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="10" id="JMW-1p-R7T"/>
-                                            <constraint firstAttribute="height" constant="80" id="vIm-qG-CCK"/>
+                                            <constraint firstAttribute="width" priority="999" constant="200" id="udQ-FA-yvS"/>
                                         </constraints>
+                                        <connections>
+                                            <segue destination="hbu-YJ-oVo" kind="embed" id="KoO-5O-izF"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekL-A8-cbw">
+                                        <rect key="frame" x="200" y="0.0" width="946" height="960"/>
+                                        <connections>
+                                            <segue destination="Kda-zV-ES4" kind="embed" id="Aq2-Fd-zVJ"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x9Q-Am-enn">
+                                        <rect key="frame" x="1146" y="0.0" width="220" height="960"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="220" id="Eee-sr-ho5"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="lBD-SZ-RD5" kind="embed" id="7OY-Ia-AT0"/>
+                                        </connections>
+                                    </containerView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0LG-qD-OhP" customClass="ViewDraggingIndicator" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="160" y="0.0" width="80" height="960"/>
+                                        <subviews>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s7q-FV-ZGY">
+                                                <rect key="frame" x="35" y="440" width="10" height="80"/>
+                                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="10" id="JMW-1p-R7T"/>
+                                                    <constraint firstAttribute="height" constant="80" id="vIm-qG-CCK"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="9YN-yd-4K6"/>
+                                            <constraint firstItem="s7q-FV-ZGY" firstAttribute="centerX" secondItem="0LG-qD-OhP" secondAttribute="centerX" id="dPQ-Fd-j0s"/>
+                                            <constraint firstItem="s7q-FV-ZGY" firstAttribute="centerY" secondItem="0LG-qD-OhP" secondAttribute="centerY" id="uQP-pZ-ehk"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="indicator" destination="s7q-FV-ZGY" id="7rR-ew-ciM"/>
+                                            <outletCollection property="gestureRecognizers" destination="zZ3-H1-Xdy" appends="YES" id="Txw-ad-lkV"/>
+                                        </connections>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <gestureRecognizers/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="9YN-yd-4K6"/>
-                                    <constraint firstItem="s7q-FV-ZGY" firstAttribute="centerX" secondItem="0LG-qD-OhP" secondAttribute="centerX" id="dPQ-Fd-j0s"/>
-                                    <constraint firstItem="s7q-FV-ZGY" firstAttribute="centerY" secondItem="0LG-qD-OhP" secondAttribute="centerY" id="uQP-pZ-ehk"/>
+                                    <constraint firstAttribute="bottom" secondItem="0LG-qD-OhP" secondAttribute="bottom" id="DDP-5C-V8L"/>
+                                    <constraint firstItem="ekL-A8-cbw" firstAttribute="leading" secondItem="j2b-N6-rPD" secondAttribute="trailing" id="ENm-Ub-ynT"/>
+                                    <constraint firstItem="j2b-N6-rPD" firstAttribute="top" secondItem="g4Z-Px-HDe" secondAttribute="top" id="IDo-zH-N2z"/>
+                                    <constraint firstItem="x9Q-Am-enn" firstAttribute="top" secondItem="g4Z-Px-HDe" secondAttribute="top" id="JV7-bv-wNC"/>
+                                    <constraint firstItem="x9Q-Am-enn" firstAttribute="leading" secondItem="ekL-A8-cbw" secondAttribute="trailing" id="LN7-9v-9ec"/>
+                                    <constraint firstItem="0LG-qD-OhP" firstAttribute="centerX" secondItem="j2b-N6-rPD" secondAttribute="trailing" id="R2r-yt-uzA"/>
+                                    <constraint firstAttribute="bottom" secondItem="j2b-N6-rPD" secondAttribute="bottom" id="SfP-aF-1iB"/>
+                                    <constraint firstItem="ekL-A8-cbw" firstAttribute="top" secondItem="g4Z-Px-HDe" secondAttribute="top" id="VH7-2Y-B8j"/>
+                                    <constraint firstAttribute="bottom" secondItem="x9Q-Am-enn" secondAttribute="bottom" id="YD5-zN-02B"/>
+                                    <constraint firstAttribute="bottom" secondItem="ekL-A8-cbw" secondAttribute="bottom" id="jtN-88-mZz"/>
+                                    <constraint firstItem="0LG-qD-OhP" firstAttribute="top" secondItem="g4Z-Px-HDe" secondAttribute="top" id="lRQ-CS-JXy"/>
+                                    <constraint firstAttribute="trailing" secondItem="x9Q-Am-enn" secondAttribute="trailing" id="meR-gN-GhU"/>
+                                    <constraint firstItem="j2b-N6-rPD" firstAttribute="leading" secondItem="g4Z-Px-HDe" secondAttribute="leading" id="u9J-vM-IZR"/>
                                 </constraints>
-                                <connections>
-                                    <outlet property="indicator" destination="s7q-FV-ZGY" id="7rR-ew-ciM"/>
-                                    <outletCollection property="gestureRecognizers" destination="zZ3-H1-Xdy" appends="YES" id="Txw-ad-lkV"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="j2b-N6-rPD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9Lk-9e-GAA"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="x9Q-Am-enn" secondAttribute="bottom" id="C7x-Fe-HGn"/>
-                            <constraint firstItem="ekL-A8-cbw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HWZ-0h-mS4"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="0LG-qD-OhP" secondAttribute="bottom" id="HoC-I2-0TN"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="x9Q-Am-enn" secondAttribute="trailing" id="L29-l2-evK"/>
-                            <constraint firstItem="0LG-qD-OhP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Per-bZ-feE"/>
-                            <constraint firstItem="j2b-N6-rPD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Piq-rJ-oe0"/>
-                            <constraint firstItem="0LG-qD-OhP" firstAttribute="centerX" secondItem="j2b-N6-rPD" secondAttribute="trailing" id="WyY-ae-zRi"/>
-                            <constraint firstItem="x9Q-Am-enn" firstAttribute="leading" secondItem="ekL-A8-cbw" secondAttribute="trailing" id="aNE-c1-I9s"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="j2b-N6-rPD" secondAttribute="bottom" id="ajt-99-yZX"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ekL-A8-cbw" secondAttribute="bottom" id="d87-QO-rdx"/>
-                            <constraint firstItem="ekL-A8-cbw" firstAttribute="leading" secondItem="j2b-N6-rPD" secondAttribute="trailing" id="miL-Xe-Poh"/>
-                            <constraint firstItem="x9Q-Am-enn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ph9-ka-1cD"/>
+                            <constraint firstAttribute="bottom" secondItem="g4Z-Px-HDe" secondAttribute="bottom" id="57e-Lh-M0N"/>
+                            <constraint firstAttribute="trailing" secondItem="g4Z-Px-HDe" secondAttribute="trailing" id="7aH-Yp-0KB"/>
+                            <constraint firstItem="g4Z-Px-HDe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="Fyk-2p-ruN"/>
+                            <constraint firstItem="g4Z-Px-HDe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Lmw-FK-uy7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -238,6 +250,7 @@
                     <connections>
                         <outlet property="attributesBarButtonItem" destination="PCG-9f-F1l" id="u9T-p5-dfP"/>
                         <outlet property="attributesContainerWidthConstraint" destination="Eee-sr-ho5" id="2qd-JR-sRN"/>
+                        <outlet property="contentViewBottomConstraint" destination="57e-Lh-M0N" id="EAj-XD-kh2"/>
                         <outlet property="sourceEditorWidthConstraint" destination="udQ-FA-yvS" id="84x-sp-Urz"/>
                     </connections>
                 </viewController>
@@ -293,18 +306,18 @@
             <objects>
                 <viewController id="lBD-SZ-RD5" customClass="AttributesViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SL3-Ne-iS1">
-                        <rect key="frame" x="0.0" y="0.0" width="220" height="916"/>
+                        <rect key="frame" x="0.0" y="0.0" width="220" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ek3-UT-VuF">
-                                <rect key="frame" x="0.0" y="20" width="1" height="896"/>
+                                <rect key="frame" x="0.0" y="20" width="1" height="940"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="cT4-MW-Geh"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CEH-Xs-6fo">
-                                <rect key="frame" x="1" y="20" width="219" height="896"/>
+                                <rect key="frame" x="1" y="20" width="219" height="940"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="KernelAttributeTableViewCellIdentifier" rowHeight="100" id="NuG-th-5W3" customClass="KernelAttributeTableViewCell" customModule="FilterPlayground" customModuleProvider="target">
@@ -506,15 +519,15 @@
             <objects>
                 <viewController id="hbu-YJ-oVo" customClass="SourceEditorViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FBl-Wz-udb">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="916"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEl-je-gOO" customClass="NumberedTextView" customModule="FilterPlayground" customModuleProvider="target">
-                                <rect key="frame" x="24" y="28" width="152" height="880"/>
+                                <rect key="frame" x="24" y="28" width="152" height="924"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1v-bD-rhN">
-                                <rect key="frame" x="8" y="916" width="184" height="0.0"/>
+                                <rect key="frame" x="8" y="960" width="184" height="0.0"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IDq-YO-IrH">
                                         <rect key="frame" x="0.0" y="0.0" width="184" height="0.0"/>
@@ -618,27 +631,27 @@
             <objects>
                 <viewController id="Kda-zV-ES4" customClass="LiveViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Yp-iT-9hZ">
-                        <rect key="frame" x="0.0" y="0.0" width="946" height="916"/>
+                        <rect key="frame" x="0.0" y="0.0" width="946" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sQJ-6r-2tx">
-                                <rect key="frame" x="8" y="8" width="930" height="900"/>
+                                <rect key="frame" x="8" y="8" width="930" height="944"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aY7-EU-4tc">
-                                        <rect key="frame" x="0.0" y="0.0" width="930" height="446"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="930" height="468"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gaw-QV-wG7" customClass="SelectImageView" customModule="FilterPlayground" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="461" height="446"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="461" height="468"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VAu-42-Aum" customClass="SelectImageView" customModule="FilterPlayground" customModuleProvider="target">
-                                                <rect key="frame" x="469" y="0.0" width="461" height="446"/>
+                                                <rect key="frame" x="469" y="0.0" width="461" height="468"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s9I-fw-uLe" customClass="SelectImageView" customModule="FilterPlayground" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="454" width="930" height="446"/>
+                                        <rect key="frame" x="0.0" y="476" width="930" height="468"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>

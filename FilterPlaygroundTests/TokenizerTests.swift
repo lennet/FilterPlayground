@@ -98,7 +98,6 @@ class TokenizerTests: XCTestCase {
         let string = "__sample"
         let tokenizer = Tokenizer(string: string)
         XCTAssertEqual(Token.identifier(.type(.sample)), tokenizer.nextToken()!)
-        
     }
     
     func testFloatAfterBracket() {

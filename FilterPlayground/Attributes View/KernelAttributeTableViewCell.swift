@@ -122,7 +122,16 @@ class KernelAttributeTableViewCell: UITableViewCell {
             button.addTarget(self, action: #selector(colorButtonTapped(sender:)), for: .touchUpInside)
             valueButton = button
             break
-        default:
+        case .vec2:
+            let picker = VectorValuePicker(frame: valueSelectionView.bounds, numberOfValues: 2)
+            valueSelectionView.addSubview(picker)
+        case .vec3:
+            let picker = VectorValuePicker(frame: valueSelectionView.bounds, numberOfValues: 3)
+            valueSelectionView.addSubview(picker)
+        case .vec4:
+            let picker = VectorValuePicker(frame: valueSelectionView.bounds, numberOfValues: 4)
+            valueSelectionView.addSubview(picker)
+        case .float:
             let button = UIButton(frame: valueSelectionView.bounds)
             valueSelectionView.addSubview(button)
             button.addTarget(self, action: #selector(valueButtonTapped(sender:)), for: .touchUpInside)

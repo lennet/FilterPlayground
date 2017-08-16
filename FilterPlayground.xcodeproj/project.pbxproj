@@ -13,6 +13,7 @@
 		980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229B11F2FCF41000FFCA2 /* ErrorTableViewCell.swift */; };
 		981267D41F34BEFC00101027 /* Kernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981267D31F34BEFC00101027 /* Kernel.swift */; };
 		982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */; };
+		98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */; };
 		9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC741F3663AE00A8E3CA /* Theme.swift */; };
 		9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC761F36675000A8E3CA /* ThemingTests.swift */; };
 		9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845C6101F38F44100F38283 /* NewProjectViewController.swift */; };
@@ -77,6 +78,7 @@
 		980229B11F2FCF41000FFCA2 /* ErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTableViewCell.swift; sourceTree = "<group>"; };
 		981267D31F34BEFC00101027 /* Kernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kernel.swift; sourceTree = "<group>"; };
 		982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDraggingIndicator.swift; sourceTree = "<group>"; };
+		98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorValuePicker.swift; sourceTree = "<group>"; };
 		9841EC741F3663AE00A8E3CA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		9841EC761F36675000A8E3CA /* ThemingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingTests.swift; sourceTree = "<group>"; };
 		9845C6101F38F44100F38283 /* NewProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectViewController.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				98A67FB11F3A17820043AA9D /* SelectFloatViewController.swift */,
 				98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */,
 				986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */,
+				98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */,
 			);
 			path = "Attributes View";
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,
 				980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */,
 				98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */,
+				98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */,
 				98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */,
 				981267D41F34BEFC00101027 /* Kernel.swift in Sources */,
 				98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */,

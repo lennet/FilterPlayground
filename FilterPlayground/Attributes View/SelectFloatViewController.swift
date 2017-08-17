@@ -10,6 +10,8 @@ import UIKit
 
 class SelectFloatViewController: UIViewController {
 
+    @IBOutlet weak var previousButton: FloatSelectionButton!
+    @IBOutlet weak var nextButton: FloatSelectionButton!
     @IBOutlet weak var slider: CircularSlider!
     @IBOutlet weak var buttonsView: UIView!
     @IBOutlet weak var buttonsViewTopConstraint: NSLayoutConstraint!
@@ -19,16 +21,46 @@ class SelectFloatViewController: UIViewController {
     var valueBeforeDot: String = ""
     var valueAfterDot: String? = nil
     var dotAlreadyTapped = false
+    var defaultContentSize: CGSize {
+        return CGSize(width: 300, height: 500 + (showNextButton || showPreviousButton ? 100 : 0) )
+    }
+
+    var showNextButton = false {
+        didSet {
+            loadViewIfNeeded()
+//            UIView.performWithoutAnimation {
+                nextButton.isHidden = !showNextButton
+                nextButton.needsLeftBorder = showNextButton && showPreviousButton
+                nextButton.superview?.layoutIfNeeded()
+//            }
+            updateContentSize()
+        }
+    }
     
-    let defaultContentSize = CGSize(width: 300, height: 500)
+    var showPreviousButton = false {
+        didSet {
+            loadViewIfNeeded()
+//            UIView.performWithoutAnimation {
+                nextButton.needsLeftBorder = showNextButton && showPreviousButton
+                previousButton.isHidden = !showPreviousButton
+                previousButton.setNeedsDisplay()
+                nextButton.superview?.layoutIfNeeded()
+//            }
+            updateContentSize()
+        }
+    }
+    
+    
     var valueChanged: ((CGFloat) -> ())?
+    var nextButtonTappedCallback: (()->())?
+    var previousButtonTappedCallback: (()->())?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         slider.addTarget(self, action: #selector(sliderDidBeginEditing), for: .editingDidBegin)
         slider.addTarget(self, action: #selector(sliderDidEndEditing), for: .editingDidEnd)
         
-        self.preferredContentSize = defaultContentSize
+        updateContentSize()
     }
     
     @objc func sliderDidBeginEditing() {
@@ -124,6 +156,18 @@ class SelectFloatViewController: UIViewController {
                 update(value: CGFloat(Float("\(valueBeforeDot)")!))
             }
         }
+    }
+    
+    @IBAction func nextButtonTapped(_ sender: Any) {
+        nextButtonTappedCallback?()
+    }
+    
+    @IBAction func previousButtonTapped(_ sender: Any) {
+        previousButtonTappedCallback?()
+    }
+    
+    func updateContentSize() {
+        self.preferredContentSize = defaultContentSize
     }
     
     func append(number: Int) {

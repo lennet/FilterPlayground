@@ -12,7 +12,8 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
     
     var poppoverControllerPresentationController: UIPopoverPresentationController?
     var floatPicker: SelectFloatViewController?
-    var currentHighlightedIndex: UInt = 0
+    var currentHighlightedIndex: Int = 0
+    var numberOfValues: Int = 0
     
     let stackView: UIStackView = {
         let view = UIStackView()
@@ -22,9 +23,9 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
         return view
     }()
     
-    init(frame: CGRect, numberOfValues: UInt) {
+    init(frame: CGRect, numberOfValues: Int) {
         super.init(frame: frame)
-        
+        self.numberOfValues = numberOfValues
         stackView.frame = bounds
         addSubview(stackView)
         
@@ -38,7 +39,7 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addFloatPicker(index: UInt){
+    func addFloatPicker(index: Int){
         let label = UILabel()
         label.frame.size.width = bounds.width
         label.autoresizingMask = .flexibleWidth
@@ -49,10 +50,23 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
     
     @objc func handleTap() {
         let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! SelectFloatViewController
+        viewController.showNextButton = true
         self.floatPicker = viewController
         viewController.valueChanged = { value in
-            self.highlight(at: 2)
+            guard let label = self.stackView.arrangedSubviews[self.currentHighlightedIndex-1] as? UILabel else {
+                return
+            }
+            label.text = "\(value)"
         }
+        
+        viewController.nextButtonTappedCallback = {
+            self.highlight(at: self.currentHighlightedIndex+1)
+        }
+        
+        viewController.previousButtonTappedCallback = {
+            self.highlight(at: self.currentHighlightedIndex-1)
+        }
+
         
         viewController.modalPresentationStyle = .popover
         viewController.popoverPresentationController?.sourceView = self
@@ -63,7 +77,7 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
         highlight(at: 1)
     }
     
-    func highlight(at index: UInt) {
+    func highlight(at index: Int) {
         guard currentHighlightedIndex != index else {
             return
         }
@@ -82,6 +96,9 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
                 label.textColor = .black
             }
         }
+        
+        floatPicker?.showNextButton = currentHighlightedIndex < numberOfValues
+        floatPicker?.showPreviousButton = currentHighlightedIndex > 1
     }
     
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {

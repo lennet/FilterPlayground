@@ -156,9 +156,32 @@
                                             <action selector="deleteButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="gDh-BX-Zqj"/>
                                         </connections>
                                     </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4VE-nS-mOe">
+                                        <rect key="frame" x="0.0" y="553.5" width="400" height="100"/>
+                                        <subviews>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDp-Hs-DwL" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="-653.5" width="0.0" height="30"/>
+                                                <state key="normal" title="Previous"/>
+                                                <connections>
+                                                    <action selector="previousButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="CXy-RG-SLR"/>
+                                                </connections>
+                                            </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r1f-l4-8IF" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="-653.5" width="0.0" height="30"/>
+                                                <state key="normal" title="Next"/>
+                                                <connections>
+                                                    <action selector="nextButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="wrn-70-aFV"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="rFz-fA-1i5"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="4VE-nS-mOe" firstAttribute="leading" secondItem="0NQ-aM-KYa" secondAttribute="leading" id="09e-E8-Ose"/>
                                     <constraint firstItem="RwV-gI-rsy" firstAttribute="width" secondItem="jnq-4O-2n7" secondAttribute="width" id="0mu-IX-1Re"/>
                                     <constraint firstItem="Igt-kZ-2Hg" firstAttribute="top" secondItem="0NQ-aM-KYa" secondAttribute="top" constant="20" id="1TA-86-MFv"/>
                                     <constraint firstItem="K0m-Cb-EFz" firstAttribute="height" secondItem="TdD-Eu-khJ" secondAttribute="height" id="3Ma-VP-7pa"/>
@@ -177,6 +200,7 @@
                                     <constraint firstItem="6Qk-7J-lR0" firstAttribute="height" secondItem="CYH-Q8-Cam" secondAttribute="height" id="KNc-iv-wEK"/>
                                     <constraint firstItem="UAI-KV-PGy" firstAttribute="top" secondItem="jnq-4O-2n7" secondAttribute="bottom" id="O60-S1-bTK"/>
                                     <constraint firstItem="UAI-KV-PGy" firstAttribute="height" secondItem="hWW-M4-Hxg" secondAttribute="height" id="OM5-CY-aVd"/>
+                                    <constraint firstAttribute="trailing" secondItem="4VE-nS-mOe" secondAttribute="trailing" id="Oyf-pk-ovB"/>
                                     <constraint firstItem="RwV-gI-rsy" firstAttribute="height" secondItem="jnq-4O-2n7" secondAttribute="height" id="Qz2-SK-Qtt"/>
                                     <constraint firstItem="Igt-kZ-2Hg" firstAttribute="width" secondItem="0NQ-aM-KYa" secondAttribute="width" multiplier="0.33333" id="RPq-G0-UVq"/>
                                     <constraint firstItem="1bd-7z-eFF" firstAttribute="width" secondItem="1bd-7z-eFF" secondAttribute="height" multiplier="1:1" id="Unf-yU-63R"/>
@@ -200,6 +224,7 @@
                                     <constraint firstItem="wJ7-Ea-smw" firstAttribute="top" secondItem="jnq-4O-2n7" secondAttribute="bottom" id="ieG-x5-XMU"/>
                                     <constraint firstAttribute="trailing" secondItem="wJ7-Ea-smw" secondAttribute="trailing" id="jen-Qo-yeA"/>
                                     <constraint firstItem="6Qk-7J-lR0" firstAttribute="leading" secondItem="CYH-Q8-Cam" secondAttribute="trailing" id="kfi-IV-s47"/>
+                                    <constraint firstItem="4VE-nS-mOe" firstAttribute="top" secondItem="TdD-Eu-khJ" secondAttribute="bottom" id="mmR-Jr-rCs"/>
                                     <constraint firstItem="hWW-M4-Hxg" firstAttribute="width" secondItem="hWW-M4-Hxg" secondAttribute="height" multiplier="1:1" id="pcY-Sx-qur"/>
                                     <constraint firstItem="1bd-7z-eFF" firstAttribute="top" secondItem="hWW-M4-Hxg" secondAttribute="bottom" id="vGb-Uq-FXv"/>
                                     <constraint firstItem="hWW-M4-Hxg" firstAttribute="leading" secondItem="0NQ-aM-KYa" secondAttribute="leading" id="vgX-um-7xi"/>
@@ -229,7 +254,9 @@
                     <connections>
                         <outlet property="buttonsView" destination="0NQ-aM-KYa" id="EjA-ey-TM3"/>
                         <outlet property="buttonsViewTopConstraint" destination="vKO-60-ChH" id="eZk-Lg-kU6"/>
+                        <outlet property="nextButton" destination="r1f-l4-8IF" id="3e5-J3-teD"/>
                         <outlet property="pointsButton" destination="TdD-Eu-khJ" id="SFf-w5-shG"/>
+                        <outlet property="previousButton" destination="qDp-Hs-DwL" id="DHj-so-kxf"/>
                         <outlet property="slider" destination="a2N-Lt-AJg" id="zbY-e4-Zl0"/>
                     </connections>
                 </viewController>

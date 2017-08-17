@@ -11,8 +11,17 @@ import UIKit
 @IBDesignable
 class FloatSelectionButton: UIButton {
 
-    @IBInspectable var needsLeftBorder: Bool = false
-    @IBInspectable var needsRightBorder: Bool = false
+    @IBInspectable var needsLeftBorder = false {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    @IBInspectable var needsRightBorder = false {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
 
     override func draw(_ rect: CGRect) {
         super.draw(rect)

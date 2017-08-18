@@ -17,10 +17,10 @@ class ExportTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sender = tableView.cellForRow(at: indexPath)
         switch indexPath.row {
         case 0:
-            // cikernel
-            exportAsCIKernel(sender: tableView.cellForRow(at: indexPath))
+            exportAsCIKernel(sender: sender)
             break
         case 1:
             // Swift
@@ -29,11 +29,20 @@ class ExportTableViewController: UITableViewController {
             // Swift Playground
             break
         case 3:
-            // Filter Playground
+            exportAsPlayground(sender: sender)
             break
 
         default:
             break
+        }
+    }
+    
+    func exportAsPlayground(sender: UIView?) {
+        guard let document = document else {
+                return
+        }
+        document.save(to: document.fileURL, for: .forOverwriting) { (_) in
+            self.presentActivityViewController(sourceView: sender, items: [document.fileURL])
         }
     }
     

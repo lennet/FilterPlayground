@@ -33,7 +33,6 @@ extension String {
     var withoutSlash: String {
         return self.replacingOccurrences(of: "/", with: "")
     }
-
         
 }
 
@@ -94,6 +93,16 @@ extension Array where Element: Equatable {
     
     func index(of element: Element, after index: Int) -> Int? {
         for i in index..<self.count {
+            if self[i] == element {
+                return i
+            }
+        }
+        return nil
+    }
+    
+    func indexCountingFromLastElement(of element: Element) -> Int? {
+        
+        for i in stride(from: self.count-1, to: 0, by: -1) {
             if self[i] == element {
                 return i
             }

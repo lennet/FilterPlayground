@@ -156,8 +156,8 @@ class ASTTests: XCTestCase {
         let result = ASTBuilder.getAST(for: tokens)
         let expectation: [ASTNode] = [.bracetStatement(prefix: [.openingBracket], body: [
             .bracetStatement(prefix: [.openingBracket], body:
-                [], postfix: [.closingBracket])
-            ], postfix: [])]
+                [], postfix: [])
+            ], postfix: [.closingBracket])]
         
         XCTAssertEqual(result, expectation)
     }

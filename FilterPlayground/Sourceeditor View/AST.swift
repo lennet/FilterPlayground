@@ -148,9 +148,11 @@ class ASTBuilder {
                 break
             case .openingBracket:
                 let bodyTokens: [Token]
-                if let lastIndex = Array(tokens.reversed()).index(of: .closingBracket),
-                    tokens.count > (i + 1) {
-                    bodyTokens = Array(tokens[(i+1)..<(tokens.count-lastIndex)])
+                
+                if let lastIndex = tokens.indexCountingFromLastElement(of: .closingBracket),
+                    tokens.count > (i + 1),
+                    (i+1) < lastIndex {
+                    bodyTokens = Array(tokens[(i+1)..<lastIndex])
                 } else {
                     bodyTokens = Array(tokens[(i+1)...])
                 }

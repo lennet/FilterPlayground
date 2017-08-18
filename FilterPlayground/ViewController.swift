@@ -264,6 +264,8 @@ class ViewController: UIViewController {
             }
         case let vc as DocumentBrowserViewController:
             vc.didOpenedDocument = didOpened
+        case let nc as UINavigationController where nc.viewControllers.first is ExportTableViewController:
+            (nc.viewControllers.first as? ExportTableViewController)?.document = document
         default:
             print("Unkown ViewController Segue: \(segue.destination)")
         }

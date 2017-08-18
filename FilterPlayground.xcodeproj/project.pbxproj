@@ -40,6 +40,7 @@
 		98A67FB21F3A17820043AA9D /* SelectFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB11F3A17820043AA9D /* SelectFloatViewController.swift */; };
 		98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */; };
 		98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE92A81F3900290044E33F /* LiveViewController.swift */; };
+		98B7B6E91F4757B5008C370F /* ExportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */; };
 		98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */; };
 		98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */; };
 		98C5E23D1F34B85C006E7658 /* KernelCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23C1F34B85C006E7658 /* KernelCompiler.swift */; };
@@ -111,6 +112,7 @@
 		98A67FB11F3A17820043AA9D /* SelectFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFloatViewController.swift; sourceTree = "<group>"; };
 		98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatSelectionButton.swift; sourceTree = "<group>"; };
 		98AE92A81F3900290044E33F /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
+		98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportTableViewController.swift; sourceTree = "<group>"; };
 		98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingDocumentTests.swift; sourceTree = "<group>"; };
 		98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelperTests.swift; sourceTree = "<group>"; };
 		98C5E23C1F34B85C006E7658 /* KernelCompiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelCompiler.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				981267D21F34BEDB00101027 /* Compiler */,
 				9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */,
 				982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */,
+				98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */,
 			);
 			path = FilterPlayground;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				98E692EE1F30DF8D000C8B41 /* ProjectMetaData.swift in Sources */,
 				9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */,
 				98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */,
+				98B7B6E91F4757B5008C370F /* ExportTableViewController.swift in Sources */,
 				986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */,
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,

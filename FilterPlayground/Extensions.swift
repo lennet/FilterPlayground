@@ -25,6 +25,15 @@ extension String {
     var firstLine: String? {
         return self.components(separatedBy: "\n").first
     }
+    
+    var withoutWhiteSpaces: String {
+        return self.replacingOccurrences(of: " ", with: "")
+    }
+    
+    var withoutSlash: String {
+        return self.replacingOccurrences(of: "/", with: "")
+    }
+
         
 }
 

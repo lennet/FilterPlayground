@@ -10,7 +10,7 @@ import Foundation
 
 class ErrorHelper {
 
-    let fileURL: URL = FileManager.urlInDocumentsDirectory(for: "ErrorLog\(Date())")
+    let fileURL: URL = FileManager.default.temporaryDirectory.appendingPathComponent("ErrorLog\(Date())")
     
     init() {
         redirectSTDErr()

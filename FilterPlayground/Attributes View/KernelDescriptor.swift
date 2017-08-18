@@ -261,7 +261,9 @@ extension KernelAttributeType {
         case .color:
             return .color(0, 0, 0, 0)
         case .sample:
-            return .sample(UIImage())
+            let frame = CGRect(origin: .zero, size: CGSize(width: 400, height: 400))
+            let cgImage = CIContext().createCGImage(CIImage(color: .black), from: frame)!
+            return .sample(UIImage(cgImage: cgImage))
         }
     }
     

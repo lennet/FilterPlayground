@@ -13,6 +13,8 @@ class LiveViewController: UIViewController {
     @IBOutlet weak var imageView: SelectImageView!
     @IBOutlet var inputImageViews: [SelectImageView]!
     
+    var didUpdateInputImages: (([UIImage]) -> ())?
+    
     var numberOfInputs: Int = 2 {
         didSet {
             switch numberOfInputs {
@@ -32,7 +34,14 @@ class LiveViewController: UIViewController {
     }
     
     var inputImages: [UIImage] {
-        return inputImageViews.flatMap{ $0.image }
+        get {
+            return inputImageViews.flatMap{ $0.image }
+        }
+        set {
+            for (index, image) in newValue.enumerated() where index < inputImageViews.count {
+                inputImageViews[index].image = image
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -46,7 +55,12 @@ class LiveViewController: UIViewController {
         super.viewWillAppear(animated)
         
         inputImageViews.forEach{ $0.accessibilityIgnoresInvertColors = true }
+        inputImageViews.forEach{ $0.didSelectImage = didSelectImage }
         imageView.accessibilityIgnoresInvertColors = true
+    }
+    
+    func didSelectImage(imageView: SelectImageView){
+        didUpdateInputImages?(inputImages)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -22,6 +22,12 @@ class Document: UIDocument {
         }
     }
     
+    var inputImages: [UIImage] = [] {
+        didSet {
+            self.updateChangeCount(.done)
+        }
+    }
+    
     var title: String {
         return fileURL.lastPathComponent
     }
@@ -31,10 +37,7 @@ class Document: UIDocument {
         metaData.type = type
         source = metaData.initialSource()
         metaData.attributes = metaData.initalArguments()
-    }
-    
-    override init(fileURL url: URL) {
-        super.init(fileURL: url)
+        inputImages = metaData.initialInputImages()
     }
     
     override func contents(forType typeName: String) throws -> Any {
@@ -47,6 +50,17 @@ class Document: UIDocument {
         let fileWrapper = FileWrapper(directoryWithFileWrappers: [:])
         fileWrapper.addRegularFile(withContents: meta   , preferredFilename: "metadata.json")
         fileWrapper.addRegularFile(withContents: sourceData,  preferredFilename: "content")
+        
+        if inputImages.count > 0 {
+            let inputImagesFileWrapper = FileWrapper(directoryWithFileWrappers: [:])
+            for (index, image) in inputImages.enumerated() {
+                inputImagesFileWrapper.addRegularFile(withContents: UIImagePNGRepresentation(image)!, preferredFilename: "\(index).png")
+            }
+        
+            inputImagesFileWrapper.preferredFilename = "inputimages"
+            fileWrapper.addFileWrapper(inputImagesFileWrapper)
+        }
+        
         return fileWrapper
     }
     
@@ -76,6 +90,20 @@ class Document: UIDocument {
         
         guard let sourceString = String(data: contentsData, encoding: .utf8) else {
             throw DocumentError.unknownFileFormat
+        }
+        
+        if let inputImagesFileWrapper = filewrapper.fileWrappers?["inputimages"] {
+            var imageFound = true
+            var index = 0
+            while (imageFound) {
+                if let data = inputImagesFileWrapper.fileWrappers?["\(index).png"]?.regularFileContents,
+                    let image = UIImage(data: data) {
+                    inputImages.append(image)
+                } else {
+                    imageFound = false
+                }
+                index += 1
+            }
         }
         
         self.source = sourceString

@@ -181,11 +181,11 @@ class ViewController: UIViewController {
             self.sourceEditorViewController?.source = document.source
             self.attributesViewController?.attributes = document.metaData.attributes
             self.attributesViewController?.tableView.reloadData()
+            self.liveViewController?.inputImages = document.inputImages
             self.liveViewController?.numberOfInputs = document.metaData.type.requiredInputImages
             self.attributesBarButtonItem.isEnabled = document.metaData.type.supportsAttributes
             self.showAttributes = document.metaData.type.supportsAttributes
             self.title = document.title
-            self.liveViewController?.reset()
         }
         if let document = self.document {
             document.save(to: document.fileURL, for: .forOverwriting, completionHandler: { (_) in
@@ -257,6 +257,9 @@ class ViewController: UIViewController {
             }
         case let vc as LiveViewController:
             self.liveViewController = vc
+            vc.didUpdateInputImages = { [weak self] images in
+                self?.document?.inputImages = images
+            }
         case let vc as SourceEditorViewController:
             self.sourceEditorViewController = vc
             vc.didUpdateText = { [weak self] text in

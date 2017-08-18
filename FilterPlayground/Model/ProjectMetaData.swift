@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ProjectMetaData: Codable {
     
@@ -27,5 +28,10 @@ struct ProjectMetaData: Codable {
     
     func initalArguments() -> [KernelAttribute] {
         return type.requiredArguments.map{ KernelAttribute(name: "unamed", type: $0, value: $0.defaultValue) }
+    }
+    
+    func initialInputImages() -> [UIImage] {
+        // TODO
+        return []
     }
 }

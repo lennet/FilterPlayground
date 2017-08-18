@@ -106,7 +106,6 @@ enum KernelAttributeValue {
     case sample(UIImage)
     case color(Float, Float, Float, Float)
     
-    
     var asKernelValue: Any {
         switch self {
         case .float(let value):
@@ -159,7 +158,7 @@ extension KernelAttributeValue: Codable {
             try container.encode([a, b, c, d], forKey: .color)
             break
         case .sample(let image):
-            try container.encode(NSKeyedArchiver.archivedData(withRootObject: image), forKey: .sample)
+            try container.encode(UIImagePNGRepresentation(image)!, forKey: .sample)
             break
         }
     }
@@ -206,7 +205,7 @@ extension KernelAttributeValue: Codable {
             return
         }
         if let value = try? values.decode(Data.self, forKey: .sample) {
-            guard let image = NSKeyedUnarchiver.unarchiveObject(with: value) as? UIImage else {
+            guard let image = UIImage(data: value) else {
                 throw CodableErrors.unkownValue
             }
             self = .sample(image)

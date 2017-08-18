@@ -33,6 +33,41 @@ asdads
         
         let errors = ErrorParser.getErrors(for: error)
         XCTAssertEqual(errors.count, 1)
-        XCTAssertEqual(errors.first!, CompilerError(lineNumber: 1, characterIndex: 1, type: "ERROR", message: "unknown type name 'asdads'"))
+        XCTAssertEqual(errors.first!, CompilerError(lineNumber: 1, characterIndex: 1, type: "ERROR", message: "unknown type name 'asdads'", note: nil))
+    }
+    
+    func testErrorWithNote() {
+        let errorString = """
+[CIKernelPool] 3:2: ERROR: expected '}'
+}
+ ^
+[CIKernelPool] 1:36: note:" to match this '{'
+kernel vec4 untitled(__sample img) {
+                                   ^
+"""
+        
+        let errors = ErrorParser.getErrors(for: errorString)
+        XCTAssertEqual(errors.count, 1)
+        let note = (1, 36, " to match this '{'")
+        let error = CompilerError(lineNumber: 3, characterIndex: 2, type: "ERROR", message: "expected '}'", note: note)
+        XCTAssertEqual(errors.first!, error)
+    }
+    
+    
+    func testErrorWithNote2() {
+        let errorString = """
+        [CIKernelPool] 4:2: ERROR: function declared with return type 'vec4', but returning type 'vec2'
+        return  destCoord()
+            ^
+            [CIKernelPool] 1:8: note: return type declared here
+        kernel vec4 untitled(__sample img) {
+            ^
+        """
+        
+        let errors = ErrorParser.getErrors(for: errorString)
+        XCTAssertEqual(errors.count, 1)
+        let note = (1, 8, " return type declared here")
+        let error = CompilerError(lineNumber: 4, characterIndex: 2, type: "ERROR", message: "function declared with return type 'vec4', but returning type 'vec2'", note: note)
+        XCTAssertEqual(errors.first!, error)
     }
 }

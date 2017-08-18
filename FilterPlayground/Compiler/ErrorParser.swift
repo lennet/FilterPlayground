@@ -15,7 +15,15 @@ class ErrorParser {
     class func getErrors(for errorString: String) -> [CompilerError] {
         let components = errorString.components(separatedBy: "[CIKernelPool]").flatMap{ $0.firstLine }
         let errors = components.flatMap(getError)
-        return errors
+        var result: [CompilerError] = []
+        for error in errors {
+            if error.type == "note" && result.count > 0 {
+                result[result.count-1].note = (error.lineNumber, error.characterIndex, error.message)
+            } else {
+                result.append(error)
+            }
+        }
+        return result
     }
     
     fileprivate class func getError(for errorString: String) -> CompilerError? {
@@ -27,7 +35,7 @@ class ErrorParser {
         let type = components[2]
         let message = components[3]
         
-        return CompilerError(lineNumber: lineNumber, characterIndex: characterIndex, type: type, message: message)
+        return CompilerError(lineNumber: lineNumber, characterIndex: characterIndex, type: type, message: message, note: nil)
     }
     
 }

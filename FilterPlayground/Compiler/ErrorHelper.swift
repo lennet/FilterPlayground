@@ -29,6 +29,7 @@ class ErrorHelper {
     
     func errorString() -> String? {
         let result = try? String(contentsOf: fileURL)
+        print(result ?? "")
         return (result?.isEmpty ?? true) ? nil : result
     }
     

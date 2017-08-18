@@ -100,6 +100,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "errorCellIdentifier") as! ErrorTableViewCell
+        // todo show notes 
         let error = errors[indexPath.row]
         cell.label.text = "\(error.type): \(error.message)"
         return cell

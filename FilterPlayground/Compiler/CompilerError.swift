@@ -13,6 +13,7 @@ struct CompilerError {
     var characterIndex: Int
     var type: String
     var message: String
+    var note: (Int, Int, String)?
 }
 
 extension CompilerError: Equatable {

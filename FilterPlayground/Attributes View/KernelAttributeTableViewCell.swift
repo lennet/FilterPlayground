@@ -14,18 +14,22 @@ class KernelAttributeTableViewCell: UITableViewCell {
     @IBOutlet weak var typeButton: UIButton!
     @IBOutlet weak var valueSelectionView: UIView!
     
-    var valueButton: UIButton!
+    var valueButton: UIView!
     
     var attribute: KernelAttribute? {
         didSet {
             if let type = attribute?.type {
+                if let oldType = oldValue?.type,
+                    oldType == type {
+                    return
+                }
+                
                 setupValueView(for: type, value: attribute?.value)
                 typeButton.setTitle(type.rawValue, for: .normal)
             } else {
                 typeButton.setTitle("type", for: .normal)
                 valueSelectionView.subviews.forEach{ $0.removeFromSuperview() }
             }
-            update()
         }
     }
 
@@ -44,14 +48,8 @@ class KernelAttributeTableViewCell: UITableViewCell {
         guard let attribute = attribute else {
             return
         }
-//        guard attribute.type != nil,
-//            !attribute.name.isEmpty,
-//            attribute.value != nil else {
-//            return
-//        }
   
         updateCallBack?(self, attribute)
-       
     }
     
     @IBAction func selectType(_ sender: UIButton) {
@@ -99,50 +97,57 @@ class KernelAttributeTableViewCell: UITableViewCell {
     
     func setupValueView(for type: KernelAttributeType, value: KernelAttributeValue?) {
         valueSelectionView.subviews.forEach{ $0.removeFromSuperview() }
-        switch type {
-        case .sample :
+        switch (type, attribute?.value) {
+        case (.sample, .sample(let image)?) :
             let imageView = SelectImageView(frame: valueSelectionView.bounds)
             imageView.didSelectImage = { image in
                 self.attribute?.value = .sample(image.image!)
                 self.updateCallBack?(self, self.attribute!)
             }
-            if case .sample(let image)? = value {
-                imageView.image = image
-            }
-            
+            imageView.image = image
             imageView.backgroundColor = .gray
             valueSelectionView.addSubview(imageView)
             break
-        case .color:
+        case (.color, .color(let r, let g , let b , let a)?):
             let button = UIButton(frame: valueSelectionView.bounds)
             valueSelectionView.addSubview(button)
-            if case .color(let r, let g , let b , let a)? = value {
-                button.backgroundColor = UIColor(displayP3Red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(a))
-            }
+            button.backgroundColor = UIColor(displayP3Red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(a))
             button.addTarget(self, action: #selector(colorButtonTapped(sender:)), for: .touchUpInside)
             valueButton = button
             break
-        case .vec2:
-            let picker = VectorValuePicker(frame: valueSelectionView.bounds, numberOfValues: 2)
+        case (.vec2, .vec2(let a, let b)?):
+            let picker = VectorValuePicker(frame: valueSelectionView.bounds, values: [a, b])
+            picker.valuesChanged = { values in
+                self.attribute?.value = .vec2(values[0], values[1])
+                self.updateCallBack?(self, self.attribute!)
+            }
+            valueButton = picker
             valueSelectionView.addSubview(picker)
-        case .vec3:
-            let picker = VectorValuePicker(frame: valueSelectionView.bounds, numberOfValues: 3)
+        case (.vec3, .vec3(let a, let b, let c)?):
+            let picker = VectorValuePicker(frame: valueSelectionView.bounds, values: [a, b, c])
+            picker.valuesChanged = { values in
+                self.attribute?.value = .vec3(values[0], values[1], values[2])
+                self.updateCallBack?(self, self.attribute!)
+            }
+            valueButton = picker
             valueSelectionView.addSubview(picker)
-        case .vec4:
-            let picker = VectorValuePicker(frame: valueSelectionView.bounds, numberOfValues: 4)
+        case (.vec4, .vec4(let a, let b, let c, let d)?):
+            let picker = VectorValuePicker(frame: valueSelectionView.bounds, values: [a, b, c, d])
+            picker.valuesChanged = { values in
+                self.attribute?.value = .vec4(values[0], values[1], values[2], values[3])
+                self.updateCallBack?(self, self.attribute!)
+            }
+            valueButton = picker
             valueSelectionView.addSubview(picker)
-        case .float:
+        case (.float, .float(let floatValue)?):
             let button = UIButton(frame: valueSelectionView.bounds)
             valueSelectionView.addSubview(button)
             button.addTarget(self, action: #selector(valueButtonTapped(sender:)), for: .touchUpInside)
-            button.setTitle("0.0", for: .normal)
             button.setTitleColor(.blue, for: .normal)
-            if case .float(let floatValue)? = value {
-                button.setTitle("\(floatValue)", for: .normal)
-            } else {
-                button.setTitle("0.0", for: .normal)
-            }
+            button.setTitle("\(floatValue)", for: .normal)
             valueButton = button
+            break
+        default:
             break
         }
     }

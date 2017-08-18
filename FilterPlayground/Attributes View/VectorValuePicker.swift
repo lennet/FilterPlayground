@@ -13,7 +13,12 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
     var poppoverControllerPresentationController: UIPopoverPresentationController?
     var floatPicker: SelectFloatViewController?
     var currentHighlightedIndex: Int = 0
-    var numberOfValues: Int = 0
+    var numberOfValues: Int {
+        return values.count
+    }
+    
+    var valuesChanged: (([Float]) -> ())?
+    var values: [Float]
     
     let stackView: UIStackView = {
         let view = UIStackView()
@@ -23,12 +28,11 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
         return view
     }()
     
-    init(frame: CGRect, numberOfValues: Int) {
+    init(frame: CGRect, values: [Float]) {
+        self.values = values
         super.init(frame: frame)
-        self.numberOfValues = numberOfValues
         stackView.frame = bounds
         addSubview(stackView)
-        
         (1...numberOfValues).forEach(addFloatPicker)
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -56,7 +60,9 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
             guard let label = self.stackView.arrangedSubviews[self.currentHighlightedIndex-1] as? UILabel else {
                 return
             }
+            self.values[self.currentHighlightedIndex-1] = Float(value)
             label.text = "\(value)"
+            self.valuesChanged?(self.values)
         }
         
         viewController.nextButtonTappedCallback = {
@@ -67,7 +73,6 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
             self.highlight(at: self.currentHighlightedIndex-1)
         }
 
-        
         viewController.modalPresentationStyle = .popover
         viewController.popoverPresentationController?.sourceView = self
         viewController.popoverPresentationController?.delegate = self
@@ -97,12 +102,13 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
             }
         }
         
+        floatPicker?.set(value: CGFloat(values[self.currentHighlightedIndex-1]))
         floatPicker?.showNextButton = currentHighlightedIndex < numberOfValues
         floatPicker?.showPreviousButton = currentHighlightedIndex > 1
     }
     
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-        highlight(at: 0)
+        highlight(at: 1)
     }
     
 }

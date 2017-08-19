@@ -19,7 +19,9 @@ protocol Theme {
     static var sourceEditorTextFloat: UIColor { get }
     static var sourceEditorText: UIColor { get }
     static var liveViewBackground: UIColor { get }
+    static var liveViewLabel: UIColor { get }
     static var dropInteractionBorder: UIColor { get }
+    static var imageViewBackground: UIColor { get }
 }
 
 struct NightTheme: Theme {
@@ -43,7 +45,11 @@ struct NightTheme: Theme {
     
     static var liveViewBackground: UIColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
     
-    static var dropInteractionBorder: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    static var liveViewLabel: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    
+    static var dropInteractionBorder: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    
+    static var imageViewBackground: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
 }
 
 struct Default: Theme {
@@ -67,7 +73,11 @@ struct Default: Theme {
     
     static var liveViewBackground: UIColor = #colorLiteral(red: 0.9404068964, green: 0.9404068964, blue: 0.9404068964, alpha: 1)
     
+    static var liveViewLabel: UIColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+    
     static var dropInteractionBorder: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    
+    static var imageViewBackground: UIColor = #colorLiteral(red: 0.8214625635, green: 0.8214625635, blue: 0.8214625635, alpha: 1)
 }
 
 class ThemeManager {

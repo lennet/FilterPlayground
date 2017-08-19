@@ -8,6 +8,7 @@
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -692,31 +693,59 @@
                         <rect key="frame" x="0.0" y="0.0" width="946" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sQJ-6r-2tx">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sQJ-6r-2tx">
                                 <rect key="frame" x="8" y="8" width="930" height="944"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aY7-EU-4tc">
-                                        <rect key="frame" x="0.0" y="0.0" width="930" height="468"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="1ph-8y-4rt">
+                                        <rect key="frame" x="0.0" y="0.0" width="930" height="464"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gaw-QV-wG7" customClass="CustomImageView" customModule="FilterPlayground" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="461" height="468"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VAu-42-Aum" customClass="CustomImageView" customModule="FilterPlayground" customModuleProvider="target">
-                                                <rect key="frame" x="469" y="0.0" width="461" height="468"/>
-                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1p-RC-JFF">
+                                                <rect key="frame" x="0.0" y="0.0" width="930" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="cTO-7V-HZ8"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aY7-EU-4tc">
+                                                <rect key="frame" x="0.0" y="40" width="930" height="424"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gaw-QV-wG7" customClass="CustomImageView" customModule="FilterPlayground" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="461" height="424"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </imageView>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VAu-42-Aum" customClass="CustomImageView" customModule="FilterPlayground" customModuleProvider="target">
+                                                        <rect key="frame" x="469" y="0.0" width="461" height="424"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ouput" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gka-nD-dnk">
+                                        <rect key="frame" x="0.0" y="472" width="930" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="4aB-ka-71q"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s9I-fw-uLe" customClass="CustomImageView" customModule="FilterPlayground" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="476" width="930" height="468"/>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="520" width="930" height="424"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="s9I-fw-uLe" firstAttribute="height" relation="greaterThanOrEqual" secondItem="sQJ-6r-2tx" secondAttribute="height" multiplier="1:3" id="7fg-YD-7eg"/>
+                                    <constraint firstItem="s9I-fw-uLe" firstAttribute="height" secondItem="gaw-QV-wG7" secondAttribute="height" priority="999" id="Y0w-sk-xno"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="gaw-QV-wG7" firstAttribute="height" relation="greaterThanOrEqual" secondItem="8Yp-iT-9hZ" secondAttribute="height" multiplier="1:2" priority="999" constant="-80" id="0qc-rZ-9tR"/>
                             <constraint firstAttribute="bottom" secondItem="sQJ-6r-2tx" secondAttribute="bottom" constant="8" id="2BF-Cv-Mvi"/>
                             <constraint firstItem="sQJ-6r-2tx" firstAttribute="leading" secondItem="TCx-nS-dLE" secondAttribute="leading" constant="8" id="9Mx-rv-uWJ"/>
                             <constraint firstItem="TCx-nS-dLE" firstAttribute="trailing" secondItem="sQJ-6r-2tx" secondAttribute="trailing" constant="8" id="jLK-00-gRf"/>
@@ -726,8 +755,11 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="s9I-fw-uLe" id="GYP-fN-RKA"/>
-                        <outletCollection property="inputImageViews" destination="VAu-42-Aum" collectionClass="NSMutableArray" id="ZvM-Br-Sqp"/>
+                        <outlet property="inputStackView" destination="1ph-8y-4rt" id="3yz-cz-ooW"/>
                         <outletCollection property="inputImageViews" destination="gaw-QV-wG7" collectionClass="NSMutableArray" id="8u0-ZV-VUm"/>
+                        <outletCollection property="inputImageViews" destination="VAu-42-Aum" collectionClass="NSMutableArray" id="ZvM-Br-Sqp"/>
+                        <outletCollection property="labels" destination="x1p-RC-JFF" collectionClass="NSMutableArray" id="5GH-se-F3D"/>
+                        <outletCollection property="labels" destination="Gka-nD-dnk" collectionClass="NSMutableArray" id="NQI-pc-2bL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xkA-3E-GHI" userLabel="First Responder" sceneMemberID="firstResponder"/>

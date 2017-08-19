@@ -10,26 +10,33 @@ import UIKit
 
 class LiveViewController: UIViewController {
     
+    @IBOutlet weak var inputStackView: UIStackView!
     @IBOutlet weak var imageView: CustomImageView!
     @IBOutlet var inputImageViews: [CustomImageView]!
-    
+    @IBOutlet var labels: [UILabel]!
     var didUpdateInputImages: (([UIImage]) -> ())?
     
     var numberOfInputs: Int = 2 {
         didSet {
+            
             switch numberOfInputs {
             case 2:
                 inputImageViews.forEach { $0.isHidden = false }
-                inputImageViews.first?.superview?.isHidden = false
+                inputStackView.isHidden = false
+                labels.forEach { $0.isHidden = false }
                 break
             case 1:
-                inputImageViews.first?.superview?.isHidden = false
+                inputStackView.isHidden = false
+                labels.forEach { $0.isHidden = false }
                 inputImageViews.last?.isHidden = true
                 break
             default:
-                inputImageViews.first?.superview?.isHidden = true
+                inputStackView.isHidden = true
+                labels.forEach { $0.isHidden = true }
                 break
             }
+            
+            themeChanged(notification: nil)
         }
     }
     
@@ -38,6 +45,7 @@ class LiveViewController: UIViewController {
             return inputImageViews.flatMap{ $0.image }
         }
         set {
+            inputImageViews.forEach{ $0.image = nil }
             for (index, image) in newValue.enumerated() where index < inputImageViews.count {
                 inputImageViews[index].image = image
             }
@@ -77,6 +85,13 @@ class LiveViewController: UIViewController {
     
     @objc func themeChanged(notification: Notification?) {
         self.view.backgroundColor = ThemeManager.shared.currentTheme.liveViewBackground
+        inputImageViews.forEach{ $0.backgroundColor = ThemeManager.shared.currentTheme.imageViewBackground }
+        if numberOfInputs > 0 {
+            imageView.backgroundColor = ThemeManager.shared.currentTheme.imageViewBackground
+        } else {
+            imageView.backgroundColor = .clear
+        }
+        labels.forEach{ $0.textColor = ThemeManager.shared.currentTheme.liveViewLabel }
     }
     
 }

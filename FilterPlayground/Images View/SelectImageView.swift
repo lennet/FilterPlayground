@@ -71,7 +71,11 @@ class SelectImageView: UIImageView, UIImagePickerControllerDelegate, UINavigatio
             return []
         }
         let imageItemProvider =  NSItemProvider(object: image)
-        return [ UIDragItem(itemProvider: imageItemProvider) ]
+        let dragItem = UIDragItem(itemProvider: imageItemProvider)
+        dragItem.previewProvider = {
+            return UIDragPreview(view: UIImageView(image: image))
+        }
+        return [ dragItem ]
     }
 
 }

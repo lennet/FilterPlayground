@@ -92,7 +92,7 @@ class CircularSlider: UIControl {
     
     func progress(for angle: CGFloat) -> CGFloat {
         let transformedAngle = angle - 90
-        let result = (transformedAngle + ceil(-transformedAngle/360) * 360) / 360
+        return (transformedAngle + ceil(-transformedAngle/360) * 360) / 360
     }
     
     func knobLocation(for angle: CGFloat) -> CGPoint {

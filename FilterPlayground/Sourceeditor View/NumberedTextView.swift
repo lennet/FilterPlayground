@@ -17,13 +17,14 @@ class NumberedTextView: UIView, UITextViewDelegate {
     class var spacingValue: String {
         return Settings.tabsEnabled ? "\t" : "    "
     }
-
+    
     let textView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear
         textView.autocorrectionType = .no
         textView.autocapitalizationType = .none
         textView.autoresizingMask = UIViewAutoresizing.flexibleHeight.union(.flexibleWidth)
+        (textView as UIScrollView).delaysContentTouches = false
         return textView
     }()
     
@@ -53,19 +54,25 @@ class NumberedTextView: UIView, UITextViewDelegate {
         }
         set {
             textView.font = newValue
-            // todo calculate max contentInset
-//            guard let newValue = newValue else { return }
-//            textView.contentInset.left = newValue.pointSize
+            setNeedsLayout()
         }
+    }
+    
+    var lineNumberOffset: CGFloat {
+        return ("\(textView.text.numberOfLines) " as NSString).size(withAttributes: lineNumberAttributes(with: .clear)).width
     }
     
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
-        textView.frame = CGRect(origin: CGPoint(x:30, y:0), size: CGSize(width: frame.width - 30, height: frame.height))
         textView.delegate = self
         contentMode = .topLeft
         addSubview(textView)
         backgroundColor = .clear
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        textView.frame = CGRect(origin: CGPoint(x:lineNumberOffset+10, y:0), size: CGSize(width: frame.width - lineNumberOffset-10, height: frame.height))
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -90,28 +97,46 @@ class NumberedTextView: UIView, UITextViewDelegate {
         var lineRange = NSMakeRange(0, 1)
         var index = 0
         var lineNumber = 1
+        var shouldRenderLineNumber = true
         
         while index < textView.layoutManager.numberOfGlyphs {
-            var lineRect = textView.layoutManager.lineFragmentUsedRect(forGlyphAt: index, effectiveRange: &lineRange)
-            lineRect.origin.y = lineRect.origin.y - textView.contentOffset.y + textView.textContainerInset.top
-            
-            if (hightLightErrorLineNumber ?? -1) == lineNumber {
-                fillLine(rect: CGRect(origin:lineRect.origin, size: CGSize(width: rect.width, height: lineRect.height)), color: theme.sourceEditorLineBackgroundError)
-            } else if lineRange.contains(textView.selectedRange.location) && textView.selectedRange.length == 0 {
-                fillLine(rect: CGRect(origin:lineRect.origin, size: CGSize(width: rect.width, height: lineRect.height)), color: theme.sourceEditorLineBackgroundHighlighted)
-            }
-            
-            if lineRect.origin.y > -(textView.font?.lineHeight ?? 10) {
-                draw(text: "\(lineNumber) :", at: lineRect.origin, color: theme.sourceEditorLineNumber)
-            }
-    
-            if lineRect.origin.y > frame.size.height {
-                break
-            }
-            
+            let lineRect = textView.layoutManager.lineFragmentUsedRect(forGlyphAt: index, effectiveRange: &lineRange)
             index = NSMaxRange(lineRange)
-            lineNumber += 1
+            lineRange = (textView.text as NSString).lineRange(for: lineRange)
+            
+            if draw(for: lineNumber, lineRange: lineRange, lineRect: lineRect, rect: rect, shouldRenderLineNumber: shouldRenderLineNumber) == false {
+                return
+            }
+            
+            shouldRenderLineNumber = textView.text[textView.text.index(textView.text.startIndex, offsetBy: index-1)] == "\n"
+            if shouldRenderLineNumber {
+                lineNumber += 1
+            }
         }
+        lineRange = NSRange.init(location: textView.text.count, length: 0)
+        draw(for: lineNumber, lineRange: lineRange, lineRect: textView.layoutManager.extraLineFragmentRect, rect: rect, shouldRenderLineNumber: shouldRenderLineNumber)
+    }
+    
+    //: returns false if the current linerect is out of bounds
+    @discardableResult
+    func draw(for lineNumber: Int, lineRange: NSRange, lineRect: CGRect, rect: CGRect, shouldRenderLineNumber: Bool) -> Bool {
+        let origin = CGPoint(x: 0, y: lineRect.origin.y - textView.contentOffset.y + textView.textContainerInset.top)
+        
+        if origin.y > frame.size.height {
+            return false
+        }
+        
+        if (hightLightErrorLineNumber ?? -1) == lineNumber {
+            fillLine(rect: CGRect(origin:origin, size: CGSize(width: rect.width, height: lineRect.height)), color: theme.sourceEditorLineBackgroundError)
+        } else if textView.isFirstResponder && (lineRange.contains(textView.selectedRange.location) || lineRange.location == textView.selectedRange.location) && textView.selectedRange.length == 0 {
+            fillLine(rect: CGRect(origin:origin, size: CGSize(width: rect.width, height: lineRect.height)), color: theme.sourceEditorLineBackgroundHighlighted)
+        }
+        
+        if shouldRenderLineNumber && origin.y > -(textView.font?.lineHeight ?? 10) {
+            print(lineNumber)
+            draw(text: "\(lineNumber) ", at: origin, color: theme.sourceEditorLineNumber)
+        }
+        return true
     }
     
     func fillLine(rect: CGRect, color: UIColor) {
@@ -119,10 +144,17 @@ class NumberedTextView: UIView, UITextViewDelegate {
         UIGraphicsGetCurrentContext()?.fill(rect)
     }
     
+    func lineNumberAttributes(with color: UIColor) ->  [NSAttributedStringKey : Any] {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .right
+        
+        return [.font : textView.font!,
+                .foregroundColor: color,
+                .paragraphStyle: paragraphStyle]
+    }
+    
     func draw(text: String, at point: CGPoint, color: UIColor) {
-        let attributes = [.font : textView.font!,
-                          .foregroundColor: color] as [NSAttributedStringKey : Any]
-        (text as NSString).draw(at: CGPoint(x: 0, y: point.y), withAttributes: attributes)
+        (text as NSString).draw(in: CGRect(origin:point, size: CGSize(width: lineNumberOffset, height: font!.pointSize)), withAttributes: lineNumberAttributes(with: color))
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -154,7 +186,13 @@ class NumberedTextView: UIView, UITextViewDelegate {
             textView.selectedRange = newSelectedRange
             renderText()
             return false
+        } else if text == "\t" && range.length == 0 {
+            let newText = NumberedTextView.spacingValue
+            textView.text = textView.text.replacingCharacters(in: Range(range, in: textView.text)!, with: newText)
+            textView.selectedRange = NSMakeRange(range.location+newText.count, 0)
+            return false
         }
+        
         return true
     }
     

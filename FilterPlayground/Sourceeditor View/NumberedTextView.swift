@@ -132,7 +132,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
             var newText = text + tabs
             
             let newSelectedRange: NSRange
-            if (textView.text as NSString).substring(with: NSMakeRange(range.location, 1)) == "}" && (textView.text as NSString).substring(with: NSMakeRange(range.location-1, 1)) == "{" {
+            if range.location < textView.text.characters.count && (textView.text as NSString).substring(with: NSMakeRange(range.location, 1)) == "}" && (textView.text as NSString).substring(with: NSMakeRange(range.location-1, 1)) == "{" {
                 newSelectedRange = NSMakeRange(range.location+newText.count+1, 0)
                 newText += "\(spacingValue)\n" + tabs
             } else {

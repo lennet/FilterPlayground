@@ -10,8 +10,8 @@ import UIKit
 
 class LiveViewController: UIViewController {
     
-    @IBOutlet weak var imageView: SelectImageView!
-    @IBOutlet var inputImageViews: [SelectImageView]!
+    @IBOutlet weak var imageView: CustomImageView!
+    @IBOutlet var inputImageViews: [CustomImageView]!
     
     var didUpdateInputImages: (([UIImage]) -> ())?
     
@@ -58,9 +58,10 @@ class LiveViewController: UIViewController {
         inputImageViews.forEach{ $0.accessibilityIgnoresInvertColors = true }
         inputImageViews.forEach{ $0.didSelectImage = didSelectImage }
         imageView.accessibilityIgnoresInvertColors = true
+        imageView.canSelectImage = false
     }
     
-    func didSelectImage(imageView: SelectImageView){
+    func didSelectImage(imageView: CustomImageView){
         didUpdateInputImages?(inputImages)
     }
     

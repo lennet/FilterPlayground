@@ -9,9 +9,10 @@
 import UIKit
 import MobileCoreServices
 
-class SelectImageView: UIImageView, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDropInteractionDelegate, UIDragInteractionDelegate {
+class CustomImageView: UIImageView, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDropInteractionDelegate, UIDragInteractionDelegate {
     
-    var didSelectImage: ((SelectImageView)->())?
+    var didSelectImage: ((CustomImageView)->())?
+    var canSelectImage = true
 
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
@@ -28,6 +29,9 @@ class SelectImageView: UIImageView, UIImagePickerControllerDelegate, UINavigatio
     }
     
     @objc func handleTap() {
+        guard canSelectImage else {
+            return
+        }
         let imagePicker = UIImagePickerController()
         imagePicker.mediaTypes = [kUTTypeImage as String]
         imagePicker.delegate = self
@@ -51,18 +55,31 @@ class SelectImageView: UIImageView, UIImagePickerControllerDelegate, UINavigatio
     }
     
     func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
-        return session.canLoadObjects(ofClass: UIImage.self)
+        return canSelectImage && session.canLoadObjects(ofClass: UIImage.self)
     }
     
     func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
         return UIDropProposal(operation: .copy)
     }
-
+    
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidEnter session: UIDropSession) {
+        layer.borderWidth = 2
+        layer.borderColor = ThemeManager.shared.currentTheme.dropInteractionBorder.cgColor
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidExit session: UIDropSession) {
+        layer.borderWidth = 0
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidEnd session: UIDropSession) {
+        layer.borderWidth = 0
+    }
     
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
         session.loadObjects(ofClass: UIImage.self) { imageItems in
             let images = imageItems as! [UIImage]
             self.image = images.first
+            self.didSelectImage?(self)
         }
     }
     

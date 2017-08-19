@@ -27,7 +27,7 @@
 		985A420D1F2CF8F200636E72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 985A420C1F2CF8F200636E72 /* Assets.xcassets */; };
 		985A42101F2CF8F200636E72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 985A420E1F2CF8F200636E72 /* LaunchScreen.storyboard */; };
 		985A42261F2CF8F300636E72 /* FilterPlaygroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42251F2CF8F300636E72 /* FilterPlaygroundUITests.swift */; };
-		985A42361F2CFEE800636E72 /* SelectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42351F2CFEE800636E72 /* SelectImageView.swift */; };
+		985A42361F2CFEE800636E72 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42351F2CFEE800636E72 /* CustomImageView.swift */; };
 		986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */; };
 		9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868A8C01F3712EB00D0BC79 /* AST.swift */; };
 		987672451F2F5355002F9AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
@@ -134,7 +134,7 @@
 		985A42211F2CF8F300636E72 /* FilterPlaygroundUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilterPlaygroundUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		985A42251F2CF8F300636E72 /* FilterPlaygroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPlaygroundUITests.swift; sourceTree = "<group>"; };
 		985A42271F2CF8F300636E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		985A42351F2CFEE800636E72 /* SelectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImageView.swift; sourceTree = "<group>"; };
+		985A42351F2CFEE800636E72 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		9868A8C01F3712EB00D0BC79 /* AST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
 		987672441F2F5355002F9AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -385,7 +385,7 @@
 		98D919A01F2E05AB007D5234 /* Images View */ = {
 			isa = PBXGroup;
 			children = (
-				985A42351F2CFEE800636E72 /* SelectImageView.swift */,
+				985A42351F2CFEE800636E72 /* CustomImageView.swift */,
 				98AE92A81F3900290044E33F /* LiveViewController.swift */,
 			);
 			path = "Images View";
@@ -609,7 +609,7 @@
 				98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */,
 				985A42081F2CF8F200636E72 /* ViewController.swift in Sources */,
 				9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */,
-				985A42361F2CFEE800636E72 /* SelectImageView.swift in Sources */,
+				985A42361F2CFEE800636E72 /* CustomImageView.swift in Sources */,
 				987672451F2F5355002F9AAF /* Extensions.swift in Sources */,
 				982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */,
 				98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */,

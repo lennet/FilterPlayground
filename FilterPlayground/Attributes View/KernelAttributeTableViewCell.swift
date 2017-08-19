@@ -101,7 +101,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
         valueSelectionView.subviews.forEach{ $0.removeFromSuperview() }
         switch (type, attribute?.value) {
         case (.sample, .sample(let image)?) :
-            let imageView = SelectImageView(frame: valueSelectionView.bounds)
+            let imageView = CustomImageView(frame: valueSelectionView.bounds)
             imageView.didSelectImage = { image in
                 self.attribute?.value = .sample(image.image!)
                 self.updateCallBack?(self, self.attribute!)

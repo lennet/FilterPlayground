@@ -127,11 +127,14 @@ class NumberedTextView: UIView, UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" && range.length == 0 {
-            let intendationLevel = currentAST?.intendationLevel(at: range.location, with: 0) ?? 0
+            
+            let firstString = (textView.text as NSString).substring(to: range.location)
+            let intendationLevel = currentAST?.intendationLevel(at: Parser(string: firstString).getTokens().count, with: 0) ?? 0
             let tabs = Array(repeating: spacingValue, count: intendationLevel).joined()
             var newText = text + tabs
             
             let newSelectedRange: NSRange
+            // {}
             if range.location < textView.text.characters.count && (textView.text as NSString).substring(with: NSMakeRange(range.location, 1)) == "}" && (textView.text as NSString).substring(with: NSMakeRange(range.location-1, 1)) == "{" {
                 newSelectedRange = NSMakeRange(range.location+newText.count+1, 0)
                 newText += "\(spacingValue)\n" + tabs

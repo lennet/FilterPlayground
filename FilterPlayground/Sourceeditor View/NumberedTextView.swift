@@ -133,7 +133,6 @@ class NumberedTextView: UIView, UITextViewDelegate {
         }
         
         if shouldRenderLineNumber && origin.y > -(textView.font?.lineHeight ?? 10) {
-            print(lineNumber)
             draw(text: "\(lineNumber) ", at: origin, color: theme.sourceEditorLineNumber)
         }
         return true

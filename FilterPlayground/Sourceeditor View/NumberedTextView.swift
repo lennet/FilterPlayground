@@ -129,15 +129,23 @@ class NumberedTextView: UIView, UITextViewDelegate {
         if text == "\n" && range.length == 0 {
             
             let firstString = (textView.text as NSString).substring(to: range.location)
-            let intendationLevel = currentAST?.intendationLevel(at: Parser(string: firstString).getTokens().count, with: 0) ?? 0
+            let currentTokenLocation = Parser(string: firstString).getTokens().count
+            let intendationLevel = currentAST?.intendationLevel(at: currentTokenLocation, with: 0) ?? 0
             let tabs = Array(repeating: spacingValue, count: intendationLevel).joined()
             var newText = text + tabs
             
+            let lastChrackterIsOpeningBracket = (textView.text as NSString).substring(with: NSMakeRange(range.location-1, 1)) == "{"
             let newSelectedRange: NSRange
-            // {}
-            if range.location < textView.text.characters.count && (textView.text as NSString).substring(with: NSMakeRange(range.location, 1)) == "}" && (textView.text as NSString).substring(with: NSMakeRange(range.location-1, 1)) == "{" {
+            
+            if range.location < textView.text.characters.count && (textView.text as NSString).substring(with: NSMakeRange(range.location, 1)) == "}" && lastChrackterIsOpeningBracket {
+                // {\n}
                 newSelectedRange = NSMakeRange(range.location+newText.count+1, 0)
                 newText += "\(spacingValue)\n" + tabs
+            } else if lastChrackterIsOpeningBracket && currentAST?.needsClosingBracket(at: currentTokenLocation) ?? false {
+                // {\n
+                newSelectedRange = NSMakeRange(range.location+newText.count, 0)
+                let oldSpacing = Array(repeating: spacingValue, count: intendationLevel-1).joined()
+                newText += "\n\(oldSpacing)}"
             } else {
                 newSelectedRange = NSMakeRange(range.location+newText.count, 0)
             }

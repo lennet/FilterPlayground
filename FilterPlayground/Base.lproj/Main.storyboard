@@ -479,7 +479,7 @@
         <!--New Project-->
         <scene sceneID="pgF-Sh-xtC">
             <objects>
-                <tableViewController storyboardIdentifier="NewProjectViewController" id="ZzX-F5-eF8" customClass="NewProjectViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="NewProjectViewController" title="New Project" id="ZzX-F5-eF8" customClass="NewProjectViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="S87-Is-PUV">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -584,11 +584,11 @@
                             <outlet property="delegate" destination="ZzX-F5-eF8" id="GJg-lo-ROx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New Project" id="4ob-kY-eB1"/>
+                    <navigationItem key="navigationItem" title="Empty Project" id="LrO-EO-5H0"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="itg-mA-yig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3220.0585651537331" y="942.18749999999989"/>
+            <point key="canvasLocation" x="4240" y="960"/>
         </scene>
         <!--Source Editor View Controller-->
         <scene sceneID="jwi-XS-pAf">
@@ -684,24 +684,6 @@
             </objects>
             <point key="canvasLocation" x="-686" y="1753"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="1fk-eT-Hl0">
-            <objects>
-                <navigationController storyboardIdentifier="NewProjectNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Hg5-53-ljk" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ddh-nl-KBE">
-                        <rect key="frame" x="0.0" y="20" width="1366" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="ZzX-F5-eF8" kind="relationship" relationship="rootViewController" id="cnw-iE-pY6"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sxS-6g-jkS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2428.1112737920935" y="941.60156249999989"/>
-        </scene>
         <!--Live View Controller-->
         <scene sceneID="Tse-Ci-XcA">
             <objects>
@@ -786,7 +768,74 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f5c-2z-ewP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1041" y="77"/>
+            <point key="canvasLocation" x="-1246" y="-73"/>
+        </scene>
+        <!--New Project-->
+        <scene sceneID="ziM-EO-EXd">
+            <objects>
+                <tabBarController storyboardIdentifier="NewProjectTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="Kkb-KW-51k" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="New Project" id="BmS-Fj-bBG"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5ZH-ih-apj">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="et2-7M-Gmp" kind="relationship" relationship="viewControllers" id="RgM-w3-xIs"/>
+                        <segue destination="4Gy-4E-ibt" kind="relationship" relationship="viewControllers" id="A3z-MB-Lp4"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nnh-Xb-fuh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2747" y="942"/>
+        </scene>
+        <!--Template-->
+        <scene sceneID="EBa-Jn-BP1">
+            <objects>
+                <tableViewController title="Template" id="aX3-25-gz8" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Template" id="Oql-Tg-6w0"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a7S-7R-sli" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4240" y="1809"/>
+        </scene>
+        <!--New project-->
+        <scene sceneID="sTQ-Bb-fHq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="et2-7M-Gmp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="New project" id="66c-rm-5kO"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="2F1-RN-VSM">
+                        <rect key="frame" x="0.0" y="20" width="1366" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZzX-F5-eF8" kind="relationship" relationship="rootViewController" id="0ju-zi-ffY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y3r-sl-FLR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3508.6383601756952" y="941.60156249999989"/>
+        </scene>
+        <!--Template-->
+        <scene sceneID="eHs-t7-p5n">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Gy-4E-ibt" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Template" id="z5a-Ar-UjB"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="10C-CA-Z1F">
+                        <rect key="frame" x="0.0" y="20" width="1366" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="aX3-25-gz8" kind="relationship" relationship="rootViewController" id="7tO-xO-8sM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cri-NM-bj7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3508.6383601756952" y="1817.5781249999998"/>
         </scene>
     </scenes>
     <resources>

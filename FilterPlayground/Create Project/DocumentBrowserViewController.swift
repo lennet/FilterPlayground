@@ -25,10 +25,10 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
         let newDocumentURL = FileManager.urlInDocumentsDirectory(for: "\(Date()).kernelProj")
         
-        let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewProjectNavigationController") as! UINavigationController
-        let viewController = navigationController.viewControllers.first as! NewProjectViewController
-        viewController.modalPresentationStyle = .formSheet
-        present(viewController, animated: true) {
+        let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewProjectTabBarController") as! UITabBarController
+        let viewController = (tabBarController.viewControllers!.first as! UINavigationController).viewControllers.first as! NewProjectViewController
+        tabBarController.modalPresentationStyle = .formSheet
+        present(tabBarController, animated: true) {
             
             viewController.didSelectType = { type in
                 viewController.dismiss(animated: true, completion: nil)

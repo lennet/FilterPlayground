@@ -71,6 +71,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
         self.valueButton = sender
         viewController.valueChanged = { value in
             self.attribute?.value = .float(Float(value))
+            (self.valueButton as? UIButton)?.setTitle("\(value)", for: .normal)
             self.updateCallBack?(self, self.attribute!)
         }
         
@@ -85,6 +86,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
         let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "ColorPickerViewControllerIdentifier") as! ColorPickerViewController
         viewController.colorChanged = { r, g ,b , a in
             self.attribute?.value = .color(r,g,b,a)
+            self.valueButton.backgroundColor = UIColor(displayP3Red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(a))
             self.updateCallBack?(self, self.attribute!)
         }
         
@@ -148,8 +150,14 @@ class KernelAttributeTableViewCell: UITableViewCell {
             valueButton = button
             break
         default:
+            
             break
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        attribute = nil
     }
     
 }

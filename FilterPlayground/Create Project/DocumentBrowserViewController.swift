@@ -23,7 +23,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     // MARK: UIDocumentBrowserViewControllerDelegate
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
-        let newDocumentURL = FileManager.urlInDocumentsDirectory(for: "\(Date()).kernelProj")
+        let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("untitled.kernelProj")
         
         let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewProjectTabBarController") as! UITabBarController
         let viewController = (tabBarController.viewControllers!.first as! UINavigationController).viewControllers.first as! NewProjectViewController

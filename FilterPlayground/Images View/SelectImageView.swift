@@ -9,7 +9,7 @@
 import UIKit
 import MobileCoreServices
 
-class SelectImageView: UIImageView, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SelectImageView: UIImageView, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDropInteractionDelegate, UIDragInteractionDelegate {
     
     var didSelectImage: ((SelectImageView)->())?
 
@@ -19,6 +19,12 @@ class SelectImageView: UIImageView, UIImagePickerControllerDelegate, UINavigatio
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         addGestureRecognizer(tapGestureRecognizer)
         isUserInteractionEnabled = true
+        
+        let dropInteraction = UIDropInteraction(delegate: self)
+        addInteraction(dropInteraction)
+        
+        let dragInteraction = UIDragInteraction(delegate: self)
+        addInteraction(dragInteraction)
     }
     
     @objc func handleTap() {
@@ -43,4 +49,29 @@ class SelectImageView: UIImageView, UIImagePickerControllerDelegate, UINavigatio
         self.image = image
         didSelectImage?(self)
     }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: UIImage.self)
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+        return UIDropProposal(operation: .copy)
+    }
+
+    
+    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        session.loadObjects(ofClass: UIImage.self) { imageItems in
+            let images = imageItems as! [UIImage]
+            self.image = images.first
+        }
+    }
+    
+    func dragInteraction(_ interaction: UIDragInteraction, itemsForBeginning session: UIDragSession) -> [UIDragItem] {
+        guard let image = image else {
+            return []
+        }
+        let imageItemProvider =  NSItemProvider(object: image)
+        return [ UIDragItem(itemProvider: imageItemProvider) ]
+    }
+
 }

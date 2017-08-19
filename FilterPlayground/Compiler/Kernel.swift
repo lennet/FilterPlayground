@@ -26,7 +26,7 @@ class GeneralKernel: Kernel {
     
     func apply(with inputImages: [UIImage], attributes: [Any]) -> UIImage? {
         let arguments: [Any] = attributes
-            guard let result = kernel?.apply(extent: CGRect(origin: .zero, size: CGSize(width: 900, height: 200) ), roiCallback: { (index, rect) -> CGRect in
+            guard let result = kernel?.apply(extent: CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000) ), roiCallback: { (index, rect) -> CGRect in
             return rect
         }, arguments: arguments) else {
             return nil

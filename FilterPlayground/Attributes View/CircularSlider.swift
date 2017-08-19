@@ -57,9 +57,9 @@ class CircularSlider: UIControl {
         
         // todo use velocity
         let prog = progress(for: a)
-        if previousProgress - prog > 0.9 {
+        if previousProgress - prog > 0.70 {
             previousProgress = 0
-        } else if prog - previousProgress > 0.9 {
+        } else if prog - previousProgress > 0.70 {
             previousProgress = 1
         }
         
@@ -91,12 +91,8 @@ class CircularSlider: UIControl {
     }
     
     func progress(for angle: CGFloat) -> CGFloat {
-        let progress = (angle+90).remainder(dividingBy: 360) + ((angle+90) < 0 ? 360 : 0)
-        if progress < 0 {
-            return (abs(progress)) / 360
-        } else {
-            return progress / 360
-        }
+        let transformedAngle = angle - 90
+        let result = (transformedAngle + ceil(-transformedAngle/360) * 360) / 360
     }
     
     func knobLocation(for angle: CGFloat) -> CGPoint {

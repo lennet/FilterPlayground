@@ -33,6 +33,10 @@ extension String {
     var withoutSlash: String {
         return self.replacingOccurrences(of: "/", with: "")
     }
+    
+    var numberOfLines: Int {
+        return self.components(separatedBy: "\n").count
+    }
         
 }
 

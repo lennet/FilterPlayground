@@ -41,6 +41,7 @@ class LiveViewController: UIViewController {
             for (index, image) in newValue.enumerated() where index < inputImageViews.count {
                 inputImageViews[index].image = image
             }
+            imageView.image = nil
         }
     }
     

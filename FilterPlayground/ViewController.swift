@@ -129,7 +129,8 @@ class ViewController: UIViewController {
             let errorHelper = ErrorHelper()
             
             let image = kernel.apply(with: input, attributes: attributes.map{ $0.value.asKernelValue })
-            print(errorHelper.errorString())
+            // TODO parse runtime errors 
+            print(errorHelper.errorString() ?? "")
             DispatchQueue.main.sync {
                 self.liveViewController?.imageView.image = image
                 self.isRunning = false                

@@ -60,7 +60,7 @@ struct Default: Theme {
 
     static var sourceEditorBackground: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     
-    static var sourceEditorLineNumber: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    static var sourceEditorLineNumber: UIColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
     
     static var liveViewBackground: UIColor = #colorLiteral(red: 0.9404068964, green: 0.9404068964, blue: 0.9404068964, alpha: 1)
 }

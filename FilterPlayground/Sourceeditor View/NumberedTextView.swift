@@ -14,7 +14,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
         return ThemeManager.shared.currentTheme
     }
     
-    var spacingValue: String {
+    class var spacingValue: String {
         return Settings.tabsEnabled ? "\t" : "    "
     }
 
@@ -131,7 +131,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
             let firstString = (textView.text as NSString).substring(to: range.location)
             let currentTokenLocation = Parser(string: firstString).getTokens().count
             let intendationLevel = currentAST?.intendationLevel(at: currentTokenLocation, with: 0) ?? 0
-            let tabs = Array(repeating: spacingValue, count: intendationLevel).joined()
+            let tabs = Array(repeating: NumberedTextView.spacingValue, count: intendationLevel).joined()
             var newText = text + tabs
             
             let lastChrackterIsOpeningBracket = (textView.text as NSString).substring(with: NSMakeRange(range.location-1, 1)) == "{"
@@ -140,11 +140,11 @@ class NumberedTextView: UIView, UITextViewDelegate {
             if range.location < textView.text.characters.count && (textView.text as NSString).substring(with: NSMakeRange(range.location, 1)) == "}" && lastChrackterIsOpeningBracket {
                 // {\n}
                 newSelectedRange = NSMakeRange(range.location+newText.count+1, 0)
-                newText += "\(spacingValue)\n" + tabs
+                newText += "\(NumberedTextView.spacingValue)\n" + tabs
             } else if lastChrackterIsOpeningBracket && currentAST?.needsClosingBracket(at: currentTokenLocation) ?? false {
                 // {\n
                 newSelectedRange = NSMakeRange(range.location+newText.count, 0)
-                let oldSpacing = Array(repeating: spacingValue, count: intendationLevel-1).joined()
+                let oldSpacing = Array(repeating: NumberedTextView.spacingValue, count: intendationLevel-1).joined()
                 newText += "\n\(oldSpacing)}"
             } else {
                 newSelectedRange = NSMakeRange(range.location+newText.count, 0)

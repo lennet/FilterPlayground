@@ -66,6 +66,41 @@ class KernelCompilerTests: XCTestCase {
             XCTFail()
         }
     }
+    
+    func testInitialSourceDefault() {
+        let source = KernelType.normal.initialSource(with: "untitled")
+        let result = KernelCompiler<GeneralKernel>.compile(source: source)
+        
+        if case .failed(let errors) = result {
+            XCTFail("\(errors.count) unexpected errors")
+        }
+    }
+    
+    func testInitialSourceWarp() {
+        let source = KernelType.warp.initialSource(with: "untitled")
+        let result = KernelCompiler<CIWarpKernel>.compile(source: source)
+        
+        if case .failed(let errors) = result {
+            XCTFail("\(errors.count) unexpected errors")
+        }
+    }
+    
+    func testInitialSourceColor() {
+        let source = KernelType.color.initialSource(with: "untitled")
+        let result = KernelCompiler<CIColorKernel>.compile(source: source)
+        
+        if case .failed(let errors) = result {
+            XCTFail("\(errors.count) unexpected errors")
+        }
+    }
 
+    func testInitialSourceBlend() {
+        let source = KernelType.blend.initialSource(with: "untitled")
+        let result = KernelCompiler<BlendKernel>.compile(source: source)
+        
+        if case .failed(let errors) = result {
+            XCTFail("\(errors.count) unexpected errors")
+        }
+    }
     
 }

@@ -31,13 +31,19 @@
 		986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */; };
 		9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868A8C01F3712EB00D0BC79 /* AST.swift */; };
 		987672451F2F5355002F9AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
+		9881A14F1F4884C900BABA72 /* ThumbnailProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881A14E1F4884C900BABA72 /* ThumbnailProvider.swift */; };
+		9881A1531F4884CA00BABA72 /* FilterPlaygroundThumbnailExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9881A15F1F4884E700BABA72 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9881A15E1F4884E700BABA72 /* QuickLook.framework */; };
+		9881A1621F4884E700BABA72 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881A1611F4884E700BABA72 /* PreviewViewController.swift */; };
+		9881A1651F4884E700BABA72 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9881A1631F4884E700BABA72 /* MainInterface.storyboard */; };
+		9881A1691F4884E700BABA72 /* FilterPlaygroundPreviewExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */; };
 		98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */; };
 		98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */; };
 		98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */; };
 		98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */; };
 		98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */; };
-		98A67FB21F3A17820043AA9D /* SelectFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB11F3A17820043AA9D /* SelectFloatViewController.swift */; };
+		98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB11F3A17820043AA9D /* FloatPickerViewController.swift */; };
 		98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */; };
 		98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE92A81F3900290044E33F /* LiveViewController.swift */; };
 		98B7B6E91F4757B5008C370F /* ExportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */; };
@@ -70,7 +76,36 @@
 			remoteGlobalIDString = 985A42011F2CF8F200636E72;
 			remoteInfo = FilterPlayground;
 		};
+		9881A1511F4884CA00BABA72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 985A41FA1F2CF8F200636E72 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9881A14B1F4884C900BABA72;
+			remoteInfo = FilterPlaygroundThumbnailExtension;
+		};
+		9881A1671F4884E700BABA72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 985A41FA1F2CF8F200636E72 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9881A15B1F4884E600BABA72;
+			remoteInfo = FilterPlaygroundPreviewExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9881A1571F4884CA00BABA72 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9881A1691F4884E700BABA72 /* FilterPlaygroundPreviewExtension.appex in Embed App Extensions */,
+				9881A1531F4884CA00BABA72 /* FilterPlaygroundThumbnailExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		980229AB1F2F94F9000FFCA2 /* ErrorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelper.swift; sourceTree = "<group>"; };
@@ -103,13 +138,21 @@
 		986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		9868A8C01F3712EB00D0BC79 /* AST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
 		987672441F2F5355002F9AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FilterPlaygroundThumbnailExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9881A14E1F4884C900BABA72 /* ThumbnailProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailProvider.swift; sourceTree = "<group>"; };
+		9881A1501F4884C900BABA72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FilterPlaygroundPreviewExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9881A15E1F4884E700BABA72 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		9881A1611F4884E700BABA72 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		9881A1641F4884E700BABA72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		9881A1661F4884E700BABA72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesViewController.swift; sourceTree = "<group>"; };
 		98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorViewController.swift; sourceTree = "<group>"; };
 		98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelDescriptor.swift; sourceTree = "<group>"; };
 		98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeTableViewCell.swift; sourceTree = "<group>"; };
 		98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedTextView.swift; sourceTree = "<group>"; };
 		98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSlider.swift; sourceTree = "<group>"; };
-		98A67FB11F3A17820043AA9D /* SelectFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFloatViewController.swift; sourceTree = "<group>"; };
+		98A67FB11F3A17820043AA9D /* FloatPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatPickerViewController.swift; sourceTree = "<group>"; };
 		98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatSelectionButton.swift; sourceTree = "<group>"; };
 		98AE92A81F3900290044E33F /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportTableViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +194,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9881A1491F4884C900BABA72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9881A1591F4884E600BABA72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9881A15F1F4884E700BABA72 /* QuickLook.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -189,6 +247,9 @@
 				985A42041F2CF8F200636E72 /* FilterPlayground */,
 				985A42191F2CF8F300636E72 /* FilterPlaygroundTests */,
 				985A42241F2CF8F300636E72 /* FilterPlaygroundUITests */,
+				9881A14D1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */,
+				9881A1601F4884E700BABA72 /* FilterPlaygroundPreviewExtension */,
+				9881A15D1F4884E700BABA72 /* Frameworks */,
 				985A42031F2CF8F200636E72 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -199,6 +260,8 @@
 				985A42021F2CF8F200636E72 /* FilterPlayground.app */,
 				985A42161F2CF8F300636E72 /* FilterPlaygroundTests.xctest */,
 				985A42211F2CF8F300636E72 /* FilterPlaygroundUITests.xctest */,
+				9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */,
+				9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -254,6 +317,33 @@
 			path = FilterPlaygroundUITests;
 			sourceTree = "<group>";
 		};
+		9881A14D1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */ = {
+			isa = PBXGroup;
+			children = (
+				9881A14E1F4884C900BABA72 /* ThumbnailProvider.swift */,
+				9881A1501F4884C900BABA72 /* Info.plist */,
+			);
+			path = FilterPlaygroundThumbnailExtension;
+			sourceTree = "<group>";
+		};
+		9881A15D1F4884E700BABA72 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9881A15E1F4884E700BABA72 /* QuickLook.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9881A1601F4884E700BABA72 /* FilterPlaygroundPreviewExtension */ = {
+			isa = PBXGroup;
+			children = (
+				9881A1611F4884E700BABA72 /* PreviewViewController.swift */,
+				9881A1631F4884E700BABA72 /* MainInterface.storyboard */,
+				9881A1661F4884E700BABA72 /* Info.plist */,
+			);
+			path = FilterPlaygroundPreviewExtension;
+			sourceTree = "<group>";
+		};
 		98D475AE1F3BB8920080D794 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,7 +362,7 @@
 				98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */,
 				98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */,
 				98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */,
-				98A67FB11F3A17820043AA9D /* SelectFloatViewController.swift */,
+				98A67FB11F3A17820043AA9D /* FloatPickerViewController.swift */,
 				98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */,
 				986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */,
 				98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */,
@@ -320,10 +410,13 @@
 				985A41FE1F2CF8F200636E72 /* Sources */,
 				985A41FF1F2CF8F200636E72 /* Frameworks */,
 				985A42001F2CF8F200636E72 /* Resources */,
+				9881A1571F4884CA00BABA72 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9881A1521F4884CA00BABA72 /* PBXTargetDependency */,
+				9881A1681F4884E700BABA72 /* PBXTargetDependency */,
 			);
 			name = FilterPlayground;
 			productName = FilterPlayground;
@@ -366,6 +459,40 @@
 			productReference = 985A42211F2CF8F300636E72 /* FilterPlaygroundUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		9881A14B1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9881A1561F4884CA00BABA72 /* Build configuration list for PBXNativeTarget "FilterPlaygroundThumbnailExtension" */;
+			buildPhases = (
+				9881A1481F4884C900BABA72 /* Sources */,
+				9881A1491F4884C900BABA72 /* Frameworks */,
+				9881A14A1F4884C900BABA72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FilterPlaygroundThumbnailExtension;
+			productName = FilterPlaygroundThumbnailExtension;
+			productReference = 9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		9881A15B1F4884E600BABA72 /* FilterPlaygroundPreviewExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9881A16A1F4884E700BABA72 /* Build configuration list for PBXNativeTarget "FilterPlaygroundPreviewExtension" */;
+			buildPhases = (
+				9881A1581F4884E600BABA72 /* Sources */,
+				9881A1591F4884E600BABA72 /* Frameworks */,
+				9881A15A1F4884E600BABA72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FilterPlaygroundPreviewExtension;
+			productName = FilterPlaygroundPreviewExtension;
+			productReference = 9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -387,6 +514,12 @@
 						CreatedOnToolsVersion = 9.0;
 						TestTargetID = 985A42011F2CF8F200636E72;
 					};
+					9881A14B1F4884C900BABA72 = {
+						CreatedOnToolsVersion = 9.0;
+					};
+					9881A15B1F4884E600BABA72 = {
+						CreatedOnToolsVersion = 9.0;
+					};
 				};
 			};
 			buildConfigurationList = 985A41FD1F2CF8F200636E72 /* Build configuration list for PBXProject "FilterPlayground" */;
@@ -405,6 +538,8 @@
 				985A42011F2CF8F200636E72 /* FilterPlayground */,
 				985A42151F2CF8F300636E72 /* FilterPlaygroundTests */,
 				985A42201F2CF8F300636E72 /* FilterPlaygroundUITests */,
+				9881A14B1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */,
+				9881A15B1F4884E600BABA72 /* FilterPlaygroundPreviewExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -432,6 +567,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9881A14A1F4884C900BABA72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9881A15A1F4884E600BABA72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9881A1651F4884E700BABA72 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,7 +614,7 @@
 				982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */,
 				98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */,
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,
-				98A67FB21F3A17820043AA9D /* SelectFloatViewController.swift in Sources */,
+				98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
 				9848C4441F3B9B58001E079C /* SettingsTableViewController.swift in Sources */,
 				9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */,
@@ -501,6 +651,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9881A1481F4884C900BABA72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9881A14F1F4884C900BABA72 /* ThumbnailProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9881A1581F4884E600BABA72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9881A1621F4884E700BABA72 /* PreviewViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -513,6 +679,16 @@
 			isa = PBXTargetDependency;
 			target = 985A42011F2CF8F200636E72 /* FilterPlayground */;
 			targetProxy = 985A42221F2CF8F300636E72 /* PBXContainerItemProxy */;
+		};
+		9881A1521F4884CA00BABA72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9881A14B1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */;
+			targetProxy = 9881A1511F4884CA00BABA72 /* PBXContainerItemProxy */;
+		};
+		9881A1681F4884E700BABA72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9881A15B1F4884E600BABA72 /* FilterPlaygroundPreviewExtension */;
+			targetProxy = 9881A1671F4884E700BABA72 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -531,6 +707,14 @@
 				985A420F1F2CF8F200636E72 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		9881A1631F4884E700BABA72 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9881A1641F4884E700BABA72 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 		98DC562A1F3CEF1C0024F522 /* ValuePicker.storyboard */ = {
@@ -654,6 +838,7 @@
 		985A422B1F2CF8F300636E72 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 23Q9KTEYUV;
 				INFOPLIST_FILE = FilterPlayground/Info.plist;
@@ -668,6 +853,7 @@
 		985A422C1F2CF8F300636E72 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 23Q9KTEYUV;
 				INFOPLIST_FILE = FilterPlayground/Info.plist;
@@ -739,6 +925,62 @@
 			};
 			name = Release;
 		};
+		9881A1541F4884CA00BABA72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 23Q9KTEYUV;
+				INFOPLIST_FILE = FilterPlaygroundThumbnailExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lt.FilterPlayground.FilterPlaygroundThumbnailExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9881A1551F4884CA00BABA72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 23Q9KTEYUV;
+				INFOPLIST_FILE = FilterPlaygroundThumbnailExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lt.FilterPlayground.FilterPlaygroundThumbnailExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9881A16B1F4884E700BABA72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 23Q9KTEYUV;
+				INFOPLIST_FILE = FilterPlaygroundPreviewExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lt.FilterPlayground.FilterPlaygroundPreviewExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9881A16C1F4884E700BABA72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 23Q9KTEYUV;
+				INFOPLIST_FILE = FilterPlaygroundPreviewExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lt.FilterPlayground.FilterPlaygroundPreviewExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -774,6 +1016,24 @@
 			buildConfigurations = (
 				985A42311F2CF8F300636E72 /* Debug */,
 				985A42321F2CF8F300636E72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9881A1561F4884CA00BABA72 /* Build configuration list for PBXNativeTarget "FilterPlaygroundThumbnailExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9881A1541F4884CA00BABA72 /* Debug */,
+				9881A1551F4884CA00BABA72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9881A16A1F4884E700BABA72 /* Build configuration list for PBXNativeTarget "FilterPlaygroundPreviewExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9881A16B1F4884E700BABA72 /* Debug */,
+				9881A16C1F4884E700BABA72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

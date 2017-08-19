@@ -126,9 +126,11 @@ class ViewController: UIViewController {
         clearErrors()
         
         DispatchQueue.global(qos: .background).async {
-            let image = kernel.apply(with: input, attributes: attributes.map{ $0.value.asKernelValue })
+            let errorHelper = ErrorHelper()
             
-            DispatchQueue.main.async {
+            let image = kernel.apply(with: input, attributes: attributes.map{ $0.value.asKernelValue })
+            print(errorHelper.errorString())
+            DispatchQueue.main.sync {
                 self.liveViewController?.imageView.image = image
                 self.isRunning = false                
             }

@@ -67,7 +67,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
     }
     
     @objc func valueButtonTapped(sender: UIButton) {
-        let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! SelectFloatViewController
+        let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! FloatPickerViewController
         self.valueButton = sender
         viewController.valueChanged = { value in
             self.attribute?.value = .float(Float(value))

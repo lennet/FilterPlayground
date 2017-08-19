@@ -22,8 +22,7 @@ struct ProjectMetaData: Codable {
     }
     
     func initialSource() -> String {
-        let parameter = type.initialArguments
-        return "kernel \(type.returnType) \(name)(\(parameter)) {\n\n}"
+        return type.initialSource(with: name)
     }
     
     func initalArguments() -> [KernelAttribute] {

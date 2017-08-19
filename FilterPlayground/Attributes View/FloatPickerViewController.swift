@@ -1,5 +1,5 @@
 //
-//  SelectFloatViewController.swift
+//  FloatPickerViewController.swift
 //  FilterPlayground
 //
 //  Created by Leo Thomas on 08.08.17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectFloatViewController: UIViewController {
+class FloatPickerViewController: UIViewController {
 
     @IBOutlet weak var previousButton: FloatSelectionButton!
     @IBOutlet weak var nextButton: FloatSelectionButton!

@@ -11,7 +11,7 @@ import UIKit
 class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
     
     var poppoverControllerPresentationController: UIPopoverPresentationController?
-    var floatPicker: SelectFloatViewController?
+    var floatPicker: FloatPickerViewController?
     var currentHighlightedIndex: Int = 0
     var numberOfValues: Int {
         return values.count
@@ -53,7 +53,7 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
     }
     
     @objc func handleTap() {
-        let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! SelectFloatViewController
+        let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! FloatPickerViewController
         viewController.showNextButton = true
         self.floatPicker = viewController
         viewController.valueChanged = { value in

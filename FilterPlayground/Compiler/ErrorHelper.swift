@@ -20,7 +20,7 @@ class ErrorHelper {
         deleteLogs()
     }
     
-    func redirectSTDErr() {
+    private func redirectSTDErr() {
         freopen(fileURL.path.cString(
             using: .ascii)!,
                 "a+",

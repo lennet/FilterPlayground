@@ -37,6 +37,10 @@ extension KernelType {
         }
     }
     
+    func initialSource(with name: String) -> String {
+        return "kernel \(returnType) \(name)(\(initialArguments)) {\n\(initialSourceBody)\n}"
+    }
+    
     var initialArguments: String {
         switch self {
         case .color:
@@ -45,6 +49,19 @@ extension KernelType {
             return "\(KernelAttributeType.sample.rawValue) fore, \(KernelAttributeType.sample.rawValue) back"
         default:
             return ""
+        }
+    }
+    
+    var initialSourceBody: String {
+        switch self {
+        case .color:
+            return "\(NumberedTextView.spacingValue)return sample(img, destCoord());"
+        case .warp:
+            return "\(NumberedTextView.spacingValue)return destCoord();"
+        case .blend:
+            return "\(NumberedTextView.spacingValue)return sample(fore, destCoord()) + sample(back, destCoord());"
+        case .normal:
+            return "\(NumberedTextView.spacingValue)return vec4(1.0, 1.0, 1.0, 1.0);"
         }
     }
     

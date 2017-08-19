@@ -38,13 +38,12 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
             if errors.isEmpty {
                 errorViewHeightConstraint.constant = 0
             } else {
-                // todo check for keyboardsize
-                
-                errorViewHeightConstraint.constant = 100
+                errorTableView.reloadData()
+                errorTableView.layoutIfNeeded()
+                errorViewHeightConstraint.constant = min(errorTableView.contentSize.height, view.frame.size.height/4)
             }
             updateBottomSpacing(animated: true)
             textView.hightLightErrorLineNumber = nil
-            errorTableView.reloadData()
         }
     }
     

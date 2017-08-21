@@ -87,7 +87,16 @@ class CustomImageView: UIImageView, UIImagePickerControllerDelegate, UINavigatio
         guard let image = image else {
             return []
         }
-        let imageItemProvider =  NSItemProvider(object: image)
+        let item: UIImage
+        if let ciImage = image.ciImage {
+            // ciimage bases images are empty after dropping
+            let context = CIContext()
+            item = UIImage(cgImage: context.createCGImage(ciImage, from: ciImage.extent)!)
+        } else {
+            item = image
+        }
+        
+        let imageItemProvider =  NSItemProvider(object: item)
         let dragItem = UIDragItem(itemProvider: imageItemProvider)
         dragItem.previewProvider = {
             return UIDragPreview(view: UIImageView(image: image))

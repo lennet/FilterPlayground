@@ -2,30 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UTExportedTypeDeclarations</key>
-	<array>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>com.apple.package</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Kernel Project</string>
-			<key>UTTypeIdentifier</key>
-			<string>com.leonardtthomas.kernelProject</string>
-			<key>UTTypeSize320IconFile</key>
-			<string>iconlarge.png</string>
-			<key>UTTypeSize64IconFile</key>
-			<string>iconsmall.png</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>kernelProj</string>
-				</array>
-			</dict>
-		</dict>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -60,5 +36,29 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.quicklook.preview</string>
 	</dict>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>com.apple.package</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Kernel Project</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.leonardtthomas.kernelProject</string>
+			<key>UTTypeSize320IconFile</key>
+			<string>iconlarge.png</string>
+			<key>UTTypeSize64IconFile</key>
+			<string>iconsmall.png</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>kernelProj</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

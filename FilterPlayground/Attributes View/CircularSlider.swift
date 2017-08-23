@@ -79,15 +79,7 @@ class CircularSlider: UIControl, CAAnimationDelegate {
             break
         case .ended,
              .cancelled:
-            let animation = CAKeyframeAnimation(keyPath: "position")
-            animation.fillMode = kCAFillModeForwards
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            animation.duration = 0.25
-            animation.isRemovedOnCompletion = false
-            let arcCenter = CGPoint(x: bounds.width/2, y: bounds.height/2)
-            animation.path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: a.asRadian, endAngle: CGFloat(-90.0).asRadian, clockwise: prog < 0.5).cgPath
-            animation.delegate = self
-            knob.layer.add(animation, forKey: "Move to Origin")
+            animateKnobToOrigin(with: a)
             sendActions(for: .editingDidEnd)
             break
         default:
@@ -114,6 +106,18 @@ class CircularSlider: UIControl, CAAnimationDelegate {
         let path = UIBezierPath(ovalIn: circleRect)
         path.stroke()
         path.lineWidth = lineWidth
+    }
+    
+    func animateKnobToOrigin(with angle: CGFloat) {
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        animation.fillMode = kCAFillModeForwards
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.duration = 0.25
+        animation.isRemovedOnCompletion = false
+        let arcCenter = CGPoint(x: bounds.width/2, y: bounds.height/2)
+        animation.path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: angle.asRadian, endAngle: CGFloat(-90.0).asRadian, clockwise: prog < 0.5).cgPath
+        animation.delegate = self
+        knob.layer.add(animation, forKey: "Move to Origin")
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {

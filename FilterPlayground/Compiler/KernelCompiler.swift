@@ -10,7 +10,7 @@ import Foundation
 
 enum KernelCompilerResult {
     case success(kernel: Kernel)
-    case failed(errors: [CompilerError])
+    case failed(errors: [KernelError])
 }
 
 class KernelCompiler<T: Kernel> {
@@ -22,7 +22,7 @@ class KernelCompiler<T: Kernel> {
         if let kernel = T.compile(source: source) {
             return KernelCompilerResult.success(kernel: kernel)
         } else if let errorString = errorHelper.errorString() {
-            return .failed(errors: ErrorParser.getErrors(for: errorString))
+            return .failed(errors: ErrorParser.compileErrors(for: errorString))
         }
         // todo add unkown errors
         return .failed(errors: [])

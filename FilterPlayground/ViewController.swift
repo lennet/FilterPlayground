@@ -172,7 +172,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func display(errors: [CompilerError]) {
+    func display(errors: [KernelError]) {
         sourceEditorViewController?.errors = errors
         isRunning = false
     }

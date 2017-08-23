@@ -31,9 +31,9 @@ asdads
 2017-07-31 18:22:20.371780+0200 FilterPlayground[39291:2779720] [compile] [CIWarpKernel initWithString:] failed due to error parsing kernel source.
 """
         
-        let errors = ErrorParser.getErrors(for: error)
+        let errors = ErrorParser.compileErrors(for: error)
         XCTAssertEqual(errors.count, 1)
-        XCTAssertEqual(errors.first!, CompilerError(lineNumber: 1, characterIndex: 1, type: "ERROR", message: "unknown type name 'asdads'", note: nil))
+        XCTAssertEqual(errors.first!, KernelError.compile(lineNumber: 1, characterIndex: 1, type: "ERROR", message: "unknown type name 'asdads'", note: nil))
     }
     
     func testErrorWithNote() {
@@ -41,15 +41,15 @@ asdads
 [CIKernelPool] 3:2: ERROR: expected '}'
 }
  ^
-[CIKernelPool] 1:36: note:" to match this '{'
+[CIKernelPool] 1:36: note: to match this '{'
 kernel vec4 untitled(__sample img) {
                                    ^
 """
         
-        let errors = ErrorParser.getErrors(for: errorString)
+        let errors = ErrorParser.compileErrors(for: errorString)
         XCTAssertEqual(errors.count, 1)
-        let note = (1, 36, " to match this '{'")
-        let error = CompilerError(lineNumber: 3, characterIndex: 2, type: "ERROR", message: "expected '}'", note: note)
+        let note = (1, 36, "to match this '{'")
+        let error = KernelError.compile(lineNumber: 3, characterIndex: 2, type: "ERROR", message: "expected '}'", note: note)
         XCTAssertEqual(errors.first!, error)
     }
     
@@ -64,10 +64,20 @@ kernel vec4 untitled(__sample img) {
             ^
         """
         
-        let errors = ErrorParser.getErrors(for: errorString)
+        let errors = ErrorParser.compileErrors(for: errorString)
         XCTAssertEqual(errors.count, 1)
-        let note = (1, 8, " return type declared here")
-        let error = CompilerError(lineNumber: 4, characterIndex: 2, type: "ERROR", message: "function declared with return type 'vec4', but returning type 'vec2'", note: note)
+        let note = (1, 8, "return type declared here")
+        let error = KernelError.compile(lineNumber: 4, characterIndex: 2, type: "ERROR", message: "function declared with return type 'vec4', but returning type 'vec2'", note: note)
+        XCTAssertEqual(errors.first!, error)
+    }
+    
+    func testRuntimeErrors() {
+        let errorString = """
+[api] -[CIColorKernel applyWithExtent:arguments:options:] argument count mismatch for kernel 'untitled', expected 1 but saw 0.
+"""
+        let errors = ErrorParser.runtimeErrors(for: errorString)
+        XCTAssertEqual(errors.count, 1)
+        let error = KernelError.runtime(message: "argument count mismatch for kernel 'untitled', expected 1 but saw 0.")
         XCTAssertEqual(errors.first!, error)
     }
 }

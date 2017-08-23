@@ -32,7 +32,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     
     var didUpdateText: ((String)->())?
     
-    var errors: [CompilerError] = [] {
+    var errors: [KernelError] = [] {
         didSet {
             guard errors != oldValue else { return }
             if errors.isEmpty {
@@ -100,14 +100,27 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "errorCellIdentifier") as! ErrorTableViewCell
         // todo show notes 
-        let error = errors[indexPath.row]
-        cell.label.text = "\(error.type): \(error.message)"
+        switch errors[indexPath.row] {
+        case .compile(lineNumber: _, characterIndex: _, type: let type, message: let message, note: _):
+            cell.label.text = "\(type): \(message)"
+            break
+        case .runtime(message: let message):
+            cell.label.text = "\(message)"
+            break
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let error = errors[indexPath.row]
-        textView.hightLightErrorLineNumber = error.lineNumber
+        switch errors[indexPath.row] {
+        case .compile(lineNumber: let lineNumber, characterIndex: _, type: _, message: _, note: _):
+            textView.hightLightErrorLineNumber = lineNumber
+            break
+        case .runtime(message: _):
+            break
+        }
+
     }
     
     func updateFont() {

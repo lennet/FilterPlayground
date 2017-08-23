@@ -99,16 +99,8 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "errorCellIdentifier") as! ErrorTableViewCell
-        // todo show notes 
-        switch errors[indexPath.row] {
-        case .compile(lineNumber: _, characterIndex: _, type: let type, message: let message, note: _):
-            cell.label.text = "\(type): \(message)"
-            break
-        case .runtime(message: let message):
-            cell.label.text = "\(message)"
-            break
-        }
-        
+        // todo show notes
+        cell.error = errors[indexPath.row]
         return cell
     }
     

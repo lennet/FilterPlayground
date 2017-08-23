@@ -73,11 +73,17 @@ kernel vec4 untitled(__sample img) {
     
     func testRuntimeErrors() {
         let errorString = """
-[api] -[CIColorKernel applyWithExtent:arguments:options:] argument count mismatch for kernel 'untitled', expected 1 but saw 0.
+2017-08-23 22:51:41.564656+0200 FilterPlayground[1140:1368834] [api] -[CIColorKernel applyWithExtent:arguments:options:] argument count mismatch for kernel \'untitled\', expected 1 but saw 0.\n
 """
         let errors = ErrorParser.runtimeErrors(for: errorString)
         XCTAssertEqual(errors.count, 1)
         let error = KernelError.runtime(message: "argument count mismatch for kernel 'untitled', expected 1 but saw 0.")
         XCTAssertEqual(errors.first!, error)
+    }
+    
+    func testRuntimeErrorParserWithEmptyInput() {
+        let errorString = ""
+        let errors = ErrorParser.runtimeErrors(for: errorString)
+        XCTAssertEqual(errors.count, 0)
     }
 }

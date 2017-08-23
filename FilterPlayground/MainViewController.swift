@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     @IBOutlet weak var contentViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var attributesBarButtonItem: UIBarButtonItem!
@@ -127,11 +127,13 @@ class ViewController: UIViewController {
         
         DispatchQueue.global(qos: .background).async {
             let errorHelper = ErrorHelper()
-            
             let image = kernel.apply(with: input, attributes: attributes.map{ $0.value.asKernelValue })
-            // TODO parse runtime errors 
-            print(errorHelper.errorString() ?? "")
             DispatchQueue.main.sync {
+                if let errorString = errorHelper.errorString() {
+                    let errors = ErrorParser.runtimeErrors(for: errorString)
+                    self.display(errors: errors)
+                }
+        
                 self.liveViewController?.imageView.image = image
                 self.isRunning = false                
             }

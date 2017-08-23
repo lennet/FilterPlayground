@@ -39,7 +39,7 @@ class ErrorParser {
     }
     
     class func runtimeErrors(for errorString: String) -> [KernelError] {
-        return errorString.components(separatedBy: "[api]")
+        return errorString.components(separatedBy: "[api]")[1...]
             .flatMap{ $0.firstLine }
             .flatMap{ $0.components(separatedBy: ":]").last }
             .flatMap{ $0.trimmingCharacters(in: .whitespaces) }

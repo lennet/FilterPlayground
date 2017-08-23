@@ -19,9 +19,12 @@ class GeneralKernel: Kernel {
     var kernel: CIKernel?
     
     static func compile(source: String) -> Kernel? {
-        let result = GeneralKernel()
-        result.kernel = CIKernel(source: source)
-        return result
+        if let kernel = CIKernel(source: source) {
+            let result = GeneralKernel()
+            result.kernel = kernel
+            return result
+        }
+        return nil
     }
     
     func apply(with inputImages: [UIImage], attributes: [Any]) -> UIImage? {
@@ -40,9 +43,12 @@ class BlendKernel: Kernel {
     var kernel: CIBlendKernel?
     
     static func compile(source: String) -> Kernel? {
-        let result = BlendKernel()
-        result.kernel = CIBlendKernel(source: source)
-        return result
+        if let kernel = CIBlendKernel(source: source) {
+            let result = BlendKernel()
+            result.kernel = kernel
+            return result
+        }
+        return nil
     }
     
     func apply(with inputImages: [UIImage], attributes: [Any]) -> UIImage? {

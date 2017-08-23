@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class CircularSlider: UIControl {
+class CircularSlider: UIControl, CAAnimationDelegate {
     
     let lineWidth: CGFloat = 2.0
     var radius: CGFloat {
@@ -79,10 +79,15 @@ class CircularSlider: UIControl {
             break
         case .ended,
              .cancelled:
-            // TODO use CAAnimation to animate with custom paths
-            UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
-                self.knob.center = self.knobLocation(for: 270)
-            }, completion: nil)
+            let animation = CAKeyframeAnimation(keyPath: "position")
+            animation.fillMode = kCAFillModeForwards
+            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            animation.duration = 0.25
+            animation.isRemovedOnCompletion = false
+            let arcCenter = CGPoint(x: bounds.width/2, y: bounds.height/2)
+            animation.path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: a.asRadian, endAngle: CGFloat(-90.0).asRadian, clockwise: prog < 0.5).cgPath
+            animation.delegate = self
+            knob.layer.add(animation, forKey: "Move to Origin")
             sendActions(for: .editingDidEnd)
             break
         default:
@@ -111,10 +116,16 @@ class CircularSlider: UIControl {
         path.lineWidth = lineWidth
     }
     
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        knob.center = knobLocation(for: 270)
+        knob.layer.removeAllAnimations()
+    }
+    
 }
 
 import UIKit.UIGestureRecognizerSubclass
 
+// this is neccessary to get a pan directly after the first touch
 public class AllTouchesPanGestureRecognizer: UIPanGestureRecognizer {
     
     public var callBack: ((_ recognizer: AllTouchesPanGestureRecognizer, _ state: UIGestureRecognizerState) -> ())?

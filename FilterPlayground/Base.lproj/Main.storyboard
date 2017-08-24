@@ -420,7 +420,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="nameTextFieldChanged:" destination="NuG-th-5W3" eventType="editingDidEnd" id="hai-iE-ym2"/>
+                                                        <action selector="nameTextFieldChanged:" destination="NuG-th-5W3" eventType="editingChanged" id="eU9-0F-8Zx"/>
                                                     </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NG5-4q-oan">

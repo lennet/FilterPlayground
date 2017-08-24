@@ -23,12 +23,13 @@ class KernelAttributeTableViewCell: UITableViewCell {
                     oldType == type {
                     return
                 }
-                
+                nameTextField.text = attribute?.name
                 setupValueView(for: type, value: attribute?.value)
                 typeButton.setTitle(type.rawValue, for: .normal)
             } else {
                 typeButton.setTitle("type", for: .normal)
                 valueSelectionView.subviews.forEach{ $0.removeFromSuperview() }
+                nameTextField.text = nil
             }
         }
     }
@@ -62,6 +63,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
         viewController.didSelectType = { type in
             self.attribute = KernelAttribute(name: self.attribute?.name ?? "", type: type, value: type.defaultValue)
             self.setupValueView(for: type, value: self.attribute!.value)
+            self.update()
         }
         UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(viewController, animated: true, completion: nil)
     }

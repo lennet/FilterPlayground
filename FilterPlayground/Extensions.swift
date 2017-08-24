@@ -93,6 +93,13 @@ extension CIColorKernel: Kernel {
     
 }
 
+public func ==<A: Equatable, B: Equatable>(lhs: [(A, B)], rhs: [(A, B)]) -> Bool {
+    guard lhs.count == rhs.count else { return false }
+    return zip(lhs, rhs)
+        .filter{ $0.0 != $1.0 || $0.1 != $1.1 }
+        .count == 0
+}
+
 extension Array where Element: Equatable {
     
     func index(of element: Element, after index: Int) -> Int? {
@@ -113,7 +120,6 @@ extension Array where Element: Equatable {
         }
         return nil
     }
-    
 }
 
 extension CGFloat {

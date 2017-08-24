@@ -31,6 +31,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     }
     
     var didUpdateText: ((String)->())?
+    var didUpdateArguments: (([(String, KernelAttributeType)]) -> ())?
     
     var errors: [KernelError] = [] {
         didSet {
@@ -67,6 +68,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         registerNotifications()
+        textView.didUpdateArguments = { self.didUpdateArguments?($0) }
         textView.delegate = self
     }
     
@@ -122,12 +124,16 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     
     @objc func themeChanged(notification: Notification?) {
         view.backgroundColor = ThemeManager.shared.currentTheme.sourceEditorBackground
-        textView.renderText()
+        textView.updatedText()
         textView.setNeedsDisplay()
     }
     
     func textViewDidChange(_ textView: UITextView) {
         didUpdateText?(textView.text)
     }
-
+    
+    func update(attributes: [KernelAttribute]) {
+        textView.insert(arguments: attributes.map{ ($0.name, $0.type) })
+    }
+    
 }

@@ -29,13 +29,16 @@ class NumberedTextView: UIView, UITextViewDelegate {
     }()
     
     weak var delegate: UITextViewDelegate?
+    
+    var didUpdateArguments: (([(String, KernelAttributeType)]) -> ())?
+    
     var text: String? {
         get {
             return textView.text
         }
         set {
             textView.text = newValue
-            renderText()
+            updatedText()
             setNeedsDisplay()
         }
     }
@@ -77,14 +80,23 @@ class NumberedTextView: UIView, UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         setNeedsDisplay()
-        renderText()
+        updatedText()
     }
     
-    func renderText() {
+    func updatedText(buildAst: Bool = true) {
         let selectedRange = textView.selectedRange
-        let parser = Parser(string: textView.text)
         let oldFont = font
-        currentAST = parser.getAST()
+        if buildAst {
+            let oldAst = currentAST
+            let parser = Parser(string: textView.text)
+            currentAST = parser.getAST()
+            
+            if let oldKernelDefinition = oldAst?.kernelDefinition(),
+                let newKernelDefinition = currentAST?.kernelDefinition(),
+                !(oldKernelDefinition.arguments == newKernelDefinition.arguments) {
+                didUpdateArguments?(newKernelDefinition.arguments)
+            }
+        }
         textView.attributedText = currentAST?.asAttributedText
         textView.selectedRange = selectedRange
         textView.font = oldFont
@@ -183,7 +195,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
             
             textView.text = textView.text.replacingCharacters(in: Range(range, in: textView.text)!, with: newText)
             textView.selectedRange = newSelectedRange
-            renderText()
+            updatedText()
             return false
         } else if text == "\t" && range.length == 0 {
             let newText = NumberedTextView.spacingValue
@@ -201,6 +213,11 @@ class NumberedTextView: UIView, UITextViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         setNeedsDisplay()
+    }
+    
+    func insert(arguments: [(String, KernelAttributeType)]) {
+        currentAST = currentAST?.astWithReplacedArguments(newArguments: arguments)
+        updatedText(buildAst: false)
     }
     
 }

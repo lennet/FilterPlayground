@@ -11,7 +11,11 @@ import UIKit
 class AttributesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    var attributes: [KernelAttribute] = []
+    var attributes: [KernelAttribute] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     var didUpdateAttributes: ((Bool)->())?
     
     // Mark: Tableview data source
@@ -25,8 +29,11 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
             return
         }
         if indexPath.row < attributes.count {
+            let oldAttribute = attributes[indexPath.row]
             attributes[indexPath.row] = attribute
-            didUpdateAttributes?(true)
+            // we only need to rerun if values have changed.
+            // we compare name and attributes because comparing values can be expensive for images
+            didUpdateAttributes?(oldAttribute.name == attribute.name && oldAttribute.type == attribute.type)
         } else {
             attributes.append(attribute)
             tableView.reloadData()
@@ -59,6 +66,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
     func deleteAttribute(action: UITableViewRowAction, for indexPath: IndexPath) {
         attributes.remove(at: indexPath.row)
         tableView.reloadData()
+        didUpdateAttributes?(false)
     }
     
 }

@@ -249,17 +249,41 @@ class MainViewController: UIViewController {
         }
     }
     
+    func didUpdateArgumentsFromAttributesViewController(shouldRerun: Bool) {
+        guard let attributes = attributesViewController?.attributes else {
+            return
+        }
+        document?.metaData.attributes = attributes
+        document?.updateChangeCount(.done)
+        if shouldRerun {
+            self.run()
+        }
+        sourceEditorViewController?.update(attributes: attributes)
+    }
+    
+    func didUpdateArgumentsFromSourceEditor(arguments: [(String, KernelAttributeType)]) {
+        let currentAttributes = attributesViewController?.attributes ?? []
+        var newAttributes: [KernelAttribute] = []
+        
+        for (index, argument) in arguments.enumerated() {
+            if index < currentAttributes.count {
+                var currentArgument = currentAttributes[index]
+                if (currentArgument.type == argument.1) {
+                    currentArgument.name = argument.0
+                    newAttributes.append(currentArgument)
+                    continue
+                }
+            }
+            newAttributes.append(KernelAttribute(name: argument.0, type: argument.1, value: argument.1.defaultValue))
+        }
+        attributesViewController?.attributes = newAttributes
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {
         case let vc as AttributesViewController:
             self.attributesViewController = vc
-            self.attributesViewController?.didUpdateAttributes = { shouldRun in
-                self.document?.metaData.attributes = self.attributesViewController?.attributes ?? []
-                self.document?.updateChangeCount(.done)
-                if shouldRun {
-                    self.run()
-                }
-            }
+            self.attributesViewController?.didUpdateAttributes = didUpdateArgumentsFromAttributesViewController
         case let vc as LiveViewController:
             self.liveViewController = vc
             vc.didUpdateInputImages = { [weak self] images in
@@ -270,6 +294,7 @@ class MainViewController: UIViewController {
             vc.didUpdateText = { [weak self] text in
                 self?.document?.source = text
             }
+            vc.didUpdateArguments = didUpdateArgumentsFromSourceEditor
         case let vc as DocumentBrowserViewController:
             vc.didOpenedDocument = didOpened
         case let nc as UINavigationController where nc.viewControllers.first is ExportTableViewController:

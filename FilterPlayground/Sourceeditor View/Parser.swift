@@ -265,7 +265,7 @@ class Parser {
     }
     
     func getAST() -> ASTNode {
-        return ASTNode.root(ASTBuilder.getAST(for: getTokens()))
+        return ASTNode.root(ASTHelper.getAST(for: getTokens()))
     }
     
 }

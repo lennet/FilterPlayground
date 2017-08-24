@@ -16,6 +16,12 @@ enum ASTNode {
     case root([ASTNode])
 }
 
+typealias KernelDefinition = (name: String, returnType: KernelAttributeType, arguments: [(String,KernelAttributeType)])
+
+func ==(lhs:(String,KernelAttributeType), rhs:(String,KernelAttributeType)) -> Bool {
+    return lhs.0 == rhs.0 && lhs.1 == rhs.1
+}
+
 extension ASTNode: Equatable {
     
     static func ==(lhs: ASTNode, rhs: ASTNode) -> Bool {
@@ -86,8 +92,8 @@ extension ASTNode: Equatable {
             })
             return maxValue
         case .statement(_),
-        .unkown(_),
-        .comment(_):
+             .unkown(_),
+             .comment(_):
             return depth
         }
     }
@@ -118,9 +124,88 @@ extension ASTNode: Equatable {
         }
     }
     
+    func kernelDefinition() -> KernelDefinition? {
+        guard case .root(let nodes) = self else {
+            return nil
+        }
+        
+        for case .bracetStatement(prefix: let prefix, body: _, postfix: _) in nodes {
+            let tokens = prefix
+                .filter {
+                    if case .identifier(_) = $0 {
+                        return true
+                    }
+                    return false
+            }
+            guard tokens.count >= 4 else { continue }
+            switch (tokens[0], tokens[1], tokens[2], tokens[3]) {
+            case (.identifier(.keyword(.kernel)), .identifier(.type(let type)), .identifier(.other(let name)), .identifier(.other("("))):
+                return (name: name, returnType: type, arguments:ASTHelper.arguments(for: Array(tokens[3...])))
+            default:
+                continue
+            }
+        }
+        
+        return nil
+    }
+    
+    func astWithReplacedArguments(newArguments: [(String, KernelAttributeType)]) -> ASTNode? {
+        guard case .root(let nodes) = self else {
+            return nil
+        }
+    
+        var otherNodes: [ASTNode] = []
+        
+        for (index, node) in nodes.enumerated() {
+            guard case .bracetStatement(prefix: let prefix, body: let body, postfix: let postfix) = node else {
+                otherNodes.append(node)
+                continue
+            }
+            let kernelIndex = prefix.index(of: .identifier(.keyword(.kernel)))
+            let tokens = prefix
+                .filter {
+                    if case .identifier(_) = $0 {
+                        return true
+                    }
+                    return false
+            }
+            guard tokens.count >= 4 else {
+                otherNodes.append(node)
+                continue
+                
+            }
+            switch (tokens[0], tokens[1], tokens[2], tokens[3]) {
+            case (.identifier(.keyword(.kernel)), .identifier(.type(_)), .identifier(.other(_)), .identifier(.other("("))):
+                let argumentsToken = newArguments
+                    .map{[Token.identifier(.type($0.1)), Token.whiteSpace, Token.identifier(.other($0.0))]}
+                    .joined(separator: [Token.identifier(.other(",")), Token.whiteSpace])
+                var newPrefix: [Token] = [tokens[0], .whiteSpace, tokens[1], .whiteSpace, tokens[2], tokens[3]]
+                    + argumentsToken
+                    + [.identifier(.other(")")), .whiteSpace, .openingBracket]
+                
+                if let kernelIndex = kernelIndex,
+                    kernelIndex > 0 {
+                    newPrefix = prefix[0..<kernelIndex] + newPrefix
+                }
+
+                let newRoot = ASTNode.bracetStatement(prefix: newPrefix, body: body, postfix: postfix)
+                
+                let nodes = [otherNodes, [newRoot], Array(nodes[(index+1)...])]
+                    .filter{ !$0.isEmpty}
+                    .reduce([], +)
+                return .root(nodes)
+            default:
+                otherNodes.append(node)
+                continue
+            }
+        }
+        
+        return nil
+    }
+    
 }
 
-class ASTBuilder {
+class ASTHelper {
     
     private init() {}
     
@@ -202,6 +287,26 @@ class ASTBuilder {
             }
         }
         return ASTNode.comment(Array(tokens[...resultIndex]))
+    }
+    
+    class func arguments(for tokens: [Token]) -> [(String, KernelAttributeType)] {
+        var result: [(String, KernelAttributeType)] = []
+        let filtred = tokens.filter{ token in
+            switch token {
+            case .identifier(.other(")")),
+                 .identifier(.other("(")):
+                return false
+            default:
+                return true
+            }
+        }
+        for component in filtred.split(separator: .identifier(.other(","))) where component.count == 2 {
+            if case Token.identifier(.type(let type)) = component.first!,
+                case Token.identifier(.other(let name)) = component.last! {
+                result.append((name, type))
+            }
+        }
+        return result
     }
     
 }

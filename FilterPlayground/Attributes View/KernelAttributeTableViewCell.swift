@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KernelAttributeTableViewCell: UITableViewCell {
+class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var typeButton: UIButton!
@@ -60,6 +60,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
         viewController.modalPresentationStyle = .popover
         viewController.popoverPresentationController?.sourceView = sender
         viewController.popoverPresentationController?.sourceRect = sender.bounds
+        viewController.popoverPresentationController?.delegate = self
         viewController.didSelectType = { type in
             self.attribute = KernelAttribute(name: self.attribute?.name ?? "", type: type, value: type.defaultValue)
             self.setupValueView(for: type, value: self.attribute!.value)
@@ -80,6 +81,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
         viewController.modalPresentationStyle = .popover
         viewController.popoverPresentationController?.sourceView = valueSelectionView
         viewController.popoverPresentationController?.sourceRect = valueSelectionView.bounds
+        viewController.popoverPresentationController?.delegate = self
         
         UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(viewController, animated: true, completion: nil)
     }
@@ -95,6 +97,7 @@ class KernelAttributeTableViewCell: UITableViewCell {
         viewController.modalPresentationStyle = .popover
         viewController.popoverPresentationController?.sourceView = valueSelectionView
         viewController.popoverPresentationController?.sourceRect = valueSelectionView.bounds
+        viewController.popoverPresentationController?.delegate = self
         
         UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(viewController, animated: true, completion: nil)
     }
@@ -160,6 +163,10 @@ class KernelAttributeTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         attribute = nil
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     
 }

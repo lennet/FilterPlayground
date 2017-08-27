@@ -216,7 +216,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
     }
     
     func insert(arguments: [(String, KernelAttributeType)]) {
-        currentAST = currentAST?.astWithReplacedArguments(newArguments: arguments)
+        currentAST?.replaceArguments(newArguments: arguments)
         updatedText(buildAst: false)
     }
     

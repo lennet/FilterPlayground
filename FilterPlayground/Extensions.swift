@@ -120,6 +120,15 @@ extension Array where Element: Equatable {
         }
         return nil
     }
+    
+    mutating func replace(element: Element, with replacement: Element) {
+        self = map{
+            if $0 == element {
+                return replacement
+            }
+            return $0
+        }
+    }
 }
 
 extension CGFloat {

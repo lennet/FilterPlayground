@@ -149,18 +149,13 @@ extension ASTNode: Equatable {
         return nil
     }
     
-    func astWithReplacedArguments(newArguments: [(String, KernelAttributeType)]) -> ASTNode? {
-        guard case .root(let nodes) = self else {
-            return nil
-        }
-    
-        var otherNodes: [ASTNode] = []
-        
-        for (index, node) in nodes.enumerated() {
-            guard case .bracetStatement(prefix: let prefix, body: let body, postfix: let postfix) = node else {
-                otherNodes.append(node)
-                continue
-            }
+    mutating func replaceArguments(newArguments: [(String, KernelAttributeType)]) {
+        switch self {
+        case .unkown( _),
+             .comment( _),
+             .statement( _):
+            return
+        case .bracetStatement(prefix:var prefix, body: let body, postfix: let postfix):
             let kernelIndex = prefix.index(of: .identifier(.keyword(.kernel)))
             let tokens = prefix
                 .filter {
@@ -170,9 +165,7 @@ extension ASTNode: Equatable {
                     return false
             }
             guard tokens.count >= 4 else {
-                otherNodes.append(node)
-                continue
-                
+                return
             }
             switch (tokens[0], tokens[1], tokens[2], tokens[3]) {
             case (.identifier(.keyword(.kernel)), .identifier(.type(_)), .identifier(.other(_)), .identifier(.other("("))):
@@ -187,20 +180,55 @@ extension ASTNode: Equatable {
                     kernelIndex > 0 {
                     newPrefix = prefix[0..<kernelIndex] + newPrefix
                 }
-
-                let newRoot = ASTNode.bracetStatement(prefix: newPrefix, body: body, postfix: postfix)
                 
-                let nodes = [otherNodes, [newRoot], Array(nodes[(index+1)...])]
-                    .filter{ !$0.isEmpty}
-                    .reduce([], +)
-                return .root(nodes)
+                self = .bracetStatement(prefix: newPrefix, body: body, postfix: postfix)
+                return
             default:
-                otherNodes.append(node)
-                continue
+                return
             }
+        case .root(let nodes):
+            self = .root(nodes.map {
+                var tmp = $0
+                tmp.replaceArguments(newArguments: newArguments)
+                return tmp
+            })
+            return
         }
-        
-        return nil
+    }
+    
+    mutating func replace(token: Token, with replacement: Token) {
+        switch self {
+        case .unkown(var tokens):
+            tokens.replace(element: token, with: replacement)
+            self = .unkown(tokens)
+            break
+        case .comment(var tokens):
+            tokens.replace(element: token, with: replacement)
+            self = .comment(tokens)
+            break
+        case .statement(var tokens):
+            tokens.replace(element: token, with: replacement)
+            self = .statement(tokens)
+            break
+        case .bracetStatement(prefix:var prefixToken, body: var bodyNodes, postfix: var postFixToken):
+            prefixToken.replace(element: token, with: replacement)
+            postFixToken.replace(element: token, with: replacement)
+            bodyNodes = bodyNodes.map {
+                var tmp = $0
+                tmp.replace(token: token, with: replacement)
+                return tmp
+            }
+            self = .bracetStatement(prefix: prefixToken, body: bodyNodes, postfix: postFixToken)
+            break
+        case .root(var nodes):
+            nodes = nodes.map {
+                var tmp = $0
+                tmp.replace(token: token, with: replacement)
+                return tmp
+            }
+            self = .root(nodes)
+            break
+        }
     }
     
 }

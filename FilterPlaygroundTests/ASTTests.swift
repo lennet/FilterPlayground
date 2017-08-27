@@ -302,8 +302,10 @@ kernel vec2 hello(float radius, vec2 foo) {
     return vec2(1.0, 1.0);
 }
 """
-        let ast = Parser(string: source).getAST()
-        let result = ast.astWithReplacedArguments(newArguments: [("bar", .color)])!.asAttributedText.string
+        var ast = Parser(string: source).getAST()
+        ast.replaceArguments(newArguments: [("bar", .color)])
+        let result = ast.asAttributedText.string
+        
         let expectedResult = """
 kernel vec2 hello(__color bar) {
     return vec2(1.0, 1.0);
@@ -318,8 +320,9 @@ kernel vec2 hello(float radius, vec2 foo) {
     return vec2(1.0, 1.0);
 }
 """
-        let ast = Parser(string: source).getAST()
-        let result = ast.astWithReplacedArguments(newArguments: [("bar", .color), ("foo", .float)])!.asAttributedText.string
+        var ast = Parser(string: source).getAST()
+        ast.replaceArguments(newArguments: [("bar", .color), ("foo", .float)])
+        let result = ast.asAttributedText.string
         let expectedResult = """
 kernel vec2 hello(__color bar, float foo) {
     return vec2(1.0, 1.0);
@@ -335,10 +338,30 @@ kernel vec2 hello() {
     return vec2(1.0, 1.0);
 }
 """
-        let ast = Parser(string: source).getAST()
-        let result = ast.astWithReplacedArguments(newArguments: [])!.asAttributedText.string
+        var ast = Parser(string: source).getAST()
+        ast.replaceArguments(newArguments: [])
+        let result = ast.asAttributedText.string
         let expectedResult = source
         XCTAssertEqual(result, expectedResult)
+    }
+    
+    func testReplaceTokens() {
+        let source = """
+
+kernel vec2 hello() {
+    return hello5(1.0, 1.0);
+}
+"""
+        var ast = Parser(string: source).getAST()
+        ast.replace(token: Token.identifier(.other("hello")), with: Token.identifier(.other("foo")))
+        
+        let expectedResult = """
+
+kernel vec2 foo() {
+    return hello5(1.0, 1.0);
+}
+"""
+        XCTAssertEqual(ast.asAttributedText.string, expectedResult)
     }
     
 }

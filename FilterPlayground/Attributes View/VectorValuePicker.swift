@@ -111,4 +111,8 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
         highlight(at: 1)
     }
     
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
 }

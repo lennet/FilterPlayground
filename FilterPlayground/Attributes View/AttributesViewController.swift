@@ -11,9 +11,14 @@ import UIKit
 class AttributesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var shouldUpdateOnReload = true
     var attributes: [KernelAttribute] = [] {
         didSet {
-            self.tableView.reloadData()
+            if shouldUpdateOnReload {
+                self.tableView.reloadData()
+            }
+            shouldUpdateOnReload = true
         }
     }
     var didUpdateAttributes: ((Bool)->())?
@@ -30,6 +35,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         if indexPath.row < attributes.count {
             let oldAttribute = attributes[indexPath.row]
+            shouldUpdateOnReload = false
             attributes[indexPath.row] = attribute
             // we only need to rerun if values have changed.
             // we compare name and attributes because comparing values can be expensive for images

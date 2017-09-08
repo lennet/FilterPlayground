@@ -23,10 +23,11 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     // MARK: UIDocumentBrowserViewControllerDelegate
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
-        let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("untitled.kernelProj")
+        let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("untitled.\(Document.type)")
         
         let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewProjectTabBarController") as! UITabBarController
         let viewController = (tabBarController.viewControllers!.first as! UINavigationController).viewControllers.first as! NewProjectViewController
+        let selectTemplateViewController = (tabBarController.viewControllers!.last as! UINavigationController).viewControllers.first as! SelectTemplateTableViewController
         tabBarController.modalPresentationStyle = .formSheet
         present(tabBarController, animated: true) {
             
@@ -40,8 +41,13 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
                         importHandler(nil, .none)
                     }
                 }
-                
             }
+            
+            selectTemplateViewController.didSelectTemplate = { url in
+                viewController.dismiss(animated: true, completion: nil)
+                importHandler(url, .copy)
+            }
+            
         }
         
     }
@@ -80,9 +86,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
                 navigationController.modalTransitionStyle = .crossDissolve
                 self.present(navigationController, animated: true, completion: nil)
             }
-            
         }
-        
     }
     
 }

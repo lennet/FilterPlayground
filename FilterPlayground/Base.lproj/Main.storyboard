@@ -262,7 +262,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-443.1918008784773" y="847.8515625"/>
+            <point key="canvasLocation" x="-607" y="855"/>
         </scene>
         <!--Export-->
         <scene sceneID="hnW-X9-HX6">
@@ -826,7 +826,35 @@
         <!--Template-->
         <scene sceneID="EBa-Jn-BP1">
             <objects>
-                <tableViewController title="Template" id="aX3-25-gz8" sceneMemberID="viewController">
+                <tableViewController title="Template" id="aX3-25-gz8" customClass="SelectTemplateTableViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nR5-yi-hAd">
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="identiifer" textLabel="pHr-Fg-t4j" style="IBUITableViewCellStyleDefault" id="5J6-zf-6xx">
+                                <rect key="frame" x="0.0" y="28" width="1366" height="52"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5J6-zf-6xx" id="Fwt-Zc-aOa">
+                                    <rect key="frame" x="0.0" y="0.0" width="1366" height="51.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pHr-Fg-t4j">
+                                            <rect key="frame" x="20" y="0.0" width="1331" height="51.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="aX3-25-gz8" id="fsh-rg-anY"/>
+                            <outlet property="delegate" destination="aX3-25-gz8" id="XDB-y8-Rts"/>
+                        </connections>
+                    </tableView>
                     <navigationItem key="navigationItem" title="Template" id="Oql-Tg-6w0"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7S-7R-sli" userLabel="First Responder" sceneMemberID="firstResponder"/>

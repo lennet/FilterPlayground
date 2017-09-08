@@ -12,7 +12,7 @@
 			<key>CFBundleTypeIconFiles</key>
 			<array/>
 			<key>CFBundleTypeName</key>
-			<string>Document</string>
+			<string>Kernel Project</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSHandlerRank</key>
@@ -21,14 +21,6 @@
 			<array>
 				<string>com.leonardtthomas.kernelProject</string>
 			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeIconFiles</key>
-			<array/>
-			<key>CFBundleTypeName</key>
-			<string>test</string>
-			<key>LSItemContentTypes</key>
-			<array/>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>

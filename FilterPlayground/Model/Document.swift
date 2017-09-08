@@ -15,6 +15,8 @@ enum DocumentError: Error {
 
 class Document: UIDocument {
 
+    static let type: String = "kernelProj"
+    
     var metaData: ProjectMetaData = ProjectMetaData(attributes: [], type: .warp)
     var source: String = "" {
         didSet {

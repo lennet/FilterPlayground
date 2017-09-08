@@ -1,0 +1,8 @@
+kernel vec4 untitled() {
+    return untitled2();
+}
+
+kernel vec4 untitled2() {
+    return vec4(1.0, 1.0, 1.0, 1.0);
+}
+

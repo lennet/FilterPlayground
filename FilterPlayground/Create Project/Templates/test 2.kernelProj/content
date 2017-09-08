@@ -1,0 +1,3 @@
+kernel vec4 untitled(__sample fore, __sample back) {
+    return sample(fore, destCoord()) + sample(back, destCoord());
+}

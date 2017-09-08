@@ -30,6 +30,13 @@
 		985A42361F2CFEE800636E72 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42351F2CFEE800636E72 /* CustomImageView.swift */; };
 		986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */; };
 		9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868A8C01F3712EB00D0BC79 /* AST.swift */; };
+		986AA72B1F62F51C008F2091 /* TemplatesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AA72A1F62F51C008F2091 /* TemplatesManager.swift */; };
+		986AA72D1F62F679008F2091 /* TemplatesManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */; };
+		986AA7321F62FE3B008F2091 /* test 2.kernelProj in Resources */ = {isa = PBXBuildFile; fileRef = 986AA72F1F62FD34008F2091 /* test 2.kernelProj */; };
+		986AA7331F62FE3B008F2091 /* test 3.kernelProj in Resources */ = {isa = PBXBuildFile; fileRef = 986AA72E1F62FD2D008F2091 /* test 3.kernelProj */; };
+		986AA7341F62FE3B008F2091 /* test 4.kernelProj in Resources */ = {isa = PBXBuildFile; fileRef = 986AA7301F62FD36008F2091 /* test 4.kernelProj */; };
+		986AA7351F62FE3B008F2091 /* test.kernelProj in Resources */ = {isa = PBXBuildFile; fileRef = 986AA7311F62FD38008F2091 /* test.kernelProj */; };
+		986AA7371F62FF76008F2091 /* SelectTemplateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AA7361F62FF76008F2091 /* SelectTemplateTableViewController.swift */; };
 		987672451F2F5355002F9AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
 		9881A14F1F4884C900BABA72 /* ThumbnailProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881A14E1F4884C900BABA72 /* ThumbnailProvider.swift */; };
 		9881A1531F4884CA00BABA72 /* FilterPlaygroundThumbnailExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -137,6 +144,13 @@
 		985A42351F2CFEE800636E72 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		9868A8C01F3712EB00D0BC79 /* AST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
+		986AA72A1F62F51C008F2091 /* TemplatesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesManager.swift; sourceTree = "<group>"; };
+		986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesManagerTests.swift; sourceTree = "<group>"; };
+		986AA72E1F62FD2D008F2091 /* test 3.kernelProj */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "test 3.kernelProj"; sourceTree = "<group>"; };
+		986AA72F1F62FD34008F2091 /* test 2.kernelProj */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "test 2.kernelProj"; sourceTree = "<group>"; };
+		986AA7301F62FD36008F2091 /* test 4.kernelProj */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "test 4.kernelProj"; sourceTree = "<group>"; };
+		986AA7311F62FD38008F2091 /* test.kernelProj */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = test.kernelProj; sourceTree = "<group>"; };
+		986AA7361F62FF76008F2091 /* SelectTemplateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTemplateTableViewController.swift; sourceTree = "<group>"; };
 		987672441F2F5355002F9AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FilterPlaygroundThumbnailExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9881A14E1F4884C900BABA72 /* ThumbnailProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailProvider.swift; sourceTree = "<group>"; };
@@ -235,6 +249,7 @@
 		9845C60F1F38F42500F38283 /* Create Project */ = {
 			isa = PBXGroup;
 			children = (
+				986AA7291F62F4FE008F2091 /* Templates */,
 				98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */,
 				9845C6101F38F44100F38283 /* NewProjectViewController.swift */,
 			);
@@ -304,6 +319,7 @@
 				98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */,
 				9841EC761F36675000A8E3CA /* ThemingTests.swift */,
 				98C6FE851F3832AE00D0E840 /* ASTTests.swift */,
+				986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -315,6 +331,19 @@
 				985A42271F2CF8F300636E72 /* Info.plist */,
 			);
 			path = FilterPlaygroundUITests;
+			sourceTree = "<group>";
+		};
+		986AA7291F62F4FE008F2091 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				986AA72F1F62FD34008F2091 /* test 2.kernelProj */,
+				986AA72E1F62FD2D008F2091 /* test 3.kernelProj */,
+				986AA7301F62FD36008F2091 /* test 4.kernelProj */,
+				986AA7311F62FD38008F2091 /* test.kernelProj */,
+				986AA72A1F62F51C008F2091 /* TemplatesManager.swift */,
+				986AA7361F62FF76008F2091 /* SelectTemplateTableViewController.swift */,
+			);
+			path = Templates;
 			sourceTree = "<group>";
 		};
 		9881A14D1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */ = {
@@ -549,6 +578,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				986AA7341F62FE3B008F2091 /* test 4.kernelProj in Resources */,
+				986AA7351F62FE3B008F2091 /* test.kernelProj in Resources */,
+				986AA7331F62FE3B008F2091 /* test 3.kernelProj in Resources */,
+				986AA7321F62FE3B008F2091 /* test 2.kernelProj in Resources */,
 				98DC562C1F3CEF1C0024F522 /* ValuePicker.storyboard in Resources */,
 				985A42101F2CF8F200636E72 /* LaunchScreen.storyboard in Resources */,
 				985A420D1F2CF8F200636E72 /* Assets.xcassets in Resources */,
@@ -617,11 +650,13 @@
 				98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
 				9848C4441F3B9B58001E079C /* SettingsTableViewController.swift in Sources */,
+				986AA7371F62FF76008F2091 /* SelectTemplateTableViewController.swift in Sources */,
 				9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */,
 				98E692E91F30C832000C8B41 /* Document.swift in Sources */,
 				98C5E23D1F34B85C006E7658 /* KernelCompiler.swift in Sources */,
 				980229AE1F2FB88F000FFCA2 /* ErrorParser.swift in Sources */,
 				98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */,
+				986AA72B1F62F51C008F2091 /* TemplatesManager.swift in Sources */,
 				980229AC1F2F94F9000FFCA2 /* ErrorHelper.swift in Sources */,
 				98C5E23F1F34B8DD006E7658 /* KernelError.swift in Sources */,
 			);
@@ -636,6 +671,7 @@
 				985668431F2E6ABE00297A4E /* TokenizerTests.swift in Sources */,
 				9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */,
 				98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */,
+				986AA72D1F62F679008F2091 /* TemplatesManagerTests.swift in Sources */,
 				980229B01F2FBF18000FFCA2 /* ErrorParserTests.swift in Sources */,
 				98C6FE861F3832AE00D0E840 /* ASTTests.swift in Sources */,
 				98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */,

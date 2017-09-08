@@ -36,6 +36,11 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
 
     var updateCallBack: ((UITableViewCell, KernelAttribute) -> ())?
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        registerNotifications()
+    }
+    
     @IBAction func nameTextFieldChanged(_ sender: Any) {
         guard let name = nameTextField.text else {
             return
@@ -43,8 +48,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         attribute?.name = name
         update()
     }
-    
-    
+
     func update() {
         guard let attribute = attribute else {
             return
@@ -168,5 +172,13 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
-    
+
+    func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(notification:)), name: ThemeManager.themeChangedNotificationName, object: nil)
+        themeChanged(notification: nil)
+    }
+
+    @objc func themeChanged(notification: Notification?) {
+        contentView.backgroundColor = ThemeManager.shared.currentTheme.attributesCellBackground
+    }
 }

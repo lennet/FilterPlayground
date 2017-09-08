@@ -22,7 +22,17 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     var didUpdateAttributes: ((Bool)->())?
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerNotifications()
+    }
     
+    func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(notification:)), name: ThemeManager.themeChangedNotificationName, object: nil)
+        themeChanged(notification: nil)
+    }
+
     // Mark: Tableview data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,6 +83,11 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         attributes.remove(at: indexPath.row)
         tableView.reloadData()
         didUpdateAttributes?(false)
+    }
+    
+    @objc func themeChanged(notification: Notification?) {
+        view.backgroundColor = ThemeManager.shared.currentTheme.attributesBackground
+        tableView.separatorColor = ThemeManager.shared.currentTheme.attributesSeparatorColor
     }
     
 }

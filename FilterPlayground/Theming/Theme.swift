@@ -22,9 +22,18 @@ protocol Theme {
     static var liveViewLabel: UIColor { get }
     static var dropInteractionBorder: UIColor { get }
     static var imageViewBackground: UIColor { get }
+    static var attributesSeparatorColor: UIColor { get }
+    static var attributesBackground: UIColor { get }
+    static var attributesCellBackground: UIColor { get }
 }
 
 struct NightTheme: Theme {
+    static var attributesCellBackground: UIColor = .black
+    
+    static var attributesSeparatorColor: UIColor = .white
+    
+    static var attributesBackground: UIColor = .black
+    
     static var sourceEditTextComment: UIColor = .green
     
     static var sourceEditorTextFloat: UIColor = .blue
@@ -78,6 +87,13 @@ struct Default: Theme {
     static var dropInteractionBorder: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
     static var imageViewBackground: UIColor = #colorLiteral(red: 0.8214625635, green: 0.8214625635, blue: 0.8214625635, alpha: 1)
+    
+    static var attributesSeparatorColor: UIColor = .darkGray
+    
+    static var attributesBackground: UIColor = .white
+    
+    static var attributesCellBackground: UIColor = .white
+
 }
 
 class ThemeManager {

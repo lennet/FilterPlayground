@@ -48,8 +48,13 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         }
     }
     
-    var fontSize: Float = 22 {
-        didSet {
+    var fontSize: Float {
+        get {
+            return Settings.fontSize
+        }
+    
+        set {
+            Settings.fontSize = newValue
             updateFont()
         }
     }
@@ -67,9 +72,13 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateFont()
         registerNotifications()
         textView.didUpdateArguments = { self.didUpdateArguments?($0) }
         textView.delegate = self
+        
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(gestureRecognizer:)))
+        self.view.addGestureRecognizer(pinchGestureRecognizer)
     }
     
     func registerNotifications() {
@@ -134,6 +143,12 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     
     func update(attributes: [KernelAttribute]) {
         textView.insert(arguments: attributes.map{ ($0.name, $0.type) })
+    }
+    
+    @objc func handlePinch(gestureRecognizer: UIPinchGestureRecognizer) {
+        fontSize = (fontSize + Float(gestureRecognizer.velocity))
+        fontSize = max(fontSize, 9)
+        fontSize = min(fontSize, 72)
     }
     
 }

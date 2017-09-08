@@ -16,18 +16,18 @@ enum KernelType: String, Codable {
 }
 
 extension KernelType {
-    
+
     var returnType: KernelAttributeType {
         switch self {
         case .normal,
-         .color,
-         .blend:
+             .color,
+             .blend:
             return .vec4
         case .warp:
             return .vec2
         }
     }
-    
+
     var requiredArguments: [KernelAttributeType] {
         switch self {
         case .color:
@@ -36,11 +36,11 @@ extension KernelType {
             return []
         }
     }
-    
+
     func initialSource(with name: String) -> String {
         return "kernel \(returnType) \(name)(\(initialArguments)) {\n\(initialSourceBody)\n}"
     }
-    
+
     var initialArguments: String {
         switch self {
         case .color:
@@ -51,7 +51,7 @@ extension KernelType {
             return ""
         }
     }
-    
+
     var initialSourceBody: String {
         switch self {
         case .color:
@@ -64,7 +64,7 @@ extension KernelType {
             return "\(NumberedTextView.spacingValue)return vec4(1.0, 1.0, 1.0, 1.0);"
         }
     }
-    
+
     var requiredInputImages: Int {
         switch self {
         case .blend:
@@ -75,7 +75,7 @@ extension KernelType {
             return 0
         }
     }
-    
+
     var supportsAttributes: Bool {
         switch self {
         case .blend:
@@ -84,7 +84,7 @@ extension KernelType {
             return true
         }
     }
-    
+
     var compile: (String) -> KernelCompilerResult {
         switch self {
         case .color:
@@ -97,22 +97,20 @@ extension KernelType {
             return KernelCompiler<BlendKernel>.compile
         }
     }
-    
 }
 
 enum KernelAttributeType: String, Codable {
-    
+
     case float
     case vec2
     case vec3
     case vec4
     case sample = "__sample"
     case color = "__color"
-    
+
     static var all: [KernelAttributeType] {
         return [.float, .vec2, .vec3, .vec4, .sample, .color]
     }
-    
 }
 
 enum KernelAttributeValue {
@@ -122,27 +120,27 @@ enum KernelAttributeValue {
     case vec4(Float, Float, Float, Float)
     case sample(UIImage)
     case color(Float, Float, Float, Float)
-    
+
     var asKernelValue: Any {
         switch self {
-        case .float(let value):
+        case let .float(value):
             return value
-        case .vec2(let a, let b):
+        case let .vec2(a, b):
             return CIVector(x: CGFloat(a), y: CGFloat(b))
-        case .vec3(let a, let b, let c):
+        case let .vec3(a, b, c):
             return CIVector(x: CGFloat(a), y: CGFloat(b), z: CGFloat(c))
-        case .vec4(let a, let b, let c, let d):
+        case let .vec4(a, b, c, d):
             return CIVector(x: CGFloat(a), y: CGFloat(b), z: CGFloat(c), w: CGFloat(d))
-        case .color(let a, let b, let c, let d):
+        case let .color(a, b, c, d):
             return CIColor(red: CGFloat(a), green: CGFloat(b), blue: CGFloat(c), alpha: CGFloat(d))
-        case .sample(let image):
+        case let .sample(image):
             return CISampler(image: image.asCIImage!)
         }
     }
 }
 
 extension KernelAttributeValue: Codable {
-    
+
     private enum CodingKeys: String, CodingKey {
         case float
         case vec2
@@ -151,35 +149,35 @@ extension KernelAttributeValue: Codable {
         case sample
         case color
     }
-    
+
     private enum CodableErrors: Error {
         case unkownValue
     }
-    
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
-        case .float(let value):
+        case let .float(value):
             try container.encode(value, forKey: .float)
             break
-        case .vec2(let a, let b):
+        case let .vec2(a, b):
             try container.encode([a, b], forKey: .vec2)
             break
-        case .vec3(let a, let b, let c):
+        case let .vec3(a, b, c):
             try container.encode([a, b, c], forKey: .vec3)
             break
-        case .vec4(let a, let b, let c, let d):
+        case let .vec4(a, b, c, d):
             try container.encode([a, b, c, d], forKey: .vec4)
             break
-        case .color(let a, let b, let c, let d):
+        case let .color(a, b, c, d):
             try container.encode([a, b, c, d], forKey: .color)
             break
-        case .sample(let image):
+        case let .sample(image):
             try container.encode(UIImagePNGRepresentation(image)!, forKey: .sample)
             break
         }
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         if let value = try? values.decode(Float.self, forKey: .float) {
@@ -230,7 +228,6 @@ extension KernelAttributeValue: Codable {
         }
         throw CodableErrors.unkownValue
     }
-
 }
 
 struct KernelAttribute {
@@ -240,31 +237,30 @@ struct KernelAttribute {
 }
 
 extension KernelAttribute: Codable {
-    
+
     enum CodingKeys: String, CodingKey {
         case name
         case type
         case value
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
         type = try values.decode(KernelAttributeType.self, forKey: .type)
         value = try values.decode(KernelAttributeValue.self, forKey: .value)
     }
-    
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(type, forKey: .type)
         try container.encode(value, forKey: .value)
     }
-    
 }
 
 extension KernelAttributeType {
-    
+
     var defaultValue: KernelAttributeValue {
         switch self {
         case .float:
@@ -283,5 +279,4 @@ extension KernelAttributeType {
             return .sample(UIImage(cgImage: cgImage))
         }
     }
-    
 }

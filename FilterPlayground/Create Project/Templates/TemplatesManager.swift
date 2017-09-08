@@ -9,10 +9,9 @@
 import Foundation
 
 class TemplatesManager {
-    
+
     class func getURLs() -> [URL] {
         let paths = Bundle.main.paths(forResourcesOfType: Document.type, inDirectory: nil)
         return paths.map(URL.init(fileURLWithPath:))
     }
-    
 }

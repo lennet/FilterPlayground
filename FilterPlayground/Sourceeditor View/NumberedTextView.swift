@@ -9,15 +9,15 @@
 import UIKit
 
 class NumberedTextView: UIView, UITextViewDelegate {
-    
+
     var theme: Theme.Type {
         return ThemeManager.shared.currentTheme
     }
-    
+
     class var spacingValue: String {
         return Settings.tabsEnabled ? "\t" : "    "
     }
-    
+
     let textView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear
@@ -27,11 +27,11 @@ class NumberedTextView: UIView, UITextViewDelegate {
         (textView as UIScrollView).delaysContentTouches = false
         return textView
     }()
-    
+
     weak var delegate: UITextViewDelegate?
-    
-    var didUpdateArguments: (([(String, KernelAttributeType)]) -> ())?
-    
+
+    var didUpdateArguments: (([(String, KernelAttributeType)]) -> Void)?
+
     var text: String? {
         get {
             return textView.text
@@ -42,15 +42,15 @@ class NumberedTextView: UIView, UITextViewDelegate {
             setNeedsDisplay()
         }
     }
-    
+
     var currentAST: ASTNode?
-    
+
     var hightLightErrorLineNumber: Int? {
         didSet {
             setNeedsDisplay()
         }
     }
-    
+
     var font: UIFont? {
         get {
             return textView.font
@@ -60,11 +60,11 @@ class NumberedTextView: UIView, UITextViewDelegate {
             setNeedsLayout()
         }
     }
-    
+
     var lineNumberOffset: CGFloat {
         return ("\(textView.text.numberOfLines) " as NSString).size(withAttributes: lineNumberAttributes(with: .clear)).width
     }
-    
+
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         textView.delegate = self
@@ -72,17 +72,17 @@ class NumberedTextView: UIView, UITextViewDelegate {
         addSubview(textView)
         backgroundColor = .clear
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        textView.frame = CGRect(origin: CGPoint(x:lineNumberOffset+10, y:0), size: CGSize(width: frame.width - lineNumberOffset-10, height: frame.height))
+        textView.frame = CGRect(origin: CGPoint(x: lineNumberOffset + 10, y: 0), size: CGSize(width: frame.width - lineNumberOffset - 10, height: frame.height))
     }
-    
-    func textViewDidChange(_ textView: UITextView) {
+
+    func textViewDidChange(_: UITextView) {
         setNeedsDisplay()
         updatedText()
     }
-    
+
     func updatedText(buildAst: Bool = true) {
         let selectedRange = textView.selectedRange
         let oldFont = font
@@ -90,7 +90,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
             let oldAst = currentAST
             let parser = Parser(string: textView.text)
             currentAST = parser.getAST()
-            
+
             if let oldKernelDefinition = oldAst?.kernelDefinition(),
                 let newKernelDefinition = currentAST?.kernelDefinition(),
                 !(oldKernelDefinition.arguments == newKernelDefinition.arguments) {
@@ -102,97 +102,99 @@ class NumberedTextView: UIView, UITextViewDelegate {
         textView.font = oldFont
         delegate?.textViewDidChange?(textView)
     }
-    
+
     override func draw(_ rect: CGRect) {
-        super.draw(rect) 
-        
+        super.draw(rect)
+
         var lineRange = NSMakeRange(0, 1)
         var index = 0
         var lineNumber = 1
         var shouldRenderLineNumber = true
-        
+
         while index < textView.layoutManager.numberOfGlyphs {
             let lineRect = textView.layoutManager.lineFragmentUsedRect(forGlyphAt: index, effectiveRange: &lineRange)
             index = NSMaxRange(lineRange)
             lineRange = (textView.text as NSString).lineRange(for: lineRange)
-            
+
             if draw(for: lineNumber, lineRange: lineRange, lineRect: lineRect, rect: rect, shouldRenderLineNumber: shouldRenderLineNumber) == false {
                 return
             }
-            
-            shouldRenderLineNumber = textView.text[textView.text.index(textView.text.startIndex, offsetBy: index-1)] == "\n"
+
+            shouldRenderLineNumber = textView.text[textView.text.index(textView.text.startIndex, offsetBy: index - 1)] == "\n"
             if shouldRenderLineNumber {
                 lineNumber += 1
             }
         }
-        lineRange = NSRange.init(location: textView.text.count, length: 0)
+        lineRange = NSRange(location: textView.text.count, length: 0)
         draw(for: lineNumber, lineRange: lineRange, lineRect: textView.layoutManager.extraLineFragmentRect, rect: rect, shouldRenderLineNumber: shouldRenderLineNumber)
     }
-    
+
     //: returns false if the current linerect is out of bounds
     @discardableResult
     func draw(for lineNumber: Int, lineRange: NSRange, lineRect: CGRect, rect: CGRect, shouldRenderLineNumber: Bool) -> Bool {
         let origin = CGPoint(x: 0, y: lineRect.origin.y - textView.contentOffset.y + textView.textContainerInset.top)
-        
+
         if origin.y > frame.size.height {
             return false
         }
-        
+
         if (hightLightErrorLineNumber ?? -1) == lineNumber {
-            fillLine(rect: CGRect(origin:origin, size: CGSize(width: rect.width, height: lineRect.height)), color: theme.sourceEditorLineBackgroundError)
+            fillLine(rect: CGRect(origin: origin, size: CGSize(width: rect.width, height: lineRect.height)), color: theme.sourceEditorLineBackgroundError)
         } else if textView.isFirstResponder && (lineRange.contains(textView.selectedRange.location) || lineRange.location == textView.selectedRange.location) && textView.selectedRange.length == 0 {
-            fillLine(rect: CGRect(origin:origin, size: CGSize(width: rect.width, height: lineRect.height)), color: theme.sourceEditorLineBackgroundHighlighted)
+            fillLine(rect: CGRect(origin: origin, size: CGSize(width: rect.width, height: lineRect.height)), color: theme.sourceEditorLineBackgroundHighlighted)
         }
-        
+
         if shouldRenderLineNumber && origin.y > -(textView.font?.lineHeight ?? 10) {
             draw(text: "\(lineNumber) ", at: origin, color: theme.sourceEditorLineNumber)
         }
         return true
     }
-    
+
     func fillLine(rect: CGRect, color: UIColor) {
         color.setFill()
         UIGraphicsGetCurrentContext()?.fill(rect)
     }
-    
-    func lineNumberAttributes(with color: UIColor) ->  [NSAttributedStringKey : Any] {
+
+    func lineNumberAttributes(with color: UIColor) -> [NSAttributedStringKey: Any] {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .right
-        
-        return [.font : textView.font!,
-                .foregroundColor: color,
-                .paragraphStyle: paragraphStyle]
+
+        return [
+            .font: textView.font!,
+            .foregroundColor: color,
+            .paragraphStyle: paragraphStyle,
+        ]
     }
-    
+
     func draw(text: String, at point: CGPoint, color: UIColor) {
-        (text as NSString).draw(in: CGRect(origin:point, size: CGSize(width: lineNumberOffset, height: font!.pointSize)), withAttributes: lineNumberAttributes(with: color))
+        (text as NSString).draw(in: CGRect(origin: point, size: CGSize(width: lineNumberOffset, height: font!.pointSize)), withAttributes: lineNumberAttributes(with: color))
     }
-    
+
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" && range.length == 0 {
-            
+
             let firstString = (textView.text as NSString).substring(to: range.location)
             let currentTokenLocation = Parser(string: firstString).getTokens().count
             let intendationLevel = currentAST?.intendationLevel(at: currentTokenLocation, with: 0) ?? 0
             let tabs = Array(repeating: NumberedTextView.spacingValue, count: intendationLevel).joined()
             var newText = text + tabs
-            
-            let lastChrackterIsOpeningBracket = (textView.text as NSString).substring(with: NSMakeRange(range.location-1, 1)) == "{"
+
+            let lastChrackterIsOpeningBracket = (textView.text as NSString).substring(with: NSMakeRange(range.location - 1, 1)) == "{"
             let newSelectedRange: NSRange
-            
+
             if range.location < textView.text.characters.count && (textView.text as NSString).substring(with: NSMakeRange(range.location, 1)) == "}" && lastChrackterIsOpeningBracket {
                 // {\n}
-                newSelectedRange = NSMakeRange(range.location+newText.count+1, 0)
+                newSelectedRange = NSMakeRange(range.location + newText.count + 1, 0)
                 newText += "\(NumberedTextView.spacingValue)\n" + tabs
             } else if lastChrackterIsOpeningBracket && currentAST?.needsClosingBracket(at: currentTokenLocation) ?? false {
                 // {\n
-                newSelectedRange = NSMakeRange(range.location+newText.count, 0)
-                let oldSpacing = Array(repeating: NumberedTextView.spacingValue, count: intendationLevel-1).joined()
+                newSelectedRange = NSMakeRange(range.location + newText.count, 0)
+                let oldSpacing = Array(repeating: NumberedTextView.spacingValue, count: intendationLevel - 1).joined()
                 newText += "\n\(oldSpacing)}"
             } else {
-                newSelectedRange = NSMakeRange(range.location+newText.count, 0)
+                newSelectedRange = NSMakeRange(range.location + newText.count, 0)
             }
-            
+
             textView.text = textView.text.replacingCharacters(in: Range(range, in: textView.text)!, with: newText)
             textView.selectedRange = newSelectedRange
             updatedText()
@@ -200,24 +202,23 @@ class NumberedTextView: UIView, UITextViewDelegate {
         } else if text == "\t" && range.length == 0 {
             let newText = NumberedTextView.spacingValue
             textView.text = textView.text.replacingCharacters(in: Range(range, in: textView.text)!, with: newText)
-            textView.selectedRange = NSMakeRange(range.location+newText.count, 0)
+            textView.selectedRange = NSMakeRange(range.location + newText.count, 0)
             return false
         }
-        
+
         return true
     }
-    
-    func textViewDidChangeSelection(_ textView: UITextView) {
+
+    func textViewDidChangeSelection(_: UITextView) {
         setNeedsDisplay()
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+    func scrollViewDidScroll(_: UIScrollView) {
         setNeedsDisplay()
     }
-    
+
     func insert(arguments: [(String, KernelAttributeType)]) {
         currentAST?.replaceArguments(newArguments: arguments)
         updatedText(buildAst: false)
     }
-    
 }

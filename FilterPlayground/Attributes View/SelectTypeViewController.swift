@@ -9,28 +9,27 @@
 import UIKit
 
 class SelectTypeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    var didSelectType: ((KernelAttributeType) -> ())?
-    
+
+    var didSelectType: ((KernelAttributeType) -> Void)?
+
     fileprivate let attributes: [KernelAttributeType] = KernelAttributeType.all
-        
-    @IBAction func cancel(_ sender: Any) {
+
+    @IBAction func cancel(_: Any) {
         dismiss(animated: true, completion: nil)
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return attributes.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "identifier", for: indexPath)
         cell.textLabel?.text = "\(attributes[indexPath.row])"
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         didSelectType?(attributes[indexPath.row])
         dismiss(animated: true, completion: nil)
     }
-
 }

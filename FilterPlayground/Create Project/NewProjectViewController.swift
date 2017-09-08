@@ -10,8 +10,8 @@ import UIKit
 
 class NewProjectViewController: UITableViewController {
 
-    var didSelectType: ((KernelType)->())?
-    
+    var didSelectType: ((KernelType) -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,8 +25,8 @@ class NewProjectViewController: UITableViewController {
     }
 
     // MARK: - Table view delegate
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let type: KernelType
         switch indexPath.row {
         case 1:
@@ -42,7 +42,6 @@ class NewProjectViewController: UITableViewController {
             type = .normal
             break
         }
-        self.didSelectType?(type)
+        didSelectType?(type)
     }
-
 }

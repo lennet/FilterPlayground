@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 
 class MainViewController: UIViewController {
-    
+
     @IBOutlet weak var contentViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var attributesBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var attributesContainerWidthConstraint: NSLayoutConstraint!
@@ -19,86 +19,85 @@ class MainViewController: UIViewController {
     weak var liveViewController: LiveViewController?
     weak var sourceEditorViewController: SourceEditorViewController?
     var isRunning = false
-    
+
     var document: Document?
     var showLiveView = true {
         didSet {
             updateViewConstraints()
         }
     }
+
     var showAttributes = true {
         didSet {
             updateViewConstraints()
         }
     }
-        
+
     override var canBecomeFirstResponder: Bool {
         return true
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         registerNotifications()
     }
-    
+
     func registerNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
-    
+
     @objc func keyboardWillShow(notification: Notification) {
         guard let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
         updateBottomSpacing(animated: true, keyboardHeight: keyboardSize.height)
     }
-    
-    @objc func keyboardWillHide(notification: Notification) {
+
+    @objc func keyboardWillHide(notification _: Notification) {
         updateBottomSpacing(animated: true, keyboardHeight: 0)
     }
-    
-    func updateBottomSpacing(animated: Bool, keyboardHeight: CGFloat) {
+
+    func updateBottomSpacing(animated _: Bool, keyboardHeight: CGFloat) {
         contentViewBottomConstraint.constant = keyboardHeight
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
-        
+
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
-        }) { (_) in
-            
+        }) { _ in
         }
     }
-    
+
     override var keyCommands: [UIKeyCommand]? {
-        
+
         let runKeyCommand = UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(run), discoverabilityTitle: "Run")
-        
+
         let increaseFontKeyCommand = UIKeyCommand(input: "+", modifierFlags: .command, action: #selector(increaseFontSize), discoverabilityTitle: "increase font size")
-        
+
         let decreaseFontKeyCommand = UIKeyCommand(input: "-", modifierFlags: .command, action: #selector(decreaseFontSize), discoverabilityTitle: "decrease font size")
-        
-        
-        return[ runKeyCommand, increaseFontKeyCommand, decreaseFontKeyCommand ]
+
+        return [runKeyCommand, increaseFontKeyCommand, decreaseFontKeyCommand]
     }
-    
+
     @objc func increaseFontSize() {
         sourceEditorViewController?.fontSize += 3
     }
-    
+
     @objc func decreaseFontSize() {
         sourceEditorViewController?.fontSize -= 3
     }
-    
+
     @IBAction func documentation(_ sender: UIBarButtonItem) {
         let url = URL(string: "https://developer.apple.com/library/content/documentation/GraphicsImaging/Reference/CIKernelLangRef/ci_gslang_ext.html")!
         let safariVC = SFSafariViewController(url: url)
         safariVC.modalPresentationStyle = .popover
         safariVC.popoverPresentationController?.barButtonItem = sender
-        
+
         present(safariVC, animated: true, completion: nil)
     }
-    
+
     @IBAction func run() {
 
         guard !isRunning else { return }
@@ -109,62 +108,61 @@ class MainViewController: UIViewController {
         guard let source = sourceEditorViewController?.source,
             let input = liveViewController?.inputImages,
             let document = document else {
-                return
+            return
         }
         let attributes = attributesViewController?.attributes ?? []
         switch document.metaData.type.compile(source) {
-        case .success(kernel: let kernel):
+        case let .success(kernel: kernel):
             apply(kernel: kernel, input: input, attributes: attributes)
             break
-        case .failed(errors: let errors):
+        case let .failed(errors: errors):
             display(errors: errors)
             break
         }
     }
-    
+
     func apply(kernel: Kernel, input: [UIImage], attributes: [KernelAttribute]) {
         clearErrors()
-        
+
         DispatchQueue.global(qos: .background).async {
             let errorHelper = ErrorHelper()
-            let image = kernel.apply(with: input, attributes: attributes.map{ $0.value.asKernelValue })
+            let image = kernel.apply(with: input, attributes: attributes.map { $0.value.asKernelValue })
             DispatchQueue.main.sync {
                 if let errorString = errorHelper.errorString() {
                     let errors = ErrorParser.runtimeErrors(for: errorString)
                     self.display(errors: errors)
                 }
-        
-                self.liveViewController?.imageView.image = image
-                self.isRunning = false                
-            }
 
+                self.liveViewController?.imageView.image = image
+                self.isRunning = false
+            }
         }
     }
-    
-    func clearErrors(){
+
+    func clearErrors() {
         sourceEditorViewController?.errors = []
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
+
         updateViewConstraints(newWidth: size.width)
-        coordinator.animate(alongsideTransition: { (context) in
+        coordinator.animate(alongsideTransition: { _ in
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
+
         updateViewConstraints()
     }
-    
+
     override func updateViewConstraints() {
         super.updateViewConstraints()
         updateViewConstraints(newWidth: view.frame.width)
     }
-    
+
     func updateViewConstraints(newWidth: CGFloat) {
         attributesContainerWidthConstraint.constant = showAttributes ? 220 : 0
         let maxWidth = newWidth - attributesContainerWidthConstraint.constant
@@ -173,12 +171,12 @@ class MainViewController: UIViewController {
             sourceEditorWidthConstraint.constant /= 2
         }
     }
-    
+
     func display(errors: [KernelError]) {
         sourceEditorViewController?.errors = errors
         isRunning = false
     }
-    
+
     func didOpened(document: Document) {
         let completion = {
             self.presentedViewController?.dismiss(animated: true, completion: nil)
@@ -193,8 +191,8 @@ class MainViewController: UIViewController {
             self.title = document.title
         }
         if let document = self.document {
-            document.save(to: document.fileURL, for: .forOverwriting, completionHandler: { (_) in
-                document.close(completionHandler: { (_) in
+            document.save(to: document.fileURL, for: .forOverwriting, completionHandler: { _ in
+                document.close(completionHandler: { _ in
                     completion()
                 })
             })
@@ -202,21 +200,21 @@ class MainViewController: UIViewController {
             completion()
         }
     }
-    
+
     @IBAction func handleDividerPan(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: sender.view!)
         sender.setTranslation(.zero, in: sender.view!)
-        
-        let maxWidth = view.frame.width-attributesContainerWidthConstraint.constant
-        
+
+        let maxWidth = view.frame.width - attributesContainerWidthConstraint.constant
+
         sourceEditorWidthConstraint.constant += translation.x
         sourceEditorWidthConstraint.constant = max(sourceEditorWidthConstraint.constant, 0)
         sourceEditorWidthConstraint.constant = min(maxWidth, sourceEditorWidthConstraint.constant)
-        
+
         switch sender.state {
         case .cancelled, .ended:
             let threshold: CGFloat = 100
-            if (sourceEditorWidthConstraint.constant < threshold) {
+            if sourceEditorWidthConstraint.constant < threshold {
                 sourceEditorWidthConstraint.constant = 0
             } else if sourceEditorWidthConstraint.constant > (maxWidth - threshold) {
                 sourceEditorWidthConstraint.constant = maxWidth
@@ -227,28 +225,28 @@ class MainViewController: UIViewController {
                 self.view.layoutIfNeeded()
             }, completion: nil)
         default:
-           view.layoutIfNeeded()
+            view.layoutIfNeeded()
         }
     }
-    
-    @IBAction func didTapLiveViewButton(_ sender: Any) {
+
+    @IBAction func didTapLiveViewButton(_: Any) {
         showLiveView = !showLiveView
         updateViewConstraints()
-        
+
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
     }
-    
-    @IBAction func didTapAttribtutesButton(_ sender: Any) {
+
+    @IBAction func didTapAttribtutesButton(_: Any) {
         showAttributes = !showAttributes
         updateViewConstraints()
-        
+
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
     }
-    
+
     func didUpdateArgumentsFromAttributesViewController(shouldRerun: Bool) {
         guard let attributes = attributesViewController?.attributes else {
             return
@@ -256,38 +254,37 @@ class MainViewController: UIViewController {
         document?.metaData.attributes = attributes
         document?.updateChangeCount(.done)
         if shouldRerun {
-            self.run()
+            run()
         }
         sourceEditorViewController?.update(attributes: attributes)
     }
-    
+
     func didUpdateArgumentsFromSourceEditor(arguments: [(String, KernelAttributeType)]) {
         let currentAttributes = attributesViewController?.attributes ?? []
         attributesViewController?.attributes = arguments.enumerated().map { (index, argument) -> KernelAttribute in
             if index < currentAttributes.count {
                 var currentArgument = currentAttributes[index]
-                if (currentArgument.type == argument.1) {
+                if currentArgument.type == argument.1 {
                     currentArgument.name = argument.0
                     return currentArgument
                 }
             }
             return KernelAttribute(name: argument.0, type: argument.1, value: argument.1.defaultValue)
-
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         switch segue.destination {
         case let vc as AttributesViewController:
-            self.attributesViewController = vc
-            self.attributesViewController?.didUpdateAttributes = didUpdateArgumentsFromAttributesViewController
+            attributesViewController = vc
+            attributesViewController?.didUpdateAttributes = didUpdateArgumentsFromAttributesViewController
         case let vc as LiveViewController:
-            self.liveViewController = vc
+            liveViewController = vc
             vc.didUpdateInputImages = { [weak self] images in
                 self?.document?.inputImages = images
             }
         case let vc as SourceEditorViewController:
-            self.sourceEditorViewController = vc
+            sourceEditorViewController = vc
             vc.didUpdateText = { [weak self] text in
                 self?.document?.source = text
             }
@@ -301,4 +298,3 @@ class MainViewController: UIViewController {
         }
     }
 }
-

@@ -9,16 +9,16 @@
 import UIKit
 
 class LiveViewController: UIViewController {
-    
+
     @IBOutlet weak var inputStackView: UIStackView!
     @IBOutlet weak var imageView: CustomImageView!
     @IBOutlet var inputImageViews: [CustomImageView]!
     @IBOutlet var labels: [UILabel]!
-    var didUpdateInputImages: (([UIImage]) -> ())?
-    
+    var didUpdateInputImages: (([UIImage]) -> Void)?
+
     var numberOfInputs: Int = 2 {
         didSet {
-            
+
             switch numberOfInputs {
             case 2:
                 inputImageViews.forEach { $0.isHidden = false }
@@ -35,63 +35,62 @@ class LiveViewController: UIViewController {
                 labels.forEach { $0.isHidden = true }
                 break
             }
-            
+
             themeChanged(notification: nil)
         }
     }
-    
+
     var inputImages: [UIImage] {
         get {
-            return inputImageViews.flatMap{ $0.image }
+            return inputImageViews.flatMap { $0.image }
         }
         set {
-            inputImageViews.forEach{ $0.image = nil }
+            inputImageViews.forEach { $0.image = nil }
             for (index, image) in newValue.enumerated() where index < inputImageViews.count {
                 inputImageViews[index].image = image
             }
             imageView.image = nil
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(notification:)), name: ThemeManager.themeChangedNotificationName, object: nil)
         themeChanged(notification: nil)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        inputImageViews.forEach{ $0.accessibilityIgnoresInvertColors = true }
-        inputImageViews.forEach{ $0.didSelectImage = didSelectImage }
+
+        inputImageViews.forEach { $0.accessibilityIgnoresInvertColors = true }
+        inputImageViews.forEach { $0.didSelectImage = didSelectImage }
         imageView.accessibilityIgnoresInvertColors = true
         imageView.canSelectImage = false
     }
-    
-    func didSelectImage(imageView: CustomImageView){
+
+    func didSelectImage(imageView _: CustomImageView) {
         didUpdateInputImages?(inputImages)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     func reset() {
         imageView.image = nil
-        inputImageViews.forEach{ $0.image = nil }
+        inputImageViews.forEach { $0.image = nil }
     }
-    
-    @objc func themeChanged(notification: Notification?) {
-        self.view.backgroundColor = ThemeManager.shared.currentTheme.liveViewBackground
-        inputImageViews.forEach{ $0.backgroundColor = ThemeManager.shared.currentTheme.imageViewBackground }
+
+    @objc func themeChanged(notification _: Notification?) {
+        view.backgroundColor = ThemeManager.shared.currentTheme.liveViewBackground
+        inputImageViews.forEach { $0.backgroundColor = ThemeManager.shared.currentTheme.imageViewBackground }
         if numberOfInputs > 0 {
             imageView.backgroundColor = ThemeManager.shared.currentTheme.imageViewBackground
         } else {
             imageView.backgroundColor = .clear
         }
-        labels.forEach{ $0.textColor = ThemeManager.shared.currentTheme.liveViewLabel }
+        labels.forEach { $0.textColor = ThemeManager.shared.currentTheme.liveViewLabel }
     }
-    
 }

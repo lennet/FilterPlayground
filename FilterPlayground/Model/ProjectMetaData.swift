@@ -10,27 +10,27 @@ import Foundation
 import UIKit
 
 struct ProjectMetaData: Codable {
-    
+
     var attributes: [KernelAttribute]
     var type: KernelType
     var name: String
-    
+
     init(attributes: [KernelAttribute], type: KernelType) {
         self.attributes = attributes
         self.type = type
-        self.name = "untitled"
+        name = "untitled"
     }
-    
+
     func initialSource() -> String {
         return type.initialSource(with: name)
     }
-    
+
     func initalArguments() -> [KernelAttribute] {
-        return type.requiredArguments.map{ KernelAttribute(name: "unamed", type: $0, value: $0.defaultValue) }
+        return type.requiredArguments.map { KernelAttribute(name: "unamed", type: $0, value: $0.defaultValue) }
     }
-    
+
     func initialInputImages() -> [UIImage] {
-        // TODO
+        // TODO:
         return []
     }
 }

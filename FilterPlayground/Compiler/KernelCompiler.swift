@@ -16,7 +16,7 @@ enum KernelCompilerResult {
 class KernelCompiler<T: Kernel> {
 
     private init() {}
-    
+
     class func compile(source: String) -> KernelCompilerResult {
         let errorHelper = ErrorHelper()
         if let kernel = T.compile(source: source) {
@@ -27,5 +27,4 @@ class KernelCompiler<T: Kernel> {
         // todo add unkown errors
         return .failed(errors: [])
     }
-    
 }

@@ -14,25 +14,25 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     @IBOutlet weak var textView: NumberedTextView!
     @IBOutlet weak var errorViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    
+
     var keyboardHeight: CGFloat = 0.0
-    
+
     var isShowingErrors: Bool {
         return !errors.isEmpty
     }
-    
+
     var bottomSpacing: CGFloat {
-        
+
         if isShowingErrors {
             return keyboardHeight + 8.0
         } else {
             return 0
         }
     }
-    
-    var didUpdateText: ((String)->())?
-    var didUpdateArguments: (([(String, KernelAttributeType)]) -> ())?
-    
+
+    var didUpdateText: ((String) -> Void)?
+    var didUpdateArguments: (([(String, KernelAttributeType)]) -> Void)?
+
     var errors: [KernelError] = [] {
         didSet {
             guard errors != oldValue else { return }
@@ -41,26 +41,26 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
             } else {
                 errorTableView.reloadData()
                 errorTableView.layoutIfNeeded()
-                errorViewHeightConstraint.constant = min(errorTableView.contentSize.height, view.frame.size.height/4)
+                errorViewHeightConstraint.constant = min(errorTableView.contentSize.height, view.frame.size.height / 4)
             }
             updateBottomSpacing(animated: true)
             textView.hightLightErrorLineNumber = nil
         }
     }
-    
+
     var fontSize: Float {
         get {
             return Settings.fontSize
         }
-    
+
         set {
             Settings.fontSize = newValue
             updateFont()
         }
     }
-    
+
     let postfix: String = "\n}"
-    
+
     var source: String {
         get {
             return textView.text ?? ""
@@ -69,53 +69,53 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
             textView.text = newValue
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateFont()
         registerNotifications()
         textView.didUpdateArguments = { self.didUpdateArguments?($0) }
         textView.delegate = self
-        
+
         let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(gestureRecognizer:)))
-        self.view.addGestureRecognizer(pinchGestureRecognizer)
+        view.addGestureRecognizer(pinchGestureRecognizer)
     }
-    
+
     func registerNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(notification:)), name: ThemeManager.themeChangedNotificationName, object: nil)
         themeChanged(notification: nil)
     }
 
-    func updateBottomSpacing(animated: Bool) {
+    func updateBottomSpacing(animated _: Bool) {
         bottomConstraint.constant = bottomSpacing
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
-        
+
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
             self.view.layoutIfNeeded()
-        }) { (_) in
+        }) { _ in
             self.textView.setNeedsDisplay()
         }
-     }
-    
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         textView.setNeedsDisplay()
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return errors.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "errorCellIdentifier") as! ErrorTableViewCell
         // todo show notes
         cell.error = errors[indexPath.row]
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch errors[indexPath.row] {
         case .compile(lineNumber: let lineNumber, characterIndex: _, type: _, message: _, note: _):
             textView.hightLightErrorLineNumber = lineNumber
@@ -123,32 +123,30 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         case .runtime(message: _):
             break
         }
-
     }
-    
+
     func updateFont() {
         textView.font = UIFont(name: "Menlo", size: CGFloat(fontSize))
         textView.setNeedsDisplay()
     }
-    
-    @objc func themeChanged(notification: Notification?) {
+
+    @objc func themeChanged(notification _: Notification?) {
         view.backgroundColor = ThemeManager.shared.currentTheme.sourceEditorBackground
         textView.updatedText()
         textView.setNeedsDisplay()
     }
-    
+
     func textViewDidChange(_ textView: UITextView) {
         didUpdateText?(textView.text)
     }
-    
+
     func update(attributes: [KernelAttribute]) {
-        textView.insert(arguments: attributes.map{ ($0.name, $0.type) })
+        textView.insert(arguments: attributes.map { ($0.name, $0.type) })
     }
-    
+
     @objc func handlePinch(gestureRecognizer: UIPinchGestureRecognizer) {
-        fontSize = (fontSize + Float(gestureRecognizer.velocity))
+        fontSize = (fontSize + Float(gestureRecognizer.velocity)/4)
         fontSize = max(fontSize, 9)
         fontSize = min(fontSize, 72)
     }
-    
 }

@@ -16,7 +16,7 @@ class FloatSelectionButton: UIButton {
             setNeedsDisplay()
         }
     }
-    
+
     @IBInspectable var needsRightBorder = false {
         didSet {
             setNeedsDisplay()
@@ -29,14 +29,14 @@ class FloatSelectionButton: UIButton {
         upperBorder.move(to: .zero)
         upperBorder.addLine(to: CGPoint(x: rect.width, y: 0))
         upperBorder.stroke()
-        
+
         if needsLeftBorder {
             let leftBorder = UIBezierPath()
             leftBorder.move(to: .zero)
             leftBorder.addLine(to: CGPoint(x: 0, y: rect.height))
             leftBorder.stroke()
         }
-        
+
         if needsRightBorder {
             let rightBorder = UIBezierPath()
             rightBorder.move(to: CGPoint(x: rect.width, y: 0))
@@ -44,5 +44,4 @@ class FloatSelectionButton: UIButton {
             rightBorder.stroke()
         }
     }
-    
 }

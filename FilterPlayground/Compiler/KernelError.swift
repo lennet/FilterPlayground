@@ -14,20 +14,19 @@ enum KernelError {
 }
 
 extension KernelError: Equatable {
-    
+
     static func ==(lhs: KernelError, rhs: KernelError) -> Bool {
         switch (lhs, rhs) {
-        case (.runtime(let lMessage), .runtime(message: let rMessage)):
+        case let (.runtime(lMessage), .runtime(message: rMessage)):
             return lMessage == rMessage
-        case (.compile(let lLineNumber, let lCharacterIndex, let lType, let lMessage, let lNote), .compile(let rLineNumber, let rCharacterIndex, let rType, let rMessage, let rNote)):
+        case let (.compile(lLineNumber, lCharacterIndex, lType, lMessage, lNote), .compile(rLineNumber, rCharacterIndex, rType, rMessage, rNote)):
             return lLineNumber == rLineNumber &&
-            lCharacterIndex == rCharacterIndex &&
-            lType == rType &&
-            lMessage == rMessage &&
-            lNote ?? (0,0,"") == rNote ?? (0,0,"")
+                lCharacterIndex == rCharacterIndex &&
+                lType == rType &&
+                lMessage == rMessage &&
+                lNote ?? (0, 0, "") == rNote ?? (0, 0, "")
         default:
             return false
         }
     }
-    
 }

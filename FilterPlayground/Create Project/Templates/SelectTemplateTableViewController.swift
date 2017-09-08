@@ -11,8 +11,8 @@ import UIKit
 class SelectTemplateTableViewController: UITableViewController {
 
     let templates = TemplatesManager.getURLs()
-    var didSelectTemplate: ((URL)->())?
-    
+    var didSelectTemplate: ((URL) -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,12 +30,12 @@ class SelectTemplateTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in _: UITableView) -> Int {
         // todo check for different types
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return templates.count
     }
 
@@ -46,8 +46,7 @@ class SelectTemplateTableViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         didSelectTemplate?(templates[indexPath.row])
     }
-
 }

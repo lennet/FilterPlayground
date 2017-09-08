@@ -10,31 +10,30 @@ import XCTest
 @testable import FilterPlayground
 
 class ErrorHelperTests: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+
     func testValidKernel() {
         let errorHelper = ErrorHelper()
-        let _ = CIKernel(source: "kernel vec2 foo() { return destCoord(); }")
+        _ = CIKernel(source: "kernel vec2 foo() { return destCoord(); }")
         XCTAssertNil(errorHelper.errorString())
     }
-    
+
     func testInvalidKernel() {
         let errorHelper = ErrorHelper()
-        let _ = CIKernel(source: "kernel vec2 foo() { return destCoord() }")
+        _ = CIKernel(source: "kernel vec2 foo() { return destCoord() }")
         let errorString = errorHelper.errorString()
         XCTAssertNotNil(errorString)
-        
+
         let error = ErrorParser.compileErrors(for: errorString!)
         XCTAssertGreaterThan(error.count, 0)
     }
-
 }

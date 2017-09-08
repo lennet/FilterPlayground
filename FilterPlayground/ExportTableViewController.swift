@@ -13,9 +13,9 @@ class ExportTableViewController: UITableViewController {
     var document: Document?
 
     @IBAction func tappedCancelButton() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sender = tableView.cellForRow(at: indexPath)
         switch indexPath.row {
@@ -36,26 +36,26 @@ class ExportTableViewController: UITableViewController {
             break
         }
     }
-    
+
     func exportAsPlayground(sender: UIView?) {
         guard let document = document else {
-                return
+            return
         }
-        document.save(to: document.fileURL, for: .forOverwriting) { (_) in
+        document.save(to: document.fileURL, for: .forOverwriting) { _ in
             self.presentActivityViewController(sourceView: sender, items: [document.fileURL])
         }
     }
-    
+
     func exportAsCIKernel(sender: UIView?) {
         guard let document = document,
             let sourceData = document.source.data(using: .utf8) else {
             return
         }
         let url = FileManager.default.temporaryDirectory.appendingPathComponent("\(document.localizedName.withoutWhiteSpaces.withoutSlash).CIKernel")
-        
+
         do {
             try sourceData.write(to: url, options: .atomicWrite)
-            
+
         } catch {
             print(error)
             // todo handle error
@@ -63,14 +63,13 @@ class ExportTableViewController: UITableViewController {
         }
         presentActivityViewController(sourceView: sender, items: [url])
     }
-    
+
     func presentActivityViewController(sourceView: UIView?, items: [Any]) {
         let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = { (type, completed, returnedItmes, error) in
+        activityViewController.completionWithItemsHandler = { _, _, _, _ in
             self.dismiss(animated: true, completion: nil)
         }
         activityViewController.popoverPresentationController?.sourceView = sourceView
         present(activityViewController, animated: true, completion: nil)
     }
-
 }

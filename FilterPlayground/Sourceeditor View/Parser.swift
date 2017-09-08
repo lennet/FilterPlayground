@@ -21,12 +21,12 @@ enum Token {
 }
 
 extension Token: Equatable {
-    
+
     static func ==(lhs: Token, rhs: Token) -> Bool {
         switch (lhs, rhs) {
-        case (.op(let a), .op(let b)):
+        case let (.op(a), .op(b)):
             return a == b
-        case (.float(let a), .float(let b)):
+        case let (.float(a), .float(b)):
             return a == b
         case (.whiteSpace, .whiteSpace),
              (.newLine, .newLine),
@@ -35,20 +35,19 @@ extension Token: Equatable {
              (.openingBracket, .openingBracket),
              (.closingBracket, .closingBracket):
             return true
-        case (.identifier(let a), .identifier(let b)):
+        case let (.identifier(a), .identifier(b)):
             return a == b
         default:
             return false
         }
     }
-    
 }
 
 extension Token {
-    
+
     var stringRepresentation: String {
         switch self {
-        case .op(let a):
+        case let .op(a):
             return a.rawValue
         case .semicolon:
             return ";"
@@ -58,9 +57,9 @@ extension Token {
             return "\n"
         case .tab:
             return "\t"
-        case .identifier(let a):
+        case let .identifier(a):
             return a.stringRepresentation
-        case .float(let a):
+        case let .float(a):
             return a
         case .openingBracket:
             return "{"
@@ -68,18 +67,17 @@ extension Token {
             return "}"
         }
     }
-    
+
     var attributes: [NSAttributedStringKey: Any] {
         switch self {
-        case .float(_):
+        case .float:
             return [NSAttributedStringKey.foregroundColor: ThemeManager.shared.currentTheme.sourceEditorTextFloat]
-        case .identifier(let a):
+        case let .identifier(a):
             return a.attributes
         default:
             return [NSAttributedStringKey.foregroundColor: ThemeManager.shared.currentTheme.sourceEditorText]
         }
     }
-    
 }
 
 enum Keyword: String {
@@ -95,49 +93,48 @@ enum Identifier {
     case type(KernelAttributeType)
     case other(String)
     case keyword(Keyword)
-    
+
     var attributes: [NSAttributedStringKey: Any] {
         let color: UIColor
         switch self {
-        case .type(_):
+        case .type:
             color = ThemeManager.shared.currentTheme.sourceEditorTextType
-        case .keyword(_):
+        case .keyword:
             color = ThemeManager.shared.currentTheme.sourceEditorTextKeyword
         default:
             color = ThemeManager.shared.currentTheme.sourceEditorText
         }
         return [NSAttributedStringKey.foregroundColor: color]
     }
-    
 }
 
 extension Identifier: Equatable {
-    
+
     static func ==(lhs: Identifier, rhs: Identifier) -> Bool {
         switch (lhs, rhs) {
-        case (.other(let a), .other(let b)):
+        case let (.other(a), .other(b)):
             return a == b
-        case (.type(let a), .type(let b)):
+        case let (.type(a), .type(b)):
             return a == b
-        case (.keyword(let a), .keyword(let b)):
+        case let (.keyword(a), .keyword(b)):
             return a == b
 
         default:
             return false
         }
     }
-    
+
     var stringRepresentation: String {
         switch self {
-        case .other(let a):
+        case let .other(a):
             return a
-        case .type(let a):
+        case let .type(a):
             return a.rawValue
-        case .keyword(let a):
+        case let .keyword(a):
             return a.rawValue
         }
     }
-    
+
     init(_ string: String) {
         if let keyword = Keyword(rawValue: string) {
             self = .keyword(keyword)
@@ -147,7 +144,6 @@ extension Identifier: Equatable {
             self = .other(string)
         }
     }
-    
 }
 
 enum Operator: String {
@@ -159,27 +155,27 @@ enum Operator: String {
 }
 
 class Tokenizer {
-    
+
     var index: String.Index
     var string: String
     var isAtEnd: Bool {
         return index >= string.endIndex
     }
-    
+
     init(string: String) {
         self.string = string
         index = string.startIndex
     }
-    
+
     func getNextCharacter() -> String? {
         guard !isAtEnd else {
             return nil
         }
-        
+
         let nextIndex = string.index(after: index)
-        return String(string[index..<nextIndex])
+        return String(string[index ..< nextIndex])
     }
-    
+
     func nextToken() -> Token? {
         guard let char = getNextCharacter() else { return nil }
         let oldIndex = index
@@ -202,9 +198,9 @@ class Tokenizer {
         case Token.tab.stringRepresentation:
             index = string.index(after: index)
             return Token.tab
-        case let a where Operator(rawValue:a) != nil:
+        case let a where Operator(rawValue: a) != nil:
             index = string.index(after: index)
-            return Token.op(Operator(rawValue:a)!)
+            return Token.op(Operator(rawValue: a)!)
         case let a where !(CharacterSet.alphanumerics.contains(a.unicodeScalars.first!) || a == "_"):
             index = string.index(after: index)
             return Token.identifier(.other(a))
@@ -213,25 +209,24 @@ class Tokenizer {
             var alreadyFoundDot = false
             index = string.index(after: index)
             while let nextChar = getNextCharacter(),
-                (Float(nextChar)?.isNaN ?? true) == false  || (nextChar == "."){
-                    if (nextChar == ".") {
-                        if (alreadyFoundDot) {
-                            index = oldIndex
-                            return tokenizeIdentifer()
-                        } else {
-                            alreadyFoundDot =  true
-                        }
+                (Float(nextChar)?.isNaN ?? true) == false || (nextChar == ".") {
+                if nextChar == "." {
+                    if alreadyFoundDot {
+                        index = oldIndex
+                        return tokenizeIdentifer()
+                    } else {
+                        alreadyFoundDot = true
                     }
-                    floatString.append(nextChar)
-                    index = string.index(after: index)
+                }
+                floatString.append(nextChar)
+                index = string.index(after: index)
             }
             return Token.float(floatString)
         default:
             return tokenizeIdentifer()
         }
-        
     }
-    
+
     func tokenizeIdentifer() -> Token? {
         guard let nextChar = getNextCharacter() else { return nil }
         var identifier = nextChar
@@ -239,23 +234,21 @@ class Tokenizer {
         while let nextChar = getNextCharacter(),
             // todo create own charactersets for identifier
             CharacterSet.alphanumerics.contains(nextChar.unicodeScalars.first!) || nextChar == "_" {
-                identifier.append(nextChar)
-                index = string.index(after: index)
+            identifier.append(nextChar)
+            index = string.index(after: index)
         }
-        
-        return Token.identifier(Identifier(identifier))
 
+        return Token.identifier(Identifier(identifier))
     }
-    
 }
 
 class Parser {
-    
+
     let tokenizer: Tokenizer
     init(string: String) {
         tokenizer = Tokenizer(string: string)
     }
-    
+
     func getTokens() -> [Token] {
         var tokens: [Token] = []
         while let token = tokenizer.nextToken() {
@@ -263,21 +256,19 @@ class Parser {
         }
         return tokens
     }
-    
+
     func getAST() -> ASTNode {
         return ASTNode.root(ASTHelper.getAST(for: getTokens()))
     }
-    
 }
 
 class Renderer {
-    
+
     class func renderAsPlainText(tokens: [Token]) -> String {
-        return tokens.map{ $0.stringRepresentation }.joined()
+        return tokens.map { $0.stringRepresentation }.joined()
     }
-    
+
     class func rederAsAttributedString(tokens: [Token]) -> NSAttributedString {
-        return tokens.map{ NSAttributedString(string: $0.stringRepresentation, attributes: $0.attributes) }.reduce(NSAttributedString(), +)
+        return tokens.map { NSAttributedString(string: $0.stringRepresentation, attributes: $0.attributes) }.reduce(NSAttributedString(), +)
     }
-    
 }

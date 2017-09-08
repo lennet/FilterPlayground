@@ -9,9 +9,9 @@
 import UIKit
 
 class AttributesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
     @IBOutlet weak var tableView: UITableView!
-    
+
     var shouldUpdateOnReload = true
     var attributes: [KernelAttribute] = [] {
         didSet {
@@ -21,24 +21,25 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
             shouldUpdateOnReload = true
         }
     }
-    var didUpdateAttributes: ((Bool)->())?
+
+    var didUpdateAttributes: ((Bool) -> Void)?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         registerNotifications()
     }
-    
+
     func registerNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(notification:)), name: ThemeManager.themeChangedNotificationName, object: nil)
         themeChanged(notification: nil)
     }
 
     // Mark: Tableview data source
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return attributes.count + 1
     }
-    
+
     func didUpdateAttribute(cell: UITableViewCell, attribute: KernelAttribute) {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
@@ -56,7 +57,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
             didUpdateAttributes?(false)
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "KernelAttributeTableViewCellIdentifier", for: indexPath) as! KernelAttributeTableViewCell
         if indexPath.row < attributes.count {
@@ -64,30 +65,29 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         } else {
             cell.attribute = nil
         }
-        
+
         cell.updateCallBack = didUpdateAttribute
         return cell
     }
-    
+
     // MARK: - Delegate
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+
+    func tableView(_: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return indexPath.row < attributes.count
     }
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+
+    func tableView(_: UITableView, editActionsForRowAt _: IndexPath) -> [UITableViewRowAction]? {
         return [UITableViewRowAction(style: .destructive, title: "remove", handler: deleteAttribute)]
     }
-    
-    func deleteAttribute(action: UITableViewRowAction, for indexPath: IndexPath) {
+
+    func deleteAttribute(action _: UITableViewRowAction, for indexPath: IndexPath) {
         attributes.remove(at: indexPath.row)
         tableView.reloadData()
         didUpdateAttributes?(false)
     }
-    
-    @objc func themeChanged(notification: Notification?) {
+
+    @objc func themeChanged(notification _: Notification?) {
         view.backgroundColor = ThemeManager.shared.currentTheme.attributesBackground
         tableView.separatorColor = ThemeManager.shared.currentTheme.attributesSeparatorColor
     }
-    
 }

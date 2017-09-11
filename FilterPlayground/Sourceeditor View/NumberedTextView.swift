@@ -203,6 +203,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
             let newText = NumberedTextView.spacingValue
             textView.text = textView.text.replacingCharacters(in: Range(range, in: textView.text)!, with: newText)
             textView.selectedRange = NSMakeRange(range.location + newText.count, 0)
+            updatedText()
             return false
         }
 

@@ -37,9 +37,22 @@ extension KernelType {
                     return rect
                     }, image: input, arguments: [\(arguments.joined(separator: ","))] )
             """
+        case .color:
+            let guardArguments = arguments.map{ "let \($0) = \($0)" }.joined(separator: ",\n\t\t\t")
+            return """
+            guard \(guardArguments) else {
+                    return nil
+                    }
+                    return kernel?.apply(extent: \(arguments[0]).extent, arguments: [\(arguments.joined(separator: ","))] )
+            """
+
         default:
             return ""
         }
+    }
+    
+    var hasInputImage: Bool {
+        return requiredInputImages > 0
     }
     
 }
@@ -67,19 +80,23 @@ class CIFilterHelper {
 
     class func cifilter(with kernelSource: String, type: KernelType, arguments: [KernelAttribute], name: String) -> String {
         let properties = arguments.map{ "\tvar \($0.name): \($0.type.swiftType)?" }.joined(separator: "\n")
-        
+        var inputProperties = ""
+        if type.requiredInputImages > 0 {
+            inputProperties = "\tvar input: CIImage?"
+        }
         return """
 import CoreImage
 
 class \(name): CIFilter {
     
     // todo rename after the swift playgrounds bug got fixed
-    var input: CIImage?
+\(inputProperties)
 \(properties)
         
     var kernel: \(type.swiftType)? = {
         return \(type.swiftType)(source:\"\"\"
-        \(kernelSource)\"\"\")
+        \(kernelSource)
+\"\"\")
     }()
         
     override var outputImage: CIImage? {

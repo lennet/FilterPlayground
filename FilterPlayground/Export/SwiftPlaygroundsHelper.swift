@@ -18,7 +18,7 @@ extension KernelAttributeValue {
         case .float(let f):
             return "\(f)"
         case .sample(_):
-            return "#imageLiteral(resourceName: \(attributeName)"
+            return "CISampler(image: CIImage(image: #imageLiteral(resourceName: \"\(attributeName).png\"))!)"
         case .vec2(let a, let b):
             return "CIVector(x: \(a), y: \(b))"
         case .vec3(let a, let b, let c):
@@ -46,16 +46,19 @@ class SwiftPlaygroundsHelper {
         let filterName = document.localizedName.withoutWhiteSpaces.withoutSlash
         let definedVariables = document.metaData.attributes.map{ "var \($0.name): \($0.type.swiftType) = \($0.value.swiftPlaygroundValue(with:  $0.name))" }.joined(separator: "\n")
         let assignFilterProperties = document.metaData.attributes.map{ "filter.\($0.name) = \($0.name)" }.joined(separator: "\n")
-    
+        
+        var inputImageAssignment = ""
+        if document.metaData.type.requiredInputImages > 0 {
+            inputImageAssignment = "let image = #imageLiteral(resourceName: \"input.png\")\nfilter.input = CIImage(image: image)"
+        }
         let content = """
         import UIKit
         \(CIFilterHelper.cifilter(with: document.source, type: document.metaData.type, arguments: document.metaData.attributes, name: filterName))
         
         \(definedVariables)
-        let image = #imageLiteral(resourceName: "input.png")
         
         let filter = \(filterName)()
-        filter.input = CIImage(image: image)
+        \(inputImageAssignment)
         \(assignFilterProperties)
         
         let result = filter.outputImage

@@ -45,7 +45,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
 
     var currentAST: ASTNode?
 
-    var hightLightErrorLineNumber: [Int] = [] {
+    var hightLightErrorLineNumber: Set<Int> = [] {
         didSet {
             setNeedsDisplay()
         }

@@ -118,15 +118,16 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch errors[indexPath.row] {
         case .compile(lineNumber: let lineNumber, characterIndex: _, type: _, message: _, note: let note):
-            var lineNumbers = [lineNumber]
+            var lineNumbers = Set([lineNumber])
             if let note = note {
-                lineNumbers.append(note.lineNumber)
+                lineNumbers.insert(note.lineNumber)
             }
             textView.hightLightErrorLineNumber = lineNumbers
             break
         case .runtime(message: _):
             break
         }
+    
     }
 
     func updateFont() {

@@ -16,6 +16,7 @@
 		98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */; };
 		9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC741F3663AE00A8E3CA /* Theme.swift */; };
 		9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC761F36675000A8E3CA /* ThemingTests.swift */; };
+		98426C171F670540007C2260 /* CIFilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98426C161F670540007C2260 /* CIFilterHelper.swift */; };
 		9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845C6101F38F44100F38283 /* NewProjectViewController.swift */; };
 		9848C4441F3B9B58001E079C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */; };
 		984D9FA41F2E824B004AFD74 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D9FA31F2E824B004AFD74 /* ParserTests.swift */; };
@@ -38,6 +39,7 @@
 		986AA7351F62FE3B008F2091 /* test.kernelProj in Resources */ = {isa = PBXBuildFile; fileRef = 986AA7311F62FD38008F2091 /* test.kernelProj */; };
 		986AA7371F62FF76008F2091 /* SelectTemplateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AA7361F62FF76008F2091 /* SelectTemplateTableViewController.swift */; };
 		987672451F2F5355002F9AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
+		987A73291F66F65000F73806 /* SwiftPlaygroundsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */; };
 		9881A14F1F4884C900BABA72 /* ThumbnailProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881A14E1F4884C900BABA72 /* ThumbnailProvider.swift */; };
 		9881A1531F4884CA00BABA72 /* FilterPlaygroundThumbnailExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9881A15F1F4884E700BABA72 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9881A15E1F4884E700BABA72 /* QuickLook.framework */; };
@@ -124,6 +126,7 @@
 		98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorValuePicker.swift; sourceTree = "<group>"; };
 		9841EC741F3663AE00A8E3CA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		9841EC761F36675000A8E3CA /* ThemingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingTests.swift; sourceTree = "<group>"; };
+		98426C161F670540007C2260 /* CIFilterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilterHelper.swift; sourceTree = "<group>"; };
 		9845C6101F38F44100F38283 /* NewProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectViewController.swift; sourceTree = "<group>"; };
 		9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		984D9FA31F2E824B004AFD74 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
@@ -152,6 +155,7 @@
 		986AA7311F62FD38008F2091 /* test.kernelProj */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = test.kernelProj; sourceTree = "<group>"; };
 		986AA7361F62FF76008F2091 /* SelectTemplateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTemplateTableViewController.swift; sourceTree = "<group>"; };
 		987672441F2F5355002F9AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPlaygroundsHelper.swift; sourceTree = "<group>"; };
 		9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FilterPlaygroundThumbnailExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9881A14E1F4884C900BABA72 /* ThumbnailProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailProvider.swift; sourceTree = "<group>"; };
 		9881A1501F4884C900BABA72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -301,7 +305,7 @@
 				981267D21F34BEDB00101027 /* Compiler */,
 				9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */,
 				982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */,
-				98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */,
+				987A73271F66F63800F73806 /* Export */,
 			);
 			path = FilterPlayground;
 			sourceTree = "<group>";
@@ -344,6 +348,16 @@
 				986AA7361F62FF76008F2091 /* SelectTemplateTableViewController.swift */,
 			);
 			path = Templates;
+			sourceTree = "<group>";
+		};
+		987A73271F66F63800F73806 /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */,
+				987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */,
+				98426C161F670540007C2260 /* CIFilterHelper.swift */,
+			);
+			path = Export;
 			sourceTree = "<group>";
 		};
 		9881A14D1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */ = {
@@ -642,6 +656,7 @@
 				98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */,
 				985A42081F2CF8F200636E72 /* MainViewController.swift in Sources */,
 				9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */,
+				98426C171F670540007C2260 /* CIFilterHelper.swift in Sources */,
 				985A42361F2CFEE800636E72 /* CustomImageView.swift in Sources */,
 				987672451F2F5355002F9AAF /* Extensions.swift in Sources */,
 				982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */,
@@ -649,6 +664,7 @@
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,
 				98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
+				987A73291F66F65000F73806 /* SwiftPlaygroundsHelper.swift in Sources */,
 				9848C4441F3B9B58001E079C /* SettingsTableViewController.swift in Sources */,
 				986AA7371F62FF76008F2091 /* SelectTemplateTableViewController.swift in Sources */,
 				9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */,

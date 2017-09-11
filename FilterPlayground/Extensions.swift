@@ -125,6 +125,15 @@ extension Array where Element: Equatable {
     }
 }
 
+extension Array
+{
+    func appending(with array: Array<Element> ) -> Array<Element> {
+        var tmp = self
+        tmp.append(contentsOf: array)
+        return tmp
+    }
+}
+
 extension CGFloat {
 
     var asRadian: CGFloat {

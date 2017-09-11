@@ -23,18 +23,25 @@ class ExportTableViewController: UITableViewController {
             exportAsCIKernel(sender: sender)
             break
         case 1:
-            // Swift
+            exportAsCIFIlter(sender: sender)
             break
         case 2:
-            // Swift Playground
+            exportAsSwiftPlayground(sender: sender)
             break
         case 3:
             exportAsPlayground(sender: sender)
             break
-
         default:
             break
         }
+    }
+    
+    func exportAsSwiftPlayground(sender: UIView?) {
+        guard let document = document else {
+            return
+        }
+        let playground = SwiftPlaygroundsHelper.swiftPlayground(with:  document)
+        self.presentActivityViewController(sourceView: sender, items: [playground])
     }
 
     func exportAsPlayground(sender: UIView?) {
@@ -44,6 +51,25 @@ class ExportTableViewController: UITableViewController {
         document.save(to: document.fileURL, for: .forOverwriting) { _ in
             self.presentActivityViewController(sourceView: sender, items: [document.fileURL])
         }
+    }
+    
+    func exportAsCIFIlter(sender: UIView?) {
+        guard let document = document,
+            let sourceData = CIFilterHelper.cifilter(with: document.source, type: document.metaData.type, arguments: document.metaData.attributes, name: document.localizedName.withoutWhiteSpaces.withoutSlash).data(using: .utf8) else {
+                return
+        }
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("\(document.localizedName.withoutWhiteSpaces.withoutSlash).swift")
+        
+        do {
+            try sourceData.write(to: url, options: .atomicWrite)
+            
+        } catch {
+            print(error)
+            // todo handle error
+            return
+        }
+        presentActivityViewController(sourceView: sender, items: [url])
+
     }
 
     func exportAsCIKernel(sender: UIView?) {

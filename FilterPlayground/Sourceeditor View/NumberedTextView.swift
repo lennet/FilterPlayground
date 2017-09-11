@@ -45,7 +45,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
 
     var currentAST: ASTNode?
 
-    var hightLightErrorLineNumber: Int? {
+    var hightLightErrorLineNumber: [Int] = [] {
         didSet {
             setNeedsDisplay()
         }
@@ -138,7 +138,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
             return false
         }
 
-        if (hightLightErrorLineNumber ?? -1) == lineNumber {
+        if hightLightErrorLineNumber.contains(lineNumber) {
             fillLine(rect: CGRect(origin: origin, size: CGSize(width: rect.width, height: lineRect.height)), color: theme.sourceEditorLineBackgroundError)
         } else if textView.isFirstResponder && (lineRange.contains(textView.selectedRange.location) || lineRange.location == textView.selectedRange.location) && textView.selectedRange.length == 0 {
             fillLine(rect: CGRect(origin: origin, size: CGSize(width: rect.width, height: lineRect.height)), color: theme.sourceEditorLineBackgroundHighlighted)

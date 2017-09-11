@@ -9,7 +9,7 @@
 import Foundation
 
 enum KernelError {
-    case compile(lineNumber: Int, characterIndex: Int, type: String, message: String, note: (Int, Int, String)?)
+    case compile(lineNumber: Int, characterIndex: Int, type: String, message: String, note: (lineNumber: Int, characterIndex: Int, message: String)?)
     case runtime(message: String)
 }
 

@@ -11,7 +11,7 @@ import UIKit
 class ErrorTableViewCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var errorView: UIView!
+    @IBOutlet weak var errorView: UIImageView!
 
     var error: KernelError? {
         didSet {
@@ -22,14 +22,19 @@ class ErrorTableViewCell: UITableViewCell {
     func setup() {
         guard let error = error else { return }
         switch error {
-        case .compile(lineNumber: _, characterIndex: _, type: let type, message: let message, note: _):
-            label.text = "\(type): \(message)"
-            errorView.backgroundColor = .red
+        case .compile(lineNumber: _, characterIndex: _, type: let type, message: let message, note: let note):
+            var text = "\(type): \(message)"
+            if let note = note {
+                text.append("\n\(note.message)")
+            }
+            label.text = text
+            errorView.image = #imageLiteral(resourceName: "CompileError")
             break
         case let .runtime(message: message):
             label.text = "\(message)"
-            errorView.backgroundColor = .purple
+            errorView.image = #imageLiteral(resourceName: "RunTimeError")
             break
         }
     }
+    
 }

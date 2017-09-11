@@ -44,7 +44,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
                 errorViewHeightConstraint.constant = min(errorTableView.contentSize.height, view.frame.size.height / 4)
             }
             updateBottomSpacing(animated: true)
-            textView.hightLightErrorLineNumber = nil
+            textView.hightLightErrorLineNumber = []
         }
     }
 
@@ -117,8 +117,12 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch errors[indexPath.row] {
-        case .compile(lineNumber: let lineNumber, characterIndex: _, type: _, message: _, note: _):
-            textView.hightLightErrorLineNumber = lineNumber
+        case .compile(lineNumber: let lineNumber, characterIndex: _, type: _, message: _, note: let note):
+            var lineNumbers = [lineNumber]
+            if let note = note {
+                lineNumbers.append(note.lineNumber)
+            }
+            textView.hightLightErrorLineNumber = lineNumbers
             break
         case .runtime(message: _):
             break

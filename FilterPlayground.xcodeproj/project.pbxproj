@@ -27,7 +27,6 @@
 		985A420B1F2CF8F200636E72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 985A42091F2CF8F200636E72 /* Main.storyboard */; };
 		985A420D1F2CF8F200636E72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 985A420C1F2CF8F200636E72 /* Assets.xcassets */; };
 		985A42101F2CF8F200636E72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 985A420E1F2CF8F200636E72 /* LaunchScreen.storyboard */; };
-		985A42261F2CF8F300636E72 /* FilterPlaygroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42251F2CF8F300636E72 /* FilterPlaygroundUITests.swift */; };
 		985A42361F2CFEE800636E72 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42351F2CFEE800636E72 /* CustomImageView.swift */; };
 		986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */; };
 		9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868A8C01F3712EB00D0BC79 /* AST.swift */; };
@@ -46,7 +45,6 @@
 		9881A1621F4884E700BABA72 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881A1611F4884E700BABA72 /* PreviewViewController.swift */; };
 		9881A1651F4884E700BABA72 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9881A1631F4884E700BABA72 /* MainInterface.storyboard */; };
 		9881A1691F4884E700BABA72 /* FilterPlaygroundPreviewExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		9897166B1F67E07400E7C20C /* CIFIlterHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9897166A1F67E07400E7C20C /* CIFIlterHelperTests.swift */; };
 		989716731F67E3C800E7C20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716721F67E3C800E7C20C /* AppDelegate.swift */; };
 		989716751F67E3C800E7C20C /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716741F67E3C800E7C20C /* Document.swift */; };
 		989716781F67E3C800E7C20C /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 989716761F67E3C800E7C20C /* Document.xib */; };
@@ -92,13 +90,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		985A42171F2CF8F300636E72 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 985A41FA1F2CF8F200636E72 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 985A42011F2CF8F200636E72;
-			remoteInfo = FilterPlayground;
-		};
-		985A42221F2CF8F300636E72 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 985A41FA1F2CF8F200636E72 /* Project object */;
 			proxyType = 1;
@@ -168,9 +159,6 @@
 		985A42111F2CF8F200636E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		985A42161F2CF8F300636E72 /* FilterPlaygroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilterPlaygroundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		985A421C1F2CF8F300636E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		985A42211F2CF8F300636E72 /* FilterPlaygroundUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilterPlaygroundUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		985A42251F2CF8F300636E72 /* FilterPlaygroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPlaygroundUITests.swift; sourceTree = "<group>"; };
-		985A42271F2CF8F300636E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		985A42351F2CFEE800636E72 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		9868A8C01F3712EB00D0BC79 /* AST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
@@ -191,7 +179,6 @@
 		9881A1611F4884E700BABA72 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		9881A1641F4884E700BABA72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		9881A1661F4884E700BABA72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9897166A1F67E07400E7C20C /* CIFIlterHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFIlterHelperTests.swift; sourceTree = "<group>"; };
 		989716701F67E3C800E7C20C /* FilterPlaygroundMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterPlaygroundMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		989716721F67E3C800E7C20C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		989716741F67E3C800E7C20C /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -241,13 +228,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		985A42131F2CF8F300636E72 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		985A421E1F2CF8F300636E72 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -321,7 +301,6 @@
 			children = (
 				985A42041F2CF8F200636E72 /* FilterPlayground */,
 				985A42191F2CF8F300636E72 /* FilterPlaygroundTests */,
-				985A42241F2CF8F300636E72 /* FilterPlaygroundUITests */,
 				9881A14D1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */,
 				9881A1601F4884E700BABA72 /* FilterPlaygroundPreviewExtension */,
 				989716711F67E3C800E7C20C /* FilterPlaygroundMac */,
@@ -336,7 +315,6 @@
 			children = (
 				985A42021F2CF8F200636E72 /* FilterPlayground.app */,
 				985A42161F2CF8F300636E72 /* FilterPlaygroundTests.xctest */,
-				985A42211F2CF8F300636E72 /* FilterPlaygroundUITests.xctest */,
 				9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */,
 				9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */,
 				989716701F67E3C800E7C20C /* FilterPlaygroundMac.app */,
@@ -385,18 +363,8 @@
 				9841EC761F36675000A8E3CA /* ThemingTests.swift */,
 				98C6FE851F3832AE00D0E840 /* ASTTests.swift */,
 				986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */,
-				9897166A1F67E07400E7C20C /* CIFIlterHelperTests.swift */,
 			);
 			path = FilterPlaygroundTests;
-			sourceTree = "<group>";
-		};
-		985A42241F2CF8F300636E72 /* FilterPlaygroundUITests */ = {
-			isa = PBXGroup;
-			children = (
-				985A42251F2CF8F300636E72 /* FilterPlaygroundUITests.swift */,
-				985A42271F2CF8F300636E72 /* Info.plist */,
-			);
-			path = FilterPlaygroundUITests;
 			sourceTree = "<group>";
 		};
 		986AA7291F62F4FE008F2091 /* Templates */ = {
@@ -579,24 +547,6 @@
 			productReference = 985A42161F2CF8F300636E72 /* FilterPlaygroundTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		985A42201F2CF8F300636E72 /* FilterPlaygroundUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 985A42301F2CF8F300636E72 /* Build configuration list for PBXNativeTarget "FilterPlaygroundUITests" */;
-			buildPhases = (
-				985A421D1F2CF8F300636E72 /* Sources */,
-				985A421E1F2CF8F300636E72 /* Frameworks */,
-				985A421F1F2CF8F300636E72 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				985A42231F2CF8F300636E72 /* PBXTargetDependency */,
-			);
-			name = FilterPlaygroundUITests;
-			productName = FilterPlaygroundUITests;
-			productReference = 985A42211F2CF8F300636E72 /* FilterPlaygroundUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		9881A14B1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9881A1561F4884CA00BABA72 /* Build configuration list for PBXNativeTarget "FilterPlaygroundThumbnailExtension" */;
@@ -683,10 +633,6 @@
 						CreatedOnToolsVersion = 9.0;
 						TestTargetID = 985A42011F2CF8F200636E72;
 					};
-					985A42201F2CF8F300636E72 = {
-						CreatedOnToolsVersion = 9.0;
-						TestTargetID = 985A42011F2CF8F200636E72;
-					};
 					9881A14B1F4884C900BABA72 = {
 						CreatedOnToolsVersion = 9.0;
 					};
@@ -724,7 +670,6 @@
 			targets = (
 				985A42011F2CF8F200636E72 /* FilterPlayground */,
 				985A42151F2CF8F300636E72 /* FilterPlaygroundTests */,
-				985A42201F2CF8F300636E72 /* FilterPlaygroundUITests */,
 				9881A14B1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */,
 				9881A15B1F4884E600BABA72 /* FilterPlaygroundPreviewExtension */,
 				9897166F1F67E3C800E7C20C /* FilterPlaygroundMac */,
@@ -750,13 +695,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		985A42141F2CF8F300636E72 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		985A421F1F2CF8F300636E72 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -855,18 +793,9 @@
 				98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */,
 				986AA72D1F62F679008F2091 /* TemplatesManagerTests.swift in Sources */,
 				980229B01F2FBF18000FFCA2 /* ErrorParserTests.swift in Sources */,
-				9897166B1F67E07400E7C20C /* CIFIlterHelperTests.swift in Sources */,
 				98C6FE861F3832AE00D0E840 /* ASTTests.swift in Sources */,
 				98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */,
 				984D9FA41F2E824B004AFD74 /* ParserTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		985A421D1F2CF8F300636E72 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				985A42261F2CF8F300636E72 /* FilterPlaygroundUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -920,11 +849,6 @@
 			isa = PBXTargetDependency;
 			target = 985A42011F2CF8F200636E72 /* FilterPlayground */;
 			targetProxy = 985A42171F2CF8F300636E72 /* PBXContainerItemProxy */;
-		};
-		985A42231F2CF8F300636E72 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 985A42011F2CF8F200636E72 /* FilterPlayground */;
-			targetProxy = 985A42221F2CF8F300636E72 /* PBXContainerItemProxy */;
 		};
 		9881A1521F4884CA00BABA72 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1164,34 +1088,6 @@
 			};
 			name = Release;
 		};
-		985A42311F2CF8F300636E72 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = FilterPlaygroundUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = lt.FilterPlaygroundUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FilterPlayground;
-			};
-			name = Debug;
-		};
-		985A42321F2CF8F300636E72 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = FilterPlaygroundUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = lt.FilterPlaygroundUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FilterPlayground;
-			};
-			name = Release;
-		};
 		9881A1541F4884CA00BABA72 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1346,15 +1242,6 @@
 			buildConfigurations = (
 				985A422E1F2CF8F300636E72 /* Debug */,
 				985A422F1F2CF8F300636E72 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		985A42301F2CF8F300636E72 /* Build configuration list for PBXNativeTarget "FilterPlaygroundUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				985A42311F2CF8F300636E72 /* Debug */,
-				985A42321F2CF8F300636E72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

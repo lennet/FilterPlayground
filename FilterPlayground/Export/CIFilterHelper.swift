@@ -78,6 +78,11 @@ extension KernelAttributeType {
 
 class CIFilterHelper {
 
+    class func cifilter(with kernelSource: String, type: KernelType, arguments: [KernelAttribute], name: String) -> Data? {
+        let source: String = CIFilterHelper.cifilter(with: kernelSource, type: type, arguments: arguments, name: name)
+        return source.data(using: .utf8)
+    }
+    
     class func cifilter(with kernelSource: String, type: KernelType, arguments: [KernelAttribute], name: String) -> String {
         let properties = arguments.map{ "\tvar \($0.name): \($0.type.swiftType)?" }.joined(separator: "\n")
         var inputProperties = ""

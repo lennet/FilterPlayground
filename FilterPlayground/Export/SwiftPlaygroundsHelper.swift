@@ -52,7 +52,7 @@ class SwiftPlaygroundsHelper {
         }
         let content = """
         import UIKit
-        \(CIFilterHelper.cifilter(with: document.source, type: document.metaData.type, arguments: document.metaData.attributes, name: filterName))
+        \(CIFilterHelper.cifilter(with: document.source, type: document.metaData.type, arguments: document.metaData.attributes, name: filterName) as String)
         
         \(definedVariables)
         

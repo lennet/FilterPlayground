@@ -18,10 +18,30 @@ extension XCTest {
         let task = Process()
         task.launchPath = "/usr/bin/env"
         task.arguments = ["xcrun", "-sdk", "iphoneos", "swiftc", "-target", "arm64-apple-ios11.0", tmpURL.path]
+        
+        let pipe = Pipe()
+        task.standardError = pipe
+        
         task.launch()
         task.waitUntilExit()
-        XCTAssertEqual(task.terminationStatus, invertCondition ? 1 : 0,
-                       file: file, line: line)
+        
+        if task.terminationStatus == 0 && invertCondition {
+            XCTFail("Code compiles", file: file, line: line)
+        } else if task.terminationStatus == 1 && !invertCondition {
+            let data = pipe.fileHandleForReading.readDataToEndOfFile()
+            let error = String(data: data, encoding: .utf8) ?? "Unkown error"
+            let message = """
+failed to compile:
+------------------------------
+\(source)
+------------------------------
+with error log:
+------------------------------
+\(error)
+------------------------------
+"""
+            XCTFail(message, file: file, line: line)
+        }
     }
     
 }
@@ -51,6 +71,22 @@ class FilterPlaygroundMacTests: XCTestCase {
                         KernelAttribute(name: "bar", type: .vec2, value: .vec2(1, 1)),
                         KernelAttribute(name: "test", type: .sample, value: .sample(CIImage(color: .black)))]
         let source: String = CIFilterHelper.cifilter(with: "", type: .warp, arguments:arguments, name: "testWarp")
+        XCTAssertSwiftCompiles(source: source)
+    }
+    
+    func testBlendFilter() {
+        let source: String = CIFilterHelper.cifilter(with: "", type: .blend, arguments: [KernelAttribute(name: "foo", type: .sample, value: .sample(CIImage(color: .black))), KernelAttribute(name: "bar", type: .sample, value: .sample(CIImage(color: .black)))], name: "testBlend")
+        XCTAssertSwiftCompiles(source: source)
+    }
+    
+    func testColorFilter() {
+        let source: String = CIFilterHelper.cifilter(with: "", type: .color, arguments: [KernelAttribute(name: "test", type: .sample, value: .sample(CIImage(color: .black)))], name: "testColor")
+        XCTAssertSwiftCompiles(source: source)
+
+    }
+    
+    func testNormalFilter() {
+        let source: String = CIFilterHelper.cifilter(with: "", type: .normal, arguments: [], name: "testNormal")
         XCTAssertSwiftCompiles(source: source)
     }
     

@@ -31,15 +31,15 @@ extension XCTest {
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
             let error = String(data: data, encoding: .utf8) ?? "Unkown error"
             let message = """
-failed to compile:
-------------------------------
-\(source)
-------------------------------
-with error log:
-------------------------------
-\(error)
-------------------------------
-"""
+                failed to compile:
+                ------------------------------
+                \(source)
+                ------------------------------
+                with error log:
+                ------------------------------
+                \(error)
+                ------------------------------
+                """
             XCTFail(message, file: file, line: line)
         }
     }

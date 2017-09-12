@@ -13,11 +13,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
     var theme: Theme.Type {
         return ThemeManager.shared.currentTheme
     }
-
-    class var spacingValue: String {
-        return Settings.tabsEnabled ? "\t" : "    "
-    }
-
+    
     let textView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear
@@ -176,7 +172,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
             let firstString = (textView.text as NSString).substring(to: range.location)
             let currentTokenLocation = Parser(string: firstString).getTokens().count
             let intendationLevel = currentAST?.intendationLevel(at: currentTokenLocation, with: 0) ?? 0
-            let tabs = Array(repeating: NumberedTextView.spacingValue, count: intendationLevel).joined()
+            let tabs = Array(repeating: Settings.spacingValue, count: intendationLevel).joined()
             var newText = text + tabs
 
             let lastChrackterIsOpeningBracket = (textView.text as NSString).substring(with: NSMakeRange(range.location - 1, 1)) == "{"
@@ -185,11 +181,11 @@ class NumberedTextView: UIView, UITextViewDelegate {
             if range.location < textView.text.characters.count && (textView.text as NSString).substring(with: NSMakeRange(range.location, 1)) == "}" && lastChrackterIsOpeningBracket {
                 // {\n}
                 newSelectedRange = NSMakeRange(range.location + newText.count + 1, 0)
-                newText += "\(NumberedTextView.spacingValue)\n" + tabs
+                newText += "\(Settings.spacingValue)\n" + tabs
             } else if lastChrackterIsOpeningBracket && currentAST?.needsClosingBracket(at: currentTokenLocation) ?? false {
                 // {\n
                 newSelectedRange = NSMakeRange(range.location + newText.count, 0)
-                let oldSpacing = Array(repeating: NumberedTextView.spacingValue, count: intendationLevel - 1).joined()
+                let oldSpacing = Array(repeating: Settings.spacingValue, count: intendationLevel - 1).joined()
                 newText += "\n\(oldSpacing)}"
             } else {
                 newSelectedRange = NSMakeRange(range.location + newText.count, 0)
@@ -200,7 +196,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
             updatedText()
             return false
         } else if text == "\t" && range.length == 0 {
-            let newText = NumberedTextView.spacingValue
+            let newText = Settings.spacingValue
             textView.text = textView.text.replacingCharacters(in: Range(range, in: textView.text)!, with: newText)
             textView.selectedRange = NSMakeRange(range.location + newText.count, 0)
             updatedText()

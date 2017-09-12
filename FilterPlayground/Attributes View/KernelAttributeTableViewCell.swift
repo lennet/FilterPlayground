@@ -112,10 +112,10 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         case let (.sample, .sample(image)?) :
             let imageView = CustomImageView(frame: valueSelectionView.bounds)
             imageView.didSelectImage = { image in
-                self.attribute?.value = .sample(image.image!)
+                self.attribute?.value = .sample(image.image!.asCIImage!)
                 self.updateCallBack?(self, self.attribute!)
             }
-            imageView.image = image
+            imageView.image = UIImage(ciImage: image)
             imageView.backgroundColor = .gray
             valueSelectionView.addSubview(imageView)
             break

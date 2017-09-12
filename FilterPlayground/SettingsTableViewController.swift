@@ -8,30 +8,6 @@
 
 import UIKit
 
-struct Settings {
-
-    static var tabsEnabled: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: #function)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: #function)
-        }
-    }
-
-    static var fontSize: Float {
-        get {
-            guard UserDefaults.standard.value(forKey: #function) != nil else {
-                return 22
-            }
-            return UserDefaults.standard.float(forKey: #function)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: #function)
-        }
-    }
-}
-
 class SettingsTableViewController: UITableViewController {
 
     @IBOutlet weak var tabsVsSpacesSegmentedControl: UISegmentedControl!

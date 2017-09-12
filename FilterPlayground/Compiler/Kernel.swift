@@ -6,13 +6,13 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import UIKit
+import CoreImage
 
 protocol Kernel: class {
 
     static func compile(source: String) -> Kernel?
 
-    func apply(with inputImages: [UIImage], attributes: [Any]) -> UIImage?
+    func apply(with inputImages: [CIImage], attributes: [Any]) -> CIImage?
 }
 
 class GeneralKernel: Kernel {
@@ -27,14 +27,11 @@ class GeneralKernel: Kernel {
         return nil
     }
 
-    func apply(with _: [UIImage], attributes: [Any]) -> UIImage? {
+    func apply(with _: [CIImage], attributes: [Any]) -> CIImage? {
         let arguments: [Any] = attributes
-        guard let result = kernel?.apply(extent: CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000)), roiCallback: { (_, rect) -> CGRect in
+        return kernel?.apply(extent: CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000)), roiCallback: { (_, rect) -> CGRect in
             rect
-        }, arguments: arguments) else {
-            return nil
-        }
-        return UIImage(ciImage: result)
+        }, arguments: arguments)
     }
 }
 
@@ -50,16 +47,14 @@ class BlendKernel: Kernel {
         return nil
     }
 
-    func apply(with inputImages: [UIImage], attributes _: [Any]) -> UIImage? {
-        guard let first = inputImages.first?.asCIImage,
-            let second = inputImages.last?.asCIImage,
+    func apply(with inputImages: [CIImage], attributes _: [Any]) -> CIImage? {
+        guard let first = inputImages.first,
+            let second = inputImages.last,
             inputImages.count == 2 else {
             return nil
         }
 
-        guard let result = kernel?.apply(foreground: first, background: second) else {
-            return nil
-        }
-        return UIImage(ciImage: result)
+        return kernel?.apply(foreground: first, background: second)
+        
     }
 }

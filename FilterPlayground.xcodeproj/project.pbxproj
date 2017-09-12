@@ -46,6 +46,26 @@
 		9881A1621F4884E700BABA72 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881A1611F4884E700BABA72 /* PreviewViewController.swift */; };
 		9881A1651F4884E700BABA72 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9881A1631F4884E700BABA72 /* MainInterface.storyboard */; };
 		9881A1691F4884E700BABA72 /* FilterPlaygroundPreviewExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9897166B1F67E07400E7C20C /* CIFIlterHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9897166A1F67E07400E7C20C /* CIFIlterHelperTests.swift */; };
+		989716731F67E3C800E7C20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716721F67E3C800E7C20C /* AppDelegate.swift */; };
+		989716751F67E3C800E7C20C /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716741F67E3C800E7C20C /* Document.swift */; };
+		989716781F67E3C800E7C20C /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 989716761F67E3C800E7C20C /* Document.xib */; };
+		9897167A1F67E3C800E7C20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 989716791F67E3C800E7C20C /* Assets.xcassets */; };
+		9897167D1F67E3C800E7C20C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9897167B1F67E3C800E7C20C /* MainMenu.xib */; };
+		989716891F67E3C900E7C20C /* FilterPlaygroundMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716881F67E3C900E7C20C /* FilterPlaygroundMacTests.swift */; };
+		989716911F67E47300E7C20C /* CIFilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98426C161F670540007C2260 /* CIFilterHelper.swift */; };
+		989716931F67E75900E7C20C /* KernelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */; };
+		989716941F67E77500E7C20C /* KernelCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23C1F34B85C006E7658 /* KernelCompiler.swift */; };
+		989716961F67E7B300E7C20C /* CoreImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716951F67E7B300E7C20C /* CoreImage+Extension.swift */; };
+		9897169A1F67E80A00E7C20C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716991F67E80A00E7C20C /* UIImage+Extension.swift */; };
+		9897169B1F67E81D00E7C20C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
+		9897169C1F67E84A00E7C20C /* Kernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981267D31F34BEFC00101027 /* Kernel.swift */; };
+		9897169D1F67E8EE00E7C20C /* KernelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23E1F34B8DD006E7658 /* KernelError.swift */; };
+		9897169E1F67E93300E7C20C /* ErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229AB1F2F94F9000FFCA2 /* ErrorHelper.swift */; };
+		9897169F1F67E94800E7C20C /* CoreImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716951F67E7B300E7C20C /* CoreImage+Extension.swift */; };
+		989716A01F67E97600E7C20C /* ErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229AD1F2FB88F000FFCA2 /* ErrorParser.swift */; };
+		989716A21F67F54C00E7C20C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716A11F67F54C00E7C20C /* Settings.swift */; };
+		989716A31F67F55C00E7C20C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716A11F67F54C00E7C20C /* Settings.swift */; };
 		98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */; };
 		98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */; };
 		98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */; };
@@ -98,6 +118,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 9881A15B1F4884E600BABA72;
 			remoteInfo = FilterPlaygroundPreviewExtension;
+		};
+		989716851F67E3C900E7C20C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 985A41FA1F2CF8F200636E72 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9897166F1F67E3C800E7C20C;
+			remoteInfo = FilterPlaygroundMac;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -164,6 +191,21 @@
 		9881A1611F4884E700BABA72 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		9881A1641F4884E700BABA72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		9881A1661F4884E700BABA72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9897166A1F67E07400E7C20C /* CIFIlterHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFIlterHelperTests.swift; sourceTree = "<group>"; };
+		989716701F67E3C800E7C20C /* FilterPlaygroundMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterPlaygroundMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		989716721F67E3C800E7C20C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		989716741F67E3C800E7C20C /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		989716771F67E3C800E7C20C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		989716791F67E3C800E7C20C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9897167C1F67E3C800E7C20C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		9897167E1F67E3C800E7C20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9897167F1F67E3C800E7C20C /* FilterPlaygroundMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FilterPlaygroundMac.entitlements; sourceTree = "<group>"; };
+		989716841F67E3C900E7C20C /* FilterPlaygroundMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilterPlaygroundMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		989716881F67E3C900E7C20C /* FilterPlaygroundMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPlaygroundMacTests.swift; sourceTree = "<group>"; };
+		9897168A1F67E3C900E7C20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		989716951F67E7B300E7C20C /* CoreImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreImage+Extension.swift"; sourceTree = "<group>"; };
+		989716991F67E80A00E7C20C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		989716A11F67F54C00E7C20C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesViewController.swift; sourceTree = "<group>"; };
 		98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorViewController.swift; sourceTree = "<group>"; };
 		98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelDescriptor.swift; sourceTree = "<group>"; };
@@ -227,6 +269,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9897166D1F67E3C800E7C20C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		989716811F67E3C900E7C20C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -268,6 +324,8 @@
 				985A42241F2CF8F300636E72 /* FilterPlaygroundUITests */,
 				9881A14D1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */,
 				9881A1601F4884E700BABA72 /* FilterPlaygroundPreviewExtension */,
+				989716711F67E3C800E7C20C /* FilterPlaygroundMac */,
+				989716871F67E3C900E7C20C /* FilterPlaygroundMacTests */,
 				9881A15D1F4884E700BABA72 /* Frameworks */,
 				985A42031F2CF8F200636E72 /* Products */,
 			);
@@ -281,6 +339,8 @@
 				985A42211F2CF8F300636E72 /* FilterPlaygroundUITests.xctest */,
 				9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */,
 				9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */,
+				989716701F67E3C800E7C20C /* FilterPlaygroundMac.app */,
+				989716841F67E3C900E7C20C /* FilterPlaygroundMacTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -301,11 +361,12 @@
 				98D919A01F2E05AB007D5234 /* Images View */,
 				98D9199E1F2E0585007D5234 /* Sourceeditor View */,
 				98D9199D1F2E0578007D5234 /* Attributes View */,
-				987672441F2F5355002F9AAF /* Extensions.swift */,
+				989716981F67E7F300E7C20C /* Extensions */,
 				981267D21F34BEDB00101027 /* Compiler */,
 				9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */,
 				982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */,
 				987A73271F66F63800F73806 /* Export */,
+				989716A11F67F54C00E7C20C /* Settings.swift */,
 			);
 			path = FilterPlayground;
 			sourceTree = "<group>";
@@ -324,6 +385,7 @@
 				9841EC761F36675000A8E3CA /* ThemingTests.swift */,
 				98C6FE851F3832AE00D0E840 /* ASTTests.swift */,
 				986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */,
+				9897166A1F67E07400E7C20C /* CIFIlterHelperTests.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -385,6 +447,39 @@
 				9881A1661F4884E700BABA72 /* Info.plist */,
 			);
 			path = FilterPlaygroundPreviewExtension;
+			sourceTree = "<group>";
+		};
+		989716711F67E3C800E7C20C /* FilterPlaygroundMac */ = {
+			isa = PBXGroup;
+			children = (
+				989716721F67E3C800E7C20C /* AppDelegate.swift */,
+				989716741F67E3C800E7C20C /* Document.swift */,
+				989716761F67E3C800E7C20C /* Document.xib */,
+				989716791F67E3C800E7C20C /* Assets.xcassets */,
+				9897167B1F67E3C800E7C20C /* MainMenu.xib */,
+				9897167E1F67E3C800E7C20C /* Info.plist */,
+				9897167F1F67E3C800E7C20C /* FilterPlaygroundMac.entitlements */,
+			);
+			path = FilterPlaygroundMac;
+			sourceTree = "<group>";
+		};
+		989716871F67E3C900E7C20C /* FilterPlaygroundMacTests */ = {
+			isa = PBXGroup;
+			children = (
+				989716881F67E3C900E7C20C /* FilterPlaygroundMacTests.swift */,
+				9897168A1F67E3C900E7C20C /* Info.plist */,
+			);
+			path = FilterPlaygroundMacTests;
+			sourceTree = "<group>";
+		};
+		989716981F67E7F300E7C20C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				987672441F2F5355002F9AAF /* Extensions.swift */,
+				989716951F67E7B300E7C20C /* CoreImage+Extension.swift */,
+				989716991F67E80A00E7C20C /* UIImage+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		98D475AE1F3BB8920080D794 /* Resources */ = {
@@ -536,6 +631,41 @@
 			productReference = 9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		9897166F1F67E3C800E7C20C /* FilterPlaygroundMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9897168B1F67E3C900E7C20C /* Build configuration list for PBXNativeTarget "FilterPlaygroundMac" */;
+			buildPhases = (
+				9897166C1F67E3C800E7C20C /* Sources */,
+				9897166D1F67E3C800E7C20C /* Frameworks */,
+				9897166E1F67E3C800E7C20C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FilterPlaygroundMac;
+			productName = FilterPlaygroundMac;
+			productReference = 989716701F67E3C800E7C20C /* FilterPlaygroundMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		989716831F67E3C900E7C20C /* FilterPlaygroundMacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9897168E1F67E3C900E7C20C /* Build configuration list for PBXNativeTarget "FilterPlaygroundMacTests" */;
+			buildPhases = (
+				989716801F67E3C900E7C20C /* Sources */,
+				989716811F67E3C900E7C20C /* Frameworks */,
+				989716821F67E3C900E7C20C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				989716861F67E3C900E7C20C /* PBXTargetDependency */,
+			);
+			name = FilterPlaygroundMacTests;
+			productName = FilterPlaygroundMacTests;
+			productReference = 989716841F67E3C900E7C20C /* FilterPlaygroundMacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -563,6 +693,15 @@
 					9881A15B1F4884E600BABA72 = {
 						CreatedOnToolsVersion = 9.0;
 					};
+					9897166F1F67E3C800E7C20C = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					989716831F67E3C900E7C20C = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 9897166F1F67E3C800E7C20C;
+					};
 				};
 			};
 			buildConfigurationList = 985A41FD1F2CF8F200636E72 /* Build configuration list for PBXProject "FilterPlayground" */;
@@ -583,6 +722,8 @@
 				985A42201F2CF8F300636E72 /* FilterPlaygroundUITests */,
 				9881A14B1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */,
 				9881A15B1F4884E600BABA72 /* FilterPlaygroundPreviewExtension */,
+				9897166F1F67E3C800E7C20C /* FilterPlaygroundMac */,
+				989716831F67E3C900E7C20C /* FilterPlaygroundMacTests */,
 			);
 		};
 /* End PBXProject section */
@@ -632,6 +773,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9897166E1F67E3C800E7C20C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9897167A1F67E3C800E7C20C /* Assets.xcassets in Resources */,
+				989716781F67E3C800E7C20C /* Document.xib in Resources */,
+				9897167D1F67E3C800E7C20C /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		989716821F67E3C900E7C20C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -654,6 +812,7 @@
 				98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */,
 				98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */,
 				98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */,
+				989716A21F67F54C00E7C20C /* Settings.swift in Sources */,
 				985A42081F2CF8F200636E72 /* MainViewController.swift in Sources */,
 				9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */,
 				98426C171F670540007C2260 /* CIFilterHelper.swift in Sources */,
@@ -670,9 +829,11 @@
 				9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */,
 				98E692E91F30C832000C8B41 /* Document.swift in Sources */,
 				98C5E23D1F34B85C006E7658 /* KernelCompiler.swift in Sources */,
+				989716961F67E7B300E7C20C /* CoreImage+Extension.swift in Sources */,
 				980229AE1F2FB88F000FFCA2 /* ErrorParser.swift in Sources */,
 				98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */,
 				986AA72B1F62F51C008F2091 /* TemplatesManager.swift in Sources */,
+				9897169A1F67E80A00E7C20C /* UIImage+Extension.swift in Sources */,
 				980229AC1F2F94F9000FFCA2 /* ErrorHelper.swift in Sources */,
 				98C5E23F1F34B8DD006E7658 /* KernelError.swift in Sources */,
 			);
@@ -689,6 +850,7 @@
 				98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */,
 				986AA72D1F62F679008F2091 /* TemplatesManagerTests.swift in Sources */,
 				980229B01F2FBF18000FFCA2 /* ErrorParserTests.swift in Sources */,
+				9897166B1F67E07400E7C20C /* CIFIlterHelperTests.swift in Sources */,
 				98C6FE861F3832AE00D0E840 /* ASTTests.swift in Sources */,
 				98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */,
 				984D9FA41F2E824B004AFD74 /* ParserTests.swift in Sources */,
@@ -719,6 +881,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9897166C1F67E3C800E7C20C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9897169F1F67E94800E7C20C /* CoreImage+Extension.swift in Sources */,
+				9897169C1F67E84A00E7C20C /* Kernel.swift in Sources */,
+				9897169E1F67E93300E7C20C /* ErrorHelper.swift in Sources */,
+				989716931F67E75900E7C20C /* KernelDescriptor.swift in Sources */,
+				989716751F67E3C800E7C20C /* Document.swift in Sources */,
+				989716731F67E3C800E7C20C /* AppDelegate.swift in Sources */,
+				989716A31F67F55C00E7C20C /* Settings.swift in Sources */,
+				989716A01F67E97600E7C20C /* ErrorParser.swift in Sources */,
+				989716911F67E47300E7C20C /* CIFilterHelper.swift in Sources */,
+				989716941F67E77500E7C20C /* KernelCompiler.swift in Sources */,
+				9897169B1F67E81D00E7C20C /* Extensions.swift in Sources */,
+				9897169D1F67E8EE00E7C20C /* KernelError.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		989716801F67E3C900E7C20C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				989716891F67E3C900E7C20C /* FilterPlaygroundMacTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -741,6 +930,11 @@
 			isa = PBXTargetDependency;
 			target = 9881A15B1F4884E600BABA72 /* FilterPlaygroundPreviewExtension */;
 			targetProxy = 9881A1671F4884E700BABA72 /* PBXContainerItemProxy */;
+		};
+		989716861F67E3C900E7C20C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9897166F1F67E3C800E7C20C /* FilterPlaygroundMac */;
+			targetProxy = 989716851F67E3C900E7C20C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -767,6 +961,22 @@
 				9881A1641F4884E700BABA72 /* Base */,
 			);
 			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		989716761F67E3C800E7C20C /* Document.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				989716771F67E3C800E7C20C /* Base */,
+			);
+			name = Document.xib;
+			sourceTree = "<group>";
+		};
+		9897167B1F67E3C800E7C20C /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9897167C1F67E3C800E7C20C /* Base */,
+			);
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		98DC562A1F3CEF1C0024F522 /* ValuePicker.storyboard */ = {
@@ -1033,6 +1243,80 @@
 			};
 			name = Release;
 		};
+		9897168C1F67E3C900E7C20C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FilterPlaygroundMac/FilterPlaygroundMac.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = FilterPlaygroundMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = s.FilterPlaygroundMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		9897168D1F67E3C900E7C20C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FilterPlaygroundMac/FilterPlaygroundMac.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = FilterPlaygroundMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = s.FilterPlaygroundMac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		9897168F1F67E3C900E7C20C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = FilterPlaygroundMacTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = s.FilterPlaygroundMacTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FilterPlaygroundMac.app/Contents/MacOS/FilterPlaygroundMac";
+			};
+			name = Debug;
+		};
+		989716901F67E3C900E7C20C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = FilterPlaygroundMacTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = s.FilterPlaygroundMacTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FilterPlaygroundMac.app/Contents/MacOS/FilterPlaygroundMac";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1086,6 +1370,24 @@
 			buildConfigurations = (
 				9881A16B1F4884E700BABA72 /* Debug */,
 				9881A16C1F4884E700BABA72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9897168B1F67E3C900E7C20C /* Build configuration list for PBXNativeTarget "FilterPlaygroundMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9897168C1F67E3C900E7C20C /* Debug */,
+				9897168D1F67E3C900E7C20C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9897168E1F67E3C900E7C20C /* Build configuration list for PBXNativeTarget "FilterPlaygroundMacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9897168F1F67E3C900E7C20C /* Debug */,
+				989716901F67E3C900E7C20C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

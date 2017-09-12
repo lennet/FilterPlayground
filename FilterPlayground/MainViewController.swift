@@ -127,14 +127,14 @@ class MainViewController: UIViewController {
 
         DispatchQueue.global(qos: .background).async {
             let errorHelper = ErrorHelper()
-            let image = kernel.apply(with: input, attributes: attributes.map { $0.value.asKernelValue })
+            let image = kernel.apply(with: input.flatMap{ $0.asCIImage }, attributes: attributes.map { $0.value.asKernelValue })
             DispatchQueue.main.sync {
                 if let errorString = errorHelper.errorString() {
                     let errors = ErrorParser.runtimeErrors(for: errorString)
                     self.display(errors: errors)
                 }
 
-                self.liveViewController?.imageView.image = image
+                self.liveViewController?.imageView.image = UIImage(ciImage: image!)
                 self.isRunning = false
             }
         }

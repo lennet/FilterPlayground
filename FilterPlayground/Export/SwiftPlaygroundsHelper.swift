@@ -6,7 +6,6 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension KernelAttributeValue {
@@ -70,7 +69,7 @@ class SwiftPlaygroundsHelper {
         
         var resources: [(String, Data)] = document.metaData.attributes
             .flatMap{ guard case .sample(let image) = $0.value  else {return nil}
-                return ($0.name, UIImagePNGRepresentation(image)!) }
+                return ($0.name, image.asPNGData!) }
         
         if let input = document.inputImages.first {
             resources.append(("input", UIImagePNGRepresentation(input)!))

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import UIKit
+import CoreImage
 
 extension NSAttributedString {
 
@@ -54,18 +54,15 @@ extension CIWarpKernel: Kernel {
         return CIWarpKernel(source: source)
     }
 
-    func apply(with inputImages: [UIImage], attributes: [Any]) -> UIImage? {
+    func apply(with inputImages: [CIImage], attributes: [Any]) -> CIImage? {
 
-        guard let input = (inputImages.flatMap { $0.asCIImage }).first else {
+        guard let input = inputImages.first else {
             return nil
         }
 
-        guard let result = self.apply(extent: input.extent, roiCallback: { (_, rect) -> CGRect in
+        return self.apply(extent: input.extent, roiCallback: { (_, rect) -> CGRect in
             rect
-        }, image: input, arguments: attributes) else {
-            return nil
-        }
-        return UIImage(ciImage: result)
+        }, image: input, arguments: attributes)
     }
 }
 
@@ -75,15 +72,12 @@ extension CIColorKernel: Kernel {
         return CIColorKernel(source: source)
     }
 
-    func apply(with _: [UIImage], attributes: [Any]) -> UIImage? {
+    func apply(with _: [CIImage], attributes: [Any]) -> CIImage? {
         guard let image = attributes.first as? CISampler else {
             return nil
         }
-
-        guard let result = self.apply(extent: image.extent, arguments: attributes) else {
-            return nil
-        }
-        return UIImage(ciImage: result)
+        return self.apply(extent: image.extent, arguments: attributes)
+        
     }
 }
 
@@ -125,8 +119,7 @@ extension Array where Element: Equatable {
     }
 }
 
-extension Array
-{
+extension Array {
     func appending(with array: Array<Element> ) -> Array<Element> {
         var tmp = self
         tmp.append(contentsOf: array)
@@ -138,12 +131,5 @@ extension CGFloat {
 
     var asRadian: CGFloat {
         return self * CGFloat.pi / 180
-    }
-}
-
-extension UIImage {
-
-    var asCIImage: CIImage? {
-        return ciImage ?? CIImage(cgImage: cgImage!)
     }
 }

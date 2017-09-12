@@ -6,7 +6,7 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import UIKit
+import CoreImage
 
 enum KernelType: String, Codable {
     case normal
@@ -55,13 +55,13 @@ extension KernelType {
     var initialSourceBody: String {
         switch self {
         case .color:
-            return "\(NumberedTextView.spacingValue)return sample(img, destCoord());"
+            return "\(Settings.spacingValue)return sample(img, destCoord());"
         case .warp:
-            return "\(NumberedTextView.spacingValue)return destCoord();"
+            return "\(Settings.spacingValue)return destCoord();"
         case .blend:
-            return "\(NumberedTextView.spacingValue)return sample(fore, destCoord()) + sample(back, destCoord());"
+            return "\(Settings.spacingValue)return sample(fore, destCoord()) + sample(back, destCoord());"
         case .normal:
-            return "\(NumberedTextView.spacingValue)return vec4(1.0, 1.0, 1.0, 1.0);"
+            return "\(Settings.spacingValue)return vec4(1.0, 1.0, 1.0, 1.0);"
         }
     }
 
@@ -118,7 +118,7 @@ enum KernelAttributeValue {
     case vec2(Float, Float)
     case vec3(Float, Float, Float)
     case vec4(Float, Float, Float, Float)
-    case sample(UIImage)
+    case sample(CIImage)
     case color(Float, Float, Float, Float)
 
     var asKernelValue: Any {
@@ -134,7 +134,7 @@ enum KernelAttributeValue {
         case let .color(a, b, c, d):
             return CIColor(red: CGFloat(a), green: CGFloat(b), blue: CGFloat(c), alpha: CGFloat(d))
         case let .sample(image):
-            return CISampler(image: image.asCIImage!)
+            return CISampler(image: image)
         }
     }
 }
@@ -173,7 +173,7 @@ extension KernelAttributeValue: Codable {
             try container.encode([a, b, c, d], forKey: .color)
             break
         case let .sample(image):
-            try container.encode(UIImagePNGRepresentation(image)!, forKey: .sample)
+            try container.encode(image.asPNGData!, forKey: .sample)
             break
         }
     }
@@ -220,7 +220,7 @@ extension KernelAttributeValue: Codable {
             return
         }
         if let value = try? values.decode(Data.self, forKey: .sample) {
-            guard let image = UIImage(data: value) else {
+            guard let image = CIImage(data: value) else {
                 throw CodableErrors.unkownValue
             }
             self = .sample(image)
@@ -274,9 +274,7 @@ extension KernelAttributeType {
         case .color:
             return .color(0, 0, 0, 0)
         case .sample:
-            let frame = CGRect(origin: .zero, size: CGSize(width: 400, height: 400))
-            let cgImage = CIContext().createCGImage(CIImage(color: .black), from: frame)!
-            return .sample(UIImage(cgImage: cgImage))
+            return .sample(CIImage(color: .black))
         }
     }
 }

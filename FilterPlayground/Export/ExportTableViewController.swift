@@ -40,7 +40,10 @@ class ExportTableViewController: UITableViewController {
         guard let document = document else {
             return
         }
-        let playground = SwiftPlaygroundsHelper.swiftPlayground(with:  document)
+        
+        let name = document.localizedName.withoutWhiteSpaces.withoutSlash
+        let inputImages = document.inputImages.flatMap(UIImagePNGRepresentation)
+        let playground = SwiftPlaygroundsHelper.swiftPlayground(with: name, type: document.metaData.type, kernelSource: document.source, arguments: document.metaData.attributes, inputImages: inputImages)
         self.presentActivityViewController(sourceView: sender, items: [playground])
     }
 

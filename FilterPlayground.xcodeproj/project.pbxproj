@@ -28,6 +28,7 @@
 		985A420D1F2CF8F200636E72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 985A420C1F2CF8F200636E72 /* Assets.xcassets */; };
 		985A42101F2CF8F200636E72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 985A420E1F2CF8F200636E72 /* LaunchScreen.storyboard */; };
 		985A42361F2CFEE800636E72 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42351F2CFEE800636E72 /* CustomImageView.swift */; };
+		985EB2491F6821990007B85C /* CIFilterHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985EB2481F6821990007B85C /* CIFilterHelperTests.swift */; };
 		986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */; };
 		9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868A8C01F3712EB00D0BC79 /* AST.swift */; };
 		986AA72B1F62F51C008F2091 /* TemplatesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AA72A1F62F51C008F2091 /* TemplatesManager.swift */; };
@@ -50,7 +51,6 @@
 		989716781F67E3C800E7C20C /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 989716761F67E3C800E7C20C /* Document.xib */; };
 		9897167A1F67E3C800E7C20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 989716791F67E3C800E7C20C /* Assets.xcassets */; };
 		9897167D1F67E3C800E7C20C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9897167B1F67E3C800E7C20C /* MainMenu.xib */; };
-		989716891F67E3C900E7C20C /* FilterPlaygroundMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716881F67E3C900E7C20C /* FilterPlaygroundMacTests.swift */; };
 		989716911F67E47300E7C20C /* CIFilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98426C161F670540007C2260 /* CIFilterHelper.swift */; };
 		989716931F67E75900E7C20C /* KernelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */; };
 		989716941F67E77500E7C20C /* KernelCompiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23C1F34B85C006E7658 /* KernelCompiler.swift */; };
@@ -64,6 +64,9 @@
 		989716A01F67E97600E7C20C /* ErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229AD1F2FB88F000FFCA2 /* ErrorParser.swift */; };
 		989716A21F67F54C00E7C20C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716A11F67F54C00E7C20C /* Settings.swift */; };
 		989716A31F67F55C00E7C20C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716A11F67F54C00E7C20C /* Settings.swift */; };
+		989C576E1F68224C008FF142 /* SwiftPlaygroundsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989C576D1F68224C008FF142 /* SwiftPlaygroundsTests.swift */; };
+		989C576F1F6822BC008FF142 /* SwiftPlaygroundsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */; };
+		989C57711F6825CD008FF142 /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989C57701F6825CD008FF142 /* XCTest+Extension.swift */; };
 		98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */; };
 		98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */; };
 		98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */; };
@@ -160,6 +163,7 @@
 		985A42161F2CF8F300636E72 /* FilterPlaygroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilterPlaygroundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		985A421C1F2CF8F300636E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		985A42351F2CFEE800636E72 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		985EB2481F6821990007B85C /* CIFilterHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilterHelperTests.swift; sourceTree = "<group>"; };
 		986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		9868A8C01F3712EB00D0BC79 /* AST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
 		986AA72A1F62F51C008F2091 /* TemplatesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesManager.swift; sourceTree = "<group>"; };
@@ -188,11 +192,12 @@
 		9897167E1F67E3C800E7C20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9897167F1F67E3C800E7C20C /* FilterPlaygroundMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FilterPlaygroundMac.entitlements; sourceTree = "<group>"; };
 		989716841F67E3C900E7C20C /* FilterPlaygroundMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilterPlaygroundMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		989716881F67E3C900E7C20C /* FilterPlaygroundMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPlaygroundMacTests.swift; sourceTree = "<group>"; };
 		9897168A1F67E3C900E7C20C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		989716951F67E7B300E7C20C /* CoreImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreImage+Extension.swift"; sourceTree = "<group>"; };
 		989716991F67E80A00E7C20C /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		989716A11F67F54C00E7C20C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		989C576D1F68224C008FF142 /* SwiftPlaygroundsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPlaygroundsTests.swift; sourceTree = "<group>"; };
+		989C57701F6825CD008FF142 /* XCTest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extension.swift"; sourceTree = "<group>"; };
 		98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesViewController.swift; sourceTree = "<group>"; };
 		98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorViewController.swift; sourceTree = "<group>"; };
 		98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelDescriptor.swift; sourceTree = "<group>"; };
@@ -434,8 +439,10 @@
 		989716871F67E3C900E7C20C /* FilterPlaygroundMacTests */ = {
 			isa = PBXGroup;
 			children = (
-				989716881F67E3C900E7C20C /* FilterPlaygroundMacTests.swift */,
 				9897168A1F67E3C900E7C20C /* Info.plist */,
+				985EB2481F6821990007B85C /* CIFilterHelperTests.swift */,
+				989C576D1F68224C008FF142 /* SwiftPlaygroundsTests.swift */,
+				989C57701F6825CD008FF142 /* XCTest+Extension.swift */,
 			);
 			path = FilterPlaygroundMacTests;
 			sourceTree = "<group>";
@@ -822,6 +829,7 @@
 				9897169F1F67E94800E7C20C /* CoreImage+Extension.swift in Sources */,
 				9897169C1F67E84A00E7C20C /* Kernel.swift in Sources */,
 				9897169E1F67E93300E7C20C /* ErrorHelper.swift in Sources */,
+				989C576F1F6822BC008FF142 /* SwiftPlaygroundsHelper.swift in Sources */,
 				989716931F67E75900E7C20C /* KernelDescriptor.swift in Sources */,
 				989716751F67E3C800E7C20C /* Document.swift in Sources */,
 				989716731F67E3C800E7C20C /* AppDelegate.swift in Sources */,
@@ -838,7 +846,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				989716891F67E3C900E7C20C /* FilterPlaygroundMacTests.swift in Sources */,
+				989C576E1F68224C008FF142 /* SwiftPlaygroundsTests.swift in Sources */,
+				985EB2491F6821990007B85C /* CIFilterHelperTests.swift in Sources */,
+				989C57711F6825CD008FF142 /* XCTest+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

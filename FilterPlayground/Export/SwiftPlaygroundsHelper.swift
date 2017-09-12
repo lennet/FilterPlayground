@@ -6,7 +6,7 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 extension KernelAttributeValue {
     
@@ -41,42 +41,44 @@ class SwiftPlaygroundsHelper {
         return content.data(using: .utf8)!
     }()
     
-    class func swiftPlayground(with document: Document) -> URL {
-        let filterName = document.localizedName.withoutWhiteSpaces.withoutSlash
-        let definedVariables = document.metaData.attributes.map{ "var \($0.name): \($0.type.swiftType) = \($0.value.swiftPlaygroundValue(with:  $0.name))" }.joined(separator: "\n")
-        let assignFilterProperties = document.metaData.attributes.map{ "filter.\($0.name) = \($0.name)" }.joined(separator: "\n")
+    class func swiftPlayground(with name: String, type: KernelType, kernelSource: String, arguments: [KernelAttribute] ,inputImages: [Data]) -> URL {
+        
+        let definedVariables = arguments.map{ "var \($0.name): \($0.type.swiftType) = \($0.value.swiftPlaygroundValue(with:  $0.name))" }.joined(separator: "\n")
+        let assignFilterProperties = arguments.map{ "filter.\($0.name) = \($0.name)" }.joined(separator: "\n")
         
         var inputImageAssignment = ""
-        if document.metaData.type.requiredInputImages > 0 {
+        if inputImages.count > 0 {
             inputImageAssignment = "let image = #imageLiteral(resourceName: \"input.png\")\nfilter.input = CIImage(image: image)"
         }
         let content = """
         import UIKit
-        \(CIFilterHelper.cifilter(with: document.source, type: document.metaData.type, arguments: document.metaData.attributes, name: filterName) as String)
+        \(CIFilterHelper.cifilter(with: kernelSource, type: type, arguments: arguments, name: name) as String)
         
         \(definedVariables)
         
-        let filter = \(filterName)()
+        let filter = \(name)()
         \(inputImageAssignment)
         \(assignFilterProperties)
         
         let result = filter.outputImage
         """
-        return SwiftPlaygroundsHelper.swiftPlayground(with: content, resources: swiftPlaygroundResourcesFolder(with: document))
-    }
-    
-    class func swiftPlaygroundResourcesFolder(with document: Document) -> FileWrapper {
         
-        var resources: [(String, Data)] = document.metaData.attributes
+        var resources: [(String, Data)] = arguments
             .flatMap{ guard case .sample(let image) = $0.value  else {return nil}
                 return ($0.name, image.asPNGData!) }
         
-        if let input = document.inputImages.first {
-            resources.append(("input", UIImagePNGRepresentation(input)!))
+        if let input = inputImages.first {
+            resources.append(("input", input))
         }
+
+        
+        return SwiftPlaygroundsHelper.swiftPlayground(with: content, resources: swiftPlaygroundResourcesFolder(with: resources))
+    }
+    
+    class func swiftPlaygroundResourcesFolder(with files: [(String, Data)]) -> FileWrapper {
         
         var resourceWrappers: [String: FileWrapper] = [:]
-        for resource in resources {
+        for resource in files {
             resourceWrappers["\(resource.0).png"] = FileWrapper(regularFileWithContents: resource.1)
         }
 

@@ -23,6 +23,10 @@ class ErrorParser {
                 result.append(.compile(lineNumber: lineNumber, characterIndex: characterIndex, type: type, message: message, note: note))
             }
         }
+        let unkownErrors = unkownCompileError(for: errorString)
+        if result.isEmpty && !unkownErrors.isEmpty {
+            result.append(contentsOf: unkownErrors)
+        }
         return result
     }
 
@@ -45,5 +49,15 @@ class ErrorParser {
             .flatMap { $0.trimmingCharacters(in: .whitespaces) }
             .filter { !$0.isEmpty }
             .flatMap { .runtime(message: $0) }
+    }
+    
+    class func unkownCompileError(for errorString: String) -> [KernelError] {
+        
+        return errorString.components(separatedBy: "[compile]")[1...]
+            .flatMap { $0.firstLine }
+            .flatMap { $0.components(separatedBy: ":]").last }
+            .flatMap { $0.trimmingCharacters(in: .whitespaces) }
+            .filter { !$0.isEmpty }
+            .flatMap { KernelError.compile(lineNumber: -1, characterIndex: -1, type: "ERROR", message: $0, note: nil) }
     }
 }

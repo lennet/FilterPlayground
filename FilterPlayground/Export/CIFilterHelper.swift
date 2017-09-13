@@ -51,10 +51,6 @@ extension KernelType {
         }
     }
     
-    var hasInputImage: Bool {
-        return requiredInputImages > 0
-    }
-    
 }
 
 extension KernelAttributeType {

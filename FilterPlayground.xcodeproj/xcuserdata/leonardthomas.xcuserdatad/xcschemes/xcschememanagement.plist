@@ -12,12 +12,12 @@
 		<key>FilterPlaygroundMac.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>1</integer>
 		</dict>
 		<key>FilterPlaygroundPreviewExtension.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<key>FilterPlaygroundThumbnailExtension.xcscheme</key>
 		<dict>
@@ -38,6 +38,16 @@
 			<true/>
 		</dict>
 		<key>985A42201F2CF8F300636E72</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9897166F1F67E3C800E7C20C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>989716831F67E3C900E7C20C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

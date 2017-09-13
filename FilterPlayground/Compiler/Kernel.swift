@@ -55,6 +55,5 @@ class BlendKernel: Kernel {
         }
 
         return kernel?.apply(foreground: first, background: second)
-        
     }
 }

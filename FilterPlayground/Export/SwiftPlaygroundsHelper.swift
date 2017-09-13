@@ -47,8 +47,17 @@ class SwiftPlaygroundsHelper {
         let assignFilterProperties = arguments.map{ "filter.\($0.name) = \($0.name)" }.joined(separator: "\n")
         
         var inputImageAssignment = ""
-        if inputImages.count > 0 {
+        if inputImages.count == 1 {
             inputImageAssignment = "let image = #imageLiteral(resourceName: \"input.png\")\nfilter.input = CIImage(image: image)"
+        } else if inputImages.count == 2 {
+            inputImageAssignment = """
+            let fore = #imageLiteral(resourceName: \"fore.png\")
+            filter.fore = CIImage(image: fore)
+            
+            let back = #imageLiteral(resourceName: \"back.png\")
+            filter.back = CIImage(image: back)
+
+            """
         }
         let content = """
         import UIKit
@@ -67,10 +76,12 @@ class SwiftPlaygroundsHelper {
             .flatMap{ guard case .sample(let image) = $0.value  else {return nil}
                 return ($0.name, image.asPNGData!) }
         
-        if let input = inputImages.first {
-            resources.append(("input", input))
+        if inputImages.count == 1 {
+            resources.append(("input", inputImages[0]))
+        } else if inputImages.count == 2 {
+            resources.append(contentsOf: [("fore", inputImages[0]),
+                                          ("back", inputImages[1])])
         }
-
         
         return SwiftPlaygroundsHelper.swiftPlayground(with: content, resources: swiftPlaygroundResourcesFolder(with: resources))
     }

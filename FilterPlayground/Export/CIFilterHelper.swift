@@ -45,9 +45,31 @@ extension KernelType {
                     }
                     return kernel?.apply(extent: \(arguments[0]).extent, arguments: [\(arguments.joined(separator: ","))] )
             """
-
-        default:
-            return ""
+        case .normal:
+            let guardArguments = arguments.map{ "let \($0) = \($0)" }.joined(separator: ",\n\t\t\t")
+            var guardStatement = ""
+            if !guardArguments.isEmpty {
+                guardStatement = """
+                guard \(guardArguments) else {
+                return nil
+                }
+                """
+            }
+            return """
+            \(guardStatement)
+            return kernel?.apply(extent: CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000)), roiCallback: { (_, rect) -> CGRect in
+            rect
+            }, arguments: [\(arguments.joined(separator: ","))])
+            """
+        case .blend:
+            return """
+                guard let fore = fore,
+                    let back = back else {
+                        return nil
+                }
+            
+                return kernel?.apply(foreground: fore, background: back)
+            """
         }
     }
     
@@ -82,8 +104,13 @@ class CIFilterHelper {
     class func cifilter(with kernelSource: String, type: KernelType, arguments: [KernelAttribute], name: String) -> String {
         let properties = arguments.map{ "\tvar \($0.name): \($0.type.swiftType)?" }.joined(separator: "\n")
         var inputProperties = ""
-        if type.requiredInputImages > 0 {
+        if type.requiredInputImages == 1 {
             inputProperties = "\tvar input: CIImage?"
+        } else if type.requiredInputImages == 2 {
+            inputProperties = """
+            \tvar fore: CIImage?
+            \tvar back: CIImage?
+            """
         }
         return """
 import CoreImage

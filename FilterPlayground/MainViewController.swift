@@ -18,6 +18,10 @@ class MainViewController: UIViewController {
     weak var attributesViewController: AttributesViewController?
     weak var liveViewController: LiveViewController?
     weak var sourceEditorViewController: SourceEditorViewController?
+    
+    /// describe the relation between the width of the SourceEditor and the LiveView
+    var sourceViewRatio: CGFloat = 0.5
+    
     var isRunning = false
 
     var document: Document?
@@ -167,9 +171,10 @@ class MainViewController: UIViewController {
     func updateViewConstraints(newWidth: CGFloat) {
         attributesContainerWidthConstraint.constant = showAttributes ? 220 : 0
         let maxWidth = newWidth - attributesContainerWidthConstraint.constant
-        sourceEditorWidthConstraint.constant = maxWidth
         if showLiveView {
-            sourceEditorWidthConstraint.constant /= 2
+            sourceEditorWidthConstraint.constant = maxWidth * sourceViewRatio
+        } else {
+            sourceEditorWidthConstraint.constant = maxWidth
         }
     }
 
@@ -207,25 +212,32 @@ class MainViewController: UIViewController {
         sender.setTranslation(.zero, in: sender.view!)
 
         let maxWidth = view.frame.width - attributesContainerWidthConstraint.constant
-
-        sourceEditorWidthConstraint.constant += translation.x
-        sourceEditorWidthConstraint.constant = max(sourceEditorWidthConstraint.constant, 0)
-        sourceEditorWidthConstraint.constant = min(maxWidth, sourceEditorWidthConstraint.constant)
+        let oldValue = sourceViewRatio
+        
+        sourceViewRatio += translation.x/maxWidth
+        sourceViewRatio = max(sourceViewRatio, 0)
+        sourceViewRatio = min(sourceViewRatio, 1)
+        
+        if oldValue == 1 && sourceViewRatio < 1 {
+            showLiveView = true
+        }
 
         switch sender.state {
         case .cancelled, .ended:
             let threshold: CGFloat = 100
             if sourceEditorWidthConstraint.constant < threshold {
-                sourceEditorWidthConstraint.constant = 0
+                sourceViewRatio = 0
             } else if sourceEditorWidthConstraint.constant > (maxWidth - threshold) {
-                sourceEditorWidthConstraint.constant = maxWidth
+                sourceViewRatio = 1
             } else {
                 fallthrough
             }
+            updateViewConstraints()
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
             }, completion: nil)
         default:
+            updateViewConstraints()
             view.layoutIfNeeded()
         }
     }

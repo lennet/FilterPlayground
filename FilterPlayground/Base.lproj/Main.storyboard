@@ -591,7 +591,9 @@
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abg-Uk-vLh">
                                 <rect key="frame" x="0.0" y="960" width="200" height="0.0"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="600" id="A6W-Kv-QzK"/>
                                     <constraint firstAttribute="height" id="BbS-SQ-5jC"/>
                                 </constraints>
                                 <connections>
@@ -602,8 +604,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="lEl-je-gOO" secondAttribute="trailing" constant="8" id="3JV-Id-VAl"/>
-                            <constraint firstAttribute="trailing" secondItem="Abg-Uk-vLh" secondAttribute="trailing" id="Q2M-qy-wTQ"/>
-                            <constraint firstItem="Abg-Uk-vLh" firstAttribute="leading" secondItem="ZWP-fj-UMi" secondAttribute="leading" id="bVt-KR-S02"/>
+                            <constraint firstItem="Abg-Uk-vLh" firstAttribute="centerX" secondItem="FBl-Wz-udb" secondAttribute="centerX" id="Eh4-9F-dzD"/>
+                            <constraint firstAttribute="trailing" secondItem="Abg-Uk-vLh" secondAttribute="trailing" priority="999" id="Q2M-qy-wTQ"/>
+                            <constraint firstItem="Abg-Uk-vLh" firstAttribute="leading" secondItem="ZWP-fj-UMi" secondAttribute="leading" priority="999" id="bVt-KR-S02"/>
                             <constraint firstItem="lEl-je-gOO" firstAttribute="top" secondItem="FBl-Wz-udb" secondAttribute="topMargin" constant="8" id="jQo-eI-VZu"/>
                             <constraint firstItem="Abg-Uk-vLh" firstAttribute="top" secondItem="lEl-je-gOO" secondAttribute="bottom" id="lfi-D4-hnk"/>
                             <constraint firstItem="lEl-je-gOO" firstAttribute="leading" secondItem="FBl-Wz-udb" secondAttribute="leadingMargin" priority="998" constant="8" id="qGO-Zq-0jG"/>

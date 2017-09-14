@@ -37,7 +37,10 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
             errorTableView.layoutIfNeeded()
             let screenHeight = UIApplication.shared.keyWindow?.frame.height ?? 0
             maxHeight = min(errorTableView.contentSize.height + headerHeight * 2, screenHeight / 4)
-            shouldUpdateHeight?(maxHeight, true)
+            
+            if view.bounds.height == 0 {
+                shouldUpdateHeight?(maxHeight, true)
+            }
             
             let compileErrorsCount = errors.filter{ !$0.isRuntime }.count
             if compileErrorsCount > 0 {
@@ -60,7 +63,7 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        headerView.layer.cornerRadius = 6
+        headerView.layer.cornerRadius = 8
         headerView.layer.maskedCorners = CACornerMask.layerMaxXMinYCorner.union(.layerMinXMinYCorner)
         
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleHeaderPan(gestureRecnogizer:)))

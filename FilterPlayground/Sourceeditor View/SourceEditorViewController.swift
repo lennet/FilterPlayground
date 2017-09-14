@@ -8,43 +8,27 @@
 
 import UIKit
 
-class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate {
+class SourceEditorViewController: UIViewController, UITextViewDelegate {
 
-    @IBOutlet weak var errorTableView: UITableView!
     @IBOutlet weak var textView: NumberedTextView!
     @IBOutlet weak var errorViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-
-    var keyboardHeight: CGFloat = 0.0
+    
+    weak var errorViewController: ErrorViewController?
 
     var isShowingErrors: Bool {
         return !errors.isEmpty
     }
 
-    var bottomSpacing: CGFloat {
-
-        if isShowingErrors {
-            return keyboardHeight + 8.0
-        } else {
-            return 0
-        }
-    }
-
     var didUpdateText: ((String) -> Void)?
     var didUpdateArguments: (([(String, KernelAttributeType)]) -> Void)?
 
-    var errors: [KernelError] = [] {
-        didSet {
-            guard errors != oldValue else { return }
-            if errors.isEmpty {
-                errorViewHeightConstraint.constant = 0
-            } else {
-                errorTableView.reloadData()
-                errorTableView.layoutIfNeeded()
-                errorViewHeightConstraint.constant = min(errorTableView.contentSize.height, view.frame.size.height / 4)
-            }
-            updateBottomSpacing(animated: true)
-            textView.hightLightErrorLineNumber = []
+    var errors: [KernelError] {
+        set {
+            errorViewController?.errors = newValue
+            textView.highLightErrorLineNumber = []
+        }
+        get {
+            return errorViewController?.errors ?? []
         }
     }
 
@@ -86,48 +70,9 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         themeChanged(notification: nil)
     }
 
-    func updateBottomSpacing(animated _: Bool) {
-        bottomConstraint.constant = bottomSpacing
-        UIView.animate(withDuration: 0.25) {
-            self.view.layoutIfNeeded()
-        }
-
-        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseInOut, animations: {
-            self.view.layoutIfNeeded()
-        }) { _ in
-            self.textView.setNeedsDisplay()
-        }
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         textView.setNeedsDisplay()
-    }
-
-    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return errors.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "errorCellIdentifier") as! ErrorTableViewCell
-        // todo show notes
-        cell.error = errors[indexPath.row]
-        return cell
-    }
-
-    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch errors[indexPath.row] {
-        case .compile(lineNumber: let lineNumber, characterIndex: _, type: _, message: _, note: let note):
-            var lineNumbers = Set([lineNumber])
-            if let note = note {
-                lineNumbers.insert(note.lineNumber)
-            }
-            textView.hightLightErrorLineNumber = lineNumbers
-            break
-        case .runtime(message: _):
-            break
-        }
-    
     }
 
     func updateFont() {
@@ -153,5 +98,23 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, UITableV
         fontSize = (fontSize + Float(gestureRecognizer.velocity)/4)
         fontSize = max(fontSize, 9)
         fontSize = min(fontSize, 72)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if let errorViewController = segue.destination as? ErrorViewController {
+            errorViewController.shouldHighLight = { lineNumbers in
+                self.textView.highLightErrorLineNumber = lineNumbers
+            }
+            errorViewController.shouldUpdateHeight = { height, animated in
+                self.errorViewHeightConstraint.constant = height
+                
+                UIView.animate(withDuration: animated ? 0.25 : 0, animations: {
+                    self.view.layoutIfNeeded()
+                })
+            }
+            self.errorViewController = errorViewController
+        }
     }
 }

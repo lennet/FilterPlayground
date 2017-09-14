@@ -12,6 +12,7 @@
 		980229B01F2FBF18000FFCA2 /* ErrorParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229AF1F2FBF18000FFCA2 /* ErrorParserTests.swift */; };
 		980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229B11F2FCF41000FFCA2 /* ErrorTableViewCell.swift */; };
 		981267D41F34BEFC00101027 /* Kernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981267D31F34BEFC00101027 /* Kernel.swift */; };
+		981D621F1F6B1858006A8606 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D621E1F6B1858006A8606 /* ErrorViewController.swift */; };
 		982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */; };
 		98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */; };
 		9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC741F3663AE00A8E3CA /* Theme.swift */; };
@@ -143,6 +144,7 @@
 		980229AF1F2FBF18000FFCA2 /* ErrorParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorParserTests.swift; sourceTree = "<group>"; };
 		980229B11F2FCF41000FFCA2 /* ErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTableViewCell.swift; sourceTree = "<group>"; };
 		981267D31F34BEFC00101027 /* Kernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kernel.swift; sourceTree = "<group>"; };
+		981D621E1F6B1858006A8606 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDraggingIndicator.swift; sourceTree = "<group>"; };
 		98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorValuePicker.swift; sourceTree = "<group>"; };
 		9841EC741F3663AE00A8E3CA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				985668401F2E60EB00297A4E /* Parser.swift */,
 				980229B11F2FCF41000FFCA2 /* ErrorTableViewCell.swift */,
 				9868A8C01F3712EB00D0BC79 /* AST.swift */,
+				981D621E1F6B1858006A8606 /* ErrorViewController.swift */,
 			);
 			path = "Sourceeditor View";
 			sourceTree = "<group>";
@@ -784,6 +787,7 @@
 				98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */,
 				986AA72B1F62F51C008F2091 /* TemplatesManager.swift in Sources */,
 				9897169A1F67E80A00E7C20C /* UIImage+Extension.swift in Sources */,
+				981D621F1F6B1858006A8606 /* ErrorViewController.swift in Sources */,
 				980229AC1F2F94F9000FFCA2 /* ErrorHelper.swift in Sources */,
 				98C5E23F1F34B8DD006E7658 /* KernelError.swift in Sources */,
 			);

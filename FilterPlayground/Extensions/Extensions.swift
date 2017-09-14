@@ -132,4 +132,8 @@ extension CGFloat {
     var asRadian: CGFloat {
         return self * CGFloat.pi / 180
     }
+    
+    func noramlized(min: CGFloat, max: CGFloat) -> CGFloat {
+        return (self - min)/(max - min)
+    }
 }

@@ -11,6 +11,15 @@ import Foundation
 enum KernelError {
     case compile(lineNumber: Int, characterIndex: Int, type: String, message: String, note: (lineNumber: Int, characterIndex: Int, message: String)?)
     case runtime(message: String)
+    
+    var isRuntime: Bool {
+        switch self {
+        case .compile(lineNumber: _, characterIndex: _, type: _, message: _, note: _):
+            return false
+        case .runtime(message: _):
+            return true
+        }
+    }
 }
 
 extension KernelError: Equatable {

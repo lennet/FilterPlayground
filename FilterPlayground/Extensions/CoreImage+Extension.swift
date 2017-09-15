@@ -18,7 +18,12 @@ extension CIImage {
     var asPNGData: Data? {
         #if os(iOS) || os(watchOS) || os(tvOS)
             let context = CIContext()
-            let image = UIImage(cgImage: context.createCGImage(self, from: self.extent)!)
+            let image: UIImage
+            if let cgImage = context.createCGImage(self, from: self.extent) {
+                 image = UIImage(cgImage: cgImage)
+            } else {
+                image = UIImage(ciImage: self)
+            }
             return UIImagePNGRepresentation(image)
         #elseif os(OSX)
             // TODO

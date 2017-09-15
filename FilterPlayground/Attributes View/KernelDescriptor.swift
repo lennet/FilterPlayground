@@ -8,6 +8,10 @@
 
 import CoreImage
 
+#if os(iOS) || os(tvOS)
+    import UIKit
+#endif
+
 enum KernelType: String, Codable {
     case normal
     case warp
@@ -274,7 +278,11 @@ extension KernelAttributeType {
         case .color:
             return .color(0, 0, 0, 0)
         case .sample:
-            return .sample(CIImage(color: .black))
+            #if os(iOS) || os(tvOS)
+                return .sample(#imageLiteral(resourceName: "DefaultImage").asCIImage!)
+            #else
+                return .sample(CIImage(color: .black))
+            #endif
         }
     }
 }

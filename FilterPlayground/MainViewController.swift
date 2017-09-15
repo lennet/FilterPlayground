@@ -126,25 +126,36 @@ class MainViewController: UIViewController {
         }
     }
 
+    // TODO make function throwing to handle error handling somewhere else
     func apply(kernel: Kernel, input: [UIImage], attributes: [KernelAttribute]) {
         clearErrors()
-
+        guard let document = document else { return }
+        let requiredInputImages = document.metaData.type.requiredInputImages
+        guard requiredInputImages == input.count else {
+            display(errors: [KernelError.runtime(message: "A \(document.metaData.type) Kernel requires \(requiredInputImages) input image\(requiredInputImages > 1 ? "s" : "") but you only passed \(input.count)")])
+            liveViewController?.highlightEmptyInputImageViews = true
+            return
+        }
+    
         DispatchQueue.global(qos: .background).async {
             let errorHelper = ErrorHelper()
             let image = kernel.apply(with: input.flatMap{ $0.asCIImage }, attributes: attributes.map { $0.value.asKernelValue })
             DispatchQueue.main.sync {
-                if let errorString = errorHelper.errorString() {
+                if let image = image {
+                  self.liveViewController?.imageView.image = UIImage(ciImage: image)
+                } else if let errorString = errorHelper.errorString() {
                     let errors = ErrorParser.runtimeErrors(for: errorString)
                     self.display(errors: errors)
+                } else {
+                    self.display(errors: [KernelError.runtime(message: "Unkown Error occured. Please check your code and the passed arguments")])
                 }
-
-                self.liveViewController?.imageView.image = UIImage(ciImage: image!)
                 self.isRunning = false
             }
         }
     }
 
     func clearErrors() {
+        liveViewController?.highlightEmptyInputImageViews = false
         sourceEditorViewController?.errors = []
     }
 

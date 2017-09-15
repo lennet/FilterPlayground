@@ -36,5 +36,4 @@ class ErrorTableViewCell: UITableViewCell {
             break
         }
     }
-    
 }

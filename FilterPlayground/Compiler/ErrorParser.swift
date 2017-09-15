@@ -50,9 +50,9 @@ class ErrorParser {
             .filter { !$0.isEmpty }
             .flatMap { .runtime(message: $0) }
     }
-    
+
     class func unkownCompileError(for errorString: String) -> [KernelError] {
-        
+
         return errorString.components(separatedBy: "[compile]")[1...]
             .flatMap { $0.firstLine }
             .flatMap { $0.components(separatedBy: ":]").last }

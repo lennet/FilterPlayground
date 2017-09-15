@@ -13,7 +13,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
     var theme: Theme.Type {
         return ThemeManager.shared.currentTheme
     }
-    
+
     let textView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear

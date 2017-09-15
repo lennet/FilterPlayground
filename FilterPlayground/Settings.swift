@@ -9,7 +9,7 @@
 import Foundation
 
 struct Settings {
-    
+
     static var tabsEnabled: Bool {
         get {
             return UserDefaults.standard.bool(forKey: #function)
@@ -18,7 +18,7 @@ struct Settings {
             UserDefaults.standard.set(newValue, forKey: #function)
         }
     }
-    
+
     static var fontSize: Float {
         get {
             guard UserDefaults.standard.value(forKey: #function) != nil else {
@@ -30,7 +30,7 @@ struct Settings {
             UserDefaults.standard.set(newValue, forKey: #function)
         }
     }
-    
+
     static var spacingValue: String {
         return tabsEnabled ? "\t" : "    "
     }

@@ -69,18 +69,18 @@ class ErrorParserTests: XCTestCase {
         let error = KernelError.compile(lineNumber: 4, characterIndex: 2, type: "ERROR", message: "function declared with return type 'vec4', but returning type 'vec2'", note: note)
         XCTAssertEqual(errors.first!, error)
     }
-    
+
     // input to get this error: vec2 test() { return destCoord(); }
     func testUnkownError() {
         let error = """
         2017-09-11 17:21:57.296768+0200 FilterPlayground[6926:528702] [compile] [CIWarpKernel initWithString:] failed due to error parsing kernel source.
         """
-        
+
         let errors = ErrorParser.compileErrors(for: error)
         XCTAssertEqual(errors.count, 1)
         XCTAssertEqual(errors.first!, KernelError.compile(lineNumber: -1, characterIndex: -1, type: "ERROR", message: "failed due to error parsing kernel source.", note: nil))
     }
-    
+
     func testRuntimeErrors() {
         let errorString = """
         2017-08-23 22:51:41.564656+0200 FilterPlayground[1140:1368834] [api] -[CIColorKernel applyWithExtent:arguments:options:] argument count mismatch for kernel \'untitled\', expected 1 but saw 0.\n

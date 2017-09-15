@@ -9,9 +9,8 @@
 import UIKit
 
 extension UIImage {
-    
+
     var asCIImage: CIImage? {
         return ciImage ?? CIImage(cgImage: cgImage!)
     }
-    
 }

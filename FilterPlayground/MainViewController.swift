@@ -18,10 +18,10 @@ class MainViewController: UIViewController {
     weak var attributesViewController: AttributesViewController?
     weak var liveViewController: LiveViewController?
     weak var sourceEditorViewController: SourceEditorViewController?
-    
+
     /// describe the relation between the width of the SourceEditor and the LiveView
     var sourceViewRatio: CGFloat = 0.5
-    
+
     var isRunning = false
 
     var document: Document?
@@ -80,7 +80,7 @@ class MainViewController: UIViewController {
 
         let increaseFontKeyCommand = UIKeyCommand(input: "+", modifierFlags: .command, action: #selector(increaseFontSize), discoverabilityTitle: "increase font size")
         let increaseFontKeyCommandUSKeyboard = UIKeyCommand(input: "=", modifierFlags: .command, action: #selector(increaseFontSize))
-    
+
         let decreaseFontKeyCommand = UIKeyCommand(input: "-", modifierFlags: .command, action: #selector(decreaseFontSize), discoverabilityTitle: "decrease font size")
 
         return [runKeyCommand, increaseFontKeyCommand, increaseFontKeyCommandUSKeyboard, decreaseFontKeyCommand]
@@ -126,7 +126,7 @@ class MainViewController: UIViewController {
         }
     }
 
-    // TODO make function throwing to handle error handling somewhere else
+    // TODO: make function throwing to handle error handling somewhere else
     func apply(kernel: Kernel, input: [UIImage], attributes: [KernelAttribute]) {
         clearErrors()
         guard let document = document else { return }
@@ -136,13 +136,13 @@ class MainViewController: UIViewController {
             liveViewController?.highlightEmptyInputImageViews = true
             return
         }
-    
+
         DispatchQueue.global(qos: .background).async {
             let errorHelper = ErrorHelper()
-            let image = kernel.apply(with: input.flatMap{ $0.asCIImage }, attributes: attributes.map { $0.value.asKernelValue })
+            let image = kernel.apply(with: input.flatMap { $0.asCIImage }, attributes: attributes.map { $0.value.asKernelValue })
             DispatchQueue.main.sync {
                 if let image = image {
-                  self.liveViewController?.imageView.image = UIImage(ciImage: image)
+                    self.liveViewController?.imageView.image = UIImage(ciImage: image)
                 } else if let errorString = errorHelper.errorString() {
                     let errors = ErrorParser.runtimeErrors(for: errorString)
                     self.display(errors: errors)
@@ -224,11 +224,11 @@ class MainViewController: UIViewController {
 
         let maxWidth = view.frame.width - attributesContainerWidthConstraint.constant
         let oldValue = sourceViewRatio
-        
-        sourceViewRatio += translation.x/maxWidth
+
+        sourceViewRatio += translation.x / maxWidth
         sourceViewRatio = max(sourceViewRatio, 0)
         sourceViewRatio = min(sourceViewRatio, 1)
-        
+
         if oldValue == 1 && sourceViewRatio < 1 {
             showLiveView = true
         }

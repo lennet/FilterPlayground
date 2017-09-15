@@ -12,7 +12,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var textView: NumberedTextView!
     @IBOutlet weak var errorViewHeightConstraint: NSLayoutConstraint!
-    
+
     weak var errorViewController: ErrorViewController?
 
     var isShowingErrors: Bool {
@@ -95,21 +95,21 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate {
     }
 
     @objc func handlePinch(gestureRecognizer: UIPinchGestureRecognizer) {
-        fontSize = (fontSize + Float(gestureRecognizer.velocity)/4)
+        fontSize = (fontSize + Float(gestureRecognizer.velocity) / 4)
         fontSize = max(fontSize, 9)
         fontSize = min(fontSize, 72)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
+
         if let errorViewController = segue.destination as? ErrorViewController {
             errorViewController.shouldHighLight = { lineNumbers in
                 self.textView.highLightErrorLineNumber = lineNumbers
             }
             errorViewController.shouldUpdateHeight = { height, animated in
                 self.errorViewHeightConstraint.constant = height
-                
+
                 UIView.animate(withDuration: animated ? 0.25 : 0, animations: {
                     self.view.layoutIfNeeded()
                 })

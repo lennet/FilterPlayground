@@ -17,7 +17,7 @@ class LiveViewController: UIViewController {
     var didUpdateInputImages: (([UIImage]) -> Void)?
     var highlightEmptyInputImageViews = false {
         didSet {
-            inputImageViews.forEach { (imageView) in
+            inputImageViews.forEach { imageView in
                 // todo fade
                 imageView.layer.borderColor = self.highlightEmptyInputImageViews ? UIColor.red.withAlphaComponent(0.7).cgColor : UIColor.clear.cgColor
                 imageView.layer.borderWidth = self.highlightEmptyInputImageViews ? 2 : 0

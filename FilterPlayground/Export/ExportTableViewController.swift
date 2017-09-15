@@ -35,12 +35,12 @@ class ExportTableViewController: UITableViewController {
             break
         }
     }
-    
+
     func exportAsSwiftPlayground(sender: UIView?) {
         guard let document = document else {
             return
         }
-        
+
         let name = document.localizedName.withoutWhiteSpaces.withoutSlash
         let inputImages = document.inputImages.flatMap(UIImagePNGRepresentation)
         let playground = SwiftPlaygroundsHelper.swiftPlayground(with: name, type: document.metaData.type, kernelSource: document.source, arguments: document.metaData.attributes, inputImages: inputImages)
@@ -55,24 +55,23 @@ class ExportTableViewController: UITableViewController {
             self.presentActivityViewController(sourceView: sender, items: [document.fileURL])
         }
     }
-    
+
     func exportAsCIFIlter(sender: UIView?) {
         guard let document = document,
             let sourceData = CIFilterHelper.cifilter(with: document.source, type: document.metaData.type, arguments: document.metaData.attributes, name: document.localizedName.withoutWhiteSpaces.withoutSlash).data(using: .utf8) else {
-                return
+            return
         }
         let url = FileManager.default.temporaryDirectory.appendingPathComponent("\(document.localizedName.withoutWhiteSpaces.withoutSlash).swift")
-        
+
         do {
             try sourceData.write(to: url, options: .atomicWrite)
-            
+
         } catch {
             print(error)
             // todo handle error
             return
         }
         presentActivityViewController(sourceView: sender, items: [url])
-
     }
 
     func exportAsCIKernel(sender: UIView?) {

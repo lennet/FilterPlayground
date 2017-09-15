@@ -60,7 +60,7 @@ extension CIWarpKernel: Kernel {
             return nil
         }
 
-        return self.apply(extent: input.extent, roiCallback: { (_, rect) -> CGRect in
+        return apply(extent: input.extent, roiCallback: { (_, rect) -> CGRect in
             rect
         }, image: input, arguments: attributes)
     }
@@ -76,8 +76,7 @@ extension CIColorKernel: Kernel {
         guard let image = attributes.first as? CISampler else {
             return nil
         }
-        return self.apply(extent: image.extent, arguments: attributes)
-        
+        return apply(extent: image.extent, arguments: attributes)
     }
 }
 
@@ -120,7 +119,7 @@ extension Array where Element: Equatable {
 }
 
 extension Array {
-    func appending(with array: Array<Element> ) -> Array<Element> {
+    func appending(with array: Array<Element>) -> Array<Element> {
         var tmp = self
         tmp.append(contentsOf: array)
         return tmp
@@ -132,8 +131,8 @@ extension CGFloat {
     var asRadian: CGFloat {
         return self * CGFloat.pi / 180
     }
-    
+
     func noramlized(min: CGFloat, max: CGFloat) -> CGFloat {
-        return (self - min)/(max - min)
+        return (self - min) / (max - min)
     }
 }

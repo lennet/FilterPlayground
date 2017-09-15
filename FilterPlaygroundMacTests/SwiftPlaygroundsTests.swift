@@ -13,12 +13,12 @@ import CoreImage
 class SwiftPlaygroundsTests: XCTestCase {
 
     // the first two tests are only meta tests to test the assert method
-    
+
     func testCompilerDoesntCompiles() {
         let playgroundURL = SwiftPlaygroundsHelper.swiftPlayground(with: "var image: UIImage?")
         XCTAssertSwiftPlaygroundCompiles(url: playgroundURL, invertCondition: true)
     }
-    
+
     func testCompilerCompiles() {
         let playgroundURL = SwiftPlaygroundsHelper.swiftPlayground(with: """
         import UIKit
@@ -26,5 +26,4 @@ class SwiftPlaygroundsTests: XCTestCase {
         """)
         XCTAssertSwiftPlaygroundCompiles(url: playgroundURL)
     }
-    
 }

@@ -8,54 +8,54 @@
 
 import UIKit
 
-// TODO use the scrollViews drag to hide the ErrorView
+// TODO: use the scrollViews drag to hide the ErrorView
 class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var errorTableView: UITableView!
-    
+
     @IBOutlet weak var headerViewLabelContainer: UIStackView!
     @IBOutlet weak var compileErrorView: UIView!
     @IBOutlet weak var runTimeErrorView: UIView!
     @IBOutlet weak var runTimeErrorLabel: UILabel!
     @IBOutlet weak var compileErrorLabel: UILabel!
-    
+
     var headerHeight: CGFloat {
         return headerView.bounds.height
     }
-    
+
     var maxHeight: CGFloat = 0
-    var shouldHighLight:((_ lineNumbers: Set<Int>) -> ())?
-    var shouldUpdateHeight:((_ newHeight: CGFloat, _ animated: Bool) -> ())?
+    var shouldHighLight: ((_ lineNumbers: Set<Int>) -> Void)?
+    var shouldUpdateHeight: ((_ newHeight: CGFloat, _ animated: Bool) -> Void)?
     var heightChangedObserverToken: NSKeyValueObservation?
- 
+
     var errors: [KernelError] = [] {
         didSet {
             didUpateErrros(with: oldValue)
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         headerView.layer.cornerRadius = 8
         headerView.layer.maskedCorners = CACornerMask.layerMaxXMinYCorner.union(.layerMinXMinYCorner)
-        
+
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleHeaderPan(gestureRecnogizer:)))
         headerView.addGestureRecognizer(panGestureRecognizer)
-        
+
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleHeaderTap(gestureRecnogizer:)))
         headerView.addGestureRecognizer(tapGestureRecognizer)
-        
+
         headerViewLabelContainer.alpha = 0
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         heightChangedObserverToken?.invalidate()
     }
-    
+
     func didUpateErrros(with oldValue: [KernelError]) {
         guard errors != oldValue else { return }
         guard errors.count > 0 else {
@@ -66,20 +66,20 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
         errorTableView.layoutIfNeeded()
         let screenHeight = UIApplication.shared.keyWindow?.frame.height ?? 0
         maxHeight = min(errorTableView.contentSize.height + headerHeight * 2, screenHeight / 4)
-        
+
         if view.bounds.height == 0 {
             shouldUpdateHeight?(maxHeight, true)
         }
-        
-        let compileErrorsCount = errors.filter{ !$0.isRuntime }.count
+
+        let compileErrorsCount = errors.filter { !$0.isRuntime }.count
         if compileErrorsCount > 0 {
             compileErrorLabel.text = "\(compileErrorsCount)"
             compileErrorView.isHidden = false
         } else {
             compileErrorView.isHidden = true
         }
-        
-        let runTimeErrorsCount = errors.filter{ $0.isRuntime }.count
+
+        let runTimeErrorsCount = errors.filter { $0.isRuntime }.count
         if runTimeErrorsCount > 0 {
             runTimeErrorLabel.text = "\(runTimeErrorsCount)"
             runTimeErrorView.isHidden = false
@@ -87,25 +87,24 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
             runTimeErrorView.isHidden = true
         }
     }
-    
+
     func setAlpha(value: CGFloat, animated: Bool) {
         UIView.animate(withDuration: animated ? 0.25 : 0) {
             self.headerViewLabelContainer.alpha = value
         }
     }
-    
+
     @objc func handleHeaderPan(gestureRecnogizer: UIPanGestureRecognizer) {
-        
-        
+
         var newHeight: CGFloat = 0
         var shouldAnimatedUpdate = false
-        
+
         switch gestureRecnogizer.state {
         case .cancelled,
-                 .ended:
-            let velocity = gestureRecnogizer.velocity(in: self.headerView)
+             .ended:
+            let velocity = gestureRecnogizer.velocity(in: headerView)
             shouldAnimatedUpdate = true
-            if velocity.y < 0  {
+            if velocity.y < 0 {
                 newHeight = maxHeight
                 setAlpha(value: 0, animated: false)
             } else {
@@ -114,21 +113,21 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             break
         default:
-            let translation = gestureRecnogizer.translation(in: self.headerView)
-            gestureRecnogizer.setTranslation(.zero, in: self.headerView)
-            
+            let translation = gestureRecnogizer.translation(in: headerView)
+            gestureRecnogizer.setTranslation(.zero, in: headerView)
+
             newHeight = view.bounds.height - translation.y
             newHeight = max(newHeight, headerHeight)
             newHeight = min(newHeight, maxHeight)
-            setAlpha(value:  1-newHeight.noramlized(min: headerHeight, max: maxHeight), animated: false)
+            setAlpha(value: 1 - newHeight.noramlized(min: headerHeight, max: maxHeight), animated: false)
             // todo use different timing curve
             break
         }
-        
-        self.shouldUpdateHeight?(newHeight, shouldAnimatedUpdate)
+
+        shouldUpdateHeight?(newHeight, shouldAnimatedUpdate)
     }
-    
-    @objc func handleHeaderTap(gestureRecnogizer: UITapGestureRecognizer) {
+
+    @objc func handleHeaderTap(gestureRecnogizer _: UITapGestureRecognizer) {
         var newHeight: CGFloat = 0
         var newAlpha: CGFloat = 0
         if view.bounds.height > headerHeight {
@@ -138,27 +137,27 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
             newHeight = maxHeight
             newAlpha = 0
         }
-        
-        self.shouldUpdateHeight?(newHeight, true)
+
+        shouldUpdateHeight?(newHeight, true)
         setAlpha(value: newAlpha, animated: true)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         errorTableView.isScrollEnabled = errorTableView.contentSize.height > errorTableView.bounds.height
     }
-    
+
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return errors.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "errorCellIdentifier") as! ErrorTableViewCell
         // todo show notes
         cell.error = errors[indexPath.row]
         return cell
     }
-    
+
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch errors[indexPath.row] {
         case .compile(lineNumber: let lineNumber, characterIndex: _, type: _, message: _, note: let note):
@@ -172,5 +171,4 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
             break
         }
     }
-    
 }

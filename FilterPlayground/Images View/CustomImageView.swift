@@ -77,7 +77,7 @@ class CustomImageView: UIImageView, UIImagePickerControllerDelegate, UINavigatio
 
     func dropInteraction(_: UIDropInteraction, performDrop session: UIDropSession) {
         session.loadObjects(ofClass: UIImage.self) { imageItems in
-            let images = imageItems as! [UIImage]
+            guard let images = imageItems as? [UIImage] else { return }
             self.image = images.first
             self.didSelectImage?(self)
         }

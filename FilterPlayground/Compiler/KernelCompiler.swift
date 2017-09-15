@@ -24,7 +24,6 @@ class KernelCompiler<T: Kernel> {
         } else if let errorString = errorHelper.errorString() {
             return .failed(errors: ErrorParser.compileErrors(for: errorString))
         }
-        // todo add unkown errors
-        return .failed(errors: [])
+        return .failed(errors: [KernelError.compile(lineNumber: -1, characterIndex: -1, type: "Error", message: "Unkown Error. Please check your code.", note: nil)])
     }
 }

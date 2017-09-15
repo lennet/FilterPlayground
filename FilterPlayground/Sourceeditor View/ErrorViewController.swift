@@ -32,31 +32,7 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
  
     var errors: [KernelError] = [] {
         didSet {
-            guard errors != oldValue else { return }
-            errorTableView.reloadData()
-            errorTableView.layoutIfNeeded()
-            let screenHeight = UIApplication.shared.keyWindow?.frame.height ?? 0
-            maxHeight = min(errorTableView.contentSize.height + headerHeight * 2, screenHeight / 4)
-            
-            if view.bounds.height == 0 {
-                shouldUpdateHeight?(maxHeight, true)
-            }
-            
-            let compileErrorsCount = errors.filter{ !$0.isRuntime }.count
-            if compileErrorsCount > 0 {
-                compileErrorLabel.text = "\(compileErrorsCount)"
-                compileErrorView.isHidden = false
-            } else {
-                compileErrorView.isHidden = true
-            }
-            
-            let runTimeErrorsCount = errors.filter{ $0.isRuntime }.count
-            if runTimeErrorsCount > 0 {
-                runTimeErrorLabel.text = "\(runTimeErrorsCount)"
-                runTimeErrorView.isHidden = false
-            } else {
-                runTimeErrorView.isHidden = true
-            }
+            didUpateErrros(with: oldValue)
         }
     }
     
@@ -80,11 +56,42 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
         heightChangedObserverToken?.invalidate()
     }
     
+    func didUpateErrros(with oldValue: [KernelError]) {
+        guard errors != oldValue else { return }
+        guard errors.count > 0 else {
+            shouldUpdateHeight?(0, true)
+            return
+        }
+        errorTableView.reloadData()
+        errorTableView.layoutIfNeeded()
+        let screenHeight = UIApplication.shared.keyWindow?.frame.height ?? 0
+        maxHeight = min(errorTableView.contentSize.height + headerHeight * 2, screenHeight / 4)
+        
+        if view.bounds.height == 0 {
+            shouldUpdateHeight?(maxHeight, true)
+        }
+        
+        let compileErrorsCount = errors.filter{ !$0.isRuntime }.count
+        if compileErrorsCount > 0 {
+            compileErrorLabel.text = "\(compileErrorsCount)"
+            compileErrorView.isHidden = false
+        } else {
+            compileErrorView.isHidden = true
+        }
+        
+        let runTimeErrorsCount = errors.filter{ $0.isRuntime }.count
+        if runTimeErrorsCount > 0 {
+            runTimeErrorLabel.text = "\(runTimeErrorsCount)"
+            runTimeErrorView.isHidden = false
+        } else {
+            runTimeErrorView.isHidden = true
+        }
+    }
+    
     func setAlpha(value: CGFloat, animated: Bool) {
         UIView.animate(withDuration: animated ? 0.25 : 0) {
             self.headerViewLabelContainer.alpha = value
         }
-
     }
     
     @objc func handleHeaderPan(gestureRecnogizer: UIPanGestureRecognizer) {

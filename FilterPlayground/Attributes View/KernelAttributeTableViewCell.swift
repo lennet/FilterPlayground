@@ -26,10 +26,12 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
                 nameTextField.text = attribute?.name
                 setupValueView(for: type, value: attribute?.value)
                 typeButton.setTitle(type.rawValue, for: .normal)
+                nameTextField.isEnabled = true
             } else {
                 typeButton.setTitle("type", for: .normal)
                 valueSelectionView.subviews.forEach { $0.removeFromSuperview() }
                 nameTextField.text = nil
+                nameTextField.isEnabled = false
             }
         }
     }

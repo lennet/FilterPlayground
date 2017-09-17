@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationControllerDelegate {
+class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var typeButton: UIButton!
@@ -23,6 +23,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
                     oldType == type {
                     return
                 }
+
                 nameTextField.text = attribute?.name
                 setupValueView(for: type, value: attribute?.value)
                 typeButton.setTitle(type.rawValue, for: .normal)
@@ -41,6 +42,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     override func awakeFromNib() {
         super.awakeFromNib()
         registerNotifications()
+        nameTextField.delegate = self
     }
 
     @IBAction func nameTextFieldChanged(_: Any) {
@@ -60,19 +62,18 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     }
 
     @IBAction func selectType(_ sender: UIButton) {
-
         let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "selectTypeViewControllerIdentifier") as! SelectTypeViewController
-
-        viewController.modalPresentationStyle = .popover
-        viewController.popoverPresentationController?.sourceView = sender
-        viewController.popoverPresentationController?.sourceRect = sender.bounds
-        viewController.popoverPresentationController?.delegate = self
         viewController.didSelectType = { type in
             self.attribute = KernelAttribute(name: self.attribute?.name ?? "", type: type, value: type.defaultValue)
             self.setupValueView(for: type, value: self.attribute!.value)
             self.update()
+            if self.nameTextField.text?.isEmpty ?? true {
+                DispatchQueue.main.async {
+                    self.nameTextField.becomeFirstResponder()
+                }
+            }
         }
-        UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(viewController, animated: true, completion: nil)
+        present(viewController: viewController, with: sender)
     }
 
     @objc func valueButtonTapped(sender: UIButton) {
@@ -83,13 +84,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
             (self.valueButton as? UIButton)?.setTitle("\(value)", for: .normal)
             self.updateCallBack?(self, self.attribute!)
         }
-
-        viewController.modalPresentationStyle = .popover
-        viewController.popoverPresentationController?.sourceView = valueSelectionView
-        viewController.popoverPresentationController?.sourceRect = valueSelectionView.bounds
-        viewController.popoverPresentationController?.delegate = self
-
-        UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(viewController, animated: true, completion: nil)
+        present(viewController: viewController, with: sender)
     }
 
     @objc func colorButtonTapped(sender _: UIButton) {
@@ -99,13 +94,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
             self.valueButton.backgroundColor = UIColor(displayP3Red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(a))
             self.updateCallBack?(self, self.attribute!)
         }
-
-        viewController.modalPresentationStyle = .popover
-        viewController.popoverPresentationController?.sourceView = valueSelectionView
-        viewController.popoverPresentationController?.sourceRect = valueSelectionView.bounds
-        viewController.popoverPresentationController?.delegate = self
-
-        UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(viewController, animated: true, completion: nil)
+        present(viewController: viewController, with: valueSelectionView)
     }
 
     func setupValueView(for type: KernelAttributeType, value _: KernelAttributeValue?) {
@@ -161,20 +150,14 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
             valueButton = button
             break
         default:
-
             break
         }
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        attribute = nil
     }
 
     func adaptivePresentationStyle(for _: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
-
+    
     func registerNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(notification:)), name: ThemeManager.themeChangedNotificationName, object: nil)
         themeChanged(notification: nil)
@@ -182,5 +165,43 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
 
     @objc func themeChanged(notification _: Notification?) {
         contentView.backgroundColor = ThemeManager.shared.currentTheme.attributesCellBackground
+    }
+    
+    func present(viewController: UIViewController, with sender: UIView) {
+        guard let presentedViewController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController else {
+            return
+        }
+        viewController.modalPresentationStyle = .popover
+        viewController.popoverPresentationController?.sourceView = sender
+        viewController.popoverPresentationController?.sourceRect = sender.bounds
+        viewController.popoverPresentationController?.delegate = self
+        
+        // dismiss keyboard if needed
+        if let navigationController = presentedViewController as? UINavigationController {
+            (navigationController.viewControllers.first as? MainViewController)?.attributesViewController?.view.endEditing(true)
+        }
+        
+        presentedViewController.present(viewController, animated: true, completion: nil)
+    }
+    
+    // MARK: UITextFieldDelegate
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let type = self.attribute?.type else { return }
+        if textField.text?.isEmpty ?? true {
+            let newName = "untitled\(String(describing: type).capitalized)"
+            self.attribute?.name = newName
+            textField.text = newName
+            update()
+        }
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

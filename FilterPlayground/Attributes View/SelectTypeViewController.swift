@@ -29,7 +29,8 @@ class SelectTypeViewController: UIViewController, UITableViewDataSource, UITable
     }
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        didSelectType?(attributes[indexPath.row])
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            self.didSelectType?(self.attributes[indexPath.row])
+        }
     }
 }

@@ -16,6 +16,8 @@ enum DocumentError: Error {
 class Document: UIDocument {
 
     static let type: String = "kernelProj"
+    
+    var resourcesWrapper = FileWrapper(directoryWithFileWrappers: [:])
 
     var metaData: ProjectMetaData = ProjectMetaData(attributes: [], type: .warp)
     var source: String = "" {
@@ -41,7 +43,7 @@ class Document: UIDocument {
         metaData.attributes = metaData.initalArguments()
         inputImages = metaData.initialInputImages()
     }
-
+    
     override func contents(forType _: String) throws -> Any {
         let meta = try JSONEncoder().encode(metaData)
 
@@ -51,7 +53,7 @@ class Document: UIDocument {
 
         let fileWrapper = FileWrapper(directoryWithFileWrappers: [:])
         fileWrapper.addRegularFile(withContents: meta, preferredFilename: "metadata.json")
-        fileWrapper.addRegularFile(withContents: sourceData, preferredFilename: "content")
+        fileWrapper.addRegularFile(withContents: sourceData, preferredFilename: "source.cikernel")
 
         if inputImages.count > 0 {
             let inputImagesFileWrapper = FileWrapper(directoryWithFileWrappers: [:])
@@ -62,8 +64,56 @@ class Document: UIDocument {
             inputImagesFileWrapper.preferredFilename = "inputimages"
             fileWrapper.addFileWrapper(inputImagesFileWrapper)
         }
+        
+        resourcesWrapper = FileWrapper(directoryWithFileWrappers: [:])
+        metaData.attributes.forEach { argument in
+            guard case .sample(let image) = argument.value else { return }
+            self.addImage(image: image, for: argument.name)
+        }
+        
+        resourcesWrapper.preferredFilename = "Resources"
+        fileWrapper.addFileWrapper(resourcesWrapper)
 
         return fileWrapper
+    }
+    
+    func addImage(image: CIImage, for name: String) {
+        guard let data = image.asPNGData else { return }
+        addResource(for: "\(name).png", with: data)
+    }
+    
+    func getImage(for name: String) -> CIImage? {
+        guard let child = resourcesWrapper.fileWrappers?["\(name).png" ],
+            let data = child.regularFileContents else { return nil }
+        return CIImage(data: data)
+    }
+    
+    func renameImage(for name: String, with newName: String) {
+        renameResouce(for: "\(name).png", with: "\(newName).png")
+    }
+    
+    func addResource(for name: String, with data: Data) {
+        resourcesWrapper.addRegularFile(withContents: data, preferredFilename: name)
+    }
+    
+    func getAllResources() -> [(name: String, data: Data)] {
+        return resourcesWrapper.fileWrappers?.values.flatMap {
+            guard let data = $0.regularFileContents,
+                let name = $0.preferredFilename else { return nil}
+            return (name: name,data: data)
+        } ?? []
+    }
+    
+    func removeResource(for name: String) {
+        guard let child = resourcesWrapper.fileWrappers?[name] else { return }
+        resourcesWrapper.removeFileWrapper(child)
+    }
+    
+    func renameResouce(for name: String, with newName: String) {
+        guard let child = resourcesWrapper.fileWrappers?[name],
+            let data = child.regularFileContents else { return }
+        removeResource(for: name)
+        addResource(for: newName, with: data)
     }
 
     override func load(fromContents contents: Any, ofType _: String?) throws {
@@ -82,18 +132,27 @@ class Document: UIDocument {
 
         metaData = try JSONDecoder().decode(ProjectMetaData.self, from: meta)
 
-        guard let contentFilewrapper = filewrapper.fileWrappers?["content"] else {
+        guard let contentFilewrapper = filewrapper.fileWrappers?["source.cikernel"] else {
             throw DocumentError.unknownFileFormat
         }
 
         guard let contentsData = contentFilewrapper.regularFileContents else {
             throw DocumentError.unknownFileFormat
         }
-
+ 
         guard let sourceString = String(data: contentsData, encoding: .utf8) else {
             throw DocumentError.unknownFileFormat
         }
-
+        
+        if let resourcesFilewrapper = filewrapper.fileWrappers?["Resources"] {
+           resourcesWrapper = resourcesFilewrapper
+        }
+        
+        metaData.attributes = metaData.attributes.flatMap { argument in
+            guard case .sample = argument.type else { return argument }
+            return KernelAttribute(name: argument.name, type: argument.type, value:  .sample(self.getImage(for: argument.name)!))
+        }
+ 
         if let inputImagesFileWrapper = filewrapper.fileWrappers?["inputimages"] {
             var imageFound = true
             var index = 0

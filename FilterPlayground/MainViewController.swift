@@ -207,9 +207,9 @@ class MainViewController: UIViewController {
             self.showAttributes = document.metaData.type.supportsAttributes
             self.title = document.title
         }
-        if let document = self.document {
-            document.save(to: document.fileURL, for: .forOverwriting, completionHandler: { _ in
-                document.close(completionHandler: { _ in
+        if let oldDocument = self.document {
+            oldDocument.save(to: document.fileURL, for: .forOverwriting, completionHandler: { _ in
+                oldDocument.close(completionHandler: { _ in
                     completion()
                 })
             })

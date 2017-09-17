@@ -176,8 +176,8 @@ extension KernelAttributeValue: Codable {
         case let .color(a, b, c, d):
             try container.encode([a, b, c, d], forKey: .color)
             break
-        case let .sample(image):
-            try container.encode(image.asPNGData!, forKey: .sample)
+        case .sample(_):
+            // we are not encoding images in the json
             break
         }
     }
@@ -223,13 +223,6 @@ extension KernelAttributeValue: Codable {
             self = .color(value[0], value[1], value[2], value[3])
             return
         }
-        if let value = try? values.decode(Data.self, forKey: .sample) {
-            guard let image = CIImage(data: value) else {
-                throw CodableErrors.unkownValue
-            }
-            self = .sample(image)
-            return
-        }
         throw CodableErrors.unkownValue
     }
 }
@@ -252,14 +245,24 @@ extension KernelAttribute: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
         type = try values.decode(KernelAttributeType.self, forKey: .type)
-        value = try values.decode(KernelAttributeValue.self, forKey: .value)
+        if type == .sample {
+            // this value gets overriden in the load method
+            value = KernelAttributeValue.sample(CIImage(color: .black))
+        } else {
+            value = try values.decode(KernelAttributeValue.self, forKey: .value)
+        }
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(type, forKey: .type)
-        try container.encode(value, forKey: .value)
+        if type != .sample {
+            // we are not encoding images in the json
+            try container.encode(value, forKey: .value)
+        } else {
+            try container.encode("", forKey: .value)
+        }
     }
 }
 

@@ -571,7 +571,13 @@
                             <outlet property="delegate" destination="ZzX-F5-eF8" id="GJg-lo-ROx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Empty Project" id="LrO-EO-5H0"/>
+                    <navigationItem key="navigationItem" title="Empty Project" id="LrO-EO-5H0">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Ydj-fe-3B8">
+                            <connections>
+                                <segue destination="et2-7M-Gmp" kind="custom" customClass="DismissSegue" customModule="FilterPlayground" customModuleProvider="target" id="LVZ-vl-ww2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="itg-mA-yig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -953,7 +959,13 @@
                             <outlet property="delegate" destination="aX3-25-gz8" id="XDB-y8-Rts"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Template" id="Oql-Tg-6w0"/>
+                    <navigationItem key="navigationItem" title="Template" id="Oql-Tg-6w0">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="HG5-Zl-56c">
+                            <connections>
+                                <segue destination="4Gy-4E-ibt" kind="custom" customClass="DismissSegue" customModule="FilterPlayground" customModuleProvider="target" id="U7U-Nn-uZ5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7S-7R-sli" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1005,4 +1017,8 @@
             <color white="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="U7U-Nn-uZ5"/>
+        <segue reference="LVZ-vl-ww2"/>
+    </inferredMetricsTieBreakers>
 </document>

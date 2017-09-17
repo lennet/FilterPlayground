@@ -15,6 +15,7 @@
 		981D621F1F6B1858006A8606 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D621E1F6B1858006A8606 /* ErrorViewController.swift */; };
 		982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */; };
 		983008731F6EEB67005C89C3 /* DocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983008721F6EEB67005C89C3 /* DocumentTests.swift */; };
+		983008761F6F084C005C89C3 /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983008751F6F084C005C89C3 /* DismissSegue.swift */; };
 		98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */; };
 		9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC741F3663AE00A8E3CA /* Theme.swift */; };
 		9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC761F36675000A8E3CA /* ThemingTests.swift */; };
@@ -148,6 +149,7 @@
 		981D621E1F6B1858006A8606 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
 		982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDraggingIndicator.swift; sourceTree = "<group>"; };
 		983008721F6EEB67005C89C3 /* DocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTests.swift; sourceTree = "<group>"; };
+		983008751F6F084C005C89C3 /* DismissSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
 		98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorValuePicker.swift; sourceTree = "<group>"; };
 		9841EC741F3663AE00A8E3CA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		9841EC761F36675000A8E3CA /* ThemingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingTests.swift; sourceTree = "<group>"; };
@@ -287,6 +289,14 @@
 			path = Compiler;
 			sourceTree = "<group>";
 		};
+		983008741F6F0838005C89C3 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				983008751F6F084C005C89C3 /* DismissSegue.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		9841EC731F36639B00A8E3CA /* Theming */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +345,7 @@
 		985A42041F2CF8F200636E72 /* FilterPlayground */ = {
 			isa = PBXGroup;
 			children = (
+				983008741F6F0838005C89C3 /* Helper */,
 				98D475AE1F3BB8920080D794 /* Resources */,
 				9845C60F1F38F42500F38283 /* Create Project */,
 				9841EC731F36639B00A8E3CA /* Theming */,
@@ -772,6 +783,7 @@
 				985A42081F2CF8F200636E72 /* MainViewController.swift in Sources */,
 				9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */,
 				98426C171F670540007C2260 /* CIFilterHelper.swift in Sources */,
+				983008761F6F084C005C89C3 /* DismissSegue.swift in Sources */,
 				985A42361F2CFEE800636E72 /* CustomImageView.swift in Sources */,
 				987672451F2F5355002F9AAF /* Extensions.swift in Sources */,
 				982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */,

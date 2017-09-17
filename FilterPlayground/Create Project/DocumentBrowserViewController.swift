@@ -12,6 +12,7 @@ import MobileCoreServices
 class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
 
     var didOpenedDocument: ((Document) -> Void)?
+    var importHandler: ((URL?, UIDocumentBrowserViewController.ImportMode) -> ())?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +21,14 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         allowsDocumentCreation = true
     }
 
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.dismiss(animated: flag, completion: completion)
+        importHandler?(nil, .none)
+    }
     // MARK: UIDocumentBrowserViewControllerDelegate
 
     func documentBrowser(_: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
+        self.importHandler = importHandler
         let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("untitled.\(Document.type)")
 
         let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewProjectTabBarController") as! UITabBarController
@@ -30,15 +36,16 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         let selectTemplateViewController = (tabBarController.viewControllers!.last as! UINavigationController).viewControllers.first as! SelectTemplateTableViewController
         tabBarController.modalPresentationStyle = .formSheet
         present(tabBarController, animated: true) {
-
             viewController.didSelectType = { type in
                 viewController.dismiss(animated: true, completion: nil)
                 let document = Document(fileURL: newDocumentURL, type: type)
                 document.save(to: newDocumentURL, for: .forCreating) { success in
                     if success {
                         importHandler(newDocumentURL, .move)
+                        self.importHandler = nil
                     } else {
                         importHandler(nil, .none)
+                        self.importHandler = nil
                     }
                 }
             }
@@ -46,6 +53,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
             selectTemplateViewController.didSelectTemplate = { url in
                 viewController.dismiss(animated: true, completion: nil)
                 importHandler(url, .copy)
+                self.importHandler = nil
             }
         }
     }

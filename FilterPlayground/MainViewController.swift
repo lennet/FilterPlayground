@@ -45,6 +45,14 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         registerNotifications()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if document == nil {
+            performSegue(withIdentifier: "initialSetupSegue", sender: nil)
+        }
+    }
 
     func registerNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)

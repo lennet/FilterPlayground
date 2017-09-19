@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="04X-wZ-hWf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AKF-dN-QLZ">
     <device id="ipad12_9" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,7 +20,7 @@
             <objects>
                 <viewController id="04X-wZ-hWf" customClass="DocumentBrowserViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WEg-i2-9WZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ZVg-v0-vSA"/>
@@ -129,7 +129,7 @@
                                             <constraint firstAttribute="width" priority="999" constant="200" id="udQ-FA-yvS"/>
                                         </constraints>
                                         <connections>
-                                            <segue destination="hbu-YJ-oVo" kind="embed" id="KoO-5O-izF"/>
+                                            <segue destination="hbu-YJ-oVo" kind="embed" id="6qf-jS-jya"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekL-A8-cbw">
@@ -253,6 +253,7 @@
                         <outlet property="attributesContainerWidthConstraint" destination="Eee-sr-ho5" id="2qd-JR-sRN"/>
                         <outlet property="contentViewBottomConstraint" destination="57e-Lh-M0N" id="EAj-XD-kh2"/>
                         <outlet property="sourceEditorWidthConstraint" destination="udQ-FA-yvS" id="84x-sp-Urz"/>
+                        <segue destination="04X-wZ-hWf" kind="presentation" identifier="initialSetupSegue" modalPresentationStyle="formSheet" id="Vhs-y3-SKK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -887,7 +888,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qv3-qs-8wA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3414" y="1171"/>
+            <point key="canvasLocation" x="-1225" y="1162"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CXj-Fh-WZr">
@@ -1020,5 +1021,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="U7U-Nn-uZ5"/>
         <segue reference="LVZ-vl-ww2"/>
+        <segue reference="Vhs-y3-SKK"/>
     </inferredMetricsTieBreakers>
 </document>

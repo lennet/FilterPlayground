@@ -41,7 +41,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
                 let document = Document(fileURL: newDocumentURL, type: type)
                 document.save(to: newDocumentURL, for: .forCreating) { success in
                     if success {
-                        importHandler(newDocumentURL, .move)
+                        importHandler(newDocumentURL, .copy)
                         self.importHandler = nil
                     } else {
                         importHandler(nil, .none)

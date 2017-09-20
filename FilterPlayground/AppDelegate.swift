@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard inputURL.isFileURL else { return false }
 
         // Reveal / import the document at the URL
-        guard let documentBrowserViewController = window?.rootViewController as? DocumentBrowserViewController else { return false }
+        let documentBrowserViewController =  DocumentBrowserViewController()
 
         documentBrowserViewController.revealDocument(at: inputURL, importIfNeeded: true) { revealedDocumentURL, error in
             if let error = error {

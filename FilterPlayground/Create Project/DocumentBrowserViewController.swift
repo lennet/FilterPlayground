@@ -29,7 +29,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
 
     func documentBrowser(_: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
         self.importHandler = importHandler
-        let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("untitled.\(Document.type)")
+        let newDocumentURL = FileManager.urlInDocumentsDirectory(for: "untitled.\(Document.type)")
 
         let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewProjectTabBarController") as! UITabBarController
         let viewController = (tabBarController.viewControllers!.first as! UINavigationController).viewControllers.first as! NewProjectViewController
@@ -41,7 +41,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
                 let document = Document(fileURL: newDocumentURL, type: type)
                 document.save(to: newDocumentURL, for: .forCreating) { success in
                     if success {
-                        importHandler(newDocumentURL, .copy)
+                        importHandler(newDocumentURL, .move)
                         self.importHandler = nil
                     } else {
                         importHandler(nil, .none)

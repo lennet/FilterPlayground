@@ -78,7 +78,7 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
         viewController.popoverPresentationController?.delegate = self
         poppoverControllerPresentationController = viewController.popoverPresentationController
 
-        UIApplication.shared.keyWindow?.rootViewController?.presentedViewController?.present(viewController, animated: true, completion: nil)
+        UIApplication.shared.keyWindow?.rootViewController?.present(viewController, animated: true, completion: nil)
         highlight(at: 1)
     }
 

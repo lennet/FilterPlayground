@@ -15,7 +15,7 @@ enum DocumentError: Error {
 
 class Document: UIDocument {
 
-    static let type: String = "kernelProj"
+    static let type: String = "FilterPlayground"
     
     var resourcesWrapper = FileWrapper(directoryWithFileWrappers: [:])
 

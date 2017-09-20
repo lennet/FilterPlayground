@@ -168,7 +168,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     }
     
     func present(viewController: UIViewController, with sender: UIView) {
-        guard let presentedViewController = UIApplication.shared.keyWindow?.rootViewController?.presentedViewController else {
+        guard let presentedViewController = UIApplication.shared.keyWindow?.rootViewController else {
             return
         }
         viewController.modalPresentationStyle = .popover

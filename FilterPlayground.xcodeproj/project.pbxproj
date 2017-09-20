@@ -43,12 +43,6 @@
 		986AA7371F62FF76008F2091 /* SelectTemplateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AA7361F62FF76008F2091 /* SelectTemplateTableViewController.swift */; };
 		987672451F2F5355002F9AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
 		987A73291F66F65000F73806 /* SwiftPlaygroundsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */; };
-		9881A14F1F4884C900BABA72 /* ThumbnailProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881A14E1F4884C900BABA72 /* ThumbnailProvider.swift */; };
-		9881A1531F4884CA00BABA72 /* FilterPlaygroundThumbnailExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		9881A15F1F4884E700BABA72 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9881A15E1F4884E700BABA72 /* QuickLook.framework */; };
-		9881A1621F4884E700BABA72 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9881A1611F4884E700BABA72 /* PreviewViewController.swift */; };
-		9881A1651F4884E700BABA72 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9881A1631F4884E700BABA72 /* MainInterface.storyboard */; };
-		9881A1691F4884E700BABA72 /* FilterPlaygroundPreviewExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		989716731F67E3C800E7C20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716721F67E3C800E7C20C /* AppDelegate.swift */; };
 		989716751F67E3C800E7C20C /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716741F67E3C800E7C20C /* Document.swift */; };
 		989716781F67E3C800E7C20C /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 989716761F67E3C800E7C20C /* Document.xib */; };
@@ -102,20 +96,6 @@
 			remoteGlobalIDString = 985A42011F2CF8F200636E72;
 			remoteInfo = FilterPlayground;
 		};
-		9881A1511F4884CA00BABA72 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 985A41FA1F2CF8F200636E72 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9881A14B1F4884C900BABA72;
-			remoteInfo = FilterPlaygroundThumbnailExtension;
-		};
-		9881A1671F4884E700BABA72 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 985A41FA1F2CF8F200636E72 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9881A15B1F4884E600BABA72;
-			remoteInfo = FilterPlaygroundPreviewExtension;
-		};
 		989716851F67E3C900E7C20C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 985A41FA1F2CF8F200636E72 /* Project object */;
@@ -132,8 +112,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				9881A1691F4884E700BABA72 /* FilterPlaygroundPreviewExtension.appex in Embed App Extensions */,
-				9881A1531F4884CA00BABA72 /* FilterPlaygroundThumbnailExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,14 +159,7 @@
 		986AA7361F62FF76008F2091 /* SelectTemplateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTemplateTableViewController.swift; sourceTree = "<group>"; };
 		987672441F2F5355002F9AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPlaygroundsHelper.swift; sourceTree = "<group>"; };
-		9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FilterPlaygroundThumbnailExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		9881A14E1F4884C900BABA72 /* ThumbnailProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailProvider.swift; sourceTree = "<group>"; };
-		9881A1501F4884C900BABA72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FilterPlaygroundPreviewExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9881A15E1F4884E700BABA72 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
-		9881A1611F4884E700BABA72 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
-		9881A1641F4884E700BABA72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		9881A1661F4884E700BABA72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		989716701F67E3C800E7C20C /* FilterPlaygroundMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterPlaygroundMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		989716721F67E3C800E7C20C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		989716741F67E3C800E7C20C /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -242,21 +213,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9881A1491F4884C900BABA72 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9881A1591F4884E600BABA72 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9881A15F1F4884E700BABA72 /* QuickLook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,8 +276,6 @@
 			children = (
 				985A42041F2CF8F200636E72 /* FilterPlayground */,
 				985A42191F2CF8F300636E72 /* FilterPlaygroundTests */,
-				9881A14D1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */,
-				9881A1601F4884E700BABA72 /* FilterPlaygroundPreviewExtension */,
 				989716711F67E3C800E7C20C /* FilterPlaygroundMac */,
 				989716871F67E3C900E7C20C /* FilterPlaygroundMacTests */,
 				9881A15D1F4884E700BABA72 /* Frameworks */,
@@ -334,8 +288,6 @@
 			children = (
 				985A42021F2CF8F200636E72 /* FilterPlayground.app */,
 				985A42161F2CF8F300636E72 /* FilterPlaygroundTests.xctest */,
-				9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */,
-				9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */,
 				989716701F67E3C800E7C20C /* FilterPlaygroundMac.app */,
 				989716841F67E3C900E7C20C /* FilterPlaygroundMacTests.xctest */,
 			);
@@ -411,31 +363,12 @@
 			path = Export;
 			sourceTree = "<group>";
 		};
-		9881A14D1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */ = {
-			isa = PBXGroup;
-			children = (
-				9881A14E1F4884C900BABA72 /* ThumbnailProvider.swift */,
-				9881A1501F4884C900BABA72 /* Info.plist */,
-			);
-			path = FilterPlaygroundThumbnailExtension;
-			sourceTree = "<group>";
-		};
 		9881A15D1F4884E700BABA72 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				9881A15E1F4884E700BABA72 /* QuickLook.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9881A1601F4884E700BABA72 /* FilterPlaygroundPreviewExtension */ = {
-			isa = PBXGroup;
-			children = (
-				9881A1611F4884E700BABA72 /* PreviewViewController.swift */,
-				9881A1631F4884E700BABA72 /* MainInterface.storyboard */,
-				9881A1661F4884E700BABA72 /* Info.plist */,
-			);
-			path = FilterPlaygroundPreviewExtension;
 			sourceTree = "<group>";
 		};
 		989716711F67E3C800E7C20C /* FilterPlaygroundMac */ = {
@@ -545,8 +478,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				9881A1521F4884CA00BABA72 /* PBXTargetDependency */,
-				9881A1681F4884E700BABA72 /* PBXTargetDependency */,
 			);
 			name = FilterPlayground;
 			productName = FilterPlayground;
@@ -570,40 +501,6 @@
 			productName = FilterPlaygroundTests;
 			productReference = 985A42161F2CF8F300636E72 /* FilterPlaygroundTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		9881A14B1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9881A1561F4884CA00BABA72 /* Build configuration list for PBXNativeTarget "FilterPlaygroundThumbnailExtension" */;
-			buildPhases = (
-				9881A1481F4884C900BABA72 /* Sources */,
-				9881A1491F4884C900BABA72 /* Frameworks */,
-				9881A14A1F4884C900BABA72 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = FilterPlaygroundThumbnailExtension;
-			productName = FilterPlaygroundThumbnailExtension;
-			productReference = 9881A14C1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
-		9881A15B1F4884E600BABA72 /* FilterPlaygroundPreviewExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9881A16A1F4884E700BABA72 /* Build configuration list for PBXNativeTarget "FilterPlaygroundPreviewExtension" */;
-			buildPhases = (
-				9881A1581F4884E600BABA72 /* Sources */,
-				9881A1591F4884E600BABA72 /* Frameworks */,
-				9881A15A1F4884E600BABA72 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = FilterPlaygroundPreviewExtension;
-			productName = FilterPlaygroundPreviewExtension;
-			productReference = 9881A15C1F4884E600BABA72 /* FilterPlaygroundPreviewExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
 		};
 		9897166F1F67E3C800E7C20C /* FilterPlaygroundMac */ = {
 			isa = PBXNativeTarget;
@@ -657,12 +554,6 @@
 						CreatedOnToolsVersion = 9.0;
 						TestTargetID = 985A42011F2CF8F200636E72;
 					};
-					9881A14B1F4884C900BABA72 = {
-						CreatedOnToolsVersion = 9.0;
-					};
-					9881A15B1F4884E600BABA72 = {
-						CreatedOnToolsVersion = 9.0;
-					};
 					9897166F1F67E3C800E7C20C = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -694,8 +585,6 @@
 			targets = (
 				985A42011F2CF8F200636E72 /* FilterPlayground */,
 				985A42151F2CF8F300636E72 /* FilterPlaygroundTests */,
-				9881A14B1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */,
-				9881A15B1F4884E600BABA72 /* FilterPlaygroundPreviewExtension */,
 				9897166F1F67E3C800E7C20C /* FilterPlaygroundMac */,
 				989716831F67E3C900E7C20C /* FilterPlaygroundMacTests */,
 			);
@@ -722,21 +611,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9881A14A1F4884C900BABA72 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9881A15A1F4884E600BABA72 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9881A1651F4884E700BABA72 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,22 +700,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9881A1481F4884C900BABA72 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9881A14F1F4884C900BABA72 /* ThumbnailProvider.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9881A1581F4884E600BABA72 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9881A1621F4884E700BABA72 /* PreviewViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9897166C1F67E3C800E7C20C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -880,16 +738,6 @@
 			target = 985A42011F2CF8F200636E72 /* FilterPlayground */;
 			targetProxy = 985A42171F2CF8F300636E72 /* PBXContainerItemProxy */;
 		};
-		9881A1521F4884CA00BABA72 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9881A14B1F4884C900BABA72 /* FilterPlaygroundThumbnailExtension */;
-			targetProxy = 9881A1511F4884CA00BABA72 /* PBXContainerItemProxy */;
-		};
-		9881A1681F4884E700BABA72 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9881A15B1F4884E600BABA72 /* FilterPlaygroundPreviewExtension */;
-			targetProxy = 9881A1671F4884E700BABA72 /* PBXContainerItemProxy */;
-		};
 		989716861F67E3C900E7C20C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9897166F1F67E3C800E7C20C /* FilterPlaygroundMac */;
@@ -912,14 +760,6 @@
 				985A420F1F2CF8F200636E72 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		9881A1631F4884E700BABA72 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9881A1641F4884E700BABA72 /* Base */,
-			);
-			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 		989716761F67E3C800E7C20C /* Document.xib */ = {
@@ -1118,62 +958,6 @@
 			};
 			name = Release;
 		};
-		9881A1541F4884CA00BABA72 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = 23Q9KTEYUV;
-				INFOPLIST_FILE = FilterPlaygroundThumbnailExtension/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lt.filterplayground.FilterPlaygroundThumbnailExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		9881A1551F4884CA00BABA72 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = 23Q9KTEYUV;
-				INFOPLIST_FILE = FilterPlaygroundThumbnailExtension/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lt.filterplayground.FilterPlaygroundThumbnailExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		9881A16B1F4884E700BABA72 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = 23Q9KTEYUV;
-				INFOPLIST_FILE = FilterPlaygroundPreviewExtension/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lt.filterplayground.FilterPlaygroundPreviewExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		9881A16C1F4884E700BABA72 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = 23Q9KTEYUV;
-				INFOPLIST_FILE = FilterPlaygroundPreviewExtension/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lt.filterplayground.FilterPlaygroundPreviewExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		9897168C1F67E3C900E7C20C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1272,24 +1056,6 @@
 			buildConfigurations = (
 				985A422E1F2CF8F300636E72 /* Debug */,
 				985A422F1F2CF8F300636E72 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9881A1561F4884CA00BABA72 /* Build configuration list for PBXNativeTarget "FilterPlaygroundThumbnailExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9881A1541F4884CA00BABA72 /* Debug */,
-				9881A1551F4884CA00BABA72 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9881A16A1F4884E700BABA72 /* Build configuration list for PBXNativeTarget "FilterPlaygroundPreviewExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9881A16B1F4884E700BABA72 /* Debug */,
-				9881A16C1F4884E700BABA72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

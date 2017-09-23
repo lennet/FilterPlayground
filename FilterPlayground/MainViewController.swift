@@ -306,7 +306,7 @@ class MainViewController: UIViewController {
 
     func didUpdateArgumentsFromSourceEditor(arguments: [(String, KernelAttributeType)]) {
         let currentAttributes = attributesViewController?.attributes ?? []
-        attributesViewController?.attributes = arguments.enumerated().map { (index, argument) -> KernelAttribute in
+        let newAttributes = arguments.enumerated().map { (index, argument) -> KernelAttribute in
             if index < currentAttributes.count {
                 var currentArgument = currentAttributes[index]
                 if currentArgument.type == argument.1 {
@@ -316,6 +316,9 @@ class MainViewController: UIViewController {
             }
             return KernelAttribute(name: argument.0, type: argument.1, value: argument.1.defaultValue)
         }
+        attributesViewController?.attributes = newAttributes
+        document?.metaData.attributes = newAttributes
+        document?.updateChangeCount(.done)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {

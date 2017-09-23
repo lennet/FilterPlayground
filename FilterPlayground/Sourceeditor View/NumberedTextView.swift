@@ -64,7 +64,15 @@ class NumberedTextView: UIView, UITextViewDelegate {
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         textView.delegate = self
-        textView.attribtutedStringForString = hightlight
+        textView.attribtutedStringForString = { text, resultCallback in
+            DispatchQueue.global(qos: .userInteractive).async {
+                let parser = Parser(string: text)
+                let result = parser.getAST().asAttributedText
+                DispatchQueue.main.async {
+                    resultCallback(result)
+                }
+            }
+        }
         contentMode = .topLeft
         addSubview(textView)
         backgroundColor = .clear
@@ -175,7 +183,6 @@ class NumberedTextView: UIView, UITextViewDelegate {
     }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return true
         if text == "\n" && range.length == 0 {
 
             let firstString = (textView.text as NSString).substring(to: range.location)

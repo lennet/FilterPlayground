@@ -10,7 +10,7 @@ import UIKit
 
 class SourceEditorTextStorage: NSTextStorage {
     
-    var attribtutedStringForString: ((String) -> NSAttributedString)?
+    var attribtutedStringForString: ((String, @escaping (NSAttributedString) -> ()) -> ())?
     var attributedString: NSMutableAttributedString = NSMutableAttributedString(string: "")
     
     override var string: String {
@@ -37,27 +37,31 @@ class SourceEditorTextStorage: NSTextStorage {
     }
     
     override func processEditing() {
+        super.processEditing()
         guard editedMask.contains(.editedCharacters) else { return }
         let nsstring = (self.string as NSString)
         let editedParagaphRange = nsstring.lineRange(for: self.editedRange)
         let editedParagraph = nsstring.substring(with: editedParagaphRange)
         
-        guard let attributedParagraphString = attribtutedStringForString?(editedParagraph),
-            attributedParagraphString.string == self.attributedString.attributedSubstring(from: editedParagaphRange).string else { return }
-        
-        self.beginEditing()
-        attributedParagraphString.enumerateAttributes(in: NSMakeRange(0, attributedParagraphString.length), options: [], using: { (attribute, currentRange, stop) in
-            var adjustedRange = NSMakeRange(editedParagaphRange.location+currentRange.location, currentRange.length)
-            if adjustedRange.location + adjustedRange.length > self.string.count {
-                adjustedRange.length = self.string.count - adjustedRange.location
-            } else if adjustedRange.length < 0 {
-                adjustedRange.length = 0
+        attribtutedStringForString?(editedParagraph) { attributedParagraphString in
+            self.beginEditing()
+            DispatchQueue.global(qos: .userInteractive).async {
+                attributedParagraphString.enumerateAttributes(in: NSMakeRange(0, attributedParagraphString.length), options: [], using: { (attribute, currentRange, stop) in
+                    var adjustedRange = NSMakeRange(editedParagaphRange.location+currentRange.location, currentRange.length)
+                    if adjustedRange.location + adjustedRange.length > self.string.count {
+                        adjustedRange.length = self.string.count - adjustedRange.location
+                    } else if adjustedRange.length < 0 {
+                        adjustedRange.length = 0
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.addAttributes(attribute, range: adjustedRange)
+                    }
+                })
+
             }
-            self.addAttributes(attribute, range: adjustedRange)
-        })
-        
-        self.endEditing()
-        self.edited(.editedAttributes, range: self.editedRange, changeInLength: 0)
-        super.processEditing()
+            self.endEditing()
+            self.edited(.editedAttributes, range: self.editedRange, changeInLength: 0)
+        }
     }
 }

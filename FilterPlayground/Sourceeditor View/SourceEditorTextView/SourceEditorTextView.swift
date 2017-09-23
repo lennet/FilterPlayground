@@ -10,7 +10,7 @@ import UIKit
 
 class SourceEditorTextView: UITextView {
     
-    var attribtutedStringForString: ((String) -> NSAttributedString)?{
+    var attribtutedStringForString: ((String, @escaping (NSAttributedString) -> ()) -> ())?{
         set {
             (textStorage as? SourceEditorTextStorage)?.attribtutedStringForString = newValue
         }

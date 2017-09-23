@@ -61,7 +61,6 @@
 		9897169F1F67E94800E7C20C /* CoreImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716951F67E7B300E7C20C /* CoreImage+Extension.swift */; };
 		989716A01F67E97600E7C20C /* ErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229AD1F2FB88F000FFCA2 /* ErrorParser.swift */; };
 		989716A21F67F54C00E7C20C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716A11F67F54C00E7C20C /* Settings.swift */; };
-		989716A31F67F55C00E7C20C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716A11F67F54C00E7C20C /* Settings.swift */; };
 		989C576E1F68224C008FF142 /* SwiftPlaygroundsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989C576D1F68224C008FF142 /* SwiftPlaygroundsTests.swift */; };
 		989C576F1F6822BC008FF142 /* SwiftPlaygroundsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */; };
 		989C57711F6825CD008FF142 /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989C57701F6825CD008FF142 /* XCTest+Extension.swift */; };
@@ -252,6 +251,7 @@
 		983008741F6F0838005C89C3 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */,
 				983008751F6F084C005C89C3 /* DismissSegue.swift */,
 			);
 			path = Helper;
@@ -317,10 +317,8 @@
 				98D9199D1F2E0578007D5234 /* Attributes View */,
 				989716981F67E7F300E7C20C /* Extensions */,
 				981267D21F34BEDB00101027 /* Compiler */,
-				9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */,
-				982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */,
+				988901A11F76546500B97C4A /* Settings */,
 				987A73271F66F63800F73806 /* Export */,
-				989716A11F67F54C00E7C20C /* Settings.swift */,
 			);
 			path = FilterPlayground;
 			sourceTree = "<group>";
@@ -382,6 +380,15 @@
 				9889019D1F76417A00B97C4A /* SourceEditorTextStorage.swift */,
 			);
 			path = SourceEditorTextView;
+			sourceTree = "<group>";
+		};
+		988901A11F76546500B97C4A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				989716A11F67F54C00E7C20C /* Settings.swift */,
+				9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		989716711F67E3C800E7C20C /* FilterPlaygroundMac */ = {
@@ -727,7 +734,6 @@
 				989716931F67E75900E7C20C /* KernelDescriptor.swift in Sources */,
 				989716751F67E3C800E7C20C /* Document.swift in Sources */,
 				989716731F67E3C800E7C20C /* AppDelegate.swift in Sources */,
-				989716A31F67F55C00E7C20C /* Settings.swift in Sources */,
 				989716A01F67E97600E7C20C /* ErrorParser.swift in Sources */,
 				989716911F67E47300E7C20C /* CIFilterHelper.swift in Sources */,
 				989716941F67E77500E7C20C /* KernelCompiler.swift in Sources */,

@@ -86,13 +86,8 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         document.open { _ in
             if let didOpenedDocument = self.didOpenedDocument {
                 didOpenedDocument(document)
-            } else {
-                let navigationController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NavigationControllerIdentifier") as! UINavigationController
-                let viewController = navigationController.viewControllers.first as! MainViewController
-                viewController.loadViewIfNeeded()
-                viewController.didOpened(document: document)
-                navigationController.modalTransitionStyle = .crossDissolve
-                self.present(navigationController, animated: true, completion: nil)
+            } else if let documentViewController = self.presentingViewController as? MainViewController {
+                documentViewController.didOpened(document: document)
             }
         }
     }

@@ -30,7 +30,7 @@ class CircularSlider: UIControl, CAAnimationDelegate {
         return view
     }()
 
-    var previousProgress: CGFloat = 0
+    var previousProgress: CGFloat = 0.5
     var roundedSteps = true
     var value: CGFloat = 0
 

@@ -18,6 +18,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
 
     var attribute: KernelAttribute? {
         didSet {
+            nameTextField.text = attribute?.name
             if let type = attribute?.type {
                 if let oldType = oldValue?.type,
                     oldType == type {

@@ -55,8 +55,15 @@ class MainViewController: UIViewController {
     }
 
     func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillTerminate), name: NSNotification.Name.UIApplicationWillTerminate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc func applicationWillTerminate() {
+        guard let document = document,
+            document.hasUnsavedChanges else { return }
+        document.save(to: document.fileURL, for: .forOverwriting)
     }
 
     @objc func keyboardWillShow(notification: Notification) {

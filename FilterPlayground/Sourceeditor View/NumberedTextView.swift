@@ -14,8 +14,8 @@ class NumberedTextView: UIView, UITextViewDelegate {
         return ThemeManager.shared.currentTheme
     }
 
-    let textView: UITextView = {
-        let textView = UITextView()
+    let textView: SourceEditorTextView = {
+        let textView = SourceEditorTextView(frame: .zero)
         textView.backgroundColor = .clear
         textView.autocorrectionType = .no
         textView.autocapitalizationType = .none
@@ -64,6 +64,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         textView.delegate = self
+        textView.attribtutedStringForString = hightlight
         contentMode = .topLeft
         addSubview(textView)
         backgroundColor = .clear
@@ -78,25 +79,33 @@ class NumberedTextView: UIView, UITextViewDelegate {
         setNeedsDisplay()
         updatedText()
     }
+    
+    func hightlight(text: String) -> NSAttributedString
+    {
+        let parser = Parser(string: text)
+        return parser.getAST().asAttributedText
+    }
 
     func updatedText(buildAst: Bool = true) {
         let selectedRange = textView.selectedRange
-        let oldFont = font
-        if buildAst {
-            let oldAst = currentAST
-            let parser = Parser(string: textView.text)
-            currentAST = parser.getAST()
-
-            if let oldKernelDefinition = oldAst?.kernelDefinition(),
-                let newKernelDefinition = currentAST?.kernelDefinition(),
-                !(oldKernelDefinition.arguments == newKernelDefinition.arguments) {
-                didUpdateArguments?(newKernelDefinition.arguments)
+        if buildAst,
+            let text = self.textView.text {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let oldAst = self.currentAST
+                let parser = Parser(string: text)
+                self.currentAST = parser.getAST()
+                DispatchQueue.main.sync {
+                    if let oldKernelDefinition = oldAst?.kernelDefinition(),
+                        let newKernelDefinition = self.currentAST?.kernelDefinition(),
+                        !(oldKernelDefinition.arguments == newKernelDefinition.arguments) {
+                        self.didUpdateArguments?(newKernelDefinition.arguments)
+                    }
+                }
             }
+        } else {
+            textView.selectedRange = selectedRange
+            delegate?.textViewDidChange?(textView)
         }
-        textView.attributedText = currentAST?.asAttributedText
-        textView.selectedRange = selectedRange
-        textView.font = oldFont
-        delegate?.textViewDidChange?(textView)
     }
 
     override func draw(_ rect: CGRect) {
@@ -156,7 +165,6 @@ class NumberedTextView: UIView, UITextViewDelegate {
         paragraphStyle.alignment = .right
 
         return [
-            .font: textView.font!,
             .foregroundColor: color,
             .paragraphStyle: paragraphStyle,
         ]
@@ -167,6 +175,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
     }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return true
         if text == "\n" && range.length == 0 {
 
             let firstString = (textView.text as NSString).substring(to: range.location)

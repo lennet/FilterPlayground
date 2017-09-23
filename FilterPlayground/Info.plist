@@ -12,14 +12,14 @@
 			<key>CFBundleTypeIconFiles</key>
 			<array/>
 			<key>CFBundleTypeName</key>
-			<string>Kernel Project</string>
+			<string>Filter Playground</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.leonardtthomas.kernelProject</string>
+				<string>com.leonardtthomas.filterplayground</string>
 			</array>
 		</dict>
 	</array>
@@ -74,9 +74,9 @@
 				<string>com.apple.package</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Kernel Project</string>
+			<string>Filter Playground</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.leonardtthomas.kernelProject</string>
+			<string>com.leonardtthomas.filterplayground</string>
 			<key>UTTypeSize320IconFile</key>
 			<string>iconlarge.png</string>
 			<key>UTTypeSize64IconFile</key>

@@ -29,7 +29,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
 
     func documentBrowser(_: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
         self.importHandler = importHandler
-        let newDocumentURL = FileManager.urlInDocumentsDirectory(for: "untitled.\(Document.type)")
+        let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("untitled.\(Document.type)")
 
         let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewProjectTabBarController") as! UITabBarController
         let viewController = (tabBarController.viewControllers!.first as! UINavigationController).viewControllers.first as! NewProjectViewController
@@ -71,8 +71,11 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         presentDocument(at: destinationURL)
     }
 
-    func documentBrowser(_: UIDocumentBrowserViewController, failedToImportDocumentAt _: URL, error _: Error?) {
+    func documentBrowser(_: UIDocumentBrowserViewController, failedToImportDocumentAt _: URL, error err: Error?) {
         // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
+        if let error = err {
+            print(error)
+        }
     }
 
     // MARK: Document Presentation

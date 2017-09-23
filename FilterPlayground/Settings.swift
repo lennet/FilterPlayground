@@ -22,7 +22,7 @@ struct Settings {
     static var fontSize: Float {
         get {
             guard UserDefaults.standard.value(forKey: #function) != nil else {
-                return 22
+                return 12
             }
             return UserDefaults.standard.float(forKey: #function)
         }

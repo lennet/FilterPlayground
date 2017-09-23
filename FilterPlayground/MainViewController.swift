@@ -262,7 +262,13 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func didTapLiveViewButton(_: Any) {
-        showLiveView = !showLiveView
+        if showLiveView,
+            sourceViewRatio == 1
+            {
+            sourceViewRatio = 0.5
+        } else if !showLiveView {
+            showLiveView = true
+        }
         updateViewConstraints()
 
         UIView.animate(withDuration: 0.25) {

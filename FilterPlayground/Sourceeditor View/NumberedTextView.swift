@@ -73,6 +73,11 @@ class NumberedTextView: UIView, UITextViewDelegate {
                 }
             }
         }
+        
+        textView.codeCompletionsForString = { text, location, resultCallback in
+            // TODO!
+            resultCallback(["{", "}", "mod", "destCoord()", ";", "(", ")"])
+        }
         contentMode = .topLeft
         addSubview(textView)
         backgroundColor = .clear

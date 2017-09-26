@@ -61,9 +61,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func applicationWillTerminate() {
-        guard let document = document,
-            document.hasUnsavedChanges else { return }
-        document.save(to: document.fileURL, for: .forOverwriting)
+        document?.close(completionHandler: nil)
     }
 
     @objc func keyboardWillShow(notification: Notification) {
@@ -223,10 +221,8 @@ class MainViewController: UIViewController {
             self.title = document.title
         }
         if let oldDocument = self.document {
-            oldDocument.save(to: document.fileURL, for: .forOverwriting, completionHandler: { _ in
-                oldDocument.close(completionHandler: { _ in
-                    completion()
-                })
+            oldDocument.close(completionHandler: { _ in
+                completion()
             })
         } else {
             completion()

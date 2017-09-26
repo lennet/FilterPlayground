@@ -21,7 +21,6 @@ class SourceEditorTextView: UITextView, UICollectionViewDelegate, UICollectionVi
     
     fileprivate var cachedCodeCompletions: [String] = [] {
         didSet {
-            // TODO hide collectionView if there are no results
             if oldValue != cachedCodeCompletions {
                 codeCompletionColectionView.reloadData()
             }
@@ -81,7 +80,7 @@ class SourceEditorTextView: UITextView, UICollectionViewDelegate, UICollectionVi
         view.delegate = self
         view.dataSource = self
         view.register(CodeCompletionCollectionViewCell.self, forCellWithReuseIdentifier: CodeCompletionCollectionViewCell.reuseIdentifier)
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0.8352941176, blue: 0.8588235294, alpha: 1)
         inputAccessoryView = view
     }
     
@@ -96,7 +95,14 @@ class SourceEditorTextView: UITextView, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedItem = cachedCodeCompletions[indexPath.item]
+        
+        while let lastChar = (text as NSString).substring(to: selectedRange.location).last,
+            let unicodeScalar = lastChar.unicodeScalars.first,
+            NSCharacterSet.letters.contains(unicodeScalar) {
+            deleteBackward()
+        }
         insertText(selectedItem)
+        insertText(" ")
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -111,6 +117,8 @@ class SourceEditorTextView: UITextView, UICollectionViewDelegate, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CodeCompletionCollectionViewCell.reuseIdentifier, for: indexPath) as! CodeCompletionCollectionViewCell
         cell.text = cachedCodeCompletions[indexPath.row]
         cell.contentView.backgroundColor = .lightGray
+        cell.contentView.layer.cornerRadius = 6
+        cell.contentView.layer.masksToBounds = true
         return cell
     }
 

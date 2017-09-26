@@ -12,7 +12,25 @@ class CIKernelLanguageHelper {
     
     static var functions: [String] = {
         // todo add
-        return  KernelAttributeType.all.map{ $0.rawValue } + ["mod", "destCoord()"]
+        return ["(", ")", ".", ",", "if", "for", "/", "*" , "-"] + KernelAttributeType.all.map{ $0.rawValue} + ["mod",
+                                                                                                                "compare",
+                                                                                                                "cos_",
+                                                                                                                "cossin",
+                                                                                                                "cossin_",
+                                                                                                                "destCoord",
+                                                                                                                "premultiply",
+                                                                                                                "sample",
+                                                                                                                "samplerCoord",
+                                                                                                                "samplerExtent",
+                                                                                                                "samplerOrigin",
+                                                                                                                "samplerSize",
+                                                                                                                "samplerTransform",
+                                                                                                                "sin_",
+                                                                                                                "sincos",
+                                                                                                                "sincos_",
+                                                                                                                "tan_",
+                                                                                                                "unpremultiply"]
     }()
+    
     
 }

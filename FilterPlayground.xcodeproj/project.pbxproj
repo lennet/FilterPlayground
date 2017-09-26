@@ -24,6 +24,9 @@
 		9848C4441F3B9B58001E079C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */; };
 		984D9FA41F2E824B004AFD74 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D9FA31F2E824B004AFD74 /* ParserTests.swift */; };
 		9853F8591F78F15100551541 /* CodeCompletionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853F8581F78F15100551541 /* CodeCompletionCollectionViewCell.swift */; };
+		9853F85B1F79012500551541 /* AST+CodeCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853F85A1F79012500551541 /* AST+CodeCompletion.swift */; };
+		9853F85D1F7903C100551541 /* ASTCodeCompletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853F85C1F7903C100551541 /* ASTCodeCompletionTests.swift */; };
+		9853F85F1F79218C00551541 /* CIKernelLanguageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853F85E1F79218C00551541 /* CIKernelLanguageHelper.swift */; };
 		985668411F2E60EB00297A4E /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985668401F2E60EB00297A4E /* Parser.swift */; };
 		985668431F2E6ABE00297A4E /* TokenizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985668421F2E6ABE00297A4E /* TokenizerTests.swift */; };
 		985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42051F2CF8F200636E72 /* AppDelegate.swift */; };
@@ -139,6 +142,9 @@
 		9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		984D9FA31F2E824B004AFD74 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
 		9853F8581F78F15100551541 /* CodeCompletionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeCompletionCollectionViewCell.swift; sourceTree = "<group>"; };
+		9853F85A1F79012500551541 /* AST+CodeCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AST+CodeCompletion.swift"; sourceTree = "<group>"; };
+		9853F85C1F7903C100551541 /* ASTCodeCompletionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTCodeCompletionTests.swift; sourceTree = "<group>"; };
+		9853F85E1F79218C00551541 /* CIKernelLanguageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIKernelLanguageHelper.swift; sourceTree = "<group>"; };
 		985668401F2E60EB00297A4E /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		985668421F2E6ABE00297A4E /* TokenizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenizerTests.swift; sourceTree = "<group>"; };
 		985A42021F2CF8F200636E72 /* FilterPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,6 +254,7 @@
 				980229AB1F2F94F9000FFCA2 /* ErrorHelper.swift */,
 				980229AD1F2FB88F000FFCA2 /* ErrorParser.swift */,
 				98C5E23E1F34B8DD006E7658 /* KernelError.swift */,
+				9853F85E1F79218C00551541 /* CIKernelLanguageHelper.swift */,
 			);
 			path = Compiler;
 			sourceTree = "<group>";
@@ -342,6 +349,7 @@
 				98C6FE851F3832AE00D0E840 /* ASTTests.swift */,
 				986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */,
 				983008721F6EEB67005C89C3 /* DocumentTests.swift */,
+				9853F85C1F7903C100551541 /* ASTCodeCompletionTests.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -466,6 +474,7 @@
 				985668401F2E60EB00297A4E /* Parser.swift */,
 				980229B11F2FCF41000FFCA2 /* ErrorTableViewCell.swift */,
 				9868A8C01F3712EB00D0BC79 /* AST.swift */,
+				9853F85A1F79012500551541 /* AST+CodeCompletion.swift */,
 				981D621E1F6B1858006A8606 /* ErrorViewController.swift */,
 				9889019C1F76414200B97C4A /* SourceEditorTextView */,
 			);
@@ -693,6 +702,7 @@
 				98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */,
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,
 				98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */,
+				9853F85F1F79218C00551541 /* CIKernelLanguageHelper.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
 				987A73291F66F65000F73806 /* SwiftPlaygroundsHelper.swift in Sources */,
 				9848C4441F3B9B58001E079C /* SettingsTableViewController.swift in Sources */,
@@ -704,6 +714,7 @@
 				9853F8591F78F15100551541 /* CodeCompletionCollectionViewCell.swift in Sources */,
 				980229AE1F2FB88F000FFCA2 /* ErrorParser.swift in Sources */,
 				98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */,
+				9853F85B1F79012500551541 /* AST+CodeCompletion.swift in Sources */,
 				986AA72B1F62F51C008F2091 /* TemplatesManager.swift in Sources */,
 				9897169A1F67E80A00E7C20C /* UIImage+Extension.swift in Sources */,
 				9889019E1F76417A00B97C4A /* SourceEditorTextStorage.swift in Sources */,
@@ -720,6 +731,7 @@
 				98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */,
 				98E5AD0E1F2E87280047AC2E /* RendererTests.swift in Sources */,
 				985668431F2E6ABE00297A4E /* TokenizerTests.swift in Sources */,
+				9853F85D1F7903C100551541 /* ASTCodeCompletionTests.swift in Sources */,
 				983008731F6EEB67005C89C3 /* DocumentTests.swift in Sources */,
 				9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */,
 				98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */,

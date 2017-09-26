@@ -22,7 +22,9 @@ class SourceEditorTextView: UITextView, UICollectionViewDelegate, UICollectionVi
     fileprivate var cachedCodeCompletions: [String] = [] {
         didSet {
             // TODO hide collectionView if there are no results
-            codeCompletionColectionView.reloadData()
+            if oldValue != cachedCodeCompletions {
+                codeCompletionColectionView.reloadData()
+            }
         }
     }
     var codeCompletionsForString: ((String, Int, @escaping ([String]) -> ()) -> ())?
@@ -54,6 +56,14 @@ class SourceEditorTextView: UITextView, UICollectionViewDelegate, UICollectionVi
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         configureCodeCompletionView()
+    }
+    
+    override var selectedTextRange: UITextRange? {
+        didSet {
+            codeCompletionsForString?(text, selectedRange.location) { result in
+                self.cachedCodeCompletions = result
+            }
+        }
     }
     
     // MARK: - NSTextStorageDelegate

@@ -75,8 +75,17 @@ class NumberedTextView: UIView, UITextViewDelegate {
         }
         
         textView.codeCompletionsForString = { text, location, resultCallback in
-            // TODO!
-            resultCallback(["{", "}", "mod", "destCoord()", ";", "(", ")"])
+            DispatchQueue.global(qos: .userInteractive).async {
+                let firstString = (text as NSString).substring(to: location)
+                let currentTokenLocation = Parser(string: firstString).getTokens().count
+
+                let parser = Parser(string: text)
+                let result = parser.getAST().codeCompletion(at: currentTokenLocation, with: CIKernelLanguageHelper.functions)
+                DispatchQueue.main.async {
+                    resultCallback(result)
+                }
+            }
+//            resultCallback(["{", "}", "mod", "destCoord()", ";", "(", ")"])
         }
         contentMode = .topLeft
         addSubview(textView)

@@ -65,9 +65,23 @@ class SourceEditorTextView: UITextView, UICollectionViewDelegate, UICollectionVi
         }
     }
     
+    override func paste(_ sender: Any?) {
+        // Text from the Pasteboard could contain hundreds of line which whould freeze the syntax highlighting pipeline for some seconds
+        // Disabling the Textstorage pipeline and blocking the main thread leads to frame drops but is still much faster than adding each new attribute through NSTextStorage
+        guard let string = UIPasteboard.general.string else {
+            super.paste(sender)
+            return
+        }
+        var newText = text ?? ""
+        newText.replaceSubrange(Range(selectedRange, in: text)!, with: string)
+        (self.textStorage as? SourceEditorTextStorage)?.shouldIgnoreNextChange = true
+        self.attributedText = Parser(string: newText).getAST().asAttributedText
+    }
+    
     // MARK: - NSTextStorageDelegate
     
     func textStorage(_ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions, range editedRange: NSRange, changeInLength delta: Int) {
+        guard textStorage.editedMask.contains(.editedCharacters) else { return }
         codeCompletionsForString?(text, selectedRange.location) { result in
             self.cachedCodeCompletions = result
         }

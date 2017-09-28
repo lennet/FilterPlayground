@@ -10,6 +10,7 @@ import UIKit
 
 class SourceEditorTextStorage: NSTextStorage {
     
+    var shouldIgnoreNextChange = false
     var attribtutedStringForString: ((String, @escaping (NSAttributedString) -> ()) -> ())?
     var attributedString: NSMutableAttributedString = NSMutableAttributedString(string: "")
     
@@ -39,6 +40,9 @@ class SourceEditorTextStorage: NSTextStorage {
     override func processEditing() {
         super.processEditing()
         guard editedMask.contains(.editedCharacters) else { return }
+        guard shouldIgnoreNextChange == false else { return}
+        shouldIgnoreNextChange = false
+        
         let nsstring = (self.string as NSString)
         let editedParagaphRange = nsstring.lineRange(for: self.editedRange)
         let editedParagraph = nsstring.substring(with: editedParagaphRange)

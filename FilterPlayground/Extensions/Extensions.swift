@@ -6,7 +6,8 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import CoreImage
+import CoreGraphics
+import Foundation
 
 extension NSAttributedString {
 
@@ -45,46 +46,6 @@ extension FileManager {
             .userDomainMask,
             true)[0]
         return URL(fileURLWithPath: "\(documentsPath)/\(name)")
-    }
-}
-
-extension CIWarpKernel: Kernel {
-
-    var shadingLanguage: ShadingLanguage {
-        return .coreimage
-    }
-    
-    static func compile(source: String) -> Kernel? {
-        return CIWarpKernel(source: source)
-    }
-
-    func apply(with inputImages: [CIImage], attributes: [Any]) -> CIImage? {
-
-        guard let input = inputImages.first else {
-            return nil
-        }
-
-        return apply(extent: input.extent, roiCallback: { (_, rect) -> CGRect in
-            rect
-        }, image: input, arguments: attributes)
-    }
-}
-
-extension CIColorKernel: Kernel {
-
-    var shadingLanguage: ShadingLanguage {
-        return .coreimage
-    }
-    
-    static func compile(source: String) -> Kernel? {
-        return CIColorKernel(source: source)
-    }
-
-    func apply(with _: [CIImage], attributes: [Any]) -> CIImage? {
-        guard let image = attributes.first as? CISampler else {
-            return nil
-        }
-        return apply(extent: image.extent, arguments: attributes)
     }
 }
 

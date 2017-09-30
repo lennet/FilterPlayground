@@ -31,6 +31,8 @@
 		9833310D1F80046B00C9AF52 /* CoreImageColorKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985544901F7FFAA100E9F02A /* CoreImageColorKernel.swift */; };
 		9833310E1F80046F00C9AF52 /* CoreImageWarpKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9855448E1F7FF8D300E9F02A /* CoreImageWarpKernel.swift */; };
 		9833310F1F80048F00C9AF52 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716A11F67F54C00E7C20C /* Settings.swift */; };
+		983331111F80066300C9AF52 /* MetalKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331101F80066300C9AF52 /* MetalKernel.swift */; };
+		983331121F80066800C9AF52 /* MetalKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331101F80066300C9AF52 /* MetalKernel.swift */; };
 		9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC741F3663AE00A8E3CA /* Theme.swift */; };
 		9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC761F36675000A8E3CA /* ThemingTests.swift */; };
 		98426C171F670540007C2260 /* CIFilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98426C161F670540007C2260 /* CIFilterHelper.swift */; };
@@ -150,6 +152,7 @@
 		980229B11F2FCF41000FFCA2 /* ErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTableViewCell.swift; sourceTree = "<group>"; };
 		981267D31F34BEFC00101027 /* Kernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kernel.swift; sourceTree = "<group>"; };
 		981D621E1F6B1858006A8606 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		982DAAFA1F800F1E00E5F27D /* Kernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Kernel.swift; path = FilterPlayground/Compiler/Kernel.swift; sourceTree = SOURCE_ROOT; };
 		982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDraggingIndicator.swift; sourceTree = "<group>"; };
 		983008721F6EEB67005C89C3 /* DocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTests.swift; sourceTree = "<group>"; };
 		983008751F6F084C005C89C3 /* DismissSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
@@ -158,6 +161,7 @@
 		983331001F80029E00C9AF52 /* KernelAttributeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeType.swift; sourceTree = "<group>"; };
 		983331021F8002C600C9AF52 /* KernelAttributeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeValue.swift; sourceTree = "<group>"; };
 		983331041F80039800C9AF52 /* KernelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelType.swift; sourceTree = "<group>"; };
+		983331101F80066300C9AF52 /* MetalKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalKernel.swift; sourceTree = "<group>"; };
 		9841EC741F3663AE00A8E3CA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		9841EC761F36675000A8E3CA /* ThemingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingTests.swift; sourceTree = "<group>"; };
 		98426C161F670540007C2260 /* CIFilterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilterHelper.swift; sourceTree = "<group>"; };
@@ -321,6 +325,7 @@
 				9855448E1F7FF8D300E9F02A /* CoreImageWarpKernel.swift */,
 				985544901F7FFAA100E9F02A /* CoreImageColorKernel.swift */,
 				985544921F7FFB3E00E9F02A /* CoreImageBlendKernel.swift */,
+				983331101F80066300C9AF52 /* MetalKernel.swift */,
 			);
 			path = Kernels;
 			sourceTree = "<group>";
@@ -533,6 +538,7 @@
 		98E692EC1F30DF75000C8B41 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				982DAAFA1F800F1E00E5F27D /* Kernel.swift */,
 				98E692E81F30C832000C8B41 /* Project.swift */,
 				98E692ED1F30DF8D000C8B41 /* ProjectMetaData.swift */,
 				985544881F7FF2B900E9F02A /* ShadingLanguage.swift */,
@@ -723,6 +729,7 @@
 				9855448F1F7FF8D300E9F02A /* CoreImageWarpKernel.swift in Sources */,
 				9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */,
 				98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */,
+				983331111F80066300C9AF52 /* MetalKernel.swift in Sources */,
 				98B7B6E91F4757B5008C370F /* ExportTableViewController.swift in Sources */,
 				986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */,
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
@@ -818,6 +825,7 @@
 				989716A01F67E97600E7C20C /* ErrorParser.swift in Sources */,
 				9833310A1F8003B600C9AF52 /* ShadingLanguage.swift in Sources */,
 				989716911F67E47300E7C20C /* CIFilterHelper.swift in Sources */,
+				983331121F80066800C9AF52 /* MetalKernel.swift in Sources */,
 				989716941F67E77500E7C20C /* KernelCompiler.swift in Sources */,
 				983331071F8003AB00C9AF52 /* KernelAttributeValue.swift in Sources */,
 				9897169B1F67E81D00E7C20C /* Extensions.swift in Sources */,
@@ -1013,7 +1021,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lt.filterplayground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1028,7 +1036,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lt.filterplayground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

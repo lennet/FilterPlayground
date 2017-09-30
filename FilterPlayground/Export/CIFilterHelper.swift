@@ -21,6 +21,8 @@ extension KernelType {
             return "\(CIKernel.self)"
         case .coreimagewarp:
             return "\(CIWarpKernel.self)"
+        case .metal:
+            return ""
         }
     }
     
@@ -70,6 +72,8 @@ extension KernelType {
             
                 return kernel?.apply(foreground: fore, background: back)
             """
+        case .metal:
+            return ""
         }
     }
     

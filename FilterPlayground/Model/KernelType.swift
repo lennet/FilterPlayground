@@ -13,6 +13,7 @@ enum KernelType: String, Codable {
     case coreimagewarp
     case coreimagecolor
     case coreimageblend
+    case metal
     
     var kernelClass: Kernel.Type {
         switch self {
@@ -24,6 +25,8 @@ enum KernelType: String, Codable {
             return CoreImageColorKernel.self
         case .coreimageblend:
             return CoreImageBlendKernel.self
+        case .metal:
+            return MetalKernel.self
         }
     }
 }
@@ -75,6 +78,8 @@ extension KernelType {
             return "\(Settings.spacingValue)return sample(fore, destCoord()) + sample(back, destCoord());"
         case .coreimage:
             return "\(Settings.spacingValue)return vec4(1.0, 1.0, 1.0, 1.0);"
+        case .metal:
+            return ""
         }
     }
     

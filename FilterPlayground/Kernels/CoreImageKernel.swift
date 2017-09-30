@@ -18,7 +18,7 @@ class CoreImageKernel: Kernel {
     
     class func compile(source: String) -> Kernel? {
         if let kernel = CIKernel(source: source) {
-            let result = GeneralKernel()
+            let result = CoreImageKernel()
             result.kernel = kernel
             return result
         }

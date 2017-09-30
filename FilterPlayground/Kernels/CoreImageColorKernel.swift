@@ -11,7 +11,7 @@ import CoreImage
 class CoreImageColorKernel: CoreImageKernel {
 
     var colorKernel: CIColorKernel?
-    
+
     override class func compile(source: String) -> Kernel? {
         if let kernel = CIColorKernel(source: source) {
             let result = CoreImageColorKernel()
@@ -20,12 +20,11 @@ class CoreImageColorKernel: CoreImageKernel {
         }
         return nil
     }
-    
+
     override func apply(with _: [CIImage], attributes: [Any]) -> CIImage? {
         guard let image = attributes.first as? CISampler else {
             return nil
         }
         return colorKernel?.apply(extent: image.extent, arguments: attributes)
     }
-    
 }

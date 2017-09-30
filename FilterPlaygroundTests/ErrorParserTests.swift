@@ -96,11 +96,11 @@ class ErrorParserTests: XCTestCase {
         let errors = CoreImageErrorParser.runtimeErrors(for: errorString)
         XCTAssertEqual(errors.count, 0)
     }
-    
+
     func testMetalErrorParser() {
         let errorString = "Compilation failed: \n\nprogram_source:1:8: error: unknown type name \'vec2\'\nkernel vec2 untitled() {\n       ^\nprogram_source:1:13: error: kernel must have void return type\nkernel vec2 untitled() {\n            ^\n"
         let errors = MetalErrorParser.compileErrors(for: errorString)
-        
+
         let expectedFirstError = KernelError.compile(lineNumber: 1, characterIndex: 8, type: .error, message: "unknown type name \'vec2\'", note: nil)
         let expectedSecondError = KernelError.compile(lineNumber: 1, characterIndex: 13, type: .error, message: "kernel must have void return type", note: nil)
 
@@ -108,7 +108,7 @@ class ErrorParserTests: XCTestCase {
         XCTAssertEqual(errors.last!, expectedSecondError)
         XCTAssertEqual(errors.count, 2)
     }
-    
+
     func testMetalErrorParserWarning() {
         let errorString = """
         Compilation succeeded with:
@@ -118,9 +118,9 @@ class ErrorParserTests: XCTestCase {
         ^
         """
         let errors = MetalErrorParser.compileErrors(for: errorString)
-        
+
         let expectedFirstError = KernelError.compile(lineNumber: 10, characterIndex: 19, type: .warning, message: "unused variable 'a'", note: nil)
-        
+
         XCTAssertEqual(errors.first!, expectedFirstError)
         XCTAssertEqual(errors.count, 1)
     }

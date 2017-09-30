@@ -12,7 +12,7 @@ import MobileCoreServices
 class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
 
     var didOpenedDocument: ((Project) -> Void)?
-    var importHandler: ((URL?, UIDocumentBrowserViewController.ImportMode) -> ())?
+    var importHandler: ((URL?, UIDocumentBrowserViewController.ImportMode) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         super.dismiss(animated: flag, completion: completion)
         importHandler?(nil, .none)
     }
+
     // MARK: UIDocumentBrowserViewControllerDelegate
 
     func documentBrowser(_: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {

@@ -158,7 +158,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     func adaptivePresentationStyle(for _: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
-    
+
     func registerNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(notification:)), name: ThemeManager.themeChangedNotificationName, object: nil)
         themeChanged(notification: nil)
@@ -167,7 +167,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     @objc func themeChanged(notification _: Notification?) {
         contentView.backgroundColor = ThemeManager.shared.currentTheme.attributesCellBackground
     }
-    
+
     func present(viewController: UIViewController, with sender: UIView) {
         guard let presentedViewController = UIApplication.shared.keyWindow?.rootViewController else {
             return
@@ -176,31 +176,31 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         viewController.popoverPresentationController?.sourceView = sender
         viewController.popoverPresentationController?.sourceRect = sender.bounds
         viewController.popoverPresentationController?.delegate = self
-        
+
         // dismiss keyboard if needed
         if let navigationController = presentedViewController as? UINavigationController {
             (navigationController.viewControllers.first as? MainViewController)?.attributesViewController?.view.endEditing(true)
         }
-        
+
         presentedViewController.present(viewController, animated: true, completion: nil)
     }
-    
+
     // MARK: UITextFieldDelegate
-    
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let type = self.attribute?.type else { return }
         if textField.text?.isEmpty ?? true {
             let newName = "untitled\(String(describing: type).capitalized)"
-            self.attribute?.name = newName
+            attribute?.name = newName
             textField.text = newName
             update()
         }
     }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+
+    func textFieldShouldEndEditing(_: UITextField) -> Bool {
         return true
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

@@ -72,17 +72,17 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if view.bounds.height == 0 {
             shouldUpdateHeight?(maxHeight, true)
         }
-        
+
         let compileErrors = errors.filter { !$0.isRuntime }
 
         let compileErrorsCount = compileErrors.filter { !$0.isWarning }.count
         compileErrorLabel.text = "\(compileErrorsCount)"
         compileErrorView.isHidden = compileErrorsCount <= 0
-        
+
         let warningsCount = compileErrors.count - compileErrorsCount
         compileWarningLabel.text = "\(warningsCount)"
         compileWarningView.isHidden = warningsCount <= 0
-        
+
         let runTimeErrorsCount = errors.filter { $0.isRuntime }.count
         runTimeErrorLabel.text = "\(runTimeErrorsCount)"
         runTimeErrorView.isHidden = runTimeErrorsCount <= 0

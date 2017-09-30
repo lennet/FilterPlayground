@@ -9,9 +9,9 @@
 import CoreImage
 
 class CoreImageBlendKernel: CoreImageKernel {
-    
+
     var blendKernel: CIBlendKernel?
-    
+
     override class func compile(source: String) -> Kernel? {
         if let kernel = CIBlendKernel(source: source) {
             let result = CoreImageBlendKernel()
@@ -20,14 +20,13 @@ class CoreImageBlendKernel: CoreImageKernel {
         }
         return nil
     }
-    
-    override func apply(with inputImages: [CIImage], attributes: [Any]) -> CIImage? {
+
+    override func apply(with inputImages: [CIImage], attributes _: [Any]) -> CIImage? {
         guard let first = inputImages.first,
             let second = inputImages.last,
             inputImages.count == 2 else {
-                return nil
+            return nil
         }
-        
-        return blendKernel?.apply(foreground: first, background: second)    }
 
+        return blendKernel?.apply(foreground: first, background: second) }
 }

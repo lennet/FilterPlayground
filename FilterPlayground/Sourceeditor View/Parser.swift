@@ -78,7 +78,7 @@ extension Token {
             return [NSAttributedStringKey.foregroundColor: ThemeManager.shared.currentTheme.sourceEditorText]
         }
     }
-    
+
     var isSpaceTabOrNewLine: Bool {
         return self == .whiteSpace || self == .newLine || self == .tab
     }

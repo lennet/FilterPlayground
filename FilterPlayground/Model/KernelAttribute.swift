@@ -16,13 +16,13 @@ struct KernelAttribute {
 }
 
 extension KernelAttribute: Codable {
-    
+
     enum CodingKeys: String, CodingKey {
         case name
         case type
         case value
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
@@ -34,7 +34,7 @@ extension KernelAttribute: Codable {
             value = try values.decode(KernelAttributeValue.self, forKey: .value)
         }
     }
-    
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
@@ -46,5 +46,4 @@ extension KernelAttribute: Codable {
             try container.encode("", forKey: .value)
         }
     }
-    
 }

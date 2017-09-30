@@ -7,12 +7,3 @@
 //
 
 import CoreImage
-
-
-
-
-
-
-
-
-

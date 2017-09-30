@@ -11,37 +11,37 @@ import Metal
 import MetalKit
 
 class MetalKernel: Kernel {
-    
+
     var library: MTLLibrary?
-    
+
     var shadingLanguage: ShadingLanguage {
         return .metal
     }
-    
+
     static func compile(source: String) -> KernelCompilerResult {
         let device = MTLCreateSystemDefaultDevice()
-        
+
         let kernel = MetalKernel()
         var errors: [KernelError] = []
-        
+
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
-        device?.makeLibrary(source: source, options: nil, completionHandler: { (lib, error) in
+        device?.makeLibrary(source: source, options: nil, completionHandler: { lib, error in
             kernel.library = lib
             if let error = error as? MTLLibraryError {
-                errors =  MetalErrorParser.compileErrors(for: error.localizedDescription)
+                errors = MetalErrorParser.compileErrors(for: error.localizedDescription)
                 print(error)
             }
             dispatchGroup.leave()
         })
-        
+
         dispatchGroup.wait()
         if kernel.library == nil {
             return .failed(errors: errors)
         }
         return .success(kernel: kernel, errors: errors)
     }
-    
+
     class var initialSource: String {
         return """
         #include <metal_stdlib>
@@ -58,9 +58,8 @@ class MetalKernel: Kernel {
         }
         """
     }
-    
-    func apply(with inputImages: [CIImage], attributes: [Any]) -> CIImage? {
+
+    func apply(with _: [CIImage], attributes _: [Any]) -> CIImage? {
         return nil
     }
-    
 }

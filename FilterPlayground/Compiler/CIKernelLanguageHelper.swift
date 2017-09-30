@@ -9,28 +9,28 @@
 import Foundation
 
 class CIKernelLanguageHelper {
-    
+
     static var functions: [String] = {
         // todo add
-        return ["(", ")", ".", ",", "if", "for", "/", "*" , "-"] + KernelAttributeType.all.map{ $0.rawValue} + ["mod",
-                                                                                                                "compare",
-                                                                                                                "cos_",
-                                                                                                                "cossin",
-                                                                                                                "cossin_",
-                                                                                                                "destCoord",
-                                                                                                                "premultiply",
-                                                                                                                "sample",
-                                                                                                                "samplerCoord",
-                                                                                                                "samplerExtent",
-                                                                                                                "samplerOrigin",
-                                                                                                                "samplerSize",
-                                                                                                                "samplerTransform",
-                                                                                                                "sin_",
-                                                                                                                "sincos",
-                                                                                                                "sincos_",
-                                                                                                                "tan_",
-                                                                                                                "unpremultiply"]
+        ["(", ")", ".", ",", "if", "for", "/", "*", "-"] + KernelAttributeType.all.map { $0.rawValue } + [
+            "mod",
+            "compare",
+            "cos_",
+            "cossin",
+            "cossin_",
+            "destCoord",
+            "premultiply",
+            "sample",
+            "samplerCoord",
+            "samplerExtent",
+            "samplerOrigin",
+            "samplerSize",
+            "samplerTransform",
+            "sin_",
+            "sincos",
+            "sincos_",
+            "tan_",
+            "unpremultiply",
+        ]
     }()
-    
-    
 }

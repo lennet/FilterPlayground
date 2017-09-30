@@ -47,11 +47,11 @@ class MainViewController: UIViewController {
         presentDocumentBrowser()
         registerNotifications()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+
     func presentDocumentBrowser() {
         if document == nil {
             performSegue(withIdentifier: "initialSetupSegueWithoutAnimation", sender: nil)
@@ -63,7 +63,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
-    
+
     @objc func applicationWillTerminate() {
         document?.close(completionHandler: nil)
     }
@@ -272,8 +272,7 @@ class MainViewController: UIViewController {
 
     @IBAction func didTapLiveViewButton(_: Any) {
         if showLiveView,
-            sourceViewRatio == 1
-            {
+            sourceViewRatio == 1 {
             sourceViewRatio = 0.5
         } else if !showLiveView {
             showLiveView = true

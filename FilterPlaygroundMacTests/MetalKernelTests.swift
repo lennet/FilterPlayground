@@ -10,23 +10,23 @@ import XCTest
 @testable import FilterPlaygroundMac
 
 class MetalKernelTests: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+
     func testCompileError() {
         let source = """
-kernel vec2 untitled() {
-    
-}
-"""
+        kernel vec2 untitled() {
+            
+        }
+        """
         let result = MetalKernel.compile(source: source)
         switch result {
         case let .failed(errors):
@@ -40,29 +40,28 @@ kernel vec2 untitled() {
         default:
             XCTFail()
         }
-
     }
-    
+
     func testCompilerMetalKernelWarnings() {
         let source = """
-        #include <metal_stdlib>
-        using namespace metal;
-        
-        kernel void untitled(
-        texture2d<float, access::read> inTexture [[texture(0)]],
-        texture2d<float, access::write> outTexture [[texture(1)]],
-        uint2 gid [[thread_position_in_grid]])
-        
-        {
-            float a;
-        
-        }
-"""
+                #include <metal_stdlib>
+                using namespace metal;
+                
+                kernel void untitled(
+                texture2d<float, access::read> inTexture [[texture(0)]],
+                texture2d<float, access::write> outTexture [[texture(1)]],
+                uint2 gid [[thread_position_in_grid]])
+                
+                {
+                    float a;
+                
+                }
+        """
         let result = MetalKernel.compile(source: source)
         switch result {
         case let .success(kernel: kernel, errors: errors):
             let expectedFirstError = KernelError.compile(lineNumber: 10, characterIndex: 19, type: .warning, message: "unused variable 'a'", note: nil)
-            
+
             XCTAssertEqual(errors.first!, expectedFirstError)
             XCTAssertEqual(errors.count, 1)
             XCTAssertNotNil((kernel as? MetalKernel)?.library)
@@ -70,9 +69,8 @@ kernel vec2 untitled() {
         default:
             XCTFail()
         }
-
     }
-    
+
     func testCompileMetalKernel() {
         let source = MetalKernel.initialSource
         let result = MetalKernel.compile(source: source)
@@ -82,7 +80,5 @@ kernel vec2 untitled() {
         default:
             XCTFail()
         }
-
     }
-    
 }

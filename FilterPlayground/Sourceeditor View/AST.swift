@@ -58,18 +58,18 @@ extension ASTNode: Equatable {
             return tokens.map { NSAttributedString(string: $0.stringRepresentation, attributes: $0.attributes) }.reduce(NSAttributedString(), +)
         }
     }
-    
+
     var tokens: [Token] {
         switch self {
         case let .bracetStatement(prefix: prefix, body: body, postfix: postfix):
             return prefix
                 + body
-                .map{ $0.tokens }
+                .map { $0.tokens }
                 .reduce([Token](), +)
                 + postfix
         case let .root(nodes):
             return nodes
-                .map{ $0.tokens }
+                .map { $0.tokens }
                 .reduce([Token](), +)
         case let .statement(tokens),
              let .unkown(tokens),

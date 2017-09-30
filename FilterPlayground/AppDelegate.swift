@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let documentBrowserViewController =  DocumentBrowserViewController(forOpeningFilesWithContentTypes: nil)
+    let documentBrowserViewController = DocumentBrowserViewController(forOpeningFilesWithContentTypes: nil)
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -50,8 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if mainViewController.documentBrowser == nil {
             mainViewController.presentDocumentBrowser()
         }
-//
-        
+        //
+
         mainViewController.documentBrowser?.revealDocument(at: inputURL, importIfNeeded: true) { revealedDocumentURL, error in
             if let error = error {
                 // Handle the error appropriately

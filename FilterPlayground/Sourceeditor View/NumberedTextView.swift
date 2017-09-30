@@ -73,7 +73,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
                 }
             }
         }
-        
+
         textView.codeCompletionsForString = { text, location, resultCallback in
             DispatchQueue.global(qos: .userInteractive).async {
                 let firstString = (text as NSString).substring(to: location)
@@ -85,7 +85,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
                     resultCallback(result)
                 }
             }
-//            resultCallback(["{", "}", "mod", "destCoord()", ";", "(", ")"])
+            //            resultCallback(["{", "}", "mod", "destCoord()", ";", "(", ")"])
         }
         contentMode = .topLeft
         addSubview(textView)
@@ -101,9 +101,8 @@ class NumberedTextView: UIView, UITextViewDelegate {
         setNeedsDisplay()
         updatedText()
     }
-    
-    func hightlight(text: String) -> NSAttributedString
-    {
+
+    func hightlight(text: String) -> NSAttributedString {
         let parser = Parser(string: text)
         return parser.getAST().asAttributedText
     }
@@ -250,6 +249,5 @@ class NumberedTextView: UIView, UITextViewDelegate {
         textView.attributedText = currentAST?.asAttributedText
         textView.selectedRange = selectedRange
         delegate?.textViewDidChange?(textView)
-
     }
 }

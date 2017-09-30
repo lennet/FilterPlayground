@@ -45,12 +45,12 @@ class SavingDocumentTests: XCTestCase {
 
         wait(for: [expectation], timeout: 5)
     }
-    
+
     func testSaveImage() {
         let text = "Hello World"
         let attribute = KernelAttribute(name: "test", type: .sample, value: KernelAttributeType.sample.defaultValue)
         let expectation = XCTestExpectation(description: "Waiting for file creation")
-        
+
         let document = Project(fileURL: url)
         document.save(to: url, for: .forCreating) { _ in
             document.source = text
@@ -65,7 +65,7 @@ class SavingDocumentTests: XCTestCase {
                 })
             })
         }
-        
+
         wait(for: [expectation], timeout: 5)
     }
 }

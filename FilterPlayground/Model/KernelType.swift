@@ -14,7 +14,7 @@ enum KernelType: String, Codable {
     case coreimagecolor
     case coreimageblend
     case metal
-    
+
     var kernelClass: Kernel.Type {
         switch self {
         case .coreimage:
@@ -32,7 +32,7 @@ enum KernelType: String, Codable {
 }
 
 extension KernelType {
-    
+
     var returnType: KernelAttributeType {
         switch self {
         case .coreimage,
@@ -43,7 +43,7 @@ extension KernelType {
             return .vec2
         }
     }
-    
+
     var requiredArguments: [KernelAttributeType] {
         switch self {
         case .coreimagecolor:
@@ -52,11 +52,11 @@ extension KernelType {
             return []
         }
     }
-    
+
     func initialSource(with name: String) -> String {
         return "kernel \(returnType) \(name)(\(initialArguments)) {\n\(initialSourceBody)\n}"
     }
-    
+
     var initialArguments: String {
         switch self {
         case .coreimagecolor:
@@ -67,7 +67,7 @@ extension KernelType {
             return ""
         }
     }
-    
+
     var initialSourceBody: String {
         switch self {
         case .coreimagecolor:
@@ -82,7 +82,7 @@ extension KernelType {
             return ""
         }
     }
-    
+
     var requiredInputImages: Int {
         switch self {
         case .coreimageblend:
@@ -93,7 +93,7 @@ extension KernelType {
             return 0
         }
     }
-    
+
     var supportsAttributes: Bool {
         switch self {
         case .coreimageblend:
@@ -102,10 +102,10 @@ extension KernelType {
             return true
         }
     }
-    
+
     var compile: (String) -> KernelCompilerResult {
         return { source in
-            return self.kernelClass.compile(source: source)
+            self.kernelClass.compile(source: source)
         }
     }
 }

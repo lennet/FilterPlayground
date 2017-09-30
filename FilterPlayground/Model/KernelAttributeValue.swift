@@ -15,7 +15,7 @@ enum KernelAttributeValue {
     case vec4(Float, Float, Float, Float)
     case sample(CIImage)
     case color(Float, Float, Float, Float)
-    
+
     var asKernelValue: Any {
         switch self {
         case let .float(value):
@@ -35,7 +35,7 @@ enum KernelAttributeValue {
 }
 
 extension KernelAttributeValue: Codable {
-    
+
     private enum CodingKeys: String, CodingKey {
         case float
         case vec2
@@ -44,11 +44,11 @@ extension KernelAttributeValue: Codable {
         case sample
         case color
     }
-    
+
     private enum CodableErrors: Error {
         case unkownValue
     }
-    
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
@@ -67,12 +67,12 @@ extension KernelAttributeValue: Codable {
         case let .color(a, b, c, d):
             try container.encode([a, b, c, d], forKey: .color)
             break
-        case .sample(_):
+        case .sample:
             // we are not encoding images in the json
             break
         }
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         if let value = try? values.decode(Float.self, forKey: .float) {
@@ -117,4 +117,3 @@ extension KernelAttributeValue: Codable {
         throw CodableErrors.unkownValue
     }
 }
-

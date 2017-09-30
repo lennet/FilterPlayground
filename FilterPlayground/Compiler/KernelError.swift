@@ -26,7 +26,7 @@ enum KernelError {
             return true
         }
     }
-    
+
     var isWarning: Bool {
         switch self {
         case .compile(lineNumber: _, characterIndex: _, type: let type, message: _, note: _):

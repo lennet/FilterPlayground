@@ -9,13 +9,13 @@
 import UIKit
 
 class CodeCompletionCollectionViewCell: UICollectionViewCell {
-    
+
     class var reuseIdentifier: String {
         return String(describing: CodeCompletionCollectionViewCell.self)
     }
-    
+
     fileprivate weak var label: UILabel?
-    
+
     var text: String? {
         get {
             return label?.text
@@ -25,14 +25,13 @@ class CodeCompletionCollectionViewCell: UICollectionViewCell {
             label?.text = newValue
         }
     }
-    
+
     func configureLabel() {
         guard self.label == nil else { return }
-        let label = UILabel(frame: self.bounds)
+        let label = UILabel(frame: bounds)
         label.autoresizingMask = UIViewAutoresizing.flexibleHeight.union(.flexibleWidth)
         label.textAlignment = .center
         addSubview(label)
         self.label = label
     }
-    
 }

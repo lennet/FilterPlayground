@@ -11,7 +11,7 @@ import CoreImage
 protocol Kernel: class {
 
     var shadingLanguage: ShadingLanguage { get }
-    
+
     static func compile(source: String) -> KernelCompilerResult
 
     func apply(with inputImages: [CIImage], attributes: [Any]) -> CIImage?

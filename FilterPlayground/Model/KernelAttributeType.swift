@@ -12,21 +12,21 @@ import CoreImage
 #endif
 
 enum KernelAttributeType: String, Codable {
-    
+
     case float
     case vec2
     case vec3
     case vec4
     case sample = "__sample"
     case color = "__color"
-    
+
     static var all: [KernelAttributeType] {
         return [.float, .vec2, .vec3, .vec4, .sample, .color]
     }
 }
 
 extension KernelAttributeType {
-    
+
     var defaultValue: KernelAttributeValue {
         switch self {
         case .float:

@@ -9,7 +9,7 @@
 import UIKit
 
 extension CompileErrorType {
-    
+
     var icon: UIImage? {
         switch self {
         case .error:
@@ -20,7 +20,6 @@ extension CompileErrorType {
             return nil
         }
     }
-    
 }
 
 class ErrorTableViewCell: UITableViewCell {

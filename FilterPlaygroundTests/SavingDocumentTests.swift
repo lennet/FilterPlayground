@@ -29,12 +29,12 @@ class SavingDocumentTests: XCTestCase {
         let attribute = KernelAttribute(name: "test", type: .float, value: .float(50))
         let expectation = XCTestExpectation(description: "Waiting for file creation")
 
-        let document = Document(fileURL: url)
+        let document = Project(fileURL: url)
         document.save(to: url, for: .forCreating) { _ in
             document.source = text
             document.metaData.attributes = [attribute]
             document.close(completionHandler: { _ in
-                let document2 = Document(fileURL: self.url)
+                let document2 = Project(fileURL: self.url)
                 document2.open(completionHandler: { _ in
                     XCTAssertEqual(document2.source, text)
                     XCTAssertNotNil(document2.metaData.attributes.first)
@@ -51,12 +51,12 @@ class SavingDocumentTests: XCTestCase {
         let attribute = KernelAttribute(name: "test", type: .sample, value: KernelAttributeType.sample.defaultValue)
         let expectation = XCTestExpectation(description: "Waiting for file creation")
         
-        let document = Document(fileURL: url)
+        let document = Project(fileURL: url)
         document.save(to: url, for: .forCreating) { _ in
             document.source = text
             document.metaData.attributes = [attribute]
             document.close(completionHandler: { _ in
-                let document2 = Document(fileURL: self.url)
+                let document2 = Project(fileURL: self.url)
                 document2.open(completionHandler: { _ in
                     XCTAssertEqual(document2.source, text)
                     XCTAssertNotNil(document2.metaData.attributes.first)

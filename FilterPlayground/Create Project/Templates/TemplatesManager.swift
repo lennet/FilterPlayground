@@ -11,7 +11,7 @@ import Foundation
 class TemplatesManager {
 
     class func getURLs() -> [URL] {
-        let paths = Bundle.main.paths(forResourcesOfType: Document.type, inDirectory: nil)
+        let paths = Bundle.main.paths(forResourcesOfType: Project.type, inDirectory: nil)
         return paths.map(URL.init(fileURLWithPath:))
     }
 }

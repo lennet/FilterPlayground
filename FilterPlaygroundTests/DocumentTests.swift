@@ -22,7 +22,7 @@ class DocumentTests: XCTestCase {
     }
     
     func testAddResources() {
-        let document = Document(fileURL: URL(fileURLWithPath: ""), type: .warp)
+        let document = Project(fileURL: URL(fileURLWithPath: ""), type: .coreimagewarp)
         XCTAssertEqual(document.getAllResources().count, 0)
         
         let data = Data()
@@ -34,7 +34,7 @@ class DocumentTests: XCTestCase {
     }
     
     func testRemoveResource() {
-        let document = Document(fileURL: URL(fileURLWithPath: ""), type: .warp)
+        let document = Project(fileURL: URL(fileURLWithPath: ""), type: .coreimagewarp)
         
         let data = Data()
         document.addResource(for: "test", with: data)
@@ -45,7 +45,7 @@ class DocumentTests: XCTestCase {
     }
     
     func testRenameResource() {
-        let document = Document(fileURL: URL(fileURLWithPath: ""), type: .warp)
+        let document = Project(fileURL: URL(fileURLWithPath: ""), type: .coreimagewarp)
         
         let data = Data()
         document.addResource(for: "test", with: data)

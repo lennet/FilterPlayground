@@ -11,7 +11,7 @@ import MobileCoreServices
 
 class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
 
-    var didOpenedDocument: ((Document) -> Void)?
+    var didOpenedDocument: ((Project) -> Void)?
     var importHandler: ((URL?, UIDocumentBrowserViewController.ImportMode) -> ())?
 
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
 
     func documentBrowser(_: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
         self.importHandler = importHandler
-        let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("untitled.\(Document.type)")
+        let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("untitled.\(Project.type)")
 
         let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewProjectTabBarController") as! UITabBarController
         let viewController = (tabBarController.viewControllers!.first as! UINavigationController).viewControllers.first as! NewProjectViewController
@@ -38,7 +38,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         present(tabBarController, animated: true) {
             viewController.didSelectType = { type in
                 viewController.dismiss(animated: true, completion: nil)
-                let document = Document(fileURL: newDocumentURL, type: type)
+                let document = Project(fileURL: newDocumentURL, type: type)
                 document.save(to: newDocumentURL, for: .forCreating) { success in
                     if success {
                         importHandler(newDocumentURL, .move)
@@ -82,7 +82,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
 
     func presentDocument(at documentURL: URL) {
 
-        let document = Document(fileURL: documentURL)
+        let document = Project(fileURL: documentURL)
         document.open { _ in
             if let didOpenedDocument = self.didOpenedDocument {
                 didOpenedDocument(document)

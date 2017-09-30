@@ -31,16 +31,16 @@ class NewProjectViewController: UITableViewController {
         let type: KernelType
         switch indexPath.row {
         case 1:
-            type = .warp
+            type = .coreimagewarp
             break
         case 2:
-            type = .color
+            type = .coreimagecolor
             break
         case 3:
-            type = .blend
+            type = .coreimageblend
             break
         default:
-            type = .normal
+            type = .coreimage
             break
         }
         didSelectType?(type)

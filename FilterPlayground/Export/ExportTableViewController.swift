@@ -10,7 +10,7 @@ import UIKit
 
 class ExportTableViewController: UITableViewController {
 
-    var document: Document?
+    var document: Project?
 
     @IBAction func tappedCancelButton() {
         dismiss(animated: true, completion: nil)

@@ -26,7 +26,7 @@ class CIFilterHelperTests: XCTestCase {
     }
 
     func testWarpFilter() {
-        let source: String = CIFilterHelper.cifilter(with: "", type: .warp, arguments: [], name: "testWarp")
+        let source: String = CIFilterHelper.cifilter(with: "", type: .coreimagewarp, arguments: [], name: "testWarp")
         XCTAssertSwiftCompiles(source: source)
     }
 
@@ -36,22 +36,22 @@ class CIFilterHelperTests: XCTestCase {
             KernelAttribute(name: "bar", type: .vec2, value: .vec2(1, 1)),
             KernelAttribute(name: "test", type: .sample, value: .sample(CIImage(color: .black))),
         ]
-        let source: String = CIFilterHelper.cifilter(with: "", type: .warp, arguments: arguments, name: "testWarp")
+        let source: String = CIFilterHelper.cifilter(with: "", type: .coreimagewarp, arguments: arguments, name: "testWarp")
         XCTAssertSwiftCompiles(source: source)
     }
 
     func testBlendFilter() {
-        let source: String = CIFilterHelper.cifilter(with: "", type: .blend, arguments: [KernelAttribute(name: "foo", type: .sample, value: .sample(CIImage(color: .black))), KernelAttribute(name: "bar", type: .sample, value: .sample(CIImage(color: .black)))], name: "testBlend")
+        let source: String = CIFilterHelper.cifilter(with: "", type: .coreimageblend, arguments: [KernelAttribute(name: "foo", type: .sample, value: .sample(CIImage(color: .black))), KernelAttribute(name: "bar", type: .sample, value: .sample(CIImage(color: .black)))], name: "testBlend")
         XCTAssertSwiftCompiles(source: source)
     }
 
     func testColorFilter() {
-        let source: String = CIFilterHelper.cifilter(with: "", type: .color, arguments: [KernelAttribute(name: "test", type: .sample, value: .sample(CIImage(color: .black)))], name: "testColor")
+        let source: String = CIFilterHelper.cifilter(with: "", type: .coreimagecolor, arguments: [KernelAttribute(name: "test", type: .sample, value: .sample(CIImage(color: .black)))], name: "testColor")
         XCTAssertSwiftCompiles(source: source)
     }
 
     func testNormalFilter() {
-        let source: String = CIFilterHelper.cifilter(with: "", type: .normal, arguments: [], name: "testNormal")
+        let source: String = CIFilterHelper.cifilter(with: "", type: .coreimage, arguments: [], name: "testNormal")
         XCTAssertSwiftCompiles(source: source)
     }
 }

@@ -66,7 +66,7 @@ class KernelCompilerTests: XCTestCase {
     }
 
     func testInitialSourceDefault() {
-        let source = KernelType.normal.initialSource(with: "untitled")
+        let source = KernelType.coreimage.initialSource(with: "untitled")
         let result = KernelCompiler<GeneralKernel>.compile(source: source)
 
         if case let .failed(errors) = result {
@@ -75,7 +75,7 @@ class KernelCompilerTests: XCTestCase {
     }
 
     func testInitialSourceWarp() {
-        let source = KernelType.warp.initialSource(with: "untitled")
+        let source = KernelType.coreimagewarp.initialSource(with: "untitled")
         let result = KernelCompiler<CIWarpKernel>.compile(source: source)
 
         if case let .failed(errors) = result {
@@ -84,7 +84,7 @@ class KernelCompilerTests: XCTestCase {
     }
 
     func testInitialSourceColor() {
-        let source = KernelType.color.initialSource(with: "untitled")
+        let source = KernelType.coreimagecolor.initialSource(with: "untitled")
         let result = KernelCompiler<CIColorKernel>.compile(source: source)
 
         if case let .failed(errors) = result {
@@ -93,7 +93,7 @@ class KernelCompilerTests: XCTestCase {
     }
 
     func testInitialSourceBlend() {
-        let source = KernelType.blend.initialSource(with: "untitled")
+        let source = KernelType.coreimageblend.initialSource(with: "untitled")
         let result = KernelCompiler<BlendKernel>.compile(source: source)
 
         if case let .failed(errors) = result {

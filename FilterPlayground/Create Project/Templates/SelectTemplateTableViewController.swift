@@ -26,7 +26,7 @@ class SelectTemplateTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "identiifer", for: indexPath)
-        let document = Document(fileURL: templates[indexPath.row])
+        let document = Project(fileURL: templates[indexPath.row])
         cell.textLabel?.text = document.title
         return cell
     }

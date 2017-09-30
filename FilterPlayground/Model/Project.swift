@@ -8,18 +8,18 @@
 
 import UIKit
 
-enum DocumentError: Error {
+enum ProjectError: Error {
     case unknownFileFormat
     case encodeError
 }
 
-class Document: UIDocument {
+class Project: UIDocument {
 
     static let type: String = "FilterPlayground"
     
     var resourcesWrapper = FileWrapper(directoryWithFileWrappers: [:])
 
-    var metaData: ProjectMetaData = ProjectMetaData(attributes: [], type: .warp)
+    var metaData: ProjectMetaData = ProjectMetaData(attributes: [], type: .coreimagewarp)
     var source: String = "" {
         didSet {
             self.updateChangeCount(.done)
@@ -48,7 +48,7 @@ class Document: UIDocument {
         let meta = try JSONEncoder().encode(metaData)
 
         guard let sourceData = source.data(using: .utf8) else {
-            throw DocumentError.encodeError
+            throw ProjectError.encodeError
         }
 
         let fileWrapper = FileWrapper(directoryWithFileWrappers: [:])
@@ -119,29 +119,29 @@ class Document: UIDocument {
     override func load(fromContents contents: Any, ofType _: String?) throws {
 
         guard let filewrapper = contents as? FileWrapper else {
-            throw DocumentError.unknownFileFormat
+            throw ProjectError.unknownFileFormat
         }
 
         guard let metaFilewrapper = filewrapper.fileWrappers?["metadata.json"] else {
-            throw DocumentError.unknownFileFormat
+            throw ProjectError.unknownFileFormat
         }
 
         guard let meta = metaFilewrapper.regularFileContents else {
-            throw DocumentError.unknownFileFormat
+            throw ProjectError.unknownFileFormat
         }
 
         metaData = try JSONDecoder().decode(ProjectMetaData.self, from: meta)
 
         guard let contentFilewrapper = filewrapper.fileWrappers?["source.cikernel"] else {
-            throw DocumentError.unknownFileFormat
+            throw ProjectError.unknownFileFormat
         }
 
         guard let contentsData = contentFilewrapper.regularFileContents else {
-            throw DocumentError.unknownFileFormat
+            throw ProjectError.unknownFileFormat
         }
  
         guard let sourceString = String(data: contentsData, encoding: .utf8) else {
-            throw DocumentError.unknownFileFormat
+            throw ProjectError.unknownFileFormat
         }
         
         if let resourcesFilewrapper = filewrapper.fileWrappers?["Resources"] {

@@ -10,12 +10,19 @@ import CoreImage
 
 protocol Kernel: class {
 
+    var shadingLanguage: ShadingLanguage { get }
+    
     static func compile(source: String) -> Kernel?
 
     func apply(with inputImages: [CIImage], attributes: [Any]) -> CIImage?
 }
 
 class GeneralKernel: Kernel {
+    
+    var shadingLanguage: ShadingLanguage {
+        return .coreimage
+    }
+    
     var kernel: CIKernel?
 
     static func compile(source: String) -> Kernel? {
@@ -36,6 +43,11 @@ class GeneralKernel: Kernel {
 }
 
 class BlendKernel: Kernel {
+    
+    var shadingLanguage: ShadingLanguage {
+        return .coreimage
+    }
+
     var kernel: CIBlendKernel?
 
     static func compile(source: String) -> Kernel? {

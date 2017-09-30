@@ -13,20 +13,20 @@ extension KernelType {
     
     fileprivate var swiftType: String {
         switch self {
-        case .blend:
+        case .coreimageblend:
             return "\(CIBlendKernel.self)"
-        case .color:
+        case .coreimagecolor:
             return "\(CIColorKernel.self)"
-        case .normal:
+        case .coreimage:
             return "\(CIKernel.self)"
-        case .warp:
+        case .coreimagewarp:
             return "\(CIWarpKernel.self)"
         }
     }
     
     fileprivate func swiftOutputImage(with arguments: [String]) -> String {
         switch self {
-        case .warp:
+        case .coreimagewarp:
             let guardArguments = ["input"].appending(with: arguments)
                 .map{ "let \($0) = \($0)" }.joined(separator: ",\n\t\t\t")
             return """
@@ -37,7 +37,7 @@ extension KernelType {
                     return rect
                     }, image: input, arguments: [\(arguments.joined(separator: ","))] )
             """
-        case .color:
+        case .coreimagecolor:
             let guardArguments = arguments.map{ "let \($0) = \($0)" }.joined(separator: ",\n\t\t\t")
             return """
             guard \(guardArguments) else {
@@ -45,7 +45,7 @@ extension KernelType {
                     }
                     return kernel?.apply(extent: \(arguments[0]).extent, arguments: [\(arguments.joined(separator: ","))] )
             """
-        case .normal:
+        case .coreimage:
             let guardArguments = arguments.map{ "let \($0) = \($0)" }.joined(separator: ",\n\t\t\t")
             var guardStatement = ""
             if !guardArguments.isEmpty {
@@ -61,7 +61,7 @@ extension KernelType {
             rect
             }, arguments: [\(arguments.joined(separator: ","))])
             """
-        case .blend:
+        case .coreimageblend:
             return """
                 guard let fore = fore,
                     let back = back else {

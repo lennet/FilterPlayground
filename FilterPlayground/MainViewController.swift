@@ -25,7 +25,7 @@ class MainViewController: UIViewController {
 
     var isRunning = false
 
-    var document: Document?
+    var document: Project?
     var showLiveView = true {
         didSet {
             updateViewConstraints()
@@ -211,7 +211,7 @@ class MainViewController: UIViewController {
         isRunning = false
     }
 
-    func didOpened(document: Document) {
+    func didOpened(document: Project) {
         let completion = {
             self.presentedViewController?.dismiss(animated: true, completion: nil)
             self.document = document

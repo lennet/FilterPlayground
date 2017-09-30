@@ -50,6 +50,10 @@ extension FileManager {
 
 extension CIWarpKernel: Kernel {
 
+    var shadingLanguage: ShadingLanguage {
+        return .coreimage
+    }
+    
     static func compile(source: String) -> Kernel? {
         return CIWarpKernel(source: source)
     }
@@ -68,6 +72,10 @@ extension CIWarpKernel: Kernel {
 
 extension CIColorKernel: Kernel {
 
+    var shadingLanguage: ShadingLanguage {
+        return .coreimage
+    }
+    
     static func compile(source: String) -> Kernel? {
         return CIColorKernel(source: source)
     }

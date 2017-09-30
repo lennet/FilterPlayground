@@ -134,8 +134,9 @@ class MainViewController: UIViewController {
         }
         let attributes = attributesViewController?.attributes ?? []
         switch document.metaData.type.compile(source) {
-        case let .success(kernel: kernel):
+        case let .success(kernel: kernel, errors: errors):
             apply(kernel: kernel, input: input, attributes: attributes)
+            display(errors: errors)
             break
         case let .failed(errors: errors):
             display(errors: errors)
@@ -164,7 +165,8 @@ class MainViewController: UIViewController {
                     let errors = CoreImageErrorParser.runtimeErrors(for: errorString)
                     self.display(errors: errors)
                 } else {
-                    self.display(errors: [KernelError.runtime(message: "Unkown Error occured. Please check your code and the passed arguments")])
+                    let currentErrors = self.sourceEditorViewController?.errors ?? []
+                    self.display(errors: currentErrors + [KernelError.runtime(message: "Unkown Error occured. Please check your code and the passed arguments")])
                 }
                 self.isRunning = false
             }

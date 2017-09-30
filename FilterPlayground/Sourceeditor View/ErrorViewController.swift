@@ -17,9 +17,11 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var headerViewLabelContainer: UIStackView!
     @IBOutlet weak var compileErrorView: UIView!
+    @IBOutlet weak var compileWarningView: UIView!
     @IBOutlet weak var runTimeErrorView: UIView!
     @IBOutlet weak var runTimeErrorLabel: UILabel!
     @IBOutlet weak var compileErrorLabel: UILabel!
+    @IBOutlet weak var compileWarningLabel: UILabel!
 
     var headerHeight: CGFloat {
         return headerView.bounds.height
@@ -70,22 +72,20 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if view.bounds.height == 0 {
             shouldUpdateHeight?(maxHeight, true)
         }
+        
+        let compileErrors = errors.filter { !$0.isRuntime }
 
-        let compileErrorsCount = errors.filter { !$0.isRuntime }.count
-        if compileErrorsCount > 0 {
-            compileErrorLabel.text = "\(compileErrorsCount)"
-            compileErrorView.isHidden = false
-        } else {
-            compileErrorView.isHidden = true
-        }
-
+        let compileErrorsCount = compileErrors.filter { !$0.isWarning }.count
+        compileErrorLabel.text = "\(compileErrorsCount)"
+        compileErrorView.isHidden = compileErrorsCount <= 0
+        
+        let warningsCount = compileErrors.count - compileErrorsCount
+        compileWarningLabel.text = "\(warningsCount)"
+        compileWarningView.isHidden = warningsCount <= 0
+        
         let runTimeErrorsCount = errors.filter { $0.isRuntime }.count
-        if runTimeErrorsCount > 0 {
-            runTimeErrorLabel.text = "\(runTimeErrorsCount)"
-            runTimeErrorView.isHidden = false
-        } else {
-            runTimeErrorView.isHidden = true
-        }
+        runTimeErrorLabel.text = "\(runTimeErrorsCount)"
+        runTimeErrorView.isHidden = runTimeErrorsCount <= 0
     }
 
     func setAlpha(value: CGFloat, animated: Bool) {

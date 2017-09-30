@@ -15,7 +15,7 @@ class CoreImageErrorParser {
         let errors = components.flatMap(getError)
         var result: [KernelError] = []
         for case let .compile(lineNumber: lineNumber, characterIndex: characterIndex, type: type, message: message, note: note) in errors {
-            if type == "note" && result.count > 0 {
+            if type == .note && result.count > 0 {
                 if case .compile(lineNumber: let prevLineNumber, characterIndex: let prevCharacterIndex, type: let prevType, message: let prevMessage, note: _) = result[result.count - 1] {
                     result[result.count - 1] = .compile(lineNumber: prevLineNumber, characterIndex: prevCharacterIndex, type: prevType, message: prevMessage, note: (lineNumber, characterIndex, message))
                 }
@@ -36,7 +36,8 @@ class CoreImageErrorParser {
 
         guard let lineNumber = Int(components[0]) else { return nil }
         guard let characterIndex = Int(components[1]) else { return nil }
-        let type = components[2]
+        let typeString = components[2]
+        let type = CompileErrorType(rawValue: typeString) ?? .error
         let message = components[3]
 
         return .compile(lineNumber: lineNumber, characterIndex: characterIndex, type: type, message: message, note: nil)
@@ -58,6 +59,6 @@ class CoreImageErrorParser {
             .flatMap { $0.components(separatedBy: ":]").last }
             .flatMap { $0.trimmingCharacters(in: .whitespaces) }
             .filter { !$0.isEmpty }
-            .flatMap { KernelError.compile(lineNumber: -1, characterIndex: -1, type: "ERROR", message: $0, note: nil) }
+            .flatMap { KernelError.compile(lineNumber: -1, characterIndex: -1, type: .error, message: $0, note: nil) }
     }
 }

@@ -8,6 +8,21 @@
 
 import UIKit
 
+extension CompileErrorType {
+    
+    var icon: UIImage? {
+        switch self {
+        case .error:
+            return #imageLiteral(resourceName: "CompileError")
+        case .warning:
+            return #imageLiteral(resourceName: "CompilerWarning")
+        case .note:
+            return nil
+        }
+    }
+    
+}
+
 class ErrorTableViewCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
@@ -28,7 +43,7 @@ class ErrorTableViewCell: UITableViewCell {
                 text.append("\n\(note.message)")
             }
             label.text = text
-            errorView.image = #imageLiteral(resourceName: "CompileError")
+            errorView.image = type.icon
             break
         case let .runtime(message: message):
             label.text = "\(message)"

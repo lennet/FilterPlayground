@@ -9,6 +9,7 @@
 import Foundation
 
 enum KernelCompilerResult {
-    case success(kernel: Kernel)
+    /// errors could contain warnings
+    case success(kernel: Kernel, errors: [KernelError])
     case failed(errors: [KernelError])
 }

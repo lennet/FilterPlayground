@@ -19,11 +19,11 @@ class CoreImageKernel: Kernel {
     static func compile(source: String) -> KernelCompilerResult {
         let errorHelper = ErrorHelper()
         if let kernel: Kernel = compile(source: source) {
-            return KernelCompilerResult.success(kernel: kernel)
+            return KernelCompilerResult.success(kernel: kernel, errors: [])
         } else if let errorString = errorHelper.errorString() {
             return .failed(errors: CoreImageErrorParser.compileErrors(for: errorString))
         }
-        return .failed(errors: [KernelError.compile(lineNumber: -1, characterIndex: -1, type: "Error", message: "Unkown Error. Please check your code.", note: nil)])
+        return .failed(errors: [KernelError.compile(lineNumber: -1, characterIndex: -1, type: .error, message: "Unkown Error. Please check your code.", note: nil)])
         
     }
     

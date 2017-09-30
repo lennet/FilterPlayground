@@ -33,7 +33,7 @@ class ErrorParserTests: XCTestCase {
 
         let errors = CoreImageErrorParser.compileErrors(for: error)
         XCTAssertEqual(errors.count, 1)
-        XCTAssertEqual(errors.first!, KernelError.compile(lineNumber: 1, characterIndex: 1, type: "ERROR", message: "unknown type name 'asdads'", note: nil))
+        XCTAssertEqual(errors.first!, KernelError.compile(lineNumber: 1, characterIndex: 1, type: .error, message: "unknown type name 'asdads'", note: nil))
     }
 
     func testErrorWithNote() {
@@ -49,7 +49,7 @@ class ErrorParserTests: XCTestCase {
         let errors = CoreImageErrorParser.compileErrors(for: errorString)
         XCTAssertEqual(errors.count, 1)
         let note = (1, 36, "to match this '{'")
-        let error = KernelError.compile(lineNumber: 3, characterIndex: 2, type: "ERROR", message: "expected '}'", note: note)
+        let error = KernelError.compile(lineNumber: 3, characterIndex: 2, type: .error, message: "expected '}'", note: note)
         XCTAssertEqual(errors.first!, error)
     }
 
@@ -66,7 +66,7 @@ class ErrorParserTests: XCTestCase {
         let errors = CoreImageErrorParser.compileErrors(for: errorString)
         XCTAssertEqual(errors.count, 1)
         let note = (1, 8, "return type declared here")
-        let error = KernelError.compile(lineNumber: 4, characterIndex: 2, type: "ERROR", message: "function declared with return type 'vec4', but returning type 'vec2'", note: note)
+        let error = KernelError.compile(lineNumber: 4, characterIndex: 2, type: .error, message: "function declared with return type 'vec4', but returning type 'vec2'", note: note)
         XCTAssertEqual(errors.first!, error)
     }
 
@@ -78,7 +78,7 @@ class ErrorParserTests: XCTestCase {
 
         let errors = CoreImageErrorParser.compileErrors(for: error)
         XCTAssertEqual(errors.count, 1)
-        XCTAssertEqual(errors.first!, KernelError.compile(lineNumber: -1, characterIndex: -1, type: "ERROR", message: "failed due to error parsing kernel source.", note: nil))
+        XCTAssertEqual(errors.first!, KernelError.compile(lineNumber: -1, characterIndex: -1, type: .error, message: "failed due to error parsing kernel source.", note: nil))
     }
 
     func testRuntimeErrors() {
@@ -101,11 +101,27 @@ class ErrorParserTests: XCTestCase {
         let errorString = "Compilation failed: \n\nprogram_source:1:8: error: unknown type name \'vec2\'\nkernel vec2 untitled() {\n       ^\nprogram_source:1:13: error: kernel must have void return type\nkernel vec2 untitled() {\n            ^\n"
         let errors = MetalErrorParser.compileErrors(for: errorString)
         
-        let expectedFirstError = KernelError.compile(lineNumber: 1, characterIndex: 8, type: "error", message: "unknown type name \'vec2\'\nkernel vec2 untitled() {\n       ^\n", note: nil)
-        let expectedSecondError = KernelError.compile(lineNumber: 1, characterIndex: 13, type: "error", message: "kernel must have void return type\nkernel vec2 untitled() {\n            ^\n", note: nil)
+        let expectedFirstError = KernelError.compile(lineNumber: 1, characterIndex: 8, type: .error, message: "unknown type name \'vec2\'", note: nil)
+        let expectedSecondError = KernelError.compile(lineNumber: 1, characterIndex: 13, type: .error, message: "kernel must have void return type", note: nil)
 
         XCTAssertEqual(errors.first!, expectedFirstError)
         XCTAssertEqual(errors.last!, expectedSecondError)
         XCTAssertEqual(errors.count, 2)
+    }
+    
+    func testMetalErrorParserWarning() {
+        let errorString = """
+        Compilation succeeded with:
+        
+        program_source:10:19: warning: unused variable 'a'
+        float a;
+        ^
+        """
+        let errors = MetalErrorParser.compileErrors(for: errorString)
+        
+        let expectedFirstError = KernelError.compile(lineNumber: 10, characterIndex: 19, type: .warning, message: "unused variable 'a'", note: nil)
+        
+        XCTAssertEqual(errors.first!, expectedFirstError)
+        XCTAssertEqual(errors.count, 1)
     }
 }

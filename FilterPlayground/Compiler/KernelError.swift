@@ -8,8 +8,14 @@
 
 import Foundation
 
+enum CompileErrorType: String {
+    case error
+    case note
+    case warning
+}
+
 enum KernelError {
-    case compile(lineNumber: Int, characterIndex: Int, type: String, message: String, note: (lineNumber: Int, characterIndex: Int, message: String)?)
+    case compile(lineNumber: Int, characterIndex: Int, type: CompileErrorType, message: String, note: (lineNumber: Int, characterIndex: Int, message: String)?)
     case runtime(message: String)
 
     var isRuntime: Bool {
@@ -18,6 +24,15 @@ enum KernelError {
             return false
         case .runtime(message: _):
             return true
+        }
+    }
+    
+    var isWarning: Bool {
+        switch self {
+        case .compile(lineNumber: _, characterIndex: _, type: let type, message: _, note: _):
+            return type == .warning
+        case .runtime(message: _):
+            return false
         }
     }
 }

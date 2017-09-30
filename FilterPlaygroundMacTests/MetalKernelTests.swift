@@ -30,9 +30,9 @@ kernel vec2 untitled() {
         let result = MetalKernel.compile(source: source)
         switch result {
         case let .failed(errors):
-            let expectedFirstError = KernelError.compile(lineNumber: 1, characterIndex: 8, type: "error", message: "unknown type name \'vec2\'\nkernel vec2 untitled() {\n       ^\n", note: nil)
-            let expectedSecondError = KernelError.compile(lineNumber: 1, characterIndex: 13, type: "error", message: "kernel must have void return type\nkernel vec2 untitled() {\n            ^\n", note: nil)
-            
+            let expectedFirstError = KernelError.compile(lineNumber: 1, characterIndex: 8, type: .error, message: "unknown type name \'vec2\'", note: nil)
+            let expectedSecondError = KernelError.compile(lineNumber: 1, characterIndex: 13, type: .error, message: "kernel must have void return type", note: nil)
+
             XCTAssertEqual(errors.first!, expectedFirstError)
             XCTAssertEqual(errors.last!, expectedSecondError)
             XCTAssertEqual(errors.count, 2)
@@ -43,11 +43,46 @@ kernel vec2 untitled() {
 
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testCompilerMetalKernelWarnings() {
+        let source = """
+        #include <metal_stdlib>
+        using namespace metal;
+        
+        kernel void untitled(
+        texture2d<float, access::read> inTexture [[texture(0)]],
+        texture2d<float, access::write> outTexture [[texture(1)]],
+        uint2 gid [[thread_position_in_grid]])
+        
+        {
+            float a;
+        
         }
+"""
+        let result = MetalKernel.compile(source: source)
+        switch result {
+        case let .success(kernel: kernel, errors: errors):
+            let expectedFirstError = KernelError.compile(lineNumber: 10, characterIndex: 19, type: .warning, message: "unused variable 'a'", note: nil)
+            
+            XCTAssertEqual(errors.first!, expectedFirstError)
+            XCTAssertEqual(errors.count, 1)
+            XCTAssertNotNil((kernel as? MetalKernel)?.library)
+            break
+        default:
+            XCTFail()
+        }
+
+    }
+    
+    func testCompileMetalKernel() {
+        let source = MetalKernel.initialSource
+        let result = MetalKernel.compile(source: source)
+        switch result {
+        case .success(kernel: _):
+            break
+        default:
+            XCTFail()
+        }
+
     }
     
 }

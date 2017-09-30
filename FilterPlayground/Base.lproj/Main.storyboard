@@ -643,13 +643,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Errors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxh-hw-cEb">
-                                        <rect key="frame" x="34" y="12.5" width="46" height="20.5"/>
+                                        <rect key="frame" x="-20" y="12.5" width="46" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="U3W-wt-Nlm">
-                                        <rect key="frame" x="88" y="4" width="104" height="36"/>
+                                        <rect key="frame" x="34" y="4" width="158" height="36"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPC-1U-Jzq">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="36"/>
@@ -677,8 +677,34 @@
                                                     <constraint firstItem="rM8-Q2-va5" firstAttribute="centerY" secondItem="UPC-1U-Jzq" secondAttribute="centerY" id="xix-bz-YF8"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Jd-pp-xPv">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jvf-3F-o0f">
                                                 <rect key="frame" x="54" y="0.0" width="50" height="36"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CompilerWarning" translatesAutoresizingMaskIntoConstraints="NO" id="sxL-2o-e4F">
+                                                        <rect key="frame" x="0.0" y="9.5" width="17" height="17"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="17" id="Mhp-0F-GKH"/>
+                                                            <constraint firstAttribute="width" constant="17" id="itV-D0-orV"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcx-CQ-B0Q">
+                                                        <rect key="frame" x="21" y="9" width="26.5" height="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="gcx-CQ-B0Q" firstAttribute="centerY" secondItem="sxL-2o-e4F" secondAttribute="centerY" id="Jcf-li-eUr"/>
+                                                    <constraint firstAttribute="trailing" secondItem="gcx-CQ-B0Q" secondAttribute="trailing" constant="2" id="PRh-01-Brw"/>
+                                                    <constraint firstItem="gcx-CQ-B0Q" firstAttribute="leading" secondItem="sxL-2o-e4F" secondAttribute="trailing" constant="4" id="jZc-0y-E3S"/>
+                                                    <constraint firstItem="sxL-2o-e4F" firstAttribute="leading" secondItem="jvf-3F-o0f" secondAttribute="leading" id="w4b-pN-weH"/>
+                                                    <constraint firstItem="sxL-2o-e4F" firstAttribute="centerY" secondItem="jvf-3F-o0f" secondAttribute="centerY" id="xoP-L1-6pE"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Jd-pp-xPv">
+                                                <rect key="frame" x="108" y="0.0" width="50" height="36"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RunTimeError" translatesAutoresizingMaskIntoConstraints="NO" id="q7e-Sa-xXL">
                                                         <rect key="frame" x="0.0" y="9.5" width="17" height="17"/>
@@ -780,6 +806,8 @@
                     <connections>
                         <outlet property="compileErrorLabel" destination="ZlT-z7-YC8" id="gKI-Y9-9Bb"/>
                         <outlet property="compileErrorView" destination="UPC-1U-Jzq" id="xP5-uX-nuh"/>
+                        <outlet property="compileWarningLabel" destination="gcx-CQ-B0Q" id="nXd-U1-rvP"/>
+                        <outlet property="compileWarningView" destination="jvf-3F-o0f" id="34Q-Na-hJ2"/>
                         <outlet property="errorTableView" destination="eeQ-Xc-k0r" id="f1v-AX-rpt"/>
                         <outlet property="headerView" destination="KoV-0Q-Z3R" id="4uV-Yv-te6"/>
                         <outlet property="headerViewLabelContainer" destination="U3W-wt-Nlm" id="fDn-7z-CTM"/>
@@ -1013,8 +1041,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CompileError" width="40" height="46"/>
-        <image name="RunTimeError" width="246" height="284"/>
+        <image name="CompileError" width="246" height="284"/>
+        <image name="CompilerWarning" width="286" height="285"/>
+        <image name="RunTimeError" width="284" height="284"/>
         <namedColor name="SectionBackground">
             <color white="0.94999998807907104" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>

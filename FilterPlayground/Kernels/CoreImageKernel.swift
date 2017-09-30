@@ -16,6 +16,17 @@ class CoreImageKernel: Kernel {
     
     var kernel: CIKernel?
     
+    static func compile(source: String) -> KernelCompilerResult {
+        let errorHelper = ErrorHelper()
+        if let kernel: Kernel = compile(source: source) {
+            return KernelCompilerResult.success(kernel: kernel)
+        } else if let errorString = errorHelper.errorString() {
+            return .failed(errors: CoreImageErrorParser.compileErrors(for: errorString))
+        }
+        return .failed(errors: [KernelError.compile(lineNumber: -1, characterIndex: -1, type: "Error", message: "Unkown Error. Please check your code.", note: nil)])
+        
+    }
+    
     class func compile(source: String) -> Kernel? {
         if let kernel = CIKernel(source: source) {
             let result = CoreImageKernel()

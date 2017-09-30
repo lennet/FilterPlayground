@@ -105,13 +105,7 @@ extension KernelType {
     
     var compile: (String) -> KernelCompilerResult {
         return { source in
-            let errorHelper = ErrorHelper()
-            if let kernel = self.kernelClass.compile(source: source) {
-                return KernelCompilerResult.success(kernel: kernel)
-            } else if let errorString = errorHelper.errorString() {
-                return .failed(errors: ErrorParser.compileErrors(for: errorString))
-            }
-            return .failed(errors: [KernelError.compile(lineNumber: -1, characterIndex: -1, type: "Error", message: "Unkown Error. Please check your code.", note: nil)])
+            return self.kernelClass.compile(source: source)
         }
     }
 }

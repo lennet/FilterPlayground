@@ -33,7 +33,7 @@ class ErrorHelperTests: XCTestCase {
         let errorString = errorHelper.errorString()
         XCTAssertNotNil(errorString)
 
-        let error = ErrorParser.compileErrors(for: errorString!)
+        let error = CoreImageErrorParser.compileErrors(for: errorString!)
         XCTAssertGreaterThan(error.count, 0)
     }
 }

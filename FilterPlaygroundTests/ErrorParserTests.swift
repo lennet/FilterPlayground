@@ -31,7 +31,7 @@ class ErrorParserTests: XCTestCase {
             2017-07-31 18:22:20.371780+0200 FilterPlayground[39291:2779720] [compile] [CIWarpKernel initWithString:] failed due to error parsing kernel source.
             """
 
-        let errors = ErrorParser.compileErrors(for: error)
+        let errors = CoreImageErrorParser.compileErrors(for: error)
         XCTAssertEqual(errors.count, 1)
         XCTAssertEqual(errors.first!, KernelError.compile(lineNumber: 1, characterIndex: 1, type: "ERROR", message: "unknown type name 'asdads'", note: nil))
     }
@@ -46,7 +46,7 @@ class ErrorParserTests: XCTestCase {
                                            ^
         """
 
-        let errors = ErrorParser.compileErrors(for: errorString)
+        let errors = CoreImageErrorParser.compileErrors(for: errorString)
         XCTAssertEqual(errors.count, 1)
         let note = (1, 36, "to match this '{'")
         let error = KernelError.compile(lineNumber: 3, characterIndex: 2, type: "ERROR", message: "expected '}'", note: note)
@@ -63,7 +63,7 @@ class ErrorParserTests: XCTestCase {
             ^
         """
 
-        let errors = ErrorParser.compileErrors(for: errorString)
+        let errors = CoreImageErrorParser.compileErrors(for: errorString)
         XCTAssertEqual(errors.count, 1)
         let note = (1, 8, "return type declared here")
         let error = KernelError.compile(lineNumber: 4, characterIndex: 2, type: "ERROR", message: "function declared with return type 'vec4', but returning type 'vec2'", note: note)
@@ -76,7 +76,7 @@ class ErrorParserTests: XCTestCase {
         2017-09-11 17:21:57.296768+0200 FilterPlayground[6926:528702] [compile] [CIWarpKernel initWithString:] failed due to error parsing kernel source.
         """
 
-        let errors = ErrorParser.compileErrors(for: error)
+        let errors = CoreImageErrorParser.compileErrors(for: error)
         XCTAssertEqual(errors.count, 1)
         XCTAssertEqual(errors.first!, KernelError.compile(lineNumber: -1, characterIndex: -1, type: "ERROR", message: "failed due to error parsing kernel source.", note: nil))
     }
@@ -85,7 +85,7 @@ class ErrorParserTests: XCTestCase {
         let errorString = """
         2017-08-23 22:51:41.564656+0200 FilterPlayground[1140:1368834] [api] -[CIColorKernel applyWithExtent:arguments:options:] argument count mismatch for kernel \'untitled\', expected 1 but saw 0.\n
         """
-        let errors = ErrorParser.runtimeErrors(for: errorString)
+        let errors = CoreImageErrorParser.runtimeErrors(for: errorString)
         XCTAssertEqual(errors.count, 1)
         let error = KernelError.runtime(message: "argument count mismatch for kernel 'untitled', expected 1 but saw 0.")
         XCTAssertEqual(errors.first!, error)
@@ -93,7 +93,19 @@ class ErrorParserTests: XCTestCase {
 
     func testRuntimeErrorParserWithEmptyInput() {
         let errorString = ""
-        let errors = ErrorParser.runtimeErrors(for: errorString)
+        let errors = CoreImageErrorParser.runtimeErrors(for: errorString)
         XCTAssertEqual(errors.count, 0)
+    }
+    
+    func testMetalErrorParser() {
+        let errorString = "Compilation failed: \n\nprogram_source:1:8: error: unknown type name \'vec2\'\nkernel vec2 untitled() {\n       ^\nprogram_source:1:13: error: kernel must have void return type\nkernel vec2 untitled() {\n            ^\n"
+        let errors = MetalErrorParser.compileErrors(for: errorString)
+        
+        let expectedFirstError = KernelError.compile(lineNumber: 1, characterIndex: 8, type: "error", message: "unknown type name \'vec2\'\nkernel vec2 untitled() {\n       ^\n", note: nil)
+        let expectedSecondError = KernelError.compile(lineNumber: 1, characterIndex: 13, type: "error", message: "kernel must have void return type\nkernel vec2 untitled() {\n            ^\n", note: nil)
+
+        XCTAssertEqual(errors.first!, expectedFirstError)
+        XCTAssertEqual(errors.last!, expectedSecondError)
+        XCTAssertEqual(errors.count, 2)
     }
 }

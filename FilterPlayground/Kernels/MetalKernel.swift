@@ -18,15 +18,15 @@ class MetalKernel: Kernel {
         return .metal
     }
     
-    static func compile(source: String) -> Kernel? {
+    static func compile(source: String) -> KernelCompilerResult {
         let device = MTLCreateSystemDefaultDevice()
         do {
             let kernel = MetalKernel()
             kernel.library = try device?.makeLibrary(source: source, options: nil)
-            return kernel
+            return KernelCompilerResult.success(kernel: kernel)
         } catch let error as NSError {
             print(error.localizedDescription)
-            return nil
+            return .failed(errors: MetalErrorParser.compileErrors(for: error.localizedDescription))
         }
     }
     

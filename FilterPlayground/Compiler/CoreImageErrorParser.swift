@@ -1,5 +1,5 @@
 //
-//  ErrorParser.swift
+//  CoreImageErrorParser.swift
 //  FilterPlayground
 //
 //  Created by Leo Thomas on 31.07.17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ErrorParser {
+class CoreImageErrorParser {
 
     class func compileErrors(for errorString: String) -> [KernelError] {
         let components = errorString.components(separatedBy: "[CIKernelPool]").flatMap { $0.firstLine }

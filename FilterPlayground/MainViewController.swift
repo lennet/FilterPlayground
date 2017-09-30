@@ -161,7 +161,7 @@ class MainViewController: UIViewController {
                 if let image = image {
                     self.liveViewController?.imageView.image = UIImage(ciImage: image)
                 } else if let errorString = errorHelper.errorString() {
-                    let errors = ErrorParser.runtimeErrors(for: errorString)
+                    let errors = CoreImageErrorParser.runtimeErrors(for: errorString)
                     self.display(errors: errors)
                 } else {
                     self.display(errors: [KernelError.runtime(message: "Unkown Error occured. Please check your code and the passed arguments")])

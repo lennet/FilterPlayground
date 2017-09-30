@@ -79,7 +79,6 @@
 		9897167A1F67E3C800E7C20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 989716791F67E3C800E7C20C /* Assets.xcassets */; };
 		9897167D1F67E3C800E7C20C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9897167B1F67E3C800E7C20C /* MainMenu.xib */; };
 		989716911F67E47300E7C20C /* CIFilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98426C161F670540007C2260 /* CIFilterHelper.swift */; };
-		989716931F67E75900E7C20C /* KernelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */; };
 		989716941F67E77500E7C20C /* KernelCompilerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23C1F34B85C006E7658 /* KernelCompilerResult.swift */; };
 		989716961F67E7B300E7C20C /* CoreImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716951F67E7B300E7C20C /* CoreImage+Extension.swift */; };
 		9897169A1F67E80A00E7C20C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716991F67E80A00E7C20C /* UIImage+Extension.swift */; };
@@ -95,7 +94,6 @@
 		989C57711F6825CD008FF142 /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989C57701F6825CD008FF142 /* XCTest+Extension.swift */; };
 		98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */; };
 		98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */; };
-		98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */; };
 		98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */; };
 		98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */; };
 		98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */; };
@@ -227,7 +225,6 @@
 		989C57701F6825CD008FF142 /* XCTest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extension.swift"; sourceTree = "<group>"; };
 		98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesViewController.swift; sourceTree = "<group>"; };
 		98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorViewController.swift; sourceTree = "<group>"; };
-		98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelDescriptor.swift; sourceTree = "<group>"; };
 		98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeTableViewCell.swift; sourceTree = "<group>"; };
 		98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedTextView.swift; sourceTree = "<group>"; };
 		98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSlider.swift; sourceTree = "<group>"; };
@@ -506,7 +503,6 @@
 			isa = PBXGroup;
 			children = (
 				98DC562A1F3CEF1C0024F522 /* ValuePicker.storyboard */,
-				98A0CC641F2D1A8100FFC0A1 /* KernelDescriptor.swift */,
 				98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */,
 				98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */,
 				98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */,
@@ -749,7 +745,6 @@
 				98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */,
 				981267D41F34BEFC00101027 /* Kernel.swift in Sources */,
 				98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */,
-				98A0CC651F2D1A8100FFC0A1 /* KernelDescriptor.swift in Sources */,
 				98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */,
 				988901A01F76426900B97C4A /* SourceEditorLayoutManager.swift in Sources */,
 				989716A21F67F54C00E7C20C /* Settings.swift in Sources */,
@@ -827,7 +822,6 @@
 				9833310E1F80046F00C9AF52 /* CoreImageWarpKernel.swift in Sources */,
 				983331091F8003B200C9AF52 /* KernelAttribute.swift in Sources */,
 				9833310C1F80046800C9AF52 /* CoreImageBlendKernel.swift in Sources */,
-				989716931F67E75900E7C20C /* KernelDescriptor.swift in Sources */,
 				989716751F67E3C800E7C20C /* Document.swift in Sources */,
 				9833310D1F80046B00C9AF52 /* CoreImageColorKernel.swift in Sources */,
 				983331061F8003A800C9AF52 /* KernelType.swift in Sources */,

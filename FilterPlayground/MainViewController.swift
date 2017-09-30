@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
     weak var attributesViewController: AttributesViewController?
     weak var liveViewController: LiveViewController?
     weak var sourceEditorViewController: SourceEditorViewController?
+    weak var documentBrowser: DocumentBrowserViewController?
 
     /// describe the relation between the width of the SourceEditor and the LiveView
     var sourceViewRatio: CGFloat = 0.5
@@ -43,14 +44,17 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presentDocumentBrowser()
         registerNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+    }
+    
+    func presentDocumentBrowser() {
         if document == nil {
-            performSegue(withIdentifier: "initialSetupSegue", sender: nil)
+            performSegue(withIdentifier: "initialSetupSegueWithoutAnimation", sender: nil)
         }
     }
 
@@ -334,6 +338,7 @@ class MainViewController: UIViewController {
             }
             vc.didUpdateArguments = didUpdateArgumentsFromSourceEditor
         case let vc as DocumentBrowserViewController:
+            documentBrowser = vc
             vc.didOpenedDocument = didOpened
         case let nc as UINavigationController where nc.viewControllers.first is ExportTableViewController:
             (nc.viewControllers.first as? ExportTableViewController)?.document = document

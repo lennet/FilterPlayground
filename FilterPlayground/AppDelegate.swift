@@ -12,6 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let documentBrowserViewController =  DocumentBrowserViewController(forOpeningFilesWithContentTypes: nil)
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -45,17 +46,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard inputURL.isFileURL else { return false }
 
         // Reveal / import the document at the URL
-        let documentBrowserViewController =  DocumentBrowserViewController()
-
-        documentBrowserViewController.revealDocument(at: inputURL, importIfNeeded: true) { revealedDocumentURL, error in
+        guard let mainViewController = self.window?.rootViewController?.childViewControllers.first as? MainViewController else { return false }
+        if mainViewController.documentBrowser == nil {
+            mainViewController.presentDocumentBrowser()
+        }
+//
+        
+        mainViewController.documentBrowser?.revealDocument(at: inputURL, importIfNeeded: true) { revealedDocumentURL, error in
             if let error = error {
                 // Handle the error appropriately
                 print("Failed to reveal the document at URL \(inputURL) with error: '\(error)'")
                 return
             }
-
+            self.documentBrowserViewController.didOpenedDocument = mainViewController.didOpened
             // Present the Document View Controller for the revealed URL
-            documentBrowserViewController.presentDocument(at: revealedDocumentURL!)
+            self.documentBrowserViewController.presentDocument(at: revealedDocumentURL!)
         }
 
         return true

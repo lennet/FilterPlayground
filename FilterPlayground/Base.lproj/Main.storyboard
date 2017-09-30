@@ -254,6 +254,7 @@
                         <outlet property="contentViewBottomConstraint" destination="57e-Lh-M0N" id="EAj-XD-kh2"/>
                         <outlet property="sourceEditorWidthConstraint" destination="udQ-FA-yvS" id="84x-sp-Urz"/>
                         <segue destination="04X-wZ-hWf" kind="presentation" identifier="initialSetupSegue" modalPresentationStyle="formSheet" id="Vhs-y3-SKK"/>
+                        <segue destination="04X-wZ-hWf" kind="presentation" identifier="initialSetupSegueWithoutAnimation" animates="NO" modalPresentationStyle="formSheet" id="6YF-hI-kgR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1021,6 +1022,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="U7U-Nn-uZ5"/>
         <segue reference="LVZ-vl-ww2"/>
-        <segue reference="Vhs-y3-SKK"/>
+        <segue reference="6YF-hI-kgR"/>
     </inferredMetricsTieBreakers>
 </document>

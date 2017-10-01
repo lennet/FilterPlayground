@@ -48,7 +48,7 @@ class SavingDocumentTests: XCTestCase {
 
     func testSaveImage() {
         let text = "Hello World"
-        let attribute = KernelAttribute(name: "test", type: .sample, value: KernelAttributeType.sample.defaultValue)
+        let attribute = KernelAttribute(name: "test", type: .sample, value: KernelArgumentType.sample.defaultValue)
         let expectation = XCTestExpectation(description: "Waiting for file creation")
 
         let document = Project(fileURL: url)

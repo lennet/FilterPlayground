@@ -12,6 +12,18 @@ class CoreImageWarpKernel: CoreImageKernel {
 
     var warpKernel: CIWarpKernel?
 
+    override class var returnType: KernelArgumentType {
+        return .vec2
+    }
+
+    override class var requiredInputImages: Int {
+        return 1
+    }
+
+    override class var initialSourceBody: String {
+        return "\(Settings.spacingValue)return destCoord();"
+    }
+
     override class func compile(source: String) -> Kernel? {
         if let kernel = CIWarpKernel(source: source) {
             let result = CoreImageWarpKernel()

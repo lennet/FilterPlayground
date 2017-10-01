@@ -16,9 +16,9 @@ enum ASTNode {
     case root([ASTNode])
 }
 
-typealias KernelDefinition = (name: String, returnType: KernelAttributeType, arguments: [(String, KernelAttributeType)])
+typealias KernelDefinition = (name: String, returnType: KernelArgumentType, arguments: [(String, KernelArgumentType)])
 
-func ==(lhs: (String, KernelAttributeType), rhs: (String, KernelAttributeType)) -> Bool {
+func ==(lhs: (String, KernelArgumentType), rhs: (String, KernelArgumentType)) -> Bool {
     return lhs.0 == rhs.0 && lhs.1 == rhs.1
 }
 
@@ -159,7 +159,7 @@ extension ASTNode: Equatable {
         return nil
     }
 
-    mutating func replaceArguments(newArguments: [(String, KernelAttributeType)]) {
+    mutating func replaceArguments(newArguments: [(String, KernelArgumentType)]) {
         switch self {
         case .unkown(_),
              .comment(_),
@@ -326,8 +326,8 @@ class ASTHelper {
         return ASTNode.comment(Array(tokens[...resultIndex]))
     }
 
-    class func arguments(for tokens: [Token]) -> [(String, KernelAttributeType)] {
-        var result: [(String, KernelAttributeType)] = []
+    class func arguments(for tokens: [Token]) -> [(String, KernelArgumentType)] {
+        var result: [(String, KernelArgumentType)] = []
         let filtred = tokens.filter { token in
             switch token {
             case .identifier(.other(")")),

@@ -94,7 +94,7 @@ enum Keyword: String {
 }
 
 enum Identifier {
-    case type(KernelAttributeType)
+    case type(KernelArgumentType)
     case other(String)
     case keyword(Keyword)
 
@@ -142,7 +142,7 @@ extension Identifier: Equatable {
     init(_ string: String) {
         if let keyword = Keyword(rawValue: string) {
             self = .keyword(keyword)
-        } else if let type = KernelAttributeType(rawValue: string) {
+        } else if let type = KernelArgumentType(rawValue: string) {
             self = .type(type)
         } else {
             self = .other(string)

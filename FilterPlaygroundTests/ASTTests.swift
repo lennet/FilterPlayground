@@ -259,7 +259,7 @@ class ASTTests: XCTestCase {
     func testArgumentsForToken() {
         let tokens: [Token] = [Token.identifier(.type(.float)), Token.identifier(.other("name")), Token.identifier(.other(","))]
 
-        let expectedResult = [("name", KernelAttributeType.float)]
+        let expectedResult = [("name", KernelArgumentType.float)]
         XCTAssert(ASTHelper.arguments(for: tokens) == expectedResult)
     }
 
@@ -270,7 +270,7 @@ class ASTTests: XCTestCase {
         }
         """
         let ast = Parser(string: source).getAST()
-        let expectedResult: KernelDefinition = (name: "hello", returnType: KernelAttributeType.vec2, arguments: [("radius", KernelAttributeType.float)])
+        let expectedResult: KernelDefinition = (name: "hello", returnType: KernelArgumentType.vec2, arguments: [("radius", KernelArgumentType.float)])
         let result = ast.kernelDefinition()!
         XCTAssert(result.arguments == expectedResult.arguments)
         XCTAssertEqual(result.name, expectedResult.name)
@@ -284,7 +284,7 @@ class ASTTests: XCTestCase {
         }
         """
         let ast = Parser(string: source).getAST()
-        let expectedResult: KernelDefinition = (name: "hello", returnType: KernelAttributeType.vec2, arguments: [])
+        let expectedResult: KernelDefinition = (name: "hello", returnType: KernelArgumentType.vec2, arguments: [])
         let result = ast.kernelDefinition()!
         XCTAssert(result.arguments == expectedResult.arguments)
         XCTAssertEqual(result.name, expectedResult.name)
@@ -298,7 +298,7 @@ class ASTTests: XCTestCase {
         }
         """
         let ast = Parser(string: source).getAST()
-        let expectedResult: KernelDefinition = (name: "hello", returnType: KernelAttributeType.vec2, arguments: [("radius", KernelAttributeType.float), ("foo", KernelAttributeType.vec2)])
+        let expectedResult: KernelDefinition = (name: "hello", returnType: KernelArgumentType.vec2, arguments: [("radius", KernelArgumentType.float), ("foo", KernelArgumentType.vec2)])
         let result = ast.kernelDefinition()!
         XCTAssert(result.arguments ==
             expectedResult.arguments)

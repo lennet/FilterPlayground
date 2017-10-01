@@ -12,9 +12,18 @@ import MetalKit
 
 class MetalKernel: Kernel {
 
+    static var requiredInputImages: Int {
+        return 0
+    }
+
+    static var supportedArguments: [KernelArgumentType] {
+        // todo
+        return []
+    }
+
     var library: MTLLibrary?
 
-    var shadingLanguage: ShadingLanguage {
+    class var shadingLanguage: ShadingLanguage {
         return .metal
     }
 
@@ -42,12 +51,12 @@ class MetalKernel: Kernel {
         return .success(kernel: kernel, errors: errors)
     }
 
-    class var initialSource: String {
+    static func initialSource(with name: String) -> String {
         return """
         #include <metal_stdlib>
         using namespace metal;
         
-        kernel void untitled(
+        kernel void \(name)(
         texture2d<float, access::read> inTexture [[texture(0)]],
         texture2d<float, access::write> outTexture [[texture(1)]],
         uint2 gid [[thread_position_in_grid]])

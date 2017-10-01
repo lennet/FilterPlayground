@@ -10,9 +10,9 @@ import UIKit
 
 class SelectTypeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var didSelectType: ((KernelAttributeType) -> Void)?
+    var didSelectType: ((KernelArgumentType) -> Void)?
 
-    fileprivate let attributes: [KernelAttributeType] = KernelAttributeType.all
+    fileprivate let attributes: [KernelArgumentType] = KernelArgumentType.all
 
     @IBAction func cancel(_: Any) {
         dismiss(animated: true, completion: nil)

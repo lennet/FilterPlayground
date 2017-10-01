@@ -10,8 +10,36 @@ import CoreImage
 
 class CoreImageKernel: Kernel {
 
-    var shadingLanguage: ShadingLanguage {
+    class var requiredArguments: [KernelArgumentType] {
+        return []
+    }
+
+    class var requiredInputImages: Int {
+        return 0
+    }
+
+    class var supportedArguments: [KernelArgumentType] {
+        return [.float, .vec2, .vec3, .vec4, .sample, .color]
+    }
+
+    class var shadingLanguage: ShadingLanguage {
         return .coreimage
+    }
+
+    static func initialSource(with name: String) -> String {
+        return "kernel \(returnType) \(name)(\(initialArguments)) {\n\(initialSourceBody)\n}"
+    }
+
+    class var initialArguments: String {
+        return ""
+    }
+
+    class var returnType: KernelArgumentType {
+        return .vec4
+    }
+
+    class var initialSourceBody: String {
+        return "\(Settings.spacingValue)return vec4(1.0, 1.0, 1.0, 1.0);"
     }
 
     var kernel: CIKernel?

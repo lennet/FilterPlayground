@@ -123,7 +123,7 @@ extension ASTNode {
                 !token.isSpaceTabOrNewLine
             })
             guard let last = filtredToken.last else {
-                return KernelAttributeType.all.map { $0.rawValue }
+                return KernelArgumentType.all.map { $0.rawValue }
             }
             switch last {
             case .identifier(.other(")")),

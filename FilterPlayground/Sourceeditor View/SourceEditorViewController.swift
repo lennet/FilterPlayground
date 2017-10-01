@@ -20,7 +20,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate {
     }
 
     var didUpdateText: ((String) -> Void)?
-    var didUpdateArguments: (([(String, KernelAttributeType)]) -> Void)?
+    var didUpdateArguments: (([(String, KernelArgumentType)]) -> Void)?
 
     var errors: [KernelError] {
         set {

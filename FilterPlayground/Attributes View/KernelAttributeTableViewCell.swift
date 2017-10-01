@@ -98,7 +98,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         present(viewController: viewController, with: valueSelectionView)
     }
 
-    func setupValueView(for type: KernelAttributeType, value _: KernelAttributeValue?) {
+    func setupValueView(for type: KernelArgumentType, value _: KernelAttributeValue?) {
         valueSelectionView.subviews.forEach { $0.removeFromSuperview() }
         switch (type, attribute?.value) {
         case let (.sample, .sample(image)?) :

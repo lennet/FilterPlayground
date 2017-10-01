@@ -11,7 +11,7 @@ import CoreImage
 
 struct KernelAttribute {
     var name: String
-    var type: KernelAttributeType
+    var type: KernelArgumentType
     var value: KernelAttributeValue
 }
 
@@ -26,7 +26,7 @@ extension KernelAttribute: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
-        type = try values.decode(KernelAttributeType.self, forKey: .type)
+        type = try values.decode(KernelArgumentType.self, forKey: .type)
         if type == .sample {
             // this value gets overriden in the load method
             value = KernelAttributeValue.sample(CIImage(color: .black))

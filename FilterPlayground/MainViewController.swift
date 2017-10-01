@@ -133,7 +133,7 @@ class MainViewController: UIViewController {
             return
         }
         let attributes = attributesViewController?.attributes ?? []
-        switch document.metaData.type.compile(source) {
+        switch document.metaData.type.kernelClass.compile(source: source) {
         case let .success(kernel: kernel, errors: errors):
             apply(kernel: kernel, input: input, attributes: attributes)
             display(errors: errors)
@@ -148,7 +148,7 @@ class MainViewController: UIViewController {
     func apply(kernel: Kernel, input: [UIImage], attributes: [KernelAttribute]) {
         clearErrors()
         guard let document = document else { return }
-        let requiredInputImages = document.metaData.type.requiredInputImages
+        let requiredInputImages = document.metaData.type.kernelClass.requiredInputImages
         guard requiredInputImages == input.count else {
             display(errors: [KernelError.runtime(message: "A \(document.metaData.type) Kernel requires \(requiredInputImages) input image\(requiredInputImages > 1 ? "s" : "") but you only passed \(input.count)")])
             liveViewController?.highlightEmptyInputImageViews = true
@@ -221,9 +221,9 @@ class MainViewController: UIViewController {
             self.attributesViewController?.attributes = document.metaData.attributes
             self.attributesViewController?.tableView.reloadData()
             self.liveViewController?.inputImages = document.inputImages
-            self.liveViewController?.numberOfInputs = document.metaData.type.requiredInputImages
-            self.attributesBarButtonItem.isEnabled = document.metaData.type.supportsAttributes
-            self.showAttributes = document.metaData.type.supportsAttributes
+            self.liveViewController?.numberOfInputs = document.metaData.type.kernelClass.requiredInputImages
+            self.attributesBarButtonItem.isEnabled = document.metaData.type.kernelClass.supportsArguments
+            self.showAttributes = document.metaData.type.kernelClass.supportsArguments
             self.title = document.title
         }
         if let oldDocument = self.document {
@@ -305,7 +305,7 @@ class MainViewController: UIViewController {
         sourceEditorViewController?.update(attributes: attributes)
     }
 
-    func didUpdateArgumentsFromSourceEditor(arguments: [(String, KernelAttributeType)]) {
+    func didUpdateArgumentsFromSourceEditor(arguments: [(String, KernelArgumentType)]) {
         let currentAttributes = attributesViewController?.attributes ?? []
         let newAttributes = arguments.enumerated().map { (index, argument) -> KernelAttribute in
             if index < currentAttributes.count {

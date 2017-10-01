@@ -12,6 +12,22 @@ class CoreImageBlendKernel: CoreImageKernel {
 
     var blendKernel: CIBlendKernel?
 
+    override class var supportedArguments: [KernelArgumentType] {
+        return []
+    }
+
+    override class var initialArguments: String {
+        return "\(KernelArgumentType.sample.rawValue) fore, \(KernelArgumentType.sample.rawValue) back"
+    }
+
+    override class var requiredInputImages: Int {
+        return 2
+    }
+
+    override class var initialSourceBody: String {
+        return "\(Settings.spacingValue)return sample(fore, destCoord()) + sample(back, destCoord());"
+    }
+
     override class func compile(source: String) -> Kernel? {
         if let kernel = CIBlendKernel(source: source) {
             let result = CoreImageBlendKernel()

@@ -72,7 +72,7 @@ class MetalKernelTests: XCTestCase {
     }
 
     func testCompileMetalKernel() {
-        let source = MetalKernel.initialSource
+        let source = MetalKernel.initialSource(with: "untitled")
         let result = MetalKernel.compile(source: source)
         switch result {
         case .success(kernel: _):

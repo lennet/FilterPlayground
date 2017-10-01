@@ -21,12 +21,12 @@
 		983008761F6F084C005C89C3 /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983008751F6F084C005C89C3 /* DismissSegue.swift */; };
 		98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */; };
 		983330FF1F80026000C9AF52 /* KernelAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983330FE1F80026000C9AF52 /* KernelAttribute.swift */; };
-		983331011F80029E00C9AF52 /* KernelAttributeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331001F80029E00C9AF52 /* KernelAttributeType.swift */; };
+		983331011F80029E00C9AF52 /* KernelArgumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331001F80029E00C9AF52 /* KernelArgumentType.swift */; };
 		983331031F8002C600C9AF52 /* KernelAttributeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331021F8002C600C9AF52 /* KernelAttributeValue.swift */; };
 		983331051F80039800C9AF52 /* KernelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331041F80039800C9AF52 /* KernelType.swift */; };
 		983331061F8003A800C9AF52 /* KernelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331041F80039800C9AF52 /* KernelType.swift */; };
 		983331071F8003AB00C9AF52 /* KernelAttributeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331021F8002C600C9AF52 /* KernelAttributeValue.swift */; };
-		983331081F8003AE00C9AF52 /* KernelAttributeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331001F80029E00C9AF52 /* KernelAttributeType.swift */; };
+		983331081F8003AE00C9AF52 /* KernelArgumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331001F80029E00C9AF52 /* KernelArgumentType.swift */; };
 		983331091F8003B200C9AF52 /* KernelAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983330FE1F80026000C9AF52 /* KernelAttribute.swift */; };
 		9833310A1F8003B600C9AF52 /* ShadingLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985544881F7FF2B900E9F02A /* ShadingLanguage.swift */; };
 		9833310B1F80046100C9AF52 /* CoreImageKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9855448C1F7FF89400E9F02A /* CoreImageKernel.swift */; };
@@ -162,7 +162,7 @@
 		983008751F6F084C005C89C3 /* DismissSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
 		98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorValuePicker.swift; sourceTree = "<group>"; };
 		983330FE1F80026000C9AF52 /* KernelAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttribute.swift; sourceTree = "<group>"; };
-		983331001F80029E00C9AF52 /* KernelAttributeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeType.swift; sourceTree = "<group>"; };
+		983331001F80029E00C9AF52 /* KernelArgumentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelArgumentType.swift; sourceTree = "<group>"; };
 		983331021F8002C600C9AF52 /* KernelAttributeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeValue.swift; sourceTree = "<group>"; };
 		983331041F80039800C9AF52 /* KernelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelType.swift; sourceTree = "<group>"; };
 		983331101F80066300C9AF52 /* MetalKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalKernel.swift; sourceTree = "<group>"; };
@@ -547,7 +547,7 @@
 				98E692ED1F30DF8D000C8B41 /* ProjectMetaData.swift */,
 				985544881F7FF2B900E9F02A /* ShadingLanguage.swift */,
 				983330FE1F80026000C9AF52 /* KernelAttribute.swift */,
-				983331001F80029E00C9AF52 /* KernelAttributeType.swift */,
+				983331001F80029E00C9AF52 /* KernelArgumentType.swift */,
 				983331021F8002C600C9AF52 /* KernelAttributeValue.swift */,
 				983331041F80039800C9AF52 /* KernelType.swift */,
 				980E4F431F80108000C603C3 /* KernelCompilerResult.swift */,
@@ -762,7 +762,7 @@
 				98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */,
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,
 				98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */,
-				983331011F80029E00C9AF52 /* KernelAttributeType.swift in Sources */,
+				983331011F80029E00C9AF52 /* KernelArgumentType.swift in Sources */,
 				9853F85F1F79218C00551541 /* CIKernelLanguageHelper.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
 				987A73291F66F65000F73806 /* SwiftPlaygroundsHelper.swift in Sources */,
@@ -814,7 +814,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9897169F1F67E94800E7C20C /* CoreImage+Extension.swift in Sources */,
-				983331081F8003AE00C9AF52 /* KernelAttributeType.swift in Sources */,
+				983331081F8003AE00C9AF52 /* KernelArgumentType.swift in Sources */,
 				9897169C1F67E84A00E7C20C /* Kernel.swift in Sources */,
 				980E4F461F8013AA00C603C3 /* MetalErrorParser.swift in Sources */,
 				9897169E1F67E93300E7C20C /* ErrorHelper.swift in Sources */,

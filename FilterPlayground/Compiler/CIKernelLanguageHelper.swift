@@ -12,7 +12,7 @@ class CIKernelLanguageHelper {
 
     static var functions: [String] = {
         // todo add
-        ["(", ")", ".", ",", "if", "for", "/", "*", "-"] + KernelAttributeType.all.map { $0.rawValue } + [
+        ["(", ")", ".", ",", "if", "for", "/", "*", "-"] + KernelArgumentType.all.map { $0.rawValue } + [
             "mod",
             "compare",
             "cos_",

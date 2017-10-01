@@ -153,7 +153,6 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "errorCellIdentifier") as! ErrorTableViewCell
-        // todo show notes
         cell.error = errors[indexPath.row]
         return cell
     }

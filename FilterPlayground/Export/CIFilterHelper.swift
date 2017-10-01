@@ -79,7 +79,7 @@ extension KernelType {
     
 }
 
-extension KernelAttributeType {
+extension KernelArgumentType {
     
     var swiftType: String {
         switch self {
@@ -108,9 +108,9 @@ class CIFilterHelper {
     class func cifilter(with kernelSource: String, type: KernelType, arguments: [KernelAttribute], name: String) -> String {
         let properties = arguments.map{ "\tvar \($0.name): \($0.type.swiftType)?" }.joined(separator: "\n")
         var inputProperties = ""
-        if type.requiredInputImages == 1 {
+        if type.kernelClass.requiredInputImages == 1 {
             inputProperties = "\tvar input: CIImage?"
-        } else if type.requiredInputImages == 2 {
+        } else if type.kernelClass.requiredInputImages == 2 {
             inputProperties = """
             \tvar fore: CIImage?
             \tvar back: CIImage?

@@ -26,7 +26,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
 
     weak var delegate: UITextViewDelegate?
 
-    var didUpdateArguments: (([(String, KernelAttributeType)]) -> Void)?
+    var didUpdateArguments: (([(String, KernelArgumentType)]) -> Void)?
 
     var text: String? {
         get {
@@ -243,7 +243,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
         setNeedsDisplay()
     }
 
-    func insert(arguments: [(String, KernelAttributeType)]) {
+    func insert(arguments: [(String, KernelArgumentType)]) {
         let selectedRange = textView.selectedRange
         currentAST?.replaceArguments(newArguments: arguments)
         textView.attributedText = currentAST?.asAttributedText

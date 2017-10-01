@@ -81,7 +81,7 @@ class ASTCodeCompletionTests: XCTestCase {
     func testEmptySource() {
         let code = " "
         let ast = Parser(string: code).getAST()
-        let result = ast.codeCompletion(at: 0, with: KernelAttributeType.all.map { $0.rawValue })
+        let result = ast.codeCompletion(at: 0, with: KernelArgumentType.all.map { $0.rawValue })
         XCTAssertTrue(result.contains("vec2"))
         XCTAssertTrue(result.contains("vec3"))
         XCTAssertTrue(result.contains("vec4"))

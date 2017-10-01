@@ -11,7 +11,7 @@ import CoreImage
     import UIKit
 #endif
 
-enum KernelAttributeType: String, Codable {
+enum KernelArgumentType: String, Codable {
 
     case float
     case vec2
@@ -20,12 +20,12 @@ enum KernelAttributeType: String, Codable {
     case sample = "__sample"
     case color = "__color"
 
-    static var all: [KernelAttributeType] {
+    static var all: [KernelArgumentType] {
         return [.float, .vec2, .vec3, .vec4, .sample, .color]
     }
 }
 
-extension KernelAttributeType {
+extension KernelArgumentType {
 
     var defaultValue: KernelAttributeValue {
         switch self {

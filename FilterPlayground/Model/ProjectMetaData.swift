@@ -22,11 +22,15 @@ struct ProjectMetaData: Codable {
     }
 
     func initialSource() -> String {
-        return type.initialSource(with: name)
+        return type.kernelClass.initialSource(with: name)
     }
 
     func initalArguments() -> [KernelAttribute] {
-        return type.requiredArguments.map { KernelAttribute(name: "unamed", type: $0, value: $0.defaultValue) }
+        if let kernelType = type.kernelClass as? CoreImageKernel.Type {
+            return kernelType.requiredArguments.map { KernelAttribute(name: "unamed", type: $0, value: $0.defaultValue) }
+        }
+        // todo
+        return []
     }
 
     func initialInputImages() -> [UIImage] {

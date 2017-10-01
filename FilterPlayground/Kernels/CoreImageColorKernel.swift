@@ -12,6 +12,18 @@ class CoreImageColorKernel: CoreImageKernel {
 
     var colorKernel: CIColorKernel?
 
+    override class var requiredArguments: [KernelArgumentType] {
+        return [.sample]
+    }
+
+    override class var initialArguments: String {
+        return "\(KernelArgumentType.sample.rawValue) img"
+    }
+
+    override class var initialSourceBody: String {
+        return "\(Settings.spacingValue)return sample(img, destCoord());"
+    }
+
     override class func compile(source: String) -> Kernel? {
         if let kernel = CIColorKernel(source: source) {
             let result = CoreImageColorKernel()

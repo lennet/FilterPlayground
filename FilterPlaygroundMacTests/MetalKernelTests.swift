@@ -27,7 +27,7 @@ class MetalKernelTests: XCTestCase {
             
         }
         """
-        let result = MetalKernel.compile(source: source)
+        let result = MetalKernel().compile(source: source)
         switch result {
         case let .failed(errors):
             let expectedFirstError = KernelError.compile(lineNumber: 1, characterIndex: 8, type: .error, message: "unknown type name \'vec2\'", note: nil)
@@ -57,14 +57,15 @@ class MetalKernelTests: XCTestCase {
                 
                 }
         """
-        let result = MetalKernel.compile(source: source)
+        let kernel = MetalKernel()
+        let result =  kernel.compile(source: source)
         switch result {
-        case let .success(kernel: kernel, errors: errors):
+        case let .success(errors: errors):
             let expectedFirstError = KernelError.compile(lineNumber: 10, characterIndex: 19, type: .warning, message: "unused variable 'a'", note: nil)
 
             XCTAssertEqual(errors.first!, expectedFirstError)
             XCTAssertEqual(errors.count, 1)
-            XCTAssertNotNil((kernel as? MetalKernel)?.library)
+            XCTAssertNotNil(kernel.library)
             break
         default:
             XCTFail()
@@ -73,9 +74,9 @@ class MetalKernelTests: XCTestCase {
 
     func testCompileMetalKernel() {
         let source = MetalKernel.initialSource(with: "untitled")
-        let result = MetalKernel.compile(source: source)
+        let result = MetalKernel().compile(source: source)
         switch result {
-        case .success(kernel: _):
+        case .success(errors: _):
             break
         default:
             XCTFail()

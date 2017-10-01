@@ -24,13 +24,12 @@ class CoreImageColorKernel: CoreImageKernel {
         return "\(Settings.spacingValue)return sample(img, destCoord());"
     }
 
-    override class func compile(source: String) -> Kernel? {
+    override func compile(source: String) -> Bool {
         if let kernel = CIColorKernel(source: source) {
-            let result = CoreImageColorKernel()
-            result.colorKernel = kernel
-            return result
+            colorKernel = kernel
+            return true
         }
-        return nil
+        return false
     }
 
     override func apply(with _: [CIImage], attributes: [Any]) -> CIImage? {

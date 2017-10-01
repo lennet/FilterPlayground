@@ -18,9 +18,11 @@ protocol Kernel: class {
 
     static var requiredInputImages: Int { get }
 
-    static func compile(source: String) -> KernelCompilerResult
+    func compile(source: String) -> KernelCompilerResult
 
     func apply(with inputImages: [CIImage], attributes: [Any]) -> CIImage?
+
+    init()
 }
 
 extension Kernel {

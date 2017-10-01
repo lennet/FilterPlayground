@@ -28,13 +28,12 @@ class CoreImageBlendKernel: CoreImageKernel {
         return "\(Settings.spacingValue)return sample(fore, destCoord()) + sample(back, destCoord());"
     }
 
-    override class func compile(source: String) -> Kernel? {
+    override func compile(source: String) -> Bool {
         if let kernel = CIBlendKernel(source: source) {
-            let result = CoreImageBlendKernel()
-            result.blendKernel = kernel
-            return result
+            blendKernel = kernel
+            return true
         }
-        return nil
+        return false
     }
 
     override func apply(with inputImages: [CIImage], attributes _: [Any]) -> CIImage? {

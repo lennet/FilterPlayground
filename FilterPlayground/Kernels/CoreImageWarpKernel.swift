@@ -24,13 +24,12 @@ class CoreImageWarpKernel: CoreImageKernel {
         return "\(Settings.spacingValue)return destCoord();"
     }
 
-    override class func compile(source: String) -> Kernel? {
+    override func compile(source: String) -> Bool {
         if let kernel = CIWarpKernel(source: source) {
-            let result = CoreImageWarpKernel()
-            result.warpKernel = kernel
-            return result
+            warpKernel = kernel
+            return true
         }
-        return nil
+        return false
     }
 
     override func apply(with inputImages: [CIImage], attributes: [Any]) -> CIImage? {

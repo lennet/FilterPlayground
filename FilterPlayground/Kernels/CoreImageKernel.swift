@@ -10,6 +10,8 @@ import CoreImage
 
 class CoreImageKernel: Kernel {
 
+    required init() {}
+
     class var requiredArguments: [KernelArgumentType] {
         return []
     }
@@ -44,23 +46,22 @@ class CoreImageKernel: Kernel {
 
     var kernel: CIKernel?
 
-    static func compile(source: String) -> KernelCompilerResult {
+    func compile(source: String) -> KernelCompilerResult {
         let errorHelper = ErrorHelper()
-        if let kernel: Kernel = compile(source: source) {
-            return KernelCompilerResult.success(kernel: kernel, errors: [])
+        if compile(source: source) {
+            return KernelCompilerResult.success(errors: [])
         } else if let errorString = errorHelper.errorString() {
             return .failed(errors: CoreImageErrorParser.compileErrors(for: errorString))
         }
         return .failed(errors: [KernelError.compile(lineNumber: -1, characterIndex: -1, type: .error, message: "Unkown Error. Please check your code.", note: nil)])
     }
 
-    class func compile(source: String) -> Kernel? {
+    func compile(source: String) -> Bool {
         if let kernel = CIKernel(source: source) {
-            let result = CoreImageKernel()
-            result.kernel = kernel
-            return result
+            self.kernel = kernel
+            return true
         }
-        return nil
+        return false
     }
 
     func apply(with _: [CIImage], attributes: [Any]) -> CIImage? {

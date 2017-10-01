@@ -22,7 +22,7 @@ class MainViewController: UIViewController {
 
     /// describe the relation between the width of the SourceEditor and the LiveView
     var sourceViewRatio: CGFloat = 0.5
-
+    var kernel: Kernel?
     var isRunning = false
 
     var document: Project?
@@ -129,12 +129,12 @@ class MainViewController: UIViewController {
 
         guard let source = sourceEditorViewController?.source,
             let input = liveViewController?.inputImages,
-            let document = document else {
+            let kernel = kernel else {
             return
         }
         let attributes = attributesViewController?.attributes ?? []
-        switch document.metaData.type.kernelClass.compile(source: source) {
-        case let .success(kernel: kernel, errors: errors):
+        switch kernel.compile(source: source) {
+        case let .success(errors: errors):
             apply(kernel: kernel, input: input, attributes: attributes)
             display(errors: errors)
             break
@@ -225,6 +225,7 @@ class MainViewController: UIViewController {
             self.attributesBarButtonItem.isEnabled = document.metaData.type.kernelClass.supportsArguments
             self.showAttributes = document.metaData.type.kernelClass.supportsArguments
             self.title = document.title
+            self.kernel = document.metaData.type.kernelClass.init()
         }
         if let oldDocument = self.document {
             oldDocument.close(completionHandler: { _ in

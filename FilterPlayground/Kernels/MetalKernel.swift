@@ -12,6 +12,12 @@ import MetalKit
 
 class MetalKernel: Kernel {
 
+    let device: MTLDevice?
+
+    required init() {
+        device = MTLCreateSystemDefaultDevice()
+    }
+
     static var requiredInputImages: Int {
         return 0
     }
@@ -27,16 +33,13 @@ class MetalKernel: Kernel {
         return .metal
     }
 
-    static func compile(source: String) -> KernelCompilerResult {
-        let device = MTLCreateSystemDefaultDevice()
-
-        let kernel = MetalKernel()
+    func compile(source: String) -> KernelCompilerResult {
         var errors: [KernelError] = []
 
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
         device?.makeLibrary(source: source, options: nil, completionHandler: { lib, error in
-            kernel.library = lib
+            self.library = lib
             if let error = error as? MTLLibraryError {
                 errors = MetalErrorParser.compileErrors(for: error.localizedDescription)
                 print(error)
@@ -45,10 +48,10 @@ class MetalKernel: Kernel {
         })
 
         dispatchGroup.wait()
-        if kernel.library == nil {
+        if library == nil {
             return .failed(errors: errors)
         }
-        return .success(kernel: kernel, errors: errors)
+        return .success(errors: errors)
     }
 
     static func initialSource(with name: String) -> String {

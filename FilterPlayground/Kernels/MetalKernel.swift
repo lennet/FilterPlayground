@@ -10,16 +10,45 @@ import CoreImage
 import Metal
 import MetalKit
 
-class MetalKernel: Kernel {
+class MetalKernel: NSObject, Kernel, MTKViewDelegate {
 
+    var mtkView: MTKView
+    var shouldDraw = true
+
+    var outputView: KernelOutputView {
+        return mtkView
+    }
+
+    let threadGroupCount = MTLSizeMake(16, 16, 1)
     let device: MTLDevice?
+    let commandQueue: MTLCommandQueue?
+    var pipelineState: MTLComputePipelineState?
+    var library: MTLLibrary?
+    var inputTexture: MTLTexture?
+    var function: MTLFunction? {
+        didSet {
+            guard let function = function else {
+                return
+            }
 
-    required init() {
+            device?.makeComputePipelineState(function: function, completionHandler: { state, error in
+                self.pipelineState = state
+                print(error ?? "")
+            })
+        }
+    }
+
+    required override init() {
         device = MTLCreateSystemDefaultDevice()
+        mtkView = MTKView(frame: .zero, device: device)
+        commandQueue = device?.makeCommandQueue()
+        super.init()
+        mtkView.delegate = self
+        mtkView.framebufferOnly = false
     }
 
     static var requiredInputImages: Int {
-        return 0
+        return 1
     }
 
     static var supportedArguments: [KernelArgumentType] {
@@ -27,31 +56,51 @@ class MetalKernel: Kernel {
         return []
     }
 
-    var library: MTLLibrary?
-
     class var shadingLanguage: ShadingLanguage {
         return .metal
     }
 
-    func compile(source: String) -> KernelCompilerResult {
+    func render(with inputImages: [CIImage], attributes _: [Any]) {
+        guard let device = device else { return }
+        guard let image = inputImages.first?.cgImage else { return }
+
+        guard let lib = library else { return }
+        guard let functionName = lib.functionNames.first else { return }
+        let constantValues = MTLFunctionConstantValues()
+        lib.makeFunction(name: functionName, constantValues: constantValues) { function, error in
+            // todo handle error
+            // todo use CIContext to render image into texture
+            self.function = function
+            let textureLoader = MTKTextureLoader(device: device)
+            do {
+                self.inputTexture = try textureLoader.newTexture(cgImage: image, options: nil)
+                if let texture = self.inputTexture {
+                    self.mtkView.drawableSize = CGSize(width: texture.width, height: texture.height)
+                }
+            } catch {
+                print(error)
+            }
+
+            self.shouldDraw = true
+        }
+    }
+
+    func compile(source: String, completion: @escaping (KernelCompilerResult) -> Void) {
         var errors: [KernelError] = []
 
-        let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
         device?.makeLibrary(source: source, options: nil, completionHandler: { lib, error in
+
             self.library = lib
             if let error = error as? MTLLibraryError {
                 errors = MetalErrorParser.compileErrors(for: error.localizedDescription)
                 print(error)
             }
-            dispatchGroup.leave()
+            if self.library == nil {
+                completion(.failed(errors: errors))
+            } else {
+                completion(.success(errors: errors))
+            }
         })
-
-        dispatchGroup.wait()
-        if library == nil {
-            return .failed(errors: errors)
-        }
-        return .success(errors: errors)
     }
 
     static func initialSource(with name: String) -> String {
@@ -73,5 +122,36 @@ class MetalKernel: Kernel {
 
     func apply(with _: [CIImage], attributes _: [Any]) -> CIImage? {
         return nil
+    }
+
+    // Mark: - MTKViewDelegate
+
+    func draw(in view: MTKView) {
+        guard shouldDraw else { return }
+        if let currentDrawable = view.currentDrawable,
+            let inputTexture = inputTexture,
+            let pipelineState = pipelineState {
+            let commandBuffer = commandQueue?.makeCommandBuffer()
+
+            let commandEncoder = commandBuffer?.makeComputeCommandEncoder()
+            commandEncoder?.setComputePipelineState(pipelineState)
+            commandEncoder?.setTexture(inputTexture, index: 0)
+            #if !((arch(i386) || arch(x86_64)) && os(iOS))
+                commandEncoder?.setTexture(currentDrawable.texture, index: 1)
+            #endif
+
+            let threadGroups = MTLSize(width: Int(inputTexture.width) / threadGroupCount.width, height: Int(inputTexture.height) / threadGroupCount.height, depth: 1)
+
+            commandEncoder?.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
+            commandEncoder?.endEncoding()
+
+            commandBuffer?.present(currentDrawable)
+            commandBuffer?.commit()
+            shouldDraw = false
+        }
+    }
+
+    func mtkView(_: MTKView, drawableSizeWillChange _: CGSize) {
+        shouldDraw = true
     }
 }

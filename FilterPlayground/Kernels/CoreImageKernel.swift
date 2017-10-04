@@ -7,10 +7,31 @@
 //
 
 import CoreImage
+#if os(iOS) || os(tvOS)
+    import UIKit
+    typealias ImageView = CustomImageView
+#else
+    import AppKit
+    typealias ImageView = NSImageView
+#endif
 
 class CoreImageKernel: Kernel {
 
-    required init() {}
+    var imageView: ImageView
+
+    var outputView: KernelOutputView {
+        return imageView
+    }
+
+    required init() {
+        imageView = ImageView()
+
+        #if os(iOS) || os(tvOS)
+            imageView.accessibilityIgnoresInvertColors = true
+            imageView.canSelectImage = false
+            imageView.contentMode = .scaleAspectFit
+        #endif
+    }
 
     class var requiredArguments: [KernelArgumentType] {
         return []
@@ -46,14 +67,20 @@ class CoreImageKernel: Kernel {
 
     var kernel: CIKernel?
 
-    func compile(source: String) -> KernelCompilerResult {
+    func render(with inputImages: [CIImage], attributes: [Any]) {
+        let result = apply(with: inputImages, attributes: attributes)
+        imageView.image = result?.asImage
+    }
+
+    func compile(source: String, completion: @escaping (KernelCompilerResult) -> Void) {
         let errorHelper = ErrorHelper()
         if compile(source: source) {
-            return KernelCompilerResult.success(errors: [])
+            completion(.success(errors: []))
         } else if let errorString = errorHelper.errorString() {
-            return .failed(errors: CoreImageErrorParser.compileErrors(for: errorString))
+            completion(.failed(errors: CoreImageErrorParser.compileErrors(for: errorString)))
+        } else {
+            completion(.failed(errors: [KernelError.compile(lineNumber: -1, characterIndex: -1, type: .error, message: "Unkown Error. Please check your code.", note: nil)]))
         }
-        return .failed(errors: [KernelError.compile(lineNumber: -1, characterIndex: -1, type: .error, message: "Unkown Error. Please check your code.", note: nil)])
     }
 
     func compile(source: String) -> Bool {

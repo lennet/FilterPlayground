@@ -10,8 +10,8 @@ import UIKit
 
 class LiveViewController: UIViewController {
 
+    @IBOutlet weak var outputContainerView: UIView!
     @IBOutlet weak var inputStackView: UIStackView!
-    @IBOutlet weak var imageView: CustomImageView!
     @IBOutlet var inputImageViews: [CustomImageView]!
     @IBOutlet var labels: [UILabel]!
     var didUpdateInputImages: (([UIImage]) -> Void)?
@@ -58,7 +58,6 @@ class LiveViewController: UIViewController {
             for (index, image) in newValue.enumerated() where index < inputImageViews.count {
                 inputImageViews[index].image = image
             }
-            imageView.image = nil
         }
     }
 
@@ -74,12 +73,18 @@ class LiveViewController: UIViewController {
 
         inputImageViews.forEach { $0.accessibilityIgnoresInvertColors = true }
         inputImageViews.forEach { $0.didSelectImage = didSelectImage }
-        imageView.accessibilityIgnoresInvertColors = true
-        imageView.canSelectImage = false
     }
 
     func didSelectImage(imageView _: CustomImageView) {
         didUpdateInputImages?(inputImages)
+    }
+
+    func setup(with kernel: Kernel) {
+        outputContainerView.removeAllSubViews()
+        let view = kernel.outputView
+        view.frame = outputContainerView.bounds
+        view.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
+        outputContainerView.addSubview(view)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -88,7 +93,7 @@ class LiveViewController: UIViewController {
     }
 
     func reset() {
-        imageView.image = nil
+        // imageView.image = nil
         inputImageViews.forEach { $0.image = nil }
     }
 
@@ -96,9 +101,9 @@ class LiveViewController: UIViewController {
         view.backgroundColor = ThemeManager.shared.currentTheme.liveViewBackground
         inputImageViews.forEach { $0.backgroundColor = ThemeManager.shared.currentTheme.imageViewBackground }
         if numberOfInputs > 0 {
-            imageView.backgroundColor = ThemeManager.shared.currentTheme.imageViewBackground
+            outputContainerView.backgroundColor = ThemeManager.shared.currentTheme.imageViewBackground
         } else {
-            imageView.backgroundColor = .clear
+            outputContainerView.backgroundColor = .clear
         }
         labels.forEach { $0.textColor = ThemeManager.shared.currentTheme.liveViewLabel }
     }

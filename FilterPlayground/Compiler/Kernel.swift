@@ -7,6 +7,13 @@
 //
 
 import CoreImage
+#if os(iOS) || os(tvOS)
+    import UIKit
+    typealias KernelOutputView = UIView
+#else
+    import AppKit
+    typealias KernelOutputView = NSView
+#endif
 
 protocol Kernel: class {
 
@@ -18,9 +25,13 @@ protocol Kernel: class {
 
     static var requiredInputImages: Int { get }
 
-    func compile(source: String) -> KernelCompilerResult
+    func compile(source: String, completion: @escaping (KernelCompilerResult) -> Void)
 
     func apply(with inputImages: [CIImage], attributes: [Any]) -> CIImage?
+
+    func render(with inputImages: [CIImage], attributes: [Any])
+
+    var outputView: KernelOutputView { get }
 
     init()
 }

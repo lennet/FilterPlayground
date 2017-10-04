@@ -8,8 +8,10 @@
 
 #if os(iOS) || os(tvOS)
     import UIKit
+    typealias Image = UIImage
 #elseif os(OSX)
     import AppKit
+    typealias Image = NSImage
 #endif
 
 extension CIImage {
@@ -28,6 +30,23 @@ extension CIImage {
             // TODO:
             return nil
         #else
+            return nil
+        #endif
+    }
+
+    var asImage: Image? {
+        #if os(iOS) || os(watchOS) || os(tvOS)
+            let context = CIContext()
+            if let cgImage = context.createCGImage(self, from: self.extent) {
+                return UIImage(cgImage: cgImage)
+            } else {
+                return UIImage(ciImage: self)
+            }
+        #else
+            let context = CIContext()
+            if let cgImage = context.createCGImage(self, from: self.extent) {
+                return NSImage(cgImage: cgImage, size: extent.size)
+            }
             return nil
         #endif
     }

@@ -22,7 +22,15 @@ class MainViewController: UIViewController {
 
     /// describe the relation between the width of the SourceEditor and the LiveView
     var sourceViewRatio: CGFloat = 0.5
-    var kernel: Kernel?
+    var kernel: Kernel? {
+        didSet {
+            guard let kernel = kernel else {
+                return
+            }
+            liveViewController?.setup(with: kernel)
+        }
+    }
+
     var isRunning = false
 
     var document: Project?
@@ -133,14 +141,18 @@ class MainViewController: UIViewController {
             return
         }
         let attributes = attributesViewController?.attributes ?? []
-        switch kernel.compile(source: source) {
-        case let .success(errors: errors):
-            apply(kernel: kernel, input: input, attributes: attributes)
-            display(errors: errors)
-            break
-        case let .failed(errors: errors):
-            display(errors: errors)
-            break
+        kernel.compile(source: source) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(errors: errors):
+                    self.apply(kernel: kernel, input: input, attributes: attributes)
+                    self.display(errors: errors)
+                    break
+                case let .failed(errors: errors):
+                    self.display(errors: errors)
+                    break
+                }
+            }
         }
     }
 
@@ -155,22 +167,8 @@ class MainViewController: UIViewController {
             return
         }
 
-        DispatchQueue.global(qos: .background).async {
-            let errorHelper = ErrorHelper()
-            let image = kernel.apply(with: input.flatMap { $0.asCIImage }, attributes: attributes.map { $0.value.asKernelValue })
-            DispatchQueue.main.sync {
-                if let image = image {
-                    self.liveViewController?.imageView.image = UIImage(ciImage: image)
-                } else if let errorString = errorHelper.errorString() {
-                    let errors = CoreImageErrorParser.runtimeErrors(for: errorString)
-                    self.display(errors: errors)
-                } else {
-                    let currentErrors = self.sourceEditorViewController?.errors ?? []
-                    self.display(errors: currentErrors + [KernelError.runtime(message: "Unkown Error occured. Please check your code and the passed arguments")])
-                }
-                self.isRunning = false
-            }
-        }
+        kernel.render(with: input.flatMap { $0.asCIImage }, attributes: attributes.map { $0.value.asKernelValue })
+        isRunning = false
     }
 
     func clearErrors() {

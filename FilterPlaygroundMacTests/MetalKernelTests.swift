@@ -27,19 +27,23 @@ class MetalKernelTests: XCTestCase {
             
         }
         """
-        let result = MetalKernel().compile(source: source)
-        switch result {
-        case let .failed(errors):
-            let expectedFirstError = KernelError.compile(lineNumber: 1, characterIndex: 8, type: .error, message: "unknown type name \'vec2\'", note: nil)
-            let expectedSecondError = KernelError.compile(lineNumber: 1, characterIndex: 13, type: .error, message: "kernel must have void return type", note: nil)
+        let exp = XCTestExpectation(description: "waiting for compilation")
+        MetalKernel().compile(source: source) { result in
+            switch result {
+            case let .failed(errors):
+                let expectedFirstError = KernelError.compile(lineNumber: 1, characterIndex: 8, type: .error, message: "unknown type name \'vec2\'", note: nil)
+                let expectedSecondError = KernelError.compile(lineNumber: 1, characterIndex: 13, type: .error, message: "kernel must have void return type", note: nil)
 
-            XCTAssertEqual(errors.first!, expectedFirstError)
-            XCTAssertEqual(errors.last!, expectedSecondError)
-            XCTAssertEqual(errors.count, 2)
-            break
-        default:
-            XCTFail()
+                XCTAssertEqual(errors.first!, expectedFirstError)
+                XCTAssertEqual(errors.last!, expectedSecondError)
+                XCTAssertEqual(errors.count, 2)
+                break
+            default:
+                XCTFail()
+            }
+            exp.fulfill()
         }
+        wait(for: [exp], timeout: 5)
     }
 
     func testCompilerMetalKernelWarnings() {
@@ -57,29 +61,38 @@ class MetalKernelTests: XCTestCase {
                 
                 }
         """
-        let kernel = MetalKernel()
-        let result =  kernel.compile(source: source)
-        switch result {
-        case let .success(errors: errors):
-            let expectedFirstError = KernelError.compile(lineNumber: 10, characterIndex: 19, type: .warning, message: "unused variable 'a'", note: nil)
 
-            XCTAssertEqual(errors.first!, expectedFirstError)
-            XCTAssertEqual(errors.count, 1)
-            XCTAssertNotNil(kernel.library)
-            break
-        default:
-            XCTFail()
+        let exp = XCTestExpectation(description: "waiting for compilation")
+        let kernel = MetalKernel()
+        kernel.compile(source: source) { result in
+            switch result {
+            case let .success(errors: errors):
+                let expectedFirstError = KernelError.compile(lineNumber: 10, characterIndex: 19, type: .warning, message: "unused variable 'a'", note: nil)
+
+                XCTAssertEqual(errors.first!, expectedFirstError)
+                XCTAssertEqual(errors.count, 1)
+                XCTAssertNotNil(kernel.library)
+                break
+            default:
+                XCTFail()
+            }
+            exp.fulfill()
         }
+        wait(for: [exp], timeout: 5)
     }
 
     func testCompileMetalKernel() {
         let source = MetalKernel.initialSource(with: "untitled")
-        let result = MetalKernel().compile(source: source)
-        switch result {
-        case .success(errors: _):
-            break
-        default:
-            XCTFail()
+        let exp = XCTestExpectation(description: "waiting for compilation")
+        MetalKernel().compile(source: source) { result in
+            switch result {
+            case .success(errors: _):
+                break
+            default:
+                XCTFail()
+            }
+            exp.fulfill()
         }
+        wait(for: [exp], timeout: 5)
     }
 }

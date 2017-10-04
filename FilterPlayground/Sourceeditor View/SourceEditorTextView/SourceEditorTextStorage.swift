@@ -30,10 +30,7 @@ class SourceEditorTextStorage: NSTextStorage {
     }
 
     override func setAttributes(_ attrs: [NSAttributedStringKey: Any]?, range: NSRange) {
-        //        beginEditing()
         attributedString.setAttributes(attrs, range: range)
-        // edited(.editedAttributes, range: range, changeInLength: 0)
-        //        endEditing()
     }
 
     override func processEditing() {
@@ -48,7 +45,6 @@ class SourceEditorTextStorage: NSTextStorage {
 
         attribtutedStringForString?(editedParagraph) { attributedParagraphString in
             self.beginEditing()
-            //            DispatchQueue.global(qos: .userInteractive).async {
             attributedParagraphString.enumerateAttributes(in: NSMakeRange(0, attributedParagraphString.length), options: [], using: { attribute, currentRange, _ in
                 var adjustedRange = NSMakeRange(editedParagaphRange.location + currentRange.location, currentRange.length)
                 if adjustedRange.location + adjustedRange.length > self.string.count {
@@ -57,14 +53,11 @@ class SourceEditorTextStorage: NSTextStorage {
                     adjustedRange.length = 0
                 }
 
-                //                    DispatchQueue.main.async {
                 self.addAttributes(attribute, range: adjustedRange)
-                //                    }
             })
 
             self.endEditing()
             self.edited(.editedAttributes, range: NSMakeRange(0, self.string.count), changeInLength: 0)
         }
-        // todo try to move this end editing in the last main async call
     }
 }

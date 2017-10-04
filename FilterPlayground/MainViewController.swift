@@ -33,7 +33,7 @@ class MainViewController: UIViewController {
 
     var isRunning = false
 
-    var document: Project?
+    var project: Project?
     var showLiveView = true {
         didSet {
             updateViewConstraints()
@@ -61,7 +61,7 @@ class MainViewController: UIViewController {
     }
 
     func presentDocumentBrowser() {
-        if document == nil {
+        if project == nil {
             performSegue(withIdentifier: "initialSetupSegueWithoutAnimation", sender: nil)
         }
     }
@@ -73,7 +73,7 @@ class MainViewController: UIViewController {
     }
 
     @objc func applicationWillTerminate() {
-        document?.close(completionHandler: nil)
+        project?.close(completionHandler: nil)
     }
 
     @objc func keyboardWillShow(notification: Notification) {
@@ -159,7 +159,7 @@ class MainViewController: UIViewController {
     // TODO: make function throwing to handle error handling somewhere else
     func apply(kernel: Kernel, input: [UIImage], attributes: [KernelAttribute]) {
         clearErrors()
-        guard let document = document else { return }
+        guard let document = project else { return }
         let requiredInputImages = document.metaData.type.kernelClass.requiredInputImages
         guard requiredInputImages == input.count else {
             display(errors: [KernelError.runtime(message: "A \(document.metaData.type) Kernel requires \(requiredInputImages) input image\(requiredInputImages > 1 ? "s" : "") but you only passed \(input.count)")])
@@ -214,7 +214,7 @@ class MainViewController: UIViewController {
     func didOpened(document: Project) {
         let completion = {
             self.presentedViewController?.dismiss(animated: true, completion: nil)
-            self.document = document
+            self.project = document
             self.sourceEditorViewController?.source = document.source
             self.attributesViewController?.attributes = document.metaData.attributes
             self.attributesViewController?.tableView.reloadData()
@@ -225,7 +225,7 @@ class MainViewController: UIViewController {
             self.title = document.title
             self.kernel = document.metaData.type.kernelClass.init()
         }
-        if let oldDocument = self.document {
+        if let oldDocument = self.project {
             oldDocument.close(completionHandler: { _ in
                 completion()
             })
@@ -296,8 +296,8 @@ class MainViewController: UIViewController {
         guard let attributes = attributesViewController?.attributes else {
             return
         }
-        document?.metaData.attributes = attributes
-        document?.updateChangeCount(.done)
+        project?.metaData.attributes = attributes
+        project?.updateChangeCount(.done)
         if shouldRerun {
             run()
         }
@@ -317,8 +317,8 @@ class MainViewController: UIViewController {
             return KernelAttribute(name: argument.0, type: argument.1, value: argument.1.defaultValue)
         }
         attributesViewController?.attributes = newAttributes
-        document?.metaData.attributes = newAttributes
-        document?.updateChangeCount(.done)
+        project?.metaData.attributes = newAttributes
+        project?.updateChangeCount(.done)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
@@ -329,19 +329,19 @@ class MainViewController: UIViewController {
         case let vc as LiveViewController:
             liveViewController = vc
             vc.didUpdateInputImages = { [weak self] images in
-                self?.document?.inputImages = images
+                self?.project?.inputImages = images
             }
         case let vc as SourceEditorViewController:
             sourceEditorViewController = vc
             vc.didUpdateText = { [weak self] text in
-                self?.document?.source = text
+                self?.project?.source = text
             }
             vc.didUpdateArguments = didUpdateArgumentsFromSourceEditor
         case let vc as DocumentBrowserViewController:
             documentBrowser = vc
             vc.didOpenedDocument = didOpened
         case let nc as UINavigationController where nc.viewControllers.first is ExportTableViewController:
-            (nc.viewControllers.first as? ExportTableViewController)?.document = document
+            (nc.viewControllers.first as? ExportTableViewController)?.document = project
         default:
             print("Unkown ViewController Segue: \(segue.destination)")
         }

@@ -120,7 +120,7 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func documentation(_ sender: UIBarButtonItem) {
-        let url = URL(string: "https://developer.apple.com/library/content/documentation/GraphicsImaging/Reference/CIKernelLangRef/ci_gslang_ext.html")!
+        guard let url = kernel?.shadingLanguage.documentationURL else { return }
         let safariVC = SFSafariViewController(url: url)
         safariVC.modalPresentationStyle = .popover
         safariVC.popoverPresentationController?.barButtonItem = sender
@@ -167,7 +167,7 @@ class MainViewController: UIViewController {
             return
         }
 
-        kernel.render(with: input.flatMap { $0.asCIImage }, attributes: attributes.map { $0.value.asKernelValue })
+        kernel.render(with: input.flatMap { $0.asCIImage }, attributes: attributes.map { $0.value })
         isRunning = false
     }
 

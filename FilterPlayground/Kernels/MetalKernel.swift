@@ -37,6 +37,8 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
             })
         }
     }
+    
+    var arguments: [KernelAttributeValue] = []
 
     required override init() {
         device = MTLCreateSystemDefaultDevice()
@@ -53,23 +55,25 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
 
     static var supportedArguments: [KernelArgumentType] {
         // todo
-        return []
+        return [.float]
     }
 
-    class var shadingLanguage: ShadingLanguage {
+    var shadingLanguage: ShadingLanguage {
         return .metal
     }
 
-    func render(with inputImages: [CIImage], attributes _: [Any]) {
+    func render(with inputImages: [CIImage], attributes arguments: [KernelAttributeValue]) {
         guard let device = device else { return }
         guard let image = inputImages.first?.cgImage else { return }
 
         guard let lib = library else { return }
         guard let functionName = lib.functionNames.first else { return }
         let constantValues = MTLFunctionConstantValues()
+        self.arguments = arguments
         lib.makeFunction(name: functionName, constantValues: constantValues) { function, error in
             // todo handle error
             // todo use CIContext to render image into texture
+            
             self.function = function
             let textureLoader = MTKTextureLoader(device: device)
             do {
@@ -83,6 +87,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
 
             self.shouldDraw = true
         }
+
     }
 
     func compile(source: String, completion: @escaping (KernelCompilerResult) -> Void) {
@@ -120,7 +125,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         """
     }
 
-    func apply(with _: [CIImage], attributes _: [Any]) -> CIImage? {
+    func apply(with _: [CIImage], attributes _: [KernelAttributeValue]) -> CIImage? {
         return nil
     }
 
@@ -139,7 +144,15 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
             #if !((arch(i386) || arch(x86_64)) && os(iOS))
                 commandEncoder?.setTexture(currentDrawable.texture, index: 1)
             #endif
-
+            
+            var index = 0
+            arguments.forEach({ (value) in
+                value.withUnsafeMetalBufferValue({ (pointer, length) -> () in
+                    commandEncoder?.setBytes(pointer, length: length, index: index)
+                    index += 1
+                })
+            })
+            
             let threadGroups = MTLSize(width: Int(inputTexture.width) / threadGroupCount.width, height: Int(inputTexture.height) / threadGroupCount.height, depth: 1)
 
             commandEncoder?.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)

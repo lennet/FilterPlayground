@@ -32,6 +32,25 @@ enum KernelAttributeValue {
             return CISampler(image: image)
         }
     }
+    
+    func withUnsafeMetalBufferValue<T>(_ body: (UnsafeRawPointer, Int) -> T) -> T? {
+        switch self {
+        case var .float(value):
+            return body(&value, MemoryLayout<Float>.size)
+        case .vec2:
+            return nil
+        case .vec3:
+            return nil
+        case .vec4:
+            return nil
+        case .color:
+            return nil
+        case .sample(_):
+            return nil
+        }
+
+    }
+    
 }
 
 extension KernelAttributeValue: Codable {

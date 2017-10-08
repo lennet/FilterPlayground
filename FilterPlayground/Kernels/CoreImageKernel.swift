@@ -45,7 +45,7 @@ class CoreImageKernel: Kernel {
         return [.float, .vec2, .vec3, .vec4, .sample, .color]
     }
 
-    class var shadingLanguage: ShadingLanguage {
+    var shadingLanguage: ShadingLanguage {
         return .coreimage
     }
 
@@ -67,7 +67,7 @@ class CoreImageKernel: Kernel {
 
     var kernel: CIKernel?
 
-    func render(with inputImages: [CIImage], attributes: [Any]) {
+    func render(with inputImages: [CIImage], attributes: [KernelAttributeValue]) {
         let result = apply(with: inputImages, attributes: attributes)
         imageView.image = result?.asImage
     }
@@ -91,8 +91,8 @@ class CoreImageKernel: Kernel {
         return false
     }
 
-    func apply(with _: [CIImage], attributes: [Any]) -> CIImage? {
-        let arguments: [Any] = attributes
+    func apply(with _: [CIImage], attributes: [KernelAttributeValue]) -> CIImage? {
+        let arguments: [Any] = attributes.flatMap{$0.asKernelValue}
         return kernel?.apply(extent: CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000)), roiCallback: { (_, rect) -> CGRect in
             rect
         }, arguments: arguments)

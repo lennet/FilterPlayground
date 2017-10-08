@@ -32,13 +32,13 @@ class CoreImageWarpKernel: CoreImageKernel {
         return false
     }
 
-    override func apply(with inputImages: [CIImage], attributes: [Any]) -> CIImage? {
+    override func apply(with inputImages: [CIImage], attributes: [KernelAttributeValue]) -> CIImage? {
         guard let input = inputImages.first else {
             return nil
         }
 
         return warpKernel?.apply(extent: input.extent, roiCallback: { (_, rect) -> CGRect in
             rect
-        }, image: input, arguments: attributes)
+        }, image: input, arguments: attributes.flatMap{$0.asKernelValue})
     }
 }

@@ -12,12 +12,41 @@ import MetalKit
 
 class MetalKernel: NSObject, Kernel, MTKViewDelegate {
 
+    var inputImages: [CIImage] = [] {
+        didSet {
+            guard let device = device else { return }
+            guard let image = inputImages.first?.cgImage else { return }
+
+            guard let lib = library else { return }
+            guard let functionName = lib.functionNames.first else { return }
+            let constantValues = MTLFunctionConstantValues()
+            lib.makeFunction(name: functionName, constantValues: constantValues) { function, error in
+                // todo handle error
+                // todo use CIContext to render image into texture
+
+                self.function = function
+                let textureLoader = MTKTextureLoader(device: device)
+                do {
+                    self.inputTexture = try textureLoader.newTexture(cgImage: image, options: nil)
+                    if let texture = self.inputTexture {
+                        self.mtkView.drawableSize = CGSize(width: texture.width, height: texture.height)
+                    }
+                } catch {
+                    print(error)
+                }
+
+                self.mtkView.setNeedsDisplay()
+            }
+        }
+    }
+
     var mtkView: MTKView
-    var shouldDraw = true
 
     var outputView: KernelOutputView {
         return mtkView
     }
+
+    var arguments: [KernelAttributeValue] = []
 
     let threadGroupCount = MTLSizeMake(16, 16, 1)
     let device: MTLDevice?
@@ -37,16 +66,13 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
             })
         }
     }
-    
-    var arguments: [KernelAttributeValue] = []
 
     required override init() {
         device = MTLCreateSystemDefaultDevice()
         mtkView = MTKView(frame: .zero, device: device)
         commandQueue = device?.makeCommandQueue()
         super.init()
-        mtkView.delegate = self
-        mtkView.framebufferOnly = false
+        configureMetalView()
     }
 
     static var requiredInputImages: Int {
@@ -62,32 +88,24 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         return .metal
     }
 
-    func render(with inputImages: [CIImage], attributes arguments: [KernelAttributeValue]) {
-        guard let device = device else { return }
-        guard let image = inputImages.first?.cgImage else { return }
+    func render() {
+        mtkView.setNeedsDisplay()
+    }
 
-        guard let lib = library else { return }
-        guard let functionName = lib.functionNames.first else { return }
-        let constantValues = MTLFunctionConstantValues()
-        self.arguments = arguments
-        lib.makeFunction(name: functionName, constantValues: constantValues) { function, error in
-            // todo handle error
-            // todo use CIContext to render image into texture
-            
-            self.function = function
-            let textureLoader = MTKTextureLoader(device: device)
-            do {
-                self.inputTexture = try textureLoader.newTexture(cgImage: image, options: nil)
-                if let texture = self.inputTexture {
-                    self.mtkView.drawableSize = CGSize(width: texture.width, height: texture.height)
-                }
-            } catch {
-                print(error)
-            }
+    func getImage() -> CIImage? {
+        // TODO:
+        return nil
+    }
 
-            self.shouldDraw = true
-        }
-
+    private func configureMetalView() {
+        mtkView.enableSetNeedsDisplay = true
+        #if os(iOS) || os(tvOS)
+            mtkView.contentMode = .scaleAspectFit
+            mtkView.contentScaleFactor = UIScreen.main.scale
+        #endif
+        mtkView.autoResizeDrawable = false
+        mtkView.delegate = self
+        mtkView.framebufferOnly = false
     }
 
     func compile(source: String, completion: @escaping (KernelCompilerResult) -> Void) {
@@ -125,14 +143,9 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         """
     }
 
-    func apply(with _: [CIImage], attributes _: [KernelAttributeValue]) -> CIImage? {
-        return nil
-    }
-
     // Mark: - MTKViewDelegate
 
     func draw(in view: MTKView) {
-        guard shouldDraw else { return }
         if let currentDrawable = view.currentDrawable,
             let inputTexture = inputTexture,
             let pipelineState = pipelineState {
@@ -144,15 +157,15 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
             #if !((arch(i386) || arch(x86_64)) && os(iOS))
                 commandEncoder?.setTexture(currentDrawable.texture, index: 1)
             #endif
-            
+
             var index = 0
-            arguments.forEach({ (value) in
-                value.withUnsafeMetalBufferValue({ (pointer, length) -> () in
+            arguments.forEach({ value in
+                value.withUnsafeMetalBufferValue({ (pointer, length) -> Void in
                     commandEncoder?.setBytes(pointer, length: length, index: index)
                     index += 1
                 })
             })
-            
+
             let threadGroups = MTLSize(width: Int(inputTexture.width) / threadGroupCount.width, height: Int(inputTexture.height) / threadGroupCount.height, depth: 1)
 
             commandEncoder?.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
@@ -160,11 +173,10 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
 
             commandBuffer?.present(currentDrawable)
             commandBuffer?.commit()
-            shouldDraw = false
         }
     }
 
     func mtkView(_: MTKView, drawableSizeWillChange _: CGSize) {
-        shouldDraw = true
+        mtkView.setNeedsDisplay()
     }
 }

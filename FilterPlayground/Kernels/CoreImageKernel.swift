@@ -17,11 +17,15 @@ import CoreImage
 
 class CoreImageKernel: Kernel {
 
+    var inputImages: [CIImage] = []
+
     var imageView: ImageView
 
     var outputView: KernelOutputView {
         return imageView
     }
+
+    var arguments: [KernelAttributeValue] = []
 
     required init() {
         imageView = ImageView()
@@ -67,9 +71,12 @@ class CoreImageKernel: Kernel {
 
     var kernel: CIKernel?
 
-    func render(with inputImages: [CIImage], attributes: [KernelAttributeValue]) {
-        let result = apply(with: inputImages, attributes: attributes)
-        imageView.image = result?.asImage
+    func render() {
+        imageView.image = getImage()?.asImage
+    }
+
+    func getImage() -> CIImage? {
+        return apply(with: inputImages, attributes: arguments)
     }
 
     func compile(source: String, completion: @escaping (KernelCompilerResult) -> Void) {
@@ -92,7 +99,7 @@ class CoreImageKernel: Kernel {
     }
 
     func apply(with _: [CIImage], attributes: [KernelAttributeValue]) -> CIImage? {
-        let arguments: [Any] = attributes.flatMap{$0.asKernelValue}
+        let arguments: [Any] = attributes.flatMap { $0.asKernelValue }
         return kernel?.apply(extent: CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000)), roiCallback: { (_, rect) -> CGRect in
             rect
         }, arguments: arguments)

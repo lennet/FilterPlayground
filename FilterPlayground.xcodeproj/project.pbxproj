@@ -39,6 +39,7 @@
 		9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC741F3663AE00A8E3CA /* Theme.swift */; };
 		9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC761F36675000A8E3CA /* ThemingTests.swift */; };
 		98426C171F670540007C2260 /* CIFilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98426C161F670540007C2260 /* CIFilterHelper.swift */; };
+		9845153E1F9149420015FADF /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845153C1F9149210015FADF /* NSView+Extension.swift */; };
 		9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845C6101F38F44100F38283 /* NewProjectViewController.swift */; };
 		9848C4441F3B9B58001E079C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */; };
 		984D9FA41F2E824B004AFD74 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D9FA31F2E824B004AFD74 /* ParserTests.swift */; };
@@ -170,6 +171,7 @@
 		9841EC741F3663AE00A8E3CA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		9841EC761F36675000A8E3CA /* ThemingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingTests.swift; sourceTree = "<group>"; };
 		98426C161F670540007C2260 /* CIFilterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilterHelper.swift; sourceTree = "<group>"; };
+		9845153C1F9149210015FADF /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
 		9845C6101F38F44100F38283 /* NewProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectViewController.swift; sourceTree = "<group>"; };
 		9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		984D9FA31F2E824B004AFD74 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 				989716951F67E7B300E7C20C /* CoreImage+Extension.swift */,
 				989716991F67E80A00E7C20C /* UIImage+Extension.swift */,
 				98D8F9DE1F815D20005A1DFE /* UIView+Extension.swift */,
+				9845153C1F9149210015FADF /* NSView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -822,6 +825,7 @@
 				9897169C1F67E84A00E7C20C /* Kernel.swift in Sources */,
 				980E4F461F8013AA00C603C3 /* MetalErrorParser.swift in Sources */,
 				9897169E1F67E93300E7C20C /* ErrorHelper.swift in Sources */,
+				9845153E1F9149420015FADF /* NSView+Extension.swift in Sources */,
 				989C576F1F6822BC008FF142 /* SwiftPlaygroundsHelper.swift in Sources */,
 				9833310E1F80046F00C9AF52 /* CoreImageWarpKernel.swift in Sources */,
 				983331091F8003B200C9AF52 /* KernelAttribute.swift in Sources */,

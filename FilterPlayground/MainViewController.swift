@@ -157,7 +157,7 @@ class MainViewController: UIViewController {
     }
 
     // TODO: make function throwing to handle error handling somewhere else
-    func apply(kernel: Kernel, input: [UIImage], attributes: [KernelAttribute]) {
+    func apply(kernel: Kernel, input: [UIImage], attributes _: [KernelAttribute]) {
         clearErrors()
         guard let document = project else { return }
         let requiredInputImages = document.metaData.type.kernelClass.requiredInputImages
@@ -167,7 +167,7 @@ class MainViewController: UIViewController {
             return
         }
 
-        kernel.render(with: input.flatMap { $0.asCIImage }, attributes: attributes.map { $0.value })
+        kernel.inputImages = input.flatMap { $0.asCIImage }
         isRunning = false
     }
 
@@ -224,6 +224,7 @@ class MainViewController: UIViewController {
             self.showAttributes = document.metaData.type.kernelClass.supportsArguments
             self.title = document.title
             self.kernel = document.metaData.type.kernelClass.init()
+            self.updateKernelarguments()
         }
         if let oldDocument = self.project {
             oldDocument.close(completionHandler: { _ in
@@ -299,9 +300,17 @@ class MainViewController: UIViewController {
         project?.metaData.attributes = attributes
         project?.updateChangeCount(.done)
         if shouldRerun {
-            run()
+            updateKernelarguments()
         }
         sourceEditorViewController?.update(attributes: attributes)
+    }
+
+    func updateKernelarguments() {
+        guard let attributes = attributesViewController?.attributes else {
+            return
+        }
+        kernel?.arguments = attributes.map { $0.value }
+        kernel?.render()
     }
 
     func didUpdateArgumentsFromSourceEditor(arguments: [(String, KernelArgumentType)]) {

@@ -39,6 +39,6 @@ class CoreImageWarpKernel: CoreImageKernel {
 
         return warpKernel?.apply(extent: input.extent, roiCallback: { (_, rect) -> CGRect in
             rect
-        }, image: input, arguments: attributes.flatMap{$0.asKernelValue})
+        }, image: input, arguments: attributes.flatMap { $0.asKernelValue })
     }
 }

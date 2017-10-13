@@ -218,9 +218,7 @@
                             </barButtonItem>
                             <barButtonItem systemItem="action" id="IBv-aa-U1L">
                                 <connections>
-                                    <segue destination="JPN-hL-dOi" kind="popoverPresentation" popoverAnchorBarButtonItem="IBv-aa-U1L" id="iiY-oe-yLQ">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <segue destination="JPN-hL-dOi" kind="presentation" modalPresentationStyle="formSheet" id="iiY-oe-yLQ"/>
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
@@ -353,7 +351,7 @@
                             <outlet property="delegate" destination="MM0-3d-Mpf" id="OhX-Pv-0yj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Export" id="PWn-BL-Py8">
+                    <navigationItem key="navigationItem" title="Export" largeTitleDisplayMode="always" id="PWn-BL-Py8">
                         <barButtonItem key="rightBarButtonItem" title="Cancel" id="Jzt-0w-uBr">
                             <connections>
                                 <action selector="tappedCancelButton" destination="MM0-3d-Mpf" id="SaI-Hb-O9t"/>
@@ -608,7 +606,15 @@
                             <outlet property="delegate" destination="ZzX-F5-eF8" id="GJg-lo-ROx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Empty Project" id="LrO-EO-5H0">
+                    <navigationItem key="navigationItem" id="LrO-EO-5H0">
+                        <nil key="title"/>
+                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Untitled" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="XZn-sR-ay9">
+                            <rect key="frame" x="440" y="7" width="486" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Ydj-fe-3B8">
                             <connections>
                                 <segue destination="et2-7M-Gmp" kind="custom" customClass="DismissSegue" customModule="FilterPlayground" customModuleProvider="target" id="LVZ-vl-ww2"/>
@@ -618,7 +624,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="itg-mA-yig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4240" y="942"/>
+            <point key="canvasLocation" x="4239.9707174231326" y="941.60156249999989"/>
         </scene>
         <!--Source Editor View Controller-->
         <scene sceneID="jwi-XS-pAf">
@@ -960,7 +966,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JPN-hL-dOi" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FA3-4l-8Aq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

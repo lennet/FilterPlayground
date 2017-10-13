@@ -19,6 +19,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
 
         delegate = self
         allowsDocumentCreation = true
+        allowsPickingMultipleItems = true
     }
 
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {

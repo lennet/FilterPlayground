@@ -98,6 +98,7 @@ class ExportTableViewController: UITableViewController {
             self.dismiss(animated: true, completion: nil)
         }
         activityViewController.popoverPresentationController?.sourceView = sourceView
+        activityViewController.popoverPresentationController?.sourceRect = sourceView?.bounds ?? .zero
         present(activityViewController, animated: true, completion: nil)
     }
 }

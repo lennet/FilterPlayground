@@ -18,6 +18,8 @@ import CoreImage
 protocol Kernel: class {
 
     var shadingLanguage: ShadingLanguage { get }
+    var arguments: [KernelAttributeValue] { get set }
+    var inputImages: [CIImage] { get set }
 
     static var supportedArguments: [KernelArgumentType] { get }
 
@@ -27,9 +29,9 @@ protocol Kernel: class {
 
     func compile(source: String, completion: @escaping (KernelCompilerResult) -> Void)
 
-    func apply(with inputImages: [CIImage], attributes: [KernelAttributeValue]) -> CIImage?
+    func getImage() -> CIImage?
 
-    func render(with inputImages: [CIImage], attributes: [KernelAttributeValue])
+    func render()
 
     var outputView: KernelOutputView { get }
 

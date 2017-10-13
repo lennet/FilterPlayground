@@ -33,7 +33,7 @@ class CoreImageColorKernel: CoreImageKernel {
     }
 
     override func apply(with _: [CIImage], attributes: [KernelAttributeValue]) -> CIImage? {
-        let arguments = attributes.flatMap{$0.asKernelValue}
+        let arguments = attributes.flatMap { $0.asKernelValue }
         guard let image = arguments.first as? CISampler else {
             return nil
         }

@@ -7,34 +7,35 @@
 //
 
 import CoreImage
-#if os(iOS) || os(tvOS)
-    import UIKit
-    typealias ImageView = CustomImageView
-#else
-    import AppKit
-    typealias ImageView = NSImageView
-#endif
+import Metal
+import MetalKit
 
-class CoreImageKernel: Kernel {
+class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
 
     var inputImages: [CIImage] = []
 
-    var imageView: ImageView
+    let commandQueue: MTLCommandQueue?
+    let device: MTLDevice?
+    var mtkView: MTKView!
+    var context: CIContext?
 
     var outputView: KernelOutputView {
-        return imageView
+        return mtkView
     }
 
     var arguments: [KernelAttributeValue] = []
+    let colorSpace = CGColorSpaceCreateDeviceRGB()
 
-    required init() {
-        imageView = ImageView()
-
-        #if os(iOS) || os(tvOS)
-            imageView.accessibilityIgnoresInvertColors = true
-            imageView.canSelectImage = false
-            imageView.contentMode = .scaleAspectFit
+    required override init() {
+        device = MTLCreateSystemDefaultDevice()
+        commandQueue = device?.makeCommandQueue()
+        #if !((arch(i386) || arch(x86_64)) && os(iOS))
+            context = CIContext(mtlDevice: device!)
+        #else
+            context = CIContext()
         #endif
+        super.init()
+        mtkView = FPMTKView(device: device, delegate: self)
     }
 
     class var requiredArguments: [KernelArgumentType] {
@@ -72,7 +73,7 @@ class CoreImageKernel: Kernel {
     var kernel: CIKernel?
 
     func render() {
-        imageView.image = getImage()?.asImage
+        mtkView.setNeedsDisplay()
     }
 
     func getImage() -> CIImage? {
@@ -103,5 +104,29 @@ class CoreImageKernel: Kernel {
         return kernel?.apply(extent: CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000)), roiCallback: { (_, rect) -> CGRect in
             rect
         }, arguments: arguments)
+    }
+
+    // Mark: - MTKViewDelegate
+
+    func draw(in view: MTKView) {
+        if let currentDrawable = view.currentDrawable,
+            let output = apply(with: inputImages, attributes: arguments) {
+            let commandBuffer = commandQueue?.makeCommandBuffer()
+            view.drawableSize = output.extent.size
+            #if !((arch(i386) || arch(x86_64)) && os(iOS))
+                context?.render(output,
+                                to: currentDrawable.texture,
+                                commandBuffer: commandBuffer,
+                                bounds: output.extent,
+                                colorSpace: colorSpace)
+            #endif
+
+            commandBuffer?.present(currentDrawable)
+            commandBuffer?.commit()
+        }
+    }
+
+    func mtkView(_: MTKView, drawableSizeWillChange _: CGSize) {
+        mtkView.setNeedsDisplay()
     }
 }

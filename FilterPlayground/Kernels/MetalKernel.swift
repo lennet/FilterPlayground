@@ -40,7 +40,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         }
     }
 
-    var mtkView: MTKView
+    var mtkView: MTKView!
 
     var outputView: KernelOutputView {
         return mtkView
@@ -69,10 +69,9 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
 
     required override init() {
         device = MTLCreateSystemDefaultDevice()
-        mtkView = MTKView(frame: .zero, device: device)
         commandQueue = device?.makeCommandQueue()
         super.init()
-        configureMetalView()
+        mtkView = FPMTKView(device: device, delegate: self)
     }
 
     static var requiredInputImages: Int {
@@ -95,17 +94,6 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
     func getImage() -> CIImage? {
         // TODO:
         return nil
-    }
-
-    private func configureMetalView() {
-        mtkView.enableSetNeedsDisplay = true
-        #if os(iOS) || os(tvOS)
-            mtkView.contentMode = .scaleAspectFit
-            mtkView.contentScaleFactor = UIScreen.main.scale
-        #endif
-        mtkView.autoResizeDrawable = false
-        mtkView.delegate = self
-        mtkView.framebufferOnly = false
     }
 
     func compile(source: String, completion: @escaping (KernelCompilerResult) -> Void) {

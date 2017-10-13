@@ -136,16 +136,14 @@ class MainViewController: UIViewController {
         }
 
         guard let source = sourceEditorViewController?.source,
-            let input = liveViewController?.inputImages,
             let kernel = kernel else {
             return
         }
-        let attributes = attributesViewController?.attributes ?? []
         kernel.compile(source: source) { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(errors: errors):
-                    self.apply(kernel: kernel, input: input, attributes: attributes)
+                    self.render()
                     self.display(errors: errors)
                     break
                 case let .failed(errors: errors):
@@ -157,17 +155,18 @@ class MainViewController: UIViewController {
     }
 
     // TODO: make function throwing to handle error handling somewhere else
-    func apply(kernel: Kernel, input: [UIImage], attributes _: [KernelAttribute]) {
+    func render() {
         clearErrors()
-        guard let document = project else { return }
+        guard let document = project,
+            let kernel = kernel else { return }
         let requiredInputImages = document.metaData.type.kernelClass.requiredInputImages
-        guard requiredInputImages == input.count else {
-            display(errors: [KernelError.runtime(message: "A \(document.metaData.type) Kernel requires \(requiredInputImages) input image\(requiredInputImages > 1 ? "s" : "") but you only passed \(input.count)")])
+        guard requiredInputImages == kernel.inputImages.count else {
+            display(errors: [KernelError.runtime(message: "A \(document.metaData.type) Kernel requires \(requiredInputImages) input image\(requiredInputImages > 1 ? "s" : "") but you only passed \(kernel.inputImages.count)")])
             liveViewController?.highlightEmptyInputImageViews = true
             return
         }
 
-        kernel.inputImages = input.flatMap { $0.asCIImage }
+        kernel.render()
         isRunning = false
     }
 
@@ -224,6 +223,7 @@ class MainViewController: UIViewController {
             self.showAttributes = document.metaData.type.kernelClass.supportsArguments
             self.title = document.title
             self.kernel = document.metaData.type.kernelClass.init()
+            self.updateInputImages()
             self.updateKernelarguments()
         }
         if let oldDocument = self.project {
@@ -306,10 +306,14 @@ class MainViewController: UIViewController {
     }
 
     func updateKernelarguments() {
-        guard let attributes = attributesViewController?.attributes else {
-            return
-        }
-        kernel?.arguments = attributes.map { $0.value }
+        guard let project = project else { return }
+        kernel?.arguments = project.metaData.attributes.flatMap { $0.value }
+        kernel?.render()
+    }
+
+    func updateInputImages() {
+        guard let project = project else { return }
+        kernel?.inputImages = project.inputImages.flatMap { $0.asCIImage }
         kernel?.render()
     }
 
@@ -339,6 +343,7 @@ class MainViewController: UIViewController {
             liveViewController = vc
             vc.didUpdateInputImages = { [weak self] images in
                 self?.project?.inputImages = images
+                self?.updateInputImages()
             }
         case let vc as SourceEditorViewController:
             sourceEditorViewController = vc

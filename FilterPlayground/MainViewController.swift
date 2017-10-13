@@ -293,16 +293,17 @@ class MainViewController: UIViewController {
         }
     }
 
-    func didUpdateArgumentsFromAttributesViewController(shouldRerun: Bool) {
+    func didUpdateArgumentsFromAttributesViewController(onlyValueChanges: Bool) {
         guard let attributes = attributesViewController?.attributes else {
             return
         }
         project?.metaData.attributes = attributes
         project?.updateChangeCount(.done)
-        if shouldRerun {
+        if onlyValueChanges {
             updateKernelarguments()
+        } else {
+            sourceEditorViewController?.update(attributes: attributes)
         }
-        sourceEditorViewController?.update(attributes: attributes)
     }
 
     func updateKernelarguments() {

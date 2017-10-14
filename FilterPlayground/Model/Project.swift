@@ -58,7 +58,7 @@ class Project: UIDocument {
         if inputImages.count > 0 {
             let inputImagesFileWrapper = FileWrapper(directoryWithFileWrappers: [:])
             for (index, image) in inputImages.enumerated() {
-                inputImagesFileWrapper.addRegularFile(withContents: UIImagePNGRepresentation(image)!, preferredFilename: "\(index).png")
+                inputImagesFileWrapper.addRegularFile(withContents: UIImageJPEGRepresentation(image, 1.0)!, preferredFilename: "\(index).jpg")
             }
 
             inputImagesFileWrapper.preferredFilename = "inputimages"
@@ -78,18 +78,18 @@ class Project: UIDocument {
     }
 
     func addImage(image: CIImage, for name: String) {
-        guard let data = image.asPNGData else { return }
-        addResource(for: "\(name).png", with: data)
+        guard let data = image.asJPGata else { return }
+        addResource(for: "\(name).jpg", with: data)
     }
 
     func getImage(for name: String) -> CIImage? {
-        guard let child = resourcesWrapper.fileWrappers?["\(name).png"],
+        guard let child = resourcesWrapper.fileWrappers?["\(name).jpg"],
             let data = child.regularFileContents else { return nil }
         return CIImage(data: data)
     }
 
     func renameImage(for name: String, with newName: String) {
-        renameResouce(for: "\(name).png", with: "\(newName).png")
+        renameResouce(for: "\(name).jpg", with: "\(newName).jpg")
     }
 
     func addResource(for name: String, with data: Data) {
@@ -157,7 +157,7 @@ class Project: UIDocument {
             var imageFound = true
             var index = 0
             while imageFound {
-                if let data = inputImagesFileWrapper.fileWrappers?["\(index).png"]?.regularFileContents,
+                if let data = inputImagesFileWrapper.fileWrappers?["\(index).jpg"]?.regularFileContents,
                     let image = UIImage(data: data) {
                     inputImages.append(image)
                 } else {

@@ -74,7 +74,7 @@ class SwiftPlaygroundsHelper {
         
         var resources: [(String, Data)] = arguments
             .flatMap{ guard case .sample(let image) = $0.value  else {return nil}
-                return ($0.name, image.asPNGData!) }
+                return ($0.name, image.asJPGata!) }
         
         if inputImages.count == 1 {
             resources.append(("input", inputImages[0]))

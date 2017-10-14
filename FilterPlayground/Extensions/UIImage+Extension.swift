@@ -11,6 +11,29 @@ import UIKit
 extension UIImage {
 
     var asCIImage: CIImage? {
-        return ciImage ?? CIImage(cgImage: cgImage!)
+        return (ciImage ?? CIImage(cgImage: cgImage!)).oriented(forExifOrientation: exifOrientation)
     }
+    
+    var exifOrientation: Int32 {
+        switch (imageOrientation) {
+        case .up:
+            return 1
+        case .upMirrored:
+            return 2
+        case .down:
+            return 3
+        case .downMirrored:
+            return 4
+        case .leftMirrored:
+            return 5
+        case .right:
+            return 6
+        case .rightMirrored:
+            return 7
+        case .left:
+            return 8
+        }        
+    }
+
+    
 }

@@ -32,6 +32,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
     var pipelineState: MTLComputePipelineState?
     var library: MTLLibrary?
     var inputTexture: MTLTexture?
+    var context: CIContext?
     var function: MTLFunction? {
         didSet {
             guard let function = function else {
@@ -48,6 +49,11 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
     required override init() {
         device = MTLCreateSystemDefaultDevice()
         commandQueue = device?.makeCommandQueue()
+        #if !((arch(i386) || arch(x86_64)) && os(iOS))
+            context = CIContext(mtlDevice: device!)
+        #else
+            context = CIContext()
+        #endif
         super.init()
         mtkView = FPMTKView(device: device, delegate: self)
     }
@@ -78,31 +84,36 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
     }
 
     func didUpdateInputImages() {
+        makeInputTexture()
         makeFunction()
+    }
+    
+    func makeInputTexture() {
+        // todo use CIContext to render image into texture
+        guard let device = device else { return }
+        guard let image = inputImages.first else { return }
+        guard let cgImage = context?.createCGImage(image, from: image.extent) else { return }
+        
+        let textureLoader = MTKTextureLoader(device: device)
+        do {
+            self.inputTexture = try textureLoader.newTexture(cgImage: cgImage, options: nil)
+            if let texture = self.inputTexture {
+                self.mtkView.drawableSize = CGSize(width: texture.width, height: texture.height)
+            }
+        } catch {
+            print(error)
+        }
     }
 
     func makeFunction() {
-        guard let device = device else { return }
-        guard let image = inputImages.first?.cgImage else { return }
-
         guard let lib = library else { return }
         guard let functionName = lib.functionNames.first else { return }
         let constantValues = MTLFunctionConstantValues()
         lib.makeFunction(name: functionName, constantValues: constantValues) { function, error in
             // todo handle error
-            // todo use CIContext to render image into texture
 
             self.function = function
-            let textureLoader = MTKTextureLoader(device: device)
-            do {
-                self.inputTexture = try textureLoader.newTexture(cgImage: image, options: nil)
-                if let texture = self.inputTexture {
-                    self.mtkView.drawableSize = CGSize(width: texture.width, height: texture.height)
-                }
-            } catch {
-                print(error)
-            }
-
+            
             self.mtkView.setNeedsDisplay()
         }
     }

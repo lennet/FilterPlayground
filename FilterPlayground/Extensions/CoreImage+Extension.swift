@@ -16,7 +16,7 @@
 
 extension CIImage {
 
-    var asPNGData: Data? {
+    var asJPGata: Data? {
         #if os(iOS) || os(watchOS) || os(tvOS)
             let context = CIContext()
             let image: UIImage
@@ -25,7 +25,7 @@ extension CIImage {
             } else {
                 image = UIImage(ciImage: self)
             }
-            return UIImagePNGRepresentation(image)
+            return UIImageJPEGRepresentation(image, 1.0)
         #elseif os(OSX)
             // TODO:
             return nil

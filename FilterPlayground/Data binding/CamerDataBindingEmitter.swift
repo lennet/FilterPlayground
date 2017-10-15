@@ -31,22 +31,23 @@ class CamerDataBindingEmitter: NSObject, DataBindingEmitter, AVCaptureVideoDataO
     }
 
     func configureSession() {
-
-        let deviceDescoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera],
-                                                                      mediaType: .video,
-                                                                      position: .back)
-        guard let device = deviceDescoverySession.devices.first else { return }
-        // TODO: adjust framerate
-        do {
-            let input = try AVCaptureDeviceInput(device: device)
-            session.addInput(input)
-            let output = AVCaptureVideoDataOutput()
-            output.setSampleBufferDelegate(self, queue: DispatchQueue(label: "Camera Sample Buffer Delegate"))
-            session.addOutput(output)
-        } catch {
-            // handle error
-            print(error)
-        }
+        #if os(iOS) || os(tvOS)
+            let deviceDescoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera],
+                                                                          mediaType: .video,
+                                                                          position: .back)
+            guard let device = deviceDescoverySession.devices.first else { return }
+            // TODO: adjust framerate
+            do {
+                let input = try AVCaptureDeviceInput(device: device)
+                session.addInput(input)
+                let output = AVCaptureVideoDataOutput()
+                output.setSampleBufferDelegate(self, queue: DispatchQueue(label: "Camera Sample Buffer Delegate"))
+                session.addOutput(output)
+            } catch {
+                // handle error
+                print(error)
+            }
+        #endif
     }
 
     func activate() {

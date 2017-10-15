@@ -32,21 +32,21 @@ class CIFilterHelperTests: XCTestCase {
 
     func testWarpFilterWithArguments() {
         let arguments = [
-            KernelAttribute(name: "foo", type: .color, value: .color(1, 1, 1, 1)),
-            KernelAttribute(name: "bar", type: .vec2, value: .vec2(1, 1)),
-            KernelAttribute(name: "test", type: .sample, value: .sample(CIImage(color: .black))),
+            KernelArgument(name: "foo", type: .color, value: .color(1, 1, 1, 1)),
+            KernelArgument(name: "bar", type: .vec2, value: .vec2(1, 1)),
+            KernelArgument(name: "test", type: .sample, value: .sample(CIImage(color: .black))),
         ]
         let source: String = CIFilterHelper.cifilter(with: "", type: .coreimagewarp, arguments: arguments, name: "testWarp")
         XCTAssertSwiftCompiles(source: source)
     }
 
     func testBlendFilter() {
-        let source: String = CIFilterHelper.cifilter(with: "", type: .coreimageblend, arguments: [KernelAttribute(name: "foo", type: .sample, value: .sample(CIImage(color: .black))), KernelAttribute(name: "bar", type: .sample, value: .sample(CIImage(color: .black)))], name: "testBlend")
+        let source: String = CIFilterHelper.cifilter(with: "", type: .coreimageblend, arguments: [KernelArgument(name: "foo", type: .sample, value: .sample(CIImage(color: .black))), KernelArgument(name: "bar", type: .sample, value: .sample(CIImage(color: .black)))], name: "testBlend")
         XCTAssertSwiftCompiles(source: source)
     }
 
     func testColorFilter() {
-        let source: String = CIFilterHelper.cifilter(with: "", type: .coreimagecolor, arguments: [KernelAttribute(name: "test", type: .sample, value: .sample(CIImage(color: .black)))], name: "testColor")
+        let source: String = CIFilterHelper.cifilter(with: "", type: .coreimagecolor, arguments: [KernelArgument(name: "test", type: .sample, value: .sample(CIImage(color: .black)))], name: "testColor")
         XCTAssertSwiftCompiles(source: source)
     }
 

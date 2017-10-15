@@ -7,6 +7,7 @@
 //
 
 import CoreImage
+import simd
 
 enum KernelAttributeValue {
     case float(Float)
@@ -37,12 +38,15 @@ enum KernelAttributeValue {
         switch self {
         case var .float(value):
             return body(&value, MemoryLayout<Float>.size)
-        case .vec2:
-            return nil
-        case .vec3:
-            return nil
-        case .vec4:
-            return nil
+        case let .vec2(x, y):
+            var value = float2(x, y)
+            return body(&value, MemoryLayout<float2>.size)
+        case let .vec3(x, y, z):
+            var value = float3(x, y, z)
+            return body(&value, MemoryLayout<float3>.size)
+        case let .vec4(x, y, z, w):
+            var value = float4(x, y, z, w)
+            return body(&value, MemoryLayout<float4>.size)
         case .color:
             return nil
         case .sample:

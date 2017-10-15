@@ -13,7 +13,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableView: UITableView!
 
     var shouldReloadOnUpdate = true
-    var attributes: [KernelAttribute] = [] {
+    var attributes: [KernelArgument] = [] {
         didSet {
             if shouldReloadOnUpdate {
                 self.tableView.reloadData()
@@ -40,7 +40,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         return attributes.count + 1
     }
 
-    func didUpdateAttribute(cell: UITableViewCell, attribute: KernelAttribute) {
+    func didUpdateAttribute(cell: UITableViewCell, attribute: KernelArgument) {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }

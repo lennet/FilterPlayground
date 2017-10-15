@@ -20,14 +20,14 @@
 		983008731F6EEB67005C89C3 /* DocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983008721F6EEB67005C89C3 /* DocumentTests.swift */; };
 		983008761F6F084C005C89C3 /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983008751F6F084C005C89C3 /* DismissSegue.swift */; };
 		98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */; };
-		983330FF1F80026000C9AF52 /* KernelAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983330FE1F80026000C9AF52 /* KernelAttribute.swift */; };
+		983330FF1F80026000C9AF52 /* KernelArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983330FE1F80026000C9AF52 /* KernelArgument.swift */; };
 		983331011F80029E00C9AF52 /* KernelArgumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331001F80029E00C9AF52 /* KernelArgumentType.swift */; };
 		983331031F8002C600C9AF52 /* KernelAttributeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331021F8002C600C9AF52 /* KernelAttributeValue.swift */; };
 		983331051F80039800C9AF52 /* KernelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331041F80039800C9AF52 /* KernelType.swift */; };
 		983331061F8003A800C9AF52 /* KernelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331041F80039800C9AF52 /* KernelType.swift */; };
 		983331071F8003AB00C9AF52 /* KernelAttributeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331021F8002C600C9AF52 /* KernelAttributeValue.swift */; };
 		983331081F8003AE00C9AF52 /* KernelArgumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331001F80029E00C9AF52 /* KernelArgumentType.swift */; };
-		983331091F8003B200C9AF52 /* KernelAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983330FE1F80026000C9AF52 /* KernelAttribute.swift */; };
+		983331091F8003B200C9AF52 /* KernelArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983330FE1F80026000C9AF52 /* KernelArgument.swift */; };
 		9833310A1F8003B600C9AF52 /* ShadingLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985544881F7FF2B900E9F02A /* ShadingLanguage.swift */; };
 		9833310B1F80046100C9AF52 /* CoreImageKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9855448C1F7FF89400E9F02A /* CoreImageKernel.swift */; };
 		9833310C1F80046800C9AF52 /* CoreImageBlendKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985544921F7FFB3E00E9F02A /* CoreImageBlendKernel.swift */; };
@@ -64,6 +64,13 @@
 		985A42361F2CFEE800636E72 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42351F2CFEE800636E72 /* CustomImageView.swift */; };
 		985EB2491F6821990007B85C /* CIFilterHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985EB2481F6821990007B85C /* CIFilterHelperTests.swift */; };
 		986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */; };
+		98689EBE1F93AC800000AF7C /* DataBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EBD1F93AC800000AF7C /* DataBinding.swift */; };
+		98689EBF1F93AC800000AF7C /* DataBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EBD1F93AC800000AF7C /* DataBinding.swift */; };
+		98689EC21F93B41E0000AF7C /* DataBindingContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EC11F93B41E0000AF7C /* DataBindingContext.swift */; };
+		98689EC31F93B41E0000AF7C /* DataBindingContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EC11F93B41E0000AF7C /* DataBindingContext.swift */; };
+		98689EC51F93B4290000AF7C /* DataBindingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EC41F93B4290000AF7C /* DataBindingObserver.swift */; };
+		98689EC61F93B4290000AF7C /* DataBindingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EC41F93B4290000AF7C /* DataBindingObserver.swift */; };
+		98689EC81F93BFD30000AF7C /* DataBindingContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EC71F93BFD30000AF7C /* DataBindingContextTests.swift */; };
 		9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868A8C01F3712EB00D0BC79 /* AST.swift */; };
 		986AA72B1F62F51C008F2091 /* TemplatesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AA72A1F62F51C008F2091 /* TemplatesManager.swift */; };
 		986AA72D1F62F679008F2091 /* TemplatesManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */; };
@@ -165,7 +172,7 @@
 		983008721F6EEB67005C89C3 /* DocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTests.swift; sourceTree = "<group>"; };
 		983008751F6F084C005C89C3 /* DismissSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
 		98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorValuePicker.swift; sourceTree = "<group>"; };
-		983330FE1F80026000C9AF52 /* KernelAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttribute.swift; sourceTree = "<group>"; };
+		983330FE1F80026000C9AF52 /* KernelArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelArgument.swift; sourceTree = "<group>"; };
 		983331001F80029E00C9AF52 /* KernelArgumentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelArgumentType.swift; sourceTree = "<group>"; };
 		983331021F8002C600C9AF52 /* KernelAttributeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeValue.swift; sourceTree = "<group>"; };
 		983331041F80039800C9AF52 /* KernelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelType.swift; sourceTree = "<group>"; };
@@ -201,6 +208,10 @@
 		985A42351F2CFEE800636E72 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		985EB2481F6821990007B85C /* CIFilterHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilterHelperTests.swift; sourceTree = "<group>"; };
 		986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
+		98689EBD1F93AC800000AF7C /* DataBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBinding.swift; sourceTree = "<group>"; };
+		98689EC11F93B41E0000AF7C /* DataBindingContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindingContext.swift; sourceTree = "<group>"; };
+		98689EC41F93B4290000AF7C /* DataBindingObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindingObserver.swift; sourceTree = "<group>"; };
+		98689EC71F93BFD30000AF7C /* DataBindingContextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindingContextTests.swift; sourceTree = "<group>"; };
 		9868A8C01F3712EB00D0BC79 /* AST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
 		986AA72A1F62F51C008F2091 /* TemplatesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesManager.swift; sourceTree = "<group>"; };
 		986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesManagerTests.swift; sourceTree = "<group>"; };
@@ -368,6 +379,7 @@
 		985A42041F2CF8F200636E72 /* FilterPlayground */ = {
 			isa = PBXGroup;
 			children = (
+				98689EC01F93B40D0000AF7C /* Data binding */,
 				9855448B1F7FF88100E9F02A /* Kernels */,
 				983008741F6F0838005C89C3 /* Helper */,
 				98D475AE1F3BB8920080D794 /* Resources */,
@@ -407,8 +419,18 @@
 				986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */,
 				983008721F6EEB67005C89C3 /* DocumentTests.swift */,
 				9853F85C1F7903C100551541 /* ASTCodeCompletionTests.swift */,
+				98689EC71F93BFD30000AF7C /* DataBindingContextTests.swift */,
 			);
 			path = FilterPlaygroundTests;
+			sourceTree = "<group>";
+		};
+		98689EC01F93B40D0000AF7C /* Data binding */ = {
+			isa = PBXGroup;
+			children = (
+				98689EC11F93B41E0000AF7C /* DataBindingContext.swift */,
+				98689EC41F93B4290000AF7C /* DataBindingObserver.swift */,
+			);
+			path = "Data binding";
 			sourceTree = "<group>";
 		};
 		986AA7291F62F4FE008F2091 /* Templates */ = {
@@ -556,11 +578,12 @@
 				98E692E81F30C832000C8B41 /* Project.swift */,
 				98E692ED1F30DF8D000C8B41 /* ProjectMetaData.swift */,
 				985544881F7FF2B900E9F02A /* ShadingLanguage.swift */,
-				983330FE1F80026000C9AF52 /* KernelAttribute.swift */,
+				983330FE1F80026000C9AF52 /* KernelArgument.swift */,
 				983331001F80029E00C9AF52 /* KernelArgumentType.swift */,
 				983331021F8002C600C9AF52 /* KernelAttributeValue.swift */,
 				983331041F80039800C9AF52 /* KernelType.swift */,
 				980E4F431F80108000C603C3 /* KernelCompilerResult.swift */,
+				98689EBD1F93AC800000AF7C /* DataBinding.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -749,6 +772,7 @@
 				986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */,
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,
+				98689EC51F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
 				980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */,
 				98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */,
 				98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */,
@@ -765,6 +789,8 @@
 				98F2B9EF1F719B380092A015 /* SourceEditorTextView.swift in Sources */,
 				983008761F6F084C005C89C3 /* DismissSegue.swift in Sources */,
 				980E4F451F8013AA00C603C3 /* MetalErrorParser.swift in Sources */,
+				98689EC21F93B41E0000AF7C /* DataBindingContext.swift in Sources */,
+				98689EBE1F93AC800000AF7C /* DataBinding.swift in Sources */,
 				985A42361F2CFEE800636E72 /* CustomImageView.swift in Sources */,
 				987672451F2F5355002F9AAF /* Extensions.swift in Sources */,
 				985544911F7FFAA100E9F02A /* CoreImageColorKernel.swift in Sources */,
@@ -789,7 +815,7 @@
 				983331031F8002C600C9AF52 /* KernelAttributeValue.swift in Sources */,
 				98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */,
 				985544931F7FFB3E00E9F02A /* CoreImageBlendKernel.swift in Sources */,
-				983330FF1F80026000C9AF52 /* KernelAttribute.swift in Sources */,
+				983330FF1F80026000C9AF52 /* KernelArgument.swift in Sources */,
 				9853F85B1F79012500551541 /* AST+CodeCompletion.swift in Sources */,
 				986AA72B1F62F51C008F2091 /* TemplatesManager.swift in Sources */,
 				9897169A1F67E80A00E7C20C /* UIImage+Extension.swift in Sources */,
@@ -817,6 +843,7 @@
 				980229B01F2FBF18000FFCA2 /* ErrorParserTests.swift in Sources */,
 				98C6FE861F3832AE00D0E840 /* ASTTests.swift in Sources */,
 				98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */,
+				98689EC81F93BFD30000AF7C /* DataBindingContextTests.swift in Sources */,
 				984D9FA41F2E824B004AFD74 /* ParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -826,6 +853,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9897169F1F67E94800E7C20C /* CoreImage+Extension.swift in Sources */,
+				98689EBF1F93AC800000AF7C /* DataBinding.swift in Sources */,
 				983331081F8003AE00C9AF52 /* KernelArgumentType.swift in Sources */,
 				9897169C1F67E84A00E7C20C /* Kernel.swift in Sources */,
 				980E4F461F8013AA00C603C3 /* MetalErrorParser.swift in Sources */,
@@ -834,7 +862,7 @@
 				984515411F914CEE0015FADF /* FPMTKView.swift in Sources */,
 				989C576F1F6822BC008FF142 /* SwiftPlaygroundsHelper.swift in Sources */,
 				9833310E1F80046F00C9AF52 /* CoreImageWarpKernel.swift in Sources */,
-				983331091F8003B200C9AF52 /* KernelAttribute.swift in Sources */,
+				983331091F8003B200C9AF52 /* KernelArgument.swift in Sources */,
 				9833310C1F80046800C9AF52 /* CoreImageBlendKernel.swift in Sources */,
 				989716751F67E3C800E7C20C /* Document.swift in Sources */,
 				9833310D1F80046B00C9AF52 /* CoreImageColorKernel.swift in Sources */,
@@ -845,6 +873,8 @@
 				9833310A1F8003B600C9AF52 /* ShadingLanguage.swift in Sources */,
 				989716911F67E47300E7C20C /* CIFilterHelper.swift in Sources */,
 				983331121F80066800C9AF52 /* MetalKernel.swift in Sources */,
+				98689EC61F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
+				98689EC31F93B41E0000AF7C /* DataBindingContext.swift in Sources */,
 				989716941F67E77500E7C20C /* KernelCompilerResult.swift in Sources */,
 				983331071F8003AB00C9AF52 /* KernelAttributeValue.swift in Sources */,
 				9897169B1F67E81D00E7C20C /* Extensions.swift in Sources */,

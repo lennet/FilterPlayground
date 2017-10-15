@@ -14,10 +14,11 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     @IBOutlet weak var typeButton: UIButton!
     @IBOutlet weak var valueSelectionView: UIView!
     @IBOutlet weak var newArgumentOverlay: UIView!
+    @IBOutlet weak var dataBindingButton: UIButton!
 
     var valueButton: UIView!
 
-    var attribute: KernelAttribute? {
+    var attribute: KernelArgument? {
         didSet {
             nameTextField.text = attribute?.name
             if let type = attribute?.type {
@@ -29,6 +30,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
                 nameTextField.text = attribute?.name
                 setupValueView(for: type, value: attribute?.value)
                 typeButton.setTitle(type.rawValue, for: .normal)
+                dataBindingButton.isHidden = !type.supportsDataBinding
                 nameTextField.isEnabled = true
                 newArgumentOverlay.isHidden = true
             } else {
@@ -40,7 +42,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         }
     }
 
-    var updateCallBack: ((UITableViewCell, KernelAttribute) -> Void)?
+    var updateCallBack: ((UITableViewCell, KernelArgument) -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -72,10 +74,13 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         presentTypeSelection(with: sender)
     }
 
+    @IBAction func dataBindingButtonTapped(_: UIButton) {
+    }
+
     func presentTypeSelection(with sender: UIButton) {
         let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "selectTypeViewControllerIdentifier") as! SelectTypeViewController
         viewController.didSelectType = { type in
-            self.attribute = KernelAttribute(name: self.attribute?.name ?? "", type: type, value: type.defaultValue)
+            self.attribute = KernelArgument(name: self.attribute?.name ?? "", type: type, value: type.defaultValue)
             self.setupValueView(for: type, value: self.attribute!.value)
             self.update()
             if self.nameTextField.text?.isEmpty ?? true {

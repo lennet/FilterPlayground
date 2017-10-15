@@ -150,7 +150,7 @@ class Project: UIDocument {
 
         metaData.attributes = metaData.attributes.flatMap { argument in
             guard case .sample = argument.type else { return argument }
-            return KernelAttribute(name: argument.name, type: argument.type, value: .sample(self.getImage(for: argument.name)!))
+            return KernelArgument(name: argument.name, type: argument.type, value: .sample(self.getImage(for: argument.name)!))
         }
 
         if let inputImagesFileWrapper = filewrapper.fileWrappers?["inputimages"] {

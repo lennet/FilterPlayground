@@ -64,7 +64,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
 
     static var supportedArguments: [KernelArgumentType] {
         // todo
-        return [.float]
+        return [.float, .vec2, .vec3, .vec4]
     }
 
     var shadingLanguage: ShadingLanguage {

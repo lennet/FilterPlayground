@@ -26,7 +26,7 @@ class SavingDocumentTests: XCTestCase {
 
     func testSaveText() {
         let text = "Hello World"
-        let attribute = KernelAttribute(name: "test", type: .float, value: .float(50))
+        let attribute = KernelArgument(name: "test", type: .float, value: .float(50))
         let expectation = XCTestExpectation(description: "Waiting for file creation")
 
         let document = Project(fileURL: url)
@@ -48,7 +48,7 @@ class SavingDocumentTests: XCTestCase {
 
     func testSaveImage() {
         let text = "Hello World"
-        let attribute = KernelAttribute(name: "test", type: .sample, value: KernelArgumentType.sample.defaultValue)
+        let attribute = KernelArgument(name: "test", type: .sample, value: KernelArgumentType.sample.defaultValue)
         let expectation = XCTestExpectation(description: "Waiting for file creation")
 
         let document = Project(fileURL: url)

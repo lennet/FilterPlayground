@@ -11,11 +11,11 @@ import UIKit
 
 struct ProjectMetaData: Codable {
 
-    var attributes: [KernelAttribute]
+    var attributes: [KernelArgument]
     var type: KernelType
     var name: String
 
-    init(attributes: [KernelAttribute], type: KernelType) {
+    init(attributes: [KernelArgument], type: KernelType) {
         self.attributes = attributes
         self.type = type
         name = "untitled"
@@ -25,9 +25,9 @@ struct ProjectMetaData: Codable {
         return type.kernelClass.initialSource(with: name)
     }
 
-    func initalArguments() -> [KernelAttribute] {
+    func initalArguments() -> [KernelArgument] {
         if let kernelType = type.kernelClass as? CoreImageKernel.Type {
-            return kernelType.requiredArguments.map { KernelAttribute(name: "unamed", type: $0, value: $0.defaultValue) }
+            return kernelType.requiredArguments.map { KernelArgument(name: "unamed", type: $0, value: $0.defaultValue) }
         }
         // todo
         return []

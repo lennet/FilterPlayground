@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -417,11 +418,11 @@
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="EMc-mS-oUJ"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DVl-XH-aAh">
-                                                    <rect key="frame" x="0.0" y="0.0" width="219" height="99.5"/>
+                                                <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DVl-XH-aAh">
+                                                    <rect key="frame" x="0.0" y="-21" width="219" height="21"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SeP-lH-cdv">
-                                                            <rect key="frame" x="33" y="31" width="154" height="39"/>
+                                                            <rect key="frame" x="33" y="30.5" width="154" height="39"/>
                                                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="22"/>
                                                             <state key="normal" title="+ new argument"/>
                                                             <connections>
@@ -435,11 +436,20 @@
                                                         <constraint firstItem="SeP-lH-cdv" firstAttribute="centerX" secondItem="DVl-XH-aAh" secondAttribute="centerX" id="luF-iW-cRU"/>
                                                     </constraints>
                                                 </view>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaM-Uf-iYb">
+                                                    <rect key="frame" x="86" y="75" width="46" height="30"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="dataBindingButtonTapped:" destination="NuG-th-5W3" eventType="touchUpInside" id="TVY-aD-mZX"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2XK-Zs-Z2j" firstAttribute="leading" secondItem="ek3-S9-PVb" secondAttribute="leading" constant="8" id="4A4-nU-5cH"/>
                                                 <constraint firstItem="PZ7-fS-c5h" firstAttribute="centerY" secondItem="ek3-S9-PVb" secondAttribute="centerY" id="An5-nU-eDy"/>
                                                 <constraint firstItem="PZ7-fS-c5h" firstAttribute="leading" secondItem="2XK-Zs-Z2j" secondAttribute="trailing" constant="8" id="GNd-FZ-hWY"/>
+                                                <constraint firstItem="JaM-Uf-iYb" firstAttribute="centerX" secondItem="ek3-S9-PVb" secondAttribute="centerX" id="HQw-Xx-mh8"/>
+                                                <constraint firstAttribute="bottom" secondItem="JaM-Uf-iYb" secondAttribute="firstBaseline" constant="4" id="NZX-Dp-zH5"/>
                                                 <constraint firstAttribute="bottom" secondItem="DVl-XH-aAh" secondAttribute="bottom" id="OSP-0R-R5l"/>
                                                 <constraint firstAttribute="trailing" secondItem="DVl-XH-aAh" secondAttribute="trailing" id="Rpw-4A-EOq"/>
                                                 <constraint firstAttribute="trailing" secondItem="NG5-4q-oan" secondAttribute="trailing" priority="999" constant="8" id="Rza-OS-70l"/>
@@ -453,6 +463,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="dataBindingButton" destination="JaM-Uf-iYb" id="2pw-y7-hTV"/>
                                             <outlet property="nameTextField" destination="PZ7-fS-c5h" id="y2U-jw-qvK"/>
                                             <outlet property="newArgumentOverlay" destination="DVl-XH-aAh" id="Ij6-dB-kJn"/>
                                             <outlet property="typeButton" destination="2XK-Zs-Z2j" id="cTr-iN-JlS"/>

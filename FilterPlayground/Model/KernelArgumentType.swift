@@ -47,4 +47,25 @@ extension KernelArgumentType {
             #endif
         }
     }
+
+    var availableDataBindings: [DataBinding] {
+        switch self {
+        case .float:
+            return [.time]
+        case .vec2:
+            return [.touch]
+        case .vec3:
+            return []
+        case .vec4:
+            return []
+        case .color:
+            return []
+        case .sample:
+            return [.camera]
+        }
+    }
+
+    var supportsDataBinding: Bool {
+        return availableDataBindings.count > 0
+    }
 }

@@ -41,7 +41,7 @@ class SwiftPlaygroundsHelper {
         return content.data(using: .utf8)!
     }()
     
-    class func swiftPlayground(with name: String, type: KernelType, kernelSource: String, arguments: [KernelAttribute] ,inputImages: [Data]) -> URL {
+    class func swiftPlayground(with name: String, type: KernelType, kernelSource: String, arguments: [KernelArgument] ,inputImages: [Data]) -> URL {
         
         let definedVariables = arguments.map{ "var \($0.name): \($0.type.swiftType) = \($0.value.swiftPlaygroundValue(with:  $0.name))" }.joined(separator: "\n")
         let assignFilterProperties = arguments.map{ "filter.\($0.name) = \($0.name)" }.joined(separator: "\n")

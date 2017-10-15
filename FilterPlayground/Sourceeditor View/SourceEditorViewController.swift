@@ -90,7 +90,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate {
         didUpdateText?(textView.text)
     }
 
-    func update(attributes: [KernelAttribute]) {
+    func update(attributes: [KernelArgument]) {
         textView.insert(arguments: attributes.map { ($0.name, $0.type) })
     }
 

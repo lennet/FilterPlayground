@@ -17,10 +17,18 @@ class DataBindingContext {
     private var observers: [String: DataBindingObserver] = [:]
 
     func add(observer: DataBindingObserver, with name: String) {
+        observer.observedBinding.emitter?.shared.activate()
         observers[name] = observer
     }
 
     func removeObserver(with name: String) {
+        if let observer = observers[name] {
+            let observersOfSameType = observers.values.filter { $0.observedBinding == observer.observedBinding }
+            if observersOfSameType.count <= 1 {
+                // this was the last observer of this type
+                observer.observedBinding.emitter?.shared.deactivate()
+            }
+        }
         observers.removeValue(forKey: name)
     }
 
@@ -29,6 +37,7 @@ class DataBindingContext {
     }
 
     func emit(value: Any, for dataBinding: DataBinding) {
+        // todo synchronize emitter
         notifyObservers(for: dataBinding, with: value)
     }
 

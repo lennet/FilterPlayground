@@ -41,6 +41,8 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Stream imagges fo filtering</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Select image for filtering</string>
 	<key>UILaunchStoryboardName</key>

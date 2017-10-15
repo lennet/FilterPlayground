@@ -16,6 +16,9 @@
 		980E4F4A1F801A4C00C603C3 /* MetalKernelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980E4F491F801A4C00C603C3 /* MetalKernelTests.swift */; };
 		981267D41F34BEFC00101027 /* Kernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981267D31F34BEFC00101027 /* Kernel.swift */; };
 		981D621F1F6B1858006A8606 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D621E1F6B1858006A8606 /* ErrorViewController.swift */; };
+		98286D621F93F1F0003B6D4A /* CamerDataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98286D611F93F1F0003B6D4A /* CamerDataBindingEmitter.swift */; };
+		98286D631F93F1F0003B6D4A /* CamerDataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98286D611F93F1F0003B6D4A /* CamerDataBindingEmitter.swift */; };
+		98286D651F93FE97003B6D4A /* OutputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98286D641F93FE97003B6D4A /* OutputContainerView.swift */; };
 		982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */; };
 		983008731F6EEB67005C89C3 /* DocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983008721F6EEB67005C89C3 /* DocumentTests.swift */; };
 		983008761F6F084C005C89C3 /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983008751F6F084C005C89C3 /* DismissSegue.swift */; };
@@ -71,6 +74,13 @@
 		98689EC51F93B4290000AF7C /* DataBindingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EC41F93B4290000AF7C /* DataBindingObserver.swift */; };
 		98689EC61F93B4290000AF7C /* DataBindingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EC41F93B4290000AF7C /* DataBindingObserver.swift */; };
 		98689EC81F93BFD30000AF7C /* DataBindingContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EC71F93BFD30000AF7C /* DataBindingContextTests.swift */; };
+		98689ECA1F93CAC60000AF7C /* DataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EC91F93CAC60000AF7C /* DataBindingEmitter.swift */; };
+		98689ECB1F93CAC60000AF7C /* DataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EC91F93CAC60000AF7C /* DataBindingEmitter.swift */; };
+		98689ECD1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689ECC1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift */; };
+		98689ECE1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689ECC1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift */; };
+		98689ED01F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689ECF1F93D80D0000AF7C /* TimeDataBindingEmitter.swift */; };
+		98689ED11F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689ECF1F93D80D0000AF7C /* TimeDataBindingEmitter.swift */; };
+		98689ED31F93DF590000AF7C /* SelectDataBindingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689ED21F93DF590000AF7C /* SelectDataBindingViewController.swift */; };
 		9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868A8C01F3712EB00D0BC79 /* AST.swift */; };
 		986AA72B1F62F51C008F2091 /* TemplatesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AA72A1F62F51C008F2091 /* TemplatesManager.swift */; };
 		986AA72D1F62F679008F2091 /* TemplatesManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */; };
@@ -167,6 +177,8 @@
 		980E4F491F801A4C00C603C3 /* MetalKernelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalKernelTests.swift; sourceTree = "<group>"; };
 		981267D31F34BEFC00101027 /* Kernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kernel.swift; sourceTree = "<group>"; };
 		981D621E1F6B1858006A8606 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		98286D611F93F1F0003B6D4A /* CamerDataBindingEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamerDataBindingEmitter.swift; sourceTree = "<group>"; };
+		98286D641F93FE97003B6D4A /* OutputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputContainerView.swift; sourceTree = "<group>"; };
 		982DAAFA1F800F1E00E5F27D /* Kernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Kernel.swift; path = FilterPlayground/Compiler/Kernel.swift; sourceTree = SOURCE_ROOT; };
 		982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDraggingIndicator.swift; sourceTree = "<group>"; };
 		983008721F6EEB67005C89C3 /* DocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTests.swift; sourceTree = "<group>"; };
@@ -212,6 +224,10 @@
 		98689EC11F93B41E0000AF7C /* DataBindingContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindingContext.swift; sourceTree = "<group>"; };
 		98689EC41F93B4290000AF7C /* DataBindingObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindingObserver.swift; sourceTree = "<group>"; };
 		98689EC71F93BFD30000AF7C /* DataBindingContextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindingContextTests.swift; sourceTree = "<group>"; };
+		98689EC91F93CAC60000AF7C /* DataBindingEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBindingEmitter.swift; sourceTree = "<group>"; };
+		98689ECC1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDataBindingEmitter.swift; sourceTree = "<group>"; };
+		98689ECF1F93D80D0000AF7C /* TimeDataBindingEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDataBindingEmitter.swift; sourceTree = "<group>"; };
+		98689ED21F93DF590000AF7C /* SelectDataBindingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDataBindingViewController.swift; sourceTree = "<group>"; };
 		9868A8C01F3712EB00D0BC79 /* AST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
 		986AA72A1F62F51C008F2091 /* TemplatesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesManager.swift; sourceTree = "<group>"; };
 		986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplatesManagerTests.swift; sourceTree = "<group>"; };
@@ -319,6 +335,7 @@
 				982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */,
 				983008751F6F084C005C89C3 /* DismissSegue.swift */,
 				9845153F1F914CE10015FADF /* FPMTKView.swift */,
+				98286D641F93FE97003B6D4A /* OutputContainerView.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -429,6 +446,10 @@
 			children = (
 				98689EC11F93B41E0000AF7C /* DataBindingContext.swift */,
 				98689EC41F93B4290000AF7C /* DataBindingObserver.swift */,
+				98689EC91F93CAC60000AF7C /* DataBindingEmitter.swift */,
+				98689ECC1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift */,
+				98689ECF1F93D80D0000AF7C /* TimeDataBindingEmitter.swift */,
+				98286D611F93F1F0003B6D4A /* CamerDataBindingEmitter.swift */,
 			);
 			path = "Data binding";
 			sourceTree = "<group>";
@@ -543,6 +564,7 @@
 				98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */,
 				986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */,
 				98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */,
+				98689ED21F93DF590000AF7C /* SelectDataBindingViewController.swift */,
 			);
 			path = "Attributes View";
 			sourceTree = "<group>";
@@ -773,6 +795,8 @@
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,
 				98689EC51F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
+				98689ED01F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */,
+				98689ECD1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift in Sources */,
 				980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */,
 				98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */,
 				98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */,
@@ -799,11 +823,13 @@
 				98D8F9DF1F815D20005A1DFE /* UIView+Extension.swift in Sources */,
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,
 				98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */,
+				98689ED31F93DF590000AF7C /* SelectDataBindingViewController.swift in Sources */,
 				983331011F80029E00C9AF52 /* KernelArgumentType.swift in Sources */,
 				9853F85F1F79218C00551541 /* CIKernelLanguageHelper.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
 				987A73291F66F65000F73806 /* SwiftPlaygroundsHelper.swift in Sources */,
 				9848C4441F3B9B58001E079C /* SettingsTableViewController.swift in Sources */,
+				98689ECA1F93CAC60000AF7C /* DataBindingEmitter.swift in Sources */,
 				986AA7371F62FF76008F2091 /* SelectTemplateTableViewController.swift in Sources */,
 				9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */,
 				98E692E91F30C832000C8B41 /* Project.swift in Sources */,
@@ -823,8 +849,10 @@
 				981D621F1F6B1858006A8606 /* ErrorViewController.swift in Sources */,
 				9855448D1F7FF89400E9F02A /* CoreImageKernel.swift in Sources */,
 				980229AC1F2F94F9000FFCA2 /* ErrorHelper.swift in Sources */,
+				98286D621F93F1F0003B6D4A /* CamerDataBindingEmitter.swift in Sources */,
 				983331051F80039800C9AF52 /* KernelType.swift in Sources */,
 				98C5E23F1F34B8DD006E7658 /* KernelError.swift in Sources */,
+				98286D651F93FE97003B6D4A /* OutputContainerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -856,15 +884,18 @@
 				98689EBF1F93AC800000AF7C /* DataBinding.swift in Sources */,
 				983331081F8003AE00C9AF52 /* KernelArgumentType.swift in Sources */,
 				9897169C1F67E84A00E7C20C /* Kernel.swift in Sources */,
+				98689ECE1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift in Sources */,
 				980E4F461F8013AA00C603C3 /* MetalErrorParser.swift in Sources */,
 				9897169E1F67E93300E7C20C /* ErrorHelper.swift in Sources */,
 				9845153E1F9149420015FADF /* NSView+Extension.swift in Sources */,
 				984515411F914CEE0015FADF /* FPMTKView.swift in Sources */,
 				989C576F1F6822BC008FF142 /* SwiftPlaygroundsHelper.swift in Sources */,
 				9833310E1F80046F00C9AF52 /* CoreImageWarpKernel.swift in Sources */,
+				98689ED11F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */,
 				983331091F8003B200C9AF52 /* KernelArgument.swift in Sources */,
 				9833310C1F80046800C9AF52 /* CoreImageBlendKernel.swift in Sources */,
 				989716751F67E3C800E7C20C /* Document.swift in Sources */,
+				98286D631F93F1F0003B6D4A /* CamerDataBindingEmitter.swift in Sources */,
 				9833310D1F80046B00C9AF52 /* CoreImageColorKernel.swift in Sources */,
 				983331061F8003A800C9AF52 /* KernelType.swift in Sources */,
 				9833310B1F80046100C9AF52 /* CoreImageKernel.swift in Sources */,
@@ -875,6 +906,7 @@
 				983331121F80066800C9AF52 /* MetalKernel.swift in Sources */,
 				98689EC61F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
 				98689EC31F93B41E0000AF7C /* DataBindingContext.swift in Sources */,
+				98689ECB1F93CAC60000AF7C /* DataBindingEmitter.swift in Sources */,
 				989716941F67E77500E7C20C /* KernelCompilerResult.swift in Sources */,
 				983331071F8003AB00C9AF52 /* KernelAttributeValue.swift in Sources */,
 				9897169B1F67E81D00E7C20C /* Extensions.swift in Sources */,

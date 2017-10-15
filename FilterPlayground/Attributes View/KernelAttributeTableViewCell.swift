@@ -17,6 +17,22 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     @IBOutlet weak var dataBindingButton: UIButton!
 
     var valueButton: UIView!
+    var selectedBinding: DataBinding = .none {
+        didSet {
+            guard let attribute = attribute,
+                selectedBinding != oldValue else {
+                return
+            }
+
+            if selectedBinding == .none {
+                dataBindingButton.setTitle("Bindings available", for: .normal)
+                DataBindingContext.shared.removeObserver(with: attribute.name)
+            } else {
+                dataBindingButton.setTitle("Remove Binding", for: .normal)
+                DataBindingContext.shared.add(observer: self, with: attribute.name)
+            }
+        }
+    }
 
     var attribute: KernelArgument? {
         didSet {
@@ -33,11 +49,13 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
                 dataBindingButton.isHidden = !type.supportsDataBinding
                 nameTextField.isEnabled = true
                 newArgumentOverlay.isHidden = true
+                selectedBinding = attribute?.binding ?? .none
             } else {
                 valueSelectionView.subviews.forEach { $0.removeFromSuperview() }
                 nameTextField.text = nil
                 nameTextField.isEnabled = false
                 newArgumentOverlay.isHidden = false
+                dataBindingButton.isHidden = true
             }
         }
     }
@@ -74,7 +92,19 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         presentTypeSelection(with: sender)
     }
 
-    @IBAction func dataBindingButtonTapped(_: UIButton) {
+    @IBAction func dataBindingButtonTapped(_ sender: UIButton) {
+        if selectedBinding == .none {
+            let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "selectDataBindingViewControllerIdentifier") as! SelectDataBindingViewController
+            viewController.supportedBindings = attribute?.type.availableDataBindings ?? []
+            viewController.didSelectBinding = { binding in
+                self.attribute?.binding = binding
+                self.selectedBinding = binding
+            }
+            present(viewController: viewController, with: sender)
+        } else {
+            attribute?.binding = .none
+            selectedBinding = .none
+        }
     }
 
     func presentTypeSelection(with sender: UIButton) {
@@ -219,5 +249,42 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+// todo move observer out of this cell because not every attribtue must have a own cell
+extension KernelAttributeTableViewCell: DataBindingObserver {
+
+    var observedBinding: DataBinding {
+        return selectedBinding
+    }
+
+    func valueChanged(value: Any) {
+        guard let type = attribute?.type else { return }
+
+        var newValue: KernelAttributeValue?
+        switch (type, observedBinding) {
+        case (.float, .time):
+            if let time = value as? TimeInterval {
+                newValue = .float(Float(time))
+            }
+            break
+        case (.sample, .camera):
+            if let image = value as? CIImage {
+                newValue = .sample(image)
+            }
+            break
+        case (.vec2, .touch):
+            if let point = value as? CGPoint {
+                newValue = .vec2(Float(point.x), Float(point.y))
+            }
+            break
+        default:
+            break
+        }
+        if let newValue = newValue {
+            attribute?.value = newValue
+            update()
+        }
     }
 }

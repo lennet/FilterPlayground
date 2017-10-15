@@ -9,7 +9,24 @@
 import Foundation
 
 enum DataBinding: String, Codable {
+    case none
     case time
     case camera
     case touch
+}
+
+extension DataBinding {
+
+    var emitter: DataBindingEmitter.Type? {
+        switch self {
+        case .time:
+            return TimeDataBindingEmitter.self
+        case .camera:
+            return CamerDataBindingEmitter.self
+        case .touch:
+            return TouchDataBindingEmitter.self
+        case .none:
+            return nil
+        }
+    }
 }

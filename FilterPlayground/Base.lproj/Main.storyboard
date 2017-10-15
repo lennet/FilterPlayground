@@ -418,8 +418,8 @@
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="EMc-mS-oUJ"/>
                                                     </constraints>
                                                 </view>
-                                                <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DVl-XH-aAh">
-                                                    <rect key="frame" x="0.0" y="-21" width="219" height="21"/>
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DVl-XH-aAh">
+                                                    <rect key="frame" x="0.0" y="0.0" width="219" height="99.5"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SeP-lH-cdv">
                                                             <rect key="frame" x="33" y="30.5" width="154" height="39"/>
@@ -440,7 +440,7 @@
                                                     <rect key="frame" x="86" y="75" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
-                                                        <action selector="dataBindingButtonTapped:" destination="NuG-th-5W3" eventType="touchUpInside" id="TVY-aD-mZX"/>
+                                                        <action selector="dataBindingButtonTapped:" destination="NuG-th-5W3" eventType="touchUpInside" id="u7r-Ef-ITc"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -942,7 +942,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOZ-Li-t5v" userLabel="OutputContainerView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOZ-Li-t5v" userLabel="OutputContainerView" customClass="OutputContainerView" customModule="FilterPlayground" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="544" width="930" height="400"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>

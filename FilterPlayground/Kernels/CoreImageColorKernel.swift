@@ -37,6 +37,6 @@ class CoreImageColorKernel: CoreImageKernel {
         guard let image = arguments.first as? CISampler else {
             return nil
         }
-        return colorKernel?.apply(extent: image.extent, arguments: attributes)
+        return colorKernel?.apply(extent: image.extent, arguments: arguments)
     }
 }

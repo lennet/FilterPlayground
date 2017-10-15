@@ -13,6 +13,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var typeButton: UIButton!
     @IBOutlet weak var valueSelectionView: UIView!
+    @IBOutlet weak var newArgumentOverlay: UIView!
 
     var valueButton: UIView!
 
@@ -29,11 +30,12 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
                 setupValueView(for: type, value: attribute?.value)
                 typeButton.setTitle(type.rawValue, for: .normal)
                 nameTextField.isEnabled = true
+                newArgumentOverlay.isHidden = true
             } else {
-                typeButton.setTitle("type", for: .normal)
                 valueSelectionView.subviews.forEach { $0.removeFromSuperview() }
                 nameTextField.text = nil
                 nameTextField.isEnabled = false
+                newArgumentOverlay.isHidden = false
             }
         }
     }
@@ -63,6 +65,14 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     }
 
     @IBAction func selectType(_ sender: UIButton) {
+        presentTypeSelection(with: sender)
+    }
+
+    @IBAction func newArgumentButtonTapped(_ sender: UIButton) {
+        presentTypeSelection(with: sender)
+    }
+
+    func presentTypeSelection(with sender: UIButton) {
         let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "selectTypeViewControllerIdentifier") as! SelectTypeViewController
         viewController.didSelectType = { type in
             self.attribute = KernelAttribute(name: self.attribute?.name ?? "", type: type, value: type.defaultValue)

@@ -13,9 +13,9 @@ extension UIImage {
     var asCIImage: CIImage? {
         return (ciImage ?? CIImage(cgImage: cgImage!)).oriented(forExifOrientation: exifOrientation)
     }
-    
+
     var exifOrientation: Int32 {
-        switch (imageOrientation) {
+        switch imageOrientation {
         case .up:
             return 1
         case .upMirrored:
@@ -32,8 +32,6 @@ extension UIImage {
             return 7
         case .left:
             return 8
-        }        
+        }
     }
-
-    
 }

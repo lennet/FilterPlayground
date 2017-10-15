@@ -87,18 +87,18 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         makeInputTexture()
         makeFunction()
     }
-    
+
     func makeInputTexture() {
         // todo use CIContext to render image into texture
         guard let device = device else { return }
         guard let image = inputImages.first else { return }
         guard let cgImage = context?.createCGImage(image, from: image.extent) else { return }
-        
+
         let textureLoader = MTKTextureLoader(device: device)
         do {
-            self.inputTexture = try textureLoader.newTexture(cgImage: cgImage, options: nil)
+            inputTexture = try textureLoader.newTexture(cgImage: cgImage, options: nil)
             if let texture = self.inputTexture {
-                self.mtkView.drawableSize = CGSize(width: texture.width, height: texture.height)
+                mtkView.drawableSize = CGSize(width: texture.width, height: texture.height)
             }
         } catch {
             print(error)
@@ -109,11 +109,11 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         guard let lib = library else { return }
         guard let functionName = lib.functionNames.first else { return }
         let constantValues = MTLFunctionConstantValues()
-        lib.makeFunction(name: functionName, constantValues: constantValues) { function, error in
+        lib.makeFunction(name: functionName, constantValues: constantValues) { function, _ in
             // todo handle error
 
             self.function = function
-            
+
             self.mtkView.setNeedsDisplay()
         }
     }

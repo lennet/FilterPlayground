@@ -68,6 +68,11 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         nameTextField.delegate = self
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        attribute = nil
+    }
+
     @IBAction func nameTextFieldChanged(_: Any) {
         guard let name = nameTextField.text else {
             return

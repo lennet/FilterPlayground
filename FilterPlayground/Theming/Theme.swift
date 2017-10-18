@@ -84,7 +84,7 @@ struct Default: Theme {
 
     static var liveViewLabel: UIColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
 
-    static var dropInteractionBorder: UIColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    static var dropInteractionBorder: UIColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
 
     static var imageViewBackground: UIColor = #colorLiteral(red: 0.8214625635, green: 0.8214625635, blue: 0.8214625635, alpha: 1)
 

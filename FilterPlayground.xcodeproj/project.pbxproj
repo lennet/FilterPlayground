@@ -135,6 +135,7 @@
 		98E692E91F30C832000C8B41 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692E81F30C832000C8B41 /* Project.swift */; };
 		98E692EE1F30DF8D000C8B41 /* ProjectMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692ED1F30DF8D000C8B41 /* ProjectMetaData.swift */; };
 		98F2B9EF1F719B380092A015 /* SourceEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F2B9EE1F719B380092A015 /* SourceEditorTextView.swift */; };
+		98FF4F951F968BC0004F46B0 /* InputImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FF4F941F968BC0004F46B0 /* InputImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -281,6 +282,7 @@
 		98E692E81F30C832000C8B41 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		98E692ED1F30DF8D000C8B41 /* ProjectMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectMetaData.swift; sourceTree = "<group>"; };
 		98F2B9EE1F719B380092A015 /* SourceEditorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorTextView.swift; sourceTree = "<group>"; };
+		98FF4F941F968BC0004F46B0 /* InputImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -565,6 +567,7 @@
 				986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */,
 				98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */,
 				98689ED21F93DF590000AF7C /* SelectDataBindingViewController.swift */,
+				98FF4F941F968BC0004F46B0 /* InputImageTableViewCell.swift */,
 			);
 			path = "Attributes View";
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */,
 				98E692E91F30C832000C8B41 /* Project.swift in Sources */,
 				98C5E23D1F34B85C006E7658 /* KernelCompilerResult.swift in Sources */,
+				98FF4F951F968BC0004F46B0 /* InputImageTableViewCell.swift in Sources */,
 				989716961F67E7B300E7C20C /* CoreImage+Extension.swift in Sources */,
 				984515401F914CE10015FADF /* FPMTKView.swift in Sources */,
 				9853F8591F78F15100551541 /* CodeCompletionCollectionViewCell.swift in Sources */,

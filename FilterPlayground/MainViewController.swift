@@ -15,10 +15,23 @@ class MainViewController: UIViewController {
     @IBOutlet weak var attributesBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var attributesContainerWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var sourceEditorWidthConstraint: NSLayoutConstraint!
+
     weak var attributesViewController: AttributesViewController?
     weak var liveViewController: LiveViewController?
     weak var sourceEditorViewController: SourceEditorViewController?
     weak var documentBrowser: DocumentBrowserViewController?
+
+    // TODO: refactor
+    var inputImageValues: [InputImageValue] {
+
+        get {
+            return attributesViewController?.inputImages ?? []
+        }
+
+        set {
+            attributesViewController?.inputImages = newValue
+        }
+    }
 
     /// describe the relation between the width of the SourceEditor and the LiveView
     var sourceViewRatio: CGFloat = 0.5
@@ -162,7 +175,7 @@ class MainViewController: UIViewController {
         let requiredInputImages = document.metaData.type.kernelClass.requiredInputImages
         guard requiredInputImages == kernel.inputImages.count else {
             display(errors: [KernelError.runtime(message: "A \(document.metaData.type) Kernel requires \(requiredInputImages) input image\(requiredInputImages > 1 ? "s" : "") but you only passed \(kernel.inputImages.count)")])
-            liveViewController?.highlightEmptyInputImageViews = true
+            inputImageValues = inputImageValues.map { InputImageValue(image: $0.image, index: $0.index, shouldHighlightIfMissing: $0.image == nil) }
             return
         }
 
@@ -171,7 +184,7 @@ class MainViewController: UIViewController {
     }
 
     func clearErrors() {
-        liveViewController?.highlightEmptyInputImageViews = false
+        inputImageValues = inputImageValues.map { InputImageValue(image: $0.image, index: $0.index, shouldHighlightIfMissing: false) }
         sourceEditorViewController?.errors = []
     }
 
@@ -215,11 +228,15 @@ class MainViewController: UIViewController {
             self.presentedViewController?.dismiss(animated: true, completion: nil)
             self.project = document
             self.sourceEditorViewController?.source = document.source
-            self.attributesViewController?.attributes = document.metaData.attributes
+            self.attributesViewController?.arguments = document.metaData.attributes
             self.attributesViewController?.tableView.reloadData()
-            self.liveViewController?.inputImages = document.inputImages
-            self.liveViewController?.numberOfInputs = document.metaData.type.kernelClass.requiredInputImages
-            self.attributesBarButtonItem.isEnabled = document.metaData.type.kernelClass.supportsArguments
+
+            // TODO: store InputImageValue to metadatajson to fix possible order bug after saving one of multiple inputimages
+            var inputImageValues = document.inputImages.enumerated().map { InputImageValue(image: $0.element, index: $0.offset, shouldHighlightIfMissing: false) }
+            while inputImageValues.count < document.metaData.type.kernelClass.requiredInputImages {
+                inputImageValues.append(InputImageValue(image: nil, index: inputImageValues.count, shouldHighlightIfMissing: false))
+            }
+            self.inputImageValues = inputImageValues
             self.showAttributes = document.metaData.type.kernelClass.supportsArguments
             self.title = document.title
             self.kernel = document.metaData.type.kernelClass.init()
@@ -294,7 +311,7 @@ class MainViewController: UIViewController {
     }
 
     func didUpdateArgumentsFromAttributesViewController(onlyValueChanges: Bool) {
-        guard let attributes = attributesViewController?.attributes else {
+        guard let attributes = attributesViewController?.arguments else {
             return
         }
         project?.metaData.attributes = attributes
@@ -319,7 +336,7 @@ class MainViewController: UIViewController {
     }
 
     func didUpdateArgumentsFromSourceEditor(arguments: [(String, KernelArgumentType)]) {
-        let currentAttributes = attributesViewController?.attributes ?? []
+        let currentAttributes = attributesViewController?.arguments ?? []
         let newAttributes = arguments.enumerated().map { (index, argument) -> KernelArgument in
             if index < currentAttributes.count {
                 var currentArgument = currentAttributes[index]
@@ -330,7 +347,7 @@ class MainViewController: UIViewController {
             }
             return KernelArgument(name: argument.0, type: argument.1, value: argument.1.defaultValue)
         }
-        attributesViewController?.attributes = newAttributes
+        attributesViewController?.arguments = newAttributes
         project?.metaData.attributes = newAttributes
         project?.updateChangeCount(.done)
     }
@@ -340,12 +357,12 @@ class MainViewController: UIViewController {
         case let vc as AttributesViewController:
             attributesViewController = vc
             attributesViewController?.didUpdateAttributes = didUpdateArgumentsFromAttributesViewController
-        case let vc as LiveViewController:
-            liveViewController = vc
-            vc.didUpdateInputImages = { [weak self] images in
-                self?.project?.inputImages = images
+            attributesViewController?.didUpdatedImage = { [weak self] _ in
+                self?.project?.inputImages = self?.inputImageValues.flatMap { $0.image } ?? []
                 self?.updateInputImages()
             }
+        case let vc as LiveViewController:
+            liveViewController = vc
         case let vc as SourceEditorViewController:
             sourceEditorViewController = vc
             vc.didUpdateText = { [weak self] text in

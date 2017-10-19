@@ -48,6 +48,6 @@ class DataBindingContext {
     }
 
     func reset() {
-        observers.removeAll()
+        observers.keys.forEach(removeObserver)
     }
 }

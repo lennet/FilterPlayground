@@ -20,7 +20,7 @@
 		98286D631F93F1F0003B6D4A /* CamerDataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98286D611F93F1F0003B6D4A /* CamerDataBindingEmitter.swift */; };
 		98286D651F93FE97003B6D4A /* OutputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98286D641F93FE97003B6D4A /* OutputContainerView.swift */; };
 		982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */; };
-		983008731F6EEB67005C89C3 /* DocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983008721F6EEB67005C89C3 /* DocumentTests.swift */; };
+		983008731F6EEB67005C89C3 /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983008721F6EEB67005C89C3 /* ProjectTests.swift */; };
 		983008761F6F084C005C89C3 /* DismissSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983008751F6F084C005C89C3 /* DismissSegue.swift */; };
 		98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */; };
 		983330FF1F80026000C9AF52 /* KernelArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983330FE1F80026000C9AF52 /* KernelArgument.swift */; };
@@ -116,6 +116,10 @@
 		98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */; };
 		98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */; };
 		98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */; };
+		98A4113F1F99453000A97459 /* KernelInputImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4113E1F99453000A97459 /* KernelInputImage.swift */; };
+		98A411411F9950C100A97459 /* TouchDataBindingEmitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A411401F9950C100A97459 /* TouchDataBindingEmitterTests.swift */; };
+		98A411431F99534500A97459 /* TimeDataBindingEmitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A411421F99534500A97459 /* TimeDataBindingEmitterTests.swift */; };
+		98A411451F9954EF00A97459 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A411441F9954EF00A97459 /* SettingsTests.swift */; };
 		98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */; };
 		98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB11F3A17820043AA9D /* FloatPickerViewController.swift */; };
 		98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */; };
@@ -182,7 +186,7 @@
 		98286D641F93FE97003B6D4A /* OutputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputContainerView.swift; sourceTree = "<group>"; };
 		982DAAFA1F800F1E00E5F27D /* Kernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Kernel.swift; path = FilterPlayground/Compiler/Kernel.swift; sourceTree = SOURCE_ROOT; };
 		982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDraggingIndicator.swift; sourceTree = "<group>"; };
-		983008721F6EEB67005C89C3 /* DocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTests.swift; sourceTree = "<group>"; };
+		983008721F6EEB67005C89C3 /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		983008751F6F084C005C89C3 /* DismissSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissSegue.swift; sourceTree = "<group>"; };
 		98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorValuePicker.swift; sourceTree = "<group>"; };
 		983330FE1F80026000C9AF52 /* KernelArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelArgument.swift; sourceTree = "<group>"; };
@@ -261,6 +265,10 @@
 		98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorViewController.swift; sourceTree = "<group>"; };
 		98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeTableViewCell.swift; sourceTree = "<group>"; };
 		98A0CC681F2D354C00FFC0A1 /* NumberedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberedTextView.swift; sourceTree = "<group>"; };
+		98A4113E1F99453000A97459 /* KernelInputImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelInputImage.swift; sourceTree = "<group>"; };
+		98A411401F9950C100A97459 /* TouchDataBindingEmitterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDataBindingEmitterTests.swift; sourceTree = "<group>"; };
+		98A411421F99534500A97459 /* TimeDataBindingEmitterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDataBindingEmitterTests.swift; sourceTree = "<group>"; };
+		98A411441F9954EF00A97459 /* SettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
 		98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSlider.swift; sourceTree = "<group>"; };
 		98A67FB11F3A17820043AA9D /* FloatPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatPickerViewController.swift; sourceTree = "<group>"; };
 		98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatSelectionButton.swift; sourceTree = "<group>"; };
@@ -436,9 +444,12 @@
 				9841EC761F36675000A8E3CA /* ThemingTests.swift */,
 				98C6FE851F3832AE00D0E840 /* ASTTests.swift */,
 				986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */,
-				983008721F6EEB67005C89C3 /* DocumentTests.swift */,
+				983008721F6EEB67005C89C3 /* ProjectTests.swift */,
 				9853F85C1F7903C100551541 /* ASTCodeCompletionTests.swift */,
 				98689EC71F93BFD30000AF7C /* DataBindingContextTests.swift */,
+				98A411401F9950C100A97459 /* TouchDataBindingEmitterTests.swift */,
+				98A411421F99534500A97459 /* TimeDataBindingEmitterTests.swift */,
+				98A411441F9954EF00A97459 /* SettingsTests.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -609,6 +620,7 @@
 				983331041F80039800C9AF52 /* KernelType.swift */,
 				980E4F431F80108000C603C3 /* KernelCompilerResult.swift */,
 				98689EBD1F93AC800000AF7C /* DataBinding.swift */,
+				98A4113E1F99453000A97459 /* KernelInputImage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -799,6 +811,7 @@
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,
 				98689EC51F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
 				98689ED01F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */,
+				98A4113F1F99453000A97459 /* KernelInputImage.swift in Sources */,
 				98689ECD1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift in Sources */,
 				980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */,
 				98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */,
@@ -866,9 +879,12 @@
 			files = (
 				98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */,
 				98E5AD0E1F2E87280047AC2E /* RendererTests.swift in Sources */,
+				98A411451F9954EF00A97459 /* SettingsTests.swift in Sources */,
+				98A411411F9950C100A97459 /* TouchDataBindingEmitterTests.swift in Sources */,
 				985668431F2E6ABE00297A4E /* TokenizerTests.swift in Sources */,
 				9853F85D1F7903C100551541 /* ASTCodeCompletionTests.swift in Sources */,
-				983008731F6EEB67005C89C3 /* DocumentTests.swift in Sources */,
+				98A411431F99534500A97459 /* TimeDataBindingEmitterTests.swift in Sources */,
+				983008731F6EEB67005C89C3 /* ProjectTests.swift in Sources */,
 				9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */,
 				98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */,
 				986AA72D1F62F679008F2091 /* TemplatesManagerTests.swift in Sources */,

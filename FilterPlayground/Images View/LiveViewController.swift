@@ -27,11 +27,6 @@ class LiveViewController: UIViewController {
         outputContainerView.addSubview(view)
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
-    }
-
     @objc func themeChanged(notification _: Notification?) {
         view.backgroundColor = ThemeManager.shared.currentTheme.liveViewBackground
         outputContainerView.backgroundColor = ThemeManager.shared.currentTheme.imageViewBackground

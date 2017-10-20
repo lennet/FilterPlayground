@@ -32,12 +32,12 @@ class SavingDocumentTests: XCTestCase {
         let document = Project(fileURL: url)
         document.save(to: url, for: .forCreating) { _ in
             document.source = text
-            document.metaData.attributes = [attribute]
+            document.metaData.arguments = [attribute]
             document.close(completionHandler: { _ in
                 let document2 = Project(fileURL: self.url)
                 document2.open(completionHandler: { _ in
                     XCTAssertEqual(document2.source, text)
-                    XCTAssertNotNil(document2.metaData.attributes.first)
+                    XCTAssertNotNil(document2.metaData.arguments.first)
                     expectation.fulfill()
                 })
             })
@@ -54,12 +54,12 @@ class SavingDocumentTests: XCTestCase {
         let document = Project(fileURL: url)
         document.save(to: url, for: .forCreating) { _ in
             document.source = text
-            document.metaData.attributes = [attribute]
+            document.metaData.arguments = [attribute]
             document.close(completionHandler: { _ in
                 let document2 = Project(fileURL: self.url)
                 document2.open(completionHandler: { _ in
                     XCTAssertEqual(document2.source, text)
-                    XCTAssertNotNil(document2.metaData.attributes.first)
+                    XCTAssertNotNil(document2.metaData.arguments.first)
                     XCTAssertEqual(document2.getAllResources().count, 1)
                     expectation.fulfill()
                 })

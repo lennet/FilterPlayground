@@ -22,7 +22,7 @@ class MainViewController: UIViewController {
     weak var documentBrowser: DocumentBrowserViewController?
 
     // TODO: refactor
-    var inputImageValues: [InputImageValue] {
+    var inputImageValues: [KernelInputImage] {
 
         get {
             return attributesViewController?.inputImages ?? []
@@ -175,7 +175,7 @@ class MainViewController: UIViewController {
         let requiredInputImages = document.metaData.type.kernelClass.requiredInputImages
         guard requiredInputImages == kernel.inputImages.count else {
             display(errors: [KernelError.runtime(message: "A \(document.metaData.type) Kernel requires \(requiredInputImages) input image\(requiredInputImages > 1 ? "s" : "") but you only passed \(kernel.inputImages.count)")])
-            inputImageValues = inputImageValues.map { InputImageValue(image: $0.image, index: $0.index, shouldHighlightIfMissing: $0.image == nil) }
+            inputImageValues = inputImageValues.map { KernelInputImage(image: $0.image, index: $0.index, shouldHighlightIfMissing: $0.image == nil) }
             return
         }
 
@@ -184,7 +184,7 @@ class MainViewController: UIViewController {
     }
 
     func clearErrors() {
-        inputImageValues = inputImageValues.map { InputImageValue(image: $0.image, index: $0.index, shouldHighlightIfMissing: false) }
+        inputImageValues = inputImageValues.map { KernelInputImage(image: $0.image, index: $0.index, shouldHighlightIfMissing: false) }
         sourceEditorViewController?.errors = []
     }
 
@@ -228,13 +228,12 @@ class MainViewController: UIViewController {
             self.presentedViewController?.dismiss(animated: true, completion: nil)
             self.project = document
             self.sourceEditorViewController?.source = document.source
-            self.attributesViewController?.arguments = document.metaData.attributes
+            self.attributesViewController?.arguments = document.metaData.arguments
             self.attributesViewController?.tableView.reloadData()
 
-            // TODO: store InputImageValue to metadatajson to fix possible order bug after saving one of multiple inputimages
-            var inputImageValues = document.inputImages.enumerated().map { InputImageValue(image: $0.element, index: $0.offset, shouldHighlightIfMissing: false) }
+            var inputImageValues = document.metaData.inputImages
             while inputImageValues.count < document.metaData.type.kernelClass.requiredInputImages {
-                inputImageValues.append(InputImageValue(image: nil, index: inputImageValues.count, shouldHighlightIfMissing: false))
+                inputImageValues.append(KernelInputImage(image: nil, index: inputImageValues.count, shouldHighlightIfMissing: false))
             }
             self.inputImageValues = inputImageValues
             self.showAttributes = document.metaData.type.kernelClass.supportsArguments
@@ -314,7 +313,7 @@ class MainViewController: UIViewController {
         guard let attributes = attributesViewController?.arguments else {
             return
         }
-        project?.metaData.attributes = attributes
+        project?.metaData.arguments = attributes
         project?.updateChangeCount(.done)
         if onlyValueChanges {
             updateKernelarguments()
@@ -325,13 +324,13 @@ class MainViewController: UIViewController {
 
     func updateKernelarguments() {
         guard let project = project else { return }
-        kernel?.arguments = project.metaData.attributes.flatMap { $0.value }
+        kernel?.arguments = project.metaData.arguments.flatMap { $0.value }
         kernel?.render()
     }
 
     func updateInputImages() {
         guard let project = project else { return }
-        kernel?.inputImages = project.inputImages.flatMap { $0.asCIImage }
+        kernel?.inputImages = project.metaData.inputImages.flatMap { $0.image?.asCIImage }
         kernel?.render()
     }
 
@@ -348,7 +347,7 @@ class MainViewController: UIViewController {
             return KernelArgument(name: argument.0, type: argument.1, value: argument.1.defaultValue)
         }
         attributesViewController?.arguments = newAttributes
-        project?.metaData.attributes = newAttributes
+        project?.metaData.arguments = newAttributes
         project?.updateChangeCount(.done)
     }
 
@@ -358,7 +357,7 @@ class MainViewController: UIViewController {
             attributesViewController = vc
             attributesViewController?.didUpdateAttributes = didUpdateArgumentsFromAttributesViewController
             attributesViewController?.didUpdatedImage = { [weak self] _ in
-                self?.project?.inputImages = self?.inputImageValues.flatMap { $0.image } ?? []
+                self?.project?.metaData.inputImages = self?.inputImageValues ?? []
                 self?.updateInputImages()
             }
         case let vc as LiveViewController:

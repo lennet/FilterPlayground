@@ -19,14 +19,8 @@ class Project: UIDocument {
 
     var resourcesWrapper = FileWrapper(directoryWithFileWrappers: [:])
 
-    var metaData: ProjectMetaData = ProjectMetaData(attributes: [], type: .coreimagewarp)
+    var metaData: ProjectMetaData = ProjectMetaData(arguments: [], type: .coreimagewarp, inputImages: [])
     var source: String = "" {
-        didSet {
-            self.updateChangeCount(.done)
-        }
-    }
-
-    var inputImages: [UIImage] = [] {
         didSet {
             self.updateChangeCount(.done)
         }
@@ -40,8 +34,8 @@ class Project: UIDocument {
         self.init(fileURL: url)
         metaData.type = type
         source = metaData.initialSource()
-        metaData.attributes = metaData.initalArguments()
-        inputImages = metaData.initialInputImages()
+        metaData.arguments = metaData.initalArguments()
+        metaData.inputImages = metaData.initialInputImages()
     }
 
     override func contents(forType _: String) throws -> Any {
@@ -55,10 +49,11 @@ class Project: UIDocument {
         fileWrapper.addRegularFile(withContents: meta, preferredFilename: "metadata.json")
         fileWrapper.addRegularFile(withContents: sourceData, preferredFilename: "source.cikernel")
 
-        if inputImages.count > 0 {
+        if metaData.inputImages.count > 0 {
             let inputImagesFileWrapper = FileWrapper(directoryWithFileWrappers: [:])
-            for (index, image) in inputImages.enumerated() {
-                inputImagesFileWrapper.addRegularFile(withContents: UIImageJPEGRepresentation(image, 1.0)!, preferredFilename: "\(index).jpg")
+            for imageValue in metaData.inputImages {
+                guard let image = imageValue.image else { continue }
+                inputImagesFileWrapper.addRegularFile(withContents: UIImageJPEGRepresentation(image, 1.0)!, preferredFilename: "\(imageValue.index).jpg")
             }
 
             inputImagesFileWrapper.preferredFilename = "inputimages"
@@ -66,7 +61,7 @@ class Project: UIDocument {
         }
 
         resourcesWrapper = FileWrapper(directoryWithFileWrappers: [:])
-        metaData.attributes.forEach { argument in
+        metaData.arguments.forEach { argument in
             guard case let .sample(image) = argument.value else { return }
             self.addImage(image: image, for: argument.name)
         }
@@ -148,20 +143,19 @@ class Project: UIDocument {
             resourcesWrapper = resourcesFilewrapper
         }
 
-        metaData.attributes = metaData.attributes.flatMap { argument in
+        metaData.arguments = metaData.arguments.flatMap { argument in
             guard case .sample = argument.type else { return argument }
             return KernelArgument(name: argument.name, type: argument.type, value: .sample(self.getImage(for: argument.name)!))
         }
 
         if let inputImagesFileWrapper = filewrapper.fileWrappers?["inputimages"] {
-            var imageFound = true
             var index = 0
-            while imageFound {
+            while index < metaData.type.kernelClass.requiredInputImages {
                 if let data = inputImagesFileWrapper.fileWrappers?["\(index).jpg"]?.regularFileContents,
                     let image = UIImage(data: data) {
-                    inputImages.append(image)
+                    metaData.inputImages.append(KernelInputImage(image: image, index: index, shouldHighlightIfMissing: false))
                 } else {
-                    imageFound = false
+                    metaData.inputImages.append(KernelInputImage(image: nil, index: index, shouldHighlightIfMissing: false))
                 }
                 index += 1
             }

@@ -42,8 +42,8 @@ class ExportTableViewController: UITableViewController {
         }
 
         let name = document.localizedName.withoutWhiteSpaces.withoutSlash
-        let inputImages = document.inputImages.flatMap(UIImagePNGRepresentation)
-        let playground = SwiftPlaygroundsHelper.swiftPlayground(with: name, type: document.metaData.type, kernelSource: document.source, arguments: document.metaData.attributes, inputImages: inputImages)
+        let inputImages = document.metaData.inputImages.flatMap{$0.image}.flatMap(UIImagePNGRepresentation)
+        let playground = SwiftPlaygroundsHelper.swiftPlayground(with: name, type: document.metaData.type, kernelSource: document.source, arguments: document.metaData.arguments, inputImages: inputImages)
         self.presentActivityViewController(sourceView: sender, items: [playground])
     }
 
@@ -58,7 +58,7 @@ class ExportTableViewController: UITableViewController {
 
     func exportAsCIFIlter(sender: UIView?) {
         guard let document = document,
-            let sourceData = CIFilterHelper.cifilter(with: document.source, type: document.metaData.type, arguments: document.metaData.attributes, name: document.localizedName.withoutWhiteSpaces.withoutSlash).data(using: .utf8) else {
+            let sourceData = CIFilterHelper.cifilter(with: document.source, type: document.metaData.type, arguments: document.metaData.arguments, name: document.localizedName.withoutWhiteSpaces.withoutSlash).data(using: .utf8) else {
             return
         }
         let url = FileManager.default.temporaryDirectory.appendingPathComponent("\(document.localizedName.withoutWhiteSpaces.withoutSlash).swift")

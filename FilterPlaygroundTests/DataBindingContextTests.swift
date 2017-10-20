@@ -11,9 +11,9 @@ import XCTest
 
 class MockDataBindingObserver: DataBindingObserver {
 
-    var mockedBindingTyoe: DataBinding = .time
+    var mockedBindingType: DataBinding = .time
     var observedBinding: DataBinding {
-        return mockedBindingTyoe
+        return mockedBindingType
     }
 
     var id: String
@@ -109,7 +109,7 @@ class DataBindingContextTests: XCTestCase {
         XCTAssertFalse(fooMockObserver.valueChangedCalled)
         XCTAssertFalse(barMockObserver.valueChangedCalled)
 
-        DataBindingContext.shared.emit(value: 5, for: barMockObserver.mockedBindingTyoe)
+        DataBindingContext.shared.emit(value: 5, for: barMockObserver.mockedBindingType)
 
         XCTAssertTrue(fooMockObserver.valueChangedCalled)
         XCTAssertTrue(barMockObserver.valueChangedCalled)
@@ -121,7 +121,7 @@ class DataBindingContextTests: XCTestCase {
 
         let bar = "bar"
         let barMockObserver = MockDataBindingObserver(id: bar)
-        barMockObserver.mockedBindingTyoe = .camera
+        barMockObserver.mockedBindingType = .camera
 
         DataBindingContext.shared.add(observer: fooMockObserver, with: foo)
         DataBindingContext.shared.add(observer: barMockObserver, with: bar)
@@ -129,7 +129,7 @@ class DataBindingContextTests: XCTestCase {
         XCTAssertFalse(fooMockObserver.valueChangedCalled)
         XCTAssertFalse(barMockObserver.valueChangedCalled)
 
-        DataBindingContext.shared.emit(value: 5, for: fooMockObserver.mockedBindingTyoe)
+        DataBindingContext.shared.emit(value: 5, for: fooMockObserver.mockedBindingType)
 
         XCTAssertTrue(fooMockObserver.valueChangedCalled)
         XCTAssertFalse(barMockObserver.valueChangedCalled)

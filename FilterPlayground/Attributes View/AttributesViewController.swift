@@ -8,12 +8,6 @@
 
 import UIKit
 
-struct InputImageValue {
-    var image: UIImage?
-    var index: Int
-    var shouldHighlightIfMissing: Bool
-}
-
 class AttributesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     enum AttributesViewControllerSection: Int {
@@ -38,7 +32,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
 
     var shouldReloadOnUpdate = true
 
-    var inputImages: [InputImageValue] = [] {
+    var inputImages: [KernelInputImage] = [] {
         didSet {
             tableView.reloadSections(IndexSet(integer: AttributesViewControllerSection.inputImages.rawValue), with: .none)
         }
@@ -54,7 +48,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     var didUpdateAttributes: ((Bool) -> Void)?
-    var didUpdatedImage: ((InputImageValue) -> Void)?
+    var didUpdatedImage: ((KernelInputImage) -> Void)?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -109,7 +103,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
-    func didUpatedInputImage(value: InputImageValue) {
+    func didUpatedInputImage(value: KernelInputImage) {
         inputImages[value.index] = value
         didUpdatedImage?(value)
     }

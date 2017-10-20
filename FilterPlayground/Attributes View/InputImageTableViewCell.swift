@@ -15,13 +15,13 @@ class InputImageTableViewCell: UITableViewCell {
     @IBOutlet weak var inputImageView: CustomImageView!
     @IBOutlet weak var inputImageViewHeightConstraint: NSLayoutConstraint!
 
-    var value: InputImageValue? {
+    var value: KernelInputImage? {
         didSet {
             setNeedsUpdateConstraints()
         }
     }
 
-    var updatedImageCallBack: ((InputImageValue) -> Void)?
+    var updatedImageCallBack: ((KernelInputImage) -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,7 +38,7 @@ class InputImageTableViewCell: UITableViewCell {
         }
     }
 
-    func set(imageValue: InputImageValue) {
+    func set(imageValue: KernelInputImage) {
         inputImageView.image = imageValue.image
         if imageValue.shouldHighlightIfMissing {
             highlightMissingImage()

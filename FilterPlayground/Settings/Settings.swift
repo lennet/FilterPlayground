@@ -31,6 +31,7 @@ struct Settings {
         }
     }
 
+    static let customFrameRateChangedNotificationName = NSNotification.Name("CustomFrameRateSettingChangedNotification")
     static var customFrameRate: Int? {
         get {
             guard UserDefaults.standard.value(forKey: #function) != nil else {
@@ -40,9 +41,10 @@ struct Settings {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: #function)
+            NotificationCenter.default.post(name: self.customFrameRateChangedNotificationName, object: newValue)
         }
     }
-    
+
     static let ignoreLowPowerModeChangedNotificationName = NSNotification.Name("IgnoreLowPowerModeeSettingChangedNotification")
     static var ignoreLowPowerMode: Bool {
         get {

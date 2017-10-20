@@ -14,7 +14,7 @@ class TimeDataBindingEmitter: DataBindingEmitter {
 
     var timer: Timer?
     var time: TimeInterval = 0
-    
+
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(frameRateChanged), name: FrameRateManager.frameRateChangedNotificationName, object: nil)
     }
@@ -33,12 +33,12 @@ class TimeDataBindingEmitter: DataBindingEmitter {
     func deactivate() {
         deactivateTimer()
     }
-    
-    func activateTimer()  {
+
+    func activateTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: didUpdate)
         timer?.fire()
     }
-    
+
     func deactivateTimer() {
         timer?.invalidate()
         timer = nil
@@ -48,7 +48,7 @@ class TimeDataBindingEmitter: DataBindingEmitter {
         time += interval
         DataBindingContext.shared.emit(value: time, for: .time)
     }
-    
+
     @objc func frameRateChanged() {
         guard timer != nil else { return }
         deactivateTimer()

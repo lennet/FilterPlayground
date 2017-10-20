@@ -47,7 +47,7 @@ class FrameRateManagerTests: XCTestCase {
         XCTAssertFalse(frameRateManager.frameRate == frameRateManager.lowPowerModeFrameRate)
         XCTAssertTrue(frameRateManager.frameRate == custom)
     }
-    
+
     func testLowPowerModeEnabledWithHigherCustomFrameRate() {
         let frameRateManager = MockFrameRateManager()
         frameRateManager.mockIsLowPowerModeEnabled = true
@@ -81,7 +81,7 @@ class FrameRateManagerTests: XCTestCase {
         NotificationCenter.default.post(name: .NSProcessInfoPowerStateDidChange, object: nil)
         waitForExpectations(timeout: 1, handler: nil)
     }
-    
+
     func testFrameRateInLowPowerModeWithIgnoresLowPowerModeEnabled() {
         let frameRateManager = MockFrameRateManager()
         frameRateManager.mockIsLowPowerModeEnabled = true
@@ -89,12 +89,12 @@ class FrameRateManagerTests: XCTestCase {
         XCTAssertFalse(frameRateManager.frameRate == frameRateManager.lowPowerModeFrameRate)
         XCTAssertTrue(frameRateManager.frameRate == frameRateManager.maxFrameRate)
     }
-    
-    func testNotificationAfterIgnoreLowPoerModeSettingChanged() {
+
+    func testNotificationAfterIgnoreLowPowerModeSettingChanged() {
         expectation(forNotification: FrameRateManager.frameRateChangedNotificationName, object: nil, handler: nil)
         let frameRateManager = MockFrameRateManager()
         frameRateManager.mockIsLowPowerModeEnabled = true
-        
+
         Settings.ignoreLowPowerMode = true
         waitForExpectations(timeout: 1, handler: nil)
     }

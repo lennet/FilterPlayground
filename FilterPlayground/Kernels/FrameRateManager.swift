@@ -21,6 +21,7 @@ class FrameRateManager {
         #if os(iOS) || os(tvOS)
             NotificationCenter.default.addObserver(self, selector: #selector(powerModeDidChange), name: .NSProcessInfoPowerStateDidChange, object: nil)
         #endif
+        NotificationCenter.default.addObserver(self, selector: #selector(ignoreLowPowerModeDidChange), name: Settings.ignoreLowPowerModeChangedNotificationName, object: nil)
     }
 
     let lowPowerModeFrameRate: Int = 40
@@ -48,7 +49,7 @@ class FrameRateManager {
 
     var frameRate: Int {
         let unwrappedCustomFrameRate = customFrameRate ?? maxFrameRate
-        if isLowPowerModeEnabled {
+        if isLowPowerModeEnabled && !Settings.ignoreLowPowerMode {
             return min(lowPowerModeFrameRate, unwrappedCustomFrameRate)
         }
         return min(maxFrameRate, unwrappedCustomFrameRate)
@@ -56,6 +57,12 @@ class FrameRateManager {
 
     @objc func powerModeDidChange() {
         postFrameRateChanged()
+    }
+    
+    @objc func ignoreLowPowerModeDidChange() {
+        if isLowPowerModeEnabled && Settings.ignoreLowPowerMode {
+            postFrameRateChanged()
+        }
     }
 
     func postFrameRateChanged() {

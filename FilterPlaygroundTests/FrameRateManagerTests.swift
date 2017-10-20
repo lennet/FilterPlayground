@@ -21,7 +21,7 @@ class FrameRateManagerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        Settings.ignoreLowPowerMode = false
     }
 
     override func tearDown() {
@@ -47,6 +47,16 @@ class FrameRateManagerTests: XCTestCase {
         XCTAssertFalse(frameRateManager.frameRate == frameRateManager.lowPowerModeFrameRate)
         XCTAssertTrue(frameRateManager.frameRate == custom)
     }
+    
+    func testLowPowerModeEnabledWithHigherCustomFrameRate() {
+        let frameRateManager = MockFrameRateManager()
+        frameRateManager.mockIsLowPowerModeEnabled = true
+        let custom = frameRateManager.lowPowerModeFrameRate + 10
+        XCTAssertFalse(frameRateManager.frameRate == custom)
+        frameRateManager.customFrameRate = custom
+        XCTAssertTrue(frameRateManager.frameRate == frameRateManager.lowPowerModeFrameRate)
+        XCTAssertFalse(frameRateManager.frameRate == custom)
+    }
 
     func testNotHigherThanMaxFrameRate() {
         let frameRateManager = MockFrameRateManager()
@@ -69,6 +79,23 @@ class FrameRateManagerTests: XCTestCase {
         expectation(forNotification: FrameRateManager.frameRateChangedNotificationName, object: nil, handler: nil)
         _ = FrameRateManager.shared
         NotificationCenter.default.post(name: .NSProcessInfoPowerStateDidChange, object: nil)
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    func testFrameRateInLowPowerModeWithIgnoresLowPowerModeEnabled() {
+        let frameRateManager = MockFrameRateManager()
+        frameRateManager.mockIsLowPowerModeEnabled = true
+        Settings.ignoreLowPowerMode = true
+        XCTAssertFalse(frameRateManager.frameRate == frameRateManager.lowPowerModeFrameRate)
+        XCTAssertTrue(frameRateManager.frameRate == frameRateManager.maxFrameRate)
+    }
+    
+    func testNotificationAfterIgnoreLowPoerModeSettingChanged() {
+        expectation(forNotification: FrameRateManager.frameRateChangedNotificationName, object: nil, handler: nil)
+        let frameRateManager = MockFrameRateManager()
+        frameRateManager.mockIsLowPowerModeEnabled = true
+        
+        Settings.ignoreLowPowerMode = true
         waitForExpectations(timeout: 1, handler: nil)
     }
 }

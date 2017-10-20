@@ -42,6 +42,17 @@ struct Settings {
             UserDefaults.standard.set(newValue, forKey: #function)
         }
     }
+    
+    static let ignoreLowPowerModeChangedNotificationName = NSNotification.Name("IgnoreLowPowerModeeSettingChangedNotification")
+    static var ignoreLowPowerMode: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: #function)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: #function)
+            NotificationCenter.default.post(name: self.ignoreLowPowerModeChangedNotificationName, object: newValue)
+        }
+    }
 
     static var spacingValue: String {
         return tabsEnabled ? "\t" : "    "

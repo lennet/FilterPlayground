@@ -34,4 +34,16 @@ class SettingsTests: XCTestCase {
         Settings.customFrameRate = 60
         XCTAssertEqual(Settings.customFrameRate!, 60)
     }
+    
+    func testIgnoreLowPowerMode() {
+        XCTAssertFalse(Settings.ignoreLowPowerMode)
+        Settings.ignoreLowPowerMode = true
+        XCTAssertTrue(Settings.ignoreLowPowerMode)
+    }
+    
+    func testNotificationAfterIgnoreLowPowerModeChanged() {
+        expectation(forNotification: Settings.ignoreLowPowerModeChangedNotificationName, object: nil, handler: nil)
+        Settings.ignoreLowPowerMode = true
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }

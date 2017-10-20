@@ -49,10 +49,10 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func frameRateValueChanged(_: Any) {
         let newFrameRate = Int(frameRateSlider.value)
         Settings.customFrameRate = newFrameRate
-        updateFrameRateLabel()
+        updateFrameRateLabel(frameRate: newFrameRate)
     }
 
-    func updateFrameRateLabel() {
-        frameRateLabel.text = "framerate: \(newFrameRate)"
+    func updateFrameRateLabel(frameRate: Int = FrameRateManager.shared.frameRate) {
+        frameRateLabel.text = "framerate: \(frameRate)"
     }
 }

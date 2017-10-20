@@ -7,9 +7,6 @@
 //
 
 import Foundation
-#if os(iOS) || os(tvOS)
-    import UIKit
-#endif
 
 class TimeDataBindingEmitter: DataBindingEmitter {
 
@@ -17,24 +14,32 @@ class TimeDataBindingEmitter: DataBindingEmitter {
 
     var timer: Timer?
     var time: TimeInterval = 0
+    
+    init() {
+        NotificationCenter.default.addObserver(self, selector: #selector(frameRateChanged), name: FrameRateManager.frameRateChangedNotificationName, object: nil)
+    }
 
-    let interval: TimeInterval = {
-        var fps = 60
-        // todo move fps to a central place and adjust if low power mode is enabled
-        #if os(iOS) || os(tvOS)
-            fps = UIScreen.main.maximumFramesPerSecond
-        #endif
+    var interval: TimeInterval {
+        let fps = FrameRateManager.shared.frameRate
         return 1 / Double(fps)
-    }()
+    }
 
     func activate() {
         guard timer == nil else { return }
-        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: didUpdate)
         time = 0
-        timer?.fire()
+        activateTimer()
     }
 
     func deactivate() {
+        deactivateTimer()
+    }
+    
+    func activateTimer()  {
+        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: didUpdate)
+        timer?.fire()
+    }
+    
+    func deactivateTimer() {
         timer?.invalidate()
         timer = nil
     }
@@ -42,5 +47,11 @@ class TimeDataBindingEmitter: DataBindingEmitter {
     func didUpdate(timer _: Timer) {
         time += interval
         DataBindingContext.shared.emit(value: time, for: .time)
+    }
+    
+    @objc func frameRateChanged() {
+        guard timer != nil else { return }
+        deactivateTimer()
+        activateTimer()
     }
 }

@@ -13,6 +13,8 @@ class TimeDataBindingEmitterTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        Settings.customFrameRate = nil
+        FrameRateManager.shared.customFrameRate = nil
         DataBindingContext.shared.reset()
     }
 
@@ -37,5 +39,29 @@ class TimeDataBindingEmitterTests: XCTestCase {
         XCTAssertNotNil((TimeDataBindingEmitter.shared as! TimeDataBindingEmitter).timer)
         DataBindingContext.shared.removeObserver(with: observer.id)
         XCTAssertNil((TimeDataBindingEmitter.shared as! TimeDataBindingEmitter).timer)
+    }
+    
+    func testUpdateTimerAfterFrameRateChange() {
+        let emitter = TimeDataBindingEmitter()
+        emitter.activate()
+        XCTAssertEqual(emitter.timer!.timeInterval, 1/Double(FrameRateManager.shared.maxFrameRate))
+        FrameRateManager.shared.customFrameRate = 40
+        let expectation = XCTestExpectation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            XCTAssertEqual(emitter.timer!.timeInterval, 1/Double(FrameRateManager.shared.customFrameRate!))
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func testDontUpdateTimerAfterFrameRateChangeForInActiveEmitter() {
+        let emitter = TimeDataBindingEmitter()
+        FrameRateManager.shared.customFrameRate = 40
+        let expectation = XCTestExpectation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            XCTAssertNil(emitter.timer)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
     }
 }

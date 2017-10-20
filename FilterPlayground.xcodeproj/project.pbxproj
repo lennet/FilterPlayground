@@ -91,6 +91,9 @@
 		986AA7371F62FF76008F2091 /* SelectTemplateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AA7361F62FF76008F2091 /* SelectTemplateTableViewController.swift */; };
 		987672451F2F5355002F9AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
 		987A73291F66F65000F73806 /* SwiftPlaygroundsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */; };
+		987F5BE71F9A8AD8003EB32B /* FrameRateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */; };
+		987F5BE81F9A8AD8003EB32B /* FrameRateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */; };
+		987F5BEA1F9A901E003EB32B /* FrameRateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F5BE91F9A901E003EB32B /* FrameRateManagerTests.swift */; };
 		9889019E1F76417A00B97C4A /* SourceEditorTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9889019D1F76417A00B97C4A /* SourceEditorTextStorage.swift */; };
 		988901A01F76426900B97C4A /* SourceEditorLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9889019F1F76426900B97C4A /* SourceEditorLayoutManager.swift */; };
 		989716731F67E3C800E7C20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716721F67E3C800E7C20C /* AppDelegate.swift */; };
@@ -243,6 +246,8 @@
 		986AA7361F62FF76008F2091 /* SelectTemplateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTemplateTableViewController.swift; sourceTree = "<group>"; };
 		987672441F2F5355002F9AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPlaygroundsHelper.swift; sourceTree = "<group>"; };
+		987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameRateManager.swift; sourceTree = "<group>"; };
+		987F5BE91F9A901E003EB32B /* FrameRateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameRateManagerTests.swift; sourceTree = "<group>"; };
 		9881A15E1F4884E700BABA72 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		9889019D1F76417A00B97C4A /* SourceEditorTextStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorTextStorage.swift; sourceTree = "<group>"; };
 		9889019F1F76426900B97C4A /* SourceEditorLayoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorLayoutManager.swift; sourceTree = "<group>"; };
@@ -376,6 +381,7 @@
 				985544901F7FFAA100E9F02A /* CoreImageColorKernel.swift */,
 				985544921F7FFB3E00E9F02A /* CoreImageBlendKernel.swift */,
 				983331101F80066300C9AF52 /* MetalKernel.swift */,
+				987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */,
 			);
 			path = Kernels;
 			sourceTree = "<group>";
@@ -450,6 +456,7 @@
 				98A411401F9950C100A97459 /* TouchDataBindingEmitterTests.swift */,
 				98A411421F99534500A97459 /* TimeDataBindingEmitterTests.swift */,
 				98A411441F9954EF00A97459 /* SettingsTests.swift */,
+				987F5BE91F9A901E003EB32B /* FrameRateManagerTests.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -831,6 +838,7 @@
 				980E4F451F8013AA00C603C3 /* MetalErrorParser.swift in Sources */,
 				98689EC21F93B41E0000AF7C /* DataBindingContext.swift in Sources */,
 				98689EBE1F93AC800000AF7C /* DataBinding.swift in Sources */,
+				987F5BE71F9A8AD8003EB32B /* FrameRateManager.swift in Sources */,
 				985A42361F2CFEE800636E72 /* CustomImageView.swift in Sources */,
 				987672451F2F5355002F9AAF /* Extensions.swift in Sources */,
 				985544911F7FFAA100E9F02A /* CoreImageColorKernel.swift in Sources */,
@@ -890,6 +898,7 @@
 				986AA72D1F62F679008F2091 /* TemplatesManagerTests.swift in Sources */,
 				980229B01F2FBF18000FFCA2 /* ErrorParserTests.swift in Sources */,
 				98C6FE861F3832AE00D0E840 /* ASTTests.swift in Sources */,
+				987F5BEA1F9A901E003EB32B /* FrameRateManagerTests.swift in Sources */,
 				98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */,
 				98689EC81F93BFD30000AF7C /* DataBindingContextTests.swift in Sources */,
 				984D9FA41F2E824B004AFD74 /* ParserTests.swift in Sources */,
@@ -931,6 +940,7 @@
 				983331071F8003AB00C9AF52 /* KernelAttributeValue.swift in Sources */,
 				9897169B1F67E81D00E7C20C /* Extensions.swift in Sources */,
 				9833310F1F80048F00C9AF52 /* Settings.swift in Sources */,
+				987F5BE81F9A8AD8003EB32B /* FrameRateManager.swift in Sources */,
 				9897169D1F67E8EE00E7C20C /* KernelError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

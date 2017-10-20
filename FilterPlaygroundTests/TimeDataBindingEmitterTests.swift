@@ -10,12 +10,12 @@ import XCTest
 @testable import FilterPlayground
 
 class TimeDataBindingEmitterTests: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
         DataBindingContext.shared.reset()
     }
-    
+
     func testValueChanged() {
         let observer = MockDataBindingObserver(id: "foo")
         observer.mockedBindingType = .time
@@ -28,7 +28,7 @@ class TimeDataBindingEmitterTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 4)
     }
-    
+
     func testTimerDeactivatesAfterRemovingObserver() {
         let observer = MockDataBindingObserver(id: "foo")
         observer.mockedBindingType = .time
@@ -38,6 +38,4 @@ class TimeDataBindingEmitterTests: XCTestCase {
         DataBindingContext.shared.removeObserver(with: observer.id)
         XCTAssertNil((TimeDataBindingEmitter.shared as! TimeDataBindingEmitter).timer)
     }
-    
 }
-

@@ -10,10 +10,10 @@ import XCTest
 @testable import FilterPlayground
 
 class SettingsTests: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
-        
+
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
     }
 
@@ -22,11 +22,16 @@ class SettingsTests: XCTestCase {
         Settings.tabsEnabled = true
         XCTAssertTrue(Settings.tabsEnabled)
     }
-    
+
     func testFontSize() {
         XCTAssertNotEqual(Settings.fontSize, 0)
         Settings.fontSize = 0
         XCTAssertEqual(Settings.fontSize, 0)
     }
-    
+
+    func testCustomFrameRate() {
+        XCTAssertNil(Settings.customFrameRate)
+        Settings.customFrameRate = 60
+        XCTAssertEqual(Settings.customFrameRate!, 60)
+    }
 }

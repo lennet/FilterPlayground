@@ -22,7 +22,7 @@ struct ProjectMetaData {
         name = "untitled"
         self.inputImages = inputImages
     }
-    
+
     func initialSource() -> String {
         return type.kernelClass.initialSource(with: name)
     }
@@ -36,18 +36,18 @@ struct ProjectMetaData {
     }
 
     func initialInputImages() -> [KernelInputImage] {
-        return (0..<type.kernelClass.requiredInputImages).map{ KernelInputImage(image: nil, index: $0, shouldHighlightIfMissing: false) }
+        return (0 ..< type.kernelClass.requiredInputImages).map { KernelInputImage(image: nil, index: $0, shouldHighlightIfMissing: false) }
     }
 }
 
 extension ProjectMetaData: Codable {
-    
+
     enum CodingKeys: String, CodingKey {
         case arguments
         case name
         case type
     }
-    
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try values.decode(String.self, forKey: .name)
@@ -55,12 +55,11 @@ extension ProjectMetaData: Codable {
         arguments = try values.decode([KernelArgument].self, forKey: .arguments)
         inputImages = []
     }
-    
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(type, forKey: .type)
         try container.encode(arguments, forKey: .arguments)
     }
-    
 }

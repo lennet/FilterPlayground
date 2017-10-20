@@ -10,7 +10,7 @@ import XCTest
 @testable import FilterPlayground
 
 class TouchDataBindingEmitterTests: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
         DataBindingContext.shared.reset()
@@ -25,5 +25,4 @@ class TouchDataBindingEmitterTests: XCTestCase {
         (TouchDataBindingEmitter.shared as! TouchDataBindingEmitter).detectedTouch(point: .zero)
         XCTAssertTrue(observer.valueChangedCalled)
     }
-    
 }

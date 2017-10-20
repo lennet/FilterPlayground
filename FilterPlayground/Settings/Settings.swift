@@ -31,6 +31,18 @@ struct Settings {
         }
     }
 
+    static var customFrameRate: Int? {
+        get {
+            guard UserDefaults.standard.value(forKey: #function) != nil else {
+                return nil
+            }
+            return UserDefaults.standard.integer(forKey: #function)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: #function)
+        }
+    }
+
     static var spacingValue: String {
         return tabsEnabled ? "\t" : "    "
     }

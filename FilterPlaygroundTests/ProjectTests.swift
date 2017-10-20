@@ -56,27 +56,26 @@ class ProjectTests: XCTestCase {
         XCTAssertEqual(resources.count, 1)
         XCTAssertEqual(resources.first?.name ?? "", "foo")
     }
-    
+
     func testSaveInputImages() {
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let url = documentsPath.appendingPathComponent("\(Date()).filterplayground")
-        
+
         let expectation = XCTestExpectation(description: "Waiting for file creation")
-        
+
         let document = Project(fileURL: url, type: .coreimagewarp)
         document.save(to: url, for: .forCreating) { _ in
-            XCTAssertEqual(document.metaData.inputImages.filter{ $0.image != nil }.count, 0)
+            XCTAssertEqual(document.metaData.inputImages.filter { $0.image != nil }.count, 0)
             document.metaData.inputImages[0].image = #imageLiteral(resourceName: "DefaultImage")
             document.close(completionHandler: { _ in
                 let document2 = Project(fileURL: url)
                 document2.open(completionHandler: { _ in
-                    XCTAssertEqual(document.metaData.inputImages.filter{ $0.image != nil }.count, 1)
+                    XCTAssertEqual(document.metaData.inputImages.filter { $0.image != nil }.count, 1)
                     expectation.fulfill()
                 })
             })
         }
-        
+
         wait(for: [expectation], timeout: 5)
     }
-    
 }

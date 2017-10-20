@@ -13,4 +13,3 @@ struct KernelInputImage {
     var index: Int
     var shouldHighlightIfMissing: Bool
 }
-

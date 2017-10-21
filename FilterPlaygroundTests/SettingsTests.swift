@@ -49,7 +49,7 @@ class SettingsTests: XCTestCase {
 
     func testNotificationAfterCustomFrameRateChanged() {
         expectation(forNotification: Settings.customFrameRateChangedNotificationName, object: nil, handler: nil)
-        Settings.ignoreLowPowerMode = true
+        Settings.customFrameRate = 10
         waitForExpectations(timeout: 1, handler: nil)
     }
 }

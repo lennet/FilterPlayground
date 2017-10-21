@@ -55,6 +55,10 @@ class FrameRateManager {
         }
         return min(maxFrameRate, unwrappedCustomFrameRate)
     }
+    
+    var frameInterval: TimeInterval {
+        return 1 / Double(frameRate)
+    }
 
     @objc func powerModeDidChange() {
         postFrameRateChanged()

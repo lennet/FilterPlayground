@@ -18,12 +18,7 @@ class TimeDataBindingEmitter: DataBindingEmitter {
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(frameRateChanged), name: FrameRateManager.frameRateChangedNotificationName, object: nil)
     }
-
-    var interval: TimeInterval {
-        let fps = FrameRateManager.shared.frameRate
-        return 1 / Double(fps)
-    }
-
+    
     func activate() {
         guard timer == nil else { return }
         time = 0
@@ -35,7 +30,7 @@ class TimeDataBindingEmitter: DataBindingEmitter {
     }
 
     func activateTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true, block: didUpdate)
+        timer = Timer.scheduledTimer(withTimeInterval: FrameRateManager.shared.frameInterval, repeats: true, block: didUpdate)
         timer?.fire()
     }
 
@@ -44,8 +39,8 @@ class TimeDataBindingEmitter: DataBindingEmitter {
         timer = nil
     }
 
-    func didUpdate(timer _: Timer) {
-        time += interval
+    func didUpdate(timer t: Timer) {
+        time += t.timeInterval
         DataBindingContext.shared.emit(value: time, for: .time)
     }
 

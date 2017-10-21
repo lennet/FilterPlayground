@@ -6,8 +6,6 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import CoreImage
-import Metal
 import MetalKit
 
 class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {

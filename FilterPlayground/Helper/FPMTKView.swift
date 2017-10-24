@@ -82,11 +82,11 @@ class FPMTKView: MTKView, MTKViewDelegate {
 
     func showStatistics() {
         #if os(iOS) || os(tvOS)
-            guard statisticsView == nil else { return }
+            guard self.statisticsView == nil else { return }
             let statisticsView = StatisticsView(frame: CGRect(x: 0, y: bounds.height - 44, width: bounds.width, height: 44))
             statisticsView.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleTopMargin)
             addSubview(statisticsView)
-            statisticsView = statisticsView
+            self.statisticsView = statisticsView
         #endif
     }
 
@@ -123,20 +123,21 @@ class FPMTKView: MTKView, MTKViewDelegate {
     }
 
     func bufferCompletionHandler(buffer _: MTLCommandBuffer) {
-        if framesCount == numberOfSkippedFrames {
-            #if os(iOS) || os(tvOS)
-                statisticsView?.updateStatistics(frameRate: Double(numberOfSkippedFrames) / totalExecutionTimes.average(), time: gpuExecutionTimes.average())
-            #endif
-            let time = CFAbsoluteTimeGetCurrent()
-            totalExecutionTimes.removeFirst()
-            totalExecutionTimes.append(time - totalStartTime)
-            totalStartTime = time
-            gpuExecutionTimes.removeFirst()
-            gpuExecutionTimes.append(time - gpuStartTime)
-            // TODO: find way for more precise gpu execution time
-            framesCount = 0
+        guard framesCount == numberOfSkippedFrames else {
+            framesCount += 1
+            return
         }
 
-        framesCount += 1
+        #if os(iOS) || os(tvOS)
+            statisticsView?.updateStatistics(frameRate: Double(numberOfSkippedFrames) / totalExecutionTimes.average(), time: gpuExecutionTimes.average())
+        #endif
+        let time = CFAbsoluteTimeGetCurrent()
+        totalExecutionTimes.removeFirst()
+        totalExecutionTimes.append(time - totalStartTime)
+        totalStartTime = time
+        gpuExecutionTimes.removeFirst()
+        gpuExecutionTimes.append(time - gpuStartTime)
+        // TODO: find way for more precise gpu execution time
+        framesCount = 0
     }
 }

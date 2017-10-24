@@ -246,9 +246,14 @@ class NumberedTextView: UIView, UITextViewDelegate {
 
     func insert(arguments: [(String, KernelArgumentType)]) {
         let selectedRange = textView.selectedRange
-        currentAST?.replaceArguments(newArguments: arguments)
-        textView.attributedText = currentAST?.asAttributedText
-        textView.selectedRange = selectedRange
-        delegate?.textViewDidChange?(textView)
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.currentAST?.replaceArguments(newArguments: arguments)
+            let newAttribtuedText = self.currentAST?.asAttributedText
+            DispatchQueue.main.async {
+                self.textView.attributedText = newAttribtuedText
+                self.textView.selectedRange = selectedRange
+                self.delegate?.textViewDidChange?(self.textView)
+            }
+        }
     }
 }

@@ -52,4 +52,16 @@ class SettingsTests: XCTestCase {
         Settings.customFrameRate = 10
         waitForExpectations(timeout: 1, handler: nil)
     }
+
+    func testShowStatistics() {
+        XCTAssertFalse(Settings.showStatistics)
+        Settings.showStatistics = true
+        XCTAssertTrue(Settings.showStatistics)
+    }
+
+    func testNotificationAfterShowStatisticsChanged() {
+        expectation(forNotification: Settings.showStatisticsChangedNotificationName, object: nil, handler: nil)
+        Settings.showStatistics = true
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }

@@ -15,6 +15,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var frameRateLabel: UILabel!
     @IBOutlet weak var frameRateSlider: UISlider!
     @IBOutlet weak var ignoreLowPowerModeSwitch: UISwitch!
+    @IBOutlet weak var showStatisticsSwitch: UISwitch!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -22,6 +23,8 @@ class SettingsTableViewController: UITableViewController {
         tabsVsSpacesSegmentedControl.selectedSegmentIndex = Settings.tabsEnabled ? 0 : 1
         ignoreLowPowerModeSwitch.isOn = Settings.ignoreLowPowerMode
         frameRateSlider.maximumValue = Float(FrameRateManager.shared.maxFrameRate)
+        frameRateSlider.value = Float(Settings.customFrameRate ?? Int(frameRateSlider.maximumValue))
+        showStatisticsSwitch.isOn = Settings.showStatistics
         // todo disabled framerateslider in low power mode and with ignorelowpoweermode false
         updateFrameRateLabel()
     }
@@ -50,6 +53,10 @@ class SettingsTableViewController: UITableViewController {
         let newFrameRate = Int(frameRateSlider.value)
         Settings.customFrameRate = newFrameRate
         updateFrameRateLabel(frameRate: newFrameRate)
+    }
+
+    @IBAction func statisticsSwitchValueChanged(_: Any) {
+        Settings.showStatistics = showStatisticsSwitch.isOn
     }
 
     func updateFrameRateLabel(frameRate: Int = FrameRateManager.shared.frameRate) {

@@ -36,7 +36,7 @@
             <objects>
                 <tableViewController id="d8L-vD-k8G" customClass="SettingsTableViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Xuq-aG-Uhv">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -162,14 +162,45 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="150" id="UqJ-Fb-hH2">
-                                        <rect key="frame" x="0.0" y="343.5" width="300" height="150"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="-1" id="UqJ-Fb-hH2">
+                                        <rect key="frame" x="0.0" y="343.5" width="300" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UqJ-Fb-hH2" id="ICu-tj-0tg">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="show statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHC-fg-14n">
+                                                    <rect key="frame" x="16" y="12" width="114" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7vv-r5-JCg">
+                                                    <rect key="frame" x="235" y="7" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="ignoresLowPowerModeSwitchValueChanged:" destination="d8L-vD-k8G" eventType="valueChanged" id="7up-uN-cs2"/>
+                                                        <action selector="nightModeSwitchValueChanged:" destination="d8L-vD-k8G" eventType="valueChanged" id="6mh-iZ-a6H"/>
+                                                        <action selector="statisticsSwitchValueChanged:" destination="d8L-vD-k8G" eventType="valueChanged" id="p5I-6J-Jq1"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7vv-r5-JCg" firstAttribute="centerY" secondItem="ICu-tj-0tg" secondAttribute="centerY" id="DC5-tn-awH"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pHC-fg-14n" secondAttribute="trailingMargin" id="G9v-jM-3hI"/>
+                                                <constraint firstItem="pHC-fg-14n" firstAttribute="leading" secondItem="ICu-tj-0tg" secondAttribute="leadingMargin" constant="8" id="Z0C-Bt-gal"/>
+                                                <constraint firstItem="pHC-fg-14n" firstAttribute="centerY" secondItem="ICu-tj-0tg" secondAttribute="centerY" id="dCk-1E-Vc6"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="7vv-r5-JCg" secondAttribute="trailing" constant="8" id="iJb-BO-OLp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="150" id="Moi-81-CMC">
+                                        <rect key="frame" x="0.0" y="387.5" width="300" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Moi-81-CMC" id="cU5-hA-j4i">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="149.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u82-6N-Lfx">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuQ-1L-Ql8">
                                                     <rect key="frame" x="16" y="16" width="284" height="117.5"/>
                                                     <string key="text">Framerate info text Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -178,10 +209,10 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="u82-6N-Lfx" firstAttribute="top" secondItem="ICu-tj-0tg" secondAttribute="topMargin" constant="8" id="0bu-yi-9Ek"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="u82-6N-Lfx" secondAttribute="bottom" constant="8" id="EoP-4h-xBr"/>
-                                                <constraint firstItem="u82-6N-Lfx" firstAttribute="leading" secondItem="ICu-tj-0tg" secondAttribute="leadingMargin" constant="8" id="PDr-5F-NrL"/>
-                                                <constraint firstItem="u82-6N-Lfx" firstAttribute="trailing" secondItem="ICu-tj-0tg" secondAttribute="trailingMargin" constant="8" id="Wt5-oC-tY9"/>
+                                                <constraint firstItem="UuQ-1L-Ql8" firstAttribute="leading" secondItem="cU5-hA-j4i" secondAttribute="leadingMargin" constant="8" id="5fJ-RO-w7H"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="UuQ-1L-Ql8" secondAttribute="bottom" constant="8" id="CpU-vP-wfu"/>
+                                                <constraint firstItem="UuQ-1L-Ql8" firstAttribute="trailing" secondItem="cU5-hA-j4i" secondAttribute="trailingMargin" constant="8" id="EVY-44-bCb"/>
+                                                <constraint firstItem="UuQ-1L-Ql8" firstAttribute="top" secondItem="cU5-hA-j4i" secondAttribute="topMargin" constant="8" id="r6z-X5-bTt"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -193,12 +224,13 @@
                             <outlet property="delegate" destination="d8L-vD-k8G" id="urw-t2-WrO"/>
                         </connections>
                     </tableView>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="300"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="500"/>
                     <connections>
                         <outlet property="frameRateLabel" destination="7Wa-Ri-PFB" id="zZ1-lr-snw"/>
                         <outlet property="frameRateSlider" destination="caY-XM-WB1" id="u4j-g9-bzj"/>
                         <outlet property="ignoreLowPowerModeSwitch" destination="sWe-Ga-g6f" id="glA-eq-0nk"/>
                         <outlet property="nightModeSwitch" destination="qNO-gb-toC" id="nI3-xN-rl7"/>
+                        <outlet property="showStatisticsSwitch" destination="7vv-r5-JCg" id="03Z-Kj-gxV"/>
                         <outlet property="tabsVsSpacesSegmentedControl" destination="RIp-DC-uTf" id="ews-jt-Xtz"/>
                     </connections>
                 </tableViewController>

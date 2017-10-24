@@ -95,6 +95,17 @@ extension Array {
     }
 }
 
+extension Array where Element == Double {
+
+    func sum() -> Double {
+        return reduce(0, +)
+    }
+
+    func average() -> Double {
+        return sum() / Double(count)
+    }
+}
+
 extension CGFloat {
 
     var asRadian: CGFloat {

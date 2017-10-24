@@ -16,7 +16,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         }
     }
 
-    var mtkView: MTKView!
+    var mtkView: FPMTKView!
 
     var outputView: KernelOutputView {
         return mtkView
@@ -178,7 +178,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
 
             commandEncoder?.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
             commandEncoder?.endEncoding()
-
+            commandBuffer?.addCompletedHandler(mtkView.bufferCompletionHandler)
             commandBuffer?.present(currentDrawable)
             commandBuffer?.commit()
         }

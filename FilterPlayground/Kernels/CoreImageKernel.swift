@@ -14,7 +14,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
 
     let commandQueue: MTLCommandQueue?
     let device: MTLDevice?
-    var mtkView: MTKView!
+    var mtkView: FPMTKView!
     var context: CIContext?
 
     var outputView: KernelOutputView {
@@ -119,6 +119,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
                                 colorSpace: colorSpace)
             #endif
 
+            commandBuffer?.addCompletedHandler(mtkView.bufferCompletionHandler)
             commandBuffer?.present(currentDrawable)
             commandBuffer?.commit()
         }

@@ -45,7 +45,7 @@ struct Settings {
         }
     }
 
-    static let ignoreLowPowerModeChangedNotificationName = NSNotification.Name("IgnoreLowPowerModeeSettingChangedNotification")
+    static let ignoreLowPowerModeChangedNotificationName = NSNotification.Name("IgnoreLowPowerModeSettingChangedNotification")
     static var ignoreLowPowerMode: Bool {
         get {
             return UserDefaults.standard.bool(forKey: #function)
@@ -53,6 +53,17 @@ struct Settings {
         set {
             UserDefaults.standard.set(newValue, forKey: #function)
             NotificationCenter.default.post(name: self.ignoreLowPowerModeChangedNotificationName, object: newValue)
+        }
+    }
+
+    static let showStatisticsChangedNotificationName = NSNotification.Name("ShowStatisticsSettingChangedNotification")
+    static var showStatistics: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: #function)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: #function)
+            NotificationCenter.default.post(name: self.showStatisticsChangedNotificationName, object: newValue)
         }
     }
 

@@ -15,7 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let documentBrowserViewController = DocumentBrowserViewController(forOpeningFilesWithContentTypes: nil)
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         return true
     }
 

@@ -127,6 +127,7 @@
 		98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB11F3A17820043AA9D /* FloatPickerViewController.swift */; };
 		98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */; };
 		98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE92A81F3900290044E33F /* LiveViewController.swift */; };
+		98B00A2B1F9D1E70006D2728 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B00A2A1F9D1E70006D2728 /* StatisticsView.swift */; };
 		98B7B6E91F4757B5008C370F /* ExportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */; };
 		98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */; };
 		98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */; };
@@ -278,6 +279,7 @@
 		98A67FB11F3A17820043AA9D /* FloatPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatPickerViewController.swift; sourceTree = "<group>"; };
 		98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatSelectionButton.swift; sourceTree = "<group>"; };
 		98AE92A81F3900290044E33F /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
+		98B00A2A1F9D1E70006D2728 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportTableViewController.swift; sourceTree = "<group>"; };
 		98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingDocumentTests.swift; sourceTree = "<group>"; };
 		98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelperTests.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				983008751F6F084C005C89C3 /* DismissSegue.swift */,
 				9845153F1F914CE10015FADF /* FPMTKView.swift */,
 				98286D641F93FE97003B6D4A /* OutputContainerView.swift */,
+				98B00A2A1F9D1E70006D2728 /* StatisticsView.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -820,6 +823,7 @@
 				98689ED01F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */,
 				98A4113F1F99453000A97459 /* KernelInputImage.swift in Sources */,
 				98689ECD1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift in Sources */,
+				98B00A2B1F9D1E70006D2728 /* StatisticsView.swift in Sources */,
 				980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */,
 				98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */,
 				98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */,

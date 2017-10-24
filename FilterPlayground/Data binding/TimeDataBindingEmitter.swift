@@ -18,7 +18,7 @@ class TimeDataBindingEmitter: DataBindingEmitter {
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(frameRateChanged), name: FrameRateManager.frameRateChangedNotificationName, object: nil)
     }
-    
+
     func activate() {
         guard timer == nil else { return }
         time = 0

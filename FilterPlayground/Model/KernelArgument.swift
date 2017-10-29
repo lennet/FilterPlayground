@@ -12,13 +12,13 @@ import CoreImage
 struct KernelArgument {
     var name: String
     var type: KernelArgumentType
-    var value: KernelAttributeValue
+    var value: KernelArgumentValue
     var binding: DataBinding?
 }
 
 extension KernelArgument {
 
-    init(name: String, type: KernelArgumentType, value: KernelAttributeValue) {
+    init(name: String, type: KernelArgumentType, value: KernelArgumentValue) {
         self.init(name: name, type: type, value: value, binding: nil)
     }
 }
@@ -40,9 +40,9 @@ extension KernelArgument: Codable {
 
         if type == .sample {
             // this value gets overriden in the load method
-            value = KernelAttributeValue.sample(CIImage(color: .black))
+            value = KernelArgumentValue.sample(CIImage(color: .black))
         } else {
-            value = try values.decode(KernelAttributeValue.self, forKey: .value)
+            value = try values.decode(KernelArgumentValue.self, forKey: .value)
         }
     }
 

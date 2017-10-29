@@ -22,7 +22,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         return mtkView
     }
 
-    var arguments: [KernelAttributeValue] = []
+    var arguments: [KernelArgumentValue] = []
 
     let threadGroupCount = MTLSizeMake(16, 16, 1)
     let device: MTLDevice?
@@ -61,7 +61,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
     }
 
     static var supportedArguments: [KernelArgumentType] {
-        // todo
+        // TODO:
         return [.float, .vec2, .vec3, .vec4]
     }
 
@@ -87,7 +87,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
     }
 
     func makeInputTexture() {
-        // todo use CIContext to render image into texture
+        // TODO: use CIContext to render image into texture
         guard let device = device else { return }
         guard let image = inputImages.first else { return }
         guard let cgImage = context?.createCGImage(image, from: image.extent) else { return }
@@ -108,7 +108,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         guard let functionName = lib.functionNames.first else { return }
         let constantValues = MTLFunctionConstantValues()
         lib.makeFunction(name: functionName, constantValues: constantValues) { function, _ in
-            // todo handle error
+            // TODO: handle error
 
             self.function = function
 

@@ -27,7 +27,7 @@ enum KernelArgumentType: String, Codable {
 
 extension KernelArgumentType {
 
-    var defaultValue: KernelAttributeValue {
+    var defaultValue: KernelArgumentValue {
         switch self {
         case .float:
             return .float(0)

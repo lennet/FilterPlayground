@@ -236,7 +236,7 @@ class Tokenizer {
         var identifier = nextChar
         index = string.index(after: index)
         while let nextChar = getNextCharacter(),
-            // todo create own charactersets for identifier
+            // TODO: create own charactersets for identifier
             CharacterSet.alphanumerics.contains(nextChar.unicodeScalars.first!) || nextChar == "_" {
             identifier.append(nextChar)
             index = string.index(after: index)

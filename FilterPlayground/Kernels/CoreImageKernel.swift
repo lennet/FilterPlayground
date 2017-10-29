@@ -21,7 +21,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
         return mtkView
     }
 
-    var arguments: [KernelAttributeValue] = []
+    var arguments: [KernelArgumentValue] = []
     let colorSpace = CGColorSpaceCreateDeviceRGB()
 
     required override init() {
@@ -97,7 +97,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
         return false
     }
 
-    func apply(with _: [CIImage], attributes: [KernelAttributeValue]) -> CIImage? {
+    func apply(with _: [CIImage], attributes: [KernelArgumentValue]) -> CIImage? {
         let arguments: [Any] = attributes.flatMap { $0.asKernelValue }
         return kernel?.apply(extent: CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000)), roiCallback: { (_, rect) -> CGRect in
             rect

@@ -10,6 +10,10 @@ import UIKit
 
 class FloatPickerViewController: UIViewController {
 
+    class func instantiate() -> FloatPickerViewController {
+        return UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! FloatPickerViewController
+    }
+
     @IBOutlet weak var previousButton: FloatSelectionButton!
     @IBOutlet weak var nextButton: FloatSelectionButton!
     @IBOutlet weak var slider: CircularSlider!

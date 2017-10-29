@@ -12,9 +12,11 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var typeButton: UIButton!
-    @IBOutlet weak var valueSelectionView: UIView!
+    @IBOutlet weak var valueSelectionContainer: UIView!
     @IBOutlet weak var newArgumentOverlay: UIView!
     @IBOutlet weak var dataBindingButton: UIButton!
+
+    var valueSelectionView: (UIView & KernelArgumentValueView)?
 
     var valueButton: UIView!
     var selectedBinding: DataBinding = .none {
@@ -51,7 +53,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
                 newArgumentOverlay.isHidden = true
                 selectedBinding = attribute?.binding ?? .none
             } else {
-                valueSelectionView.subviews.forEach { $0.removeFromSuperview() }
+                valueSelectionContainer.subviews.forEach { $0.removeFromSuperview() }
                 nameTextField.text = nil
                 nameTextField.isEnabled = false
                 newArgumentOverlay.isHidden = false
@@ -127,82 +129,19 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         present(viewController: viewController, with: sender)
     }
 
-    @objc func valueButtonTapped(sender: UIButton) {
-        let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! FloatPickerViewController
-        valueButton = sender
-        viewController.valueChanged = { value in
-            self.attribute?.value = .float(Float(value))
-            (self.valueButton as? UIButton)?.setTitle("\(value)", for: .normal)
-            self.updateCallBack?(self, self.attribute!)
-        }
-        present(viewController: viewController, with: sender)
+    func setupValueView(for type: KernelArgumentType, value _: KernelArgumentValue?) {
+        valueSelectionView?.removeFromSuperview()
+        guard let type = attribute?.type,
+            let value = attribute?.value,
+            let view = KernelArgumentValueViewHelper.view(for: type).init(frame: valueSelectionContainer.bounds, value: value) as? (UIView & KernelArgumentValueView) else { return }
+        valueSelectionContainer.addSubview(view)
+        valueSelectionView?.updatedValueCallback = valueChanged
+        valueSelectionView = view
     }
 
-    @objc func colorButtonTapped(sender _: UIButton) {
-        let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "ColorPickerViewControllerIdentifier") as! ColorPickerViewController
-        viewController.colorChanged = { r, g, b, a in
-            self.attribute?.value = .color(r, g, b, a)
-            self.valueButton.backgroundColor = UIColor(displayP3Red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(a))
-            self.updateCallBack?(self, self.attribute!)
-        }
-        present(viewController: viewController, with: valueSelectionView)
-    }
-
-    func setupValueView(for type: KernelArgumentType, value _: KernelAttributeValue?) {
-        valueSelectionView.subviews.forEach { $0.removeFromSuperview() }
-        switch (type, attribute?.value) {
-        case let (.sample, .sample(image)?) :
-            let imageView = CustomImageView(frame: valueSelectionView.bounds)
-            imageView.didSelectImage = { image in
-                self.attribute?.value = .sample(image.image!.asCIImage!)
-                self.updateCallBack?(self, self.attribute!)
-            }
-            imageView.image = UIImage(ciImage: image)
-            imageView.backgroundColor = .gray
-            valueSelectionView.addSubview(imageView)
-            break
-        case let (.color, .color(r, g, b, a)?):
-            let button = UIButton(frame: valueSelectionView.bounds)
-            valueSelectionView.addSubview(button)
-            button.backgroundColor = UIColor(displayP3Red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: CGFloat(a))
-            button.addTarget(self, action: #selector(colorButtonTapped(sender:)), for: .touchUpInside)
-            valueButton = button
-            break
-        case let (.vec2, .vec2(a, b)?):
-            let picker = VectorValuePicker(frame: valueSelectionView.bounds, values: [a, b])
-            picker.valuesChanged = { values in
-                self.attribute?.value = .vec2(values[0], values[1])
-                self.updateCallBack?(self, self.attribute!)
-            }
-            valueButton = picker
-            valueSelectionView.addSubview(picker)
-        case let (.vec3, .vec3(a, b, c)?):
-            let picker = VectorValuePicker(frame: valueSelectionView.bounds, values: [a, b, c])
-            picker.valuesChanged = { values in
-                self.attribute?.value = .vec3(values[0], values[1], values[2])
-                self.updateCallBack?(self, self.attribute!)
-            }
-            valueButton = picker
-            valueSelectionView.addSubview(picker)
-        case let (.vec4, .vec4(a, b, c, d)?):
-            let picker = VectorValuePicker(frame: valueSelectionView.bounds, values: [a, b, c, d])
-            picker.valuesChanged = { values in
-                self.attribute?.value = .vec4(values[0], values[1], values[2], values[3])
-                self.updateCallBack?(self, self.attribute!)
-            }
-            valueButton = picker
-            valueSelectionView.addSubview(picker)
-        case let (.float, .float(floatValue)?):
-            let button = UIButton(frame: valueSelectionView.bounds)
-            valueSelectionView.addSubview(button)
-            button.addTarget(self, action: #selector(valueButtonTapped(sender:)), for: .touchUpInside)
-            button.setTitleColor(.blue, for: .normal)
-            button.setTitle("\(floatValue)", for: .normal)
-            valueButton = button
-            break
-        default:
-            break
-        }
+    func valueChanged(value: KernelArgumentValue) {
+        attribute?.value = value
+        updateCallBack?(self, attribute!)
     }
 
     func adaptivePresentationStyle(for _: UIPresentationController) -> UIModalPresentationStyle {
@@ -257,7 +196,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     }
 }
 
-// todo move observer out of this cell because not every attribtue must have a own cell
+// TODO: move observer out of this cell because not every attribtue must have a own cell
 extension KernelAttributeTableViewCell: DataBindingObserver {
 
     var observedBinding: DataBinding {
@@ -267,7 +206,7 @@ extension KernelAttributeTableViewCell: DataBindingObserver {
     func valueChanged(value: Any) {
         guard let type = attribute?.type else { return }
 
-        var newValue: KernelAttributeValue?
+        var newValue: KernelArgumentValue?
         switch (type, observedBinding) {
         case (.float, .time):
             if let time = value as? TimeInterval {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension KernelAttributeValue {
+extension KernelArgumentValue {
     
     fileprivate func swiftPlaygroundValue(with attributeName: String) -> String {
         switch self {

@@ -25,7 +25,7 @@ class SettingsTableViewController: UITableViewController {
         frameRateSlider.maximumValue = Float(FrameRateManager.shared.maxFrameRate)
         frameRateSlider.value = Float(Settings.customFrameRate ?? Int(frameRateSlider.maximumValue))
         showStatisticsSwitch.isOn = Settings.showStatistics
-        // todo disabled framerateslider in low power mode and with ignorelowpoweermode false
+        // TODO: disabled framerateslider in low power mode and with ignorelowpoweermode false
         updateFrameRateLabel()
     }
 

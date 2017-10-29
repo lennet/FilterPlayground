@@ -120,7 +120,7 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
             newHeight = max(newHeight, headerHeight)
             newHeight = min(newHeight, maxHeight)
             setAlpha(value: 1 - newHeight.noramlized(min: headerHeight, max: maxHeight), animated: false)
-            // todo use different timing curve
+            // TODO: use different timing curve
             break
         }
 

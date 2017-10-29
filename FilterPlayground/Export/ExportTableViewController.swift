@@ -68,7 +68,7 @@ class ExportTableViewController: UITableViewController {
 
         } catch {
             print(error)
-            // todo handle error
+            // TODO: handle error
             return
         }
         presentActivityViewController(sourceView: sender, items: [url])
@@ -86,7 +86,7 @@ class ExportTableViewController: UITableViewController {
 
         } catch {
             print(error)
-            // todo handle error
+            // TODO: handle error
             return
         }
         presentActivityViewController(sourceView: sender, items: [url])

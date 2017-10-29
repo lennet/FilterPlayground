@@ -8,7 +8,11 @@
 
 import UIKit
 
-class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
+class VectorValuePicker: UIControl, KernelArgumentValueView, UIPopoverPresentationControllerDelegate {
+
+    var updatedValueCallback: ((KernelArgumentValue) -> Void)?
+
+    var value: KernelArgumentValue
 
     var poppoverControllerPresentationController: UIPopoverPresentationController?
     var floatPicker: FloatPickerViewController?
@@ -17,7 +21,6 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
         return values.count
     }
 
-    var valuesChanged: (([Float]) -> Void)?
     var values: [Float]
 
     let stackView: UIStackView = {
@@ -28,8 +31,14 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
         return view
     }()
 
-    init(frame: CGRect, values: [Float]) {
+    required convenience init?(frame: CGRect, value: KernelArgumentValue) {
+        guard case let KernelArgumentValue.vec2(x, y) = value else { return nil }
+        self.init(frame: frame, values: [x, y], value: value)
+    }
+
+    init(frame: CGRect, values: [Float], value: KernelArgumentValue) {
         self.values = values
+        self.value = value
         super.init(frame: frame)
         stackView.frame = bounds
         addSubview(stackView)
@@ -53,7 +62,7 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
     }
 
     @objc func handleTap() {
-        let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! FloatPickerViewController
+        let viewController = FloatPickerViewController.instantiate()
         viewController.showNextButton = true
         floatPicker = viewController
         viewController.valueChanged = { value in
@@ -62,7 +71,7 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
             }
             self.values[self.currentHighlightedIndex - 1] = Float(value)
             label.text = "\(value)"
-            self.valuesChanged?(self.values)
+            self.updatedValues()
         }
 
         viewController.nextButtonTappedCallback = {
@@ -82,6 +91,10 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
         highlight(at: 1)
     }
 
+    func updatedValues() {
+        updatedValueCallback?(value)
+    }
+
     func highlight(at index: Int) {
         guard currentHighlightedIndex != index else {
             return
@@ -94,7 +107,7 @@ class VectorValuePicker: UIControl, UIPopoverPresentationControllerDelegate {
             if index == i + 1 {
                 label.textColor = .blue
 
-                // todo fix updating sourcerect
+                // TODO: fix updating sourcerect
                 self.poppoverControllerPresentationController?.sourceView = label
                 self.poppoverControllerPresentationController?.sourceRect = label.bounds
             } else {

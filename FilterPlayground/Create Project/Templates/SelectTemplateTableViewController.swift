@@ -16,7 +16,7 @@ class SelectTemplateTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in _: UITableView) -> Int {
-        // todo check for different types
+        // TODO: check for different types
         return 1
     }
 

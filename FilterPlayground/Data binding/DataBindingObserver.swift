@@ -10,6 +10,6 @@ import Foundation
 
 protocol DataBindingObserver {
     var observedBinding: DataBinding { get }
-    // todo make type safe
+    // TODO: make type safe
     func valueChanged(value: Any)
 }

@@ -82,11 +82,11 @@ class FPMTKView: MTKView, MTKViewDelegate {
 
     func showStatistics() {
         #if os(iOS) || os(tvOS)
-            guard self.statisticsView == nil else { return }
+            guard statisticsView == nil else { return }
             let statisticsView = StatisticsView(frame: CGRect(x: 0, y: bounds.height - 44, width: bounds.width, height: 44))
             statisticsView.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleTopMargin)
             addSubview(statisticsView)
-            self.statisticsView = statisticsView
+            statisticsView = statisticsView
         #endif
     }
 

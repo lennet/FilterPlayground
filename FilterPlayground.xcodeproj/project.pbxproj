@@ -25,10 +25,10 @@
 		98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */; };
 		983330FF1F80026000C9AF52 /* KernelArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983330FE1F80026000C9AF52 /* KernelArgument.swift */; };
 		983331011F80029E00C9AF52 /* KernelArgumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331001F80029E00C9AF52 /* KernelArgumentType.swift */; };
-		983331031F8002C600C9AF52 /* KernelAttributeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331021F8002C600C9AF52 /* KernelAttributeValue.swift */; };
+		983331031F8002C600C9AF52 /* KernelArgumentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331021F8002C600C9AF52 /* KernelArgumentValue.swift */; };
 		983331051F80039800C9AF52 /* KernelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331041F80039800C9AF52 /* KernelType.swift */; };
 		983331061F8003A800C9AF52 /* KernelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331041F80039800C9AF52 /* KernelType.swift */; };
-		983331071F8003AB00C9AF52 /* KernelAttributeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331021F8002C600C9AF52 /* KernelAttributeValue.swift */; };
+		983331071F8003AB00C9AF52 /* KernelArgumentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331021F8002C600C9AF52 /* KernelArgumentValue.swift */; };
 		983331081F8003AE00C9AF52 /* KernelArgumentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331001F80029E00C9AF52 /* KernelArgumentType.swift */; };
 		983331091F8003B200C9AF52 /* KernelArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983330FE1F80026000C9AF52 /* KernelArgument.swift */; };
 		9833310A1F8003B600C9AF52 /* ShadingLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985544881F7FF2B900E9F02A /* ShadingLanguage.swift */; };
@@ -65,6 +65,15 @@
 		985A420D1F2CF8F200636E72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 985A420C1F2CF8F200636E72 /* Assets.xcassets */; };
 		985A42101F2CF8F200636E72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 985A420E1F2CF8F200636E72 /* LaunchScreen.storyboard */; };
 		985A42361F2CFEE800636E72 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985A42351F2CFEE800636E72 /* CustomImageView.swift */; };
+		985D51951FA62C9D009881CC /* KernelArgumentValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985D51941FA62C9D009881CC /* KernelArgumentValueView.swift */; };
+		985D51971FA64A3D009881CC /* ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985D51961FA64A3D009881CC /* ExtensionsTests.swift */; };
+		985D51991FA6616B009881CC /* FloatPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985D51981FA6616B009881CC /* FloatPickerButton.swift */; };
+		985D519B1FA66A37009881CC /* ValuePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985D519A1FA66A37009881CC /* ValuePickerButton.swift */; };
+		985D519D1FA66B76009881CC /* ColorPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985D519C1FA66B76009881CC /* ColorPickerButton.swift */; };
+		985D519F1FA66E18009881CC /* Vector2ValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985D519E1FA66E18009881CC /* Vector2ValuePicker.swift */; };
+		985D51A11FA66F84009881CC /* Vector3ValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985D51A01FA66F84009881CC /* Vector3ValuePicker.swift */; };
+		985D51A31FA66FAA009881CC /* Vector4ValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985D51A21FA66FAA009881CC /* Vector4ValuePicker.swift */; };
+		985D51A61FA67096009881CC /* SampleValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985D51A51FA67096009881CC /* SampleValuePicker.swift */; };
 		985EB2491F6821990007B85C /* CIFilterHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985EB2481F6821990007B85C /* CIFilterHelperTests.swift */; };
 		986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */; };
 		98689EBE1F93AC800000AF7C /* DataBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98689EBD1F93AC800000AF7C /* DataBinding.swift */; };
@@ -195,7 +204,7 @@
 		98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorValuePicker.swift; sourceTree = "<group>"; };
 		983330FE1F80026000C9AF52 /* KernelArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelArgument.swift; sourceTree = "<group>"; };
 		983331001F80029E00C9AF52 /* KernelArgumentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelArgumentType.swift; sourceTree = "<group>"; };
-		983331021F8002C600C9AF52 /* KernelAttributeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeValue.swift; sourceTree = "<group>"; };
+		983331021F8002C600C9AF52 /* KernelArgumentValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelArgumentValue.swift; sourceTree = "<group>"; };
 		983331041F80039800C9AF52 /* KernelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelType.swift; sourceTree = "<group>"; };
 		983331101F80066300C9AF52 /* MetalKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalKernel.swift; sourceTree = "<group>"; };
 		9841EC741F3663AE00A8E3CA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -227,6 +236,15 @@
 		985A42161F2CF8F300636E72 /* FilterPlaygroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilterPlaygroundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		985A421C1F2CF8F300636E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		985A42351F2CFEE800636E72 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		985D51941FA62C9D009881CC /* KernelArgumentValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelArgumentValueView.swift; sourceTree = "<group>"; };
+		985D51961FA64A3D009881CC /* ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
+		985D51981FA6616B009881CC /* FloatPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatPickerButton.swift; sourceTree = "<group>"; };
+		985D519A1FA66A37009881CC /* ValuePickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValuePickerButton.swift; sourceTree = "<group>"; };
+		985D519C1FA66B76009881CC /* ColorPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerButton.swift; sourceTree = "<group>"; };
+		985D519E1FA66E18009881CC /* Vector2ValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector2ValuePicker.swift; sourceTree = "<group>"; };
+		985D51A01FA66F84009881CC /* Vector3ValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector3ValuePicker.swift; sourceTree = "<group>"; };
+		985D51A21FA66FAA009881CC /* Vector4ValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector4ValuePicker.swift; sourceTree = "<group>"; };
+		985D51A51FA67096009881CC /* SampleValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleValuePicker.swift; sourceTree = "<group>"; };
 		985EB2481F6821990007B85C /* CIFilterHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilterHelperTests.swift; sourceTree = "<group>"; };
 		986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		98689EBD1F93AC800000AF7C /* DataBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBinding.swift; sourceTree = "<group>"; };
@@ -460,8 +478,20 @@
 				98A411421F99534500A97459 /* TimeDataBindingEmitterTests.swift */,
 				98A411441F9954EF00A97459 /* SettingsTests.swift */,
 				987F5BE91F9A901E003EB32B /* FrameRateManagerTests.swift */,
+				985D51961FA64A3D009881CC /* ExtensionsTests.swift */,
 			);
 			path = FilterPlaygroundTests;
+			sourceTree = "<group>";
+		};
+		985D51A41FA66FE2009881CC /* VectorValuePicker */ = {
+			isa = PBXGroup;
+			children = (
+				98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */,
+				985D519E1FA66E18009881CC /* Vector2ValuePicker.swift */,
+				985D51A01FA66F84009881CC /* Vector3ValuePicker.swift */,
+				985D51A21FA66FAA009881CC /* Vector4ValuePicker.swift */,
+			);
+			path = VectorValuePicker;
 			sourceTree = "<group>";
 		};
 		98689EC01F93B40D0000AF7C /* Data binding */ = {
@@ -586,9 +616,14 @@
 				98A67FB11F3A17820043AA9D /* FloatPickerViewController.swift */,
 				98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */,
 				986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */,
-				98316DCA1F44F4A30042F653 /* VectorValuePicker.swift */,
 				98689ED21F93DF590000AF7C /* SelectDataBindingViewController.swift */,
 				98FF4F941F968BC0004F46B0 /* InputImageTableViewCell.swift */,
+				985D51941FA62C9D009881CC /* KernelArgumentValueView.swift */,
+				985D51981FA6616B009881CC /* FloatPickerButton.swift */,
+				985D519A1FA66A37009881CC /* ValuePickerButton.swift */,
+				985D519C1FA66B76009881CC /* ColorPickerButton.swift */,
+				985D51A41FA66FE2009881CC /* VectorValuePicker */,
+				985D51A51FA67096009881CC /* SampleValuePicker.swift */,
 			);
 			path = "Attributes View";
 			sourceTree = "<group>";
@@ -626,7 +661,7 @@
 				985544881F7FF2B900E9F02A /* ShadingLanguage.swift */,
 				983330FE1F80026000C9AF52 /* KernelArgument.swift */,
 				983331001F80029E00C9AF52 /* KernelArgumentType.swift */,
-				983331021F8002C600C9AF52 /* KernelAttributeValue.swift */,
+				983331021F8002C600C9AF52 /* KernelArgumentValue.swift */,
 				983331041F80039800C9AF52 /* KernelType.swift */,
 				980E4F431F80108000C603C3 /* KernelCompilerResult.swift */,
 				98689EBD1F93AC800000AF7C /* DataBinding.swift */,
@@ -816,11 +851,13 @@
 				98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */,
 				983331111F80066300C9AF52 /* MetalKernel.swift in Sources */,
 				98B7B6E91F4757B5008C370F /* ExportTableViewController.swift in Sources */,
+				985D51A11FA66F84009881CC /* Vector3ValuePicker.swift in Sources */,
 				986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */,
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,
 				98689EC51F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
 				98689ED01F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */,
+				985D519B1FA66A37009881CC /* ValuePickerButton.swift in Sources */,
 				98A4113F1F99453000A97459 /* KernelInputImage.swift in Sources */,
 				98689ECD1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift in Sources */,
 				98B00A2B1F9D1E70006D2728 /* StatisticsView.swift in Sources */,
@@ -832,11 +869,13 @@
 				98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */,
 				98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */,
 				988901A01F76426900B97C4A /* SourceEditorLayoutManager.swift in Sources */,
+				985D519D1FA66B76009881CC /* ColorPickerButton.swift in Sources */,
 				989716A21F67F54C00E7C20C /* Settings.swift in Sources */,
 				985A42081F2CF8F200636E72 /* MainViewController.swift in Sources */,
 				985544891F7FF2B900E9F02A /* ShadingLanguage.swift in Sources */,
 				9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */,
 				98426C171F670540007C2260 /* CIFilterHelper.swift in Sources */,
+				985D519F1FA66E18009881CC /* Vector2ValuePicker.swift in Sources */,
 				98F2B9EF1F719B380092A015 /* SourceEditorTextView.swift in Sources */,
 				983008761F6F084C005C89C3 /* DismissSegue.swift in Sources */,
 				980E4F451F8013AA00C603C3 /* MetalErrorParser.swift in Sources */,
@@ -853,7 +892,9 @@
 				98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */,
 				98689ED31F93DF590000AF7C /* SelectDataBindingViewController.swift in Sources */,
 				983331011F80029E00C9AF52 /* KernelArgumentType.swift in Sources */,
+				985D51A61FA67096009881CC /* SampleValuePicker.swift in Sources */,
 				9853F85F1F79218C00551541 /* CIKernelLanguageHelper.swift in Sources */,
+				985D51991FA6616B009881CC /* FloatPickerButton.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
 				987A73291F66F65000F73806 /* SwiftPlaygroundsHelper.swift in Sources */,
 				9848C4441F3B9B58001E079C /* SettingsTableViewController.swift in Sources */,
@@ -866,8 +907,9 @@
 				989716961F67E7B300E7C20C /* CoreImage+Extension.swift in Sources */,
 				984515401F914CE10015FADF /* FPMTKView.swift in Sources */,
 				9853F8591F78F15100551541 /* CodeCompletionCollectionViewCell.swift in Sources */,
+				985D51951FA62C9D009881CC /* KernelArgumentValueView.swift in Sources */,
 				980229AE1F2FB88F000FFCA2 /* CoreImageErrorParser.swift in Sources */,
-				983331031F8002C600C9AF52 /* KernelAttributeValue.swift in Sources */,
+				983331031F8002C600C9AF52 /* KernelArgumentValue.swift in Sources */,
 				98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */,
 				985544931F7FFB3E00E9F02A /* CoreImageBlendKernel.swift in Sources */,
 				983330FF1F80026000C9AF52 /* KernelArgument.swift in Sources */,
@@ -878,6 +920,7 @@
 				981D621F1F6B1858006A8606 /* ErrorViewController.swift in Sources */,
 				9855448D1F7FF89400E9F02A /* CoreImageKernel.swift in Sources */,
 				980229AC1F2F94F9000FFCA2 /* ErrorHelper.swift in Sources */,
+				985D51A31FA66FAA009881CC /* Vector4ValuePicker.swift in Sources */,
 				98286D621F93F1F0003B6D4A /* CamerDataBindingEmitter.swift in Sources */,
 				983331051F80039800C9AF52 /* KernelType.swift in Sources */,
 				98C5E23F1F34B8DD006E7658 /* KernelError.swift in Sources */,
@@ -896,6 +939,7 @@
 				985668431F2E6ABE00297A4E /* TokenizerTests.swift in Sources */,
 				9853F85D1F7903C100551541 /* ASTCodeCompletionTests.swift in Sources */,
 				98A411431F99534500A97459 /* TimeDataBindingEmitterTests.swift in Sources */,
+				985D51971FA64A3D009881CC /* ExtensionsTests.swift in Sources */,
 				983008731F6EEB67005C89C3 /* ProjectTests.swift in Sources */,
 				9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */,
 				98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */,
@@ -941,7 +985,7 @@
 				98689EC31F93B41E0000AF7C /* DataBindingContext.swift in Sources */,
 				98689ECB1F93CAC60000AF7C /* DataBindingEmitter.swift in Sources */,
 				989716941F67E77500E7C20C /* KernelCompilerResult.swift in Sources */,
-				983331071F8003AB00C9AF52 /* KernelAttributeValue.swift in Sources */,
+				983331071F8003AB00C9AF52 /* KernelArgumentValue.swift in Sources */,
 				9897169B1F67E81D00E7C20C /* Extensions.swift in Sources */,
 				9833310F1F80048F00C9AF52 /* Settings.swift in Sources */,
 				987F5BE81F9A8AD8003EB32B /* FrameRateManager.swift in Sources */,

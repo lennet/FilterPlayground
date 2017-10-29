@@ -18,7 +18,7 @@ import CoreImage
 protocol Kernel: class {
 
     var shadingLanguage: ShadingLanguage { get }
-    var arguments: [KernelAttributeValue] { get set }
+    var arguments: [KernelArgumentValue] { get set }
     var inputImages: [CIImage] { get set }
 
     static var supportedArguments: [KernelArgumentType] { get }

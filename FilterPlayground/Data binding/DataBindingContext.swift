@@ -37,7 +37,7 @@ class DataBindingContext {
     }
 
     func emit(value: Any, for dataBinding: DataBinding) {
-        // todo synchronize emitter
+        // TODO: synchronize emitter
         notifyObservers(for: dataBinding, with: value)
     }
 

@@ -36,7 +36,7 @@ class CoreImageBlendKernel: CoreImageKernel {
         return false
     }
 
-    override func apply(with inputImages: [CIImage], attributes _: [KernelAttributeValue]) -> CIImage? {
+    override func apply(with inputImages: [CIImage], attributes _: [KernelArgumentValue]) -> CIImage? {
         guard let first = inputImages.first,
             let second = inputImages.last,
             inputImages.count == 2 else {

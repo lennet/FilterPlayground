@@ -31,7 +31,7 @@ struct ProjectMetaData {
         if let kernelType = type.kernelClass as? CoreImageKernel.Type {
             return kernelType.requiredArguments.map { KernelArgument(name: "unamed", type: $0, value: $0.defaultValue) }
         }
-        // todo
+        // TODO:
         return []
     }
 

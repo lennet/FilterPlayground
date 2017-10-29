@@ -15,7 +15,7 @@ class NewProjectViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // todo add cancel button
+        // TODO: add cancel button
         // self.navigationItem.rightBarButtonItem =
     }
 

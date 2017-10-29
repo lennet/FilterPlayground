@@ -32,7 +32,7 @@ class CoreImageWarpKernel: CoreImageKernel {
         return false
     }
 
-    override func apply(with inputImages: [CIImage], attributes: [KernelAttributeValue]) -> CIImage? {
+    override func apply(with inputImages: [CIImage], attributes: [KernelArgumentValue]) -> CIImage? {
         guard let input = inputImages.first else {
             return nil
         }

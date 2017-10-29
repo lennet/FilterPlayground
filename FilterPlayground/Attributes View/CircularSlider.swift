@@ -57,7 +57,7 @@ class CircularSlider: UIControl, CAAnimationDelegate {
 
         knob.center = knobLocation(for: a)
 
-        // todo use velocity
+        // TODO: use velocity
         let prog = progress(for: a)
         if previousProgress - prog > 0.70 {
             previousProgress = 0

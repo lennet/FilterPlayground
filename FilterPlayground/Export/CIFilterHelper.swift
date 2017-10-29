@@ -121,7 +121,7 @@ import CoreImage
 
 class \(name): CIFilter {
     
-    // todo rename after the swift playgrounds bug got fixed
+    // TODO: rename after the swift playgrounds bug got fixed
 \(inputProperties)
 \(properties)
         

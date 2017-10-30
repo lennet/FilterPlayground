@@ -9,40 +9,6 @@
 import CoreImage
 import simd
 
-// TODO: refactore KernelArgumentValues into separate structs
-
-protocol KernelArgumentValueNew: Codable {
-    associatedtype type
-    associatedtype CIKernelValue
-    var value: type { get set }
-    var asCIKernelValue: CIKernelValue { get }
-}
-
-struct FloatValue: KernelArgumentValueNew {
-    typealias type = Float
-    typealias CIKernelValue = Float
-    var value: Float
-
-    init(_ value: Float) {
-        self.value = value
-    }
-
-    var asCIKernelValue: Float {
-        return value
-    }
-}
-
-struct Vec2Value: KernelArgumentValueNew {
-    typealias type = float2
-    typealias CIKernelValue = CIVector
-
-    var value: float2
-
-    var asCIKernelValue: CIVector {
-        return CIVector(x: CGFloat(value.x), y: CGFloat(value.y))
-    }
-}
-
 enum KernelArgumentValue {
     case float(Float)
     case vec2(Float, Float)

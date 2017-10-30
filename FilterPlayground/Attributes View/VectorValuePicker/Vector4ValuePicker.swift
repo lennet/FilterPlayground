@@ -19,4 +19,10 @@ class Vector4ValuePicker: VectorValuePicker {
         value = .vec4(values[0], values[1], values[2], values[3])
         super.updatedValues()
     }
+    
+    override func values(for kernelArgumentValue: KernelArgumentValue) -> [Float] {
+        guard case let KernelArgumentValue.vec4(x, y, z, w) = value else { return [] }
+        return [x,y,z,w]
+    }
+
 }

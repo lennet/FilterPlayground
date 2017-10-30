@@ -53,7 +53,6 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
                 newArgumentOverlay.isHidden = true
                 selectedBinding = attribute?.binding ?? .none
             } else {
-                valueSelectionContainer.subviews.forEach { $0.removeFromSuperview() }
                 nameTextField.text = nil
                 nameTextField.isEnabled = false
                 newArgumentOverlay.isHidden = false
@@ -118,7 +117,6 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "selectTypeViewControllerIdentifier") as! SelectTypeViewController
         viewController.didSelectType = { type in
             self.attribute = KernelArgument(name: self.attribute?.name ?? "", type: type, value: type.defaultValue)
-            self.setupValueView(for: type, value: self.attribute!.value)
             self.update()
             if self.nameTextField.text?.isEmpty ?? true {
                 DispatchQueue.main.async {
@@ -130,13 +128,18 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     }
 
     func setupValueView(for type: KernelArgumentType, value _: KernelArgumentValue?) {
-        valueSelectionView?.removeFromSuperview()
         guard let type = attribute?.type,
-            let value = attribute?.value,
-            let view = KernelArgumentValueViewHelper.view(for: type).init(frame: valueSelectionContainer.bounds, value: value) as? (UIView & KernelArgumentValueView) else { return }
-        valueSelectionContainer.addSubview(view)
-        valueSelectionView?.updatedValueCallback = valueChanged
-        valueSelectionView = view
+            let value = attribute?.value else { return }
+
+        if let valueSelectionView = valueSelectionView,
+            KernelArgumentValueViewHelper.type(for: valueSelectionView) == type {
+            valueSelectionView.value = value
+        } else if let view = KernelArgumentValueViewHelper.view(for: type).init(frame: valueSelectionContainer.bounds, value: value) as? (UIView & KernelArgumentValueView) {
+            valueSelectionView?.removeFromSuperview()
+            valueSelectionContainer.addSubview(view)
+            valueSelectionView?.updatedValueCallback = valueChanged
+            valueSelectionView = view
+        }
     }
 
     func valueChanged(value: KernelArgumentValue) {
@@ -228,6 +231,7 @@ extension KernelAttributeTableViewCell: DataBindingObserver {
         }
         if let newValue = newValue {
             attribute?.value = newValue
+            valueSelectionView?.value = newValue
             update()
         }
     }

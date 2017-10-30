@@ -12,7 +12,11 @@ class VectorValuePicker: UIControl, KernelArgumentValueView, UIPopoverPresentati
 
     var updatedValueCallback: ((KernelArgumentValue) -> Void)?
 
-    var value: KernelArgumentValue
+    var value: KernelArgumentValue {
+        didSet {
+            values = values(for: value)
+        }
+    }
 
     var poppoverControllerPresentationController: UIPopoverPresentationController?
     var floatPicker: FloatPickerViewController?
@@ -21,7 +25,11 @@ class VectorValuePicker: UIControl, KernelArgumentValueView, UIPopoverPresentati
         return values.count
     }
 
-    var values: [Float]
+    var values: [Float] {
+        didSet {
+            updateLabels()
+        }
+    }
 
     let stackView: UIStackView = {
         let view = UIStackView()
@@ -66,10 +74,10 @@ class VectorValuePicker: UIControl, KernelArgumentValueView, UIPopoverPresentati
         viewController.showNextButton = true
         floatPicker = viewController
         viewController.valueChanged = { value in
+            self.values[self.currentHighlightedIndex - 1] = Float(value)
             guard let label = self.stackView.arrangedSubviews[self.currentHighlightedIndex - 1] as? UILabel else {
                 return
             }
-            self.values[self.currentHighlightedIndex - 1] = Float(value)
             label.text = "\(value)"
             self.updatedValues()
         }
@@ -93,6 +101,19 @@ class VectorValuePicker: UIControl, KernelArgumentValueView, UIPopoverPresentati
 
     func updatedValues() {
         updatedValueCallback?(value)
+    }
+    
+    func values(for kernelArgumentValue: KernelArgumentValue) -> [Float] {
+        fatalError("override this method")
+    }
+    
+    func updateLabels() {
+        for (index, value)  in values.enumerated() {
+            guard let label = self.stackView.arrangedSubviews[index] as? UILabel else {
+                continue
+            }
+            label.text = "\(value)"
+        }
     }
 
     func highlight(at index: Int) {

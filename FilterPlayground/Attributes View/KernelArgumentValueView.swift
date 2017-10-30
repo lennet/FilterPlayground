@@ -32,4 +32,23 @@ class KernelArgumentValueViewHelper {
             return SampleValuePicker.self
         }
     }
+
+    static func type(for view: KernelArgumentValueView) -> KernelArgumentType {
+        switch view {
+        case is FloatPickerButton:
+            return .float
+        case is ColorPickerButton:
+            return .color
+        case is Vector2ValuePicker:
+            return .vec2
+        case is Vector3ValuePicker:
+            return .vec3
+        case is Vector4ValuePicker:
+            return .vec4
+        case is SampleValuePicker:
+            return .sample
+        default:
+            fatalError("missing case for view: \(view.self)")
+        }
+    }
 }

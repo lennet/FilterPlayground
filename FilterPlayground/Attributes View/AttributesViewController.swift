@@ -129,7 +129,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: InputImageTableViewCell.identifier, for: indexPath) as! InputImageTableViewCell
         cell.set(imageValue: inputImages[indexPath.row])
         cell.updatedImageCallBack = { [weak self] image in
-            self?.didUpdatedImage?(image)
+            self?.didUpatedInputImage(value: image)
         }
         return cell
     }

@@ -12,7 +12,7 @@ import Foundation
 
 extension NSAttributedString {
 
-    static func +(lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString {
+    static func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString {
         let result = NSMutableAttributedString()
         result.append(lhs)
         result.append(rhs)
@@ -50,7 +50,7 @@ extension FileManager {
     }
 }
 
-public func ==<A: Equatable, B: Equatable>(lhs: [(A, B)], rhs: [(A, B)]) -> Bool {
+public func == <A: Equatable, B: Equatable>(lhs: [(A, B)], rhs: [(A, B)]) -> Bool {
     guard lhs.count == rhs.count else { return false }
     return zip(lhs, rhs)
         .filter { $0.0 != $1.0 || $0.1 != $1.1 }
@@ -123,10 +123,6 @@ extension float2: Codable {
     private enum CodingKeys: String, CodingKey {
         case x
         case y
-    }
-
-    private enum CodableErrors: Error {
-        case unkownValue
     }
 
     public func encode(to encoder: Encoder) throws {

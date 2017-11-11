@@ -18,13 +18,13 @@ enum ASTNode {
 
 typealias KernelDefinition = (name: String, returnType: KernelArgumentType, arguments: [(String, KernelArgumentType)])
 
-func ==(lhs: (String, KernelArgumentType), rhs: (String, KernelArgumentType)) -> Bool {
+func == (lhs: (String, KernelArgumentType), rhs: (String, KernelArgumentType)) -> Bool {
     return lhs.0 == rhs.0 && lhs.1 == rhs.1
 }
 
 extension ASTNode: Equatable {
 
-    static func ==(lhs: ASTNode, rhs: ASTNode) -> Bool {
+    static func == (lhs: ASTNode, rhs: ASTNode) -> Bool {
         switch (lhs, rhs) {
         case let (.comment(left), .comment(right)):
             return left == right

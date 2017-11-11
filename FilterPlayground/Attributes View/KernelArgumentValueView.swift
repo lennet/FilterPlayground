@@ -9,6 +9,9 @@
 import UIKit
 
 protocol KernelArgumentValueView: class {
+    // 0 for default height
+    var prefferedHeight: Float { get }
+    var prefferedUIAxis: UILayoutConstraintAxis { get }
     var updatedValueCallback: ((KernelArgumentValue) -> Void)? { get set }
     var value: KernelArgumentValue { get set }
     init?(frame: CGRect, value: KernelArgumentValue)

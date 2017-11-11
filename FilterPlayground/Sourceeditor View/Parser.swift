@@ -22,7 +22,7 @@ enum Token {
 
 extension Token: Equatable {
 
-    static func ==(lhs: Token, rhs: Token) -> Bool {
+    static func == (lhs: Token, rhs: Token) -> Bool {
         switch (lhs, rhs) {
         case let (.op(a), .op(b)):
             return a == b
@@ -114,7 +114,7 @@ enum Identifier {
 
 extension Identifier: Equatable {
 
-    static func ==(lhs: Identifier, rhs: Identifier) -> Bool {
+    static func == (lhs: Identifier, rhs: Identifier) -> Bool {
         switch (lhs, rhs) {
         case let (.other(a), .other(b)):
             return a == b

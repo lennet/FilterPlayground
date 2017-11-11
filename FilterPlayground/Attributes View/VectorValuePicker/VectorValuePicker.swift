@@ -10,6 +10,14 @@ import UIKit
 
 class VectorValuePicker: UIControl, KernelArgumentValueView, UIPopoverPresentationControllerDelegate {
 
+    var prefferedHeight: Float {
+        return 0
+    }
+
+    var prefferedUIAxis: UILayoutConstraintAxis {
+        return .horizontal
+    }
+
     var updatedValueCallback: ((KernelArgumentValue) -> Void)?
 
     var value: KernelArgumentValue {
@@ -102,13 +110,13 @@ class VectorValuePicker: UIControl, KernelArgumentValueView, UIPopoverPresentati
     func updatedValues() {
         updatedValueCallback?(value)
     }
-    
-    func values(for kernelArgumentValue: KernelArgumentValue) -> [Float] {
+
+    func values(for _: KernelArgumentValue) -> [Float] {
         fatalError("override this method")
     }
-    
+
     func updateLabels() {
-        for (index, value)  in values.enumerated() {
+        for (index, value) in values.enumerated() {
             guard let label = self.stackView.arrangedSubviews[index] as? UILabel else {
                 continue
             }

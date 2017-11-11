@@ -47,6 +47,8 @@ class MainViewController: UIViewController {
     var isRunning = false
 
     var project: Project?
+    var databindingObservers: [GenericDatabindingObserver] = []
+
     var showLiveView = true {
         didSet {
             updateViewConstraints()
@@ -320,6 +322,7 @@ class MainViewController: UIViewController {
         } else {
             sourceEditorViewController?.update(attributes: attributes)
         }
+        updateDatabindingObservers()
     }
 
     func updateKernelarguments() {
@@ -328,10 +331,40 @@ class MainViewController: UIViewController {
         kernel?.render()
     }
 
+    func updateDatabindingObservers() {
+        // TODO: recycle observer instead of recreating
+        databindingObservers.forEach { observer in
+            DataBindingContext.shared.removeObserver(with: observer.argument.name)
+        }
+        databindingObservers.removeAll()
+
+        for argument in project?.metaData.arguments ?? [] where argument.binding != nil {
+            let observer = GenericDatabindingObserver(argument: argument)
+            observer.didUpdateArgument = { [weak self] newArgument in
+                self?.didUpdateArgumentFromObserver(argument: newArgument)
+            }
+            databindingObservers.append(observer)
+        }
+    }
+
     func updateInputImages() {
         guard let project = project else { return }
         kernel?.inputImages = project.metaData.inputImages.flatMap { $0.image?.asCIImage }
         kernel?.render()
+    }
+
+    func didUpdateArgumentFromObserver(argument: KernelArgument) {
+        let currentArguments = attributesViewController?.arguments ?? []
+        let newAttributes = currentArguments.map { oldArgument -> KernelArgument in
+            if oldArgument.name == argument.name {
+                return argument
+            }
+            return oldArgument
+        }
+        attributesViewController?.arguments = newAttributes
+        project?.metaData.arguments = newAttributes
+        project?.updateChangeCount(.done)
+        updateKernelarguments()
     }
 
     func didUpdateArgumentsFromSourceEditor(arguments: [(String, KernelArgumentType)]) {
@@ -349,6 +382,7 @@ class MainViewController: UIViewController {
         attributesViewController?.arguments = newAttributes
         project?.metaData.arguments = newAttributes
         project?.updateChangeCount(.done)
+        updateDatabindingObservers()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {

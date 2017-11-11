@@ -11,7 +11,7 @@ import UIKit
 class ColorPickerViewController: UIViewController {
 
     class func instantiate() -> ColorPickerViewController {
-        return UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "ColorPickerViewControllerIdentifier") as! ColorPickerViewController
+        return UIStoryboard.valuePicker.instantiateViewController(withIdentifier: "ColorPickerViewControllerIdentifier") as! ColorPickerViewController
     }
 
     @IBOutlet weak var redSlider: UISlider!

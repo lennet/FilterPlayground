@@ -19,10 +19,9 @@ class Vector3ValuePicker: VectorValuePicker {
         value = .vec3(values[0], values[1], values[2])
         super.updatedValues()
     }
-    
-    override func values(for kernelArgumentValue: KernelArgumentValue) -> [Float] {
-        guard case let KernelArgumentValue.vec3(x, y, z) = value else { return [] }
-        return [x,y,z]
-    }
 
+    override func values(for _: KernelArgumentValue) -> [Float] {
+        guard case let KernelArgumentValue.vec3(x, y, z) = value else { return [] }
+        return [x, y, z]
+    }
 }

@@ -13,9 +13,9 @@ import CoreImage
     import UIKit
 #endif
 
-class CamerDataBindingEmitter: NSObject, DataBindingEmitter, AVCaptureVideoDataOutputSampleBufferDelegate {
+class CameraDataBindingEmitter: NSObject, DataBindingEmitter, AVCaptureVideoDataOutputSampleBufferDelegate {
 
-    static let shared: DataBindingEmitter = CamerDataBindingEmitter()
+    static let shared: DataBindingEmitter = CameraDataBindingEmitter()
     let session = AVCaptureSession()
     let videoOrientation: AVCaptureVideoOrientation = {
         #if os(iOS) || os(tvOS)

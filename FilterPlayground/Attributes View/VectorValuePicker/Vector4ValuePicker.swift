@@ -10,6 +10,10 @@ import UIKit
 
 class Vector4ValuePicker: VectorValuePicker {
 
+    override var prefferedHeight: Float {
+        return 84
+    }
+
     required convenience init?(frame: CGRect, value: KernelArgumentValue) {
         guard case let KernelArgumentValue.vec4(x, y, z, w) = value else { return nil }
         self.init(frame: frame, values: [x, y, z, w], value: value)
@@ -19,10 +23,9 @@ class Vector4ValuePicker: VectorValuePicker {
         value = .vec4(values[0], values[1], values[2], values[3])
         super.updatedValues()
     }
-    
-    override func values(for kernelArgumentValue: KernelArgumentValue) -> [Float] {
-        guard case let KernelArgumentValue.vec4(x, y, z, w) = value else { return [] }
-        return [x,y,z,w]
-    }
 
+    override func values(for _: KernelArgumentValue) -> [Float] {
+        guard case let KernelArgumentValue.vec4(x, y, z, w) = value else { return [] }
+        return [x, y, z, w]
+    }
 }

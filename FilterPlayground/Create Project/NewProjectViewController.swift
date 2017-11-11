@@ -12,18 +12,6 @@ class NewProjectViewController: UITableViewController {
 
     var didSelectType: ((KernelType) -> Void)?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // TODO: add cancel button
-        // self.navigationItem.rightBarButtonItem =
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Table view delegate
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -15,12 +15,12 @@ class SwiftPlaygroundsTests: XCTestCase {
     // the first two tests are only meta tests to test the assert method
 
     func testCompilerDoesntCompiles() {
-        let playgroundURL = SwiftPlaygroundsHelper.swiftPlayground(with: "var image: UIImage?")
+        let playgroundURL = SwiftPlaygroundsExportHelper.swiftPlayground(with: "var image: UIImage?")
         XCTAssertSwiftPlaygroundCompiles(url: playgroundURL, invertCondition: true)
     }
 
     func testCompilerCompiles() {
-        let playgroundURL = SwiftPlaygroundsHelper.swiftPlayground(with: """
+        let playgroundURL = SwiftPlaygroundsExportHelper.swiftPlayground(with: """
         import UIKit
         var image: UIImage?
         """)

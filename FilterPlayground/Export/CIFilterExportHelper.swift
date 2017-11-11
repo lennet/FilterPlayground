@@ -98,10 +98,10 @@ extension KernelArgumentType {
     
 }
 
-class CIFilterHelper {
+class CIFilterExportHelper {
 
     class func cifilter(with kernelSource: String, type: KernelType, arguments: [KernelArgument], name: String) -> Data? {
-        let source: String = CIFilterHelper.cifilter(with: kernelSource, type: type, arguments: arguments, name: name)
+        let source: String = CIFilterExportHelper.cifilter(with: kernelSource, type: type, arguments: arguments, name: name)
         return source.data(using: .utf8)
     }
     

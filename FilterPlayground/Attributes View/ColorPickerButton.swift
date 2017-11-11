@@ -12,9 +12,9 @@ class ColorPickerButton: ValuePickerButton {
 
     @objc override func handleTap() {
         let viewController = ColorPickerViewController.instantiate()
-        viewController.colorChanged = { r, g, b, a in
-            self.value = .color(r, g, b, a)
-            self.updatedValueCallback?(self.value)
+        viewController.colorChanged = { [weak self] r, g, b, a in
+            self?.value = .color(r, g, b, a)
+            self?.updatedValueCallback?(self!.value)
         }
         present(viewController: viewController)
     }

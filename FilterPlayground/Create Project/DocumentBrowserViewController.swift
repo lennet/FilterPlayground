@@ -33,29 +33,29 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         self.importHandler = importHandler
         let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("untitled.\(Project.type)")
 
-        let tabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NewProjectTabBarController") as! UITabBarController
+        let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "NewProjectTabBarController") as! UITabBarController
         let viewController = (tabBarController.viewControllers!.first as! UINavigationController).viewControllers.first as! NewProjectViewController
         let selectTemplateViewController = (tabBarController.viewControllers!.last as! UINavigationController).viewControllers.first as! SelectTemplateTableViewController
         tabBarController.modalPresentationStyle = .formSheet
         present(tabBarController, animated: true) {
-            viewController.didSelectType = { type in
+            viewController.didSelectType = { [weak self] type in
                 viewController.dismiss(animated: true, completion: nil)
                 let document = Project(fileURL: newDocumentURL, type: type)
                 document.save(to: newDocumentURL, for: .forCreating) { success in
                     if success {
                         importHandler(newDocumentURL, .move)
-                        self.importHandler = nil
+                        self?.importHandler = nil
                     } else {
                         importHandler(nil, .none)
-                        self.importHandler = nil
+                        self?.importHandler = nil
                     }
                 }
             }
 
-            selectTemplateViewController.didSelectTemplate = { url in
+            selectTemplateViewController.didSelectTemplate = { [weak self] url in
                 viewController.dismiss(animated: true, completion: nil)
                 importHandler(url, .copy)
-                self.importHandler = nil
+                self?.importHandler = nil
             }
         }
     }

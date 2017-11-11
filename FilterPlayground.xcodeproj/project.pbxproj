@@ -16,8 +16,8 @@
 		980E4F4A1F801A4C00C603C3 /* MetalKernelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980E4F491F801A4C00C603C3 /* MetalKernelTests.swift */; };
 		981267D41F34BEFC00101027 /* Kernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981267D31F34BEFC00101027 /* Kernel.swift */; };
 		981D621F1F6B1858006A8606 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D621E1F6B1858006A8606 /* ErrorViewController.swift */; };
-		98286D621F93F1F0003B6D4A /* CamerDataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98286D611F93F1F0003B6D4A /* CamerDataBindingEmitter.swift */; };
-		98286D631F93F1F0003B6D4A /* CamerDataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98286D611F93F1F0003B6D4A /* CamerDataBindingEmitter.swift */; };
+		98286D621F93F1F0003B6D4A /* CameraDataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98286D611F93F1F0003B6D4A /* CameraDataBindingEmitter.swift */; };
+		98286D631F93F1F0003B6D4A /* CameraDataBindingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98286D611F93F1F0003B6D4A /* CameraDataBindingEmitter.swift */; };
 		98286D651F93FE97003B6D4A /* OutputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98286D641F93FE97003B6D4A /* OutputContainerView.swift */; };
 		982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */; };
 		983008731F6EEB67005C89C3 /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983008721F6EEB67005C89C3 /* ProjectTests.swift */; };
@@ -41,7 +41,7 @@
 		983331121F80066800C9AF52 /* MetalKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983331101F80066300C9AF52 /* MetalKernel.swift */; };
 		9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC741F3663AE00A8E3CA /* Theme.swift */; };
 		9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC761F36675000A8E3CA /* ThemingTests.swift */; };
-		98426C171F670540007C2260 /* CIFilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98426C161F670540007C2260 /* CIFilterHelper.swift */; };
+		98426C171F670540007C2260 /* CIFilterExportHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98426C161F670540007C2260 /* CIFilterExportHelper.swift */; };
 		9845153E1F9149420015FADF /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845153C1F9149210015FADF /* NSView+Extension.swift */; };
 		984515401F914CE10015FADF /* FPMTKView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845153F1F914CE10015FADF /* FPMTKView.swift */; };
 		984515411F914CEE0015FADF /* FPMTKView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845153F1F914CE10015FADF /* FPMTKView.swift */; };
@@ -99,10 +99,16 @@
 		986AA7351F62FE3B008F2091 /* test.FilterPlayground in Resources */ = {isa = PBXBuildFile; fileRef = 986AA7311F62FD38008F2091 /* test.FilterPlayground */; };
 		986AA7371F62FF76008F2091 /* SelectTemplateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AA7361F62FF76008F2091 /* SelectTemplateTableViewController.swift */; };
 		987672451F2F5355002F9AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
-		987A73291F66F65000F73806 /* SwiftPlaygroundsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */; };
+		987A73291F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A73281F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift */; };
 		987F5BE71F9A8AD8003EB32B /* FrameRateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */; };
 		987F5BE81F9A8AD8003EB32B /* FrameRateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */; };
 		987F5BEA1F9A901E003EB32B /* FrameRateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F5BE91F9A901E003EB32B /* FrameRateManagerTests.swift */; };
+		9888F4C71FB65C0700D108CF /* GenericDatabindingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9888F4C61FB65C0700D108CF /* GenericDatabindingObserver.swift */; };
+		9888F4C81FB65C0700D108CF /* GenericDatabindingObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9888F4C61FB65C0700D108CF /* GenericDatabindingObserver.swift */; };
+		9888F4CA1FB6634500D108CF /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9888F4C91FB6634500D108CF /* ThemeManager.swift */; };
+		9888F4CD1FB6636B00D108CF /* DefaultTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9888F4CC1FB6636B00D108CF /* DefaultTheme.swift */; };
+		9888F4D01FB663A400D108CF /* NightTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9888F4CF1FB663A400D108CF /* NightTheme.swift */; };
+		9888F4D31FB6675B00D108CF /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9888F4D21FB6675B00D108CF /* UIStoryboard+Extension.swift */; };
 		9889019E1F76417A00B97C4A /* SourceEditorTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9889019D1F76417A00B97C4A /* SourceEditorTextStorage.swift */; };
 		988901A01F76426900B97C4A /* SourceEditorLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9889019F1F76426900B97C4A /* SourceEditorLayoutManager.swift */; };
 		989716731F67E3C800E7C20C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716721F67E3C800E7C20C /* AppDelegate.swift */; };
@@ -110,7 +116,7 @@
 		989716781F67E3C800E7C20C /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 989716761F67E3C800E7C20C /* Document.xib */; };
 		9897167A1F67E3C800E7C20C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 989716791F67E3C800E7C20C /* Assets.xcassets */; };
 		9897167D1F67E3C800E7C20C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9897167B1F67E3C800E7C20C /* MainMenu.xib */; };
-		989716911F67E47300E7C20C /* CIFilterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98426C161F670540007C2260 /* CIFilterHelper.swift */; };
+		989716911F67E47300E7C20C /* CIFilterExportHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98426C161F670540007C2260 /* CIFilterExportHelper.swift */; };
 		989716941F67E77500E7C20C /* KernelCompilerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23C1F34B85C006E7658 /* KernelCompilerResult.swift */; };
 		989716961F67E7B300E7C20C /* CoreImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716951F67E7B300E7C20C /* CoreImage+Extension.swift */; };
 		9897169A1F67E80A00E7C20C /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716991F67E80A00E7C20C /* UIImage+Extension.swift */; };
@@ -122,7 +128,7 @@
 		989716A01F67E97600E7C20C /* CoreImageErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229AD1F2FB88F000FFCA2 /* CoreImageErrorParser.swift */; };
 		989716A21F67F54C00E7C20C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989716A11F67F54C00E7C20C /* Settings.swift */; };
 		989C576E1F68224C008FF142 /* SwiftPlaygroundsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989C576D1F68224C008FF142 /* SwiftPlaygroundsTests.swift */; };
-		989C576F1F6822BC008FF142 /* SwiftPlaygroundsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */; };
+		989C576F1F6822BC008FF142 /* SwiftPlaygroundsExportHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A73281F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift */; };
 		989C57711F6825CD008FF142 /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989C57701F6825CD008FF142 /* XCTest+Extension.swift */; };
 		98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */; };
 		98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */; };
@@ -195,7 +201,7 @@
 		980E4F491F801A4C00C603C3 /* MetalKernelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalKernelTests.swift; sourceTree = "<group>"; };
 		981267D31F34BEFC00101027 /* Kernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kernel.swift; sourceTree = "<group>"; };
 		981D621E1F6B1858006A8606 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
-		98286D611F93F1F0003B6D4A /* CamerDataBindingEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamerDataBindingEmitter.swift; sourceTree = "<group>"; };
+		98286D611F93F1F0003B6D4A /* CameraDataBindingEmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraDataBindingEmitter.swift; sourceTree = "<group>"; };
 		98286D641F93FE97003B6D4A /* OutputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputContainerView.swift; sourceTree = "<group>"; };
 		982DAAFA1F800F1E00E5F27D /* Kernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Kernel.swift; path = FilterPlayground/Compiler/Kernel.swift; sourceTree = SOURCE_ROOT; };
 		982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDraggingIndicator.swift; sourceTree = "<group>"; };
@@ -209,7 +215,7 @@
 		983331101F80066300C9AF52 /* MetalKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalKernel.swift; sourceTree = "<group>"; };
 		9841EC741F3663AE00A8E3CA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		9841EC761F36675000A8E3CA /* ThemingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingTests.swift; sourceTree = "<group>"; };
-		98426C161F670540007C2260 /* CIFilterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilterHelper.swift; sourceTree = "<group>"; };
+		98426C161F670540007C2260 /* CIFilterExportHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilterExportHelper.swift; sourceTree = "<group>"; };
 		9845153C1F9149210015FADF /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
 		9845153F1F914CE10015FADF /* FPMTKView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPMTKView.swift; sourceTree = "<group>"; };
 		9845C6101F38F44100F38283 /* NewProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectViewController.swift; sourceTree = "<group>"; };
@@ -264,10 +270,15 @@
 		986AA7311F62FD38008F2091 /* test.FilterPlayground */ = {isa = PBXFileReference; lastKnownFileType = folder; path = test.FilterPlayground; sourceTree = "<group>"; };
 		986AA7361F62FF76008F2091 /* SelectTemplateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTemplateTableViewController.swift; sourceTree = "<group>"; };
 		987672441F2F5355002F9AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPlaygroundsHelper.swift; sourceTree = "<group>"; };
+		987A73281F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPlaygroundsExportHelper.swift; sourceTree = "<group>"; };
 		987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameRateManager.swift; sourceTree = "<group>"; };
 		987F5BE91F9A901E003EB32B /* FrameRateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameRateManagerTests.swift; sourceTree = "<group>"; };
 		9881A15E1F4884E700BABA72 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		9888F4C61FB65C0700D108CF /* GenericDatabindingObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDatabindingObserver.swift; sourceTree = "<group>"; };
+		9888F4C91FB6634500D108CF /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		9888F4CC1FB6636B00D108CF /* DefaultTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTheme.swift; sourceTree = "<group>"; };
+		9888F4CF1FB663A400D108CF /* NightTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NightTheme.swift; sourceTree = "<group>"; };
+		9888F4D21FB6675B00D108CF /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		9889019D1F76417A00B97C4A /* SourceEditorTextStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorTextStorage.swift; sourceTree = "<group>"; };
 		9889019F1F76426900B97C4A /* SourceEditorLayoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorLayoutManager.swift; sourceTree = "<group>"; };
 		989716701F67E3C800E7C20C /* FilterPlaygroundMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterPlaygroundMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -380,6 +391,9 @@
 			isa = PBXGroup;
 			children = (
 				9841EC741F3663AE00A8E3CA /* Theme.swift */,
+				9888F4C91FB6634500D108CF /* ThemeManager.swift */,
+				9888F4CC1FB6636B00D108CF /* DefaultTheme.swift */,
+				9888F4CF1FB663A400D108CF /* NightTheme.swift */,
 			);
 			path = Theming;
 			sourceTree = "<group>";
@@ -502,7 +516,8 @@
 				98689EC91F93CAC60000AF7C /* DataBindingEmitter.swift */,
 				98689ECC1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift */,
 				98689ECF1F93D80D0000AF7C /* TimeDataBindingEmitter.swift */,
-				98286D611F93F1F0003B6D4A /* CamerDataBindingEmitter.swift */,
+				98286D611F93F1F0003B6D4A /* CameraDataBindingEmitter.swift */,
+				9888F4C61FB65C0700D108CF /* GenericDatabindingObserver.swift */,
 			);
 			path = "Data binding";
 			sourceTree = "<group>";
@@ -524,8 +539,8 @@
 			isa = PBXGroup;
 			children = (
 				98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */,
-				987A73281F66F65000F73806 /* SwiftPlaygroundsHelper.swift */,
-				98426C161F670540007C2260 /* CIFilterHelper.swift */,
+				987A73281F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift */,
+				98426C161F670540007C2260 /* CIFilterExportHelper.swift */,
 			);
 			path = Export;
 			sourceTree = "<group>";
@@ -587,6 +602,7 @@
 		989716981F67E7F300E7C20C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9888F4D21FB6675B00D108CF /* UIStoryboard+Extension.swift */,
 				987672441F2F5355002F9AAF /* Extensions.swift */,
 				989716951F67E7B300E7C20C /* CoreImage+Extension.swift */,
 				989716991F67E80A00E7C20C /* UIImage+Extension.swift */,
@@ -855,9 +871,11 @@
 				986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */,
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,
+				9888F4C71FB65C0700D108CF /* GenericDatabindingObserver.swift in Sources */,
 				98689EC51F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
 				98689ED01F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */,
 				985D519B1FA66A37009881CC /* ValuePickerButton.swift in Sources */,
+				9888F4CD1FB6636B00D108CF /* DefaultTheme.swift in Sources */,
 				98A4113F1F99453000A97459 /* KernelInputImage.swift in Sources */,
 				98689ECD1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift in Sources */,
 				98B00A2B1F9D1E70006D2728 /* StatisticsView.swift in Sources */,
@@ -874,7 +892,8 @@
 				985A42081F2CF8F200636E72 /* MainViewController.swift in Sources */,
 				985544891F7FF2B900E9F02A /* ShadingLanguage.swift in Sources */,
 				9868A8C11F3712EB00D0BC79 /* AST.swift in Sources */,
-				98426C171F670540007C2260 /* CIFilterHelper.swift in Sources */,
+				98426C171F670540007C2260 /* CIFilterExportHelper.swift in Sources */,
+				9888F4D01FB663A400D108CF /* NightTheme.swift in Sources */,
 				985D519F1FA66E18009881CC /* Vector2ValuePicker.swift in Sources */,
 				98F2B9EF1F719B380092A015 /* SourceEditorTextView.swift in Sources */,
 				983008761F6F084C005C89C3 /* DismissSegue.swift in Sources */,
@@ -896,13 +915,14 @@
 				9853F85F1F79218C00551541 /* CIKernelLanguageHelper.swift in Sources */,
 				985D51991FA6616B009881CC /* FloatPickerButton.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
-				987A73291F66F65000F73806 /* SwiftPlaygroundsHelper.swift in Sources */,
+				987A73291F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift in Sources */,
 				9848C4441F3B9B58001E079C /* SettingsTableViewController.swift in Sources */,
 				98689ECA1F93CAC60000AF7C /* DataBindingEmitter.swift in Sources */,
 				986AA7371F62FF76008F2091 /* SelectTemplateTableViewController.swift in Sources */,
 				9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */,
 				98E692E91F30C832000C8B41 /* Project.swift in Sources */,
 				98C5E23D1F34B85C006E7658 /* KernelCompilerResult.swift in Sources */,
+				9888F4CA1FB6634500D108CF /* ThemeManager.swift in Sources */,
 				98FF4F951F968BC0004F46B0 /* InputImageTableViewCell.swift in Sources */,
 				989716961F67E7B300E7C20C /* CoreImage+Extension.swift in Sources */,
 				984515401F914CE10015FADF /* FPMTKView.swift in Sources */,
@@ -912,6 +932,7 @@
 				983331031F8002C600C9AF52 /* KernelArgumentValue.swift in Sources */,
 				98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */,
 				985544931F7FFB3E00E9F02A /* CoreImageBlendKernel.swift in Sources */,
+				9888F4D31FB6675B00D108CF /* UIStoryboard+Extension.swift in Sources */,
 				983330FF1F80026000C9AF52 /* KernelArgument.swift in Sources */,
 				9853F85B1F79012500551541 /* AST+CodeCompletion.swift in Sources */,
 				986AA72B1F62F51C008F2091 /* TemplatesManager.swift in Sources */,
@@ -921,7 +942,7 @@
 				9855448D1F7FF89400E9F02A /* CoreImageKernel.swift in Sources */,
 				980229AC1F2F94F9000FFCA2 /* ErrorHelper.swift in Sources */,
 				985D51A31FA66FAA009881CC /* Vector4ValuePicker.swift in Sources */,
-				98286D621F93F1F0003B6D4A /* CamerDataBindingEmitter.swift in Sources */,
+				98286D621F93F1F0003B6D4A /* CameraDataBindingEmitter.swift in Sources */,
 				983331051F80039800C9AF52 /* KernelType.swift in Sources */,
 				98C5E23F1F34B8DD006E7658 /* KernelError.swift in Sources */,
 				98286D651F93FE97003B6D4A /* OutputContainerView.swift in Sources */,
@@ -966,21 +987,22 @@
 				9897169E1F67E93300E7C20C /* ErrorHelper.swift in Sources */,
 				9845153E1F9149420015FADF /* NSView+Extension.swift in Sources */,
 				984515411F914CEE0015FADF /* FPMTKView.swift in Sources */,
-				989C576F1F6822BC008FF142 /* SwiftPlaygroundsHelper.swift in Sources */,
+				989C576F1F6822BC008FF142 /* SwiftPlaygroundsExportHelper.swift in Sources */,
 				9833310E1F80046F00C9AF52 /* CoreImageWarpKernel.swift in Sources */,
 				98689ED11F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */,
 				983331091F8003B200C9AF52 /* KernelArgument.swift in Sources */,
 				9833310C1F80046800C9AF52 /* CoreImageBlendKernel.swift in Sources */,
 				989716751F67E3C800E7C20C /* Document.swift in Sources */,
-				98286D631F93F1F0003B6D4A /* CamerDataBindingEmitter.swift in Sources */,
+				98286D631F93F1F0003B6D4A /* CameraDataBindingEmitter.swift in Sources */,
 				9833310D1F80046B00C9AF52 /* CoreImageColorKernel.swift in Sources */,
 				983331061F8003A800C9AF52 /* KernelType.swift in Sources */,
 				9833310B1F80046100C9AF52 /* CoreImageKernel.swift in Sources */,
 				989716731F67E3C800E7C20C /* AppDelegate.swift in Sources */,
 				989716A01F67E97600E7C20C /* CoreImageErrorParser.swift in Sources */,
 				9833310A1F8003B600C9AF52 /* ShadingLanguage.swift in Sources */,
-				989716911F67E47300E7C20C /* CIFilterHelper.swift in Sources */,
+				989716911F67E47300E7C20C /* CIFilterExportHelper.swift in Sources */,
 				983331121F80066800C9AF52 /* MetalKernel.swift in Sources */,
+				9888F4C81FB65C0700D108CF /* GenericDatabindingObserver.swift in Sources */,
 				98689EC61F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
 				98689EC31F93B41E0000AF7C /* DataBindingContext.swift in Sources */,
 				98689ECB1F93CAC60000AF7C /* DataBindingEmitter.swift in Sources */,

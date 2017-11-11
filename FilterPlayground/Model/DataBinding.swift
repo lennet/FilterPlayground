@@ -22,7 +22,7 @@ extension DataBinding {
         case .time:
             return TimeDataBindingEmitter.self
         case .camera:
-            return CamerDataBindingEmitter.self
+            return CameraDataBindingEmitter.self
         case .touch:
             return TouchDataBindingEmitter.self
         case .none:

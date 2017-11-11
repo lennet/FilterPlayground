@@ -208,7 +208,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
             let lastChrackterIsOpeningBracket = (textView.text as NSString).substring(with: NSMakeRange(range.location - 1, 1)) == "{"
             let newSelectedRange: NSRange
 
-            if range.location < textView.text.characters.count && (textView.text as NSString).substring(with: NSMakeRange(range.location, 1)) == "}" && lastChrackterIsOpeningBracket {
+            if range.location < textView.text.count && (textView.text as NSString).substring(with: NSMakeRange(range.location, 1)) == "}" && lastChrackterIsOpeningBracket {
                 // {\n}
                 newSelectedRange = NSMakeRange(range.location + newText.count + 1, 0)
                 newText += "\(Settings.spacingValue)\n" + tabs

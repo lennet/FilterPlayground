@@ -29,7 +29,7 @@ extension KernelArgumentValue {
     
 }
 
-class SwiftPlaygroundsHelper {
+class SwiftPlaygroundsExportHelper {
 
     static var xcplaygroundData: Data = {
         let content = """
@@ -61,7 +61,7 @@ class SwiftPlaygroundsHelper {
         }
         let content = """
         import UIKit
-        \(CIFilterHelper.cifilter(with: kernelSource, type: type, arguments: arguments, name: name) as String)
+        \(CIFilterExportHelper.cifilter(with: kernelSource, type: type, arguments: arguments, name: name) as String)
         
         \(definedVariables)
         
@@ -83,7 +83,7 @@ class SwiftPlaygroundsHelper {
                                           ("back", inputImages[1])])
         }
         
-        return SwiftPlaygroundsHelper.swiftPlayground(with: content, resources: swiftPlaygroundResourcesFolder(with: resources))
+        return SwiftPlaygroundsExportHelper.swiftPlayground(with: content, resources: swiftPlaygroundResourcesFolder(with: resources))
     }
     
     class func swiftPlaygroundResourcesFolder(with files: [(String, Data)]) -> FileWrapper {

@@ -10,6 +10,19 @@ import UIKit
 
 class SampleValuePicker: UIView, KernelArgumentValueView {
 
+    var prefferedHeight: Float {
+        if let imageSize = imageView.image?.size {
+            let ratio = bounds.width / imageSize.width
+            return Float(imageSize.height * ratio)
+        } else {
+            return 0
+        }
+    }
+
+    var prefferedUIAxis: UILayoutConstraintAxis {
+        return .vertical
+    }
+
     var updatedValueCallback: ((KernelArgumentValue) -> Void)?
     var value: KernelArgumentValue {
         didSet {
@@ -24,6 +37,7 @@ class SampleValuePicker: UIView, KernelArgumentValueView {
     required init?(frame: CGRect, value: KernelArgumentValue) {
         self.value = value
         super.init(frame: frame)
+        autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
         var image: UIImage?
         if case let .sample(i) = value {
             image = i.asImage
@@ -31,7 +45,10 @@ class SampleValuePicker: UIView, KernelArgumentValueView {
         let imageView = CustomImageView(image: image)
         imageView.frame = bounds
         imageView.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
-        imageView.didSelectImage = updated
+        imageView.contentMode = .scaleAspectFit
+        imageView.didSelectImage = { [weak self] customimageView in
+            self?.updated(imageView: customimageView)
+        }
         addSubview(imageView)
         self.imageView = imageView
     }

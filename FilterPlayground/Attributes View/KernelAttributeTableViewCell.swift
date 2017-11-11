@@ -10,28 +10,25 @@ import UIKit
 
 class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
 
+    @IBOutlet weak var valueSelectionHeight: NSLayoutConstraint!
+    @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var typeButton: UIButton!
     @IBOutlet weak var valueSelectionContainer: UIView!
     @IBOutlet weak var newArgumentOverlay: UIView!
     @IBOutlet weak var dataBindingButton: UIButton!
 
-    var valueSelectionView: (UIView & KernelArgumentValueView)?
-
-    var valueButton: UIView!
+    weak var valueSelectionView: (UIView & KernelArgumentValueView)?
     var selectedBinding: DataBinding = .none {
         didSet {
-            guard let attribute = attribute,
-                selectedBinding != oldValue else {
+            guard selectedBinding != oldValue else {
                 return
             }
 
             if selectedBinding == .none {
                 dataBindingButton.setTitle("Bindings available", for: .normal)
-                DataBindingContext.shared.removeObserver(with: attribute.name)
             } else {
                 dataBindingButton.setTitle("Remove Binding", for: .normal)
-                DataBindingContext.shared.add(observer: self, with: attribute.name)
             }
         }
     }
@@ -100,11 +97,12 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
 
     @IBAction func dataBindingButtonTapped(_ sender: UIButton) {
         if selectedBinding == .none {
-            let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "selectDataBindingViewControllerIdentifier") as! SelectDataBindingViewController
+            let viewController = UIStoryboard.valuePicker.instantiateViewController(withIdentifier: "selectDataBindingViewControllerIdentifier") as! SelectDataBindingViewController
             viewController.supportedBindings = attribute?.type.availableDataBindings ?? []
-            viewController.didSelectBinding = { binding in
-                self.attribute?.binding = binding
-                self.selectedBinding = binding
+            viewController.didSelectBinding = { [weak self] binding in
+                self?.attribute?.binding = binding
+                self?.selectedBinding = binding
+                self?.update()
             }
             present(viewController: viewController, with: sender)
         } else {
@@ -114,13 +112,13 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     }
 
     func presentTypeSelection(with sender: UIButton) {
-        let viewController = UIStoryboard(name: "ValuePicker", bundle: nil).instantiateViewController(withIdentifier: "selectTypeViewControllerIdentifier") as! SelectTypeViewController
-        viewController.didSelectType = { type in
-            self.attribute = KernelArgument(name: self.attribute?.name ?? "", type: type, value: type.defaultValue)
-            self.update()
-            if self.nameTextField.text?.isEmpty ?? true {
+        let viewController = UIStoryboard.valuePicker.instantiateViewController(withIdentifier: "selectTypeViewControllerIdentifier") as! SelectTypeViewController
+        viewController.didSelectType = { [weak self] type in
+            self?.attribute = KernelArgument(name: self?.attribute?.name ?? "", type: type, value: type.defaultValue)
+            self?.update()
+            if self?.nameTextField.text?.isEmpty ?? true {
                 DispatchQueue.main.async {
-                    self.nameTextField.becomeFirstResponder()
+                    self?.nameTextField.becomeFirstResponder()
                 }
             }
         }
@@ -134,16 +132,32 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         if let valueSelectionView = valueSelectionView,
             KernelArgumentValueViewHelper.type(for: valueSelectionView) == type {
             valueSelectionView.value = value
+
         } else if let view = KernelArgumentValueViewHelper.view(for: type).init(frame: valueSelectionContainer.bounds, value: value) as? (UIView & KernelArgumentValueView) {
+            stackView.axis = view.prefferedUIAxis
+            valueSelectionContainer.removeFromSuperview()
+            if view.prefferedUIAxis == .horizontal {
+                stackView.addArrangedSubview(valueSelectionContainer)
+            } else {
+                stackView.insertArrangedSubview(valueSelectionContainer, at: 0)
+            }
             valueSelectionView?.removeFromSuperview()
             valueSelectionContainer.addSubview(view)
-            valueSelectionView?.updatedValueCallback = valueChanged
             valueSelectionView = view
+            valueSelectionView?.updatedValueCallback = { [weak self] value in
+                self?.valueSelectionChanged(value: value)
+            }
+            layoutIfNeeded()
         }
+        valueSelectionHeight.constant = CGFloat(valueSelectionView!.prefferedHeight)
+        layoutIfNeeded()
     }
 
-    func valueChanged(value: KernelArgumentValue) {
+    func valueSelectionChanged(value: KernelArgumentValue) {
         attribute?.value = value
+        print(valueSelectionView!.prefferedHeight)
+        valueSelectionHeight.constant = CGFloat(valueSelectionView!.prefferedHeight)
+        layoutIfNeeded()
         updateCallBack?(self, attribute!)
     }
 
@@ -196,43 +210,5 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-}
-
-// TODO: move observer out of this cell because not every attribtue must have a own cell
-extension KernelAttributeTableViewCell: DataBindingObserver {
-
-    var observedBinding: DataBinding {
-        return selectedBinding
-    }
-
-    func valueChanged(value: Any) {
-        guard let type = attribute?.type else { return }
-
-        var newValue: KernelArgumentValue?
-        switch (type, observedBinding) {
-        case (.float, .time):
-            if let time = value as? TimeInterval {
-                newValue = .float(Float(time))
-            }
-            break
-        case (.sample, .camera):
-            if let image = value as? CIImage {
-                newValue = .sample(image)
-            }
-            break
-        case (.vec2, .touch):
-            if let point = value as? CGPoint {
-                newValue = .vec2(Float(point.x), Float(point.y))
-            }
-            break
-        default:
-            break
-        }
-        if let newValue = newValue {
-            attribute?.value = newValue
-            valueSelectionView?.value = newValue
-            update()
-        }
     }
 }

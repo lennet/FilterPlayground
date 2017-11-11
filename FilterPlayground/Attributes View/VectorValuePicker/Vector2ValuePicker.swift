@@ -19,9 +19,9 @@ class Vector2ValuePicker: VectorValuePicker {
         value = .vec2(values[0], values[1])
         super.updatedValues()
     }
-    
-    override func values(for kernelArgumentValue: KernelArgumentValue) -> [Float] {
+
+    override func values(for _: KernelArgumentValue) -> [Float] {
         guard case let KernelArgumentValue.vec2(x, y) = value else { return [] }
-        return [x,y]
+        return [x, y]
     }
 }

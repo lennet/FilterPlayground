@@ -95,7 +95,11 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
             arguments[indexPath.row] = attribute
             // we only need to rerun if values have changed.
             // we compare name and attributes because comparing values can be expensive for images
-            didUpdateAttributes?(oldAttribute.name == attribute.name && oldAttribute.type == attribute.type)
+            let updatedType = oldAttribute.type != attribute.type
+            didUpdateAttributes?(oldAttribute.name == attribute.name && !updatedType)
+            if attribute.type == .sample || updatedType {
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
         } else {
             arguments.append(attribute)
             tableView.reloadData()
@@ -114,14 +118,19 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.attribute = arguments[indexPath.row]
         }
 
-        cell.updateCallBack = didUpdateAttribute
+        cell.updateCallBack = { [weak self] cell, argument in
+            self?.didUpdateAttribute(cell: cell, attribute: argument)
+        }
+
         return cell
     }
 
     func prepareInputImageCell(tableView: UITableView, indexPath: IndexPath) -> InputImageTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: InputImageTableViewCell.identifier, for: indexPath) as! InputImageTableViewCell
         cell.set(imageValue: inputImages[indexPath.row])
-        cell.updatedImageCallBack = didUpatedInputImage
+        cell.updatedImageCallBack = { [weak self] image in
+            self?.didUpdatedImage?(image)
+        }
         return cell
     }
 
@@ -150,6 +159,9 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func deleteAttribute(action _: UITableViewRowAction, for indexPath: IndexPath) {
+        if let cell = tableView(tableView, cellForRowAt: indexPath) as? KernelAttributeTableViewCell {
+            cell.updateCallBack = nil
+        }
         arguments.remove(at: indexPath.row)
         tableView.reloadData()
         didUpdateAttributes?(false)

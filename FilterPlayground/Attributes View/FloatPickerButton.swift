@@ -13,9 +13,10 @@ class FloatPickerButton: ValuePickerButton {
     @objc override func handleTap() {
         let viewController = FloatPickerViewController.instantiate()
 
-        viewController.valueChanged = { value in
-            self.value = .float(Float(value))
-            self.updatedValueCallback?(self.value)
+        viewController.valueChanged = { [weak self] value in
+            guard let strongSelf = self else { return }
+            strongSelf.value = .float(Float(value))
+            strongSelf.updatedValueCallback?(strongSelf.value)
         }
 
         present(viewController: viewController)

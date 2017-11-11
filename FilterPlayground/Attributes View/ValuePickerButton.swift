@@ -10,6 +10,14 @@ import UIKit
 
 class ValuePickerButton: UIButton, KernelArgumentValueView, UIPopoverPresentationControllerDelegate {
 
+    var prefferedHeight: Float {
+        return 0
+    }
+
+    var prefferedUIAxis: UILayoutConstraintAxis {
+        return .horizontal
+    }
+
     var updatedValueCallback: ((KernelArgumentValue) -> Void)?
     var value: KernelArgumentValue {
         didSet {

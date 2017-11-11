@@ -23,7 +23,7 @@ class FPMTKView: MTKView, MTKViewDelegate {
     var customNeedsDisplay = false
     var timer: Timer?
 
-    #if os(iOS) || os(tvOS)
+    #if os(iOS)
         weak var statisticsView: StatisticsView?
     #endif
 
@@ -34,9 +34,11 @@ class FPMTKView: MTKView, MTKViewDelegate {
         if Settings.showStatistics {
             showStatistics()
         }
-        #if os(iOS) || os(tvOS)
+        #if os(iOS)
             contentMode = .scaleAspectFit
             contentScaleFactor = UIScreen.main.scale
+            let dragInteraction = UIDragInteraction(delegate: self)
+            addInteraction(dragInteraction)
         #endif
         autoResizeDrawable = false
         framebufferOnly = false
@@ -141,3 +143,20 @@ class FPMTKView: MTKView, MTKViewDelegate {
         framesCount = 0
     }
 }
+
+#if os(iOS)
+    extension FPMTKView: UIDragInteractionDelegate {
+        // MARK: UIDragInteractionDelegate
+
+        func dragInteraction(_: UIDragInteraction, itemsForBeginning _: UIDragSession) -> [UIDragItem] {
+            guard let texture = self.currentDrawable?.texture,
+                let image = UIImage(texture: texture) else { return [] }
+            let imageItemProvider = NSItemProvider(object: image)
+            let dragItem = UIDragItem(itemProvider: imageItemProvider)
+            dragItem.previewProvider = {
+                UIDragPreview(view: UIImageView(image: image))
+            }
+            return [dragItem]
+        }
+    }
+#endif

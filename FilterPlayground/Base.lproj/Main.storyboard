@@ -766,6 +766,7 @@
                                         <connections>
                                             <outlet property="heightPickerButton" destination="yfQ-hA-Eod" id="MnW-jf-Cf2"/>
                                             <outlet property="modeSegmentedControl" destination="rZi-MD-asK" id="2Gh-Y3-EHg"/>
+                                            <outlet property="positionStackView" destination="jwn-fn-55s" id="wJV-Ki-pTq"/>
                                             <outlet property="widthPickerButton" destination="j28-re-lJs" id="2i5-2n-jYC"/>
                                             <outlet property="xPickerButton" destination="w83-lT-lTc" id="HPX-hB-S32"/>
                                             <outlet property="yPickerButton" destination="KiV-KV-Kao" id="ptd-9F-h4k"/>

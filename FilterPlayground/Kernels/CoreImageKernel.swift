@@ -10,6 +10,21 @@ import MetalKit
 
 class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
 
+    var extentSettings: KernelOutputSizeSetting {
+        return .sizeAndPosition
+    }
+
+    var extent: CGRect {
+        switch outputSize {
+        case .inherit:
+            return CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000))
+        case let .custom(value):
+            return value
+        }
+    }
+
+    var outputSize: KernelOutputSize = .inherit
+
     var inputImages: [CIImage] = []
 
     let commandQueue: MTLCommandQueue?
@@ -99,7 +114,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
 
     func apply(with _: [CIImage], attributes: [KernelArgumentValue]) -> CIImage? {
         let arguments: [Any] = attributes.flatMap { $0.asKernelValue }
-        return kernel?.apply(extent: CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000)), roiCallback: { (_, rect) -> CGRect in
+        return kernel?.apply(extent: extent, roiCallback: { (_, rect) -> CGRect in
             rect
         }, arguments: arguments)
     }

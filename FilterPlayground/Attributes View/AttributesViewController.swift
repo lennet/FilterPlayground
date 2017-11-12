@@ -50,8 +50,23 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
+    var extentSettings: KernelOutputSizeSetting = .none {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+
+    var outputSize: KernelOutputSize = .inherit
+    var inheritSize: CGRect = .zero {
+        didSet {
+            loadViewIfNeeded()
+            self.tableView.reloadData()
+        }
+    }
+
     var didUpdateAttributes: ((Bool) -> Void)?
     var didUpdatedImage: ((KernelInputImage) -> Void)?
+    var didUpdatedOutputSize: ((KernelOutputSize) -> Void)?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -82,6 +97,9 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         case .inputImages:
             return inputImages.count
         case .outputSize:
+            if case .none = extentSettings {
+                return 0
+            }
             return 1
         }
     }
@@ -141,6 +159,12 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func prepareOutputSizeCell(tableView: UITableView, indexPath: IndexPath) -> KernelOutputSizeTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: KernelOutputSizeTableViewCell.identifier, for: indexPath) as! KernelOutputSizeTableViewCell
+        cell.outputSize = outputSize
+        cell.inheritSize = inheritSize
+        cell.canSetPosition = extentSettings == .sizeAndPosition
+        cell.didUpdatedOutputSize = { [weak self] outputSize in
+            self?.didUpdatedOutputSize?(outputSize)
+        }
         return cell
     }
 

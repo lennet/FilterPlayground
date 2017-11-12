@@ -102,6 +102,8 @@
 		986E7E681FB8BDEF001FC74D /* KernelOutputSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E7E671FB8BDEF001FC74D /* KernelOutputSize.swift */; };
 		986E7E691FB8BDEF001FC74D /* KernelOutputSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E7E671FB8BDEF001FC74D /* KernelOutputSize.swift */; };
 		986E7E6B1FB8C550001FC74D /* KernelOutputSizeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E7E6A1FB8C550001FC74D /* KernelOutputSizeTableViewCell.swift */; };
+		986E7E6D1FB8F017001FC74D /* KernelOutputSizeSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E7E6C1FB8F017001FC74D /* KernelOutputSizeSetting.swift */; };
+		986E7E6E1FB8F01B001FC74D /* KernelOutputSizeSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E7E6C1FB8F017001FC74D /* KernelOutputSizeSetting.swift */; };
 		987672451F2F5355002F9AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
 		987A73291F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A73281F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift */; };
 		987F5BE71F9A8AD8003EB32B /* FrameRateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */; };
@@ -276,6 +278,7 @@
 		986E7E651FB8B123001FC74D /* DragInteractionImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragInteractionImageView.swift; sourceTree = "<group>"; };
 		986E7E671FB8BDEF001FC74D /* KernelOutputSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelOutputSize.swift; sourceTree = "<group>"; };
 		986E7E6A1FB8C550001FC74D /* KernelOutputSizeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelOutputSizeTableViewCell.swift; sourceTree = "<group>"; };
+		986E7E6C1FB8F017001FC74D /* KernelOutputSizeSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelOutputSizeSetting.swift; sourceTree = "<group>"; };
 		987672441F2F5355002F9AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		987A73281F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPlaygroundsExportHelper.swift; sourceTree = "<group>"; };
 		987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameRateManager.swift; sourceTree = "<group>"; };
@@ -692,6 +695,7 @@
 				98689EBD1F93AC800000AF7C /* DataBinding.swift */,
 				98A4113E1F99453000A97459 /* KernelInputImage.swift */,
 				986E7E671FB8BDEF001FC74D /* KernelOutputSize.swift */,
+				986E7E6C1FB8F017001FC74D /* KernelOutputSizeSetting.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -907,6 +911,7 @@
 				9888F4D01FB663A400D108CF /* NightTheme.swift in Sources */,
 				985D519F1FA66E18009881CC /* Vector2ValuePicker.swift in Sources */,
 				98F2B9EF1F719B380092A015 /* SourceEditorTextView.swift in Sources */,
+				986E7E6D1FB8F017001FC74D /* KernelOutputSizeSetting.swift in Sources */,
 				983008761F6F084C005C89C3 /* DismissSegue.swift in Sources */,
 				986E7E681FB8BDEF001FC74D /* KernelOutputSize.swift in Sources */,
 				980E4F451F8013AA00C603C3 /* MetalErrorParser.swift in Sources */,
@@ -1006,6 +1011,7 @@
 				983331091F8003B200C9AF52 /* KernelArgument.swift in Sources */,
 				9833310C1F80046800C9AF52 /* CoreImageBlendKernel.swift in Sources */,
 				989716751F67E3C800E7C20C /* Document.swift in Sources */,
+				986E7E6E1FB8F01B001FC74D /* KernelOutputSizeSetting.swift in Sources */,
 				98286D631F93F1F0003B6D4A /* CameraDataBindingEmitter.swift in Sources */,
 				9833310D1F80046B00C9AF52 /* CoreImageColorKernel.swift in Sources */,
 				983331061F8003A800C9AF52 /* KernelType.swift in Sources */,

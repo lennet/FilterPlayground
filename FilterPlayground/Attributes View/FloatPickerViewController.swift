@@ -23,6 +23,7 @@ class FloatPickerViewController: UIViewController {
 
     var min: Float?
     var max: Float?
+    var startValue: Float = 0
 
     // TODO: replace string representation with own struct
     var valueBeforeDot: String = ""
@@ -65,7 +66,7 @@ class FloatPickerViewController: UIViewController {
         super.viewWillAppear(animated)
         slider.addTarget(self, action: #selector(sliderDidBeginEditing), for: .editingDidBegin)
         slider.addTarget(self, action: #selector(sliderDidEndEditing), for: .editingDidEnd)
-
+        slider.value = CGFloat(startValue)
         updateContentSize()
     }
 

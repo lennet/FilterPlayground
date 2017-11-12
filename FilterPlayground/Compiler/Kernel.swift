@@ -21,6 +21,10 @@ protocol Kernel: class {
     var arguments: [KernelArgumentValue] { get set }
     var inputImages: [CIImage] { get set }
 
+    var extentSettings: KernelOutputSizeSetting { get }
+    var outputSize: KernelOutputSize { get set }
+    var extent: CGRect { get }
+
     static var supportedArguments: [KernelArgumentType] { get }
 
     static func initialSource(with name: String) -> String

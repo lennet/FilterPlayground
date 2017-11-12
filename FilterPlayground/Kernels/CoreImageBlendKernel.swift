@@ -10,6 +10,10 @@ import CoreImage
 
 class CoreImageBlendKernel: CoreImageKernel {
 
+    override var extentSettings: KernelOutputSizeSetting {
+        return .none
+    }
+
     var blendKernel: CIBlendKernel?
 
     override class var supportedArguments: [KernelArgumentType] {

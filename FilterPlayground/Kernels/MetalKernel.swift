@@ -10,6 +10,28 @@ import MetalKit
 
 class MetalKernel: NSObject, Kernel, MTKViewDelegate {
 
+    var extentSettings: KernelOutputSizeSetting {
+        return .sizeOnly
+    }
+
+    var extent: CGRect {
+        switch outputSize {
+        case .inherit:
+            if let inputTexture = inputTexture {
+                return CGRect(origin: .zero, size: CGSize(width: inputTexture.width, height: inputTexture.height))
+            }
+            return CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000))
+        case let .custom(value):
+            return value
+        }
+    }
+
+    var outputSize: KernelOutputSize = .inherit {
+        didSet {
+            mtkView.drawableSize = extent.size
+        }
+    }
+
     var inputImages: [CIImage] = [] {
         didSet {
             didUpdateInputImages()
@@ -95,9 +117,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         let textureLoader = MTKTextureLoader(device: device)
         do {
             inputTexture = try textureLoader.newTexture(cgImage: cgImage, options: nil)
-            if let texture = self.inputTexture {
-                mtkView.drawableSize = CGSize(width: texture.width, height: texture.height)
-            }
+            mtkView.drawableSize = extent.size
         } catch {
             print(error)
         }

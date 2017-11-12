@@ -10,6 +10,19 @@ import CoreImage
 
 class CoreImageWarpKernel: CoreImageKernel {
 
+    override var extent: CGRect {
+        switch outputSize {
+        case .inherit:
+            guard let input = inputImages.first else {
+                return super.extent
+            }
+
+            return input.extent
+        case let .custom(value):
+            return value
+        }
+    }
+
     var warpKernel: CIWarpKernel?
 
     override class var returnType: KernelArgumentType {
@@ -37,7 +50,7 @@ class CoreImageWarpKernel: CoreImageKernel {
             return nil
         }
 
-        return warpKernel?.apply(extent: input.extent, roiCallback: { (_, rect) -> CGRect in
+        return warpKernel?.apply(extent: extent, roiCallback: { (_, rect) -> CGRect in
             rect
         }, image: input, arguments: attributes.flatMap { $0.asKernelValue })
     }

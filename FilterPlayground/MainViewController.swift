@@ -40,6 +40,7 @@ class MainViewController: UIViewController {
             guard let kernel = kernel else {
                 return
             }
+            attributesViewController?.extentSettings = kernel.extentSettings
             liveViewController?.setup(with: kernel)
         }
     }
@@ -328,6 +329,7 @@ class MainViewController: UIViewController {
     func updateKernelarguments() {
         guard let project = project else { return }
         kernel?.arguments = project.metaData.arguments.flatMap { $0.value }
+        attributesViewController?.inheritSize = kernel?.extent ?? .zero
         kernel?.render()
     }
 
@@ -350,6 +352,7 @@ class MainViewController: UIViewController {
     func updateInputImages() {
         guard let project = project else { return }
         kernel?.inputImages = project.metaData.inputImages.flatMap { $0.image?.asCIImage }
+        attributesViewController?.inheritSize = kernel?.extent ?? .zero
         kernel?.render()
     }
 
@@ -390,6 +393,13 @@ class MainViewController: UIViewController {
         case let vc as AttributesViewController:
             attributesViewController = vc
             attributesViewController?.didUpdateAttributes = didUpdateArgumentsFromAttributesViewController
+            attributesViewController?.outputSize = self.project?.metaData.ouputSize ?? .inherit
+            attributesViewController?.inheritSize = self.kernel?.extent ?? .zero
+            attributesViewController?.didUpdatedOutputSize = { [weak self] outputSize in
+                self?.project?.metaData.ouputSize = outputSize
+                self?.kernel?.outputSize = outputSize
+                self?.kernel?.render()
+            }
             attributesViewController?.didUpdatedImage = { [weak self] _ in
                 self?.project?.metaData.inputImages = self?.inputImageValues ?? []
                 self?.updateInputImages()

@@ -9,6 +9,7 @@
 import UIKit
 
 class KernelOutputSizeTableViewCell: UITableViewCell {
+
     @IBOutlet weak var modeSegmentedControl: UISegmentedControl!
     @IBOutlet var labels: [UILabel]!
     var buttons: [FloatPickerButton] {
@@ -25,29 +26,51 @@ class KernelOutputSizeTableViewCell: UITableViewCell {
     @IBOutlet weak var yPickerButton: FloatPickerButton!
     @IBOutlet weak var xPickerButton: FloatPickerButton!
 
+    @IBOutlet weak var positionStackView: UIStackView!
     static let identifier = "KernelOutputSizeTableViewCellIdentifier"
+    var didUpdatedOutputSize: ((KernelOutputSize) -> Void)?
+    var canSetPosition: Bool = true {
+        didSet {
+            positionStackView.isHidden = !canSetPosition
+        }
+    }
 
-    var outputSize: KernelOutputSize? {
+    var inheritSize: CGRect = .zero {
         didSet {
             configure()
         }
     }
-    
+
+    var outputSize: KernelOutputSize = .inherit {
+        didSet {
+            configure()
+        }
+    }
+
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
+        configureButtons()
         updateColors()
     }
 
     func configure() {
-        guard let size = outputSize else { return }
-        switch size {
+        switch outputSize {
         case .inherit:
             updateSubViews(enabled: false)
+            updateButtons(for: inheritSize)
             break
-        case .custom:
+        case let .custom(value):
             updateSubViews(enabled: true)
+            updateButtons(for: value)
             break
         }
+    }
+
+    func updateButtons(for rect: CGRect) {
+        xPickerButton.value = .float(Float(rect.origin.x))
+        yPickerButton.value = .float(Float(rect.origin.y))
+        widthPickerButton.value = .float(Float(rect.size.width))
+        heightPickerButton.value = .float(Float(rect.size.height))
     }
 
     @IBAction func modeChanged(_: Any) {
@@ -55,11 +78,11 @@ class KernelOutputSizeTableViewCell: UITableViewCell {
         case 0:
             outputSize = .inherit
         case 1:
-            // TODO: get size from buttons
-            outputSize = .custom(.zero)
+            outputSize = .custom(inheritSize)
         default:
             fatalError()
         }
+        didUpdateValues()
     }
 
     func updateSubViews(enabled: Bool) {
@@ -78,9 +101,21 @@ class KernelOutputSizeTableViewCell: UITableViewCell {
             }
             button.min = 0
         }
+        widthPickerButton.min = 1
+        heightPickerButton.min = 1
+        heightPickerButton.value = .float(1)
+        widthPickerButton.value = .float(1)
     }
 
     func didUpdateValues() {
+        if case .custom = outputSize {
+            let x = CGFloat(xPickerButton.value.asKernelValue as! Float)
+            let y = CGFloat(yPickerButton.value.asKernelValue as! Float)
+            let width = CGFloat(widthPickerButton.value.asKernelValue as! Float)
+            let height = CGFloat(heightPickerButton.value.asKernelValue as! Float)
+            outputSize = .custom(CGRect(x: x, y: y, width: width, height: height))
+        }
+        didUpdatedOutputSize?(outputSize)
     }
 
     func updateColors() {

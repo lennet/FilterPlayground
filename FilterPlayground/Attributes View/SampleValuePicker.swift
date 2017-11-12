@@ -11,6 +11,7 @@ import UIKit
 class SampleValuePicker: UIView, KernelArgumentValueView {
 
     var prefferedHeight: Float {
+        // TODO: use AVMakeRect(aspectRatio
         if let imageSize = imageView.image?.size {
             let ratio = bounds.width / imageSize.width
             return Float(imageSize.height * ratio)

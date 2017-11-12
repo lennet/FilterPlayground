@@ -154,7 +154,7 @@ class FPMTKView: MTKView, MTKViewDelegate {
             let imageItemProvider = NSItemProvider(object: image)
             let dragItem = UIDragItem(itemProvider: imageItemProvider)
             dragItem.previewProvider = {
-                UIDragPreview(view: UIImageView(image: image))
+                UIDragPreview(view: DragInteractionImageView(image: image))
             }
             return [dragItem]
         }

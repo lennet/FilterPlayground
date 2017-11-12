@@ -640,6 +640,143 @@
                                             <outlet property="inputImageViewHeightConstraint" destination="aZe-dU-csD" id="Wjk-mA-aa8"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="KernelOutputSizeTableViewCellIdentifier" rowHeight="250" id="mKe-MV-9lE" customClass="KernelOutputSizeTableViewCell" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="378" width="219" height="250"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mKe-MV-9lE" id="5PX-lX-TSi">
+                                            <rect key="frame" x="0.0" y="0.0" width="219" height="249.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="43a-m5-Wqr">
+                                                    <rect key="frame" x="19" y="15" width="181" height="232"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIo-Wh-G8L">
+                                                            <rect key="frame" x="0.0" y="0.0" width="181" height="77.5"/>
+                                                            <subviews>
+                                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rZi-MD-asK">
+                                                                    <rect key="frame" x="22" y="24" width="137" height="29"/>
+                                                                    <segments>
+                                                                        <segment title="Inherited"/>
+                                                                        <segment title="Custom"/>
+                                                                    </segments>
+                                                                    <connections>
+                                                                        <action selector="modeChanged:" destination="mKe-MV-9lE" eventType="valueChanged" id="6eg-Uo-6j5"/>
+                                                                    </connections>
+                                                                </segmentedControl>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstItem="rZi-MD-asK" firstAttribute="centerY" secondItem="mIo-Wh-G8L" secondAttribute="centerY" id="L7Y-AQ-qP4"/>
+                                                                <constraint firstItem="rZi-MD-asK" firstAttribute="centerX" secondItem="mIo-Wh-G8L" secondAttribute="centerX" id="yRn-4l-SWF"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="jwn-fn-55s">
+                                                            <rect key="frame" x="0.0" y="77.5" width="181" height="77"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHB-IJ-soE">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="60.5" height="77"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oVR-6V-mSU">
+                                                                    <rect key="frame" x="60.5" y="0.0" width="60" height="77"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w83-lT-lTc" customClass="FloatPickerButton" customModule="FilterPlayground" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="38.5"/>
+                                                                            <state key="normal" title="0.0"/>
+                                                                        </button>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XkY-zj-e7A">
+                                                                            <rect key="frame" x="0.0" y="38.5" width="60" height="38.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Fxk-nh-RR2">
+                                                                    <rect key="frame" x="120.5" y="0.0" width="60.5" height="77"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KiV-KV-Kao" customClass="FloatPickerButton" customModule="FilterPlayground" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="38.5"/>
+                                                                            <state key="normal" title="0.0"/>
+                                                                        </button>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="y" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMm-8z-7BC">
+                                                                            <rect key="frame" x="0.0" y="38.5" width="60.5" height="38.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8Dn-Lb-h06">
+                                                            <rect key="frame" x="0.0" y="154.5" width="181" height="77.5"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71K-qQ-AcM">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="60.5" height="77.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SJ4-oD-1Gq">
+                                                                    <rect key="frame" x="60.5" y="0.0" width="60" height="77.5"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j28-re-lJs" customClass="FloatPickerButton" customModule="FilterPlayground" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="60" height="39"/>
+                                                                            <state key="normal" title="0.0"/>
+                                                                        </button>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="width" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UI4-bU-Yxi">
+                                                                            <rect key="frame" x="0.0" y="39" width="60" height="38.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="EjI-oH-JHa">
+                                                                    <rect key="frame" x="120.5" y="0.0" width="60.5" height="77.5"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfQ-hA-Eod" customClass="FloatPickerButton" customModule="FilterPlayground" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="60.5" height="39"/>
+                                                                            <state key="normal" title="0.0"/>
+                                                                        </button>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="height" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWj-wT-lRI">
+                                                                            <rect key="frame" x="0.0" y="39" width="60.5" height="38.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="43a-m5-Wqr" firstAttribute="top" secondItem="5PX-lX-TSi" secondAttribute="topMargin" constant="4" id="01o-O4-gk1"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="43a-m5-Wqr" secondAttribute="trailing" constant="4" id="QkI-OJ-6ig"/>
+                                                <constraint firstItem="43a-m5-Wqr" firstAttribute="leading" secondItem="5PX-lX-TSi" secondAttribute="leadingMargin" constant="4" id="gJN-3z-1hs"/>
+                                                <constraint firstItem="43a-m5-Wqr" firstAttribute="bottom" secondItem="5PX-lX-TSi" secondAttribute="bottomMargin" constant="8" id="kuH-8e-Lye"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="heightPickerButton" destination="yfQ-hA-Eod" id="MnW-jf-Cf2"/>
+                                            <outlet property="modeSegmentedControl" destination="rZi-MD-asK" id="2Gh-Y3-EHg"/>
+                                            <outlet property="widthPickerButton" destination="j28-re-lJs" id="2i5-2n-jYC"/>
+                                            <outlet property="xPickerButton" destination="w83-lT-lTc" id="HPX-hB-S32"/>
+                                            <outlet property="yPickerButton" destination="KiV-KV-Kao" id="ptd-9F-h4k"/>
+                                            <outletCollection property="labels" destination="qMm-8z-7BC" collectionClass="NSMutableArray" id="a0i-fw-8nD"/>
+                                            <outletCollection property="labels" destination="XkY-zj-e7A" collectionClass="NSMutableArray" id="D56-cQ-vTQ"/>
+                                            <outletCollection property="labels" destination="rWj-wT-lRI" collectionClass="NSMutableArray" id="6im-p9-GnK"/>
+                                            <outletCollection property="labels" destination="UI4-bU-Yxi" collectionClass="NSMutableArray" id="RkD-NB-T3A"/>
+                                            <outletCollection property="labels" destination="71K-qQ-AcM" collectionClass="NSMutableArray" id="odR-di-TAA"/>
+                                            <outletCollection property="labels" destination="HHB-IJ-soE" collectionClass="NSMutableArray" id="56q-8Z-PrR"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="lBD-SZ-RD5" id="N3n-6Z-TYt"/>
@@ -1111,7 +1248,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qv3-qs-8wA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1281" y="1124"/>
+            <point key="canvasLocation" x="-1225" y="1162"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CXj-Fh-WZr">

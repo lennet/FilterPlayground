@@ -30,8 +30,9 @@ class ValuePickerButton: UIButton, KernelArgumentValueView, UIPopoverPresentatio
         super.init(frame: frame)
     }
 
-    required init?(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init?(coder aCoder: NSCoder) {
+        value = KernelArgumentValue.float(0)
+        super.init(coder: aCoder)
     }
 
     func present(viewController: UIViewController) {

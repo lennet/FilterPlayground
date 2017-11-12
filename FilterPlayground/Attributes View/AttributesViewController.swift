@@ -11,11 +11,14 @@ import UIKit
 class AttributesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     enum AttributesViewControllerSection: Int {
+        case outputSize
         case inputImages
         case arguments
 
         var title: String {
             switch self {
+            case .outputSize:
+                return "Extent"
             case .inputImages:
                 return "Input images"
             case .arguments:
@@ -24,7 +27,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
 
         static var count: Int {
-            return 2
+            return 3
         }
     }
 
@@ -78,6 +81,8 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
             return arguments.count + 1
         case .inputImages:
             return inputImages.count
+        case .outputSize:
+            return 1
         }
     }
 
@@ -134,12 +139,19 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
 
+    func prepareOutputSizeCell(tableView: UITableView, indexPath: IndexPath) -> KernelOutputSizeTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: KernelOutputSizeTableViewCell.identifier, for: indexPath) as! KernelOutputSizeTableViewCell
+        return cell
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch AttributesViewControllerSection(rawValue: indexPath.section)! {
         case .arguments:
             return prepareKernelAttributeCell(tableView: tableView, indexPath: indexPath)
         case .inputImages:
             return prepareInputImageCell(tableView: tableView, indexPath: indexPath)
+        case .outputSize:
+            return prepareOutputSizeCell(tableView: tableView, indexPath: indexPath)
         }
     }
 
@@ -150,6 +162,8 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         case .arguments:
             return indexPath.row < arguments.count
         case .inputImages:
+            return false
+        case .outputSize:
             return false
         }
     }

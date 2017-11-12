@@ -21,6 +21,9 @@ class FloatPickerViewController: UIViewController {
     @IBOutlet weak var buttonsViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var pointsButton: FloatSelectionButton!
 
+    var min: Float?
+    var max: Float?
+
     // TODO: replace string representation with own struct
     var valueBeforeDot: String = ""
     var valueAfterDot: String?
@@ -188,8 +191,15 @@ class FloatPickerViewController: UIViewController {
 
     func update(value: CGFloat) {
         let roundedValue = round(value * 10000) / 10000
-        valueChanged?(roundedValue)
-        slider.value = roundedValue
+        var newValue = roundedValue
+        if let minValue = min {
+            newValue = Swift.max(newValue, CGFloat(minValue))
+        }
+        if let maxValue = max {
+            newValue = Swift.min(newValue, CGFloat(maxValue))
+        }
+        valueChanged?(newValue)
+        slider.value = newValue
     }
 
     func set(value: CGFloat) {

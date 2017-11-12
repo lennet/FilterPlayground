@@ -10,9 +10,14 @@ import UIKit
 
 class FloatPickerButton: ValuePickerButton {
 
+    var min: Float?
+    var max: Float?
+
     @objc override func handleTap() {
         let viewController = FloatPickerViewController.instantiate()
-
+        viewController.min = min
+        viewController.max = max
+        
         viewController.valueChanged = { [weak self] value in
             guard let strongSelf = self else { return }
             strongSelf.value = .float(Float(value))

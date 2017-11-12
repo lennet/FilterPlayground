@@ -11,6 +11,7 @@ import UIKit
 
 struct ProjectMetaData {
 
+    var ouputSize: KernelOutputSize
     var arguments: [KernelArgument]
     var inputImages: [KernelInputImage]
     var type: KernelType
@@ -21,6 +22,7 @@ struct ProjectMetaData {
         self.type = type
         name = "untitled"
         self.inputImages = inputImages
+        ouputSize = .inherit
     }
 
     func initialSource() -> String {
@@ -46,6 +48,7 @@ extension ProjectMetaData: Codable {
         case arguments
         case name
         case type
+        case outputSize
     }
 
     init(from decoder: Decoder) throws {
@@ -53,6 +56,7 @@ extension ProjectMetaData: Codable {
         name = try values.decode(String.self, forKey: .name)
         type = try values.decode(KernelType.self, forKey: .type)
         arguments = try values.decode([KernelArgument].self, forKey: .arguments)
+        ouputSize = (try? values.decode(KernelOutputSize.self, forKey: .outputSize)) ?? .inherit
         inputImages = []
     }
 
@@ -61,5 +65,6 @@ extension ProjectMetaData: Codable {
         try container.encode(name, forKey: .name)
         try container.encode(type, forKey: .type)
         try container.encode(arguments, forKey: .arguments)
+        try container.encode(ouputSize, forKey: .outputSize)
     }
 }

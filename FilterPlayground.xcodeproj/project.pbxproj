@@ -163,6 +163,7 @@
 		98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */; };
 		98E692E91F30C832000C8B41 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692E81F30C832000C8B41 /* Project.swift */; };
 		98E692EE1F30DF8D000C8B41 /* ProjectMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E692ED1F30DF8D000C8B41 /* ProjectMetaData.swift */; };
+		98E987C01FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E987BF1FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift */; };
 		98F2B9EF1F719B380092A015 /* SourceEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F2B9EE1F719B380092A015 /* SourceEditorTextView.swift */; };
 		98FF4F951F968BC0004F46B0 /* InputImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FF4F941F968BC0004F46B0 /* InputImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -335,6 +336,7 @@
 		98E692E61F30C5EA000C8B41 /* DocumentBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentBrowserViewController.swift; sourceTree = "<group>"; };
 		98E692E81F30C832000C8B41 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		98E692ED1F30DF8D000C8B41 /* ProjectMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectMetaData.swift; sourceTree = "<group>"; };
+		98E987BF1FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTouchesPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		98F2B9EE1F719B380092A015 /* SourceEditorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorTextView.swift; sourceTree = "<group>"; };
 		98FF4F941F968BC0004F46B0 /* InputImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -388,12 +390,14 @@
 		983008741F6F0838005C89C3 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */,
 				982DC6351F3FA1D1005DE418 /* ViewDraggingIndicator.swift */,
 				983008751F6F084C005C89C3 /* DismissSegue.swift */,
 				9845153F1F914CE10015FADF /* FPMTKView.swift */,
 				98286D641F93FE97003B6D4A /* OutputContainerView.swift */,
 				98B00A2A1F9D1E70006D2728 /* StatisticsView.swift */,
 				986E7E651FB8B123001FC74D /* DragInteractionImageView.swift */,
+				98E987BF1FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -427,7 +431,6 @@
 				985544901F7FFAA100E9F02A /* CoreImageColorKernel.swift */,
 				985544921F7FFB3E00E9F02A /* CoreImageBlendKernel.swift */,
 				983331101F80066300C9AF52 /* MetalKernel.swift */,
-				987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */,
 			);
 			path = Kernels;
 			sourceTree = "<group>";
@@ -900,6 +903,7 @@
 				986E7E6B1FB8C550001FC74D /* KernelOutputSizeTableViewCell.swift in Sources */,
 				981267D41F34BEFC00101027 /* Kernel.swift in Sources */,
 				98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */,
+				98E987C01FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift in Sources */,
 				98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */,
 				988901A01F76426900B97C4A /* SourceEditorLayoutManager.swift in Sources */,
 				985D519D1FA66B76009881CC /* ColorPickerButton.swift in Sources */,

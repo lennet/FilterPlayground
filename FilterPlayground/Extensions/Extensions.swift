@@ -7,8 +7,8 @@
 //
 
 import CoreGraphics
-import simd
 import Foundation
+import simd
 
 extension NSAttributedString {
 

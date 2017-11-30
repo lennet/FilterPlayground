@@ -146,17 +146,22 @@ class FPMTKView: MTKView, MTKViewDelegate {
 
 #if os(iOS)
     extension FPMTKView: UIDragInteractionDelegate {
+
         // MARK: UIDragInteractionDelegate
 
         func dragInteraction(_: UIDragInteraction, itemsForBeginning _: UIDragSession) -> [UIDragItem] {
-            guard let texture = self.currentDrawable?.texture,
-                let image = UIImage(texture: texture) else { return [] }
-            let imageItemProvider = NSItemProvider(object: image)
-            let dragItem = UIDragItem(itemProvider: imageItemProvider)
-            dragItem.previewProvider = {
-                UIDragPreview(view: DragInteractionImageView(image: image))
-            }
-            return [dragItem]
+            #if !((arch(i386) || arch(x86_64)) && os(iOS))
+                guard let texture = self.currentDrawable?.texture,
+                    let image = UIImage(texture: texture) else { return [] }
+                let imageItemProvider = NSItemProvider(object: image)
+                let dragItem = UIDragItem(itemProvider: imageItemProvider)
+                dragItem.previewProvider = {
+                    UIDragPreview(view: DragInteractionImageView(image: image))
+                }
+                return [dragItem]
+            #else
+                return []
+            #endif
         }
     }
 #endif

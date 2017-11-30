@@ -24,8 +24,8 @@ extension CompileErrorType {
 
 class ErrorTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var errorView: UIImageView!
+    @IBOutlet var label: UILabel!
+    @IBOutlet var errorView: UIImageView!
 
     var error: KernelError? {
         didSet {

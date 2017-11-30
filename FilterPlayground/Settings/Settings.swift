@@ -41,7 +41,7 @@ struct Settings {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: #function)
-            NotificationCenter.default.post(name: self.customFrameRateChangedNotificationName, object: newValue)
+            NotificationCenter.default.post(name: customFrameRateChangedNotificationName, object: newValue)
         }
     }
 
@@ -52,7 +52,7 @@ struct Settings {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: #function)
-            NotificationCenter.default.post(name: self.ignoreLowPowerModeChangedNotificationName, object: newValue)
+            NotificationCenter.default.post(name: ignoreLowPowerModeChangedNotificationName, object: newValue)
         }
     }
 
@@ -63,7 +63,7 @@ struct Settings {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: #function)
-            NotificationCenter.default.post(name: self.showStatisticsChangedNotificationName, object: newValue)
+            NotificationCenter.default.post(name: showStatisticsChangedNotificationName, object: newValue)
         }
     }
 

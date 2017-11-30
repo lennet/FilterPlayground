@@ -6,15 +6,15 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import UIKit
 import SafariServices
+import UIKit
 
 class MainViewController: UIViewController {
 
-    @IBOutlet weak var contentViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var attributesBarButtonItem: UIBarButtonItem!
-    @IBOutlet weak var attributesContainerWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var sourceEditorWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var contentViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var attributesBarButtonItem: UIBarButtonItem!
+    @IBOutlet var attributesContainerWidthConstraint: NSLayoutConstraint!
+    @IBOutlet var sourceEditorWidthConstraint: NSLayoutConstraint!
 
     weak var attributesViewController: AttributesViewController?
     weak var liveViewController: LiveViewController?
@@ -393,8 +393,8 @@ class MainViewController: UIViewController {
         case let vc as AttributesViewController:
             attributesViewController = vc
             attributesViewController?.didUpdateAttributes = didUpdateArgumentsFromAttributesViewController
-            attributesViewController?.outputSize = self.project?.metaData.ouputSize ?? .inherit
-            attributesViewController?.inheritSize = self.kernel?.extent ?? .zero
+            attributesViewController?.outputSize = project?.metaData.ouputSize ?? .inherit
+            attributesViewController?.inheritSize = kernel?.extent ?? .zero
             attributesViewController?.didUpdatedOutputSize = { [weak self] outputSize in
                 self?.project?.metaData.ouputSize = outputSize
                 self?.kernel?.outputSize = outputSize

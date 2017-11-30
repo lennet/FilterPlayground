@@ -7,8 +7,8 @@
 //
 
 import AVFoundation
-import CoreMedia
 import CoreImage
+import CoreMedia
 #if os(iOS) || os(tvOS)
     import UIKit
 #endif

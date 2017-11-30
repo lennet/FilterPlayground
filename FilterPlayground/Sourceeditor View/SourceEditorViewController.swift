@@ -10,8 +10,8 @@ import UIKit
 
 class SourceEditorViewController: UIViewController, UITextViewDelegate {
 
-    @IBOutlet weak var textView: NumberedTextView!
-    @IBOutlet weak var errorViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var textView: NumberedTextView!
+    @IBOutlet var errorViewHeightConstraint: NSLayoutConstraint!
 
     weak var errorViewController: ErrorViewController?
 

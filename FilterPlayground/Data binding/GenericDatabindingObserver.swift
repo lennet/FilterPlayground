@@ -6,8 +6,8 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import Foundation
 import CoreImage
+import Foundation
 
 class GenericDatabindingObserver: DataBindingObserver {
 

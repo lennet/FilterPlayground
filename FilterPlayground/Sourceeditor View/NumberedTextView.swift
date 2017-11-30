@@ -98,7 +98,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
     }
 
     func textViewDidChange(_: UITextView) {
-        self.delegate?.textViewDidChange?(textView)
+        delegate?.textViewDidChange?(textView)
         setNeedsDisplay()
         updatedText()
     }

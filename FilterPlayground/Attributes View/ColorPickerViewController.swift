@@ -14,15 +14,15 @@ class ColorPickerViewController: UIViewController {
         return UIStoryboard.valuePicker.instantiateViewController(withIdentifier: "ColorPickerViewControllerIdentifier") as! ColorPickerViewController
     }
 
-    @IBOutlet weak var redSlider: UISlider!
-    @IBOutlet weak var blueSlider: UISlider!
-    @IBOutlet weak var greenSlider: UISlider!
-    @IBOutlet weak var alphaSlider: UISlider!
+    @IBOutlet var redSlider: UISlider!
+    @IBOutlet var blueSlider: UISlider!
+    @IBOutlet var greenSlider: UISlider!
+    @IBOutlet var alphaSlider: UISlider!
 
-    @IBOutlet weak var redSliderValueLabel: UILabel!
-    @IBOutlet weak var greenSliderValueLabel: UILabel!
-    @IBOutlet weak var blueSliderValueLabel: UILabel!
-    @IBOutlet weak var alphaSliderValueLabel: UILabel!
+    @IBOutlet var redSliderValueLabel: UILabel!
+    @IBOutlet var greenSliderValueLabel: UILabel!
+    @IBOutlet var blueSliderValueLabel: UILabel!
+    @IBOutlet var alphaSliderValueLabel: UILabel!
 
     var colorChanged: ((Float, Float, Float, Float) -> Void)?
 

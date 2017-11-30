@@ -31,7 +31,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var tableView: UITableView!
 
     var shouldReloadOnUpdate = true
 

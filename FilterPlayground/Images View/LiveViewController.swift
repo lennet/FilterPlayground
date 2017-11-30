@@ -10,7 +10,7 @@ import UIKit
 
 class LiveViewController: UIViewController {
 
-    @IBOutlet weak var outputContainerView: UIView!
+    @IBOutlet var outputContainerView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()

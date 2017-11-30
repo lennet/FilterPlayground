@@ -6,9 +6,9 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import XCTest
-import simd
 @testable import FilterPlayground
+import simd
+import XCTest
 
 class ExtensionsTests: XCTestCase {
 

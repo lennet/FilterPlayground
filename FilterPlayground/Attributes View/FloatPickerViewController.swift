@@ -14,12 +14,12 @@ class FloatPickerViewController: UIViewController {
         return UIStoryboard.valuePicker.instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! FloatPickerViewController
     }
 
-    @IBOutlet weak var previousButton: FloatSelectionButton!
-    @IBOutlet weak var nextButton: FloatSelectionButton!
-    @IBOutlet weak var slider: CircularSlider!
-    @IBOutlet weak var buttonsView: UIView!
-    @IBOutlet weak var buttonsViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var pointsButton: FloatSelectionButton!
+    @IBOutlet var previousButton: FloatSelectionButton!
+    @IBOutlet var nextButton: FloatSelectionButton!
+    @IBOutlet var slider: CircularSlider!
+    @IBOutlet var buttonsView: UIView!
+    @IBOutlet var buttonsViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet var pointsButton: FloatSelectionButton!
 
     var min: Float?
     var max: Float?

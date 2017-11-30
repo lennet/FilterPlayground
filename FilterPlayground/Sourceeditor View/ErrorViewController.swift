@@ -11,17 +11,17 @@ import UIKit
 // TODO: use the scrollViews drag to hide the ErrorView
 class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var errorTableView: UITableView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var headerView: UIView!
+    @IBOutlet var errorTableView: UITableView!
 
-    @IBOutlet weak var headerViewLabelContainer: UIStackView!
-    @IBOutlet weak var compileErrorView: UIView!
-    @IBOutlet weak var compileWarningView: UIView!
-    @IBOutlet weak var runTimeErrorView: UIView!
-    @IBOutlet weak var runTimeErrorLabel: UILabel!
-    @IBOutlet weak var compileErrorLabel: UILabel!
-    @IBOutlet weak var compileWarningLabel: UILabel!
+    @IBOutlet var headerViewLabelContainer: UIStackView!
+    @IBOutlet var compileErrorView: UIView!
+    @IBOutlet var compileWarningView: UIView!
+    @IBOutlet var runTimeErrorView: UIView!
+    @IBOutlet var runTimeErrorLabel: UILabel!
+    @IBOutlet var compileErrorLabel: UILabel!
+    @IBOutlet var compileWarningLabel: UILabel!
 
     var headerHeight: CGFloat {
         return headerView.bounds.height

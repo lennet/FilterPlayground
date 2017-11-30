@@ -6,9 +6,9 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import XCTest
 import CoreImage
 @testable import FilterPlaygroundMac
+import XCTest
 
 class SwiftPlaygroundsTests: XCTestCase {
 

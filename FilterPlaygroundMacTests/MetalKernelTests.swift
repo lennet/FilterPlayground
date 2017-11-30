@@ -6,8 +6,8 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import XCTest
 @testable import FilterPlaygroundMac
+import XCTest
 
 class MetalKernelTests: XCTestCase {
 

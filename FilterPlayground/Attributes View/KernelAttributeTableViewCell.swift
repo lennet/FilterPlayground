@@ -10,13 +10,13 @@ import UIKit
 
 class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
 
-    @IBOutlet weak var valueSelectionHeight: NSLayoutConstraint!
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var typeButton: UIButton!
-    @IBOutlet weak var valueSelectionContainer: UIView!
-    @IBOutlet weak var newArgumentOverlay: UIView!
-    @IBOutlet weak var dataBindingButton: UIButton!
+    @IBOutlet var valueSelectionHeight: NSLayoutConstraint!
+    @IBOutlet var stackView: UIStackView!
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var typeButton: UIButton!
+    @IBOutlet var valueSelectionContainer: UIView!
+    @IBOutlet var newArgumentOverlay: UIView!
+    @IBOutlet var dataBindingButton: UIButton!
 
     weak var valueSelectionView: (UIView & KernelArgumentValueView)?
     var selectedBinding: DataBinding = .none {

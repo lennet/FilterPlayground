@@ -6,8 +6,8 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import UIKit
 import AVFoundation
+import UIKit
 
 // Images with a high resolution sometimes are displayed as blank images during drag interactions
 // This helper class downscales large images

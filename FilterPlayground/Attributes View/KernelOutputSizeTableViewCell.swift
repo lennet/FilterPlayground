@@ -10,7 +10,7 @@ import UIKit
 
 class KernelOutputSizeTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var modeSegmentedControl: UISegmentedControl!
+    @IBOutlet var modeSegmentedControl: UISegmentedControl!
     @IBOutlet var labels: [UILabel]!
     var buttons: [FloatPickerButton] {
         return [
@@ -21,12 +21,12 @@ class KernelOutputSizeTableViewCell: UITableViewCell {
         ]
     }
 
-    @IBOutlet weak var heightPickerButton: FloatPickerButton!
-    @IBOutlet weak var widthPickerButton: FloatPickerButton!
-    @IBOutlet weak var yPickerButton: FloatPickerButton!
-    @IBOutlet weak var xPickerButton: FloatPickerButton!
+    @IBOutlet var heightPickerButton: FloatPickerButton!
+    @IBOutlet var widthPickerButton: FloatPickerButton!
+    @IBOutlet var yPickerButton: FloatPickerButton!
+    @IBOutlet var xPickerButton: FloatPickerButton!
 
-    @IBOutlet weak var positionStackView: UIStackView!
+    @IBOutlet var positionStackView: UIStackView!
     static let identifier = "KernelOutputSizeTableViewCellIdentifier"
     var didUpdatedOutputSize: ((KernelOutputSize) -> Void)?
     var canSetPosition: Bool = true {

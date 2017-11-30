@@ -6,8 +6,8 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
 
 class TouchDataBindingEmitter: DataBindingEmitter {
 

@@ -10,12 +10,12 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
 
-    @IBOutlet weak var tabsVsSpacesSegmentedControl: UISegmentedControl!
-    @IBOutlet weak var nightModeSwitch: UISwitch!
-    @IBOutlet weak var frameRateLabel: UILabel!
-    @IBOutlet weak var frameRateSlider: UISlider!
-    @IBOutlet weak var ignoreLowPowerModeSwitch: UISwitch!
-    @IBOutlet weak var showStatisticsSwitch: UISwitch!
+    @IBOutlet var tabsVsSpacesSegmentedControl: UISegmentedControl!
+    @IBOutlet var nightModeSwitch: UISwitch!
+    @IBOutlet var frameRateLabel: UILabel!
+    @IBOutlet var frameRateSlider: UISlider!
+    @IBOutlet var ignoreLowPowerModeSwitch: UISwitch!
+    @IBOutlet var showStatisticsSwitch: UISwitch!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

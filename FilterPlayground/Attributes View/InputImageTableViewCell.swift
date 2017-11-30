@@ -12,8 +12,8 @@ class InputImageTableViewCell: UITableViewCell {
 
     static let identifier = "InputImageTableViewCellIdentifier"
 
-    @IBOutlet weak var inputImageView: CustomImageView!
-    @IBOutlet weak var inputImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var inputImageView: CustomImageView!
+    @IBOutlet var inputImageViewHeightConstraint: NSLayoutConstraint!
 
     var value: KernelInputImage? {
         didSet {

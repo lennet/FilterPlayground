@@ -75,7 +75,7 @@ class SourceEditorTextView: UITextView, UICollectionViewDelegate, UICollectionVi
         }
         var newText = text ?? ""
         newText.replaceSubrange(Range(selectedRange, in: text)!, with: string)
-        (self.textStorage as? SourceEditorTextStorage)?.shouldIgnoreNextChange = true
+        (textStorage as? SourceEditorTextStorage)?.shouldIgnoreNextChange = true
         attributedText = Parser(string: newText).getAST().asAttributedText
     }
 

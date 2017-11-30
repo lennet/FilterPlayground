@@ -16,8 +16,6 @@ enum ASTNode {
     case root([ASTNode])
 }
 
-typealias KernelDefinition = (name: String, returnType: KernelArgumentType, arguments: [(String, KernelArgumentType)])
-
 func == (lhs: (String, KernelArgumentType), rhs: (String, KernelArgumentType)) -> Bool {
     return lhs.0 == rhs.0 && lhs.1 == rhs.1
 }
@@ -150,7 +148,7 @@ extension ASTNode: Equatable {
             guard tokens.count >= 4 else { continue }
             switch (tokens[0], tokens[1], tokens[2], tokens[3]) {
             case let (.identifier(.keyword(.kernel)), .identifier(.type(type)), .identifier(.other(name)), .identifier(.other("("))):
-                return (name: name, returnType: type, arguments: ASTHelper.arguments(for: Array(tokens[3...])))
+                return KernelDefinition(name: name, returnType: type, arguments: ASTHelper.arguments(for: Array(tokens[3...])))
             default:
                 continue
             }

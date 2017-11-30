@@ -270,7 +270,7 @@ class ASTTests: XCTestCase {
         }
         """
         let ast = Parser(string: source).getAST()
-        let expectedResult: KernelDefinition = (name: "hello", returnType: KernelArgumentType.vec2, arguments: [("radius", KernelArgumentType.float)])
+        let expectedResult = KernelDefinition(name: "hello", returnType: KernelArgumentType.vec2, arguments: [("radius", KernelArgumentType.float)])
         let result = ast.kernelDefinition()!
         XCTAssert(result.arguments == expectedResult.arguments)
         XCTAssertEqual(result.name, expectedResult.name)
@@ -284,7 +284,7 @@ class ASTTests: XCTestCase {
         }
         """
         let ast = Parser(string: source).getAST()
-        let expectedResult: KernelDefinition = (name: "hello", returnType: KernelArgumentType.vec2, arguments: [])
+        let expectedResult = KernelDefinition(name: "hello", returnType: KernelArgumentType.vec2, arguments: [])
         let result = ast.kernelDefinition()!
         XCTAssert(result.arguments == expectedResult.arguments)
         XCTAssertEqual(result.name, expectedResult.name)
@@ -298,7 +298,7 @@ class ASTTests: XCTestCase {
         }
         """
         let ast = Parser(string: source).getAST()
-        let expectedResult: KernelDefinition = (name: "hello", returnType: KernelArgumentType.vec2, arguments: [("radius", KernelArgumentType.float), ("foo", KernelArgumentType.vec2)])
+        let expectedResult = KernelDefinition(name: "hello", returnType: KernelArgumentType.vec2, arguments: [("radius", KernelArgumentType.float), ("foo", KernelArgumentType.vec2)])
         let result = ast.kernelDefinition()!
         XCTAssert(result.arguments ==
             expectedResult.arguments)

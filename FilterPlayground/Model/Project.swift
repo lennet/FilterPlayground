@@ -47,7 +47,7 @@ class Project: UIDocument {
 
         let fileWrapper = FileWrapper(directoryWithFileWrappers: [:])
         fileWrapper.addRegularFile(withContents: meta, preferredFilename: "metadata.json")
-        fileWrapper.addRegularFile(withContents: sourceData, preferredFilename: "source.cikernel")
+        fileWrapper.addRegularFile(withContents: sourceData, preferredFilename: "source.\(metaData.type.shadingLanguage.fileExtension)")
 
         if metaData.inputImages.count > 0 {
             let inputImagesFileWrapper = FileWrapper(directoryWithFileWrappers: [:])
@@ -126,8 +126,7 @@ class Project: UIDocument {
         }
 
         metaData = try JSONDecoder().decode(ProjectMetaData.self, from: meta)
-
-        guard let contentFilewrapper = filewrapper.fileWrappers?["source.cikernel"] else {
+        guard let contentFilewrapper = filewrapper.fileWrappers?["source.\(metaData.type.shadingLanguage.fileExtension)"] else {
             throw ProjectError.unknownFileFormat
         }
 

@@ -24,4 +24,13 @@ extension ShadingLanguage {
             return URL(string: "https://developer.apple.com/")!
         }
     }
+
+    var fileExtension: String {
+        switch self {
+        case .coreimage:
+            return "cikernel"
+        case .metal:
+            return "metal"
+        }
+    }
 }

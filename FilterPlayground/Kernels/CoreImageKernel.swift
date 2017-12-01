@@ -96,7 +96,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
     func compile(source: String, completion: @escaping (KernelCompilerResult) -> Void) {
         let errorHelper = ErrorHelper()
         if compile(source: source) {
-            completion(.success(errors: []))
+            completion(.success(warnings: []))
         } else if let errorString = errorHelper.errorString() {
             completion(.failed(errors: CoreImageErrorParser.compileErrors(for: errorString)))
         } else {

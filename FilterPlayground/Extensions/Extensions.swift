@@ -78,6 +78,30 @@ extension Array where Element: Equatable {
         return nil
     }
 
+    func split(separators: Element...) -> [[Element]] {
+        var result: [[Element]] = []
+        var currentSubarray: [Element] = []
+        var unsortedElements = Array<Element>(self)
+        while unsortedElements.count >= separators.count {
+            let nextNCountElements = Array<Element>(unsortedElements[0 ..< separators.count])
+            if nextNCountElements == separators {
+                currentSubarray += nextNCountElements
+                currentSubarray += currentSubarray
+                unsortedElements.removeFirst(separators.count)
+                result.append(currentSubarray)
+                currentSubarray = []
+            } else {
+                currentSubarray.append(unsortedElements[0])
+                unsortedElements.removeFirst()
+            }
+        }
+        currentSubarray.append(contentsOf: unsortedElements)
+        if !currentSubarray.isEmpty {
+            result.append(currentSubarray)
+        }
+        return result
+    }
+
     mutating func replace(element: Element, with replacement: Element) {
         self = map {
             if $0 == element {

@@ -42,7 +42,7 @@ extension ASTNode {
             var result: [String] = []
 
             if let kernelDefinition = ASTNode.root([self]).kernelDefinition() {
-                result.append(contentsOf: kernelDefinition.arguments.map { $0.0 })
+                result.append(contentsOf: kernelDefinition.arguments.map { $0.name })
             }
 
             let bodyStartIndex = index - prefix.count
@@ -76,7 +76,7 @@ extension ASTNode {
             var result: [String] = []
 
             if let kernelDefinition = ASTNode.root([self]).kernelDefinition() {
-                result.append(contentsOf: kernelDefinition.arguments.map { $0.0 })
+                result.append(contentsOf: kernelDefinition.arguments.map { $0.name })
             }
 
             let containsReturn = body.flatMap { $0.tokens.contains(.identifier(.keyword(._return))) ? true : nil }.count > 0

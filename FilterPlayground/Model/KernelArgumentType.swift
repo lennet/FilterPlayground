@@ -19,9 +19,12 @@ enum KernelArgumentType: String, Codable {
     case vec4
     case sample = "__sample"
     case color = "__color"
+    case void
+    case uint2
+    case texture2d
 
     static var all: [KernelArgumentType] {
-        return [.float, .vec2, .vec3, .vec4, .sample, .color]
+        return [.float, .vec2, .vec3, .vec4, .sample, .color, .void, uint2, texture2d]
     }
 }
 
@@ -39,7 +42,12 @@ extension KernelArgumentType {
             return .vec4(0, 0, 0, 0)
         case .color:
             return .color(0, 0, 0, 0)
-        case .sample:
+        case .uint2:
+            return .uint2(0, 0)
+        case .void:
+            fatalError()
+        case .sample,
+             .texture2d:
             #if os(iOS) || os(tvOS)
                 return .sample(#imageLiteral(resourceName: "DefaultImage").asCIImage!)
             #else
@@ -60,8 +68,13 @@ extension KernelArgumentType {
             return []
         case .color:
             return []
-        case .sample:
+        case .sample,
+             .texture2d:
             return [.camera]
+        case .uint2:
+            return []
+        case .void:
+            return []
         }
     }
 

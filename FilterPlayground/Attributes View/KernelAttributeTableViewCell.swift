@@ -149,7 +149,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
             }
             layoutIfNeeded()
         }
-        valueSelectionHeight.constant = CGFloat(valueSelectionView!.prefferedHeight)
+        valueSelectionHeight.constant = CGFloat(valueSelectionView?.prefferedHeight ?? 0)
         layoutIfNeeded()
     }
 

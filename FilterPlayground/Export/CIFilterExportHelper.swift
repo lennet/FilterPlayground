@@ -93,6 +93,10 @@ extension KernelArgumentType {
              .vec3,
              .vec4:
             return "\(CIVector.self)"
+        case .void,
+             .uint2,
+             .texture2d:
+            fatalError()
         }
     }
     

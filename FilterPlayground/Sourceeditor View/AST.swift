@@ -324,8 +324,8 @@ class ASTHelper {
         return ASTNode.comment(Array(tokens[...resultIndex]))
     }
 
-    class func arguments(for tokens: [Token]) -> [(String, KernelArgumentType)] {
-        var result: [(String, KernelArgumentType)] = []
+    class func arguments(for tokens: [Token]) -> [KernelDefinitionArgument] {
+        var result: [KernelDefinitionArgument] = []
         let filtred = tokens.filter { token in
             switch token {
             case .identifier(.other(")")),
@@ -338,7 +338,7 @@ class ASTHelper {
         for component in filtred.split(separator: .identifier(.other(","))) where component.count == 2 {
             if case let Token.identifier(.type(type)) = component.first!,
                 case let Token.identifier(.other(name)) = component.last! {
-                result.append((name, type))
+                result.append(KernelDefinitionArgument(name: name, type: type))
             }
         }
         return result

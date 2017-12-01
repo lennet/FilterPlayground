@@ -16,6 +16,7 @@ enum KernelArgumentValue {
     case vec4(Float, Float, Float, Float)
     case sample(CIImage)
     case color(Float, Float, Float, Float)
+    case uint2(UInt, UInt)
 
     var asKernelValue: Any {
         switch self {
@@ -31,6 +32,8 @@ enum KernelArgumentValue {
             return CIColor(red: CGFloat(a), green: CGFloat(b), blue: CGFloat(c), alpha: CGFloat(d))
         case let .sample(image):
             return CISampler(image: image)
+        case .uint2:
+            fatalError()
         }
     }
 
@@ -47,6 +50,8 @@ enum KernelArgumentValue {
         case let .vec4(x, y, z, w):
             var value = float4(x, y, z, w)
             return body(&value, MemoryLayout<float4>.size)
+        case let .uint2:
+            return nil
         case .color:
             return nil
         case .sample:
@@ -64,6 +69,7 @@ extension KernelArgumentValue: Codable {
         case vec4
         case sample
         case color
+        case uint2
     }
 
     private enum CodableErrors: Error {
@@ -88,6 +94,8 @@ extension KernelArgumentValue: Codable {
         case let .color(a, b, c, d):
             try container.encode([a, b, c, d], forKey: .color)
             break
+        case let .uint2(a, b):
+            try container.encode([a, b], forKey: .uint2)
         case .sample:
             // we are not encoding images in the json
             break
@@ -135,6 +143,14 @@ extension KernelArgumentValue: Codable {
             self = .color(value[0], value[1], value[2], value[3])
             return
         }
+        if let value = try? values.decode([UInt].self, forKey: .uint2) {
+            guard value.count == 2 else {
+                throw CodableErrors.unkownValue
+            }
+            self = .uint2(value[0], value[1])
+            return
+        }
+
         throw CodableErrors.unkownValue
     }
 }

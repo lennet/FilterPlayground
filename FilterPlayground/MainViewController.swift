@@ -158,7 +158,7 @@ class MainViewController: UIViewController {
         kernel.compile(source: source) { result in
             DispatchQueue.main.async {
                 switch result {
-                case let .success(errors: errors):
+                case let .success(warnings: errors):
                     self.render()
                     self.display(errors: errors)
                     break

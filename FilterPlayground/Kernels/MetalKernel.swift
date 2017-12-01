@@ -149,7 +149,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
             if self.library == nil {
                 completion(.failed(errors: errors))
             } else {
-                completion(.success(errors: errors))
+                completion(.success(warnings: errors))
             }
         })
     }

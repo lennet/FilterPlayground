@@ -24,6 +24,8 @@ extension KernelArgumentValue {
             return "CIVector(x: \(a), y: \(b), z: \(c))"
         case .vec4(let a, let b, let c, let d):
             return "CIVector(x: \(a), y: \(b), z: \(c), w: \(d))"
+        case .uint2:
+            fatalError()
         }
     }
     

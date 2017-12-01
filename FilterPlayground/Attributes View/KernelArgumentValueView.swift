@@ -31,8 +31,13 @@ class KernelArgumentValueViewHelper {
             return Vector3ValuePicker.self
         case .vec4:
             return Vector4ValuePicker.self
-        case .sample:
+        case .sample,
+             .texture2d:
             return SampleValuePicker.self
+        case .uint2:
+            return Vector2ValuePicker.self
+        case .void:
+            fatalError()
         }
     }
 

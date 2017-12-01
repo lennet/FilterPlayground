@@ -40,6 +40,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
     }
 
     var currentAST: ASTNode?
+    var shadingLanguage: ShadingLanguage = .metal
 
     var highLightErrorLineNumber: Set<Int> = [] {
         didSet {
@@ -112,21 +113,44 @@ class NumberedTextView: UIView, UITextViewDelegate {
         let selectedRange = textView.selectedRange
         if buildAst,
             let text = self.textView.text {
-            DispatchQueue.global(qos: .userInitiated).async {
-                let oldAst = self.currentAST
-                let parser = Parser(string: text)
-                self.currentAST = parser.getAST()
-                DispatchQueue.main.sync {
-                    if let oldKernelDefinition = oldAst?.kernelDefinition(),
-                        let newKernelDefinition = self.currentAST?.kernelDefinition(),
-                        !(oldKernelDefinition.arguments == newKernelDefinition.arguments) {
-                        self.didUpdateArguments?(newKernelDefinition.arguments)
-                    }
-                }
+            switch shadingLanguage {
+            case .metal:
+                updateArgumentsForMetalIfNeeded(text: text)
+                break
+            case .coreimage:
+                updateArgumentsForCoreImageIfNeeded(text: text)
+                break
             }
+
         } else {
             textView.selectedRange = selectedRange
             delegate?.textViewDidChange?(textView)
+        }
+    }
+
+    func updateArgumentsForMetalIfNeeded(text: String) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let definition = MetalShadingLanguageParser(string: text).getKernelDefinition() else {
+                return
+            }
+            DispatchQueue.main.sync {
+                self.didUpdateArguments?(definition.arguments.map { ($0.name, $0.type) })
+            }
+        }
+    }
+
+    func updateArgumentsForCoreImageIfNeeded(text: String) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let oldAst = self.currentAST
+            let parser = Parser(string: text)
+            self.currentAST = parser.getAST()
+            DispatchQueue.main.sync {
+                if let oldKernelDefinition = oldAst?.kernelDefinition(),
+                    let newKernelDefinition = self.currentAST?.kernelDefinition(),
+                    !(oldKernelDefinition.arguments == newKernelDefinition.arguments) {
+                    self.didUpdateArguments?(newKernelDefinition.arguments.map { ($0.name, $0.type) })
+                }
+            }
         }
     }
 

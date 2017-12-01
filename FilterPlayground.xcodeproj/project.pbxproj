@@ -166,6 +166,9 @@
 		98E987C01FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E987BF1FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift */; };
 		98E987C21FD0A2ED00BA2B17 /* KernelDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E987C11FD0A2ED00BA2B17 /* KernelDefinition.swift */; };
 		98E987C31FD0A2FC00BA2B17 /* KernelDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E987C11FD0A2ED00BA2B17 /* KernelDefinition.swift */; };
+		98E987C51FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E987C41FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift */; };
+		98E987C61FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E987C41FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift */; };
+		98E987C81FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E987C71FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift */; };
 		98F2B9EF1F719B380092A015 /* SourceEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F2B9EE1F719B380092A015 /* SourceEditorTextView.swift */; };
 		98FF4F951F968BC0004F46B0 /* InputImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FF4F941F968BC0004F46B0 /* InputImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -340,6 +343,8 @@
 		98E692ED1F30DF8D000C8B41 /* ProjectMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectMetaData.swift; sourceTree = "<group>"; };
 		98E987BF1FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTouchesPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		98E987C11FD0A2ED00BA2B17 /* KernelDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelDefinition.swift; sourceTree = "<group>"; };
+		98E987C41FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalShadingLanguageParser.swift; sourceTree = "<group>"; };
+		98E987C71FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalShadingLanguageParserTests.swift; sourceTree = "<group>"; };
 		98F2B9EE1F719B380092A015 /* SourceEditorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorTextView.swift; sourceTree = "<group>"; };
 		98FF4F941F968BC0004F46B0 /* InputImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -510,6 +515,7 @@
 				98A411441F9954EF00A97459 /* SettingsTests.swift */,
 				987F5BE91F9A901E003EB32B /* FrameRateManagerTests.swift */,
 				985D51961FA64A3D009881CC /* ExtensionsTests.swift */,
+				98E987C71FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -674,6 +680,7 @@
 				981D621E1F6B1858006A8606 /* ErrorViewController.swift */,
 				9889019C1F76414200B97C4A /* SourceEditorTextView */,
 				98E987C11FD0A2ED00BA2B17 /* KernelDefinition.swift */,
+				98E987C41FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift */,
 			);
 			path = "Sourceeditor View";
 			sourceTree = "<group>";
@@ -896,6 +903,7 @@
 				9888F4C71FB65C0700D108CF /* GenericDatabindingObserver.swift in Sources */,
 				98689EC51F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
 				98689ED01F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */,
+				98E987C51FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift in Sources */,
 				985D519B1FA66A37009881CC /* ValuePickerButton.swift in Sources */,
 				9888F4CD1FB6636B00D108CF /* DefaultTheme.swift in Sources */,
 				98A4113F1F99453000A97459 /* KernelInputImage.swift in Sources */,
@@ -997,6 +1005,7 @@
 				987F5BEA1F9A901E003EB32B /* FrameRateManagerTests.swift in Sources */,
 				98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */,
 				98689EC81F93BFD30000AF7C /* DataBindingContextTests.swift in Sources */,
+				98E987C81FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift in Sources */,
 				984D9FA41F2E824B004AFD74 /* ParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1023,6 +1032,7 @@
 				986E7E6E1FB8F01B001FC74D /* KernelOutputSizeSetting.swift in Sources */,
 				98286D631F93F1F0003B6D4A /* CameraDataBindingEmitter.swift in Sources */,
 				9833310D1F80046B00C9AF52 /* CoreImageColorKernel.swift in Sources */,
+				98E987C61FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift in Sources */,
 				983331061F8003A800C9AF52 /* KernelType.swift in Sources */,
 				9833310B1F80046100C9AF52 /* CoreImageKernel.swift in Sources */,
 				986E7E691FB8BDEF001FC74D /* KernelOutputSize.swift in Sources */,

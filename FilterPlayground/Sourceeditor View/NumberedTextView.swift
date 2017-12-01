@@ -269,12 +269,41 @@ class NumberedTextView: UIView, UITextViewDelegate {
     }
 
     func insert(arguments: [(String, KernelArgumentType)]) {
+        switch shadingLanguage {
+        case .coreimage:
+            insertArgumentsForCoreImage(arguments)
+            break
+        case .metal:
+            break
+        }
+    }
+
+    func insertArgumentsForCoreImage(_ arguments: [(String, KernelArgumentType)]) {
         let selectedRange = textView.selectedRange
         DispatchQueue.global(qos: .userInitiated).async {
-            self.currentAST?.replaceArguments(newArguments: arguments)
-            let newAttribtuedText = self.currentAST?.asAttributedText
+            var ast: ASTNode
+            if let current = self.currentAST {
+                ast = current
+            } else {
+                let parser = Parser(string: self.text ?? "")
+                ast = parser.getAST()
+            }
+            ast.replaceArguments(newArguments: arguments)
+            let newAttribtuedText = ast.asAttributedText
             DispatchQueue.main.async {
                 self.textView.attributedText = newAttribtuedText
+                self.textView.selectedRange = selectedRange
+                self.delegate?.textViewDidChange?(self.textView)
+            }
+        }
+    }
+
+    func insertArgumentsForMetal(_: [(String, KernelArgumentType)]) {
+        let selectedRange = textView.selectedRange
+        DispatchQueue.global(qos: .userInitiated).async {
+//            let newText = MetalShadingLanguageParser(string: self.text ?? "").textWithInserted(arguments: arguments)
+            DispatchQueue.main.async {
+//                self.textView.attributedText = newAttribtuedText
                 self.textView.selectedRange = selectedRange
                 self.delegate?.textViewDidChange?(self.textView)
             }

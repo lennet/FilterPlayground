@@ -98,4 +98,8 @@ class MetalShadingLanguageParser {
 
         return KernelDefinitionArgument(name: name, type: type, access: access)
     }
+
+    func textWithInserted(arguments _: [KernelDefinitionArgument]) -> String {
+        return ""
+    }
 }

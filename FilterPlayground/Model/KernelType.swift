@@ -29,4 +29,16 @@ enum KernelType: String, Codable {
             return MetalKernel.self
         }
     }
+
+    var shadingLanguage: ShadingLanguage {
+        switch self {
+        case .metal:
+            return .metal
+        case .coreimage,
+             .coreimagewarp,
+             .coreimagecolor,
+             .coreimageblend:
+            return .coreimage
+        }
+    }
 }

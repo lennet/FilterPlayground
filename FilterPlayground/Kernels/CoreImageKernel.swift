@@ -63,10 +63,6 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
         return [.float, .vec2, .vec3, .vec4, .sample, .color]
     }
 
-    var shadingLanguage: ShadingLanguage {
-        return .coreimage
-    }
-
     static func initialSource(with name: String) -> String {
         return "kernel \(returnType) \(name)(\(initialArguments)) {\n\(initialSourceBody)\n}"
     }

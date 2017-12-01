@@ -136,7 +136,7 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func documentation(_ sender: UIBarButtonItem) {
-        guard let url = kernel?.shadingLanguage.documentationURL else { return }
+        guard let url = project?.metaData.type.shadingLanguage.documentationURL else { return }
         let safariVC = SFSafariViewController(url: url)
         safariVC.modalPresentationStyle = .popover
         safariVC.popoverPresentationController?.barButtonItem = sender
@@ -244,6 +244,7 @@ class MainViewController: UIViewController {
             self.kernel = document.metaData.type.kernelClass.init()
             self.updateInputImages()
             self.updateKernelarguments()
+            self.sourceEditorViewController?.textView.shadingLanguage = document.metaData.type.shadingLanguage
         }
         if let oldDocument = self.project {
             oldDocument.close(completionHandler: { _ in

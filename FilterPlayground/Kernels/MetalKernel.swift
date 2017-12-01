@@ -87,10 +87,6 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         return [.float, .vec2, .vec3, .vec4]
     }
 
-    var shadingLanguage: ShadingLanguage {
-        return .metal
-    }
-
     func render() {
         if function == nil {
             makeFunction()

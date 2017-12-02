@@ -371,17 +371,17 @@ class MainViewController: UIViewController {
         updateKernelarguments()
     }
 
-    func didUpdateArgumentsFromSourceEditor(arguments: [(String, KernelArgumentType)]) {
+    func didUpdateArgumentsFromSourceEditor(arguments: [KernelDefinitionArgument]) {
         let currentAttributes = attributesViewController?.arguments ?? []
         let newAttributes = arguments.enumerated().map { (index, argument) -> KernelArgument in
             if index < currentAttributes.count {
                 var currentArgument = currentAttributes[index]
-                if currentArgument.type == argument.1 {
-                    currentArgument.name = argument.0
+                if currentArgument.type == argument.type {
+                    currentArgument.name = argument.name
                     return currentArgument
                 }
             }
-            return KernelArgument(name: argument.0, type: argument.1, value: argument.1.defaultValue)
+            return KernelArgument(name: argument.name, type: argument.type, value: argument.type.defaultValue, access: argument.access, origin: argument.origin)
         }
         attributesViewController?.arguments = newAttributes
         project?.metaData.arguments = newAttributes

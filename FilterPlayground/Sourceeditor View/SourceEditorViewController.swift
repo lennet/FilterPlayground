@@ -20,7 +20,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate {
     }
 
     var didUpdateText: ((String) -> Void)?
-    var didUpdateArguments: (([(String, KernelArgumentType)]) -> Void)?
+    var didUpdateArguments: (([KernelDefinitionArgument]) -> Void)?
 
     var errors: [KernelError] {
         set {
@@ -91,7 +91,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate {
     }
 
     func update(attributes: [KernelArgument]) {
-        textView.insert(arguments: attributes.map { ($0.name, $0.type) })
+        textView.insert(arguments: attributes.map { KernelDefinitionArgument(name: $0.name, type: $0.type, access: $0.access, origin: $0.origin) })
     }
 
     @objc func handlePinch(gestureRecognizer: UIPinchGestureRecognizer) {

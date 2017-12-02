@@ -68,14 +68,17 @@ extension Array where Element: Equatable {
         return nil
     }
 
-    func indexCountingFromLastElement(of element: Element) -> Int? {
-
-        for i in stride(from: count - 1, to: 0, by: -1) {
+    func indexCounting(from index: Int, of element: Element) -> Int? {
+        for i in stride(from: index, to: 0, by: -1) {
             if self[i] == element {
                 return i
             }
         }
         return nil
+    }
+
+    func indexCountingFromLastElement(of element: Element) -> Int? {
+        return indexCounting(from: count - 1, of: element)
     }
 
     func split(separators: Element...) -> [[Element]] {

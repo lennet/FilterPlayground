@@ -26,7 +26,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
 
     weak var delegate: UITextViewDelegate?
 
-    var didUpdateArguments: (([(String, KernelArgumentType)]) -> Void)?
+    var didUpdateArguments: (([KernelDefinitionArgument]) -> Void)?
 
     var text: String? {
         get {
@@ -78,7 +78,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
         textView.codeCompletionsForString = { text, location, resultCallback in
             DispatchQueue.global(qos: .userInteractive).async {
                 let firstString = (text as NSString).substring(to: location)
-                let currentTokenLocation = Parser(string: firstString).getTokens().count
+                let currentTokenLocation = Tokenizer(string: firstString).getTokens().count
 
                 let parser = Parser(string: text)
                 let result = parser.getAST().codeCompletion(at: currentTokenLocation, with: CIKernelLanguageHelper.functions)
@@ -134,7 +134,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
                 return
             }
             DispatchQueue.main.sync {
-                self.didUpdateArguments?(definition.arguments.map { ($0.name, $0.type) })
+                self.didUpdateArguments?(definition.arguments)
             }
         }
     }
@@ -148,7 +148,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
                 if let oldKernelDefinition = oldAst?.kernelDefinition(),
                     let newKernelDefinition = self.currentAST?.kernelDefinition(),
                     !(oldKernelDefinition.arguments == newKernelDefinition.arguments) {
-                    self.didUpdateArguments?(newKernelDefinition.arguments.map { ($0.name, $0.type) })
+                    self.didUpdateArguments?(newKernelDefinition.arguments)
                 }
             }
         }
@@ -224,7 +224,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
         if text == "\n" && range.length == 0 {
 
             let firstString = (textView.text as NSString).substring(to: range.location)
-            let currentTokenLocation = Parser(string: firstString).getTokens().count
+            let currentTokenLocation = Tokenizer(string: firstString).getTokens().count
             let intendationLevel = currentAST?.intendationLevel(at: currentTokenLocation, with: 0) ?? 0
             let tabs = Array(repeating: Settings.spacingValue, count: intendationLevel).joined()
             var newText = text + tabs
@@ -268,17 +268,18 @@ class NumberedTextView: UIView, UITextViewDelegate {
         setNeedsDisplay()
     }
 
-    func insert(arguments: [(String, KernelArgumentType)]) {
+    func insert(arguments: [KernelDefinitionArgument]) {
         switch shadingLanguage {
         case .coreimage:
             insertArgumentsForCoreImage(arguments)
             break
         case .metal:
+            insertArgumentsForMetal(arguments: arguments)
             break
         }
     }
 
-    func insertArgumentsForCoreImage(_ arguments: [(String, KernelArgumentType)]) {
+    func insertArgumentsForCoreImage(_ arguments: [KernelDefinitionArgument]) {
         let selectedRange = textView.selectedRange
         DispatchQueue.global(qos: .userInitiated).async {
             var ast: ASTNode
@@ -298,12 +299,12 @@ class NumberedTextView: UIView, UITextViewDelegate {
         }
     }
 
-    func insertArgumentsForMetal(_: [(String, KernelArgumentType)]) {
+    func insertArgumentsForMetal(arguments: [KernelDefinitionArgument]) {
         let selectedRange = textView.selectedRange
         DispatchQueue.global(qos: .userInitiated).async {
-//            let newText = MetalShadingLanguageParser(string: self.text ?? "").textWithInserted(arguments: arguments)
+            let newText = MetalShadingLanguageParser(string: self.text ?? "").textWithInserted(arguments: arguments)
             DispatchQueue.main.async {
-//                self.textView.attributedText = newAttribtuedText
+                self.textView.text = newText
                 self.textView.selectedRange = selectedRange
                 self.delegate?.textViewDidChange?(self.textView)
             }

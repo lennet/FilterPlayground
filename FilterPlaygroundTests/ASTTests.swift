@@ -23,7 +23,7 @@ class ASTTests: XCTestCase {
 
     func testMethod() {
         let text = "foo{ bar(); }"
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
         let expectedResult = ASTNode.bracetStatement(prefix: [.identifier(.other("foo")), .openingBracket],
@@ -37,20 +37,20 @@ class ASTTests: XCTestCase {
 
     func testComment() {
         let text = "//hello world"
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
-        let expectedResult = ASTNode.comment(Parser(string: text).getTokens())
+        let expectedResult = ASTNode.comment(Tokenizer(string: text).getTokens())
         XCTAssertEqual(result, [expectedResult])
     }
 
     func testCommentAndMethod() {
         let text = "//hello world\nfoo{ bar(); }"
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
         let expectedResult = [
-            ASTNode.comment(Parser(string: "//hello world").getTokens()),
+            ASTNode.comment(Tokenizer(string: "//hello world").getTokens()),
             ASTNode.bracetStatement(prefix: [.newLine, .identifier(.other("foo")), .openingBracket],
                                     body: [
                                         .statement([.whiteSpace, .identifier(.other("bar")), .identifier(.other("(")), .identifier(.other(")")), .semicolon]),
@@ -63,13 +63,13 @@ class ASTTests: XCTestCase {
 
     func testCommentInMethod() {
         let text = "foo{ //hello world\n bar(); }"
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
         let expectedResult = ASTNode.bracetStatement(prefix: [.identifier(.other("foo")), .openingBracket],
                                                      body: [
                                                          .unkown([.whiteSpace]),
-                                                         .comment(Parser(string: "//hello world").getTokens()),
+                                                         .comment(Tokenizer(string: "//hello world").getTokens()),
                                                          .statement([.newLine, .whiteSpace, .identifier(.other("bar")), .identifier(.other("(")), .identifier(.other(")")), .semicolon]),
                                                          .unkown([.whiteSpace]),
                                                      ],
@@ -79,7 +79,7 @@ class ASTTests: XCTestCase {
 
     func testMethodWithNewLine() {
         let text = "foo{\n}"
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
         let expectedResult = ASTNode.bracetStatement(prefix: [.identifier(.other("foo")), .openingBracket],
@@ -90,7 +90,7 @@ class ASTTests: XCTestCase {
 
     func testEmptyMethod() {
         let text = "foo{}"
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
         let expectedResult = ASTNode.bracetStatement(prefix: [.identifier(.other("foo")), .openingBracket],
@@ -101,14 +101,14 @@ class ASTTests: XCTestCase {
 
     func testCommentAfterSpace() {
         let text = " //Hello World\n\n}"
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
         let expectedResult = [
             ASTNode.unkown([
                 .whiteSpace,
             ]),
-            .comment(Parser(string: "//Hello World").getTokens()),
+            .comment(Tokenizer(string: "//Hello World").getTokens()),
             .unkown([.newLine, .newLine]),
         ]
 
@@ -116,7 +116,7 @@ class ASTTests: XCTestCase {
 
     func testBrokenCommentWithNewLine() {
         let text = "/\n/hello world"
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
         XCTAssertEqual(result, [ASTNode.unkown([.op(.substract), .newLine, .op(.substract), .identifier(.other("hello")), .whiteSpace, .identifier(.other("world"))])])
@@ -129,23 +129,23 @@ class ASTTests: XCTestCase {
                         multi line comment
                     */
         """
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
-        XCTAssertEqual(result, [ASTNode.comment(Parser(string: text).getTokens())])
+        XCTAssertEqual(result, [ASTNode.comment(Tokenizer(string: text).getTokens())])
     }
 
     func testInlineComment() {
         let text = "foo/*comment*/bar"
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
-        XCTAssertEqual(result, [ASTNode.unkown([.identifier(.other("foo"))]), ASTNode.comment(Parser(string: "/*comment*/").getTokens()), ASTNode.unkown([.identifier(.other("bar"))])])
+        XCTAssertEqual(result, [ASTNode.unkown([.identifier(.other("foo"))]), ASTNode.comment(Tokenizer(string: "/*comment*/").getTokens()), ASTNode.unkown([.identifier(.other("bar"))])])
     }
 
     func testOpeningBracket() {
         let text = "{"
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
         XCTAssertEqual(result, [ASTNode.bracetStatement(prefix: [.openingBracket], body: [], postfix: [])])
@@ -153,7 +153,7 @@ class ASTTests: XCTestCase {
 
     func testTwoOpeningBrackets() {
         let text = "{{"
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
         XCTAssertEqual(result, [ASTNode.bracetStatement(prefix: [.openingBracket], body: [ASTNode.bracetStatement(prefix: [.openingBracket], body: [], postfix: [])], postfix: [])])
@@ -162,7 +162,7 @@ class ASTTests: XCTestCase {
     func testNestedEmptyBracketStatements() {
         let text = "{{}"
 
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
         let expectation: [ASTNode] = [.bracetStatement(prefix: [.openingBracket], body: [
             .bracetStatement(prefix: [.openingBracket], body:
@@ -180,7 +180,7 @@ class ASTTests: XCTestCase {
             }e}}f
         """
 
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let root = ASTNode.root(ASTHelper.getAST(for: tokens))
 
         let a = text.range(of: "a")!.lowerBound.encodedOffset
@@ -201,7 +201,7 @@ class ASTTests: XCTestCase {
     func testNeedsClosingBracket() {
         let text = "{ "
 
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let root = ASTNode.root(ASTHelper.getAST(for: tokens))
 
         XCTAssertTrue(root.needsClosingBracket(at: 1))
@@ -210,7 +210,7 @@ class ASTTests: XCTestCase {
     func testNeedsClosingBracketFalse() {
         let text = "{ }"
 
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let root = ASTNode.root(ASTHelper.getAST(for: tokens))
 
         XCTAssertFalse(root.needsClosingBracket(at: 1))
@@ -219,7 +219,7 @@ class ASTTests: XCTestCase {
     func testNeedsClosingBracketForInnerBody() {
         let text = "{{ }"
 
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let root = ASTNode.root(ASTHelper.getAST(for: tokens))
 
         XCTAssertTrue(root.needsClosingBracket(at: 2))
@@ -228,7 +228,7 @@ class ASTTests: XCTestCase {
     func testNeedsClosingBracketForInnerBodyFalse() {
         let text = "{{ }}"
 
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let root = ASTNode.root(ASTHelper.getAST(for: tokens))
 
         XCTAssertFalse(root.needsClosingBracket(at: 2))
@@ -237,7 +237,7 @@ class ASTTests: XCTestCase {
     func testAstInnerBracetStatementBug() {
         let text = "{{ }}"
 
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
         let expectedResult = [ASTNode.bracetStatement(prefix: [.openingBracket], body:
                 [ASTNode.bracetStatement(prefix: [.openingBracket], body: [.unkown([.whiteSpace])], postfix: [.closingBracket])]
@@ -248,7 +248,7 @@ class ASTTests: XCTestCase {
 
     func testBrokenASTWithKernel() {
         let text = "kernel{\n\t"
-        let tokens = Parser(string: text).getTokens()
+        let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
 
         let expectedResult: [ASTNode] = [ASTNode.bracetStatement(prefix: [.identifier(.keyword(.kernel)), .openingBracket], body: [.unkown([.newLine, .tab])], postfix: [])]
@@ -313,7 +313,7 @@ class ASTTests: XCTestCase {
         }
         """
         var ast = Parser(string: source).getAST()
-        ast.replaceArguments(newArguments: [("bar", .color)])
+        ast.replaceArguments(newArguments: [KernelDefinitionArgument(name: "bar", type: .color)])
         let result = ast.asAttributedText.string
 
         let expectedResult = """
@@ -331,7 +331,7 @@ class ASTTests: XCTestCase {
         }
         """
         var ast = Parser(string: source).getAST()
-        ast.replaceArguments(newArguments: [("bar", .color), ("foo", .float)])
+        ast.replaceArguments(newArguments: [KernelDefinitionArgument(name: "bar", type: .color), KernelDefinitionArgument(name: "foo", type: .float)])
         let result = ast.asAttributedText.string
         let expectedResult = """
         kernel vec2 hello(__color bar, float foo) {

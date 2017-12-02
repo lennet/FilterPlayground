@@ -28,9 +28,12 @@ class ErrorHelper {
     }
 
     func errorString() -> String? {
-        let result = try? String(contentsOf: fileURL)
-        print(result ?? "")
-        return (result?.isEmpty ?? true) ? nil : result
+        if let result = try? String(contentsOf: fileURL),
+            !result.isEmpty {
+            print(result)
+            return result
+        }
+        return nil
     }
 
     func deleteLogs() {

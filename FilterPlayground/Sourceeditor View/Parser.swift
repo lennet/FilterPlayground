@@ -244,6 +244,14 @@ class Tokenizer {
 
         return Token.identifier(Identifier(identifier))
     }
+
+    func getTokens() -> [Token] {
+        var tokens: [Token] = []
+        while let token = nextToken() {
+            tokens.append(token)
+        }
+        return tokens
+    }
 }
 
 class Parser {
@@ -253,16 +261,8 @@ class Parser {
         tokenizer = Tokenizer(string: string)
     }
 
-    func getTokens() -> [Token] {
-        var tokens: [Token] = []
-        while let token = tokenizer.nextToken() {
-            tokens.append(token)
-        }
-        return tokens
-    }
-
     func getAST() -> ASTNode {
-        return ASTNode.root(ASTHelper.getAST(for: getTokens()))
+        return ASTNode.root(ASTHelper.getAST(for: tokenizer.getTokens()))
     }
 }
 

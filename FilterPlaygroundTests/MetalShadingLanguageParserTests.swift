@@ -25,7 +25,7 @@ class MetalShadingLanguageParserTests: XCTestCase {
         let source = MetalKernel.initialSource(with: "untitled")
         let parser = MetalShadingLanguageParser(string: source)
         let kernelDefinition = parser.getKernelDefinition()
-        let expectedArguments = [KernelDefinitionArgument(name: "inTexture", type: .texture2d, access: .read), KernelDefinitionArgument(name: "outTexture", type: .texture2d, access: .write), KernelDefinitionArgument(name: "gid", type: .uint2)]
+        let expectedArguments = [KernelDefinitionArgument(name: "inTexture", type: .texture2d, access: .read, origin: .texture), KernelDefinitionArgument(name: "outTexture", type: .texture2d, access: .write, origin: .texture), KernelDefinitionArgument(name: "gid", type: .uint2, origin: .other("thread_position_in_grid"))]
         let expectedResult = KernelDefinition(name: "untitled", returnType: .void, arguments: expectedArguments)
         XCTAssertEqual(expectedResult, kernelDefinition)
     }
@@ -33,33 +33,102 @@ class MetalShadingLanguageParserTests: XCTestCase {
     func testGetArgument() {
         let source = "uint2 gid [[thread_position_in_grid]]"
         let parser = MetalShadingLanguageParser(string: source)
-        let tokens = parser.getTokens().filter { (token) -> Bool in
+        let tokens = parser.tokenizer.getTokens().filter { (token) -> Bool in
             return !token.isSpaceTabOrNewLine
         }
         let argument = parser.argument(for: tokens)
-        let expectedResult = KernelDefinitionArgument(name: "gid", type: .uint2)
+        let expectedResult = KernelDefinitionArgument(name: "gid", type: .uint2, origin: .other("thread_position_in_grid"))
         XCTAssertEqual(argument, expectedResult)
     }
 
     func testGetArgumentRead() {
         let source = "texture2d<float, access::read> inTexture [[texture(0)]],"
         let parser = MetalShadingLanguageParser(string: source)
-        let tokens = parser.getTokens().filter { (token) -> Bool in
+        let tokens = parser.tokenizer.getTokens().filter { (token) -> Bool in
             return !token.isSpaceTabOrNewLine
         }
         let argument = parser.argument(for: tokens)
-        let expectedResult = KernelDefinitionArgument(name: "inTexture", type: .texture2d, access: .read)
+        let expectedResult = KernelDefinitionArgument(name: "inTexture", type: .texture2d, access: .read, origin: .texture)
         XCTAssertEqual(argument, expectedResult)
     }
 
     func testGetArgumentWrite() {
         let source = "texture2d<float, access::write> outTexture [[texture(1)]],"
         let parser = MetalShadingLanguageParser(string: source)
-        let tokens = parser.getTokens().filter { (token) -> Bool in
+        let tokens = parser.tokenizer.getTokens().filter { (token) -> Bool in
             return !token.isSpaceTabOrNewLine
         }
         let argument = parser.argument(for: tokens)
-        let expectedResult = KernelDefinitionArgument(name: "outTexture", type: .texture2d, access: .write)
+        let expectedResult = KernelDefinitionArgument(name: "outTexture", type: .texture2d, access: .write, origin: .texture)
         XCTAssertEqual(argument, expectedResult)
+    }
+
+    func testGetArgumentConstant() {
+        let source = "constant float saturation [[buffer(0)]]"
+        let parser = MetalShadingLanguageParser(string: source)
+        let tokens = parser.tokenizer.getTokens().filter { (token) -> Bool in
+            return !token.isSpaceTabOrNewLine
+        }
+        let argument = parser.argument(for: tokens)
+        let expectedResult = KernelDefinitionArgument(name: "saturation", type: .float, access: .constant, origin: .buffer)
+        XCTAssertEqual(argument, expectedResult)
+    }
+
+    func testInserArgument() {
+        let source = """
+        #include <metal_stdlib>
+        using namespace metal;
+        
+        kernel void untitled ()
+        
+        {
+        
+        
+        }
+        """
+
+        let expectedSource = """
+        #include <metal_stdlib>
+        using namespace metal;
+        
+        kernel void untitled (float test [test])
+        
+        {
+        
+        
+        }
+        """
+        let argument = KernelDefinitionArgument(name: "test", type: .float, origin: .other("test"))
+        let result = MetalShadingLanguageParser(string: source).textWithInserted(arguments: [argument])
+        XCTAssertEqual(expectedSource, result)
+    }
+
+    func testInserArgumentWithExistingArgument() {
+        let source = """
+        #include <metal_stdlib>
+        using namespace metal;
+        
+        kernel void untitled (uint a [test])
+        
+        {
+        
+        
+        }
+        """
+
+        let expectedSource = """
+        #include <metal_stdlib>
+        using namespace metal;
+        
+        kernel void untitled (float test [test])
+        
+        {
+        
+        
+        }
+        """
+        let argument = KernelDefinitionArgument(name: "test", type: .float, origin: .other("test"))
+        let result = MetalShadingLanguageParser(string: source).textWithInserted(arguments: [argument])
+        XCTAssertEqual(expectedSource, result)
     }
 }

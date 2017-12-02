@@ -15,12 +15,13 @@ struct KernelArgument {
     var value: KernelArgumentValue
     var binding: DataBinding?
     var access: KernelArgumentAccess
+    var origin: KernelArgumentOrigin
 }
 
 extension KernelArgument {
 
-    init(name: String, type: KernelArgumentType, value: KernelArgumentValue, access: KernelArgumentAccess = .na) {
-        self.init(name: name, type: type, value: value, binding: nil, access: access)
+    init(name: String, type: KernelArgumentType, value: KernelArgumentValue, access: KernelArgumentAccess = .na, origin: KernelArgumentOrigin = .na) {
+        self.init(name: name, type: type, value: value, binding: nil, access: access, origin: origin)
     }
 }
 
@@ -32,6 +33,7 @@ extension KernelArgument: Codable {
         case value
         case binding
         case access
+        case origin
     }
 
     init(from decoder: Decoder) throws {
@@ -40,6 +42,7 @@ extension KernelArgument: Codable {
         type = try values.decode(KernelArgumentType.self, forKey: .type)
         binding = try? values.decode(DataBinding.self, forKey: .binding)
         access = try values.decode(KernelArgumentAccess.self, forKey: .access)
+        origin = try values.decode(KernelArgumentOrigin.self, forKey: .origin)
 
         if type == .sample {
             // this value gets overriden in the load method
@@ -55,6 +58,7 @@ extension KernelArgument: Codable {
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(binding, forKey: .binding)
         try container.encode(access, forKey: .access)
+        try container.encode(origin, forKey: .origin)
         if type != .sample {
             // we are not encoding images in the json
             try container.encode(value, forKey: .value)

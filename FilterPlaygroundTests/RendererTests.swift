@@ -23,8 +23,8 @@ class RendererTests: XCTestCase {
 
     func testRenderAsPlainText() {
         let string = "this is a test 50.0 and 50"
-        let parser = Parser(string: string)
-        let tokens = parser.getTokens()
+        let tokenizer = Tokenizer(string: string)
+        let tokens = tokenizer.getTokens()
         XCTAssertEqual(Renderer.renderAsPlainText(tokens: tokens), string)
     }
 }

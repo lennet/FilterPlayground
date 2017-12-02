@@ -157,7 +157,7 @@ extension ASTNode: Equatable {
         return nil
     }
 
-    mutating func replaceArguments(newArguments: [(String, KernelArgumentType)]) {
+    mutating func replaceArguments(newArguments: [KernelDefinitionArgument]) {
         switch self {
         case .unkown(_),
              .comment(_),
@@ -178,7 +178,7 @@ extension ASTNode: Equatable {
             switch (tokens[0], tokens[1], tokens[2], tokens[3]) {
             case (.identifier(.keyword(.kernel)), .identifier(.type(_)), .identifier(.other(_)), .identifier(.other("("))):
                 let argumentsToken = newArguments
-                    .map { [Token.identifier(.type($0.1)), Token.whiteSpace, Token.identifier(.other($0.0))] }
+                    .map { [Token.identifier(.type($0.type)), Token.whiteSpace, Token.identifier(.other($0.name))] }
                     .joined(separator: [Token.identifier(.other(",")), Token.whiteSpace])
                 var newPrefix: [Token] = [tokens[0], .whiteSpace, tokens[1], .whiteSpace, tokens[2], tokens[3]]
                     + argumentsToken

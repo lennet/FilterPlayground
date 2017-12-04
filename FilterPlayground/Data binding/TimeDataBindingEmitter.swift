@@ -28,6 +28,10 @@ class TimeDataBindingEmitter: DataBindingEmitter {
     func deactivate() {
         deactivateTimer()
     }
+    
+    var isActive: Bool {
+        return timer != nil
+    }
 
     func activateTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: FrameRateManager.shared.frameInterval, repeats: true, block: didUpdate)

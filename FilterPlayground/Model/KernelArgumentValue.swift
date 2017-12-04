@@ -50,7 +50,7 @@ enum KernelArgumentValue {
         case let .vec4(x, y, z, w):
             var value = float4(x, y, z, w)
             return body(&value, MemoryLayout<float4>.size)
-        case let .uint2:
+        case .uint2:
             return nil
         case .color:
             return nil

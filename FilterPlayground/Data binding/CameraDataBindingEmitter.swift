@@ -49,6 +49,10 @@ class CameraDataBindingEmitter: NSObject, DataBindingEmitter, AVCaptureVideoData
             }
         #endif
     }
+    
+    var isActive: Bool {
+        return session.isRunning
+    }
 
     func activate() {
         session.startRunning()

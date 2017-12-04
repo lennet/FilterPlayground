@@ -118,6 +118,7 @@ class DataBindingContextTests: XCTestCase {
     func testObserverNotCalledForWrongType() {
         let foo = "foo"
         let fooMockObserver = MockDataBindingObserver(id: foo)
+        fooMockObserver.mockedBindingType = .touch
 
         let bar = "bar"
         let barMockObserver = MockDataBindingObserver(id: bar)

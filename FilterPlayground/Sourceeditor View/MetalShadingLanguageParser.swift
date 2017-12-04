@@ -153,7 +153,7 @@ class MetalShadingLanguageParser {
                 originString = "[[texture(\(bufferIndex)]]"
                 bufferIndex += 1
             case let .other(value):
-                originString = "[\(value)]"
+                originString = "[[\(value)]]"
             case .texture:
                 originString = "[[texture(\(textureIndex)]]"
                 textureIndex += 1

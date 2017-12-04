@@ -91,7 +91,7 @@ class MetalShadingLanguageParserTests: XCTestCase {
         #include <metal_stdlib>
         using namespace metal;
         
-        kernel void untitled (float test [test])
+        kernel void untitled (float test [[test]])
         
         {
         
@@ -108,7 +108,7 @@ class MetalShadingLanguageParserTests: XCTestCase {
         #include <metal_stdlib>
         using namespace metal;
         
-        kernel void untitled (uint a [test])
+        kernel void untitled (uint a [[test]])
         
         {
         
@@ -120,7 +120,7 @@ class MetalShadingLanguageParserTests: XCTestCase {
         #include <metal_stdlib>
         using namespace metal;
         
-        kernel void untitled (float test [test])
+        kernel void untitled (float test [[test]])
         
         {
         

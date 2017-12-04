@@ -11,6 +11,8 @@ import Foundation
 protocol DataBindingEmitter {
     func activate()
     func deactivate()
+    
+    var isActive: Bool { get }
 
     static var shared: DataBindingEmitter { get }
 }

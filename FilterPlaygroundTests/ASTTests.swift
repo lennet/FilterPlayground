@@ -259,7 +259,7 @@ class ASTTests: XCTestCase {
     func testArgumentsForToken() {
         let tokens: [Token] = [Token.identifier(.type(.float)), Token.identifier(.other("name")), Token.identifier(.other(","))]
 
-        let expectedResult = [KernelDefinitionArgument(name: "name", type: KernelArgumentType.float)]
+        let expectedResult = [KernelDefinitionArgument(index: 0, name: "name", type: KernelArgumentType.float)]
         XCTAssert(ASTHelper.arguments(for: tokens) == expectedResult)
     }
 
@@ -270,7 +270,7 @@ class ASTTests: XCTestCase {
         }
         """
         let ast = Parser(string: source).getAST()
-        let expectedResult = KernelDefinition(name: "hello", returnType: KernelArgumentType.vec2, arguments: [KernelDefinitionArgument(name: "radius", type: KernelArgumentType.float)])
+        let expectedResult = KernelDefinition(name: "hello", returnType: KernelArgumentType.vec2, arguments: [KernelDefinitionArgument(index: 0, name: "radius", type: KernelArgumentType.float)])
         let result = ast.kernelDefinition()!
         XCTAssert(result.arguments == expectedResult.arguments)
         XCTAssertEqual(result.name, expectedResult.name)
@@ -298,7 +298,7 @@ class ASTTests: XCTestCase {
         }
         """
         let ast = Parser(string: source).getAST()
-        let expectedResult = KernelDefinition(name: "hello", returnType: KernelArgumentType.vec2, arguments: [KernelDefinitionArgument(name: "radius", type: KernelArgumentType.float), KernelDefinitionArgument(name: "foo", type: KernelArgumentType.vec2)])
+        let expectedResult = KernelDefinition(name: "hello", returnType: KernelArgumentType.vec2, arguments: [KernelDefinitionArgument(index: 0, name: "radius", type: KernelArgumentType.float), KernelDefinitionArgument(index: 1, name: "foo", type: KernelArgumentType.vec2)])
         let result = ast.kernelDefinition()!
         XCTAssert(result.arguments ==
             expectedResult.arguments)
@@ -313,7 +313,7 @@ class ASTTests: XCTestCase {
         }
         """
         var ast = Parser(string: source).getAST()
-        ast.replaceArguments(newArguments: [KernelDefinitionArgument(name: "bar", type: .color)])
+        ast.replaceArguments(newArguments: [KernelDefinitionArgument(index: 0, name: "bar", type: .color)])
         let result = ast.asAttributedText.string
 
         let expectedResult = """
@@ -331,7 +331,7 @@ class ASTTests: XCTestCase {
         }
         """
         var ast = Parser(string: source).getAST()
-        ast.replaceArguments(newArguments: [KernelDefinitionArgument(name: "bar", type: .color), KernelDefinitionArgument(name: "foo", type: .float)])
+        ast.replaceArguments(newArguments: [KernelDefinitionArgument(index: 0, name: "bar", type: .color), KernelDefinitionArgument(index: 1, name: "foo", type: .float)])
         let result = ast.asAttributedText.string
         let expectedResult = """
         kernel vec2 hello(__color bar, float foo) {

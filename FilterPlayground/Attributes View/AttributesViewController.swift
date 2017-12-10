@@ -50,6 +50,18 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
+    var filtredArguments: [KernelArgument] {
+        return arguments.filter({ (argument) -> Bool in
+            switch (argument.access, argument.origin) {
+            case (_, .other),
+                 (.read, _):
+                return false
+            default:
+                return true
+            }
+        })
+    }
+
     var extentSettings: KernelOutputSizeSetting = .none {
         didSet {
             self.tableView.reloadData()
@@ -112,10 +124,10 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
-        if indexPath.row < arguments.count {
-            let oldAttribute = arguments[indexPath.row]
+        if indexPath.row < filtredArguments.count {
+            let oldAttribute = arguments[Int(attribute.index)]
             shouldReloadOnUpdate = false
-            arguments[indexPath.row] = attribute
+            arguments[Int(attribute.index)] = attribute
             // we only need to rerun if values have changed.
             // we compare name and attributes because comparing values can be expensive for images
             let updatedType = oldAttribute.type != attribute.type
@@ -124,7 +136,9 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
         } else {
-            arguments.append(attribute)
+            var newAttribute = attribute
+            newAttribute.index = arguments.count
+            arguments.append(newAttribute)
             tableView.reloadData()
             didUpdateAttributes?(false)
         }
@@ -138,7 +152,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
     func prepareKernelAttributeCell(tableView: UITableView, indexPath: IndexPath) -> KernelAttributeTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "KernelAttributeTableViewCellIdentifier", for: indexPath) as! KernelAttributeTableViewCell
         if indexPath.row < arguments.count {
-            cell.attribute = arguments[indexPath.row]
+            cell.attribute = filtredArguments[indexPath.row]
         }
 
         cell.updateCallBack = { [weak self] cell, argument in

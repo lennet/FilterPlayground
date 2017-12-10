@@ -338,7 +338,7 @@ class ASTHelper {
         for component in filtred.split(separator: .identifier(.other(","))) where component.count == 2 {
             if case let Token.identifier(.type(type)) = component.first!,
                 case let Token.identifier(.other(name)) = component.last! {
-                result.append(KernelDefinitionArgument(name: name, type: type))
+                result.append(KernelDefinitionArgument(index: result.count, name: name, type: type))
             }
         }
         return result

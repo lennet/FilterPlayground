@@ -91,7 +91,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate {
     }
 
     func update(attributes: [KernelArgument]) {
-        textView.insert(arguments: attributes.map { KernelDefinitionArgument(name: $0.name, type: $0.type, access: $0.access, origin: $0.origin) })
+        textView.insert(arguments: attributes.map(KernelDefinitionArgument.init))
     }
 
     @objc func handlePinch(gestureRecognizer: UIPinchGestureRecognizer) {

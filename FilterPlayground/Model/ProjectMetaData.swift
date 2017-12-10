@@ -31,7 +31,7 @@ struct ProjectMetaData {
 
     func initalArguments() -> [KernelArgument] {
         if let kernelType = type.kernelClass as? CoreImageKernel.Type {
-            return kernelType.requiredArguments.map { KernelArgument(name: "unamed", type: $0, value: $0.defaultValue) }
+            return kernelType.requiredArguments.enumerated().map { KernelArgument(index: $0.offset, name: "unamed", type: $0.element, value: $0.element.defaultValue) }
         }
         // TODO:
         return []

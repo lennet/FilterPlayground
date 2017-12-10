@@ -381,7 +381,7 @@ class MainViewController: UIViewController {
                     return currentArgument
                 }
             }
-            return KernelArgument(name: argument.name, type: argument.type, value: argument.type.defaultValue, access: argument.access, origin: argument.origin)
+            return KernelArgument(index: argument.index, name: argument.name, type: argument.type, value: argument.type.defaultValue, access: argument.access, origin: argument.origin)
         }
         attributesViewController?.arguments = newAttributes
         project?.metaData.arguments = newAttributes

@@ -23,17 +23,25 @@ extension KernelDefinition: Equatable {
 }
 
 struct KernelDefinitionArgument {
-
+    var index: Int
     var name: String
     var type: KernelArgumentType
     var access: KernelArgumentAccess
     var origin: KernelArgumentOrigin
 
-    init(name: String, type: KernelArgumentType, access: KernelArgumentAccess = .na, origin: KernelArgumentOrigin = .na) {
+    init(index: Int, name: String, type: KernelArgumentType, access: KernelArgumentAccess = .na, origin: KernelArgumentOrigin = .na) {
+        self.index = index
         self.name = name
         self.type = type
         self.access = access
         self.origin = origin
+    }
+}
+
+extension KernelDefinitionArgument {
+
+    init(argument: KernelArgument) {
+        self.init(index: argument.index, name: argument.name, type: argument.type, access: argument.access, origin: argument.origin)
     }
 }
 

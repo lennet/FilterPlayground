@@ -28,7 +28,7 @@ class TimeDataBindingEmitter: DataBindingEmitter {
     func deactivate() {
         deactivateTimer()
     }
-    
+
     var isActive: Bool {
         return timer != nil
     }

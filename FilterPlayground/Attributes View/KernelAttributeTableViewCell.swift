@@ -114,7 +114,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     func presentTypeSelection(with sender: UIButton) {
         let viewController = UIStoryboard.valuePicker.instantiateViewController(withIdentifier: "selectTypeViewControllerIdentifier") as! SelectTypeViewController
         viewController.didSelectType = { [weak self] type in
-            self?.attribute = KernelArgument(name: self?.attribute?.name ?? "", type: type, value: type.defaultValue)
+            self?.attribute = KernelArgument(index: self?.attribute?.index ?? 0, name: self?.attribute?.name ?? "", type: type, value: type.defaultValue)
             self?.update()
             if self?.nameTextField.text?.isEmpty ?? true {
                 DispatchQueue.main.async {

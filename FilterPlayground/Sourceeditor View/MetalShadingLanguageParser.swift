@@ -60,11 +60,16 @@ class MetalShadingLanguageParser {
         }
 
         let argumentTokenArrays = Array(tokensAfterKernelDefinition[4 ... closingIndex + 1]).split(separators: .identifier(.other("]")), .identifier(.other(",")))
-        let arguments = argumentTokenArrays.flatMap(argument)
+        let arguments = argumentTokenArrays.reduce([KernelDefinitionArgument]()) { (result, token) -> [KernelDefinitionArgument] in
+            if let argument = self.argument(for: token, index: result.count) {
+                return result.appending(with: [argument])
+            }
+            return result
+        }
         return KernelDefinition(name: name, returnType: .void, arguments: arguments)
     }
 
-    func argument(for tokens: [Token]) -> KernelDefinitionArgument? {
+    func argument(for tokens: [Token], index: Int) -> KernelDefinitionArgument? {
         var unprocessedTokens = tokens
         var access: KernelArgumentAccess = .na
 
@@ -110,7 +115,7 @@ class MetalShadingLanguageParser {
             fatalError("not supported origin")
         }
 
-        return KernelDefinitionArgument(name: name, type: type, access: access, origin: origin)
+        return KernelDefinitionArgument(index: index, name: name, type: type, access: access, origin: origin)
     }
 
     func textWithInserted(arguments: [KernelDefinitionArgument]) -> String? {

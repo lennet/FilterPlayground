@@ -25,7 +25,7 @@ class MetalShadingLanguageParserTests: XCTestCase {
         let source = MetalKernel.initialSource(with: "untitled")
         let parser = MetalShadingLanguageParser(string: source)
         let kernelDefinition = parser.getKernelDefinition()
-        let expectedArguments = [KernelDefinitionArgument(name: "inTexture", type: .texture2d, access: .read, origin: .texture), KernelDefinitionArgument(name: "outTexture", type: .texture2d, access: .write, origin: .texture), KernelDefinitionArgument(name: "gid", type: .uint2, origin: .other("thread_position_in_grid"))]
+        let expectedArguments = [KernelDefinitionArgument(index: 0, name: "inTexture", type: .texture2d, access: .read, origin: .texture), KernelDefinitionArgument(index: 1, name: "outTexture", type: .texture2d, access: .write, origin: .texture), KernelDefinitionArgument(index: 2, name: "gid", type: .uint2, origin: .other("thread_position_in_grid"))]
         let expectedResult = KernelDefinition(name: "untitled", returnType: .void, arguments: expectedArguments)
         XCTAssertEqual(expectedResult, kernelDefinition)
     }
@@ -36,8 +36,8 @@ class MetalShadingLanguageParserTests: XCTestCase {
         let tokens = parser.tokenizer.getTokens().filter { (token) -> Bool in
             return !token.isSpaceTabOrNewLine
         }
-        let argument = parser.argument(for: tokens)
-        let expectedResult = KernelDefinitionArgument(name: "gid", type: .uint2, origin: .other("thread_position_in_grid"))
+        let argument = parser.argument(for: tokens, index: 0)
+        let expectedResult = KernelDefinitionArgument(index: 0, name: "gid", type: .uint2, origin: .other("thread_position_in_grid"))
         XCTAssertEqual(argument, expectedResult)
     }
 
@@ -47,8 +47,8 @@ class MetalShadingLanguageParserTests: XCTestCase {
         let tokens = parser.tokenizer.getTokens().filter { (token) -> Bool in
             return !token.isSpaceTabOrNewLine
         }
-        let argument = parser.argument(for: tokens)
-        let expectedResult = KernelDefinitionArgument(name: "inTexture", type: .texture2d, access: .read, origin: .texture)
+        let argument = parser.argument(for: tokens, index: 0)
+        let expectedResult = KernelDefinitionArgument(index: 0, name: "inTexture", type: .texture2d, access: .read, origin: .texture)
         XCTAssertEqual(argument, expectedResult)
     }
 
@@ -58,8 +58,8 @@ class MetalShadingLanguageParserTests: XCTestCase {
         let tokens = parser.tokenizer.getTokens().filter { (token) -> Bool in
             return !token.isSpaceTabOrNewLine
         }
-        let argument = parser.argument(for: tokens)
-        let expectedResult = KernelDefinitionArgument(name: "outTexture", type: .texture2d, access: .write, origin: .texture)
+        let argument = parser.argument(for: tokens, index: 0)
+        let expectedResult = KernelDefinitionArgument(index: 0, name: "outTexture", type: .texture2d, access: .write, origin: .texture)
         XCTAssertEqual(argument, expectedResult)
     }
 
@@ -69,8 +69,8 @@ class MetalShadingLanguageParserTests: XCTestCase {
         let tokens = parser.tokenizer.getTokens().filter { (token) -> Bool in
             return !token.isSpaceTabOrNewLine
         }
-        let argument = parser.argument(for: tokens)
-        let expectedResult = KernelDefinitionArgument(name: "saturation", type: .float, access: .constant, origin: .buffer)
+        let argument = parser.argument(for: tokens, index: 0)
+        let expectedResult = KernelDefinitionArgument(index: 0, name: "saturation", type: .float, access: .constant, origin: .buffer)
         XCTAssertEqual(argument, expectedResult)
     }
 
@@ -98,7 +98,7 @@ class MetalShadingLanguageParserTests: XCTestCase {
         
         }
         """
-        let argument = KernelDefinitionArgument(name: "test", type: .float, origin: .other("test"))
+        let argument = KernelDefinitionArgument(index: 0, name: "test", type: .float, origin: .other("test"))
         let result = MetalShadingLanguageParser(string: source).textWithInserted(arguments: [argument])
         XCTAssertEqual(expectedSource, result)
     }
@@ -127,7 +127,7 @@ class MetalShadingLanguageParserTests: XCTestCase {
         
         }
         """
-        let argument = KernelDefinitionArgument(name: "test", type: .float, origin: .other("test"))
+        let argument = KernelDefinitionArgument(index: 0, name: "test", type: .float, origin: .other("test"))
         let result = MetalShadingLanguageParser(string: source).textWithInserted(arguments: [argument])
         XCTAssertEqual(expectedSource, result)
     }

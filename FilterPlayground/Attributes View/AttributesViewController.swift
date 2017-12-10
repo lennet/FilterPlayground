@@ -34,6 +34,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet var tableView: UITableView!
 
     var shouldReloadOnUpdate = true
+    var shadingLanguage: ShadingLanguage = .coreimage
 
     var inputImages: [KernelInputImage] = [] {
         didSet {
@@ -105,7 +106,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
     func numberOfRows(in section: Int) -> Int {
         switch AttributesViewControllerSection(rawValue: section)! {
         case .arguments:
-            return arguments.count + 1
+            return filtredArguments.count + 1
         case .inputImages:
             return inputImages.count
         case .outputSize:
@@ -138,6 +139,10 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         } else {
             var newAttribute = attribute
             newAttribute.index = arguments.count
+            if case .metal = shadingLanguage {
+                let isTexture = newAttribute.type.rawValue == KernelArgumentType.texture2d.rawValue
+                newAttribute.origin = isTexture ? .texture : .buffer
+            }
             arguments.append(newAttribute)
             tableView.reloadData()
             didUpdateAttributes?(false)
@@ -151,7 +156,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func prepareKernelAttributeCell(tableView: UITableView, indexPath: IndexPath) -> KernelAttributeTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "KernelAttributeTableViewCellIdentifier", for: indexPath) as! KernelAttributeTableViewCell
-        if indexPath.row < arguments.count {
+        if indexPath.row < filtredArguments.count {
             cell.attribute = filtredArguments[indexPath.row]
         }
 

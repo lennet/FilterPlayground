@@ -228,6 +228,7 @@ class MainViewController: UIViewController {
 
     func didOpened(document: Project) {
         let completion = {
+            // TODO: Refactor!
             self.presentedViewController?.dismiss(animated: true, completion: nil)
             self.project = document
             self.sourceEditorViewController?.source = document.source
@@ -245,6 +246,7 @@ class MainViewController: UIViewController {
             self.updateInputImages()
             self.updateKernelarguments()
             self.sourceEditorViewController?.textView.shadingLanguage = document.metaData.type.shadingLanguage
+            self.attributesViewController?.shadingLanguage = document.metaData.type.shadingLanguage
         }
         if let oldDocument = self.project {
             oldDocument.close(completionHandler: { _ in

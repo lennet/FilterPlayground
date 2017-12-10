@@ -155,12 +155,12 @@ class MetalShadingLanguageParser {
             let originString: String
             switch argument.origin {
             case .buffer:
-                originString = "[[texture(\(bufferIndex)]]"
+                originString = "[[buffer(\(bufferIndex))]]"
                 bufferIndex += 1
             case let .other(value):
                 originString = "[[\(value)]]"
             case .texture:
-                originString = "[[texture(\(textureIndex)]]"
+                originString = "[[texture(\(textureIndex))]]"
                 textureIndex += 1
             case .na:
                 fatalError("not supported origin")

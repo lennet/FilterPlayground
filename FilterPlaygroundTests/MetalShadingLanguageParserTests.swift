@@ -103,6 +103,35 @@ class MetalShadingLanguageParserTests: XCTestCase {
         XCTAssertEqual(expectedSource, result)
     }
 
+    func testInserBufferArgument() {
+        let source = """
+        #include <metal_stdlib>
+        using namespace metal;
+        
+        kernel void untitled ()
+        
+        {
+        
+        
+        }
+        """
+
+        let expectedSource = """
+        #include <metal_stdlib>
+        using namespace metal;
+        
+        kernel void untitled (float test [[buffer(0)]])
+        
+        {
+        
+        
+        }
+        """
+        let argument = KernelDefinitionArgument(index: 0, name: "test", type: .float, origin: .buffer)
+        let result = MetalShadingLanguageParser(string: source).textWithInserted(arguments: [argument])
+        XCTAssertEqual(expectedSource, result)
+    }
+
     func testInserArgumentWithExistingArgument() {
         let source = """
         #include <metal_stdlib>

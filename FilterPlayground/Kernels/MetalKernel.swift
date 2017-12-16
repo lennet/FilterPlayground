@@ -17,7 +17,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
     var extent: CGRect {
         switch outputSize {
         case .inherit:
-            if let inputTexture = inputTexture {
+            if let inputTexture = inputTextures.first {
                 return CGRect(origin: .zero, size: CGSize(width: inputTexture.width, height: inputTexture.height))
             }
             return CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000))
@@ -32,11 +32,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         }
     }
 
-    var inputImages: [CIImage] = [] {
-        didSet {
-            didUpdateInputImages()
-        }
-    }
+    var inputImages: [CIImage] = []
 
     var mtkView: FPMTKView!
 
@@ -44,14 +40,18 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         return mtkView
     }
 
-    var arguments: [KernelArgumentValue] = []
+    var arguments: [KernelArgument] = [] {
+        didSet {
+            makeInputTextures()
+        }
+    }
 
     let threadGroupCount = MTLSizeMake(16, 16, 1)
     let device: MTLDevice?
     let commandQueue: MTLCommandQueue?
     var pipelineState: MTLComputePipelineState?
     var library: MTLLibrary?
-    var inputTexture: MTLTexture?
+    var inputTextures: [MTLTexture] = []
     var context: CIContext?
     var function: MTLFunction? {
         didSet {
@@ -79,7 +79,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
     }
 
     static var requiredInputImages: Int {
-        return 1
+        return 0
     }
 
     static var supportedArguments: [KernelArgumentType] {
@@ -100,22 +100,36 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
     }
 
     func didUpdateInputImages() {
-        makeInputTexture()
+        makeInputTextures()
         makeFunction()
     }
 
-    func makeInputTexture() {
+    func makeInputTextures() {
         // TODO: use CIContext to render image into texture
         guard let device = device else { return }
-        guard let image = inputImages.first else { return }
-        guard let cgImage = context?.createCGImage(image, from: image.extent) else { return }
+        inputTextures = arguments.flatMap { (argument) -> CIImage? in
+            switch (argument.access, argument.value) {
+            case let (.read, .sample(image)):
+                return image
+            default:
+                return nil
+            }
+        }.flatMap { (image) -> MTLTexture? in
 
-        let textureLoader = MTKTextureLoader(device: device)
-        do {
-            inputTexture = try textureLoader.newTexture(cgImage: cgImage, options: nil)
-            mtkView.drawableSize = extent.size
-        } catch {
-            print(error)
+            guard let cgImage = context?.createCGImage(image, from: image.extent) else { return nil }
+
+            let textureLoader = MTKTextureLoader(device: device)
+
+            do {
+                return try textureLoader.newTexture(cgImage: cgImage, options: nil)
+            } catch {
+
+                print(error)
+                if let data = image.asJPGData {
+                    return try? textureLoader.newTexture(data: data, options: nil)
+                }
+                return nil
+            }
         }
     }
 
@@ -127,7 +141,6 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
             // TODO: handle error
 
             self.function = function
-
             self.mtkView.setNeedsDisplay()
         }
     }
@@ -145,6 +158,8 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
             if self.library == nil {
                 completion(.failed(errors: errors))
             } else {
+                // TODO: wait for makeFunction
+                self.makeFunction()
                 completion(.success(warnings: errors))
             }
         })
@@ -159,10 +174,8 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         texture2d<float, access::read> inTexture [[texture(0)]],
         texture2d<float, access::write> outTexture [[texture(1)]],
         uint2 gid [[thread_position_in_grid]])
-        
         {
-        
-        
+            outTexture.write(inTexture.read(gid), gid);
         }
         """
     }
@@ -171,33 +184,50 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
 
     func draw(in view: MTKView) {
         if let currentDrawable = view.currentDrawable,
-            let inputTexture = inputTexture,
             let pipelineState = pipelineState {
             let commandBuffer = commandQueue?.makeCommandBuffer()
 
             let commandEncoder = commandBuffer?.makeComputeCommandEncoder()
             commandEncoder?.setComputePipelineState(pipelineState)
-            commandEncoder?.setTexture(inputTexture, index: 0)
+            inputTextures.enumerated().forEach({ index, texture in
+                commandEncoder?.setTexture(texture, index: index)
+            })
             #if !((arch(i386) || arch(x86_64)) && os(iOS))
-                commandEncoder?.setTexture(currentDrawable.texture, index: 1)
+                commandEncoder?.setTexture(currentDrawable.texture, index: inputTextures.count)
             #endif
 
+            mtkView.drawableSize = extent.size
             var index = 0
-            arguments.forEach({ value in
-                value.withUnsafeMetalBufferValue({ (pointer, length) -> Void in
-                    commandEncoder?.setBytes(pointer, length: length, index: index)
-                    index += 1
+            arguments
+                .filter({ (argument) -> Bool in
+                    if case .buffer = argument.origin {
+                        return true
+                    }
+                    return false
                 })
-            })
+                .forEach({ argument in
+                    argument.value.withUnsafeMetalBufferValue({ (pointer, length) -> Void in
+                        commandEncoder?.setBytes(pointer, length: length, index: index)
+                        index += 1
+                    })
+                })
 
-            let threadGroups = MTLSize(width: Int(inputTexture.width) / threadGroupCount.width, height: Int(inputTexture.height) / threadGroupCount.height, depth: 1)
+            let threadGroups = MTLSize(width: Int(extent.width) / threadGroupCount.width, height: Int(extent.height) / threadGroupCount.height, depth: 1)
 
             commandEncoder?.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
             commandEncoder?.endEncoding()
-            commandBuffer?.addCompletedHandler(mtkView.bufferCompletionHandler)
+            commandBuffer?.addCompletedHandler(bufferCompletionHandler)
             commandBuffer?.present(currentDrawable)
             commandBuffer?.commit()
         }
+    }
+
+    func bufferCompletionHandler(buffer: MTLCommandBuffer) {
+        if let error = buffer.error {
+            print(error.localizedDescription)
+        }
+
+        mtkView.bufferCompletionHandler(buffer: buffer)
     }
 
     func mtkView(_: MTKView, drawableSizeWillChange _: CGSize) {

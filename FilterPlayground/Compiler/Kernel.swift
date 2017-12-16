@@ -16,7 +16,7 @@ import CoreImage
 #endif
 
 protocol Kernel: class {
-    var arguments: [KernelArgumentValue] { get set }
+    var arguments: [KernelArgument] { get set }
     var inputImages: [CIImage] { get set }
 
     var extentSettings: KernelOutputSizeSetting { get }

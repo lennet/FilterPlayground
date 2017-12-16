@@ -36,7 +36,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
         return mtkView
     }
 
-    var arguments: [KernelArgumentValue] = []
+    var arguments: [KernelArgument] = []
     let colorSpace = CGColorSpaceCreateDeviceRGB()
 
     required override init() {
@@ -86,7 +86,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
     }
 
     func getImage() -> CIImage? {
-        return apply(with: inputImages, attributes: arguments)
+        return apply(with: inputImages, attributes: arguments.flatMap { $0.value })
     }
 
     func compile(source: String, completion: @escaping (KernelCompilerResult) -> Void) {
@@ -119,7 +119,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
 
     func draw(in view: MTKView) {
         if let currentDrawable = view.currentDrawable,
-            let output = apply(with: inputImages, attributes: arguments) {
+            let output = apply(with: inputImages, attributes: arguments.flatMap { $0.value }) {
             let commandBuffer = commandQueue?.makeCommandBuffer()
             view.drawableSize = output.extent.size
             #if !((arch(i386) || arch(x86_64)) && os(iOS))

@@ -76,7 +76,7 @@ class SwiftPlaygroundsExportHelper {
         
         var resources: [(String, Data)] = arguments
             .flatMap{ guard case .sample(let image) = $0.value  else {return nil}
-                return ($0.name, image.asJPGata!) }
+                return ($0.name, image.asJPGData!) }
         
         if inputImages.count == 1 {
             resources.append(("input", inputImages[0]))

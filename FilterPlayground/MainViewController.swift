@@ -155,6 +155,11 @@ class MainViewController: UIViewController {
             let kernel = kernel else {
             return
         }
+
+        if kernel.arguments.isEmpty {
+            kernel.arguments = project?.metaData.arguments ?? []
+        }
+
         kernel.compile(source: source) { result in
             DispatchQueue.main.async {
                 switch result {
@@ -243,10 +248,10 @@ class MainViewController: UIViewController {
             self.showAttributes = document.metaData.type.kernelClass.supportsArguments
             self.title = document.title
             self.kernel = document.metaData.type.kernelClass.init()
-            self.updateInputImages()
-            self.updateKernelarguments()
             self.sourceEditorViewController?.textView.shadingLanguage = document.metaData.type.shadingLanguage
             self.attributesViewController?.shadingLanguage = document.metaData.type.shadingLanguage
+            self.updateInputImages()
+            self.updateKernelarguments()
         }
         if let oldDocument = self.project {
             oldDocument.close(completionHandler: { _ in
@@ -331,7 +336,7 @@ class MainViewController: UIViewController {
 
     func updateKernelarguments() {
         guard let project = project else { return }
-        kernel?.arguments = project.metaData.arguments.flatMap { $0.value }
+        kernel?.arguments = project.metaData.arguments
         attributesViewController?.inheritSize = kernel?.extent ?? .zero
         kernel?.render()
     }

@@ -68,4 +68,26 @@ class SavingDocumentTests: XCTestCase {
 
         wait(for: [expectation], timeout: 5)
     }
+
+    func testSaveMetalProject() {
+        let text = "Hello World"
+        let attribute = KernelArgument(index: 0, name: "test", type: .float, value: .float(50))
+        let expectation = XCTestExpectation(description: "Waiting for file creation")
+
+        let document = Project(fileURL: url, type: .metal)
+        document.save(to: url, for: .forCreating) { _ in
+            document.source = text
+            document.metaData.arguments = [attribute]
+            document.close(completionHandler: { _ in
+                let document2 = Project(fileURL: self.url)
+                document2.open(completionHandler: { _ in
+                    XCTAssertEqual(document2.source, text)
+                    XCTAssertNotNil(document2.metaData.arguments.first)
+                    expectation.fulfill()
+                })
+            })
+        }
+
+        wait(for: [expectation], timeout: 5)
+    }
 }

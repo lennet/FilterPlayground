@@ -73,7 +73,7 @@ class Project: UIDocument {
     }
 
     func addImage(image: CIImage, for name: String) {
-        guard let data = image.asJPGata else { return }
+        guard let data = image.asJPGData else { return }
         addResource(for: "\(name).jpg", with: data)
     }
 

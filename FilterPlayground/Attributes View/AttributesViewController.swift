@@ -55,7 +55,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         return arguments.filter({ (argument) -> Bool in
             switch (argument.access, argument.origin) {
             case (_, .other),
-                 (.read, _):
+                 (.write, _):
                 return false
             default:
                 return true

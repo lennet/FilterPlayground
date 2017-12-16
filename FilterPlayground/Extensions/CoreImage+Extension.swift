@@ -16,7 +16,7 @@
 
 extension CIImage {
 
-    var asJPGata: Data? {
+    var asJPGData: Data? {
         #if os(iOS) || os(watchOS) || os(tvOS)
             let context = CIContext()
             let image: UIImage

@@ -13,7 +13,7 @@ class CoreImageColorKernel: CoreImageKernel {
     override var extent: CGRect {
         switch outputSize {
         case .inherit:
-            guard let image = arguments.first?.asKernelValue as? CISampler else {
+            guard let image = arguments.first?.value.asKernelValue as? CISampler else {
                 return CGRect(origin: .zero, size: CGSize(width: 1000, height: 1000))
             }
             return image.extent

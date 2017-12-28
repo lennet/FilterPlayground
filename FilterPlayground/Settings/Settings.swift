@@ -70,4 +70,15 @@ struct Settings {
     static var spacingValue: String {
         return tabsEnabled ? "\t" : "    "
     }
+
+    #if DEBUG
+        static var enableExperimentalFeatures: Bool {
+            get {
+                return UserDefaults.standard.bool(forKey: #function)
+            }
+            set {
+                UserDefaults.standard.set(newValue, forKey: #function)
+            }
+        }
+    #endif
 }

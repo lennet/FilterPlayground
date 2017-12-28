@@ -60,8 +60,10 @@ class SourceEditorTextView: UITextView, UICollectionViewDelegate, UICollectionVi
 
     override var selectedTextRange: UITextRange? {
         didSet {
-            codeCompletionsForString?(text, selectedRange.location) { result in
-                self.cachedCodeCompletions = result
+            if FeatureGate.isEnabled(feature: .autocompletion) {
+                codeCompletionsForString?(text, selectedRange.location) { result in
+                    self.cachedCodeCompletions = result
+                }
             }
         }
     }
@@ -91,6 +93,7 @@ class SourceEditorTextView: UITextView, UICollectionViewDelegate, UICollectionVi
     // MARK: - Code Completion
 
     func configureCodeCompletionView() {
+        guard FeatureGate.isEnabled(feature: .autocompletion) else { return }
         let view = codeCompletionColectionView
         view.delegate = self
         view.dataSource = self

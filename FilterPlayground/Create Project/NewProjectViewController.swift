@@ -12,6 +12,14 @@ class NewProjectViewController: UITableViewController {
 
     var didSelectType: ((KernelType) -> Void)?
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if FeatureGate.isEnabled(feature: .metal) {
+            return super.numberOfSections(in: tableView)
+        } else {
+            return super.numberOfSections(in: tableView) - 1
+        }
+    }
+
     // MARK: - Table view delegate
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -16,6 +16,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet var frameRateSlider: UISlider!
     @IBOutlet var ignoreLowPowerModeSwitch: UISwitch!
     @IBOutlet var showStatisticsSwitch: UISwitch!
+    @IBOutlet var experimentalFeaturesSwitch: UISwitch?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,6 +26,7 @@ class SettingsTableViewController: UITableViewController {
         frameRateSlider.maximumValue = Float(FrameRateManager.shared.maxFrameRate)
         frameRateSlider.value = Float(Settings.customFrameRate ?? Int(frameRateSlider.maximumValue))
         showStatisticsSwitch.isOn = Settings.showStatistics
+        experimentalFeaturesSwitch?.isOn = Settings.enableExperimentalFeatures
         // TODO: disabled framerateslider in low power mode and with ignorelowpoweermode false
         updateFrameRateLabel()
     }
@@ -59,7 +61,20 @@ class SettingsTableViewController: UITableViewController {
         Settings.showStatistics = showStatisticsSwitch.isOn
     }
 
+    @IBAction func experimentalFeaturesSwitchValueChanged(_: Any) {
+        Settings.enableExperimentalFeatures = experimentalFeaturesSwitch?.isOn ?? false
+    }
+
     func updateFrameRateLabel(frameRate: Int = FrameRateManager.shared.frameRate) {
         frameRateLabel.text = "framerate: \(frameRate)"
+    }
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        var numberOfSections = super.numberOfSections(in: tableView)
+        #if RELEASE
+            // hide experimental features switch
+            numberOfSections -= 1
+        #endif
+        return numberOfSections
     }
 }

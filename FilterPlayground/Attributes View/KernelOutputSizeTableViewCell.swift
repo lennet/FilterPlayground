@@ -25,8 +25,8 @@ class KernelOutputSizeTableViewCell: UITableViewCell {
     @IBOutlet var widthPickerButton: FloatPickerButton!
     @IBOutlet var yPickerButton: FloatPickerButton!
     @IBOutlet var xPickerButton: FloatPickerButton!
-
     @IBOutlet var positionStackView: UIStackView!
+
     static let identifier = "KernelOutputSizeTableViewCellIdentifier"
     var didUpdatedOutputSize: ((KernelOutputSize) -> Void)?
     var canSetPosition: Bool = true {

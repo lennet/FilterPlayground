@@ -22,9 +22,27 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         allowsPickingMultipleItems = true
     }
 
+    #if ((arch(i386) || arch(x86_64)) && os(iOS))
+        // workaround for the broken UIDocumentBrowser on simulators on Xcode 9.2
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+
+            createAndOpenDebugProject()
+        }
+    #endif
+
+    func createAndOpenDebugProject() {
+        let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("untitled.\(Project.type)")
+        let document = Project(fileURL: newDocumentURL, type: .coreimage)
+        document.save(to: newDocumentURL, for: .forCreating) { _ in
+            self.presentDocument(at: newDocumentURL)
+        }
+    }
+
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         super.dismiss(animated: flag, completion: completion)
         importHandler?(nil, .none)
+        importHandler = nil
     }
 
     // MARK: UIDocumentBrowserViewControllerDelegate
@@ -44,11 +62,10 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
                 document.save(to: newDocumentURL, for: .forCreating) { success in
                     if success {
                         importHandler(newDocumentURL, .move)
-                        self?.importHandler = nil
                     } else {
                         importHandler(nil, .none)
-                        self?.importHandler = nil
                     }
+                    self?.importHandler = nil
                 }
             }
 

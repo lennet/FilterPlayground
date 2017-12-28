@@ -68,4 +68,11 @@ extension UIImage {
 
         self.init(cgImage: image)
     }
+
+    func resize(to size: CGSize) -> UIImage {
+        let newRect = CGRect(origin: .zero, size: size)
+        return UIGraphicsImageRenderer(bounds: newRect).image { _ in
+            self.draw(in: newRect)
+        }
+    }
 }

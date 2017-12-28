@@ -116,7 +116,6 @@ class MainViewController: UIViewController {
     }
 
     override var keyCommands: [UIKeyCommand]? {
-
         let runKeyCommand = UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(run), discoverabilityTitle: "Run")
 
         let increaseFontKeyCommand = UIKeyCommand(input: "+", modifierFlags: .command, action: #selector(increaseFontSize), discoverabilityTitle: "increase font size")
@@ -424,7 +423,9 @@ class MainViewController: UIViewController {
             documentBrowser = vc
             vc.didOpenedDocument = didOpened
         case let nc as UINavigationController where nc.viewControllers.first is ExportTableViewController:
-            (nc.viewControllers.first as? ExportTableViewController)?.document = project
+            let exportViewController = nc.viewControllers.first as? ExportTableViewController
+            exportViewController?.document = project
+            exportViewController?.showCompileWarning = (sourceEditorViewController?.errors.count ?? 0) != 0
         default:
             print("Unkown ViewController Segue: \(segue.destination)")
         }

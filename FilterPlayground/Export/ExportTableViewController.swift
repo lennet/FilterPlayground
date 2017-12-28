@@ -8,32 +8,70 @@
 
 import UIKit
 
+struct ExportOption {
+    var title: String
+    var action: ((UIView?) -> Void)
+}
+
 class ExportTableViewController: UITableViewController {
 
     var document: Project?
+    var showCompileWarning: Bool = false
+    var exportOptions: [ExportOption] = []
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // TODO: define options depending on the shading language
+
+        exportOptions = [
+            ExportOption(title: "CIKernel", action: exportAsCIKernel),
+            ExportOption(title: "CIFilter", action: exportAsCIFilter),
+            ExportOption(title: "Swift Playground", action: exportAsSwiftPlayground),
+            ExportOption(title: "Filter Playground", action: exportAsPlayground),
+        ]
+    }
 
     @IBAction func tappedCancelButton() {
         dismiss(animated: true, completion: nil)
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sender = tableView.cellForRow(at: indexPath)
-        switch indexPath.row {
-        case 0:
-            exportAsCIKernel(sender: sender)
-            break
-        case 1:
-            exportAsCIFIlter(sender: sender)
-            break
-        case 2:
-            exportAsSwiftPlayground(sender: sender)
-            break
-        case 3:
-            exportAsPlayground(sender: sender)
-            break
-        default:
-            break
+    override func numberOfSections(in _: UITableView) -> Int {
+        return showCompileWarning ? 2 : 1
+    }
+
+    override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if showCompileWarning && section == 0 {
+            return 1
+        } else {
+            return exportOptions.count
         }
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCellIdentifier", for: indexPath)
+
+        if showCompileWarning && indexPath.section == 0 {
+            cell.imageView?.image = #imageLiteral(resourceName: "CompilerWarning").resize(to: CGSize(width: 32, height: 32))
+            cell.textLabel?.text = "Your code contains unresolved errors. An export will contain errors as well."
+            cell.textLabel?.numberOfLines = 0
+            cell.isUserInteractionEnabled = false
+            cell.accessoryType = .none
+        } else {
+            let option = exportOptions[indexPath.row]
+            cell.textLabel?.text = option.title
+        }
+
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard !showCompileWarning || indexPath.section != 0 else {
+            return
+        }
+
+        let sender = tableView.cellForRow(at: indexPath)
+        let option = exportOptions[indexPath.row]
+        option.action(sender)
     }
 
     func exportAsSwiftPlayground(sender: UIView?) {
@@ -56,7 +94,7 @@ class ExportTableViewController: UITableViewController {
         }
     }
 
-    func exportAsCIFIlter(sender: UIView?) {
+    func exportAsCIFilter(sender: UIView?) {
         guard let document = document,
             let sourceData = CIFilterExportHelper.cifilter(with: document.source, type: document.metaData.type, arguments: document.metaData.arguments, name: document.localizedName.withoutWhiteSpaces.withoutSlash).data(using: .utf8) else {
             return
@@ -83,7 +121,6 @@ class ExportTableViewController: UITableViewController {
 
         do {
             try sourceData.write(to: url, options: .atomicWrite)
-
         } catch {
             print(error)
             // TODO: handle error

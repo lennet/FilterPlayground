@@ -111,12 +111,14 @@ class MainViewController: UIViewController {
     override var keyCommands: [UIKeyCommand]? {
         let runKeyCommand = UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(run), discoverabilityTitle: "Run")
 
-        let increaseFontKeyCommand = UIKeyCommand(input: "+", modifierFlags: .command, action: #selector(increaseFontSize), discoverabilityTitle: "increase font size")
+        let increaseFontKeyCommand = UIKeyCommand(input: "+", modifierFlags: .command, action: #selector(increaseFontSize), discoverabilityTitle: "Increase font size")
         let increaseFontKeyCommandUSKeyboard = UIKeyCommand(input: "=", modifierFlags: .command, action: #selector(increaseFontSize))
 
-        let decreaseFontKeyCommand = UIKeyCommand(input: "-", modifierFlags: .command, action: #selector(decreaseFontSize), discoverabilityTitle: "decrease font size")
+        let decreaseFontKeyCommand = UIKeyCommand(input: "-", modifierFlags: .command, action: #selector(decreaseFontSize), discoverabilityTitle: "Decrease font size")
 
-        return [runKeyCommand, increaseFontKeyCommand, increaseFontKeyCommandUSKeyboard, decreaseFontKeyCommand]
+        let toggleAttributesKeyCommand = UIKeyCommand(input: "0", modifierFlags: .command, action: #selector(didTapAttribtutesButton), discoverabilityTitle: showAttributes ? "Hide Attributes" : "Show Attributes")
+
+        return [runKeyCommand, increaseFontKeyCommand, increaseFontKeyCommandUSKeyboard, decreaseFontKeyCommand, toggleAttributesKeyCommand]
     }
 
     @objc func increaseFontSize() {
@@ -284,7 +286,7 @@ class MainViewController: UIViewController {
         }
     }
 
-    @IBAction func didTapAttribtutesButton(_: Any) {
+    @IBAction func didTapAttribtutesButton() {
         showAttributes = !showAttributes
         updateViewConstraints()
 

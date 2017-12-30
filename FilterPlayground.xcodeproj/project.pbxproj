@@ -153,7 +153,7 @@
 		98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */; };
 		98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE92A81F3900290044E33F /* LiveViewController.swift */; };
 		98B00A2B1F9D1E70006D2728 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B00A2A1F9D1E70006D2728 /* StatisticsView.swift */; };
-		98B7B6E91F4757B5008C370F /* ExportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */; };
+		98B7B6E91F4757B5008C370F /* MainViewController+Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B7B6E81F4757B4008C370F /* MainViewController+Export.swift */; };
 		98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */; };
 		98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */; };
 		98C5E23D1F34B85C006E7658 /* KernelCompilerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23C1F34B85C006E7658 /* KernelCompilerResult.swift */; };
@@ -333,7 +333,7 @@
 		98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatSelectionButton.swift; sourceTree = "<group>"; };
 		98AE92A81F3900290044E33F /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		98B00A2A1F9D1E70006D2728 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
-		98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportTableViewController.swift; sourceTree = "<group>"; };
+		98B7B6E81F4757B4008C370F /* MainViewController+Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Export.swift"; sourceTree = "<group>"; };
 		98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingDocumentTests.swift; sourceTree = "<group>"; };
 		98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelperTests.swift; sourceTree = "<group>"; };
 		98C5E23C1F34B85C006E7658 /* KernelCompilerResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelCompilerResult.swift; sourceTree = "<group>"; };
@@ -575,7 +575,7 @@
 		987A73271F66F63800F73806 /* Export */ = {
 			isa = PBXGroup;
 			children = (
-				98B7B6E81F4757B4008C370F /* ExportTableViewController.swift */,
+				98B7B6E81F4757B4008C370F /* MainViewController+Export.swift */,
 				987A73281F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift */,
 				98426C161F670540007C2260 /* CIFilterExportHelper.swift */,
 			);
@@ -917,7 +917,7 @@
 				9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */,
 				98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */,
 				983331111F80066300C9AF52 /* MetalKernel.swift in Sources */,
-				98B7B6E91F4757B5008C370F /* ExportTableViewController.swift in Sources */,
+				98B7B6E91F4757B5008C370F /* MainViewController+Export.swift in Sources */,
 				985D51A11FA66F84009881CC /* Vector3ValuePicker.swift in Sources */,
 				986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */,
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,

@@ -10,6 +10,15 @@ import CoreGraphics
 import Foundation
 import simd
 
+func 🌎(_ key: String, comment: String = "") -> String {
+    return NSLocalizedString(key, comment: comment)
+}
+
+func 🌎(_ key: String, with arguments: CVarArg..., comment: String = "") -> String {
+    let format = 🌎(key, comment: comment)
+    return String(format: format, arguments)
+}
+
 extension NSAttributedString {
 
     static func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString {

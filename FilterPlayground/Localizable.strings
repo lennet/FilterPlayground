@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  FilterPlayground
+
+  Created by Leo Thomas on 30.12.17.
+  Copyright © 2017 Leo Thomas. All rights reserved.
+*/
+
+
+// Key commands
+"KeyCommand_Run" = "Run";
+"KeyCommand_IncreaseFont" = "Increase font size";
+"KeyCommand_DecreaseFont" = "Decrease font size";
+"KeyCommand_HideAttributes" = "Hide Attributes";
+"KeyCommand_ShowAttributes" = "Show Attributes";
+
+// Statistics
+"Statistics_FPS_Label_$f" = "Frames Per Second %.0f";
+"Statistics_GPU_Label_$f" = "GPU Frame Time ~ %.2f  ms";
+
+

@@ -27,9 +27,9 @@ class StatisticsView: UIView {
 
     func updateStatistics(frameRate: Double, time: Double) {
         DispatchQueue.main.async {
-            // TODO: use autolayout instead of spaces 😂
-            self.frameRateLabel.text = " Frames Per Second \(String(format: "%.0f", frameRate))"
-            self.timeLabel.text = "GPU Frame Time ~ \(String(format: "%.2f", time * 1000)) ms "
+            // TODO: add spacing
+            self.frameRateLabel.text = 🌎("Statistics_FPS_Label_$f", with: frameRate)
+            self.timeLabel.text = 🌎("Statistics_GPU_Label_$f", with: time * 1000)
         }
     }
 }

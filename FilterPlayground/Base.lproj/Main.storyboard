@@ -390,7 +390,7 @@
                             </barButtonItem>
                             <barButtonItem title="Attributes" id="PCG-9f-F1l">
                                 <connections>
-                                    <action selector="didTapAttribtutesButton:" destination="BYZ-38-t0r" id="zhJ-Cx-O3q"/>
+                                    <action selector="didTapAttribtutesButton" destination="BYZ-38-t0r" id="Pi0-dl-3oM"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="bookmarks" id="AP8-1U-dgp">

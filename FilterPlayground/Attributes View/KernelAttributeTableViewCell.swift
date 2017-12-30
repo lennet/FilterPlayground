@@ -18,6 +18,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     @IBOutlet var newArgumentOverlay: UIView!
     @IBOutlet var dataBindingButton: UIButton!
 
+    var supportedTypes: [KernelArgumentType] = []
     weak var valueSelectionView: (UIView & KernelArgumentValueView)?
     var selectedBinding: DataBinding = .none {
         didSet {
@@ -112,9 +113,9 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     }
 
     func presentTypeSelection(with sender: UIButton) {
-        let viewController = UIStoryboard.valuePicker.instantiateViewController(withIdentifier: "selectTypeViewControllerIdentifier") as! SelectTypeViewController
-        viewController.didSelectType = { [weak self] type in
-            self?.attribute = KernelArgument(index: self?.attribute?.index ?? 0, name: self?.attribute?.name ?? "", type: type, value: type.defaultValue)
+        let viewController = SelectObjectViewController(objects: [supportedTypes]) { [weak self] type, _ in
+            let argumentType = type as! KernelArgumentType
+            self?.attribute = KernelArgument(index: self?.attribute?.index ?? 0, name: self?.attribute?.name ?? "", type: argumentType, value: argumentType.defaultValue)
             self?.update()
             if self?.nameTextField.text?.isEmpty ?? true {
                 DispatchQueue.main.async {
@@ -210,5 +211,24 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension KernelArgumentType: SelectObjectViewControllerPresentable {
+
+    var title: String {
+        return rawValue
+    }
+
+    var subtitle: String? {
+        return nil
+    }
+
+    var interactionEnabled: Bool {
+        return true
+    }
+
+    var image: UIImage? {
+        return nil
     }
 }

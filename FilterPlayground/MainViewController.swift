@@ -249,6 +249,7 @@ class MainViewController: UIViewController {
             self.kernel = document.metaData.type.kernelClass.init()
             self.sourceEditorViewController?.textView.shadingLanguage = document.metaData.type.shadingLanguage
             self.attributesViewController?.shadingLanguage = document.metaData.type.shadingLanguage
+            self.attributesViewController?.supportedArguments = document.metaData.type.kernelClass.supportedArguments
             self.updateInputImages()
             self.updateKernelarguments()
         }
@@ -422,12 +423,30 @@ class MainViewController: UIViewController {
         case let vc as DocumentBrowserViewController:
             documentBrowser = vc
             vc.didOpenedDocument = didOpened
-        case let nc as UINavigationController where nc.viewControllers.first is ExportTableViewController:
-            let exportViewController = nc.viewControllers.first as? ExportTableViewController
-            exportViewController?.document = project
-            exportViewController?.showCompileWarning = (sourceEditorViewController?.errors.count ?? 0) != 0
         default:
             print("Unkown ViewController Segue: \(segue.destination)")
         }
+    }
+
+    @IBAction func actionButtonTapped(_ sender: UIBarButtonItem) {
+        var objects: [[SelectObjectViewControllerPresentable]] = [[
+            ExportOption(title: "CIKernel", action: exportAsCIKernel),
+            ExportOption(title: "CIFilter", action: exportAsCIFilter),
+            ExportOption(title: "Swift Playground", action: exportAsSwiftPlayground),
+            ExportOption(title: "Filter Playground", action: exportAsPlayground),
+        ]]
+        if (sourceEditorViewController?.errors.count ?? 0) != 0 {
+            objects.insert([ExportWarningObject()], at: 0)
+        }
+        let viewController = SelectObjectViewController(objects: objects, style: .grouped) { exportOption, vc in
+            var senderView: UIView?
+            if let selectedIndexPath = vc.tableView.indexPathForSelectedRow {
+                senderView = vc.tableView.cellForRow(at: selectedIndexPath)
+            }
+            (exportOption as! ExportOption).action(senderView)
+        }
+        viewController.modalPresentationStyle = .popover
+        viewController.popoverPresentationController?.barButtonItem = sender
+        present(viewController, animated: true, completion: nil)
     }
 }

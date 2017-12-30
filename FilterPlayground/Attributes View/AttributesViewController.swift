@@ -35,6 +35,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
 
     var shouldReloadOnUpdate = true
     var shadingLanguage: ShadingLanguage = .coreimage
+    var supportedArguments: [KernelArgumentType] = []
 
     var inputImages: [KernelInputImage] = [] {
         didSet {
@@ -163,7 +164,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.updateCallBack = { [weak self] cell, argument in
             self?.didUpdateAttribute(cell: cell, attribute: argument)
         }
-
+        cell.supportedTypes = supportedArguments
         return cell
     }
 

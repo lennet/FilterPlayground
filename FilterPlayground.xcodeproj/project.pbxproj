@@ -160,7 +160,6 @@
 		98C5E23F1F34B8DD006E7658 /* KernelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23E1F34B8DD006E7658 /* KernelError.swift */; };
 		98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */; };
 		98C6FE861F3832AE00D0E840 /* ASTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C6FE851F3832AE00D0E840 /* ASTTests.swift */; };
-		98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */; };
 		98D69A441FD2CC3200C3302F /* UIView+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D69A431FD2CC3200C3302F /* UIView+ExtensionTests.swift */; };
 		98D8F9DF1F815D20005A1DFE /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D8F9DE1F815D20005A1DFE /* UIView+Extension.swift */; };
 		98DC562C1F3CEF1C0024F522 /* ValuePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98DC562A1F3CEF1C0024F522 /* ValuePicker.storyboard */; };
@@ -175,6 +174,8 @@
 		98E987C61FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E987C41FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift */; };
 		98E987C81FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E987C71FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift */; };
 		98F2B9EF1F719B380092A015 /* SourceEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F2B9EE1F719B380092A015 /* SourceEditorTextView.swift */; };
+		98FDE16F1FF68C6600D881C8 /* SelectObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDE16E1FF68C6600D881C8 /* SelectObjectViewController.swift */; };
+		98FDE1711FF68DB100D881C8 /* SelectObjectViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDE1701FF68DB100D881C8 /* SelectObjectViewControllerTests.swift */; };
 		98FF4F951F968BC0004F46B0 /* InputImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FF4F941F968BC0004F46B0 /* InputImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -339,7 +340,6 @@
 		98C5E23E1F34B8DD006E7658 /* KernelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelError.swift; sourceTree = "<group>"; };
 		98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelCompilerTests.swift; sourceTree = "<group>"; };
 		98C6FE851F3832AE00D0E840 /* ASTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTTests.swift; sourceTree = "<group>"; };
-		98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTypeViewController.swift; sourceTree = "<group>"; };
 		98D475AC1F3BB88C0080D794 /* iconlarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconlarge.png; sourceTree = "<group>"; };
 		98D475AD1F3BB88D0080D794 /* Iconsmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Iconsmall.png; sourceTree = "<group>"; };
 		98D69A431FD2CC3200C3302F /* UIView+ExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ExtensionTests.swift"; sourceTree = "<group>"; };
@@ -354,6 +354,8 @@
 		98E987C41FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalShadingLanguageParser.swift; sourceTree = "<group>"; };
 		98E987C71FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalShadingLanguageParserTests.swift; sourceTree = "<group>"; };
 		98F2B9EE1F719B380092A015 /* SourceEditorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorTextView.swift; sourceTree = "<group>"; };
+		98FDE16E1FF68C6600D881C8 /* SelectObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectObjectViewController.swift; sourceTree = "<group>"; };
+		98FDE1701FF68DB100D881C8 /* SelectObjectViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectObjectViewControllerTests.swift; sourceTree = "<group>"; };
 		98FF4F941F968BC0004F46B0 /* InputImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -414,6 +416,7 @@
 				98B00A2A1F9D1E70006D2728 /* StatisticsView.swift */,
 				986E7E651FB8B123001FC74D /* DragInteractionImageView.swift */,
 				98E987BF1FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift */,
+				98FDE16E1FF68C6600D881C8 /* SelectObjectViewController.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				985D51961FA64A3D009881CC /* ExtensionsTests.swift */,
 				98E987C71FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift */,
 				98D69A431FD2CC3200C3302F /* UIView+ExtensionTests.swift */,
+				98FDE1701FF68DB100D881C8 /* SelectObjectViewControllerTests.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -669,7 +673,6 @@
 				98DC562A1F3CEF1C0024F522 /* ValuePicker.storyboard */,
 				98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */,
 				98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */,
-				98CED5E11F2DE71400E4F071 /* SelectTypeViewController.swift */,
 				98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */,
 				98A67FB11F3A17820043AA9D /* FloatPickerViewController.swift */,
 				98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */,
@@ -919,6 +922,7 @@
 				986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */,
 				98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */,
 				985668411F2E60EB00297A4E /* Parser.swift in Sources */,
+				98FDE16F1FF68C6600D881C8 /* SelectObjectViewController.swift in Sources */,
 				9888F4C71FB65C0700D108CF /* GenericDatabindingObserver.swift in Sources */,
 				98689EC51F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
 				98689ED01F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */,
@@ -959,7 +963,6 @@
 				987672451F2F5355002F9AAF /* Extensions.swift in Sources */,
 				985544911F7FFAA100E9F02A /* CoreImageColorKernel.swift in Sources */,
 				982DC6361F3FA1D1005DE418 /* ViewDraggingIndicator.swift in Sources */,
-				98CED5E21F2DE71400E4F071 /* SelectTypeViewController.swift in Sources */,
 				98D8F9DF1F815D20005A1DFE /* UIView+Extension.swift in Sources */,
 				98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */,
 				98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */,
@@ -1021,6 +1024,7 @@
 				983008731F6EEB67005C89C3 /* ProjectTests.swift in Sources */,
 				9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */,
 				98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */,
+				98FDE1711FF68DB100D881C8 /* SelectObjectViewControllerTests.swift in Sources */,
 				986AA72D1F62F679008F2091 /* TemplatesManagerTests.swift in Sources */,
 				980229B01F2FBF18000FFCA2 /* ErrorParserTests.swift in Sources */,
 				98C6FE861F3832AE00D0E840 /* ASTTests.swift in Sources */,

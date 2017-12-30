@@ -378,7 +378,7 @@
                             </barButtonItem>
                             <barButtonItem systemItem="action" id="IBv-aa-U1L">
                                 <connections>
-                                    <segue destination="JPN-hL-dOi" kind="presentation" modalPresentationStyle="formSheet" id="iiY-oe-yLQ"/>
+                                    <action selector="actionButtonTapped:" destination="BYZ-38-t0r" id="X1Y-4b-1o6"/>
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
@@ -423,52 +423,6 @@
                 </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-303" y="1124"/>
-        </scene>
-        <!--Export-->
-        <scene sceneID="hnW-X9-HX6">
-            <objects>
-                <tableViewController id="MM0-3d-Mpf" customClass="ExportTableViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="zda-tG-eNd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BasicCellIdentifier" textLabel="ENb-vx-CLf" style="IBUITableViewCellStyleDefault" id="Pzg-Hl-cYa">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pzg-Hl-cYa" id="ZNx-yF-mqv">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="CIKernel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ENb-vx-CLf">
-                                            <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="MM0-3d-Mpf" id="NMx-CQ-Ljl"/>
-                            <outlet property="delegate" destination="MM0-3d-Mpf" id="OhX-Pv-0yj"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Export" largeTitleDisplayMode="always" id="PWn-BL-Py8">
-                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="Jzt-0w-uBr">
-                            <connections>
-                                <action selector="tappedCancelButton" destination="MM0-3d-Mpf" id="SaI-Hb-O9t"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <value key="contentSizeForViewInPopover" type="size" width="375" height="200"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tH2-z4-Fsf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="318" y="-39"/>
         </scene>
         <!--Attributes View Controller-->
         <scene sceneID="WY2-JR-hmI">
@@ -1231,24 +1185,6 @@
             </objects>
             <point key="canvasLocation" x="-1225" y="1162"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="CXj-Fh-WZr">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JPN-hL-dOi" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FA3-4l-8Aq">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="MM0-3d-Mpf" kind="relationship" relationship="rootViewController" id="RHN-tT-2mJ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f5c-2z-ewP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1950" y="-327"/>
-        </scene>
         <!--New Project-->
         <scene sceneID="ziM-EO-EXd">
             <objects>
@@ -1361,8 +1297,8 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U7U-Nn-uZ5"/>
-        <segue reference="LVZ-vl-ww2"/>
+        <segue reference="A3z-MB-Lp4"/>
+        <segue reference="RgM-w3-xIs"/>
         <segue reference="Zbf-JI-q01"/>
     </inferredMetricsTieBreakers>
 </document>

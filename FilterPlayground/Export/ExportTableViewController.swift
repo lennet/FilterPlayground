@@ -8,74 +8,9 @@
 
 import UIKit
 
-struct ExportOption {
-    var title: String
-    var action: ((UIView?) -> Void)
-}
-
-class ExportTableViewController: UITableViewController {
-
-    var document: Project?
-    var showCompileWarning: Bool = false
-    var exportOptions: [ExportOption] = []
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // TODO: define options depending on the shading language
-
-        exportOptions = [
-            ExportOption(title: "CIKernel", action: exportAsCIKernel),
-            ExportOption(title: "CIFilter", action: exportAsCIFilter),
-            ExportOption(title: "Swift Playground", action: exportAsSwiftPlayground),
-            ExportOption(title: "Filter Playground", action: exportAsPlayground),
-        ]
-    }
-
-    @IBAction func tappedCancelButton() {
-        dismiss(animated: true, completion: nil)
-    }
-
-    override func numberOfSections(in _: UITableView) -> Int {
-        return showCompileWarning ? 2 : 1
-    }
-
-    override func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if showCompileWarning && section == 0 {
-            return 1
-        } else {
-            return exportOptions.count
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCellIdentifier", for: indexPath)
-
-        if showCompileWarning && indexPath.section == 0 {
-            cell.imageView?.image = #imageLiteral(resourceName: "CompilerWarning").resize(to: CGSize(width: 32, height: 32))
-            cell.textLabel?.text = "Your code contains unresolved errors. An export will contain errors as well."
-            cell.textLabel?.numberOfLines = 0
-            cell.isUserInteractionEnabled = false
-            cell.accessoryType = .none
-        } else {
-            let option = exportOptions[indexPath.row]
-            cell.textLabel?.text = option.title
-        }
-
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard !showCompileWarning || indexPath.section != 0 else {
-            return
-        }
-
-        let sender = tableView.cellForRow(at: indexPath)
-        let option = exportOptions[indexPath.row]
-        option.action(sender)
-    }
-
+extension MainViewController {
     func exportAsSwiftPlayground(sender: UIView?) {
-        guard let document = document else {
+        guard let document = project else {
             return
         }
 
@@ -86,7 +21,7 @@ class ExportTableViewController: UITableViewController {
     }
 
     func exportAsPlayground(sender: UIView?) {
-        guard let document = document else {
+        guard let document = project else {
             return
         }
         document.save(to: document.fileURL, for: .forOverwriting) { _ in
@@ -95,7 +30,7 @@ class ExportTableViewController: UITableViewController {
     }
 
     func exportAsCIFilter(sender: UIView?) {
-        guard let document = document,
+        guard let document = project,
             let sourceData = CIFilterExportHelper.cifilter(with: document.source, type: document.metaData.type, arguments: document.metaData.arguments, name: document.localizedName.withoutWhiteSpaces.withoutSlash).data(using: .utf8) else {
             return
         }
@@ -113,7 +48,7 @@ class ExportTableViewController: UITableViewController {
     }
 
     func exportAsCIKernel(sender: UIView?) {
-        guard let document = document,
+        guard let document = project,
             let sourceData = document.source.data(using: .utf8) else {
             return
         }
@@ -137,5 +72,41 @@ class ExportTableViewController: UITableViewController {
         activityViewController.popoverPresentationController?.sourceView = sourceView
         activityViewController.popoverPresentationController?.sourceRect = sourceView?.bounds ?? .zero
         present(activityViewController, animated: true, completion: nil)
+    }
+}
+
+struct ExportOption: SelectObjectViewControllerPresentable {
+    var title: String
+    var action: ((UIView?) -> Void)
+
+    var subtitle: String? {
+        return nil
+    }
+
+    var image: UIImage? {
+        return nil
+    }
+
+    var interactionEnabled: Bool {
+        return true
+    }
+}
+
+struct ExportWarningObject: SelectObjectViewControllerPresentable {
+
+    var title: String {
+        return "Your code contains unresolved errors. An export will contain errors as well."
+    }
+
+    var subtitle: String? {
+        return nil
+    }
+
+    var image: UIImage? {
+        return #imageLiteral(resourceName: "CompilerWarning").resize(to: CGSize(width: 32, height: 32))
+    }
+
+    var interactionEnabled: Bool {
+        return false
     }
 }

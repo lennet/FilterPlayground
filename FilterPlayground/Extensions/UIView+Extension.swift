@@ -15,4 +15,17 @@ extension UIView {
             view.removeFromSuperview()
         }
     }
+
+    func constraint(for attribute: NSLayoutAttribute) -> NSLayoutConstraint? {
+        for constraint in constraints where constraint.firstAttribute == attribute {
+            return constraint
+        }
+        return nil
+    }
+
+    func deactivateConstraints() {
+        for constraint in constraints {
+            removeConstraint(constraint)
+        }
+    }
 }

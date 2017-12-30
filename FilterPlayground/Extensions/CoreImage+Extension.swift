@@ -27,10 +27,9 @@ extension CIImage {
             }
             return UIImageJPEGRepresentation(image, 1.0)
         #elseif os(OSX)
-            // TODO:
-            return nil
+            fatalError()
         #else
-            return nil
+            fatalError()
         #endif
     }
 

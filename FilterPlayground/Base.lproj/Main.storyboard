@@ -310,11 +310,11 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0LG-qD-OhP" customClass="ViewDraggingIndicator" customModule="FilterPlayground" customModuleProvider="target">
                                         <rect key="frame" x="115" y="0.0" width="80" height="603"/>
                                         <subviews>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s7q-FV-ZGY">
-                                                <rect key="frame" x="35" y="261.5" width="10" height="80"/>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s7q-FV-ZGY" customClass="DraggingIndicatorView" customModule="FilterPlayground" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="261.5" width="40" height="80"/>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="10" id="JMW-1p-R7T"/>
+                                                    <constraint firstAttribute="width" constant="40" id="JMW-1p-R7T"/>
                                                     <constraint firstAttribute="height" constant="80" id="vIm-qG-CCK"/>
                                                 </constraints>
                                             </view>
@@ -393,11 +393,6 @@
                                     <action selector="didTapAttribtutesButton:" destination="BYZ-38-t0r" id="zhJ-Cx-O3q"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="LiveView" id="ixj-CU-ojp">
-                                <connections>
-                                    <action selector="didTapLiveViewButton:" destination="BYZ-38-t0r" id="kxN-q7-FRP"/>
-                                </connections>
-                            </barButtonItem>
                             <barButtonItem systemItem="bookmarks" id="AP8-1U-dgp">
                                 <connections>
                                     <action selector="documentation:" destination="BYZ-38-t0r" id="DxU-mZ-0vO"/>
@@ -410,6 +405,7 @@
                         <outlet property="attributesBarButtonItem" destination="PCG-9f-F1l" id="u9T-p5-dfP"/>
                         <outlet property="attributesContainerWidthConstraint" destination="Eee-sr-ho5" id="2qd-JR-sRN"/>
                         <outlet property="contentViewBottomConstraint" destination="57e-Lh-M0N" id="EAj-XD-kh2"/>
+                        <outlet property="draggingIndicator" destination="0LG-qD-OhP" id="maq-To-gmu"/>
                         <outlet property="sourceEditorWidthConstraint" destination="udQ-FA-yvS" id="84x-sp-Urz"/>
                         <segue destination="04X-wZ-hWf" kind="presentation" identifier="initialSetupSegue" modalPresentationStyle="formSheet" id="Vhs-y3-SKK"/>
                         <segue destination="04X-wZ-hWf" kind="presentation" identifier="initialSetupSegueWithoutAnimation" animates="NO" modalPresentationStyle="formSheet" id="6YF-hI-kgR"/>

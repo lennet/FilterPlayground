@@ -15,12 +15,11 @@ class MainViewController: UIViewController {
     @IBOutlet var attributesBarButtonItem: UIBarButtonItem!
     @IBOutlet var attributesContainerWidthConstraint: NSLayoutConstraint!
     @IBOutlet var sourceEditorWidthConstraint: NSLayoutConstraint!
-
     weak var attributesViewController: AttributesViewController?
     weak var liveViewController: LiveViewController?
     weak var sourceEditorViewController: SourceEditorViewController?
     weak var documentBrowser: DocumentBrowserViewController?
-
+    @IBOutlet var draggingIndicator: ViewDraggingIndicator!
     // TODO: refactor
     var inputImageValues: [KernelInputImage] {
 
@@ -49,12 +48,6 @@ class MainViewController: UIViewController {
 
     var project: Project?
     var databindingObservers: [GenericDatabindingObserver] = []
-
-    var showLiveView = true {
-        didSet {
-            updateViewConstraints()
-        }
-    }
 
     var showAttributes = true {
         didSet {
@@ -218,11 +211,7 @@ class MainViewController: UIViewController {
     func updateViewConstraints(newWidth: CGFloat) {
         attributesContainerWidthConstraint.constant = showAttributes ? 220 : 0
         let maxWidth = newWidth - attributesContainerWidthConstraint.constant
-        if showLiveView {
-            sourceEditorWidthConstraint.constant = maxWidth * sourceViewRatio
-        } else {
-            sourceEditorWidthConstraint.constant = maxWidth
-        }
+        sourceEditorWidthConstraint.constant = maxWidth * sourceViewRatio
     }
 
     func display(errors: [KernelError]) {
@@ -265,17 +254,10 @@ class MainViewController: UIViewController {
     @IBAction func handleDividerPan(_ sender: UIPanGestureRecognizer) {
         let translation = sender.translation(in: sender.view!)
         sender.setTranslation(.zero, in: sender.view!)
-
         let maxWidth = view.frame.width - attributesContainerWidthConstraint.constant
-        let oldValue = sourceViewRatio
-
         sourceViewRatio += translation.x / maxWidth
         sourceViewRatio = max(sourceViewRatio, 0)
         sourceViewRatio = min(sourceViewRatio, 1)
-
-        if oldValue == 1 && sourceViewRatio < 1 {
-            showLiveView = true
-        }
 
         switch sender.state {
         case .cancelled, .ended:
@@ -290,24 +272,15 @@ class MainViewController: UIViewController {
             updateViewConstraints()
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
                 self.view.layoutIfNeeded()
-            }, completion: nil)
+            }, completion: { _ in
+                self.draggingIndicator.alwaysShowIndicator = self.sourceViewRatio == 1
+                self.draggingIndicator.expandIndicator = self.sourceViewRatio == 1
+            })
         default:
+            draggingIndicator.alwaysShowIndicator = false
+            draggingIndicator.expandIndicator = false
             updateViewConstraints()
             view.layoutIfNeeded()
-        }
-    }
-
-    @IBAction func didTapLiveViewButton(_: Any) {
-        if showLiveView,
-            sourceViewRatio == 1 {
-            sourceViewRatio = 0.5
-        } else if !showLiveView {
-            showLiveView = true
-        }
-        updateViewConstraints()
-
-        UIView.animate(withDuration: 0.25) {
-            self.view.layoutIfNeeded()
         }
     }
 

@@ -95,7 +95,7 @@ struct ExportOption: SelectObjectViewControllerPresentable {
 struct ExportWarningObject: SelectObjectViewControllerPresentable {
 
     var title: String {
-        return "Your code contains unresolved errors. An export will contain errors as well."
+        return 🌎("Export_CompileErrorsWarning_Label")
     }
 
     var subtitle: String? {

@@ -18,4 +18,12 @@
 "Statistics_FPS_Label_$f" = "Frames Per Second %.0f";
 "Statistics_GPU_Label_$f" = "GPU Frame Time ~ %.2f  ms";
 
+// Export
+"Export_SwiftPlayground_Label" = "Swift Playground";
+"Export_CIFilter_Label" = "CIFilter";
+"Export_CIKernel_Label" = "CIKernel";
+"Export_FilterPlayground_Label" = "Filter Playground";
+"Export_CompileErrorsWarning_Label" = "Your code contains unresolved errors. An export will contain errors as well.";
+
+
 

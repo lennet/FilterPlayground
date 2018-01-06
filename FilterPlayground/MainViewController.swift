@@ -403,10 +403,10 @@ class MainViewController: UIViewController {
 
     @IBAction func actionButtonTapped(_ sender: UIBarButtonItem) {
         var objects: [[SelectObjectViewControllerPresentable]] = [[
-            ExportOption(title: "CIKernel", action: exportAsCIKernel),
-            ExportOption(title: "CIFilter", action: exportAsCIFilter),
-            ExportOption(title: "Swift Playground", action: exportAsSwiftPlayground),
-            ExportOption(title: "Filter Playground", action: exportAsPlayground),
+            ExportOption(title: 🌎("Export_CIKernel_Label"), action: exportAsCIKernel),
+            ExportOption(title: 🌎("Export_CIFilter_Label"), action: exportAsCIFilter),
+            ExportOption(title: 🌎("Export_SwiftPlayground_Label"), action: exportAsSwiftPlayground),
+            ExportOption(title: 🌎("Export_FilterPlayground_Label"), action: exportAsPlayground),
         ]]
         if (sourceEditorViewController?.errors.count ?? 0) != 0 {
             objects.insert([ExportWarningObject()], at: 0)

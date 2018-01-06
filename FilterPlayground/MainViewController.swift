@@ -408,10 +408,12 @@ class MainViewController: UIViewController {
             ExportOption(title: 🌎("Export_SwiftPlayground_Label"), action: exportAsSwiftPlayground),
             ExportOption(title: 🌎("Export_FilterPlayground_Label"), action: exportAsPlayground),
         ]]
+        var tableViewStyle: UITableViewStyle = .plain
         if (sourceEditorViewController?.errors.count ?? 0) != 0 {
             objects.insert([ExportWarningObject()], at: 0)
+            tableViewStyle = .grouped
         }
-        let viewController = SelectObjectViewController(objects: objects, style: .grouped) { exportOption, vc in
+        let viewController = SelectObjectViewController(objects: objects, style: tableViewStyle) { exportOption, vc in
             var senderView: UIView?
             if let selectedIndexPath = vc.tableView.indexPathForSelectedRow {
                 senderView = vc.tableView.cellForRow(at: selectedIndexPath)

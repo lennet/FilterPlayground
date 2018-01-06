@@ -98,13 +98,11 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
 
     @IBAction func dataBindingButtonTapped(_ sender: UIButton) {
         if selectedBinding == .none {
-            let viewController = UIStoryboard.valuePicker.instantiateViewController(withIdentifier: "selectDataBindingViewControllerIdentifier") as! SelectDataBindingViewController
-            viewController.supportedBindings = attribute?.type.availableDataBindings ?? []
-            viewController.didSelectBinding = { [weak self] binding in
-                self?.attribute?.binding = binding
-                self?.selectedBinding = binding
-                self?.update()
-            }
+            let viewController = SelectObjectViewController(objects: [attribute?.type.availableDataBindings ?? []], callback: { binding, _ in
+                self.attribute?.binding = binding as? DataBinding
+                self.selectedBinding = binding as! DataBinding
+                self.update()
+            })
             present(viewController: viewController, with: sender)
         } else {
             attribute?.binding = .none
@@ -215,7 +213,6 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
 }
 
 extension KernelArgumentType: SelectObjectViewControllerPresentable {
-
     var title: String {
         return rawValue
     }
@@ -230,5 +227,23 @@ extension KernelArgumentType: SelectObjectViewControllerPresentable {
 
     var image: UIImage? {
         return nil
+    }
+}
+
+extension DataBinding: SelectObjectViewControllerPresentable {
+    var title: String {
+        return String(describing: self)
+    }
+
+    var subtitle: String? {
+        return nil
+    }
+
+    var image: UIImage? {
+        return nil
+    }
+
+    var interactionEnabled: Bool {
+        return true
     }
 }

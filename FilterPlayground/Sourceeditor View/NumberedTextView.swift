@@ -281,12 +281,13 @@ class NumberedTextView: UIView, UITextViewDelegate {
 
     func insertArgumentsForCoreImage(_ arguments: [KernelDefinitionArgument]) {
         let selectedRange = textView.selectedRange
+        let source = text ?? ""
         DispatchQueue.global(qos: .userInitiated).async {
             var ast: ASTNode
             if let current = self.currentAST {
                 ast = current
             } else {
-                let parser = Parser(string: self.text ?? "")
+                let parser = Parser(string: source)
                 ast = parser.getAST()
             }
             ast.replaceArguments(newArguments: arguments)

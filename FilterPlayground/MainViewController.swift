@@ -413,7 +413,7 @@ class MainViewController: UIViewController {
             objects.insert([ExportWarningObject()], at: 0)
             tableViewStyle = .grouped
         }
-        let viewController = SelectObjectViewController(objects: objects, style: tableViewStyle) { exportOption, vc in
+        let viewController = SelectObjectController(title: "Export", objects: objects, style: tableViewStyle) { exportOption, vc in
             var senderView: UIView?
             if let selectedIndexPath = vc.tableView.indexPathForSelectedRow {
                 senderView = vc.tableView.cellForRow(at: selectedIndexPath)

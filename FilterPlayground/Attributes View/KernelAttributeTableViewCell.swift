@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
+class KernelAttributeTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     @IBOutlet var valueSelectionHeight: NSLayoutConstraint!
     @IBOutlet var stackView: UIStackView!
@@ -103,7 +103,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
 
     @IBAction func dataBindingButtonTapped(_ sender: UIButton) {
         if selectedBinding == .none {
-            let viewController = SelectObjectViewController(objects: [attribute?.type.availableDataBindings ?? []], callback: { binding, _ in
+            let viewController = SelectObjectController(title: "Data Binding", objects: [attribute?.type.availableDataBindings ?? []], callback: { binding, _ in
                 self.attribute?.binding = binding as? DataBinding
                 self.selectedBinding = binding as! DataBinding
                 self.update()
@@ -127,6 +127,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
                 }
             }
         }
+        viewController.navigationItem.title = "Type"
         present(viewController: viewController, with: sender)
     }
 
@@ -166,10 +167,6 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         updateCallBack?(self, attribute!)
     }
 
-    func adaptivePresentationStyle(for _: UIPresentationController) -> UIModalPresentationStyle {
-        return .none
-    }
-
     func registerNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(notification:)), name: ThemeManager.themeChangedNotificationName, object: nil)
         themeChanged(notification: nil)
@@ -186,7 +183,6 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         viewController.modalPresentationStyle = .popover
         viewController.popoverPresentationController?.sourceView = sender
         viewController.popoverPresentationController?.sourceRect = sender.bounds
-        viewController.popoverPresentationController?.delegate = self
 
         // dismiss keyboard if needed
         if let navigationController = presentedViewController as? UINavigationController {

@@ -26,11 +26,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
                 return
             }
 
-            if selectedBinding == .none {
-                dataBindingButton.setTitle("Bindings available", for: .normal)
-            } else {
-                dataBindingButton.setTitle("Remove Binding", for: .normal)
-            }
+            updateBindingsButton()
         }
     }
 
@@ -65,11 +61,20 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         super.awakeFromNib()
         registerNotifications()
         nameTextField.delegate = self
+        updateBindingsButton()
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         attribute = nil
+    }
+
+    func updateBindingsButton() {
+        if selectedBinding == .none {
+            dataBindingButton.setTitle("Bindings available", for: .normal)
+        } else {
+            dataBindingButton.setTitle("Remove Binding", for: .normal)
+        }
     }
 
     @IBAction func nameTextFieldChanged(_: Any) {
@@ -107,11 +112,12 @@ class KernelAttributeTableViewCell: UITableViewCell, UIPopoverPresentationContro
         } else {
             attribute?.binding = .none
             selectedBinding = .none
+            update()
         }
     }
 
     func presentTypeSelection(with sender: UIButton) {
-        let viewController = SelectObjectViewController(objects: [supportedTypes]) { [weak self] type, _ in
+        let viewController = SelectObjectController(title: "Type", objects: [supportedTypes]) { [weak self] type, _ in
             let argumentType = type as! KernelArgumentType
             self?.attribute = KernelArgument(index: self?.attribute?.index ?? 0, name: self?.attribute?.name ?? "", type: argumentType, value: argumentType.defaultValue)
             self?.update()

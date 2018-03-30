@@ -9,7 +9,6 @@
 import MetalKit
 
 class MetalKernel: NSObject, Kernel, MTKViewDelegate {
-
     var extentSettings: KernelOutputSizeSetting {
         return .sizeOnly
     }
@@ -69,7 +68,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
     required override init() {
         device = MTLCreateSystemDefaultDevice()
         commandQueue = device?.makeCommandQueue()
-        #if !((arch(i386) || arch(x86_64)) && os(iOS))
+        #if !(targetEnvironment(simulator))
             context = CIContext(mtlDevice: device!)
         #else
             context = CIContext()
@@ -107,14 +106,14 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
     func makeInputTextures() {
         // TODO: use CIContext to render image into texture
         guard let device = device else { return }
-        inputTextures = arguments.flatMap { (argument) -> CIImage? in
+        inputTextures = arguments.compactMap { (argument) -> CIImage? in
             switch (argument.access, argument.value) {
             case let (.read, .sample(image)):
                 return image
             default:
                 return nil
             }
-        }.flatMap { (image) -> MTLTexture? in
+        }.compactMap { (image) -> MTLTexture? in
 
             guard let cgImage = context?.createCGImage(image, from: image.extent) else { return nil }
 
@@ -123,7 +122,6 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
             do {
                 return try textureLoader.newTexture(cgImage: cgImage, options: nil)
             } catch {
-
                 print(error)
                 if let data = image.asJPGData {
                     return try? textureLoader.newTexture(data: data, options: nil)
@@ -192,7 +190,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
             inputTextures.enumerated().forEach({ index, texture in
                 commandEncoder?.setTexture(texture, index: index)
             })
-            #if !((arch(i386) || arch(x86_64)) && os(iOS))
+            #if !(targetEnvironment(simulator))
                 commandEncoder?.setTexture(currentDrawable.texture, index: inputTextures.count)
             #endif
 

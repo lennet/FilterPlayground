@@ -9,7 +9,6 @@
 import CoreImage
 
 class CoreImageWarpKernel: CoreImageKernel {
-
     override var extent: CGRect {
         switch outputSize {
         case .inherit:
@@ -52,6 +51,6 @@ class CoreImageWarpKernel: CoreImageKernel {
 
         return warpKernel?.apply(extent: extent, roiCallback: { (_, rect) -> CGRect in
             rect
-        }, image: input, arguments: attributes.flatMap { $0.asKernelValue })
+        }, image: input, arguments: attributes.compactMap { $0.asKernelValue })
     }
 }

@@ -18,7 +18,6 @@ protocol KernelArgumentValueView: class {
 }
 
 class KernelArgumentValueViewHelper {
-
     static func view(for valueType: KernelArgumentType) -> KernelArgumentValueView.Type {
         switch valueType {
         case .float:

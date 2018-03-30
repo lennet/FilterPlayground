@@ -9,10 +9,9 @@
 import Foundation
 
 class MetalErrorParser {
-
     class func compileErrors(for errorString: String) -> [KernelError] {
-        let components = errorString.components(separatedBy: "program_source").flatMap { $0.firstLine }[1...]
-        return components.flatMap(getError)
+        let components = errorString.components(separatedBy: "program_source").compactMap { $0.firstLine }[1...]
+        return components.compactMap(getError)
     }
 
     class func getError(errorString: String) -> KernelError? {

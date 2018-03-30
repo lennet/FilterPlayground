@@ -12,7 +12,6 @@ class DraggingIndicatorView: UIView {
 }
 
 class ViewDraggingIndicator: UIView {
-
     @IBOutlet var indicator: DraggingIndicatorView!
     var alwaysShowIndicator = false {
         didSet {

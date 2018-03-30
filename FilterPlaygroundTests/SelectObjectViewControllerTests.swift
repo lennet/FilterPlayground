@@ -24,17 +24,6 @@ struct MockPrensentable: SelectObjectViewControllerPresentable {
 }
 
 class SelectObjectViewControllerTests: XCTestCase {
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
     func testPresentTitle() {
         let objects = [MockPrensentable(title: "foo", subtitle: "bar", index: 0), MockPrensentable(title: "a", subtitle: "b", index: 1)]
         let callBack: (SelectObjectViewControllerPresentable, SelectObjectViewController) -> Void = { _, _ in }

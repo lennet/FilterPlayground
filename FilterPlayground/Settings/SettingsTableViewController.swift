@@ -9,7 +9,6 @@
 import UIKit
 
 class SettingsTableViewController: UITableViewController {
-
     @IBOutlet var tabsVsSpacesSegmentedControl: UISegmentedControl!
     @IBOutlet var nightModeSwitch: UISwitch!
     @IBOutlet var frameRateLabel: UILabel!

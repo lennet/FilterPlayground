@@ -9,7 +9,6 @@
 import Foundation
 
 class MetalShadingLanguageParser {
-
     let tokenizer: Tokenizer
     init(string: String) {
         tokenizer = Tokenizer(string: string)

@@ -9,7 +9,6 @@
 import UIKit
 
 class InputImageTableViewCell: UITableViewCell {
-
     static let identifier = "InputImageTableViewCellIdentifier"
 
     @IBOutlet var inputImageView: CustomImageView!

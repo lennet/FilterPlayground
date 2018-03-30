@@ -9,7 +9,6 @@
 import UIKit
 
 class SourceEditorTextStorage: NSTextStorage {
-
     var shouldIgnoreNextChange = false
     var attribtutedStringForString: ((String, @escaping (NSAttributedString) -> Void) -> Void)?
     var attributedString: NSMutableAttributedString = NSMutableAttributedString(string: "")

@@ -15,7 +15,7 @@ extension MainViewController {
         }
 
         let name = document.localizedName.withoutWhiteSpaces.withoutSlash
-        let inputImages = document.metaData.inputImages.flatMap { $0.image }.flatMap(UIImagePNGRepresentation)
+        let inputImages = document.metaData.inputImages.compactMap { $0.image }.compactMap(UIImagePNGRepresentation)
         let playground = SwiftPlaygroundsExportHelper.swiftPlayground(with: name, type: document.metaData.type, kernelSource: document.source, arguments: document.metaData.arguments, inputImages: inputImages)
         presentActivityViewController(sourceView: sender, items: [playground])
     }
@@ -93,7 +93,6 @@ struct ExportOption: SelectObjectViewControllerPresentable {
 }
 
 struct ExportWarningObject: SelectObjectViewControllerPresentable {
-
     var title: String {
         return 🌎("Export_CompileErrorsWarning_Label")
     }

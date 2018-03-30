@@ -9,7 +9,6 @@
 import UIKit
 
 class VectorValuePicker: UIControl, KernelArgumentValueView, UIPopoverPresentationControllerDelegate {
-
     var prefferedHeight: Float {
         return 0
     }

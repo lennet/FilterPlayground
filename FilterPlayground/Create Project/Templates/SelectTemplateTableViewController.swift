@@ -9,7 +9,6 @@
 import UIKit
 
 class SelectTemplateTableViewController: UITableViewController {
-
     let templates = TemplatesManager.getURLs()
     var didSelectTemplate: ((URL) -> Void)?
 

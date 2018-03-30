@@ -14,7 +14,6 @@ enum ProjectError: Error {
 }
 
 class Project: UIDocument {
-
     static let type: String = "FilterPlayground"
 
     var resourcesWrapper = FileWrapper(directoryWithFileWrappers: [:])
@@ -92,7 +91,7 @@ class Project: UIDocument {
     }
 
     func getAllResources() -> [(name: String, data: Data)] {
-        return resourcesWrapper.fileWrappers?.values.flatMap {
+        return resourcesWrapper.fileWrappers?.values.compactMap {
             guard let data = $0.regularFileContents,
                 let name = $0.preferredFilename else { return nil }
             return (name: name, data: data)
@@ -112,7 +111,6 @@ class Project: UIDocument {
     }
 
     override func load(fromContents contents: Any, ofType _: String?) throws {
-
         guard let filewrapper = contents as? FileWrapper else {
             throw ProjectError.unknownFileFormat
         }
@@ -142,7 +140,7 @@ class Project: UIDocument {
             resourcesWrapper = resourcesFilewrapper
         }
 
-        metaData.arguments = metaData.arguments.flatMap { argument in
+        metaData.arguments = metaData.arguments.compactMap { argument in
             guard case .sample = argument.type else { return argument }
             return KernelArgument(index: argument.index, name: argument.name, type: argument.type, value: .sample(self.getImage(for: argument.name)!), access: argument.access, origin: argument.origin)
         }

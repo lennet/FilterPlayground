@@ -10,7 +10,6 @@
 import XCTest
 
 class MockFrameRateManager: FrameRateManager {
-
     var mockIsLowPowerModeEnabled = false
     override var isLowPowerModeEnabled: Bool {
         return mockIsLowPowerModeEnabled
@@ -18,15 +17,9 @@ class MockFrameRateManager: FrameRateManager {
 }
 
 class FrameRateManagerTests: XCTestCase {
-
     override func setUp() {
         super.setUp()
         Settings.ignoreLowPowerMode = false
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
     }
 
     func testLowPowerMode() {

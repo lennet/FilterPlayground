@@ -10,7 +10,6 @@ import MobileCoreServices
 import UIKit
 
 class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
-
     var didOpenedDocument: ((Project) -> Void)?
     var importHandler: ((URL?, UIDocumentBrowserViewController.ImportMode) -> Void)?
 
@@ -22,7 +21,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         allowsPickingMultipleItems = true
     }
 
-    #if ((arch(i386) || arch(x86_64)) && os(iOS))
+    #if (targetEnvironment(simulator))
         // workaround for the broken UIDocumentBrowser on simulators on Xcode 9.2
         override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
@@ -100,7 +99,6 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     // MARK: Document Presentation
 
     func presentDocument(at documentURL: URL) {
-
         let document = Project(fileURL: documentURL)
         document.open { _ in
             if let didOpenedDocument = self.didOpenedDocument {

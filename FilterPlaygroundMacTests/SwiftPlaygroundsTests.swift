@@ -11,7 +11,6 @@ import CoreImage
 import XCTest
 
 class SwiftPlaygroundsTests: XCTestCase {
-
     // the first two tests are only meta tests to test the assert method
 
     func testCompilerDoesntCompiles() {

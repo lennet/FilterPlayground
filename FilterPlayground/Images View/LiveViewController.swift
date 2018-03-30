@@ -9,7 +9,6 @@
 import UIKit
 
 class LiveViewController: UIViewController {
-
     @IBOutlet var outputContainerView: UIView!
 
     override func viewDidLoad() {

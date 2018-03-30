@@ -10,7 +10,6 @@ import SafariServices
 import UIKit
 
 class MainViewController: UIViewController {
-
     @IBOutlet var contentViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var attributesBarButtonItem: UIBarButtonItem!
     @IBOutlet var attributesContainerWidthConstraint: NSLayoutConstraint!
@@ -22,7 +21,6 @@ class MainViewController: UIViewController {
     @IBOutlet var draggingIndicator: ViewDraggingIndicator!
     // TODO: refactor
     var inputImageValues: [KernelInputImage] {
-
         get {
             return attributesViewController?.inputImages ?? []
         }
@@ -137,7 +135,6 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func run() {
-
         guard !isRunning else { return }
         defer {
             isRunning = false
@@ -332,7 +329,7 @@ class MainViewController: UIViewController {
 
     func updateInputImages() {
         guard let project = project else { return }
-        kernel?.inputImages = project.metaData.inputImages.flatMap { $0.image?.asCIImage }
+        kernel?.inputImages = project.metaData.inputImages.compactMap { $0.image?.asCIImage }
         attributesViewController?.inheritSize = kernel?.extent ?? .zero
         kernel?.render()
     }

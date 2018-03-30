@@ -10,7 +10,6 @@ import UIKit
 
 @IBDesignable
 class FloatSelectionButton: UIButton {
-
     @IBInspectable var needsLeftBorder = false {
         didSet {
             setNeedsDisplay()

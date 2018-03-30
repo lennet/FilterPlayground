@@ -11,8 +11,7 @@ import CoreImage
     import UIKit
 #endif
 
-enum KernelArgumentType: String, Codable {
-
+enum KernelArgumentType: String, Codable, Equatable {
     case float
     case vec2
     case vec3
@@ -29,7 +28,6 @@ enum KernelArgumentType: String, Codable {
 }
 
 extension KernelArgumentType {
-
     var defaultValue: KernelArgumentValue {
         switch self {
         case .float:

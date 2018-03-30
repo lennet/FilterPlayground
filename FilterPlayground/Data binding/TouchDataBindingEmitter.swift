@@ -10,7 +10,6 @@ import CoreGraphics
 import Foundation
 
 class TouchDataBindingEmitter: DataBindingEmitter {
-
     static let shared: DataBindingEmitter = TouchDataBindingEmitter()
 
     var isActive: Bool = false

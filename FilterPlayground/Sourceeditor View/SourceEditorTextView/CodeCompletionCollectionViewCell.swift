@@ -9,7 +9,6 @@
 import UIKit
 
 class CodeCompletionCollectionViewCell: UICollectionViewCell {
-
     class var reuseIdentifier: String {
         return String(describing: CodeCompletionCollectionViewCell.self)
     }

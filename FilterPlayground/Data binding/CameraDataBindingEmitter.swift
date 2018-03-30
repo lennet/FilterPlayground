@@ -14,7 +14,6 @@ import CoreMedia
 #endif
 
 class CameraDataBindingEmitter: NSObject, DataBindingEmitter, AVCaptureVideoDataOutputSampleBufferDelegate {
-
     static let shared: DataBindingEmitter = CameraDataBindingEmitter()
     let session = AVCaptureSession()
     let videoOrientation: AVCaptureVideoOrientation = {

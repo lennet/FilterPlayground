@@ -10,7 +10,6 @@
 import XCTest
 
 class SavingDocumentTests: XCTestCase {
-
     var url: URL!
 
     override func setUp() {
@@ -30,6 +29,7 @@ class SavingDocumentTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Waiting for file creation")
 
         let document = Project(fileURL: url)
+
         document.save(to: url, for: .forCreating) { _ in
             document.source = text
             document.metaData.arguments = [attribute]

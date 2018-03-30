@@ -9,7 +9,6 @@
 import CoreImage
 
 class CoreImageBlendKernel: CoreImageKernel {
-
     override var extentSettings: KernelOutputSizeSetting {
         return .none
     }

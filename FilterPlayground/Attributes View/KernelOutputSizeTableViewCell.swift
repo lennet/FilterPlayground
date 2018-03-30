@@ -9,7 +9,6 @@
 import UIKit
 
 class KernelOutputSizeTableViewCell: UITableViewCell {
-
     @IBOutlet var modeSegmentedControl: UISegmentedControl!
     @IBOutlet var labels: [UILabel]!
     var buttons: [FloatPickerButton] {

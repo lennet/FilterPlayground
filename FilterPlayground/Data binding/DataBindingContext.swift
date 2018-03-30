@@ -9,7 +9,6 @@
 import Foundation
 
 class DataBindingContext {
-
     static let shared = DataBindingContext()
 
     private init() {}

@@ -21,7 +21,6 @@ func == (lhs: (String, KernelArgumentType), rhs: (String, KernelArgumentType)) -
 }
 
 extension ASTNode: Equatable {
-
     static func == (lhs: ASTNode, rhs: ASTNode) -> Bool {
         switch (lhs, rhs) {
         case let (.comment(left), .comment(right)):
@@ -241,7 +240,6 @@ extension ASTNode: Equatable {
 }
 
 class ASTHelper {
-
     private init() {}
 
     class func getAST(for tokens: [Token]) -> ([ASTNode]) {

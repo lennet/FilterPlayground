@@ -16,7 +16,6 @@ enum DataBinding: String, Codable {
 }
 
 extension DataBinding {
-
     var emitter: DataBindingEmitter.Type? {
         switch self {
         case .time:

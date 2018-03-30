@@ -9,7 +9,6 @@
 import UIKit
 
 class SourcEditorLayoutManager: NSLayoutManager {
-
     var lastIndex = 0
     var lastLocation = 0
 

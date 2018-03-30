@@ -14,7 +14,6 @@ enum ShadingLanguage {
 }
 
 extension ShadingLanguage {
-
     var documentationURL: URL {
         switch self {
         case .coreimage:

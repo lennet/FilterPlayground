@@ -9,7 +9,6 @@
 import Foundation
 
 class TimeDataBindingEmitter: DataBindingEmitter {
-
     static let shared: DataBindingEmitter = TimeDataBindingEmitter()
 
     var timer: Timer?

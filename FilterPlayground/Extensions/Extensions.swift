@@ -20,7 +20,6 @@ func 🌎(_ key: String, with arguments: CVarArg..., comment: String = "") -> St
 }
 
 extension NSAttributedString {
-
     static func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString {
         let result = NSMutableAttributedString()
         result.append(lhs)
@@ -30,7 +29,6 @@ extension NSAttributedString {
 }
 
 extension String {
-
     var firstLine: String? {
         return components(separatedBy: "\n").first
     }
@@ -49,7 +47,6 @@ extension String {
 }
 
 extension FileManager {
-
     static func urlInDocumentsDirectory(for name: String) -> URL {
         let documentsPath = NSSearchPathForDirectoriesInDomains(
             .documentDirectory,
@@ -67,7 +64,6 @@ public func == <A: Equatable, B: Equatable>(lhs: [(A, B)], rhs: [(A, B)]) -> Boo
 }
 
 extension Array where Element: Equatable {
-
     func index(of element: Element, after index: Int) -> Int? {
         for i in index ..< count {
             if self[i] == element {
@@ -133,7 +129,6 @@ extension Array {
 }
 
 extension Array where Element == Double {
-
     func sum() -> Double {
         return reduce(0, +)
     }
@@ -144,7 +139,6 @@ extension Array where Element == Double {
 }
 
 extension CGFloat {
-
     var asRadian: CGFloat {
         return self * CGFloat.pi / 180
     }
@@ -155,7 +149,6 @@ extension CGFloat {
 }
 
 extension float2: Codable {
-
     private enum CodingKeys: String, CodingKey {
         case x
         case y

@@ -21,7 +21,6 @@ enum Token {
 }
 
 extension Token: Equatable {
-
     static func == (lhs: Token, rhs: Token) -> Bool {
         switch (lhs, rhs) {
         case let (.op(a), .op(b)):
@@ -44,7 +43,6 @@ extension Token: Equatable {
 }
 
 extension Token {
-
     var stringRepresentation: String {
         switch self {
         case let .op(a):
@@ -113,7 +111,6 @@ enum Identifier {
 }
 
 extension Identifier: Equatable {
-
     static func == (lhs: Identifier, rhs: Identifier) -> Bool {
         switch (lhs, rhs) {
         case let (.other(a), .other(b)):
@@ -159,7 +156,6 @@ enum Operator: String {
 }
 
 class Tokenizer {
-
     var index: String.Index
     var string: String
     var isAtEnd: Bool {
@@ -255,7 +251,6 @@ class Tokenizer {
 }
 
 class Parser {
-
     let tokenizer: Tokenizer
     init(string: String) {
         tokenizer = Tokenizer(string: string)
@@ -267,7 +262,6 @@ class Parser {
 }
 
 class Renderer {
-
     class func renderAsPlainText(tokens: [Token]) -> String {
         return tokens.map { $0.stringRepresentation }.joined()
     }

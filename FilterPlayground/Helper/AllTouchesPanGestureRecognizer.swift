@@ -11,7 +11,6 @@ import UIKit.UIGestureRecognizerSubclass
 
 // this is neccessary to get a pan directly after the first touch
 public class AllTouchesPanGestureRecognizer: UIPanGestureRecognizer {
-
     public var callBack: ((_ recognizer: AllTouchesPanGestureRecognizer, _ state: UIGestureRecognizerState) -> Void)?
 
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {

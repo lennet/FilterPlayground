@@ -10,17 +10,6 @@
 import XCTest
 
 class ASTTests: XCTestCase {
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
     func testMethod() {
         let text = "foo{ bar(); }"
         let tokens = Tokenizer(string: text).getTokens()
@@ -240,7 +229,7 @@ class ASTTests: XCTestCase {
         let tokens = Tokenizer(string: text).getTokens()
         let result = ASTHelper.getAST(for: tokens)
         let expectedResult = [ASTNode.bracetStatement(prefix: [.openingBracket], body:
-                [ASTNode.bracetStatement(prefix: [.openingBracket], body: [.unkown([.whiteSpace])], postfix: [.closingBracket])]
+            [ASTNode.bracetStatement(prefix: [.openingBracket], body: [.unkown([.whiteSpace])], postfix: [.closingBracket])]
             , postfix: [.closingBracket])]
 
         XCTAssertEqual(expectedResult, result)

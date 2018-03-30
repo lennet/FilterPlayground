@@ -9,7 +9,6 @@
 import UIKit
 
 class ColorPickerButton: ValuePickerButton {
-
     @objc override func handleTap() {
         let viewController = ColorPickerViewController.instantiate()
         viewController.colorChanged = { [weak self] r, g, b, a in

@@ -9,7 +9,6 @@
 import UIKit
 
 class SourceEditorTextView: UITextView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSTextStorageDelegate {
-
     var attribtutedStringForString: ((String, @escaping (NSAttributedString) -> Void) -> Void)? {
         set {
             (textStorage as? SourceEditorTextStorage)?.attribtutedStringForString = newValue

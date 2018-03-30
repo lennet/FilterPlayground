@@ -10,7 +10,6 @@ import UIKit
 
 // TODO: use the scrollViews drag to hide the ErrorView
 class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var headerView: UIView!
     @IBOutlet var errorTableView: UITableView!
@@ -95,7 +94,6 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     @objc func handleHeaderPan(gestureRecnogizer: UIPanGestureRecognizer) {
-
         var newHeight: CGFloat = 0
         var shouldAnimatedUpdate = false
 

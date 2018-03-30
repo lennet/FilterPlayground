@@ -10,7 +10,6 @@
 import XCTest
 
 class UIView_ExtensionTests: XCTestCase {
-
     func testRemoveAllSubviews() {
         let view = UIView()
         view.addSubview(UIView())

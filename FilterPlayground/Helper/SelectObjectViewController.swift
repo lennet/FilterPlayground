@@ -16,7 +16,6 @@ protocol SelectObjectViewControllerPresentable {
 }
 
 class SelectObjectController: UINavigationController, UIPopoverPresentationControllerDelegate {
-
     public var enforcePresentationStyle: Bool = false
 
     init(title: String? = nil, objects: [[SelectObjectViewControllerPresentable]], style: UITableViewStyle = .plain, callback: @escaping (SelectObjectViewControllerPresentable, SelectObjectViewController) -> Void) {
@@ -51,7 +50,6 @@ class SelectObjectController: UINavigationController, UIPopoverPresentationContr
 }
 
 class SelectObjectViewController: UITableViewController {
-
     fileprivate var objects: [[SelectObjectViewControllerPresentable]]
     fileprivate var callback: (SelectObjectViewControllerPresentable, SelectObjectViewController) -> Void
 

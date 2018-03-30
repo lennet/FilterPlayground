@@ -10,7 +10,6 @@
 import XCTest
 
 class MockDataBindingObserver: DataBindingObserver {
-
     var mockedBindingType: DataBinding = .time
     var observedBinding: DataBinding {
         return mockedBindingType
@@ -30,15 +29,9 @@ class MockDataBindingObserver: DataBindingObserver {
 }
 
 class DataBindingContextTests: XCTestCase {
-
     override func setUp() {
         super.setUp()
         DataBindingContext.shared.reset()
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
     }
 
     func testAddObserver() {

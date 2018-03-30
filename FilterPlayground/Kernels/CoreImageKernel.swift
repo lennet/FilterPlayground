@@ -9,7 +9,6 @@
 import MetalKit
 
 class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
-
     var extentSettings: KernelOutputSizeSetting {
         return .sizeAndPosition
     }
@@ -42,7 +41,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
     required override init() {
         device = MTLCreateSystemDefaultDevice()
         commandQueue = device?.makeCommandQueue()
-        #if !((arch(i386) || arch(x86_64)) && os(iOS))
+        #if !(targetEnvironment(simulator))
             context = CIContext(mtlDevice: device!)
         #else
             context = CIContext()
@@ -86,7 +85,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
     }
 
     func getImage() -> CIImage? {
-        return apply(with: inputImages, attributes: arguments.flatMap { $0.value })
+        return apply(with: inputImages, attributes: arguments.compactMap { $0.value })
     }
 
     func compile(source: String, completion: @escaping (KernelCompilerResult) -> Void) {
@@ -109,7 +108,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
     }
 
     func apply(with _: [CIImage], attributes: [KernelArgumentValue]) -> CIImage? {
-        let arguments: [Any] = attributes.flatMap { $0.asKernelValue }
+        let arguments: [Any] = attributes.compactMap { $0.asKernelValue }
         return kernel?.apply(extent: extent, roiCallback: { (_, rect) -> CGRect in
             rect
         }, arguments: arguments)
@@ -119,10 +118,10 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
 
     func draw(in view: MTKView) {
         if let currentDrawable = view.currentDrawable,
-            let output = apply(with: inputImages, attributes: arguments.flatMap { $0.value }) {
+            let output = apply(with: inputImages, attributes: arguments.compactMap { $0.value }) {
             let commandBuffer = commandQueue?.makeCommandBuffer()
             view.drawableSize = output.extent.size
-            #if !((arch(i386) || arch(x86_64)) && os(iOS))
+            #if !(targetEnvironment(simulator))
                 context?.render(output,
                                 to: currentDrawable.texture,
                                 commandBuffer: commandBuffer,

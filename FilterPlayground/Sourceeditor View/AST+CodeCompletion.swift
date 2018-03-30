@@ -9,9 +9,7 @@
 import Foundation
 
 extension ASTNode {
-
     var functionName: String? {
-
         if let kernelDefinition = ASTNode.root([self]).kernelDefinition() {
             return kernelDefinition.name
         }
@@ -79,7 +77,7 @@ extension ASTNode {
                 result.append(contentsOf: kernelDefinition.arguments.map { $0.name })
             }
 
-            let containsReturn = body.flatMap { $0.tokens.contains(.identifier(.keyword(._return))) ? true : nil }.count > 0
+            let containsReturn = body.compactMap { $0.tokens.contains(.identifier(.keyword(._return))) ? true : nil }.count > 0
             if !containsReturn {
                 result.append(Token.identifier(.keyword(._return)).stringRepresentation + " ")
             }

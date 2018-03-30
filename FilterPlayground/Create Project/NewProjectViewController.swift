@@ -9,7 +9,6 @@
 import UIKit
 
 class NewProjectViewController: UITableViewController {
-
     var didSelectType: ((KernelType) -> Void)?
 
     override func numberOfSections(in tableView: UITableView) -> Int {

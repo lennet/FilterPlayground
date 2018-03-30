@@ -12,7 +12,6 @@ import Foundation
 #endif
 
 class FrameRateManager {
-
     static let shared = FrameRateManager()
     static let frameRateChangedNotificationName = NSNotification.Name("FrameRateChangedNotification")
 

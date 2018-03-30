@@ -10,7 +10,6 @@ import CoreImage
 import Foundation
 
 class GenericDatabindingObserver: DataBindingObserver {
-
     var argument: KernelArgument
     var didUpdateArgument: ((KernelArgument) -> Void)?
 

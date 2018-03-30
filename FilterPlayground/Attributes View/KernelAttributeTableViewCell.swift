@@ -9,7 +9,6 @@
 import UIKit
 
 class KernelAttributeTableViewCell: UITableViewCell, UITextFieldDelegate {
-
     @IBOutlet var valueSelectionHeight: NSLayoutConstraint!
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var nameTextField: UITextField!

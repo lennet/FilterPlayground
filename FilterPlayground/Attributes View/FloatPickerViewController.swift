@@ -9,7 +9,6 @@
 import UIKit
 
 class FloatPickerViewController: UIViewController {
-
     class func instantiate() -> FloatPickerViewController {
         return UIStoryboard.valuePicker.instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! FloatPickerViewController
     }

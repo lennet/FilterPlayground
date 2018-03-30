@@ -38,7 +38,6 @@ enum KernelError {
 }
 
 extension KernelError: Equatable {
-
     static func == (lhs: KernelError, rhs: KernelError) -> Bool {
         switch (lhs, rhs) {
         case let (.runtime(lMessage), .runtime(message: rMessage)):

@@ -9,7 +9,6 @@
 import MetalKit
 
 class FPMTKView: MTKView, MTKViewDelegate {
-
     weak var externalDelegate: MTKViewDelegate?
     override var delegate: MTKViewDelegate? {
         set {
@@ -150,7 +149,7 @@ class FPMTKView: MTKView, MTKViewDelegate {
         // MARK: UIDragInteractionDelegate
 
         func dragInteraction(_: UIDragInteraction, itemsForBeginning _: UIDragSession) -> [UIDragItem] {
-            #if !((arch(i386) || arch(x86_64)) && os(iOS))
+            #if !(targetEnvironment(simulator))
                 guard let texture = self.currentDrawable?.texture,
                     let image = UIImage(texture: texture) else { return [] }
                 let imageItemProvider = NSItemProvider(object: image)

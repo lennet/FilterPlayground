@@ -105,6 +105,8 @@
 		986E7E6E1FB8F01B001FC74D /* KernelOutputSizeSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986E7E6C1FB8F017001FC74D /* KernelOutputSizeSetting.swift */; };
 		987672451F2F5355002F9AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987672441F2F5355002F9AAF /* Extensions.swift */; };
 		987A73291F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A73281F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift */; };
+		987E5310204478BB00782F50 /* KernelOutputSizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E530F204478BB00782F50 /* KernelOutputSizeTests.swift */; };
+		987E53142044815000782F50 /* XCTest+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E53132044815000782F50 /* XCTest+Codable.swift */; };
 		987F5BE71F9A8AD8003EB32B /* FrameRateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */; };
 		987F5BE81F9A8AD8003EB32B /* FrameRateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */; };
 		987F5BEA1F9A901E003EB32B /* FrameRateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987F5BE91F9A901E003EB32B /* FrameRateManagerTests.swift */; };
@@ -293,6 +295,8 @@
 		986E7E6C1FB8F017001FC74D /* KernelOutputSizeSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelOutputSizeSetting.swift; sourceTree = "<group>"; };
 		987672441F2F5355002F9AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		987A73281F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPlaygroundsExportHelper.swift; sourceTree = "<group>"; };
+		987E530F204478BB00782F50 /* KernelOutputSizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelOutputSizeTests.swift; sourceTree = "<group>"; };
+		987E53132044815000782F50 /* XCTest+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Codable.swift"; sourceTree = "<group>"; };
 		987F5BE61F9A8AD8003EB32B /* FrameRateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameRateManager.swift; sourceTree = "<group>"; };
 		987F5BE91F9A901E003EB32B /* FrameRateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameRateManagerTests.swift; sourceTree = "<group>"; };
 		9881A15E1F4884E700BABA72 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
@@ -532,6 +536,8 @@
 				98E987C71FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift */,
 				98D69A431FD2CC3200C3302F /* UIView+ExtensionTests.swift */,
 				98FDE1701FF68DB100D881C8 /* SelectObjectViewControllerTests.swift */,
+				987E530F204478BB00782F50 /* KernelOutputSizeTests.swift */,
+				987E53132044815000782F50 /* XCTest+Codable.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -818,7 +824,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Leo Thomas";
 				TargetAttributes = {
 					985A42011F2CF8F200636E72 = {
@@ -1014,6 +1020,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				987E5310204478BB00782F50 /* KernelOutputSizeTests.swift in Sources */,
 				98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */,
 				98E5AD0E1F2E87280047AC2E /* RendererTests.swift in Sources */,
 				98D69A441FD2CC3200C3302F /* UIView+ExtensionTests.swift in Sources */,
@@ -1026,6 +1033,7 @@
 				983008731F6EEB67005C89C3 /* ProjectTests.swift in Sources */,
 				9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */,
 				98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */,
+				987E53142044815000782F50 /* XCTest+Codable.swift in Sources */,
 				98FDE1711FF68DB100D881C8 /* SelectObjectViewControllerTests.swift in Sources */,
 				986AA72D1F62F679008F2091 /* TemplatesManagerTests.swift in Sources */,
 				980229B01F2FBF18000FFCA2 /* ErrorParserTests.swift in Sources */,
@@ -1169,6 +1177,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1176,6 +1185,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1226,6 +1236,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1233,6 +1244,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

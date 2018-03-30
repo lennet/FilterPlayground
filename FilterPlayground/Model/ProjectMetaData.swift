@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 struct ProjectMetaData {
-
     var ouputSize: KernelOutputSize
     var arguments: [KernelArgument]
     var inputImages: [KernelInputImage]
@@ -43,7 +42,6 @@ struct ProjectMetaData {
 }
 
 extension ProjectMetaData: Codable {
-
     enum CodingKeys: String, CodingKey {
         case arguments
         case name

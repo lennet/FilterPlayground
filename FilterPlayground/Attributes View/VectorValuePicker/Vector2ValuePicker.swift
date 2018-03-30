@@ -9,7 +9,6 @@
 import UIKit
 
 class Vector2ValuePicker: VectorValuePicker {
-
     required convenience init?(frame: CGRect, value: KernelArgumentValue) {
         guard case let KernelArgumentValue.vec2(x, y) = value else { return nil }
         self.init(frame: frame, values: [x, y], value: value)

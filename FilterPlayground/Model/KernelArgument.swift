@@ -20,14 +20,12 @@ struct KernelArgument {
 }
 
 extension KernelArgument {
-
     init(index: Int, name: String, type: KernelArgumentType, value: KernelArgumentValue, access: KernelArgumentAccess = .na, origin: KernelArgumentOrigin = .na) {
         self.init(index: index, name: name, type: type, value: value, binding: nil, access: access, origin: origin)
     }
 }
 
 extension KernelArgument: Codable {
-
     enum CodingKeys: String, CodingKey {
         case index
         case name

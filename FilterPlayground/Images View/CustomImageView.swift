@@ -10,7 +10,6 @@ import MobileCoreServices
 import UIKit
 
 class CustomImageView: UIImageView, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDropInteractionDelegate, UIDragInteractionDelegate {
-
     var didSelectImage: ((CustomImageView) -> Void)?
     var canSelectImage = true
 

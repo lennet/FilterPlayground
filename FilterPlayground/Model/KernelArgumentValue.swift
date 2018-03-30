@@ -61,7 +61,6 @@ enum KernelArgumentValue {
 }
 
 extension KernelArgumentValue: Codable {
-
     private enum CodingKeys: String, CodingKey {
         case float
         case vec2

@@ -10,17 +10,6 @@
 import XCTest
 
 class ErrorParserTests: XCTestCase {
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
     func testParseSingleError() {
         let error =
             """
@@ -79,6 +68,21 @@ class ErrorParserTests: XCTestCase {
         let errors = CoreImageErrorParser.compileErrors(for: error)
         XCTAssertEqual(errors.count, 1)
         XCTAssertEqual(errors.first!, KernelError.compile(lineNumber: -1, characterIndex: -1, type: .error, message: "failed due to error parsing kernel source.", note: nil))
+    }
+
+    func testUnkownType() {
+        let error = """
+        2018-01-20 15:21:12.516832+0100 FilterPlayground[357:40691] [compile] [CIWarpKernel initWithString:] failed due to error parsing kernel source.
+                
+                [CIKernelPool] 12:25: ERROR: unkown type or function name: 'arctan2'
+                float radians = arctan2(b.y-a.y, b.x-a.x);
+                ^
+                1 error generated.
+        """
+        let errors = CoreImageErrorParser.compileErrors(for: error)
+        XCTAssertEqual(errors.count, 2)
+        XCTAssertEqual(errors.first!, KernelError.compile(lineNumber: -1, characterIndex: -1, type: .error, message: "failed due to error parsing kernel source.", note: nil))
+        XCTAssertEqual(errors.last!, KernelError.compile(lineNumber: 12, characterIndex: 25, type: .error, message: "unkown type or function name: 'arctan2'", note: nil))
     }
 
     func testRuntimeErrors() {

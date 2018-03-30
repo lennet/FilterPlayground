@@ -9,7 +9,6 @@
 import UIKit
 
 class StatisticsView: UIView {
-
     private let frameRateLabel = UILabel()
     private let timeLabel = UILabel()
     private let stackView = UIStackView()

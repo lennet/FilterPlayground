@@ -10,7 +10,6 @@
 import XCTest
 
 class TimeDataBindingEmitterTests: XCTestCase {
-
     override func setUp() {
         super.setUp()
         Settings.customFrameRate = nil

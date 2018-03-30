@@ -10,7 +10,6 @@
 import XCTest
 
 class SettingsTests: XCTestCase {
-
     override func setUp() {
         super.setUp()
 

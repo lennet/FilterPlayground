@@ -9,7 +9,6 @@
 import Foundation
 
 struct Settings {
-
     static var tabsEnabled: Bool {
         get {
             return UserDefaults.standard.bool(forKey: #function)

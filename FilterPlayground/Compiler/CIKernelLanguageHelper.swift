@@ -9,7 +9,6 @@
 import Foundation
 
 class CIKernelLanguageHelper {
-
     static var functions: [String] = {
         // TODO: add
         ["(", ")", ".", ",", "if", "for", "/", "*", "-"] + KernelArgumentType.all.map { $0.rawValue } + [

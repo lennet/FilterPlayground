@@ -10,7 +10,6 @@
 import XCTest
 
 class TouchDataBindingEmitterTests: XCTestCase {
-
     override func setUp() {
         super.setUp()
         DataBindingContext.shared.reset()

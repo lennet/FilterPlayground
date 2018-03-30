@@ -9,10 +9,9 @@
 import Foundation
 
 class CoreImageErrorParser {
-
     class func compileErrors(for errorString: String) -> [KernelError] {
-        let components = errorString.components(separatedBy: "[CIKernelPool]").flatMap { $0.firstLine }
-        let errors = components.flatMap(getError)
+        let components = errorString.components(separatedBy: "[CIKernelPool]").compactMap { $0.firstLine }
+        let errors = components.compactMap(getError)
         var result: [KernelError] = []
         for case let .compile(lineNumber: lineNumber, characterIndex: characterIndex, type: type, message: message, note: note) in errors {
             if type == .note && result.count > 0 {
@@ -32,33 +31,32 @@ class CoreImageErrorParser {
 
     fileprivate class func getError(for errorString: String) -> KernelError? {
         let components = errorString.components(separatedBy: ":").map { $0.trimmingCharacters(in: CharacterSet.whitespaces) }
-        guard components.count == 4 else { return nil }
+        guard components.count >= 4,
+            let lineNumber = Int(components[0]),
+            let characterIndex = Int(components[1]) else { return unkownCompileError(for: errorString).first }
 
-        guard let lineNumber = Int(components[0]) else { return nil }
-        guard let characterIndex = Int(components[1]) else { return nil }
         let typeString = components[2]
         let type = CompileErrorType(rawValue: typeString) ?? .error
-        let message = components[3]
+        let message = components[3...].joined(separator: ": ")
 
         return .compile(lineNumber: lineNumber, characterIndex: characterIndex, type: type, message: message, note: nil)
     }
 
     class func runtimeErrors(for errorString: String) -> [KernelError] {
         return errorString.components(separatedBy: "[api]")[1...]
-            .flatMap { $0.firstLine }
-            .flatMap { $0.components(separatedBy: ":]").last }
-            .flatMap { $0.trimmingCharacters(in: .whitespaces) }
+            .compactMap { $0.firstLine }
+            .compactMap { $0.components(separatedBy: ":]").last }
+            .compactMap { $0.trimmingCharacters(in: .whitespaces) }
             .filter { !$0.isEmpty }
-            .flatMap { .runtime(message: $0) }
+            .compactMap { .runtime(message: $0) }
     }
 
     class func unkownCompileError(for errorString: String) -> [KernelError] {
-
         return errorString.components(separatedBy: "[compile]")[1...]
-            .flatMap { $0.firstLine }
-            .flatMap { $0.components(separatedBy: ":]").last }
-            .flatMap { $0.trimmingCharacters(in: .whitespaces) }
+            .compactMap { $0.firstLine }
+            .compactMap { $0.components(separatedBy: ":]").last }
+            .compactMap { $0.trimmingCharacters(in: .whitespaces) }
             .filter { !$0.isEmpty }
-            .flatMap { KernelError.compile(lineNumber: -1, characterIndex: -1, type: .error, message: $0, note: nil) }
+            .compactMap { KernelError.compile(lineNumber: -1, characterIndex: -1, type: .error, message: $0, note: nil) }
     }
 }

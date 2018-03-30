@@ -9,7 +9,6 @@
 import CoreImage
 
 class CoreImageColorKernel: CoreImageKernel {
-
     override var extent: CGRect {
         switch outputSize {
         case .inherit:
@@ -45,7 +44,7 @@ class CoreImageColorKernel: CoreImageKernel {
     }
 
     override func apply(with _: [CIImage], attributes: [KernelArgumentValue]) -> CIImage? {
-        let arguments = attributes.flatMap { $0.asKernelValue }
+        let arguments = attributes.compactMap { $0.asKernelValue }
         return colorKernel?.apply(extent: extent, arguments: arguments)
     }
 }

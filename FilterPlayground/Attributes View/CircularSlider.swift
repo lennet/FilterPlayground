@@ -10,7 +10,6 @@ import UIKit
 
 @IBDesignable
 class CircularSlider: UIControl, CAAnimationDelegate {
-
     let lineWidth: CGFloat = 2.0
     var radius: CGFloat {
         return (bounds.width / 2) - lineWidth
@@ -50,7 +49,6 @@ class CircularSlider: UIControl, CAAnimationDelegate {
     }
 
     @objc func didPanKnob(recognizer: AllTouchesPanGestureRecognizer, state: UIGestureRecognizerState) {
-
         let location = recognizer.location(in: self)
         recognizer.setTranslation(.zero, in: self)
         let a = angle(for: location)

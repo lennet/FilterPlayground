@@ -10,7 +10,6 @@ import MetalKit
 import UIKit
 
 extension UIImage {
-
     var asCIImage: CIImage? {
         return (ciImage ?? CIImage(cgImage: cgImage!)).oriented(forExifOrientation: exifOrientation)
     }
@@ -37,7 +36,6 @@ extension UIImage {
     }
 
     convenience init?(texture: MTLTexture) {
-
         let byteCount = texture.width * texture.height * 4
 
         guard let imageBytes = malloc(byteCount) else {

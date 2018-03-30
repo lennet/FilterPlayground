@@ -9,7 +9,6 @@
 import UIKit
 
 class ColorPickerViewController: UIViewController {
-
     class func instantiate() -> ColorPickerViewController {
         return UIStoryboard.valuePicker.instantiateViewController(withIdentifier: "ColorPickerViewControllerIdentifier") as! ColorPickerViewController
     }

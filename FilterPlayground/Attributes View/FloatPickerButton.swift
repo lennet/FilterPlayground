@@ -9,7 +9,6 @@
 import UIKit
 
 class FloatPickerButton: ValuePickerButton {
-
     var min: Float?
     var max: Float?
     var resetCircularSlider = true

@@ -8,21 +8,13 @@
 
 import Foundation
 
-struct KernelDefinition {
+struct KernelDefinition: Equatable {
     var name: String
     var returnType: KernelArgumentType
     var arguments: [KernelDefinitionArgument]
 }
 
-extension KernelDefinition: Equatable {
-    static func == (lhs: KernelDefinition, rhs: KernelDefinition) -> Bool {
-        return lhs.name == rhs.name &&
-            lhs.returnType == rhs.returnType &&
-            lhs.arguments == rhs.arguments
-    }
-}
-
-struct KernelDefinitionArgument {
+struct KernelDefinitionArgument: Equatable {
     var index: Int
     var name: String
     var type: KernelArgumentType
@@ -39,22 +31,12 @@ struct KernelDefinitionArgument {
 }
 
 extension KernelDefinitionArgument {
-
     init(argument: KernelArgument) {
         self.init(index: argument.index, name: argument.name, type: argument.type, access: argument.access, origin: argument.origin)
     }
 }
 
-extension KernelDefinitionArgument: Equatable {
-    static func == (lhs: KernelDefinitionArgument, rhs: KernelDefinitionArgument) -> Bool {
-        return lhs.name == rhs.name &&
-            lhs.type == rhs.type &&
-            lhs.access == rhs.access
-    }
-}
-
-enum KernelArgumentOrigin: Codable {
-
+enum KernelArgumentOrigin: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case buffer
         case other
@@ -107,7 +89,7 @@ enum KernelArgumentOrigin: Codable {
     case na
 }
 
-enum KernelArgumentAccess: String, Codable {
+enum KernelArgumentAccess: String, Codable, Equatable {
     case read
     case write
     case constant

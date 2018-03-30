@@ -15,7 +15,6 @@
 #endif
 
 extension CIImage {
-
     var asJPGData: Data? {
         #if os(iOS) || os(watchOS) || os(tvOS)
             let context = CIContext()

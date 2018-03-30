@@ -9,7 +9,6 @@
 import Cocoa
 
 extension NSView {
-
     func setNeedsDisplay() {
         setNeedsDisplay(bounds)
     }

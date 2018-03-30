@@ -41,7 +41,6 @@ protocol Kernel: class {
 }
 
 extension Kernel {
-
     static var supportsArguments: Bool {
         return supportedArguments.count > 0
     }

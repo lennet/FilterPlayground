@@ -9,7 +9,6 @@
 import UIKit
 
 class NumberedTextView: UIView, UITextViewDelegate {
-
     var theme: Theme.Type {
         return ThemeManager.shared.currentTheme
     }
@@ -222,7 +221,6 @@ class NumberedTextView: UIView, UITextViewDelegate {
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" && range.length == 0 {
-
             let firstString = (textView.text as NSString).substring(to: range.location)
             let currentTokenLocation = Tokenizer(string: firstString).getTokens().count
             let intendationLevel = currentAST?.intendationLevel(at: currentTokenLocation, with: 0) ?? 0

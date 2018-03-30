@@ -9,7 +9,6 @@
 import Foundation
 
 class ThemeManager {
-
     static let themeChangedNotificationName = Notification.Name("themeChangedNotificationName")
     static let shared: ThemeManager = ThemeManager()
 

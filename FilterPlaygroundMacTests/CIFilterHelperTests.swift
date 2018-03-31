@@ -30,22 +30,24 @@ class CIFilterHelperTests: XCTestCase {
     }
 
     func testWarpFilterWithArguments() {
-        let arguments = [
-            KernelArgument(name: "foo", type: .color, value: .color(1, 1, 1, 1)),
-            KernelArgument(name: "bar", type: .vec2, value: .vec2(1, 1)),
-            KernelArgument(name: "test", type: .sample, value: .sample(CIImage(color: .black))),
+        let arguments: [KernelArgument] = [
+            KernelArgument(index: 0, name: "foo", type: .color, value: .color(1, 1, 1, 1)),
+            KernelArgument(index: 1, name: "bar", type: .vec2, value: .vec2(1, 1)),
+            KernelArgument(index: 2, name: "test", type: .sample, value: .sample(CIImage(color: .black))),
         ]
         let source: String = CIFilterExportHelper.cifilter(with: "", type: .coreimagewarp, arguments: arguments, name: "testWarp")
         XCTAssertSwiftCompiles(source: source)
     }
 
     func testBlendFilter() {
-        let source: String = CIFilterExportHelper.cifilter(with: "", type: .coreimageblend, arguments: [KernelArgument(name: "foo", type: .sample, value: .sample(CIImage(color: .black))), KernelArgument(name: "bar", type: .sample, value: .sample(CIImage(color: .black)))], name: "testBlend")
+        let arguments = [KernelArgument(index: 0, name: "foo", type: .sample, value: .sample(CIImage(color: .black))), KernelArgument(index: 1, name: "bar", type: .sample, value: .sample(CIImage(color: .black)))]
+
+        let source: String = CIFilterExportHelper.cifilter(with: "", type: .coreimageblend, arguments: arguments, name: "testBlend") as String
         XCTAssertSwiftCompiles(source: source)
     }
 
     func testColorFilter() {
-        let source: String = CIFilterExportHelper.cifilter(with: "", type: .coreimagecolor, arguments: [KernelArgument(name: "test", type: .sample, value: .sample(CIImage(color: .black)))], name: "testColor")
+        let source: String = CIFilterExportHelper.cifilter(with: "", type: .coreimagecolor, arguments: [KernelArgument(index: 0, name: "test", type: .sample, value: .sample(CIImage(color: .black)))], name: "testColor")
         XCTAssertSwiftCompiles(source: source)
     }
 

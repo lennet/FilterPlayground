@@ -9,6 +9,10 @@
 import CoreImage
 
 class CoreImageColorKernel: CoreImageKernel {
+    override var type: KernelType {
+        return .coreimagecolor
+    }
+
     override var extent: CGRect {
         switch outputSize {
         case .inherit:

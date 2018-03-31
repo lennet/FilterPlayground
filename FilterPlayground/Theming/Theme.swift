@@ -6,23 +6,29 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-import UIKit
+#if os(iOS) || os(tvOS)
+    import UIKit
+    typealias Color = UIColor
+#else
+    import Cocoa
+    typealias Color = NSColor
+#endif
 
 protocol Theme {
-    static var sourceEditorBackground: UIColor { get }
-    static var sourceEditorLineNumber: UIColor { get }
-    static var sourceEditorLineBackgroundError: UIColor { get }
-    static var sourceEditorLineBackgroundHighlighted: UIColor { get }
-    static var sourceEditTextComment: UIColor { get }
-    static var sourceEditorTextType: UIColor { get }
-    static var sourceEditorTextKeyword: UIColor { get }
-    static var sourceEditorTextFloat: UIColor { get }
-    static var sourceEditorText: UIColor { get }
-    static var liveViewBackground: UIColor { get }
-    static var liveViewLabel: UIColor { get }
-    static var dropInteractionBorder: UIColor { get }
-    static var imageViewBackground: UIColor { get }
-    static var attributesSeparatorColor: UIColor { get }
-    static var attributesBackground: UIColor { get }
-    static var attributesCellBackground: UIColor { get }
+    static var sourceEditorBackground: Color { get }
+    static var sourceEditorLineNumber: Color { get }
+    static var sourceEditorLineBackgroundError: Color { get }
+    static var sourceEditorLineBackgroundHighlighted: Color { get }
+    static var sourceEditTextComment: Color { get }
+    static var sourceEditorTextType: Color { get }
+    static var sourceEditorTextKeyword: Color { get }
+    static var sourceEditorTextFloat: Color { get }
+    static var sourceEditorText: Color { get }
+    static var liveViewBackground: Color { get }
+    static var liveViewLabel: Color { get }
+    static var dropInteractionBorder: Color { get }
+    static var imageViewBackground: Color { get }
+    static var attributesSeparatorColor: Color { get }
+    static var attributesBackground: Color { get }
+    static var attributesCellBackground: Color { get }
 }

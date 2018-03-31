@@ -42,8 +42,6 @@ class MainViewController: UIViewController {
         }
     }
 
-    var isRunning = false
-
     var project: Project?
     var databindingObservers: [GenericDatabindingObserver] = []
 
@@ -135,11 +133,6 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func run() {
-        guard !isRunning else { return }
-        defer {
-            isRunning = false
-        }
-
         guard let source = sourceEditorViewController?.source,
             let kernel = kernel else {
             return
@@ -149,35 +142,8 @@ class MainViewController: UIViewController {
             kernel.arguments = project?.metaData.arguments ?? []
         }
 
-        kernel.compile(source: source) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(warnings: errors):
-                    self.render()
-                    self.display(errors: errors)
-                    break
-                case let .failed(errors: errors):
-                    self.display(errors: errors)
-                    break
-                }
-            }
-        }
-    }
-
-    // TODO: make function throwing to handle error handling somewhere else
-    func render() {
-        clearErrors()
-        guard let document = project,
-            let kernel = kernel else { return }
-        let requiredInputImages = document.metaData.type.kernelClass.requiredInputImages
-        guard requiredInputImages == kernel.inputImages.count else {
-            display(errors: [KernelError.runtime(message: "A \(document.metaData.type) Kernel requires \(requiredInputImages) input image\(requiredInputImages > 1 ? "s" : "") but you only passed \(kernel.inputImages.count)")])
-            inputImageValues = inputImageValues.map { KernelInputImage(image: $0.image, index: $0.index, shouldHighlightIfMissing: $0.image == nil) }
-            return
-        }
-
-        kernel.render()
-        isRunning = false
+        let executionPipeline = KernelExecutionPipeline(kernel: kernel, errorOutput: display)
+        executionPipeline.execute(source: source)
     }
 
     func clearErrors() {
@@ -213,7 +179,7 @@ class MainViewController: UIViewController {
 
     func display(errors: [KernelError]) {
         sourceEditorViewController?.errors = errors
-        isRunning = false
+        inputImageValues = inputImageValues.map { KernelInputImage(image: $0.image, index: $0.index, shouldHighlightIfMissing: $0.image == nil) }
     }
 
     func didOpened(document: Project) {
@@ -225,14 +191,15 @@ class MainViewController: UIViewController {
             self.attributesViewController?.arguments = document.metaData.arguments
             self.attributesViewController?.tableView.reloadData()
 
+            self.kernel = document.metaData.type.kernelClass.init()
             var inputImageValues = document.metaData.inputImages
-            while inputImageValues.count < document.metaData.type.kernelClass.requiredInputImages {
+            while inputImageValues.count < self.kernel!.requiredInputImages {
                 inputImageValues.append(KernelInputImage(image: nil, index: inputImageValues.count, shouldHighlightIfMissing: false))
             }
             self.inputImageValues = inputImageValues
             self.showAttributes = document.metaData.type.kernelClass.supportsArguments
             self.title = document.title
-            self.kernel = document.metaData.type.kernelClass.init()
+
             self.sourceEditorViewController?.textView.shadingLanguage = document.metaData.type.shadingLanguage
             self.attributesViewController?.shadingLanguage = document.metaData.type.shadingLanguage
             self.attributesViewController?.supportedArguments = document.metaData.type.kernelClass.supportedArguments

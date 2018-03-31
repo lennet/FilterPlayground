@@ -6,7 +6,7 @@
 //  Copyright © 2017 Leo Thomas. All rights reserved.
 //
 
-@testable import FilterPlayground
+@testable import FilterPlaygroundMac
 import XCTest
 
 class KernelCompilerTests: XCTestCase {

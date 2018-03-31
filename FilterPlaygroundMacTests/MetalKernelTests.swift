@@ -65,7 +65,7 @@ class MetalKernelTests: XCTestCase {
         let kernel = MetalKernel()
         kernel.compile(source: source) { result in
             switch result {
-            case let .success(errors: errors):
+            case let .success(warnings: errors):
                 let expectedFirstError = KernelError.compile(lineNumber: 10, characterIndex: 19, type: .warning, message: "unused variable 'a'", note: nil)
 
                 XCTAssertEqual(errors.first!, expectedFirstError)
@@ -85,7 +85,7 @@ class MetalKernelTests: XCTestCase {
         let exp = XCTestExpectation(description: "waiting for compilation")
         MetalKernel().compile(source: source) { result in
             switch result {
-            case .success(errors: _):
+            case .success(warnings: _):
                 break
             default:
                 XCTFail()

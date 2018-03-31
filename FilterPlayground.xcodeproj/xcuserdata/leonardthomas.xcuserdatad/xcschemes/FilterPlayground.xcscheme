@@ -38,6 +38,11 @@
                BlueprintName = "FilterPlaygroundTests"
                ReferencedContainer = "container:FilterPlayground.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "SavingDocumentTests/testSaveText()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">

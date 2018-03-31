@@ -9,6 +9,10 @@
 import MetalKit
 
 class MetalKernel: NSObject, Kernel, MTKViewDelegate {
+    var type: KernelType {
+        return .metal
+    }
+
     var extentSettings: KernelOutputSizeSetting {
         return .sizeOnly
     }
@@ -77,7 +81,7 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
         mtkView = FPMTKView(device: device, delegate: self)
     }
 
-    static var requiredInputImages: Int {
+    var requiredInputImages: Int {
         return 0
     }
 
@@ -139,7 +143,9 @@ class MetalKernel: NSObject, Kernel, MTKViewDelegate {
             // TODO: handle error
 
             self.function = function
-            self.mtkView.setNeedsDisplay()
+            DispatchQueue.main.async {
+                self.mtkView.setNeedsDisplay()
+            }
         }
     }
 

@@ -9,6 +9,10 @@
 import CoreImage
 
 class CoreImageWarpKernel: CoreImageKernel {
+    override var type: KernelType {
+        return .coreimagewarp
+    }
+
     override var extent: CGRect {
         switch outputSize {
         case .inherit:
@@ -28,7 +32,7 @@ class CoreImageWarpKernel: CoreImageKernel {
         return .vec2
     }
 
-    override class var requiredInputImages: Int {
+    override var requiredInputImages: Int {
         return 1
     }
 

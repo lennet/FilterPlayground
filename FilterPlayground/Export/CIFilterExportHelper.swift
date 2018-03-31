@@ -107,9 +107,9 @@ class CIFilterExportHelper {
     class func cifilter(with kernelSource: String, type: KernelType, arguments: [KernelArgument], name: String) -> String {
         let properties = arguments.map { "\tvar \($0.name): \($0.type.swiftType)?" }.joined(separator: "\n")
         var inputProperties = ""
-        if type.kernelClass.requiredInputImages == 1 {
+        if type.kernelClass.init().requiredInputImages == 1 {
             inputProperties = "\tvar input: CIImage?"
-        } else if type.kernelClass.requiredInputImages == 2 {
+        } else if type.kernelClass.init().requiredInputImages == 2 {
             inputProperties = """
             \tvar fore: CIImage?
             \tvar back: CIImage?

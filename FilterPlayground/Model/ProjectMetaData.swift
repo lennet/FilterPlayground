@@ -37,7 +37,7 @@ struct ProjectMetaData {
     }
 
     func initialInputImages() -> [KernelInputImage] {
-        return (0 ..< type.kernelClass.requiredInputImages).map { KernelInputImage(image: nil, index: $0, shouldHighlightIfMissing: false) }
+        return (0 ..< type.kernelClass.init().requiredInputImages).map { KernelInputImage(image: nil, index: $0, shouldHighlightIfMissing: false) }
     }
 }
 

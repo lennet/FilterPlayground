@@ -147,7 +147,7 @@ class Project: UIDocument {
 
         if let inputImagesFileWrapper = filewrapper.fileWrappers?["inputimages"] {
             var index = 0
-            while index < metaData.type.kernelClass.requiredInputImages {
+            while index < metaData.type.kernelClass.init().requiredInputImages {
                 if let data = inputImagesFileWrapper.fileWrappers?["\(index).jpg"]?.regularFileContents,
                     let image = UIImage(data: data) {
                     metaData.inputImages.append(KernelInputImage(image: image, index: index, shouldHighlightIfMissing: false))

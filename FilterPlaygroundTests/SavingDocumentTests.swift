@@ -16,10 +16,12 @@ class SavingDocumentTests: XCTestCase {
         super.setUp()
         let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         url = documentsPath.appendingPathComponent("\(Date()).CIKernel")
+        sleep(1)
     }
 
     override func tearDown() {
         try? FileManager.default.removeItem(at: url)
+        sleep(1)
         super.tearDown()
     }
 
@@ -33,14 +35,16 @@ class SavingDocumentTests: XCTestCase {
         document.save(to: url, for: .forCreating) { _ in
             document.source = text
             document.metaData.arguments = [attribute]
-            document.close(completionHandler: { _ in
-                let document2 = Project(fileURL: self.url)
-                document2.open(completionHandler: { _ in
-                    XCTAssertEqual(document2.source, text)
-                    XCTAssertNotNil(document2.metaData.arguments.first)
-                    expectation.fulfill()
+            DispatchQueue.main.async {
+                document.close(completionHandler: { _ in
+                    let document2 = Project(fileURL: self.url)
+                    document2.open(completionHandler: { _ in
+                        XCTAssertEqual(document2.source, text)
+                        XCTAssertNotNil(document2.metaData.arguments.first)
+                        expectation.fulfill()
+                    })
                 })
-            })
+            }
         }
 
         wait(for: [expectation], timeout: 5)
@@ -78,14 +82,16 @@ class SavingDocumentTests: XCTestCase {
         document.save(to: url, for: .forCreating) { _ in
             document.source = text
             document.metaData.arguments = [attribute]
-            document.close(completionHandler: { _ in
-                let document2 = Project(fileURL: self.url)
-                document2.open(completionHandler: { _ in
-                    XCTAssertEqual(document2.source, text)
-                    XCTAssertNotNil(document2.metaData.arguments.first)
-                    expectation.fulfill()
+            DispatchQueue.main.async {
+                document.close(completionHandler: { _ in
+                    let document2 = Project(fileURL: self.url)
+                    document2.open(completionHandler: { _ in
+                        XCTAssertEqual(document2.source, text)
+                        XCTAssertNotNil(document2.metaData.arguments.first)
+                        expectation.fulfill()
+                    })
                 })
-            })
+            }
         }
 
         wait(for: [expectation], timeout: 5)

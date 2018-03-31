@@ -53,3 +53,11 @@ extension KernelError: Equatable {
         }
     }
 }
+
+extension Array where Element == KernelError {
+    var containsError: Bool {
+        return filter({ (error) -> Bool in
+            !error.isWarning
+        }).count > 0
+    }
+}

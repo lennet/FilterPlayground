@@ -27,7 +27,7 @@ protocol Kernel: class {
 
     static func initialSource(with name: String) -> String
 
-    static var requiredInputImages: Int { get }
+    var requiredInputImages: Int { get }
 
     func compile(source: String, completion: @escaping (KernelCompilerResult) -> Void)
 
@@ -36,6 +36,7 @@ protocol Kernel: class {
     func render()
 
     var outputView: KernelOutputView { get }
+    var type: KernelType { get }
 
     init()
 }

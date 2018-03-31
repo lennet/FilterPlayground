@@ -9,6 +9,10 @@
 import CoreImage
 
 class CoreImageBlendKernel: CoreImageKernel {
+    override var type: KernelType {
+        return .coreimageblend
+    }
+
     override var extentSettings: KernelOutputSizeSetting {
         return .none
     }
@@ -23,7 +27,7 @@ class CoreImageBlendKernel: CoreImageKernel {
         return "\(KernelArgumentType.sample.rawValue) fore, \(KernelArgumentType.sample.rawValue) back"
     }
 
-    override class var requiredInputImages: Int {
+    override var requiredInputImages: Int {
         return 2
     }
 

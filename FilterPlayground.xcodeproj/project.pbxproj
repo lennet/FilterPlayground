@@ -156,11 +156,12 @@
 		98B00A2B1F9D1E70006D2728 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B00A2A1F9D1E70006D2728 /* StatisticsView.swift */; };
 		98B7B6E91F4757B5008C370F /* MainViewController+Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B7B6E81F4757B4008C370F /* MainViewController+Export.swift */; };
 		98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */; };
-		98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */; };
 		98C5E23D1F34B85C006E7658 /* KernelCompilerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23C1F34B85C006E7658 /* KernelCompilerResult.swift */; };
 		98C5E23F1F34B8DD006E7658 /* KernelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23E1F34B8DD006E7658 /* KernelError.swift */; };
-		98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */; };
 		98C6FE861F3832AE00D0E840 /* ASTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C6FE851F3832AE00D0E840 /* ASTTests.swift */; };
+		98D09BA3206E53CB00DB6B00 /* KernelExecutionPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D09BA2206E53CB00DB6B00 /* KernelExecutionPipeline.swift */; };
+		98D09BA4206E53D100DB6B00 /* KernelExecutionPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D09BA2206E53CB00DB6B00 /* KernelExecutionPipeline.swift */; };
+		98D09BA8206E559D00DB6B00 /* KernelExecutionPipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D09BA7206E559D00DB6B00 /* KernelExecutionPipelineTests.swift */; };
 		98D69A441FD2CC3200C3302F /* UIView+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D69A431FD2CC3200C3302F /* UIView+ExtensionTests.swift */; };
 		98D8F9DF1F815D20005A1DFE /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D8F9DE1F815D20005A1DFE /* UIView+Extension.swift */; };
 		98DC562C1F3CEF1C0024F522 /* ValuePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98DC562A1F3CEF1C0024F522 /* ValuePicker.storyboard */; };
@@ -175,6 +176,13 @@
 		98E987C61FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E987C41FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift */; };
 		98E987C81FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E987C71FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift */; };
 		98F2B9EF1F719B380092A015 /* SourceEditorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F2B9EE1F719B380092A015 /* SourceEditorTextView.swift */; };
+		98F7D8C4206F882200BE8A9A /* KernelCompilerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */; };
+		98F7D8C6206F88AF00BE8A9A /* ErrorHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */; };
+		98F7D8C7206F88D900BE8A9A /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985668401F2E60EB00297A4E /* Parser.swift */; };
+		98F7D8C8206F892C00BE8A9A /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9888F4C91FB6634500D108CF /* ThemeManager.swift */; };
+		98F7D8C9206F892F00BE8A9A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9841EC741F3663AE00A8E3CA /* Theme.swift */; };
+		98F7D8CA206F89B900BE8A9A /* DefaultTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9888F4CC1FB6636B00D108CF /* DefaultTheme.swift */; };
+		98F7D8CB206F89E200BE8A9A /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868A8C01F3712EB00D0BC79 /* AST.swift */; };
 		98FDE16F1FF68C6600D881C8 /* SelectObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDE16E1FF68C6600D881C8 /* SelectObjectViewController.swift */; };
 		98FDE1711FF68DB100D881C8 /* SelectObjectViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98FDE1701FF68DB100D881C8 /* SelectObjectViewControllerTests.swift */; };
 		98FDE1731FF8196300D881C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 98FDE1721FF8196300D881C8 /* Localizable.strings */; };
@@ -344,6 +352,8 @@
 		98C5E23E1F34B8DD006E7658 /* KernelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelError.swift; sourceTree = "<group>"; };
 		98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelCompilerTests.swift; sourceTree = "<group>"; };
 		98C6FE851F3832AE00D0E840 /* ASTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTTests.swift; sourceTree = "<group>"; };
+		98D09BA2206E53CB00DB6B00 /* KernelExecutionPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelExecutionPipeline.swift; sourceTree = "<group>"; };
+		98D09BA7206E559D00DB6B00 /* KernelExecutionPipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelExecutionPipelineTests.swift; sourceTree = "<group>"; };
 		98D475AC1F3BB88C0080D794 /* iconlarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconlarge.png; sourceTree = "<group>"; };
 		98D475AD1F3BB88D0080D794 /* Iconsmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Iconsmall.png; sourceTree = "<group>"; };
 		98D69A431FD2CC3200C3302F /* UIView+ExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ExtensionTests.swift"; sourceTree = "<group>"; };
@@ -396,7 +406,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		981267D21F34BEDB00101027 /* Compiler */ = {
+		981267D21F34BEDB00101027 /* Kernel */ = {
 			isa = PBXGroup;
 			children = (
 				981267D31F34BEFC00101027 /* Kernel.swift */,
@@ -406,8 +416,9 @@
 				98C5E23E1F34B8DD006E7658 /* KernelError.swift */,
 				9853F85E1F79218C00551541 /* CIKernelLanguageHelper.swift */,
 				980E4F441F8013AA00C603C3 /* MetalErrorParser.swift */,
+				98D09BA2206E53CB00DB6B00 /* KernelExecutionPipeline.swift */,
 			);
-			path = Compiler;
+			path = Kernel;
 			sourceTree = "<group>";
 		};
 		983008741F6F0838005C89C3 /* Helper */ = {
@@ -503,7 +514,7 @@
 				98D9199E1F2E0585007D5234 /* Sourceeditor View */,
 				98D9199D1F2E0578007D5234 /* Attributes View */,
 				989716981F67E7F300E7C20C /* Extensions */,
-				981267D21F34BEDB00101027 /* Compiler */,
+				981267D21F34BEDB00101027 /* Kernel */,
 				988901A11F76546500B97C4A /* Settings */,
 				987A73271F66F63800F73806 /* Export */,
 				98FDE1721FF8196300D881C8 /* Localizable.strings */,
@@ -520,8 +531,6 @@
 				98E5AD0D1F2E87280047AC2E /* RendererTests.swift */,
 				980229AF1F2FBF18000FFCA2 /* ErrorParserTests.swift */,
 				98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */,
-				98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */,
-				98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */,
 				9841EC761F36675000A8E3CA /* ThemingTests.swift */,
 				98C6FE851F3832AE00D0E840 /* ASTTests.swift */,
 				986AA72C1F62F679008F2091 /* TemplatesManagerTests.swift */,
@@ -538,6 +547,7 @@
 				98FDE1701FF68DB100D881C8 /* SelectObjectViewControllerTests.swift */,
 				987E530F204478BB00782F50 /* KernelOutputSizeTests.swift */,
 				987E53132044815000782F50 /* XCTest+Codable.swift */,
+				98D09BA7206E559D00DB6B00 /* KernelExecutionPipelineTests.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -635,6 +645,8 @@
 		989716871F67E3C900E7C20C /* FilterPlaygroundMacTests */ = {
 			isa = PBXGroup;
 			children = (
+				98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */,
+				98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */,
 				9897168A1F67E3C900E7C20C /* Info.plist */,
 				985EB2481F6821990007B85C /* CIFilterHelperTests.swift */,
 				989C576D1F68224C008FF142 /* SwiftPlaygroundsTests.swift */,
@@ -925,6 +937,7 @@
 				9855448F1F7FF8D300E9F02A /* CoreImageWarpKernel.swift in Sources */,
 				9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */,
 				98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */,
+				98D09BA3206E53CB00DB6B00 /* KernelExecutionPipeline.swift in Sources */,
 				983331111F80066300C9AF52 /* MetalKernel.swift in Sources */,
 				98B7B6E91F4757B5008C370F /* MainViewController+Export.swift in Sources */,
 				985D51A11FA66F84009881CC /* Vector3ValuePicker.swift in Sources */,
@@ -1027,19 +1040,18 @@
 				98A411451F9954EF00A97459 /* SettingsTests.swift in Sources */,
 				98A411411F9950C100A97459 /* TouchDataBindingEmitterTests.swift in Sources */,
 				985668431F2E6ABE00297A4E /* TokenizerTests.swift in Sources */,
+				98D09BA8206E559D00DB6B00 /* KernelExecutionPipelineTests.swift in Sources */,
 				9853F85D1F7903C100551541 /* ASTCodeCompletionTests.swift in Sources */,
 				98A411431F99534500A97459 /* TimeDataBindingEmitterTests.swift in Sources */,
 				985D51971FA64A3D009881CC /* ExtensionsTests.swift in Sources */,
 				983008731F6EEB67005C89C3 /* ProjectTests.swift in Sources */,
 				9841EC771F36675000A8E3CA /* ThemingTests.swift in Sources */,
-				98C5E2411F34B9B2006E7658 /* KernelCompilerTests.swift in Sources */,
 				987E53142044815000782F50 /* XCTest+Codable.swift in Sources */,
 				98FDE1711FF68DB100D881C8 /* SelectObjectViewControllerTests.swift in Sources */,
 				986AA72D1F62F679008F2091 /* TemplatesManagerTests.swift in Sources */,
 				980229B01F2FBF18000FFCA2 /* ErrorParserTests.swift in Sources */,
 				98C6FE861F3832AE00D0E840 /* ASTTests.swift in Sources */,
 				987F5BEA1F9A901E003EB32B /* FrameRateManagerTests.swift in Sources */,
-				98C5E23B1F34B5C5006E7658 /* ErrorHelperTests.swift in Sources */,
 				98689EC81F93BFD30000AF7C /* DataBindingContextTests.swift in Sources */,
 				98E987C81FD0A46500BA2B17 /* MetalShadingLanguageParserTests.swift in Sources */,
 				984D9FA41F2E824B004AFD74 /* ParserTests.swift in Sources */,
@@ -1050,8 +1062,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98F7D8CA206F89B900BE8A9A /* DefaultTheme.swift in Sources */,
 				9897169F1F67E94800E7C20C /* CoreImage+Extension.swift in Sources */,
 				98689EBF1F93AC800000AF7C /* DataBinding.swift in Sources */,
+				98F7D8C8206F892C00BE8A9A /* ThemeManager.swift in Sources */,
 				983331081F8003AE00C9AF52 /* KernelArgumentType.swift in Sources */,
 				9897169C1F67E84A00E7C20C /* Kernel.swift in Sources */,
 				98689ECE1F93CCBC0000AF7C /* TouchDataBindingEmitter.swift in Sources */,
@@ -1070,6 +1084,7 @@
 				98286D631F93F1F0003B6D4A /* CameraDataBindingEmitter.swift in Sources */,
 				9833310D1F80046B00C9AF52 /* CoreImageColorKernel.swift in Sources */,
 				98E987C61FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift in Sources */,
+				98F7D8C7206F88D900BE8A9A /* Parser.swift in Sources */,
 				9897B22E1FEA751300291490 /* ExperimentalFeature.swift in Sources */,
 				983331061F8003A800C9AF52 /* KernelType.swift in Sources */,
 				9833310B1F80046100C9AF52 /* CoreImageKernel.swift in Sources */,
@@ -1079,13 +1094,16 @@
 				9833310A1F8003B600C9AF52 /* ShadingLanguage.swift in Sources */,
 				989716911F67E47300E7C20C /* CIFilterExportHelper.swift in Sources */,
 				983331121F80066800C9AF52 /* MetalKernel.swift in Sources */,
+				98F7D8CB206F89E200BE8A9A /* AST.swift in Sources */,
 				9888F4C81FB65C0700D108CF /* GenericDatabindingObserver.swift in Sources */,
 				98689EC61F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
 				98689EC31F93B41E0000AF7C /* DataBindingContext.swift in Sources */,
 				98689ECB1F93CAC60000AF7C /* DataBindingEmitter.swift in Sources */,
 				989716941F67E77500E7C20C /* KernelCompilerResult.swift in Sources */,
 				983331071F8003AB00C9AF52 /* KernelArgumentValue.swift in Sources */,
+				98F7D8C9206F892F00BE8A9A /* Theme.swift in Sources */,
 				98E987C31FD0A2FC00BA2B17 /* KernelDefinition.swift in Sources */,
+				98D09BA4206E53D100DB6B00 /* KernelExecutionPipeline.swift in Sources */,
 				9897169B1F67E81D00E7C20C /* Extensions.swift in Sources */,
 				9833310F1F80048F00C9AF52 /* Settings.swift in Sources */,
 				987F5BE81F9A8AD8003EB32B /* FrameRateManager.swift in Sources */,
@@ -1098,8 +1116,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				980E4F4A1F801A4C00C603C3 /* MetalKernelTests.swift in Sources */,
+				98F7D8C4206F882200BE8A9A /* KernelCompilerTests.swift in Sources */,
 				989C576E1F68224C008FF142 /* SwiftPlaygroundsTests.swift in Sources */,
 				985EB2491F6821990007B85C /* CIFilterHelperTests.swift in Sources */,
+				98F7D8C6206F88AF00BE8A9A /* ErrorHelperTests.swift in Sources */,
 				989C57711F6825CD008FF142 /* XCTest+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

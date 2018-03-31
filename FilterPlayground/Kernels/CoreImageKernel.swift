@@ -9,6 +9,10 @@
 import MetalKit
 
 class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
+    var type: KernelType {
+        return .coreimage
+    }
+
     var extentSettings: KernelOutputSizeSetting {
         return .sizeAndPosition
     }
@@ -54,7 +58,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
         return []
     }
 
-    class var requiredInputImages: Int {
+    var requiredInputImages: Int {
         return 0
     }
 

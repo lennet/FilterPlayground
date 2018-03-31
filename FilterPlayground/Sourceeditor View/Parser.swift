@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 enum Token {
     case op(Operator)
@@ -97,7 +96,7 @@ enum Identifier {
     case keyword(Keyword)
 
     var attributes: [NSAttributedStringKey: Any] {
-        let color: UIColor
+        let color: Color
         switch self {
         case .type:
             color = ThemeManager.shared.currentTheme.sourceEditorTextType

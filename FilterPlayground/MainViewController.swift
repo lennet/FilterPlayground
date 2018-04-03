@@ -30,20 +30,31 @@ class MainViewController: UIViewController {
         }
     }
 
-    /// describe the relation between the width of the SourceEditor and the LiveView
+    /// describes the relation between the width of the SourceEditor and the LiveView
     var sourceViewRatio: CGFloat = 0.5
     var kernel: Kernel? {
         didSet {
             guard let kernel = kernel else {
                 return
             }
+
+            executionPipeline = KernelExecutionPipeline(kernel: kernel, errorOutput: display)
+            argumentsController = KernelArgumentsController(kernel: kernel, shouldUpdateCallback: didUpdateArguments)
             attributesViewController?.extentSettings = kernel.extentSettings
+            attributesViewController?.inheritSize = kernel.extent
             liveViewController?.setup(with: kernel)
         }
     }
 
+    var executionPipeline: KernelExecutionPipeline?
+    var argumentsController: KernelArgumentsController? {
+        didSet {
+            attributesViewController?.didUpdateArguments = argumentsController?.updateArgumentsFromUI
+            sourceEditorViewController?.didUpdateArguments = argumentsController?.updateArgumentsFromCode
+        }
+    }
+
     var project: Project?
-    var databindingObservers: [GenericDatabindingObserver] = []
 
     var showAttributes = true {
         didSet {
@@ -141,9 +152,7 @@ class MainViewController: UIViewController {
         if kernel.arguments.isEmpty {
             kernel.arguments = project?.metaData.arguments ?? []
         }
-
-        let executionPipeline = KernelExecutionPipeline(kernel: kernel, errorOutput: display)
-        executionPipeline.execute(source: source)
+        executionPipeline?.execute(source: source)
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -166,6 +175,24 @@ class MainViewController: UIViewController {
         updateViewConstraints(newWidth: view.frame.width)
     }
 
+    func didUpdateArguments(source: KernelArgumentSource) {
+        guard let newArguments = argumentsController?.currentArguments else { return }
+        switch source {
+        case .code:
+            sourceEditorViewController?.update(attributes: newArguments)
+            break
+        case .ui:
+            attributesViewController?.arguments = newArguments
+            break
+        case .render:
+            executionPipeline?.renderIfPossible()
+            break
+        }
+
+        project?.metaData.arguments = newArguments
+        project?.updateChangeCount(.done)
+    }
+
     func updateViewConstraints(newWidth: CGFloat) {
         attributesContainerWidthConstraint.constant = showAttributes ? 220 : 0
         let maxWidth = newWidth - attributesContainerWidthConstraint.constant
@@ -186,7 +213,9 @@ class MainViewController: UIViewController {
             self.attributesViewController?.arguments = document.metaData.arguments
             self.attributesViewController?.tableView.reloadData()
 
-            self.kernel = document.metaData.type.kernelClass.init()
+            let kernel = document.metaData.type.kernelClass.init()
+            kernel.arguments = document.metaData.arguments
+            self.kernel = kernel
             var inputImageValues = document.metaData.inputImages
             while inputImageValues.count < self.kernel!.requiredInputImages {
                 inputImageValues.append(KernelInputImage(image: nil, index: inputImageValues.count, shouldHighlightIfMissing: false))
@@ -199,7 +228,6 @@ class MainViewController: UIViewController {
             self.attributesViewController?.shadingLanguage = document.metaData.type.shadingLanguage
             self.attributesViewController?.supportedArguments = document.metaData.type.kernelClass.supportedArguments
             self.updateInputImages()
-            self.updateKernelarguments()
         }
         if let oldDocument = self.project {
             oldDocument.close(completionHandler: { _ in
@@ -252,43 +280,6 @@ class MainViewController: UIViewController {
         }
     }
 
-    func didUpdateArgumentsFromAttributesViewController(onlyValueChanges: Bool) {
-        guard let attributes = attributesViewController?.arguments else {
-            return
-        }
-        project?.metaData.arguments = attributes
-        project?.updateChangeCount(.done)
-        if onlyValueChanges {
-            updateKernelarguments()
-        } else {
-            sourceEditorViewController?.update(attributes: attributes)
-        }
-        updateDatabindingObservers()
-    }
-
-    func updateKernelarguments() {
-        guard let project = project else { return }
-        kernel?.arguments = project.metaData.arguments
-        attributesViewController?.inheritSize = kernel?.extent ?? .zero
-        kernel?.render()
-    }
-
-    func updateDatabindingObservers() {
-        // TODO: recycle observer instead of recreating
-        databindingObservers.forEach { observer in
-            DataBindingContext.shared.removeObserver(with: observer.argument.name)
-        }
-        databindingObservers.removeAll()
-
-        for argument in project?.metaData.arguments ?? [] where argument.binding != nil {
-            let observer = GenericDatabindingObserver(argument: argument)
-            observer.didUpdateArgument = { [weak self] newArgument in
-                self?.didUpdateArgumentFromObserver(argument: newArgument)
-            }
-            databindingObservers.append(observer)
-        }
-    }
-
     func updateInputImages() {
         guard let project = project else { return }
         kernel?.inputImages = project.metaData.inputImages.compactMap { $0.image?.asCIImage }
@@ -296,43 +287,10 @@ class MainViewController: UIViewController {
         kernel?.render()
     }
 
-    func didUpdateArgumentFromObserver(argument: KernelArgument) {
-        let currentArguments = attributesViewController?.arguments ?? []
-        let newAttributes = currentArguments.map { oldArgument -> KernelArgument in
-            if oldArgument.name == argument.name {
-                return argument
-            }
-            return oldArgument
-        }
-        attributesViewController?.arguments = newAttributes
-        project?.metaData.arguments = newAttributes
-        project?.updateChangeCount(.done)
-        updateKernelarguments()
-    }
-
-    func didUpdateArgumentsFromSourceEditor(arguments: [KernelDefinitionArgument]) {
-        let currentAttributes = attributesViewController?.arguments ?? []
-        let newAttributes = arguments.enumerated().map { (index, argument) -> KernelArgument in
-            if index < currentAttributes.count {
-                var currentArgument = currentAttributes[index]
-                if currentArgument.type == argument.type {
-                    currentArgument.name = argument.name
-                    return currentArgument
-                }
-            }
-            return KernelArgument(index: argument.index, name: argument.name, type: argument.type, value: argument.type.defaultValue, access: argument.access, origin: argument.origin)
-        }
-        attributesViewController?.arguments = newAttributes
-        project?.metaData.arguments = newAttributes
-        project?.updateChangeCount(.done)
-        updateDatabindingObservers()
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         switch segue.destination {
         case let vc as AttributesViewController:
             attributesViewController = vc
-            attributesViewController?.didUpdateAttributes = didUpdateArgumentsFromAttributesViewController
             attributesViewController?.outputSize = project?.metaData.ouputSize ?? .inherit
             attributesViewController?.inheritSize = kernel?.extent ?? .zero
             attributesViewController?.didUpdatedOutputSize = { [weak self] outputSize in
@@ -351,7 +309,6 @@ class MainViewController: UIViewController {
             vc.didUpdateText = { [weak self] text in
                 self?.project?.source = text
             }
-            vc.didUpdateArguments = didUpdateArgumentsFromSourceEditor
         case let vc as DocumentBrowserViewController:
             documentBrowser = vc
             vc.didOpenedDocument = didOpened

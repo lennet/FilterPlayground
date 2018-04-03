@@ -26,10 +26,12 @@ class KernelArgumentsController {
 
     var shouldUpdateCallback: (KernelArgumentSource) -> Void
     var kernel: Kernel
+    var databindingObservers: [GenericDatabindingObserver]
 
     init(kernel: Kernel, shouldUpdateCallback: @escaping (KernelArgumentSource) -> Void) {
         self.shouldUpdateCallback = shouldUpdateCallback
         self.kernel = kernel
+        databindingObservers = []
     }
 
     func updateArgumentsFromCode(arguments: [KernelDefinitionArgument]) {
@@ -51,12 +53,14 @@ class KernelArgumentsController {
         if hasChanged {
             currentArguments = newArguments
             shouldUpdateCallback(.ui)
+            updateDatabindingObservers()
         }
     }
 
     func updateArgumentsFromUI(arguments: [KernelArgument]) {
         var argumentsHaveChanged = arguments.count != currentArguments.count
         var onlyValuesChanged = arguments.count == currentArguments.count
+        var shouldUpdateObservers = false
         let newArguments = arguments.enumerated().map { (index, argument) -> KernelArgument in
             if index < currentArguments.count {
                 var currentArgument = currentArguments[index]
@@ -65,6 +69,12 @@ class KernelArgumentsController {
                     currentArgument.name = argument.name
                     onlyValuesChanged = false
                 }
+
+                if currentArgument.binding != argument.binding {
+                    currentArgument.binding = argument.binding
+                    shouldUpdateObservers = true
+                }
+
                 if currentArgument.type != argument.type {
                     currentArgument.type = argument.type
                     onlyValuesChanged = false
@@ -85,6 +95,25 @@ class KernelArgumentsController {
             } else {
                 shouldUpdateCallback(.code)
             }
+        }
+        if shouldUpdateObservers {
+            updateDatabindingObservers()
+        }
+    }
+
+    func updateDatabindingObservers() {
+        // TODO: recycle observer instead of recreating
+        databindingObservers.forEach { observer in
+            DataBindingContext.shared.removeObserver(with: observer.argument.name)
+        }
+        databindingObservers.removeAll()
+
+        for argument in currentArguments where argument.binding != nil {
+            let observer = GenericDatabindingObserver(argument: argument)
+            observer.didUpdateArgument = { [weak self] newArgument in
+                self?.updateArgumentFromObserver(argument: newArgument)
+            }
+            databindingObservers.append(observer)
         }
     }
 

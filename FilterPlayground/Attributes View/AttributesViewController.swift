@@ -77,7 +77,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
-    var didUpdateAttributes: ((Bool) -> Void)?
+    var didUpdateArguments: (([KernelArgument]) -> Void)?
     var didUpdatedImage: ((KernelInputImage) -> Void)?
     var didUpdatedOutputSize: ((KernelOutputSize) -> Void)?
 
@@ -132,7 +132,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
             // we only need to rerun if values have changed.
             // we compare name and attributes because comparing values can be expensive for images
             let updatedType = oldAttribute.type != attribute.type
-            didUpdateAttributes?(oldAttribute.name == attribute.name && !updatedType)
+            didUpdateArguments?(arguments)
             if attribute.type == .sample || updatedType {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
@@ -145,7 +145,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             arguments.append(newAttribute)
             tableView.reloadData()
-            didUpdateAttributes?(false)
+            didUpdateArguments?(arguments)
         }
     }
 
@@ -221,7 +221,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         arguments.remove(at: indexPath.row)
         tableView.reloadData()
-        didUpdateAttributes?(false)
+        didUpdateArguments?(arguments)
     }
 
     @objc func themeChanged(notification _: Notification?) {

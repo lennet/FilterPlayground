@@ -47,17 +47,21 @@ class KernelExecutionPipeline {
         finishExecution()
     }
 
-    func finishExecution() {
-        defer {
-            DispatchQueue.main.async {
-                self.errorOutput(self.errors)
-            }
-        }
+    func renderIfPossible() {
         guard !errors.containsError else {
             return
         }
         DispatchQueue.main.async {
             self.kernel.render()
         }
+    }
+
+    func finishExecution() {
+        defer {
+            DispatchQueue.main.async {
+                self.errorOutput(self.errors)
+            }
+        }
+        renderIfPossible()
     }
 }

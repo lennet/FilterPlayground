@@ -192,8 +192,9 @@ class KernelArgumentControllerTests: XCTestCase {
     func testUpdateArgumentFromObserver() {
         let kernel = MockKernel()
         let exp = expectation(description: "waiting for callback")
+        exp.expectedFulfillmentCount = 2
         let callback: (KernelArgumentSource) -> Void = { source in
-            XCTAssertEqual(source, .render)
+            XCTAssertNotEqual(source, .code)
             exp.fulfill()
         }
         kernel.arguments = [KernelArgument(index: 0, name: "foo", type: .color, value: .color(0, 0, 0, 0))]

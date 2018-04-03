@@ -120,5 +120,6 @@ class KernelArgumentsController {
     func updateArgumentFromObserver(argument: KernelArgument) {
         currentArguments[argument.index] = argument
         shouldUpdateCallback(.render)
+        shouldUpdateCallback(.ui)
     }
 }

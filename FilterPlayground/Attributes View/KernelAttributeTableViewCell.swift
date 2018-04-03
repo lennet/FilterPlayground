@@ -212,39 +212,3 @@ class KernelAttributeTableViewCell: UITableViewCell, UITextFieldDelegate {
         return true
     }
 }
-
-extension KernelArgumentType: SelectObjectViewControllerPresentable {
-    var title: String {
-        return rawValue
-    }
-
-    var subtitle: String? {
-        return nil
-    }
-
-    var interactionEnabled: Bool {
-        return true
-    }
-
-    var image: UIImage? {
-        return nil
-    }
-}
-
-extension DataBinding: SelectObjectViewControllerPresentable {
-    var title: String {
-        return String(describing: self)
-    }
-
-    var subtitle: String? {
-        return nil
-    }
-
-    var image: UIImage? {
-        return nil
-    }
-
-    var interactionEnabled: Bool {
-        return true
-    }
-}

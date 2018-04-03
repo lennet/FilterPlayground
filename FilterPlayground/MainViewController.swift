@@ -57,7 +57,7 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presentDocumentBrowser()
+        presentDocumentBrowserIfNeeded()
         registerNotifications()
     }
 
@@ -65,7 +65,7 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
     }
 
-    func presentDocumentBrowser() {
+    func presentDocumentBrowserIfNeeded() {
         if project == nil {
             performSegue(withIdentifier: "initialSetupSegueWithoutAnimation", sender: nil)
         }
@@ -144,11 +144,6 @@ class MainViewController: UIViewController {
 
         let executionPipeline = KernelExecutionPipeline(kernel: kernel, errorOutput: display)
         executionPipeline.execute(source: source)
-    }
-
-    func clearErrors() {
-        inputImageValues = inputImageValues.map { KernelInputImage(image: $0.image, index: $0.index, shouldHighlightIfMissing: false) }
-        sourceEditorViewController?.errors = []
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

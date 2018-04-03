@@ -9,7 +9,7 @@
 import CoreImage
 import simd
 
-enum KernelArgumentValue {
+enum KernelArgumentValue: Equatable {
     case float(Float)
     case vec2(Float, Float)
     case vec3(Float, Float, Float)

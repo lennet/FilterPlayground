@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Reveal / import the document at the URL
         guard let mainViewController = self.window?.rootViewController?.childViewControllers.first as? MainViewController else { return false }
         if mainViewController.documentBrowser == nil {
-            mainViewController.presentDocumentBrowser()
+            mainViewController.presentDocumentBrowserIfNeeded()
         }
         //
 

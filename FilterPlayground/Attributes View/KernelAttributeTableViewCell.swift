@@ -141,6 +141,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UITextFieldDelegate {
         } else if let view = KernelArgumentValueViewHelper.view(for: type).init(frame: valueSelectionContainer.bounds, value: value) as? (UIView & KernelArgumentValueView) {
             stackView.axis = view.prefferedUIAxis
             valueSelectionContainer.removeFromSuperview()
+
             if view.prefferedUIAxis == .horizontal {
                 stackView.addArrangedSubview(valueSelectionContainer)
             } else {
@@ -152,9 +153,8 @@ class KernelAttributeTableViewCell: UITableViewCell, UITextFieldDelegate {
             valueSelectionView?.updatedValueCallback = { [weak self] value in
                 self?.valueSelectionChanged(value: value)
             }
-            layoutIfNeeded()
         }
-        valueSelectionHeight.constant = CGFloat(valueSelectionView?.prefferedHeight ?? 0)
+        valueSelectionHeight.constant = valueSelectionView!.prefferedHeight
         layoutIfNeeded()
     }
 

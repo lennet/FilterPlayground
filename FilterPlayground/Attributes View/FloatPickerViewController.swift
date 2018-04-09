@@ -24,22 +24,18 @@ class FloatPickerViewController: UIViewController {
     var max: Float?
     var startValue: Float = 0
 
-    // TODO: replace string representation with own struct
-    var valueBeforeDot: String = ""
-    var valueAfterDot: String?
-    var dotAlreadyTapped = false
+    var inputObject = FloatPickerObject(floatLiteral: 0)
+
     var defaultContentSize: CGSize {
-        return CGSize(width: 300, height: 500 + (showNextButton || showPreviousButton ? 100 : 0))
+        return CGSize(width: 225, height: 400 + (showNextButton || showPreviousButton ? 75 : 0))
     }
 
     var showNextButton = false {
         didSet {
             loadViewIfNeeded()
-            //            UIView.performWithoutAnimation {
             nextButton.isHidden = !showNextButton
             nextButton.needsLeftBorder = showNextButton && showPreviousButton
             nextButton.superview?.layoutIfNeeded()
-            //            }
             updateContentSize()
         }
     }
@@ -47,17 +43,15 @@ class FloatPickerViewController: UIViewController {
     var showPreviousButton = false {
         didSet {
             loadViewIfNeeded()
-            //            UIView.performWithoutAnimation {
             nextButton.needsLeftBorder = showNextButton && showPreviousButton
             previousButton.isHidden = !showPreviousButton
             previousButton.setNeedsDisplay()
             nextButton.superview?.layoutIfNeeded()
-            //            }
             updateContentSize()
         }
     }
 
-    var valueChanged: ((CGFloat) -> Void)?
+    var valueChanged: ((FloatPickerObject) -> Void)?
     var nextButtonTappedCallback: (() -> Void)?
     var previousButtonTappedCallback: (() -> Void)?
 
@@ -91,11 +85,8 @@ class FloatPickerViewController: UIViewController {
     }
 
     @IBAction func sliderValueChanged(_: Any) {
-        valueBeforeDot = "\(round(slider.value))"
-        if dotAlreadyTapped {
-            valueAfterDot = "\((round(slider.value * 100) / 100) - round(slider.value))"
-        }
-        update(value: slider.value)
+        inputObject.set(value: Float(slider.value))
+        update(value: Float(slider.value))
     }
 
     // Mark: Buttons
@@ -141,27 +132,15 @@ class FloatPickerViewController: UIViewController {
     }
 
     @IBAction func dotButtonTapped(_: Any) {
-        dotAlreadyTapped = true
-        slider.roundedSteps = false
+        inputObject.add(input: .dot)
+        update(value: inputObject.floatRepresentation)
+        slider.roundedSteps = inputObject.containsDot
     }
 
     @IBAction func deleteButtonTapped(_: Any) {
-        if valueAfterDot != nil && !(valueAfterDot?.isEmpty ?? true) {
-            valueAfterDot?.removeLast()
-            if valueAfterDot?.isEmpty ?? true {
-                dotAlreadyTapped = false
-                update(value: CGFloat(Float("\(valueBeforeDot)")!))
-            } else {
-                update(value: CGFloat(Float("\(valueBeforeDot).\(valueAfterDot!)")!))
-            }
-        } else if !valueBeforeDot.isEmpty {
-            valueBeforeDot.removeLast()
-            if valueBeforeDot.isEmpty {
-                update(value: 0)
-            } else {
-                update(value: CGFloat(Float("\(valueBeforeDot)")!))
-            }
-        }
+        inputObject.removeLastInput()
+        update(value: inputObject.floatRepresentation)
+        slider.roundedSteps = inputObject.containsDot
     }
 
     @IBAction func nextButtonTapped(_: Any) {
@@ -177,29 +156,21 @@ class FloatPickerViewController: UIViewController {
     }
 
     func append(number: Int) {
-        if dotAlreadyTapped {
-            if valueAfterDot == nil {
-                valueAfterDot = ""
-            }
-            valueAfterDot?.append("\(number)")
-            update(value: CGFloat(Float("\(valueBeforeDot).\(valueAfterDot!)")!))
-        } else {
-            valueBeforeDot.append("\(number)")
-            update(value: CGFloat(Float("\(valueBeforeDot)")!))
-        }
+        inputObject.add(input: .digit(number))
+        update(value: inputObject.floatRepresentation)
     }
 
-    func update(value: CGFloat) {
+    func update(value: Float) {
         let roundedValue = round(value * 10000) / 10000
         var newValue = roundedValue
         if let minValue = min {
-            newValue = Swift.max(newValue, CGFloat(minValue))
+            newValue = Swift.max(newValue, minValue)
         }
         if let maxValue = max {
-            newValue = Swift.min(newValue, CGFloat(maxValue))
+            newValue = Swift.min(newValue, maxValue)
         }
-        valueChanged?(newValue)
-        slider.value = newValue
+        valueChanged?(inputObject)
+        slider.value = CGFloat(newValue)
     }
 
     func set(value: CGFloat) {

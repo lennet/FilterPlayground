@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -37,7 +37,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Igt-kZ-2Hg" secondAttribute="height" multiplier="1:1" id="CKC-53-ecv"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="7"/>
                                         <connections>
                                             <action selector="sevenButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="SCY-v5-fse"/>
@@ -45,7 +45,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CYH-Q8-Cam" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
                                         <rect key="frame" x="133.5" y="20" width="133.5" height="133.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="8"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="needsLeftBorder" value="YES"/>
@@ -57,7 +57,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qk-7J-lR0" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
                                         <rect key="frame" x="267" y="20" width="133" height="133.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="9"/>
                                         <connections>
                                             <action selector="nineButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="cCo-xP-Eqp"/>
@@ -68,7 +68,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="jnq-4O-2n7" secondAttribute="height" multiplier="1:1" id="Oq7-ok-bn6"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="4"/>
                                         <connections>
                                             <action selector="fourButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="sce-Yi-i90"/>
@@ -76,7 +76,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RwV-gI-rsy" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
                                         <rect key="frame" x="133" y="153.5" width="133.5" height="133.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="5"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="needsLeftBorder" value="YES"/>
@@ -88,7 +88,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EZO-8K-Gme" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
                                         <rect key="frame" x="267" y="153.5" width="133" height="133.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="6"/>
                                         <connections>
                                             <action selector="sixButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="63z-oT-foq"/>
@@ -99,7 +99,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="hWW-M4-Hxg" secondAttribute="height" multiplier="1:1" id="xa1-6x-Ovg"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="1"/>
                                         <connections>
                                             <action selector="oneButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="cjC-Ac-uw3"/>
@@ -107,7 +107,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UAI-KV-PGy" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
                                         <rect key="frame" x="133.5" y="287" width="133.5" height="133.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="2"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="needsLeftBorder" value="YES"/>
@@ -119,7 +119,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJ7-Ea-smw" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
                                         <rect key="frame" x="267.5" y="287" width="132.5" height="133.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="3"/>
                                         <connections>
                                             <action selector="threeButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="KXX-sX-dKr"/>
@@ -130,7 +130,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="1bd-7z-eFF" secondAttribute="height" multiplier="1:1" id="R9e-qP-RQ9"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="0"/>
                                         <connections>
                                             <action selector="zeroButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="fYN-zN-rlr"/>
@@ -138,7 +138,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TdD-Eu-khJ" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
                                         <rect key="frame" x="133.5" y="420" width="133.5" height="133.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <state key="normal" title="•"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="needsLeftBorder" value="YES"/>
@@ -148,10 +148,10 @@
                                             <action selector="dotButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="Se9-zO-Xu7"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K0m-Cb-EFz" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
-                                        <rect key="frame" x="267.5" y="420" width="132.5" height="133.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                        <state key="normal" title="delete"/>
+                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K0m-Cb-EFz" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                        <rect key="frame" x="267" y="420.5" width="133" height="133.5"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" backgroundImage="Delete"/>
                                         <connections>
                                             <action selector="deleteButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="gDh-BX-Zqj"/>
                                         </connections>
@@ -402,4 +402,7 @@
             <point key="canvasLocation" x="2911" y="1227"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Delete" width="189" height="120"/>
+    </resources>
 </document>

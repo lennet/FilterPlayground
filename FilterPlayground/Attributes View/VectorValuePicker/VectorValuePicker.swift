@@ -9,7 +9,7 @@
 import UIKit
 
 class VectorValuePicker: UIControl, KernelArgumentValueView, UIPopoverPresentationControllerDelegate {
-    var prefferedHeight: Float {
+    var prefferedHeight: CGFloat {
         return 0
     }
 
@@ -81,11 +81,11 @@ class VectorValuePicker: UIControl, KernelArgumentValueView, UIPopoverPresentati
         viewController.showNextButton = true
         floatPicker = viewController
         viewController.valueChanged = { value in
-            self.values[self.currentHighlightedIndex - 1] = Float(value)
+            self.values[self.currentHighlightedIndex - 1] = value.floatRepresentation
             guard let label = self.stackView.arrangedSubviews[self.currentHighlightedIndex - 1] as? UILabel else {
                 return
             }
-            label.text = "\(value)"
+            label.text = value.stringRepresentation
             self.updatedValues()
         }
 

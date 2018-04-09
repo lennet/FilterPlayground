@@ -40,6 +40,12 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "SavingDocumentTests/testSaveImage()">
+               </Test>
+               <Test
+                  Identifier = "SavingDocumentTests/testSaveMetalProject()">
+               </Test>
+               <Test
                   Identifier = "SavingDocumentTests/testSaveText()">
                </Test>
             </SkippedTests>

@@ -133,7 +133,7 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
             // we compare name and attributes because comparing values can be expensive for images
             let updatedType = oldAttribute.type != attribute.type
             didUpdateArguments?(arguments)
-            if attribute.type == .sample || updatedType {
+            if updatedType {
                 tableView.reloadRows(at: [indexPath], with: .automatic)
             }
         } else {

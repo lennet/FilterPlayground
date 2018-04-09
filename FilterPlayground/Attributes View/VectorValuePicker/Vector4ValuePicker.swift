@@ -9,7 +9,7 @@
 import UIKit
 
 class Vector4ValuePicker: VectorValuePicker {
-    override var prefferedHeight: Float {
+    override var prefferedHeight: CGFloat {
         return 84
     }
 

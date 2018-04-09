@@ -9,7 +9,7 @@
 import UIKit
 
 class ValuePickerButton: UIButton, KernelArgumentValueView, UIPopoverPresentationControllerDelegate {
-    var prefferedHeight: Float {
+    var prefferedHeight: CGFloat {
         return 0
     }
 

@@ -49,6 +49,8 @@
 		9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845C6101F38F44100F38283 /* NewProjectViewController.swift */; };
 		9848C4441F3B9B58001E079C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */; };
 		984D9FA41F2E824B004AFD74 /* ParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984D9FA31F2E824B004AFD74 /* ParserTests.swift */; };
+		9851901D207A676D00F83C89 /* FloatPickerObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9851901C207A676D00F83C89 /* FloatPickerObjectTests.swift */; };
+		9851901F207A6E7E00F83C89 /* FloatPickerObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9851901E207A6E7E00F83C89 /* FloatPickerObject.swift */; };
 		9853F8591F78F15100551541 /* CodeCompletionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853F8581F78F15100551541 /* CodeCompletionCollectionViewCell.swift */; };
 		9853F85B1F79012500551541 /* AST+CodeCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853F85A1F79012500551541 /* AST+CodeCompletion.swift */; };
 		9853F85D1F7903C100551541 /* ASTCodeCompletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9853F85C1F7903C100551541 /* ASTCodeCompletionTests.swift */; };
@@ -255,6 +257,8 @@
 		9845C6101F38F44100F38283 /* NewProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectViewController.swift; sourceTree = "<group>"; };
 		9848C4431F3B9B58001E079C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		984D9FA31F2E824B004AFD74 /* ParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTests.swift; sourceTree = "<group>"; };
+		9851901C207A676D00F83C89 /* FloatPickerObjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatPickerObjectTests.swift; sourceTree = "<group>"; };
+		9851901E207A6E7E00F83C89 /* FloatPickerObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatPickerObject.swift; sourceTree = "<group>"; };
 		9853F8581F78F15100551541 /* CodeCompletionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeCompletionCollectionViewCell.swift; sourceTree = "<group>"; };
 		9853F85A1F79012500551541 /* AST+CodeCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AST+CodeCompletion.swift"; sourceTree = "<group>"; };
 		9853F85C1F7903C100551541 /* ASTCodeCompletionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTCodeCompletionTests.swift; sourceTree = "<group>"; };
@@ -560,6 +564,7 @@
 				98D09BA7206E559D00DB6B00 /* KernelExecutionPipelineTests.swift */,
 				98B5801B20723F47009AA1E6 /* MockKernel.swift */,
 				983743EE20736EF500805F2C /* KernelArgumentControllerTests.swift */,
+				9851901C207A676D00F83C89 /* FloatPickerObjectTests.swift */,
 			);
 			path = FilterPlaygroundTests;
 			sourceTree = "<group>";
@@ -717,6 +722,7 @@
 				985D51A41FA66FE2009881CC /* VectorValuePicker */,
 				985D51A51FA67096009881CC /* SampleValuePicker.swift */,
 				986E7E6A1FB8C550001FC74D /* KernelOutputSizeTableViewCell.swift */,
+				9851901E207A6E7E00F83C89 /* FloatPickerObject.swift */,
 			);
 			path = "Attributes View";
 			sourceTree = "<group>";
@@ -1017,6 +1023,7 @@
 				98C5E23D1F34B85C006E7658 /* KernelCompilerResult.swift in Sources */,
 				9888F4CA1FB6634500D108CF /* ThemeManager.swift in Sources */,
 				98FF4F951F968BC0004F46B0 /* InputImageTableViewCell.swift in Sources */,
+				9851901F207A6E7E00F83C89 /* FloatPickerObject.swift in Sources */,
 				989716961F67E7B300E7C20C /* CoreImage+Extension.swift in Sources */,
 				984515401F914CE10015FADF /* FPMTKView.swift in Sources */,
 				9853F8591F78F15100551541 /* CodeCompletionCollectionViewCell.swift in Sources */,
@@ -1053,6 +1060,7 @@
 				98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */,
 				98E5AD0E1F2E87280047AC2E /* RendererTests.swift in Sources */,
 				98D69A441FD2CC3200C3302F /* UIView+ExtensionTests.swift in Sources */,
+				9851901D207A676D00F83C89 /* FloatPickerObjectTests.swift in Sources */,
 				98A411451F9954EF00A97459 /* SettingsTests.swift in Sources */,
 				98A411411F9950C100A97459 /* TouchDataBindingEmitterTests.swift in Sources */,
 				985668431F2E6ABE00297A4E /* TokenizerTests.swift in Sources */,

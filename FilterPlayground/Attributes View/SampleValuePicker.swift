@@ -9,11 +9,11 @@
 import UIKit
 
 class SampleValuePicker: UIView, KernelArgumentValueView {
-    var prefferedHeight: Float {
+    var prefferedHeight: CGFloat {
         // TODO: use AVMakeRect(aspectRatio
         if let imageSize = imageView.image?.size {
             let ratio = bounds.width / imageSize.width
-            return Float(imageSize.height * ratio)
+            return imageSize.height * ratio
         } else {
             return 0
         }

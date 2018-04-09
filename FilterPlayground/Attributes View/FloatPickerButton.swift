@@ -11,6 +11,8 @@ import UIKit
 class FloatPickerButton: ValuePickerButton {
     var min: Float?
     var max: Float?
+
+    var inputObject: FloatPickerObject = FloatPickerObject()
     var resetCircularSlider = true
 
     @objc override func handleTap() {
@@ -18,10 +20,11 @@ class FloatPickerButton: ValuePickerButton {
         viewController.min = min
         viewController.max = max
         viewController.startValue = value.asKernelValue as! Float
-
+        inputObject.set(value: value.asKernelValue as! Float)
         viewController.valueChanged = { [weak self] value in
             guard let strongSelf = self else { return }
-            strongSelf.value = .float(Float(value))
+            strongSelf.inputObject = value
+            strongSelf.value = .float(Float(value.floatRepresentation))
             strongSelf.updatedValueCallback?(strongSelf.value)
         }
 
@@ -29,9 +32,14 @@ class FloatPickerButton: ValuePickerButton {
     }
 
     override func updateButtonAfterValueChanged() {
-        guard case let .float(a) = value else {
-            return
+        if let value = value.asKernelValue as? Float {
+            if value != inputObject.floatRepresentation {
+                inputObject.set(value: value)
+            }
         }
-        setTitle("\(a)", for: .normal)
+        setTitle(inputObject.stringRepresentation, for: .normal)
+        UIView.performWithoutAnimation {
+            layoutIfNeeded()
+        }
     }
 }

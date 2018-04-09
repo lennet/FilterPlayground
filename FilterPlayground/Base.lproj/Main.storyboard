@@ -750,10 +750,9 @@
                             <outlet property="delegate" destination="ZzX-F5-eF8" id="GJg-lo-ROx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="LrO-EO-5H0">
-                        <nil key="title"/>
+                    <navigationItem key="navigationItem" title="New Project" id="LrO-EO-5H0">
                         <textField key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Untitled" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="XZn-sR-ay9">
-                            <rect key="frame" x="151" y="7" width="73" height="30"/>
+                            <rect key="frame" x="127.5" y="7" width="120" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -767,6 +766,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="S87-Is-PUV" id="Goo-NO-95I"/>
+                        <outlet property="titleTextField" destination="XZn-sR-ay9" id="YsF-Lm-U6g"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="itg-mA-yig" userLabel="First Responder" sceneMemberID="firstResponder"/>

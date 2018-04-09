@@ -39,14 +39,14 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
 
     func documentBrowser(_: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
         self.importHandler = importHandler
-        let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("untitled.\(Project.type)")
 
         let tabBarController = UIStoryboard.main.instantiateViewController(withIdentifier: "NewProjectTabBarController") as! UITabBarController
         let viewController = (tabBarController.viewControllers!.first as! UINavigationController).viewControllers.first as! NewProjectViewController
         let selectTemplateViewController = (tabBarController.viewControllers!.last as! UINavigationController).viewControllers.first as! SelectTemplateTableViewController
         tabBarController.modalPresentationStyle = .formSheet
         present(tabBarController, animated: true) {
-            viewController.didSelectType = { [weak self] type in
+            viewController.didSelectType = { [weak self] type, title in
+                let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("\(title).\(Project.type)")
                 viewController.dismiss(animated: true, completion: nil)
                 let document = Project(fileURL: newDocumentURL, type: type)
                 document.save(to: newDocumentURL, for: .forCreating) { success in

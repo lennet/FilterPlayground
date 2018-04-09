@@ -28,7 +28,8 @@ extension KernelType: SelectObjectViewControllerPresentable {
 }
 
 class NewProjectViewController: UITableViewController {
-    var didSelectType: ((KernelType) -> Void)?
+    @IBOutlet var titleTextField: UITextField!
+    var didSelectType: ((KernelType, String) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,7 @@ class NewProjectViewController: UITableViewController {
             objects.append([.metal])
         }
         let tableView = SelectObjectTableView(frame: view.bounds, objects: objects, callback: { kernelType, _ in
-            self.didSelectType?(kernelType as! KernelType)
+            self.didSelectType?(kernelType as! KernelType, self.titleTextField.text ?? "untitled")
         })
         if FeatureGate.isEnabled(feature: .metal) {
             tableView.sectionTitles = ["CoreImage Shading Language", "Metal Shading Language"]

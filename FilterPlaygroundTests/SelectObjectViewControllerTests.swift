@@ -32,9 +32,9 @@ class SelectObjectViewControllerTests: XCTestCase {
 
         let firstIndexPath = IndexPath(row: 0, section: 0)
         let secondIndexPath = IndexPath(row: 1, section: 0)
-
-        let firstCell = viewController.tableView(viewController.tableView, cellForRowAt: firstIndexPath)
-        let secondCell = viewController.tableView(viewController.tableView, cellForRowAt: secondIndexPath)
+        let dataSource = viewController.tableView.dataSource!
+        let firstCell = dataSource.tableView(viewController.tableView, cellForRowAt: firstIndexPath)
+        let secondCell = dataSource.tableView(viewController.tableView, cellForRowAt: secondIndexPath)
 
         XCTAssertEqual(firstCell.textLabel?.text, objects.first?.title)
         XCTAssertEqual(firstCell.detailTextLabel?.text, objects.first?.subtitle)
@@ -55,7 +55,7 @@ class SelectObjectViewControllerTests: XCTestCase {
 
         let selectedIndexPath = IndexPath(row: expectedIndex, section: 0)
 
-        viewController.tableView(viewController.tableView, didSelectRowAt: selectedIndexPath)
+        viewController.tableView.delegate?.tableView?(viewController.tableView, didSelectRowAt: selectedIndexPath)
         wait(for: [exp], timeout: 1)
     }
 }

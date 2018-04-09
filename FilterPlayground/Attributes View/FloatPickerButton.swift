@@ -38,6 +38,7 @@ class FloatPickerButton: ValuePickerButton {
             }
         }
         setTitle(inputObject.stringRepresentation, for: .normal)
+        // disable animations and force a relayout to prevent an empty title after changing the value frequently
         UIView.performWithoutAnimation {
             layoutIfNeeded()
         }

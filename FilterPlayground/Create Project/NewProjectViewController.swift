@@ -8,40 +8,40 @@
 
 import UIKit
 
+extension KernelType: SelectObjectViewControllerPresentable {
+    var title: String {
+        return String(describing: kernelClass)
+    }
+
+    var subtitle: String? {
+        return "TODO"
+    }
+
+    var image: UIImage? {
+        // TODO:
+        return nil
+    }
+
+    var interactionEnabled: Bool {
+        return true
+    }
+}
+
 class NewProjectViewController: UITableViewController {
     var didSelectType: ((KernelType) -> Void)?
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var objects: [[KernelType]] = [[.coreimage, .coreimagewarp, .coreimagecolor, .coreimageblend]]
         if FeatureGate.isEnabled(feature: .metal) {
-            return super.numberOfSections(in: tableView)
-        } else {
-            return super.numberOfSections(in: tableView) - 1
+            objects.append([.metal])
         }
-    }
-
-    // MARK: - Table view delegate
-
-    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let type: KernelType
-        switch (indexPath.section, indexPath.row) {
-        case (0, 0):
-            type = .coreimage
-            break
-        case (0, 1):
-            type = .coreimagewarp
-            break
-        case (0, 2):
-            type = .coreimagecolor
-            break
-        case (0, 3):
-            type = .coreimageblend
-            break
-        case (1, 0):
-            type = .metal
-            break
-        default:
-            return
+        let tableView = SelectObjectTableView(frame: view.bounds, objects: objects, callback: { kernelType, _ in
+            self.didSelectType?(kernelType as! KernelType)
+        })
+        if FeatureGate.isEnabled(feature: .metal) {
+            tableView.sectionTitles = ["CoreImage Shading Language", "Metal Shading Language"]
         }
-        didSelectType?(type)
+        self.tableView = tableView
     }
 }

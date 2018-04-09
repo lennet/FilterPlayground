@@ -21,15 +21,6 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         allowsPickingMultipleItems = true
     }
 
-    #if (targetEnvironment(simulator))
-        // workaround for the broken UIDocumentBrowser on simulators on Xcode 9.2
-        override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
-
-            createAndOpenDebugProject()
-        }
-    #endif
-
     func createAndOpenDebugProject() {
         let newDocumentURL = FileManager.default.temporaryDirectory.appendingPathComponent("untitled.\(Project.type)")
         let document = Project(fileURL: newDocumentURL, type: .coreimage)

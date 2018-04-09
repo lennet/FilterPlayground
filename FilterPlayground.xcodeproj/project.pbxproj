@@ -78,6 +78,7 @@
 		985D51A31FA66FAA009881CC /* Vector4ValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985D51A21FA66FAA009881CC /* Vector4ValuePicker.swift */; };
 		985D51A61FA67096009881CC /* SampleValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985D51A51FA67096009881CC /* SampleValuePicker.swift */; };
 		985EB2491F6821990007B85C /* CIFilterHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985EB2481F6821990007B85C /* CIFilterHelperTests.swift */; };
+		985EB8F4207BA1DA00256D44 /* SelectObjectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985EB8F3207BA1DA00256D44 /* SelectObjectTableView.swift */; };
 		986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */; };
 		9865131620738ADA00DCAD25 /* KernelArgumentType+SelectObjectViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9865131520738ADA00DCAD25 /* KernelArgumentType+SelectObjectViewControllerRepresentable.swift */; };
 		9865131820738B0400DCAD25 /* DataBinding+SelectObjectViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9865131720738B0400DCAD25 /* DataBinding+SelectObjectViewControllerRepresentable.swift */; };
@@ -290,6 +291,7 @@
 		985D51A21FA66FAA009881CC /* Vector4ValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector4ValuePicker.swift; sourceTree = "<group>"; };
 		985D51A51FA67096009881CC /* SampleValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleValuePicker.swift; sourceTree = "<group>"; };
 		985EB2481F6821990007B85C /* CIFilterHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilterHelperTests.swift; sourceTree = "<group>"; };
+		985EB8F3207BA1DA00256D44 /* SelectObjectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectObjectTableView.swift; sourceTree = "<group>"; };
 		986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		9865131520738ADA00DCAD25 /* KernelArgumentType+SelectObjectViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KernelArgumentType+SelectObjectViewControllerRepresentable.swift"; sourceTree = "<group>"; };
 		9865131720738B0400DCAD25 /* DataBinding+SelectObjectViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataBinding+SelectObjectViewControllerRepresentable.swift"; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 				986E7E651FB8B123001FC74D /* DragInteractionImageView.swift */,
 				98E987BF1FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift */,
 				98FDE16E1FF68C6600D881C8 /* SelectObjectViewController.swift */,
+				985EB8F3207BA1DA00256D44 /* SelectObjectTableView.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -994,6 +997,7 @@
 				985D519F1FA66E18009881CC /* Vector2ValuePicker.swift in Sources */,
 				98F2B9EF1F719B380092A015 /* SourceEditorTextView.swift in Sources */,
 				986E7E6D1FB8F017001FC74D /* KernelOutputSizeSetting.swift in Sources */,
+				985EB8F4207BA1DA00256D44 /* SelectObjectTableView.swift in Sources */,
 				9897B22B1FEA74FB00291490 /* FeatureGate.swift in Sources */,
 				983008761F6F084C005C89C3 /* DismissSegue.swift in Sources */,
 				986E7E681FB8BDEF001FC74D /* KernelOutputSize.swift in Sources */,

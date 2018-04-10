@@ -79,6 +79,7 @@
 		985D51A61FA67096009881CC /* SampleValuePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985D51A51FA67096009881CC /* SampleValuePicker.swift */; };
 		985EB2491F6821990007B85C /* CIFilterHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985EB2481F6821990007B85C /* CIFilterHelperTests.swift */; };
 		985EB8F4207BA1DA00256D44 /* SelectObjectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985EB8F3207BA1DA00256D44 /* SelectObjectTableView.swift */; };
+		985EB8F6207BE9BC00256D44 /* ApplicationLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985EB8F5207BE9BC00256D44 /* ApplicationLayoutViewController.swift */; };
 		986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */; };
 		9865131620738ADA00DCAD25 /* KernelArgumentType+SelectObjectViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9865131520738ADA00DCAD25 /* KernelArgumentType+SelectObjectViewControllerRepresentable.swift */; };
 		9865131820738B0400DCAD25 /* DataBinding+SelectObjectViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9865131720738B0400DCAD25 /* DataBinding+SelectObjectViewControllerRepresentable.swift */; };
@@ -163,15 +164,19 @@
 		98B5801C20723F47009AA1E6 /* MockKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5801B20723F47009AA1E6 /* MockKernel.swift */; };
 		98B5801E20724027009AA1E6 /* KernelArgumentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5801D20724027009AA1E6 /* KernelArgumentsController.swift */; };
 		98B5801F2072403F009AA1E6 /* KernelArgumentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5801D20724027009AA1E6 /* KernelArgumentsController.swift */; };
-		98B7B6E91F4757B5008C370F /* MainViewController+Export.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B7B6E81F4757B4008C370F /* MainViewController+Export.swift */; };
 		98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */; };
 		98C5E23D1F34B85C006E7658 /* KernelCompilerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23C1F34B85C006E7658 /* KernelCompilerResult.swift */; };
 		98C5E23F1F34B8DD006E7658 /* KernelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23E1F34B8DD006E7658 /* KernelError.swift */; };
 		98C6FE861F3832AE00D0E840 /* ASTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C6FE851F3832AE00D0E840 /* ASTTests.swift */; };
+		98CF9E70207D46FE00B82040 /* ExportOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF9E6F207D46FE00B82040 /* ExportOptionsViewController.swift */; };
 		98D09BA3206E53CB00DB6B00 /* KernelExecutionPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D09BA2206E53CB00DB6B00 /* KernelExecutionPipeline.swift */; };
 		98D09BA4206E53D100DB6B00 /* KernelExecutionPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D09BA2206E53CB00DB6B00 /* KernelExecutionPipeline.swift */; };
 		98D09BA8206E559D00DB6B00 /* KernelExecutionPipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D09BA7206E559D00DB6B00 /* KernelExecutionPipelineTests.swift */; };
 		98D69A441FD2CC3200C3302F /* UIView+ExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D69A431FD2CC3200C3302F /* UIView+ExtensionTests.swift */; };
+		98D86E88207D321900AA3E7D /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D86E87207D321900AA3E7D /* KeyboardObserver.swift */; };
+		98D86E8B207D370100AA3E7D /* ApplicationInnerLayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D86E8A207D370100AA3E7D /* ApplicationInnerLayoutViewController.swift */; };
+		98D86E8D207D372100AA3E7D /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D86E8C207D372100AA3E7D /* MainController.swift */; };
+		98D86E8F207D3A5200AA3E7D /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D86E8E207D3A5200AA3E7D /* Identifiable.swift */; };
 		98D8F9DF1F815D20005A1DFE /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D8F9DE1F815D20005A1DFE /* UIView+Extension.swift */; };
 		98DC562C1F3CEF1C0024F522 /* ValuePicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98DC562A1F3CEF1C0024F522 /* ValuePicker.storyboard */; };
 		98E5AD0E1F2E87280047AC2E /* RendererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E5AD0D1F2E87280047AC2E /* RendererTests.swift */; };
@@ -292,6 +297,7 @@
 		985D51A51FA67096009881CC /* SampleValuePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleValuePicker.swift; sourceTree = "<group>"; };
 		985EB2481F6821990007B85C /* CIFilterHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CIFilterHelperTests.swift; sourceTree = "<group>"; };
 		985EB8F3207BA1DA00256D44 /* SelectObjectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectObjectTableView.swift; sourceTree = "<group>"; };
+		985EB8F5207BE9BC00256D44 /* ApplicationLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationLayoutViewController.swift; sourceTree = "<group>"; };
 		986112821F3CF14400BF0C3D /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		9865131520738ADA00DCAD25 /* KernelArgumentType+SelectObjectViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KernelArgumentType+SelectObjectViewControllerRepresentable.swift"; sourceTree = "<group>"; };
 		9865131720738B0400DCAD25 /* DataBinding+SelectObjectViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataBinding+SelectObjectViewControllerRepresentable.swift"; sourceTree = "<group>"; };
@@ -360,18 +366,22 @@
 		98B00A2A1F9D1E70006D2728 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		98B5801B20723F47009AA1E6 /* MockKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKernel.swift; sourceTree = "<group>"; };
 		98B5801D20724027009AA1E6 /* KernelArgumentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelArgumentsController.swift; sourceTree = "<group>"; };
-		98B7B6E81F4757B4008C370F /* MainViewController+Export.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+Export.swift"; sourceTree = "<group>"; };
 		98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingDocumentTests.swift; sourceTree = "<group>"; };
 		98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelperTests.swift; sourceTree = "<group>"; };
 		98C5E23C1F34B85C006E7658 /* KernelCompilerResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelCompilerResult.swift; sourceTree = "<group>"; };
 		98C5E23E1F34B8DD006E7658 /* KernelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelError.swift; sourceTree = "<group>"; };
 		98C5E2401F34B9B2006E7658 /* KernelCompilerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelCompilerTests.swift; sourceTree = "<group>"; };
 		98C6FE851F3832AE00D0E840 /* ASTTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASTTests.swift; sourceTree = "<group>"; };
+		98CF9E6F207D46FE00B82040 /* ExportOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportOptionsViewController.swift; sourceTree = "<group>"; };
 		98D09BA2206E53CB00DB6B00 /* KernelExecutionPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelExecutionPipeline.swift; sourceTree = "<group>"; };
 		98D09BA7206E559D00DB6B00 /* KernelExecutionPipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelExecutionPipelineTests.swift; sourceTree = "<group>"; };
 		98D475AC1F3BB88C0080D794 /* iconlarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconlarge.png; sourceTree = "<group>"; };
 		98D475AD1F3BB88D0080D794 /* Iconsmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Iconsmall.png; sourceTree = "<group>"; };
 		98D69A431FD2CC3200C3302F /* UIView+ExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ExtensionTests.swift"; sourceTree = "<group>"; };
+		98D86E87207D321900AA3E7D /* KeyboardObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
+		98D86E8A207D370100AA3E7D /* ApplicationInnerLayoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationInnerLayoutViewController.swift; sourceTree = "<group>"; };
+		98D86E8C207D372100AA3E7D /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		98D86E8E207D3A5200AA3E7D /* Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		98D8F9DE1F815D20005A1DFE /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		98DC562B1F3CEF1C0024F522 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = FilterPlayground/Base.lproj/ValuePicker.storyboard; sourceTree = "<group>"; };
 		98E5AD0D1F2E87280047AC2E /* RendererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererTests.swift; sourceTree = "<group>"; };
@@ -450,6 +460,8 @@
 				98E987BF1FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift */,
 				98FDE16E1FF68C6600D881C8 /* SelectObjectViewController.swift */,
 				985EB8F3207BA1DA00256D44 /* SelectObjectTableView.swift */,
+				98D86E87207D321900AA3E7D /* KeyboardObserver.swift */,
+				98D86E8E207D3A5200AA3E7D /* Identifiable.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -535,6 +547,8 @@
 				988901A11F76546500B97C4A /* Settings */,
 				987A73271F66F63800F73806 /* Export */,
 				98FDE1721FF8196300D881C8 /* Localizable.strings */,
+				98D86E89207D36E300AA3E7D /* ApplicationLayout */,
+				98D86E8C207D372100AA3E7D /* MainController.swift */,
 			);
 			path = FilterPlayground;
 			sourceTree = "<group>";
@@ -613,9 +627,9 @@
 		987A73271F66F63800F73806 /* Export */ = {
 			isa = PBXGroup;
 			children = (
-				98B7B6E81F4757B4008C370F /* MainViewController+Export.swift */,
 				987A73281F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift */,
 				98426C161F670540007C2260 /* CIFilterExportHelper.swift */,
+				98CF9E6F207D46FE00B82040 /* ExportOptionsViewController.swift */,
 			);
 			path = Export;
 			sourceTree = "<group>";
@@ -705,6 +719,15 @@
 				98D475AD1F3BB88D0080D794 /* Iconsmall.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		98D86E89207D36E300AA3E7D /* ApplicationLayout */ = {
+			isa = PBXGroup;
+			children = (
+				985EB8F5207BE9BC00256D44 /* ApplicationLayoutViewController.swift */,
+				98D86E8A207D370100AA3E7D /* ApplicationInnerLayoutViewController.swift */,
+			);
+			path = ApplicationLayout;
 			sourceTree = "<group>";
 		};
 		98D9199D1F2E0578007D5234 /* Attributes View */ = {
@@ -960,7 +983,6 @@
 				98E692E71F30C5EA000C8B41 /* DocumentBrowserViewController.swift in Sources */,
 				98D09BA3206E53CB00DB6B00 /* KernelExecutionPipeline.swift in Sources */,
 				983331111F80066300C9AF52 /* MetalKernel.swift in Sources */,
-				98B7B6E91F4757B5008C370F /* MainViewController+Export.swift in Sources */,
 				985D51A11FA66F84009881CC /* Vector3ValuePicker.swift in Sources */,
 				986112831F3CF14400BF0C3D /* ColorPickerViewController.swift in Sources */,
 				9865131820738B0400DCAD25 /* DataBinding+SelectObjectViewControllerRepresentable.swift in Sources */,
@@ -969,6 +991,7 @@
 				98FDE16F1FF68C6600D881C8 /* SelectObjectViewController.swift in Sources */,
 				9888F4C71FB65C0700D108CF /* GenericDatabindingObserver.swift in Sources */,
 				98689EC51F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
+				98D86E88207D321900AA3E7D /* KeyboardObserver.swift in Sources */,
 				98689ED01F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */,
 				98E987C51FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift in Sources */,
 				985D519B1FA66A37009881CC /* ValuePickerButton.swift in Sources */,
@@ -997,9 +1020,11 @@
 				985D519F1FA66E18009881CC /* Vector2ValuePicker.swift in Sources */,
 				98F2B9EF1F719B380092A015 /* SourceEditorTextView.swift in Sources */,
 				986E7E6D1FB8F017001FC74D /* KernelOutputSizeSetting.swift in Sources */,
+				98D86E8F207D3A5200AA3E7D /* Identifiable.swift in Sources */,
 				985EB8F4207BA1DA00256D44 /* SelectObjectTableView.swift in Sources */,
 				9897B22B1FEA74FB00291490 /* FeatureGate.swift in Sources */,
 				983008761F6F084C005C89C3 /* DismissSegue.swift in Sources */,
+				98D86E8B207D370100AA3E7D /* ApplicationInnerLayoutViewController.swift in Sources */,
 				986E7E681FB8BDEF001FC74D /* KernelOutputSize.swift in Sources */,
 				980E4F451F8013AA00C603C3 /* MetalErrorParser.swift in Sources */,
 				98689EC21F93B41E0000AF7C /* DataBindingContext.swift in Sources */,
@@ -1014,6 +1039,7 @@
 				98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */,
 				983331011F80029E00C9AF52 /* KernelArgumentType.swift in Sources */,
 				985D51A61FA67096009881CC /* SampleValuePicker.swift in Sources */,
+				985EB8F6207BE9BC00256D44 /* ApplicationLayoutViewController.swift in Sources */,
 				9853F85F1F79218C00551541 /* CIKernelLanguageHelper.swift in Sources */,
 				985D51991FA6616B009881CC /* FloatPickerButton.swift in Sources */,
 				985A42061F2CF8F200636E72 /* AppDelegate.swift in Sources */,
@@ -1026,6 +1052,7 @@
 				98E692E91F30C832000C8B41 /* Project.swift in Sources */,
 				98C5E23D1F34B85C006E7658 /* KernelCompilerResult.swift in Sources */,
 				9888F4CA1FB6634500D108CF /* ThemeManager.swift in Sources */,
+				98D86E8D207D372100AA3E7D /* MainController.swift in Sources */,
 				98FF4F951F968BC0004F46B0 /* InputImageTableViewCell.swift in Sources */,
 				9851901F207A6E7E00F83C89 /* FloatPickerObject.swift in Sources */,
 				989716961F67E7B300E7C20C /* CoreImage+Extension.swift in Sources */,
@@ -1036,6 +1063,7 @@
 				983331031F8002C600C9AF52 /* KernelArgumentValue.swift in Sources */,
 				98A0CC691F2D354C00FFC0A1 /* NumberedTextView.swift in Sources */,
 				985544931F7FFB3E00E9F02A /* CoreImageBlendKernel.swift in Sources */,
+				98CF9E70207D46FE00B82040 /* ExportOptionsViewController.swift in Sources */,
 				9888F4D31FB6675B00D108CF /* UIStoryboard+Extension.swift in Sources */,
 				983330FF1F80026000C9AF52 /* KernelArgument.swift in Sources */,
 				9853F85B1F79012500551541 /* AST+CodeCompletion.swift in Sources */,
@@ -1335,7 +1363,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lt.filterplayground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1350,7 +1378,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lt.filterplayground;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

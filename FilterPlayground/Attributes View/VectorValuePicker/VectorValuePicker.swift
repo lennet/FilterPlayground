@@ -40,7 +40,7 @@ class VectorValuePicker: UIControl, KernelArgumentValueView, UIPopoverPresentati
 
     let stackView: UIStackView = {
         let view = UIStackView()
-        view.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.distribution = .fillEqually
         view.axis = .vertical
         return view
@@ -77,7 +77,7 @@ class VectorValuePicker: UIControl, KernelArgumentValueView, UIPopoverPresentati
     }
 
     @objc func handleTap() {
-        let viewController = FloatPickerViewController.instantiate()
+        let viewController = UIStoryboard.valuePicker.instantiate(viewController: FloatPickerViewController.self)
         viewController.showNextButton = true
         floatPicker = viewController
         viewController.valueChanged = { value in

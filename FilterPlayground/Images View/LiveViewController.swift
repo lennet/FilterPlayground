@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LiveViewController: UIViewController {
+class LiveViewController: UIViewController, Identifiable {
     @IBOutlet var outputContainerView: UIView!
 
     override func viewDidLoad() {
@@ -22,7 +22,7 @@ class LiveViewController: UIViewController {
         outputContainerView.removeAllSubViews()
         let view = kernel.outputView
         view.frame = outputContainerView.bounds
-        view.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         outputContainerView.addSubview(view)
     }
 

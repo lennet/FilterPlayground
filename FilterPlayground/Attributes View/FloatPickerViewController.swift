@@ -8,11 +8,7 @@
 
 import UIKit
 
-class FloatPickerViewController: UIViewController {
-    class func instantiate() -> FloatPickerViewController {
-        return UIStoryboard.valuePicker.instantiateViewController(withIdentifier: "SelectFloatViewControllerIdentifier") as! FloatPickerViewController
-    }
-
+class FloatPickerViewController: UIViewController, Identifiable {
     @IBOutlet var previousButton: FloatSelectionButton!
     @IBOutlet var nextButton: FloatSelectionButton!
     @IBOutlet var slider: CircularSlider!

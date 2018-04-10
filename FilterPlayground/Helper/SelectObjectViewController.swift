@@ -30,8 +30,18 @@ class SelectObjectController: UINavigationController, UIPopoverPresentationContr
 
     init(title: String? = nil, objects: [[SelectObjectViewControllerPresentable]], style: UITableViewStyle = .plain, callback: @escaping (SelectObjectViewControllerPresentable, SelectObjectViewController) -> Void) {
         let rootViewController = SelectObjectViewController(title: title, objects: objects, style: style, callback: callback)
-        super.init(rootViewController: rootViewController)
+        super.init(nibName: nil, bundle: nil)
+        viewControllers = [rootViewController]
         popoverPresentationController?.delegate = self
+    }
+
+    var callback: (SelectObjectViewControllerPresentable, SelectObjectViewController) -> Void {
+        get {
+            return (viewControllers.first as! SelectObjectViewController).callback
+        }
+        set {
+            (viewControllers.first as! SelectObjectViewController).callback = newValue
+        }
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -84,14 +94,10 @@ class SelectObjectViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         tableView.layoutIfNeeded()
-        preferredContentSize = tableView.contentSize
-        configureCancelButton(arrowDirection: navigationController?.popoverPresentationController?.arrowDirection ?? .unknown)
-    }
+        preferredContentSize = CGSize(width: preferredContentSize.width, height: tableView.contentSize.height)
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        configureCancelButton(arrowDirection: navigationController?.popoverPresentationController?.arrowDirection ?? .unknown)
     }
 
     func configureCancelButton(arrowDirection: UIPopoverArrowDirection, animated: Bool = false) {

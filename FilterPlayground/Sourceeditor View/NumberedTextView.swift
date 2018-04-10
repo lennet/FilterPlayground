@@ -18,7 +18,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
         textView.backgroundColor = .clear
         textView.autocorrectionType = .no
         textView.autocapitalizationType = .none
-        textView.autoresizingMask = UIViewAutoresizing.flexibleHeight.union(.flexibleWidth)
+        textView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         (textView as UIScrollView).delaysContentTouches = false
         return textView
     }()
@@ -47,9 +47,9 @@ class NumberedTextView: UIView, UITextViewDelegate {
         }
     }
 
-    var font: UIFont? {
+    var font: UIFont {
         get {
-            return textView.font
+            return textView.font ?? UIFont.systemFont(ofSize: 17)
         }
         set {
             textView.font = newValue
@@ -216,7 +216,7 @@ class NumberedTextView: UIView, UITextViewDelegate {
     }
 
     func draw(text: String, at point: CGPoint, color: UIColor) {
-        (text as NSString).draw(in: CGRect(origin: point, size: CGSize(width: lineNumberOffset, height: font!.pointSize)), withAttributes: lineNumberAttributes(with: color))
+        (text as NSString).draw(in: CGRect(origin: point, size: CGSize(width: lineNumberOffset, height: font.pointSize)), withAttributes: lineNumberAttributes(with: color))
     }
 
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

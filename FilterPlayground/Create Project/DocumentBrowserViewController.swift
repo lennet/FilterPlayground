@@ -9,7 +9,7 @@
 import MobileCoreServices
 import UIKit
 
-class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
+class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate, Identifiable {
     var didOpenedDocument: ((Project) -> Void)?
     var importHandler: ((URL?, UIDocumentBrowserViewController.ImportMode) -> Void)?
 
@@ -19,6 +19,14 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         delegate = self
         allowsDocumentCreation = true
         allowsPickingMultipleItems = true
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        #if targetEnvironment(simulator)
+            createAndOpenDebugProject()
+        #endif
     }
 
     func createAndOpenDebugProject() {

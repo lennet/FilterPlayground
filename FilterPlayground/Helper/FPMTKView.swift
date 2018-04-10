@@ -85,7 +85,7 @@ class FPMTKView: MTKView, MTKViewDelegate {
         #if os(iOS) || os(tvOS)
             guard statisticsView == nil else { return }
             let newStatisticsView = StatisticsView(frame: CGRect(x: 0, y: bounds.height - 44, width: bounds.width, height: 44))
-            newStatisticsView.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleTopMargin)
+            newStatisticsView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             addSubview(newStatisticsView)
             statisticsView = newStatisticsView
         #endif

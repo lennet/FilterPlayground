@@ -37,14 +37,14 @@ class SampleValuePicker: UIView, KernelArgumentValueView {
     required init?(frame: CGRect, value: KernelArgumentValue) {
         self.value = value
         super.init(frame: frame)
-        autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
+        autoresizingMask = [.flexibleWidth, .flexibleHeight]
         var image: UIImage?
         if case let .sample(i) = value {
             image = i.asImage
         }
         let imageView = CustomImageView(image: image)
         imageView.frame = bounds
-        imageView.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
+        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         imageView.contentMode = .scaleAspectFit
         imageView.didSelectImage = { [weak self] customimageView in
             self?.updated(imageView: customimageView)

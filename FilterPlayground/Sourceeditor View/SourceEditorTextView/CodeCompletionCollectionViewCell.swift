@@ -28,7 +28,7 @@ class CodeCompletionCollectionViewCell: UICollectionViewCell {
     func configureLabel() {
         guard self.label == nil else { return }
         let label = UILabel(frame: bounds)
-        label.autoresizingMask = UIViewAutoresizing.flexibleHeight.union(.flexibleWidth)
+        label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         label.textAlignment = .center
         addSubview(label)
         self.label = label

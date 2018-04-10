@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AttributesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AttributesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, Identifiable {
     enum AttributesViewControllerSection: Int {
         case outputSize
         case inputImages

@@ -16,7 +16,7 @@ class FloatPickerButton: ValuePickerButton {
     var resetCircularSlider = true
 
     @objc override func handleTap() {
-        let viewController = FloatPickerViewController.instantiate()
+        let viewController = UIStoryboard.valuePicker.instantiate(viewController: FloatPickerViewController.self)
         viewController.min = min
         viewController.max = max
         viewController.startValue = value.asKernelValue as! Float

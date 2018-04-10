@@ -18,7 +18,7 @@ class StatisticsView: UIView {
 
         backgroundColor = UIColor.lightGray.withAlphaComponent(0.8)
         stackView.frame = bounds
-        stackView.autoresizingMask = UIViewAutoresizing.flexibleWidth.union(.flexibleHeight)
+        stackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         stackView.addArrangedSubview(frameRateLabel)
         stackView.addArrangedSubview(timeLabel)
         addSubview(stackView)

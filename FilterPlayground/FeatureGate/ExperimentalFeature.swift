@@ -9,6 +9,7 @@
 import Foundation
 
 enum ExperimentalFeature {
+    case newLayout
     case metal
     case autocompletion
 }

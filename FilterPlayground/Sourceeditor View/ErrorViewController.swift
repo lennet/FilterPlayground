@@ -41,7 +41,7 @@ class ErrorViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewWillAppear(animated)
 
         headerView.layer.cornerRadius = 8
-        headerView.layer.maskedCorners = CACornerMask.layerMaxXMinYCorner.union(.layerMinXMinYCorner)
+        headerView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
 
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handleHeaderPan(gestureRecnogizer:)))
         headerView.addGestureRecognizer(panGestureRecognizer)

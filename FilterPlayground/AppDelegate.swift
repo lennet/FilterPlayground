@@ -13,6 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let documentBrowserViewController = DocumentBrowserViewController(forOpeningFilesWithContentTypes: nil)
 
+    func applicationDidFinishLaunching(_: UIApplication) {
+        if FeatureGate.isEnabled(feature: .newLayout) {
+            window?.rootViewController = ApplicationLayoutViewController()
+        }
+    }
+
     func application(_: UIApplication, open inputURL: URL, options _: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
         // Ensure the URL is a file URL
         guard inputURL.isFileURL else { return false }

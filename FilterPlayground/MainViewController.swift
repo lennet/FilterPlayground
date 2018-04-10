@@ -284,7 +284,7 @@ class MainViewController: UIViewController {
         guard let project = project else { return }
         kernel?.inputImages = project.metaData.inputImages.compactMap { $0.image?.asCIImage }
         attributesViewController?.inheritSize = kernel?.extent ?? .zero
-        kernel?.render()
+        executionPipeline?.renderIfPossible()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
@@ -318,24 +318,8 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func actionButtonTapped(_ sender: UIBarButtonItem) {
-        var objects: [[SelectObjectViewControllerPresentable]] = [[
-            ExportOption(title: 🌎("Export_CIKernel_Label"), action: exportAsCIKernel),
-            ExportOption(title: 🌎("Export_CIFilter_Label"), action: exportAsCIFilter),
-            ExportOption(title: 🌎("Export_SwiftPlayground_Label"), action: exportAsSwiftPlayground),
-            ExportOption(title: 🌎("Export_FilterPlayground_Label"), action: exportAsPlayground),
-        ]]
-        var tableViewStyle: UITableViewStyle = .plain
-        if (sourceEditorViewController?.errors.count ?? 0) != 0 {
-            objects.insert([ExportWarningObject()], at: 0)
-            tableViewStyle = .grouped
-        }
-        let viewController = SelectObjectController(title: "Export", objects: objects, style: tableViewStyle) { exportOption, vc in
-            var senderView: UIView?
-            if let selectedIndexPath = vc.tableView.indexPathForSelectedRow {
-                senderView = vc.tableView.cellForRow(at: selectedIndexPath)
-            }
-            (exportOption as! ExportOption).action(senderView)
-        }
+        guard let project = project else { return }
+        let viewController = ExportOptionsViewController(project: project, showCompileWarning: (sourceEditorViewController?.errors.count ?? 0) != 0)
         viewController.modalPresentationStyle = .popover
         viewController.popoverPresentationController?.barButtonItem = sender
         present(viewController, animated: true, completion: nil)

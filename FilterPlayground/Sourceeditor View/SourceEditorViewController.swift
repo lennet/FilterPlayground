@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SourceEditorViewController: UIViewController, UITextViewDelegate {
+class SourceEditorViewController: UIViewController, UITextViewDelegate, Identifiable {
     @IBOutlet var textView: NumberedTextView!
     @IBOutlet var errorViewHeightConstraint: NSLayoutConstraint!
 
@@ -75,7 +75,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate {
     }
 
     func updateFont() {
-        textView.font = UIFont(name: "Menlo", size: CGFloat(fontSize))
+        textView.font = UIFont(name: "Menlo", size: CGFloat(fontSize))!
         textView.setNeedsDisplay()
     }
 

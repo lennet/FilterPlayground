@@ -19,7 +19,7 @@
         <!--Document Browser View Controller-->
         <scene sceneID="AKO-gh-YNY">
             <objects>
-                <viewController id="04X-wZ-hWf" customClass="DocumentBrowserViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DocumentBrowserViewControllerIdentifier" id="04X-wZ-hWf" customClass="DocumentBrowserViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WEg-i2-9WZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,7 +34,7 @@
         <!--Settings Table View Controller-->
         <scene sceneID="tRQ-GT-tr6">
             <objects>
-                <tableViewController id="d8L-vD-k8G" customClass="SettingsTableViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsTableViewControllerIdentifier" id="d8L-vD-k8G" customClass="SettingsTableViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Xuq-aG-Uhv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -423,7 +423,7 @@
         <!--Attributes View Controller-->
         <scene sceneID="WY2-JR-hmI">
             <objects>
-                <viewController id="lBD-SZ-RD5" customClass="AttributesViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AttributesViewControllerIdentifier" id="lBD-SZ-RD5" customClass="AttributesViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SL3-Ne-iS1">
                         <rect key="frame" x="0.0" y="0.0" width="220" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -776,7 +776,7 @@
         <!--Source Editor View Controller-->
         <scene sceneID="jwi-XS-pAf">
             <objects>
-                <viewController id="hbu-YJ-oVo" customClass="SourceEditorViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SourceEditorViewControllerIdentifier" id="hbu-YJ-oVo" customClass="SourceEditorViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FBl-Wz-udb">
                         <rect key="frame" x="0.0" y="0.0" width="155" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -803,7 +803,7 @@
                             <constraint firstItem="Abg-Uk-vLh" firstAttribute="centerX" secondItem="Qzn-WF-PNp" secondAttribute="centerX" id="Eh4-9F-dzD"/>
                             <constraint firstItem="Qzn-WF-PNp" firstAttribute="trailing" secondItem="Abg-Uk-vLh" secondAttribute="trailing" priority="999" id="Q2M-qy-wTQ"/>
                             <constraint firstItem="Abg-Uk-vLh" firstAttribute="leading" secondItem="Qzn-WF-PNp" secondAttribute="leading" priority="999" id="bVt-KR-S02"/>
-                            <constraint firstItem="lEl-je-gOO" firstAttribute="top" secondItem="FBl-Wz-udb" secondAttribute="topMargin" constant="8" id="jQo-eI-VZu"/>
+                            <constraint firstItem="lEl-je-gOO" firstAttribute="top" secondItem="Qzn-WF-PNp" secondAttribute="top" constant="8" id="jQo-eI-VZu"/>
                             <constraint firstItem="Abg-Uk-vLh" firstAttribute="top" secondItem="lEl-je-gOO" secondAttribute="bottom" id="lfi-D4-hnk"/>
                             <constraint firstItem="lEl-je-gOO" firstAttribute="leading" secondItem="FBl-Wz-udb" secondAttribute="leadingMargin" priority="998" constant="8" id="qGO-Zq-0jG"/>
                             <constraint firstItem="Abg-Uk-vLh" firstAttribute="bottom" secondItem="Qzn-WF-PNp" secondAttribute="bottom" id="yqt-ni-hMI"/>
@@ -935,7 +935,7 @@
                                 <rect key="frame" x="0.0" y="44" width="200" height="356"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="errorCellIdentifier" id="jVR-4K-rMw" customClass="ErrorTableViewCell" customModule="FilterPlayground" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="errorCellIdentifier" id="jVR-4K-rMw" customClass="ErrorTableViewCell" customModule="FilterPlayground" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="200" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jVR-4K-rMw" id="HL8-M4-cGr">
@@ -943,7 +943,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEZ-5X-YgJ">
-                                                    <rect key="frame" x="63" y="15" width="106" height="14.5"/>
+                                                    <rect key="frame" x="-6" y="15" width="0.0" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1011,32 +1011,33 @@
         <!--Live View Controller-->
         <scene sceneID="Tse-Ci-XcA">
             <objects>
-                <viewController id="Kda-zV-ES4" customClass="LiveViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LiveViewControllerIdentifier" id="Kda-zV-ES4" customClass="LiveViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Yp-iT-9hZ">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOZ-Li-t5v" userLabel="OutputContainerView" customClass="OutputContainerView" customModule="FilterPlayground" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="0.0" height="583"/>
+                                <rect key="frame" x="0.0" y="20" width="400" height="583"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="JaJ-xO-aGu" firstAttribute="trailing" secondItem="DOZ-Li-t5v" secondAttribute="trailing" id="DZo-MD-gtW"/>
+                            <constraint firstItem="JaJ-xO-aGu" firstAttribute="trailing" secondItem="DOZ-Li-t5v" secondAttribute="trailing" id="6TN-Al-bhC"/>
                             <constraint firstItem="JaJ-xO-aGu" firstAttribute="bottom" secondItem="DOZ-Li-t5v" secondAttribute="bottom" id="QH6-zz-33N"/>
                             <constraint firstItem="DOZ-Li-t5v" firstAttribute="top" secondItem="JaJ-xO-aGu" secondAttribute="top" id="Qy7-GN-9jd"/>
                             <constraint firstItem="DOZ-Li-t5v" firstAttribute="leading" secondItem="JaJ-xO-aGu" secondAttribute="leading" id="crQ-cM-o02"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JaJ-xO-aGu"/>
                     </view>
+                    <size key="freeformSize" width="400" height="603"/>
                     <connections>
                         <outlet property="outputContainerView" destination="DOZ-Li-t5v" id="zi2-lp-u2g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xkA-3E-GHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="469" y="2035"/>
+            <point key="canvasLocation" x="468" y="2034.3328335832086"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vjS-RX-a2o">
@@ -1151,6 +1152,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="U7U-Nn-uZ5"/>
         <segue reference="LVZ-vl-ww2"/>
-        <segue reference="Zbf-JI-q01"/>
+        <segue reference="6YF-hI-kgR"/>
     </inferredMetricsTieBreakers>
 </document>

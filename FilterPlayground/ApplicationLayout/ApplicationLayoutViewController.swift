@@ -118,11 +118,24 @@ class ApplicationLayoutViewController: UIViewController {
             innerLayoutController.navigationController?.pushViewController(attributesViewController, animated: true)
         } else {
             if attributesViewController.view.superview == nil {
+                attributesViewController.view.isHidden = true
                 innerLayoutController.addChildViewController(attributesViewController)
                 innerLayoutController.stackView.addArrangedSubview(attributesViewController.view)
+                UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: [], animations: {
+                    self.attributesViewController.view.isHidden = false
+                    self.innerLayoutController.stackView.layoutIfNeeded()
+                }, completion: nil)
+
             } else {
-                attributesViewController.removeFromParentViewController()
-                attributesViewController.view.removeFromSuperview()
+                UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: [], animations: {
+                    self.attributesViewController.view.isHidden = true
+                    self.attributesViewController.view.superview?.layoutIfNeeded()
+
+                }) { _ in
+                    self.attributesViewController.view.isHidden = false
+                    self.attributesViewController.removeFromParentViewController()
+                    self.attributesViewController.view.removeFromSuperview()
+                }
             }
         }
     }

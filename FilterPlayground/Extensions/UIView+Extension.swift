@@ -21,10 +21,4 @@ extension UIView {
         }
         return nil
     }
-
-    func deactivateConstraints() {
-        for constraint in constraints {
-            removeConstraint(constraint)
-        }
-    }
 }

@@ -9,6 +9,14 @@
 import UIKit
 
 class DraggingIndicatorView: UIView {
+    init() {
+        super.init(frame: CGRect(origin: .zero, size: CGSize(width: 50, height: 50)))
+        backgroundColor = .blue
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 }
 
 class ViewDraggingIndicator: UIView {

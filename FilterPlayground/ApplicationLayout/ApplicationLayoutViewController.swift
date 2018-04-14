@@ -54,13 +54,12 @@ class ApplicationLayoutViewController: UIViewController {
         if UIDevice.current.userInterfaceIdiom == .phone {
             outerStackView.addArrangedSubview(liveViewController.view)
         } else {
-            addChildViewController(liveViewController)
-            innerLayoutController.stackView.addArrangedSubview(liveViewController.view)
-            innerLayoutController.addChildViewController(attributesViewController)
-            innerLayoutController.stackView.addSubview(attributesViewController.view)
+            innerLayoutController.secondViewController = liveViewController
+            innerLayoutController.thirdViewController = attributesViewController
         }
+
         view.addSubview(outerStackView)
-        innerLayoutController.stackView.addArrangedSubview(sourceEditorController.view)
+        innerLayoutController.firstViewController = sourceEditorController
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -119,11 +118,10 @@ class ApplicationLayoutViewController: UIViewController {
         } else {
             if attributesViewController.view.superview == nil {
                 attributesViewController.view.isHidden = true
-                innerLayoutController.addChildViewController(attributesViewController)
-                innerLayoutController.stackView.addArrangedSubview(attributesViewController.view)
+                innerLayoutController.thirdViewController = attributesViewController
                 UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: [], animations: {
                     self.attributesViewController.view.isHidden = false
-                    self.innerLayoutController.stackView.layoutIfNeeded()
+//                    self.innerLayoutController.stackView.layoutIfNeeded()
                 }, completion: nil)
 
             } else {
@@ -133,8 +131,7 @@ class ApplicationLayoutViewController: UIViewController {
 
                 }) { _ in
                     self.attributesViewController.view.isHidden = false
-                    self.attributesViewController.removeFromParentViewController()
-                    self.attributesViewController.view.removeFromSuperview()
+                    self.innerLayoutController.thirdViewController = nil
                 }
             }
         }
@@ -176,26 +173,19 @@ class ApplicationLayoutViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         if traitCollection.userInterfaceIdiom == .pad {
-            liveViewController.view.removeFromSuperview()
+            innerLayoutController.secondViewController = nil
             if traitCollection.horizontalSizeClass == .compact {
-                attributesViewController.removeFromParentViewController()
-                attributesViewController.view.removeFromSuperview()
+                innerLayoutController.thirdViewController = nil
                 addChildViewController(liveViewController)
                 outerStackView.addArrangedSubview(liveViewController.view)
                 outerStackView.axis = .vertical
             } else {
-                innerLayoutController.addChildViewController(liveViewController)
-                innerLayoutController.stackView.addArrangedSubview(liveViewController.view)
-                innerLayoutController.addChildViewController(attributesViewController)
-                innerLayoutController.stackView.addArrangedSubview(attributesViewController.view)
+                innerLayoutController.secondViewController = liveViewController
+                innerLayoutController.thirdViewController = attributesViewController
             }
         } else if previousTraitCollection?.userInterfaceIdiom == .phone {
             outerStackView.axis = UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight ? .horizontal : .vertical
         }
-    }
-
-    override func willTransition(to _: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: traitCollection, with: coordinator)
     }
 
     func keyboardChanged(with _: KeyboardEvent, object _: KeyboardNotificationObject) {

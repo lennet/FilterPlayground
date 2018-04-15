@@ -116,24 +116,7 @@ class ApplicationLayoutViewController: UIViewController {
         if isMinified {
             innerLayoutController.navigationController?.pushViewController(attributesViewController, animated: true)
         } else {
-            if attributesViewController.view.superview == nil {
-                attributesViewController.view.isHidden = true
-                innerLayoutController.thirdViewController = attributesViewController
-                UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: [], animations: {
-                    self.attributesViewController.view.isHidden = false
-//                    self.innerLayoutController.stackView.layoutIfNeeded()
-                }, completion: nil)
-
-            } else {
-                UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: [], animations: {
-                    self.attributesViewController.view.isHidden = true
-                    self.attributesViewController.view.superview?.layoutIfNeeded()
-
-                }) { _ in
-                    self.attributesViewController.view.isHidden = false
-                    self.innerLayoutController.thirdViewController = nil
-                }
-            }
+            innerLayoutController.toggleThirdViewControllerVisibility(with: attributesViewController)
         }
     }
 
@@ -173,8 +156,8 @@ class ApplicationLayoutViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         if traitCollection.userInterfaceIdiom == .pad {
-            innerLayoutController.secondViewController = nil
             if traitCollection.horizontalSizeClass == .compact {
+                innerLayoutController.secondViewController = nil
                 innerLayoutController.thirdViewController = nil
                 addChildViewController(liveViewController)
                 outerStackView.addArrangedSubview(liveViewController.view)

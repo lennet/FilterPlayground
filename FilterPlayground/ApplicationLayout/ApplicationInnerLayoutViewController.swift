@@ -10,7 +10,7 @@ import UIKit
 
 class ApplicationInnerLayoutViewController: UIViewController, UIGestureRecognizerDelegate {
     let draggingIndicator = DraggingIndicatorView()
-    let thirdSize: CGFloat = 200
+    var thirdSize: CGFloat = 200
 
     var firstSecondRatio: CGFloat = 0.5 {
         didSet {
@@ -76,8 +76,9 @@ class ApplicationInnerLayoutViewController: UIViewController, UIGestureRecognize
         let numberOfViews: CGFloat = CGFloat(childViewControllers.count)
         let realThirdSize = numberOfViews == 3 ? thirdSize : 0
         let maxWidth = (view.frame.width - realThirdSize) / max(numberOfViews - 2, 1)
+        let ratio = numberOfViews > 1 ? firstSecondRatio : 1
 
-        let firstFrame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: maxWidth * firstSecondRatio, height: view.frame.height))
+        let firstFrame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: maxWidth * ratio, height: view.frame.height))
         firstViewController?.view.frame = firstFrame
         let secondFrame = CGRect(origin: CGPoint(x: firstFrame.size.width, y: 0), size: CGSize(width: maxWidth - firstFrame.width, height: view.frame.height))
         secondViewController?.view.frame = secondFrame
@@ -93,8 +94,11 @@ class ApplicationInnerLayoutViewController: UIViewController, UIGestureRecognize
     }
 
     func handleTouch(with recognizer: AllTouchesPanGestureRecognizer, state _: UIGestureRecognizerState) {
-        guard let first = firstViewController?.view else { return }
+        guard let first = firstViewController?.view,
+            childViewControllers.count > 1 else { return }
         let location = recognizer.location(in: recognizer.view)
+
+        // TODO: disable textview layout during resizing
 
         switch recognizer.state {
         case .began:
@@ -117,6 +121,25 @@ class ApplicationInnerLayoutViewController: UIViewController, UIGestureRecognize
         default:
             isResizingFirstView = false
             break
+        }
+    }
+
+    func toggleThirdViewControllerVisibility(with viewController: UIViewController) {
+        if viewController.view.superview == nil {
+            thirdViewController = viewController
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: [], animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        } else {
+            let originalThirdSize = thirdSize
+            view.setNeedsLayout()
+            thirdSize = 0
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: [], animations: {
+                self.view.layoutIfNeeded()
+            }) { _ in
+                self.thirdViewController = nil
+                self.thirdSize = originalThirdSize
+            }
         }
     }
 

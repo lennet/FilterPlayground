@@ -9,8 +9,6 @@
 import UIKit
 
 class LiveViewController: UIViewController, Identifiable {
-    @IBOutlet var outputContainerView: UIView!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,15 +17,15 @@ class LiveViewController: UIViewController, Identifiable {
     }
 
     func setup(with kernel: Kernel) {
-        outputContainerView.removeAllSubViews()
-        let view = kernel.outputView
-        view.frame = outputContainerView.bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        outputContainerView.addSubview(view)
+        view.removeAllSubViews()
+        let kernelView = kernel.outputView
+        kernelView.frame = view.bounds
+        kernelView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(kernelView)
+        themeChanged(notification: nil)
     }
 
     @objc func themeChanged(notification _: Notification?) {
         view.backgroundColor = ThemeManager.shared.currentTheme.liveViewBackground
-        outputContainerView.backgroundColor = ThemeManager.shared.currentTheme.imageViewBackground
     }
 }

@@ -1015,25 +1015,10 @@
                     <view key="view" contentMode="scaleToFill" id="8Yp-iT-9hZ">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOZ-Li-t5v" userLabel="OutputContainerView" customClass="OutputContainerView" customModule="FilterPlayground" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="20" width="400" height="583"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="JaJ-xO-aGu" firstAttribute="trailing" secondItem="DOZ-Li-t5v" secondAttribute="trailing" id="6TN-Al-bhC"/>
-                            <constraint firstItem="JaJ-xO-aGu" firstAttribute="bottom" secondItem="DOZ-Li-t5v" secondAttribute="bottom" id="QH6-zz-33N"/>
-                            <constraint firstItem="DOZ-Li-t5v" firstAttribute="top" secondItem="JaJ-xO-aGu" secondAttribute="top" id="Qy7-GN-9jd"/>
-                            <constraint firstItem="DOZ-Li-t5v" firstAttribute="leading" secondItem="JaJ-xO-aGu" secondAttribute="leading" id="crQ-cM-o02"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="JaJ-xO-aGu"/>
                     </view>
                     <size key="freeformSize" width="400" height="603"/>
-                    <connections>
-                        <outlet property="outputContainerView" destination="DOZ-Li-t5v" id="zi2-lp-u2g"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xkA-3E-GHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

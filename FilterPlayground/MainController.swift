@@ -42,6 +42,7 @@ class MainController {
     var argumentsController: KernelArgumentsController? {
         didSet {
             attributesViewController?.didUpdateArguments = argumentsController?.updateArgumentsFromUI
+            attributesViewController?.didUpdatedOutputSize = didUpdatedOutputSize
             sourceEditorViewController?.didUpdateArguments = argumentsController?.updateArgumentsFromCode
         }
     }
@@ -99,6 +100,12 @@ class MainController {
 
         project?.metaData.arguments = newArguments
         project?.updateChangeCount(.done)
+    }
+
+    func didUpdatedOutputSize(size: KernelOutputSize) {
+        project?.metaData.ouputSize = size
+        kernel?.outputSize = size
+        executionPipeline?.renderIfPossible()
     }
 
     func updateInputImages() {

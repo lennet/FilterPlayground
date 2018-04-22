@@ -120,6 +120,10 @@ class FPMTKView: MTKView, MTKViewDelegate {
     var totalStartTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
     var gpuStartTime: CFAbsoluteTime = CFAbsoluteTimeGetCurrent()
 
+    override var intrinsicContentSize: CGSize {
+        return drawableSize
+    }
+
     func draw(in view: MTKView) {
         externalDelegate?.draw(in: view)
         gpuStartTime = CFAbsoluteTimeGetCurrent()

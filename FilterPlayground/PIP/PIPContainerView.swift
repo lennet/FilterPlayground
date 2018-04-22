@@ -74,7 +74,7 @@ class PIPContainerView: UIView {
             subView.frame = pipWindow.bounds
             subView.isUserInteractionEnabled = false
             childViewController?.removeFromParentViewController()
-            pipWindow.addSubview(subView)
+            pipWindow.insertSubview(subView, at: 0)
             isHidden = true
             UIViewPropertyAnimator(duration: 0.25, curve: .easeInOut) {
                 self.superview?.layoutIfNeeded()

@@ -14,6 +14,7 @@ class PIPContainerView: UIView {
     var displayLink: CADisplayLink?
     let maxWindowSize = CGSize(width: 100, height: 100)
     let minWindowSize = CGSize(width: 10, height: 10)
+    var childViewController: UIViewController?
     lazy var pipWindow: PIPWindow = {
         PIPWindow(containerView: self)
     }()
@@ -72,6 +73,7 @@ class PIPContainerView: UIView {
             subView.removeFromSuperview()
             subView.frame = pipWindow.bounds
             subView.isUserInteractionEnabled = false
+            childViewController?.removeFromParentViewController()
             pipWindow.addSubview(subView)
             isHidden = true
             UIViewPropertyAnimator(duration: 0.25, curve: .easeInOut) {

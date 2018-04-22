@@ -66,7 +66,14 @@ class PIPWindow: UIWindow {
     func snapToContainerIfNeed() -> Bool {
         let screenFrame = UIApplication.shared.delegate?.window!!.bounds
 
-        if UIDevice.current.orientation.isLandscape ? frame.maxX > screenFrame!.width : frame.maxY > screenFrame!.height {
+        var shouldSnap: Bool
+        if traitCollection.userInterfaceIdiom == .pad {
+            shouldSnap = frame.maxY > screenFrame!.height
+        } else {
+            shouldSnap = UIDevice.current.orientation.isLandscape ? frame.maxX > screenFrame!.width : frame.maxY > screenFrame!.height
+        }
+
+        if shouldSnap {
             containerView.isHidden = false
             if let first = subviews.first {
                 first.removeFromSuperview()

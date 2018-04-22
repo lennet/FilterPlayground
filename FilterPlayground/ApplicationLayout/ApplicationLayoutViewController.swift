@@ -170,6 +170,7 @@ class ApplicationLayoutViewController: UIViewController {
                 innerLayoutController.secondViewController = nil
                 innerLayoutController.thirdViewController = nil
                 addChildViewController(liveViewController)
+                pipContainer.childViewController = liveViewController
                 pipContainer.addSubview(liveViewController.view)
                 outerStackView.addArrangedSubview(pipContainer)
                 outerStackView.axis = .vertical

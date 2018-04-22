@@ -70,6 +70,8 @@
 	</array>
 	<key>UISupportsDocumentBrowser</key>
 	<true/>
+	<key>UIWhitePointAdaptivityStyle</key>
+	<string>UIWhitePointAdaptivityStylePhoto</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

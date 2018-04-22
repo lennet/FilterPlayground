@@ -11,6 +11,7 @@
 		980229AE1F2FB88F000FFCA2 /* CoreImageErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229AD1F2FB88F000FFCA2 /* CoreImageErrorParser.swift */; };
 		980229B01F2FBF18000FFCA2 /* ErrorParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229AF1F2FBF18000FFCA2 /* ErrorParserTests.swift */; };
 		980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980229B11F2FCF41000FFCA2 /* ErrorTableViewCell.swift */; };
+		9807F193208D1D2D0047D675 /* PanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807F192208D1D2D0047D675 /* PanButton.swift */; };
 		980E4F451F8013AA00C603C3 /* MetalErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980E4F441F8013AA00C603C3 /* MetalErrorParser.swift */; };
 		980E4F461F8013AA00C603C3 /* MetalErrorParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980E4F441F8013AA00C603C3 /* MetalErrorParser.swift */; };
 		980E4F4A1F801A4C00C603C3 /* MetalKernelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980E4F491F801A4C00C603C3 /* MetalKernelTests.swift */; };
@@ -248,6 +249,7 @@
 		980229AD1F2FB88F000FFCA2 /* CoreImageErrorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreImageErrorParser.swift; sourceTree = "<group>"; };
 		980229AF1F2FBF18000FFCA2 /* ErrorParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorParserTests.swift; sourceTree = "<group>"; };
 		980229B11F2FCF41000FFCA2 /* ErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTableViewCell.swift; sourceTree = "<group>"; };
+		9807F192208D1D2D0047D675 /* PanButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanButton.swift; sourceTree = "<group>"; };
 		980E4F441F8013AA00C603C3 /* MetalErrorParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalErrorParser.swift; sourceTree = "<group>"; };
 		980E4F491F801A4C00C603C3 /* MetalKernelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalKernelTests.swift; sourceTree = "<group>"; };
 		981267D31F34BEFC00101027 /* Kernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kernel.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				98D86E8E207D3A5200AA3E7D /* Identifiable.swift */,
 				989FE2922085E2BA00B72402 /* ViewControllerWithIntrinsicContentSize.swift */,
 				989FE2942086023900B72402 /* IntrinsicSizableView.swift */,
+				9807F192208D1D2D0047D675 /* PanButton.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1044,6 +1047,7 @@
 				98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */,
 				989FE2912083E91000B72402 /* PIPWindow.swift in Sources */,
 				98E987C01FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift in Sources */,
+				9807F193208D1D2D0047D675 /* PanButton.swift in Sources */,
 				98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */,
 				988901A01F76426900B97C4A /* SourceEditorLayoutManager.swift in Sources */,
 				985D519D1FA66B76009881CC /* ColorPickerButton.swift in Sources */,

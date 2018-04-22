@@ -50,6 +50,7 @@ class FloatPickerObjectTests: XCTestCase {
         object.add(input: .digit(4))
         object.add(input: .digit(3))
         XCTAssertEqual(object.floatRepresentation, 19.943)
+        XCTAssertEqual(object.stringRepresentation, "19.943")
     }
 
     func testInit32() {
@@ -89,5 +90,19 @@ class FloatPickerObjectTests: XCTestCase {
     func testStringRepresentation() {
         let object = FloatPickerObject(floatLiteral: 123.456)
         XCTAssertEqual(object.stringRepresentation, "123.456")
+    }
+
+    func testNegativeFloatLiteral() {
+        let object = FloatPickerObject(floatLiteral: -123.456)
+        XCTAssertEqual(object.stringRepresentation, "-123.456")
+        XCTAssertEqual(object.floatRepresentation, -123.456)
+    }
+
+    func testToggleSign() {
+        var object = FloatPickerObject(floatLiteral: -123.456)
+        object.toggleSign()
+        XCTAssertEqual(object.stringRepresentation, "123.456")
+        object.toggleSign()
+        XCTAssertEqual(object.stringRepresentation, "-123.456")
     }
 }

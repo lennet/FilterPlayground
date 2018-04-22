@@ -25,14 +25,17 @@ enum FloatPickerObjectInput: Equatable {
 struct FloatPickerObject: ExpressibleByFloatLiteral {
     typealias FloatLiteralType = Float
 
+    private var sign: FloatingPointSign
     private var inputs: [FloatPickerObjectInput]
 
     init(floatLiteral value: Float) {
         inputs = []
+        sign = value.sign
         set(value: value)
     }
 
     init() {
+        sign = .plus
         inputs = []
     }
 
@@ -62,6 +65,17 @@ struct FloatPickerObject: ExpressibleByFloatLiteral {
             return
         }
         inputs.append(input)
+    }
+
+    mutating func toggleSign() {
+        switch sign {
+        case .minus:
+            sign = .plus
+            break
+        case .plus:
+            sign = .minus
+            break
+        }
     }
 
     mutating func removeLastInput() {
@@ -94,14 +108,14 @@ struct FloatPickerObject: ExpressibleByFloatLiteral {
             let decimals = splits[1]
             result += Float(getPart(digits: decimals)) / Float(pow(10.0, Float(decimals.count)))
         }
-        return result
+        return sign == .minus ? -result : result
     }
 
     var stringRepresentation: String {
         guard inputs.count > 0 else {
             return "0"
         }
-        return inputs.map { (input) -> String in
+        return (sign == .minus ? "-" : "") + inputs.map { (input) -> String in
             switch input {
             case let .digit(val):
                 return String(val)

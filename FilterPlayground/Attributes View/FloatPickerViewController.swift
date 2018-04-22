@@ -8,13 +8,14 @@
 
 import UIKit
 
+// TODO implement consitent highlighted state and improve delete button,
+
 class FloatPickerViewController: UIViewController, Identifiable {
     @IBOutlet var previousButton: FloatSelectionButton!
     @IBOutlet var nextButton: FloatSelectionButton!
     @IBOutlet var slider: CircularSlider!
     @IBOutlet var buttonsView: UIView!
     @IBOutlet var buttonsViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet var pointsButton: FloatSelectionButton!
 
     var min: Float?
     var max: Float?
@@ -127,10 +128,16 @@ class FloatPickerViewController: UIViewController, Identifiable {
         append(number: 9)
     }
 
-    @IBAction func dotButtonTapped(_: Any) {
-        inputObject.add(input: .dot)
-        update(value: inputObject.floatRepresentation)
-        slider.roundedSteps = inputObject.containsDot
+    @IBAction func dotButtonValueChanged(_ sender: PanButton) {
+        if sender.selectedIndex == 0 {
+            inputObject.add(input: .dot)
+            update(value: inputObject.floatRepresentation)
+            slider.roundedSteps = inputObject.containsDot
+        } else {
+            inputObject.toggleSign()
+            slider.value = CGFloat(inputObject.floatRepresentation)
+        }
+        valueChanged?(inputObject)
     }
 
     @IBAction func deleteButtonTapped(_: Any) {

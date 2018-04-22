@@ -136,18 +136,18 @@
                                             <action selector="zeroButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="fYN-zN-rlr"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TdD-Eu-khJ" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
+                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TdD-Eu-khJ" customClass="PanButton" customModule="FilterPlayground" customModuleProvider="target">
                                         <rect key="frame" x="133.5" y="420" width="133.5" height="133.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <state key="normal" title="•"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="needsLeftBorder" value="YES"/>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="needsRightBorder" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="firstText" value="+ / -"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="secondText" value="⚫︎"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="dotButtonTapped:" destination="TNL-dx-1Vd" eventType="touchUpInside" id="Se9-zO-Xu7"/>
+                                            <action selector="dotButtonValueChanged:" destination="TNL-dx-1Vd" eventType="valueChanged" id="Se3-lI-b39"/>
                                         </connections>
-                                    </button>
+                                    </view>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K0m-Cb-EFz" customClass="FloatSelectionButton" customModule="FilterPlayground" customModuleProvider="target">
                                         <rect key="frame" x="267" y="420.5" width="133" height="133.5"/>
                                         <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
@@ -255,7 +255,6 @@
                         <outlet property="buttonsView" destination="0NQ-aM-KYa" id="EjA-ey-TM3"/>
                         <outlet property="buttonsViewTopConstraint" destination="vKO-60-ChH" id="eZk-Lg-kU6"/>
                         <outlet property="nextButton" destination="r1f-l4-8IF" id="3e5-J3-teD"/>
-                        <outlet property="pointsButton" destination="TdD-Eu-khJ" id="SFf-w5-shG"/>
                         <outlet property="previousButton" destination="qDp-Hs-DwL" id="DHj-so-kxf"/>
                         <outlet property="slider" destination="a2N-Lt-AJg" id="zbY-e4-Zl0"/>
                     </connections>

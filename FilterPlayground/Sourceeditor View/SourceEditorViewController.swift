@@ -61,6 +61,7 @@ class SourceEditorViewController: UIViewController, UITextViewDelegate, Identifi
         textView.delegate = self
 
         let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(gestureRecognizer:)))
+        // todo fix broken selection gesture
         view.addGestureRecognizer(pinchGestureRecognizer)
     }
 

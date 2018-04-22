@@ -124,13 +124,13 @@ class ApplicationInnerLayoutViewController: UIViewController, UIGestureRecognize
         }
     }
 
+    var isThirdViewVisible: Bool {
+        guard let view = thirdViewController?.view else { return false }
+        return view.superview != nil
+    }
+
     func toggleThirdViewControllerVisibility(with viewController: UIViewController) {
-        if viewController.view.superview == nil {
-            thirdViewController = viewController
-            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: [], animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
-        } else {
+        if isThirdViewVisible {
             let originalThirdSize = thirdSize
             view.setNeedsLayout()
             thirdSize = 0
@@ -140,6 +140,11 @@ class ApplicationInnerLayoutViewController: UIViewController, UIGestureRecognize
                 self.thirdViewController = nil
                 self.thirdSize = originalThirdSize
             }
+        } else {
+            thirdViewController = viewController
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1, options: [], animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
         }
     }
 

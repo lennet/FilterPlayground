@@ -155,6 +155,14 @@ class ApplicationLayoutViewController: UIViewController {
         present(export, animated: true, completion: nil)
     }
 
+    @objc func increaseFontSize() {
+        sourceEditorController.fontSize += 3
+    }
+
+    @objc func decreaseFontSize() {
+        sourceEditorController.fontSize -= 3
+    }
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         if traitCollection.userInterfaceIdiom == .pad {
@@ -179,5 +187,14 @@ class ApplicationLayoutViewController: UIViewController {
 
     func keyboardChanged(with _: KeyboardEvent, object _: KeyboardNotificationObject) {
         configureNavigationController()
+    }
+
+    override var keyCommands: [UIKeyCommand]? {
+        let toggleAttributesKeyCommand = UIKeyCommand(input: "0", modifierFlags: .command, action: #selector(attributesButtonTapped), discoverabilityTitle: innerLayoutController.isThirdViewVisible ? 🌎("KeyCommand_HideAttributes") : 🌎("KeyCommand_ShowAttributes"))
+        let runKeyCommand = UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(runButtonTapped), discoverabilityTitle: 🌎("KeyCommand_Run"))
+        let increaseFontKeyCommand = UIKeyCommand(input: "+", modifierFlags: .command, action: #selector(increaseFontSize), discoverabilityTitle: 🌎("KeyCommand_IncreaseFont"))
+        let increaseFontKeyCommandUSKeyboard = UIKeyCommand(input: "=", modifierFlags: .command, action: #selector(increaseFontSize))
+        let decreaseFontKeyCommand = UIKeyCommand(input: "-", modifierFlags: .command, action: #selector(decreaseFontSize), discoverabilityTitle: 🌎("KeyCommand_DecreaseFont"))
+        return [runKeyCommand, increaseFontKeyCommand, increaseFontKeyCommandUSKeyboard, decreaseFontKeyCommand, toggleAttributesKeyCommand]
     }
 }

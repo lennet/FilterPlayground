@@ -34,10 +34,12 @@ class FPMTKView: MTKView, MTKViewDelegate {
             showStatistics()
         }
         #if os(iOS)
-            contentMode = .scaleAspectFit
-            contentScaleFactor = UIScreen.main.scale
-            let dragInteraction = UIDragInteraction(delegate: self)
-            addInteraction(dragInteraction)
+            if traitCollection.horizontalSizeClass != .compact {
+                contentMode = .scaleAspectFit
+                contentScaleFactor = UIScreen.main.scale
+                let dragInteraction = UIDragInteraction(delegate: self)
+                addInteraction(dragInteraction)
+            }
         #endif
         autoResizeDrawable = false
         framebufferOnly = false

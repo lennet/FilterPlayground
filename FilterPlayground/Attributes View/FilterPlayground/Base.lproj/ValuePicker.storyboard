@@ -14,7 +14,7 @@
         <!--Float Picker View Controller-->
         <scene sceneID="sp8-AN-UJL">
             <objects>
-                <viewController storyboardIdentifier="SelectFloatViewControllerIdentifier" id="TNL-dx-1Vd" customClass="FloatPickerViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FloatPickerViewControllerIdentifier" id="TNL-dx-1Vd" customClass="FloatPickerViewController" customModule="FilterPlayground" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vKu-ZY-mYt">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

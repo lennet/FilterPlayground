@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LiveViewController: UIViewController, Identifiable {
+class LiveViewController: ViewControllerWithIntrinsicContentSize, Identifiable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,8 +21,11 @@ class LiveViewController: UIViewController, Identifiable {
         let kernelView = kernel.outputView
         kernelView.frame = view.bounds
         kernelView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        kernelView.backgroundColor = .purple
         view.addSubview(kernelView)
         themeChanged(notification: nil)
+
+        preferredContentSize = kernel.extent.size
     }
 
     @objc func themeChanged(notification _: Notification?) {

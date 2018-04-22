@@ -146,7 +146,6 @@ class ApplicationInnerLayoutViewController: UIViewController, UIGestureRecognize
     // MARK: UIGestureRecognizerDelegate
 
     func gestureRecognizer(_: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith _: UIGestureRecognizer) -> Bool {
-        // TODO: Hittest for PIP overlay
         return true
     }
 }

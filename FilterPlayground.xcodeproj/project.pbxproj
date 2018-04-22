@@ -148,6 +148,10 @@
 		989C576E1F68224C008FF142 /* SwiftPlaygroundsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989C576D1F68224C008FF142 /* SwiftPlaygroundsTests.swift */; };
 		989C576F1F6822BC008FF142 /* SwiftPlaygroundsExportHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987A73281F66F65000F73806 /* SwiftPlaygroundsExportHelper.swift */; };
 		989C57711F6825CD008FF142 /* XCTest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989C57701F6825CD008FF142 /* XCTest+Extension.swift */; };
+		989FE28F2083BB7600B72402 /* PIPContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989FE28E2083BB7600B72402 /* PIPContainerView.swift */; };
+		989FE2912083E91000B72402 /* PIPWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989FE2902083E91000B72402 /* PIPWindow.swift */; };
+		989FE2932085E2BA00B72402 /* ViewControllerWithIntrinsicContentSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989FE2922085E2BA00B72402 /* ViewControllerWithIntrinsicContentSize.swift */; };
+		989FE2952086023900B72402 /* IntrinsicSizableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989FE2942086023900B72402 /* IntrinsicSizableView.swift */; };
 		98A0CC5F1F2D041800FFC0A1 /* AttributesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */; };
 		98A0CC631F2D043B00FFC0A1 /* SourceEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */; };
 		98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */; };
@@ -156,6 +160,10 @@
 		98A411411F9950C100A97459 /* TouchDataBindingEmitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A411401F9950C100A97459 /* TouchDataBindingEmitterTests.swift */; };
 		98A411431F99534500A97459 /* TimeDataBindingEmitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A411421F99534500A97459 /* TimeDataBindingEmitterTests.swift */; };
 		98A411451F9954EF00A97459 /* SettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A411441F9954EF00A97459 /* SettingsTests.swift */; };
+		98A4747F208608F900B0B012 /* CGRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4747E208608F900B0B012 /* CGRect+Extension.swift */; };
+		98A47480208608F900B0B012 /* CGRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A4747E208608F900B0B012 /* CGRect+Extension.swift */; };
+		98A474822086092200B0B012 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A474812086092200B0B012 /* CGPoint+Extension.swift */; };
+		98A474832086092200B0B012 /* CGPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A474812086092200B0B012 /* CGPoint+Extension.swift */; };
 		98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */; };
 		98A67FB21F3A17820043AA9D /* FloatPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB11F3A17820043AA9D /* FloatPickerViewController.swift */; };
 		98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */; };
@@ -164,6 +172,7 @@
 		98B5801C20723F47009AA1E6 /* MockKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5801B20723F47009AA1E6 /* MockKernel.swift */; };
 		98B5801E20724027009AA1E6 /* KernelArgumentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5801D20724027009AA1E6 /* KernelArgumentsController.swift */; };
 		98B5801F2072403F009AA1E6 /* KernelArgumentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B5801D20724027009AA1E6 /* KernelArgumentsController.swift */; };
+		98C5C55C208C9E2F00632D86 /* PIPWindowRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5C55B208C9E2F00632D86 /* PIPWindowRootViewController.swift */; };
 		98C5E2371F34A860006E7658 /* SavingDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */; };
 		98C5E23D1F34B85C006E7658 /* KernelCompilerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23C1F34B85C006E7658 /* KernelCompilerResult.swift */; };
 		98C5E23F1F34B8DD006E7658 /* KernelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5E23E1F34B8DD006E7658 /* KernelError.swift */; };
@@ -351,6 +360,10 @@
 		9897B22C1FEA750F00291490 /* ExperimentalFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentalFeature.swift; sourceTree = "<group>"; };
 		989C576D1F68224C008FF142 /* SwiftPlaygroundsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftPlaygroundsTests.swift; sourceTree = "<group>"; };
 		989C57701F6825CD008FF142 /* XCTest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Extension.swift"; sourceTree = "<group>"; };
+		989FE28E2083BB7600B72402 /* PIPContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIPContainerView.swift; sourceTree = "<group>"; };
+		989FE2902083E91000B72402 /* PIPWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIPWindow.swift; sourceTree = "<group>"; };
+		989FE2922085E2BA00B72402 /* ViewControllerWithIntrinsicContentSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWithIntrinsicContentSize.swift; sourceTree = "<group>"; };
+		989FE2942086023900B72402 /* IntrinsicSizableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicSizableView.swift; sourceTree = "<group>"; };
 		98A0CC5E1F2D041800FFC0A1 /* AttributesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributesViewController.swift; sourceTree = "<group>"; };
 		98A0CC621F2D043B00FFC0A1 /* SourceEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorViewController.swift; sourceTree = "<group>"; };
 		98A0CC661F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelAttributeTableViewCell.swift; sourceTree = "<group>"; };
@@ -359,6 +372,8 @@
 		98A411401F9950C100A97459 /* TouchDataBindingEmitterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDataBindingEmitterTests.swift; sourceTree = "<group>"; };
 		98A411421F99534500A97459 /* TimeDataBindingEmitterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDataBindingEmitterTests.swift; sourceTree = "<group>"; };
 		98A411441F9954EF00A97459 /* SettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTests.swift; sourceTree = "<group>"; };
+		98A4747E208608F900B0B012 /* CGRect+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extension.swift"; sourceTree = "<group>"; };
+		98A474812086092200B0B012 /* CGPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extension.swift"; sourceTree = "<group>"; };
 		98A67FAF1F3A170C0043AA9D /* CircularSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSlider.swift; sourceTree = "<group>"; };
 		98A67FB11F3A17820043AA9D /* FloatPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatPickerViewController.swift; sourceTree = "<group>"; };
 		98A67FB51F3A29DA0043AA9D /* FloatSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatSelectionButton.swift; sourceTree = "<group>"; };
@@ -366,6 +381,7 @@
 		98B00A2A1F9D1E70006D2728 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		98B5801B20723F47009AA1E6 /* MockKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockKernel.swift; sourceTree = "<group>"; };
 		98B5801D20724027009AA1E6 /* KernelArgumentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelArgumentsController.swift; sourceTree = "<group>"; };
+		98C5C55B208C9E2F00632D86 /* PIPWindowRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIPWindowRootViewController.swift; sourceTree = "<group>"; };
 		98C5E2361F34A860006E7658 /* SavingDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingDocumentTests.swift; sourceTree = "<group>"; };
 		98C5E23A1F34B5C5006E7658 /* ErrorHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelperTests.swift; sourceTree = "<group>"; };
 		98C5E23C1F34B85C006E7658 /* KernelCompilerResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KernelCompilerResult.swift; sourceTree = "<group>"; };
@@ -462,6 +478,8 @@
 				985EB8F3207BA1DA00256D44 /* SelectObjectTableView.swift */,
 				98D86E87207D321900AA3E7D /* KeyboardObserver.swift */,
 				98D86E8E207D3A5200AA3E7D /* Identifiable.swift */,
+				989FE2922085E2BA00B72402 /* ViewControllerWithIntrinsicContentSize.swift */,
+				989FE2942086023900B72402 /* IntrinsicSizableView.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -525,6 +543,7 @@
 		985A42041F2CF8F200636E72 /* FilterPlayground */ = {
 			isa = PBXGroup;
 			children = (
+				989FE28D2083BB6200B72402 /* PIP */,
 				9897B2291FEA74E200291490 /* FeatureGate */,
 				98689EC01F93B40D0000AF7C /* Data binding */,
 				9855448B1F7FF88100E9F02A /* Kernels */,
@@ -699,6 +718,8 @@
 				989716991F67E80A00E7C20C /* UIImage+Extension.swift */,
 				98D8F9DE1F815D20005A1DFE /* UIView+Extension.swift */,
 				9845153C1F9149210015FADF /* NSView+Extension.swift */,
+				98A4747E208608F900B0B012 /* CGRect+Extension.swift */,
+				98A474812086092200B0B012 /* CGPoint+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -710,6 +731,16 @@
 				9897B22C1FEA750F00291490 /* ExperimentalFeature.swift */,
 			);
 			path = FeatureGate;
+			sourceTree = "<group>";
+		};
+		989FE28D2083BB6200B72402 /* PIP */ = {
+			isa = PBXGroup;
+			children = (
+				989FE28E2083BB7600B72402 /* PIPContainerView.swift */,
+				989FE2902083E91000B72402 /* PIPWindow.swift */,
+				98C5C55B208C9E2F00632D86 /* PIPWindowRootViewController.swift */,
+			);
+			path = PIP;
 			sourceTree = "<group>";
 		};
 		98D475AE1F3BB8920080D794 /* Resources */ = {
@@ -976,7 +1007,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				989FE2932085E2BA00B72402 /* ViewControllerWithIntrinsicContentSize.swift in Sources */,
 				98E692EE1F30DF8D000C8B41 /* ProjectMetaData.swift in Sources */,
+				98C5C55C208C9E2F00632D86 /* PIPWindowRootViewController.swift in Sources */,
 				98E987C21FD0A2ED00BA2B17 /* KernelDefinition.swift in Sources */,
 				9855448F1F7FF8D300E9F02A /* CoreImageWarpKernel.swift in Sources */,
 				9845C6111F38F44100F38283 /* NewProjectViewController.swift in Sources */,
@@ -992,6 +1025,7 @@
 				9888F4C71FB65C0700D108CF /* GenericDatabindingObserver.swift in Sources */,
 				98689EC51F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
 				98D86E88207D321900AA3E7D /* KeyboardObserver.swift in Sources */,
+				989FE2952086023900B72402 /* IntrinsicSizableView.swift in Sources */,
 				98689ED01F93D80D0000AF7C /* TimeDataBindingEmitter.swift in Sources */,
 				98E987C51FD0A3E200BA2B17 /* MetalShadingLanguageParser.swift in Sources */,
 				985D519B1FA66A37009881CC /* ValuePickerButton.swift in Sources */,
@@ -1002,11 +1036,13 @@
 				980229B21F2FCF41000FFCA2 /* ErrorTableViewCell.swift in Sources */,
 				98A67FB61F3A29DA0043AA9D /* FloatSelectionButton.swift in Sources */,
 				98316DCB1F44F4A30042F653 /* VectorValuePicker.swift in Sources */,
+				98A4747F208608F900B0B012 /* CGRect+Extension.swift in Sources */,
 				98A0CC671F2D1D5000FFC0A1 /* KernelAttributeTableViewCell.swift in Sources */,
 				986E7E6B1FB8C550001FC74D /* KernelOutputSizeTableViewCell.swift in Sources */,
 				981267D41F34BEFC00101027 /* Kernel.swift in Sources */,
 				9865131620738ADA00DCAD25 /* KernelArgumentType+SelectObjectViewControllerRepresentable.swift in Sources */,
 				98A67FB01F3A170C0043AA9D /* CircularSlider.swift in Sources */,
+				989FE2912083E91000B72402 /* PIPWindow.swift in Sources */,
 				98E987C01FD041A500BA2B17 /* AllTouchesPanGestureRecognizer.swift in Sources */,
 				98AE92A91F3900290044E33F /* LiveViewController.swift in Sources */,
 				988901A01F76426900B97C4A /* SourceEditorLayoutManager.swift in Sources */,
@@ -1050,6 +1086,7 @@
 				986AA7371F62FF76008F2091 /* SelectTemplateTableViewController.swift in Sources */,
 				9841EC751F3663AE00A8E3CA /* Theme.swift in Sources */,
 				98E692E91F30C832000C8B41 /* Project.swift in Sources */,
+				98A474822086092200B0B012 /* CGPoint+Extension.swift in Sources */,
 				98C5E23D1F34B85C006E7658 /* KernelCompilerResult.swift in Sources */,
 				9888F4CA1FB6634500D108CF /* ThemeManager.swift in Sources */,
 				98D86E8D207D372100AA3E7D /* MainController.swift in Sources */,
@@ -1068,6 +1105,7 @@
 				983330FF1F80026000C9AF52 /* KernelArgument.swift in Sources */,
 				9853F85B1F79012500551541 /* AST+CodeCompletion.swift in Sources */,
 				98B5801E20724027009AA1E6 /* KernelArgumentsController.swift in Sources */,
+				989FE28F2083BB7600B72402 /* PIPContainerView.swift in Sources */,
 				9897B22D1FEA750F00291490 /* ExperimentalFeature.swift in Sources */,
 				986AA72B1F62F51C008F2091 /* TemplatesManager.swift in Sources */,
 				9897169A1F67E80A00E7C20C /* UIImage+Extension.swift in Sources */,
@@ -1137,6 +1175,7 @@
 				983331091F8003B200C9AF52 /* KernelArgument.swift in Sources */,
 				9833310C1F80046800C9AF52 /* CoreImageBlendKernel.swift in Sources */,
 				989716751F67E3C800E7C20C /* Document.swift in Sources */,
+				98A474832086092200B0B012 /* CGPoint+Extension.swift in Sources */,
 				986E7E6E1FB8F01B001FC74D /* KernelOutputSizeSetting.swift in Sources */,
 				98286D631F93F1F0003B6D4A /* CameraDataBindingEmitter.swift in Sources */,
 				9833310D1F80046B00C9AF52 /* CoreImageColorKernel.swift in Sources */,
@@ -1152,6 +1191,7 @@
 				989716911F67E47300E7C20C /* CIFilterExportHelper.swift in Sources */,
 				983331121F80066800C9AF52 /* MetalKernel.swift in Sources */,
 				98F7D8CB206F89E200BE8A9A /* AST.swift in Sources */,
+				98A47480208608F900B0B012 /* CGRect+Extension.swift in Sources */,
 				9888F4C81FB65C0700D108CF /* GenericDatabindingObserver.swift in Sources */,
 				98689EC61F93B4290000AF7C /* DataBindingObserver.swift in Sources */,
 				98689EC31F93B41E0000AF7C /* DataBindingContext.swift in Sources */,

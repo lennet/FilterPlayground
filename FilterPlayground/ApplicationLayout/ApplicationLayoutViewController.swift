@@ -10,8 +10,8 @@ import UIKit
 
 class ApplicationLayoutViewController: UIViewController {
     let subNavigationController = UINavigationController(nibName: nil, bundle: nil)
-
-    let outerStackView = UIStackView(frame: .zero)
+    let pipContainer = PIPContainerView()
+    let outerStackView = UIStackView()
 
     let sourceEditorController = UIStoryboard.main.instantiate(viewController: SourceEditorViewController.self)
     let attributesViewController = UIStoryboard.main.instantiate(viewController: AttributesViewController.self)
@@ -52,7 +52,8 @@ class ApplicationLayoutViewController: UIViewController {
         outerStackView.distribution = .fillEqually
 
         if UIDevice.current.userInterfaceIdiom == .phone {
-            outerStackView.addArrangedSubview(liveViewController.view)
+            pipContainer.addSubview(liveViewController.view)
+            outerStackView.addArrangedSubview(pipContainer)
         } else {
             innerLayoutController.secondViewController = liveViewController
             innerLayoutController.thirdViewController = attributesViewController
@@ -69,6 +70,7 @@ class ApplicationLayoutViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        attributesViewController.loadViewIfNeeded()
         presentDocumentPickerIfNeeded()
     }
 
@@ -160,13 +162,17 @@ class ApplicationLayoutViewController: UIViewController {
                 innerLayoutController.secondViewController = nil
                 innerLayoutController.thirdViewController = nil
                 addChildViewController(liveViewController)
-                outerStackView.addArrangedSubview(liveViewController.view)
+                pipContainer.addSubview(liveViewController.view)
+                outerStackView.addArrangedSubview(pipContainer)
                 outerStackView.axis = .vertical
             } else {
+                liveViewController.removeFromParentViewController()
+                liveViewController.view.removeFromSuperview()
+                pipContainer.removeFromSuperview()
                 innerLayoutController.secondViewController = liveViewController
                 innerLayoutController.thirdViewController = attributesViewController
             }
-        } else if previousTraitCollection?.userInterfaceIdiom == .phone {
+        } else if traitCollection.userInterfaceIdiom == .phone {
             outerStackView.axis = UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight ? .horizontal : .vertical
         }
     }

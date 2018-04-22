@@ -68,7 +68,7 @@ class PIPWindow: UIWindow {
             break
         }
 
-        UIViewPropertyAnimator(duration: animted ? 0.25 : 0, dampingRatio: 0.9) {
+        UIViewPropertyAnimator(duration: animated ? 0.25 : 0, dampingRatio: 0.9) {
             self.center = tmp
         }.startAnimation()
     }

@@ -131,7 +131,7 @@ class PIPWindow: UIWindow {
     }
 
     @objc func update() {
-        // TODO: replace with a more generic
+        // TODO: replace with a more generic implementationx
         if let size = subviews.first?.subviews.first?.intrinsicContentSize,
             size != .zero {
             let newSize = AVMakeRect(aspectRatio: size, insideRect: CGRect(origin: .zero, size: CGSize(width: 125, height: 125))).size

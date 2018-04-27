@@ -35,6 +35,7 @@ class KernelAttributeTableViewCell: UITableViewCell, UITextFieldDelegate {
             if let type = attribute?.type {
                 if let oldType = oldValue?.type,
                     oldType == type {
+                    setupValueView(for: type, value: attribute?.value)
                     return
                 }
 

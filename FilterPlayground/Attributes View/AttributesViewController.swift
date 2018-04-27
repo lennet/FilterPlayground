@@ -45,7 +45,8 @@ class AttributesViewController: UIViewController, UITableViewDelegate, UITableVi
     var arguments: [KernelArgument] = [] {
         didSet {
             if shouldReloadOnUpdate {
-                self.tableView.reloadData()
+                // FIXME:
+//                tableView.reloadSections(IndexSet(integer: AttributesViewControllerSection.arguments.rawValue), with: .none)
             }
             shouldReloadOnUpdate = true
         }

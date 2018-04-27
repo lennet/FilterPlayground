@@ -59,6 +59,9 @@ class FPMTKView: MTKView, MTKViewDelegate {
 
     #if os(iOS) || os(tvOS)
         override func setNeedsDisplay() {
+            #if (targetEnvironment(simulator))
+                backgroundColor = .randomColor
+            #endif
             customNeedsDisplay = true
         }
     #endif
@@ -85,7 +88,7 @@ class FPMTKView: MTKView, MTKViewDelegate {
 
     func showStatistics() {
         #if os(iOS) || os(tvOS)
-        // TODO hide statistics if the view is inside a PIP window
+            // TODO: hide statistics if the view is inside a PIP window
             guard statisticsView == nil else { return }
             let newStatisticsView = StatisticsView(frame: CGRect(x: 0, y: bounds.height - 44, width: bounds.width, height: 44))
             newStatisticsView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]

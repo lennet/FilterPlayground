@@ -8,7 +8,7 @@
 
 import UIKit
 
-// TODO implement consitent highlighted state and improve delete button,
+// TODO: implement consitent highlighted state and improve delete button,
 
 class FloatPickerViewController: UIViewController, Identifiable {
     @IBOutlet var previousButton: FloatSelectionButton!

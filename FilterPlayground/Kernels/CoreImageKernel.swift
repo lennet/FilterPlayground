@@ -113,6 +113,7 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
 
     func apply(with _: [CIImage], attributes: [KernelArgumentValue]) -> CIImage? {
         let arguments: [Any] = attributes.compactMap { $0.asKernelValue }
+
         return kernel?.apply(extent: extent, roiCallback: { (_, rect) -> CGRect in
             rect
         }, arguments: arguments)
@@ -121,22 +122,21 @@ class CoreImageKernel: NSObject, Kernel, MTKViewDelegate {
     // Mark: - MTKViewDelegate
 
     func draw(in view: MTKView) {
-        if let currentDrawable = view.currentDrawable,
-            let output = apply(with: inputImages, attributes: arguments.compactMap { $0.value }) {
-            let commandBuffer = commandQueue?.makeCommandBuffer()
-            view.drawableSize = output.extent.size
-            #if !(targetEnvironment(simulator))
-                context?.render(output,
-                                to: currentDrawable.texture,
-                                commandBuffer: commandBuffer,
-                                bounds: output.extent,
-                                colorSpace: colorSpace)
-            #endif
+        guard let currentDrawable = view.currentDrawable,
+            let output = apply(with: inputImages, attributes: arguments.compactMap { $0.value }) else { return }
+        let commandBuffer = commandQueue?.makeCommandBuffer()
+        view.drawableSize = output.extent.size
+        #if !(targetEnvironment(simulator))
+            context?.render(output,
+                            to: currentDrawable.texture,
+                            commandBuffer: commandBuffer,
+                            bounds: output.extent,
+                            colorSpace: colorSpace)
+        #endif
 
-            commandBuffer?.addCompletedHandler(mtkView.bufferCompletionHandler)
-            commandBuffer?.present(currentDrawable)
-            commandBuffer?.commit()
-        }
+        commandBuffer?.addCompletedHandler(mtkView.bufferCompletionHandler)
+        commandBuffer?.present(currentDrawable)
+        commandBuffer?.commit()
     }
 
     func mtkView(_: MTKView, drawableSizeWillChange _: CGSize) {

@@ -6,11 +6,26 @@
 //  Copyright © 2018 Leo Thomas. All rights reserved.
 //
 
+import AVFoundation
 import Foundation
+
+enum KernelUIUpdate {
+    case insertion(Int)
+    case deletion(Int)
+    case update(Int, KernelArgument)
+    case reload(Int)
+
+    var row: Int {
+        switch self {
+        case let .insertion(row), let .deletion(row), let .update(row, _), let .reload(row):
+            return row
+        }
+    }
+}
 
 enum KernelArgumentSource {
     case code
-    case ui
+    case ui([KernelUIUpdate])
     case render
 }
 
@@ -24,6 +39,8 @@ class KernelArgumentsController {
         }
     }
 
+    var cachedUIUpdates: [KernelUIUpdate] = []
+
     var shouldUpdateCallback: (KernelArgumentSource) -> Void
     var kernel: Kernel
     var databindingObservers: [GenericDatabindingObserver]
@@ -32,27 +49,34 @@ class KernelArgumentsController {
         self.shouldUpdateCallback = shouldUpdateCallback
         self.kernel = kernel
         databindingObservers = []
+
+        let displayLink = CADisplayLink(target: self, selector: #selector(updateUIIfNeeded))
+        displayLink.preferredFramesPerSecond = 5
+        displayLink.add(to: .current, forMode: .defaultRunLoopMode)
     }
 
     func updateArgumentsFromCode(arguments: [KernelDefinitionArgument]) {
         var hasChanged = arguments.count != currentArguments.count
+        var kernelUIUpdates: [KernelUIUpdate] = []
         let newArguments = arguments.enumerated().map { (index, argument) -> KernelArgument in
             if index < currentArguments.count {
                 var currentArgument = currentArguments[index]
                 if currentArgument.type == argument.type {
                     if currentArgument.name != argument.name {
                         currentArgument.name = argument.name
+                        kernelUIUpdates.append(.update(currentArgument.index, currentArgument))
                         hasChanged = true
                     }
                     return currentArgument
                 }
             }
             hasChanged = true
+            kernelUIUpdates.append(.reload(argument.index))
             return KernelArgument(index: argument.index, name: argument.name, type: argument.type, value: argument.type.defaultValue, access: argument.access, origin: argument.origin)
         }
         if hasChanged {
             currentArguments = newArguments
-            shouldUpdateCallback(.ui)
+            shouldUpdateCallback(.ui(kernelUIUpdates))
             updateDatabindingObservers()
         }
     }
@@ -120,6 +144,24 @@ class KernelArgumentsController {
     func updateArgumentFromObserver(argument: KernelArgument) {
         currentArguments[argument.index] = argument
         shouldUpdateCallback(.render)
-        shouldUpdateCallback(.ui)
+        addUIUpdates(newUpdates: [.update(argument.index, argument)])
+    }
+
+    func addUIUpdates(newUpdates: [KernelUIUpdate]) {
+        for update in newUpdates {
+            if let index = cachedUIUpdates.index(where: { (up) -> Bool in
+                update.row == up.row
+            }) {
+                cachedUIUpdates.remove(at: index)
+            }
+        }
+        cachedUIUpdates.append(contentsOf: newUpdates)
+    }
+
+    @objc func updateUIIfNeeded() {
+        if !cachedUIUpdates.isEmpty {
+            shouldUpdateCallback(.ui(cachedUIUpdates))
+            cachedUIUpdates = []
+        }
     }
 }

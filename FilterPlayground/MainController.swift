@@ -90,8 +90,9 @@ class MainController {
         case .code:
             sourceEditorViewController?.update(attributes: newArguments)
             break
-        case .ui:
+        case let .ui(arguments):
             attributesViewController?.arguments = newArguments
+            attributesViewController?.tableView.apply(changes: arguments, section: AttributesViewController.AttributesViewControllerSection.arguments.rawValue)
             break
         case .render:
             executionPipeline?.renderIfPossible()

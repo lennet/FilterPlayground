@@ -27,7 +27,7 @@ class PIPContainerView: UIView {
                 setNeedsLayout()
             } else {
                 displayLink = CADisplayLink(target: self, selector: #selector(update))
-                displayLink?.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+                displayLink?.add(to: .current, forMode: .defaultRunLoopMode)
 
                 timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(detachSubView), userInfo: nil, repeats: false)
             }

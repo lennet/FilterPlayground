@@ -19,7 +19,7 @@ class KernelArgumentControllerTests: XCTestCase {
         let kernel = MockKernel()
         let exp = expectation(description: "waiting for callback")
         let callback: (KernelArgumentSource) -> Void = { source in
-            XCTAssertEqual(source, .ui)
+            XCTAssertEqual(source, KernelArgumentSource.ui([.reload(0)]))
             exp.fulfill()
         }
         XCTAssertEqual(kernel.arguments.count, 0)
@@ -39,7 +39,7 @@ class KernelArgumentControllerTests: XCTestCase {
         let kernel = MockKernel()
         let exp = expectation(description: "waiting for callback")
         let callback: (KernelArgumentSource) -> Void = { source in
-            XCTAssertEqual(source, .ui)
+            XCTAssertEqual(source, KernelArgumentSource.ui([]))
             exp.fulfill()
         }
         kernel.arguments = [KernelArgument(index: 0, name: "foo", type: .color, value: .color(0, 0, 0, 0))]
@@ -54,8 +54,9 @@ class KernelArgumentControllerTests: XCTestCase {
     func testRenameFromSource() {
         let kernel = MockKernel()
         let exp = expectation(description: "waiting for callback")
+        let updatedArgument = KernelArgument(index: 0, name: "bar", type: .color, value: .color(0, 0, 0, 0))
         let callback: (KernelArgumentSource) -> Void = { source in
-            XCTAssertEqual(source, .ui)
+            XCTAssertEqual(source, KernelArgumentSource.ui([.update(0, updatedArgument)]))
             exp.fulfill()
         }
         kernel.arguments = [KernelArgument(index: 0, name: "foo", type: .color, value: .color(0, 0, 0, 0))]

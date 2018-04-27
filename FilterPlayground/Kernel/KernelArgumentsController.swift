@@ -9,11 +9,20 @@
 import AVFoundation
 import Foundation
 
-enum KernelUIUpdate {
+enum KernelUIUpdate: Equatable {
     case insertion(Int)
     case deletion(Int)
     case update(Int, KernelArgument)
     case reload(Int)
+
+    static func == (lhs: KernelUIUpdate, rhs: KernelUIUpdate) -> Bool {
+        switch (lhs, rhs) {
+        case let (.insertion(lhsRow), .insertion(rhsRow)), let (.deletion(lhsRow), .deletion(rhsRow)), let (.update(lhsRow, _), .update(rhsRow, _)), let (.reload(lhsRow), .reload(rhsRow)):
+            return lhsRow == rhsRow
+        default:
+            return false
+        }
+    }
 
     var row: Int {
         switch self {
@@ -23,7 +32,18 @@ enum KernelUIUpdate {
     }
 }
 
-enum KernelArgumentSource {
+enum KernelArgumentSource: Equatable {
+    static func == (lhs: KernelArgumentSource, rhs: KernelArgumentSource) -> Bool {
+        switch (lhs, rhs) {
+        case (.code, .code), (.render, .render):
+            return true
+        case let (.ui(lhsUpdates), .ui(rhsUpdates)):
+            return lhsUpdates == rhsUpdates
+        default:
+            return false
+        }
+    }
+
     case code
     case ui([KernelUIUpdate])
     case render
@@ -50,9 +70,11 @@ class KernelArgumentsController {
         self.kernel = kernel
         databindingObservers = []
 
-        let displayLink = CADisplayLink(target: self, selector: #selector(updateUIIfNeeded))
-        displayLink.preferredFramesPerSecond = 5
-        displayLink.add(to: .current, forMode: .defaultRunLoopMode)
+        #if os(iOS) || os(tvOS)
+            let displayLink = CADisplayLink(target: self, selector: #selector(updateUIIfNeeded))
+            displayLink.preferredFramesPerSecond = 5
+            displayLink.add(to: .current, forMode: .defaultRunLoopMode)
+        #endif
     }
 
     func updateArgumentsFromCode(arguments: [KernelDefinitionArgument]) {
